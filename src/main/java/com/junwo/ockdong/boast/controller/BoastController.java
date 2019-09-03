@@ -10,7 +10,7 @@ public class BoastController {
 	@RequestMapping("blist.do")
 //	public ModelAndView boastList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
 	public String boastList() {
-		
+		ㅁㄴㅁㄴㅁㄴㅁㄴ
 		return "boast/boastListView";
 	}
 
