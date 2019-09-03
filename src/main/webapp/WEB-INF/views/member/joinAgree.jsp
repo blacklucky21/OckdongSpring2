@@ -54,7 +54,7 @@
 	<br><br><br>
 	<div class="loginForm">
 
-	<a href="<%=request.getContextPath() %>/index.jsp"><img class="image" src="<%=request.getContextPath() %>/img/mainlogo.png" id="logo" align="center"></a>
+	<a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
 
 	<center>
   	<table width=960px align=center>
@@ -157,7 +157,7 @@ FARMER RECIPE는 회원관리, 서비스 개발・제공 및 향상, 안전한 �
 				return;
 			}
 			
-			location.href="<%=request.getContextPath()%>/views/member/memberJoin.jsp";
+			location.href="memberJoin.me";
 		}
 	</script>
 

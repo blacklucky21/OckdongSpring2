@@ -22,7 +22,6 @@
 <body>
 
 	<!-- ############### 헤더 부분 ############### -->
-	<jsp:include page='/views/header/header.jsp'/>
 
 	  <div class="container">
     <h1 class="page-header">Summernote Sample</h1>
@@ -61,7 +60,6 @@
 
 
 	<!-- ##################### 풋터 부분 ##################### -->
-	<jsp:include page='/views/footer/footer.jsp'/>
 
 
 

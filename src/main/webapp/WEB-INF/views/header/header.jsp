@@ -99,8 +99,8 @@
 <div class="topbar_right">
 <ul>
 
-<li><a href="<%= request.getContextPath() %>/views/member/login.jsp">LOGIN</a></li>
-<li><a href="<%= request.getContextPath() %>/views/member/joinAgree.jsp">JOIN US</a>
+<li><a href="login.me">LOGIN</a></li>
+<li><a href="enrollView.me">JOIN US</a>
 <!-- 회원가입 포인트 -->	
 </li>
 
