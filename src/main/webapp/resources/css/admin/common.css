@@ -1,0 +1,124 @@
+.top {
+	height: 85px;
+	height: 50px;
+	display: flex;
+	background: linear-gradient(230deg, #ebefe8, #dddfe6);
+	background: -webkit-linear-gradient(230deg, #ebefe8, #dddfe6);
+	background: -moz-linear-gradient(230deg, #ebefe8, #dddfe6);
+	background: -ms-linear-gradient(230deg, #ebefe8, #dddfe6);
+	background: -o-linear-gradient(230deg, #ebefe8, #dddfe6);
+}
+#top_main{
+	flex:auto;
+}
+
+#top_main > .div1 {
+	    float: left;
+    display: inherit;
+    flex: auto;
+}
+
+
+#top_main > .div1 {
+	display: inherit;
+}
+#top_main > .div2 {
+    margin: 12px 20px auto auto;
+    float: right;
+    display: inline-flex;
+}
+
+ul, li {
+	list-style: none;
+	padding: 10px;
+}
+
+/* 아코디언 메뉴 숨김 */
+.hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+.menu_depth1 {
+	cursor: pointer;
+}
+/* 로고 밑 글자 효과 주기 */
+.menu_depth1:hover {
+	color: white;
+	text-shadow: 1px 1px #000, 2px 2px #000, 3px 3px #000;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+}
+/* 클릭시 클래스 추가하여효과 준다. */
+.activeMenu {
+	color: white;
+	text-shadow: 1px 1px #000, 2px 2px #000, 3px 3px #000;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+}
+
+nav.mo_slide_menu {
+	position: absolute	;
+	left: 0;
+	width: 220px;
+	height: 94%;
+	color: #000;
+	overflow-y: auto;
+	background: linear-gradient(230deg, #dddfe6, #ebefe8);
+	background: -webkit-linear-gradient(230deg, #dddfe6, #ebefe8);
+	background: -moz-linear-gradient(230deg, #dddfe6, #ebefe8);
+	background: -ms-linear-gradient(230deg, #dddfe6, #ebefe8);
+	background: -o-linear-gradient(230deg, #dddfe6, #ebefe8);
+}
+
+.accor_has_sub {
+	font-weight: normal;
+}
+
+.accor_has_sub a.menu_depth1 {
+	display: block;
+	height: 33px;
+	padding: 17px 0 0 17px;
+	font-size: 1em;
+	color: #fff;
+	text-decoration: none;
+}
+
+.active a.menu_depth1 {
+	background-size: 18.5px 18.5px;
+}
+/* 서브 메뉴*/
+.accor_has_sub a.menu_depth2 {
+	display: block;
+	padding: auto;
+	font-size: 0.98em;
+	color: #000;
+	text-decoration: none;
+	list-style: none;
+}
+
+.accor_has_sub a.menu_depth2:hover {
+	color: white;
+	text-shadow: 1px 1px #000, 2px 2px #000, 3px 3px #000;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+}
+
+.acc_subject {
+	display: none;
+}
+
+.acc_subject li:first-child {
+	border: none;
+}
+
+
+
+
+
