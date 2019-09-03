@@ -11,13 +11,14 @@
 	max-width: none;
 	padding-bottom: 0;
 	background: #e9eaed;
+	text-align:center;
 }
 
 #content .content {
 	min-width: 1280px;
 	padding-left: 214px;
-	margin-left: 5%;
 	height: 919px;
+	display: inline-block;
 }
 
 .page_title_wrap {
@@ -157,14 +158,18 @@ table.ncp_tbl {
 
 .content_bottom {
 	width: 1280px;
-    padding: 17px 30px;
+	padding: 15px 30px;
 }
 
-.list_bottom > .table_list{
-	height: 519px;
-    border: 1px solid #f8f8f8;
+.list_bottom{
+	  overflow: scroll;
 }
 
+.list_bottom>.table_list {
+	border: 1px solid #f8f8f8;
+	height: 545px;
+	  
+}
 
 .list_bottom>.table_list>.list_table {
 	border-top: 1px solid #191919;
@@ -184,11 +189,9 @@ table.ncp_tbl {
 	font-size: inherit;
 }
 
-
-
-
-
-
+.sh{
+	    cursor: default;
+}
 
 
 
