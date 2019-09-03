@@ -5,88 +5,192 @@
 }
 
 /* 헤더 빼고 감싸기 */
-#content{
+#content {
 	overflow: visible;
-    position: static;
-    max-width: none;
-    padding-bottom: 0;
-    background: #e9eaed;
+	position: static;
+	max-width: none;
+	padding-bottom: 0;
+	background: #e9eaed;
 }
 
-
 #content .content {
-	border: 1px solid black;
 	min-width: 1280px;
 	padding-left: 214px;
-	    margin-left: 5%;
+	margin-left: 5%;
+	height: 919px;
 }
 
 .page_title_wrap {
-    position: relative;
+	position: relative;
 }
 
 .page_tit {
-    position: relative;
-    height: 39px;
-    padding-top: 21px;
-    border: 0;
-    background: none;
-    font-size: 22px;
-    font-weight: normal;
-    line-height: 38px;
-    color: #222;
-    font-weight: bold;
-    letter-spacing: -1px;
+	position: relative;
+	height: 39px;
+	padding-top: 21px;
+	border: 0;
+	background: none;
+	font-size: 22px;
+	font-weight: normal;
+	line-height: 38px;
+	color: #222;
+	font-weight: bold;
+	letter-spacing: -1px;
 }
 
-.listContent{
-	margin-top: 5%;
+.listContent {
+	margin-top: 3%;
 	position: relative;
-	border:2px solid red;
 	width: 1280px;
 }
 
-.content_top{
-    min-width: 1280px;
-    max-width: 1560px;
-    margin: 0 auto !important;
-    box-sizing: content-box;
+.content_top {
+	min-width: 1280px;
+	max-width: 1560px;
+	margin: 0 auto !important;
+	box-sizing: content-box;
 }
 
-.listContent > .content_top > .products_summary{
-	text-align:center;
+.listContent>.content_top>.products_summary {
+	text-align: center;
 }
 
 table.ncp_tbl {
-    width: 100%; 
-    border-top: 1px solid #191919;
-    border-spacing: 0px;
-    border-collapse: collapse;
-    table-layout: fixed;
+	width: 100%;
+	border-top: 1px solid #191919;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
 }
 
-.search_tab .ncp_tbl > tbody > tr > td {
-    position: relative;
-    height: 52px;
-    min-height: 0;
-    padding: 6px 10px 0;
-    border-left: 1px solid #dfdfdf;
-    color: #444;
-    font-size: 12px;
-    text-align: center;
-    vertical-align: middle;
-    background: #f6f6f6;
+.search_tab .ncp_tbl>tbody>tr>td {
+	position: relative;
+	height: 52px;
+	min-height: 0;
+	padding: 6px 10px 0;
+	border-left: 1px solid #dfdfdf;
+	color: #444;
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	background: #f6f6f6;
 }
 
+/* 아래 검색 창 */
 .search_field {
-    display: block;
-    margin: 0;
-    background: #fff;
-    padding: 22px 0 22px 31px; 
-    padding: 26px 20px 26px 31px;
-    border: 1px solid #dfdfdf;
-    margin-top: 10px;
+	display: block;
+	margin: 0;
+	background: #fff;
+	padding: 22px 0 22px 31px;
+	padding: 26px 20px 26px 31px;
+	border: 1px solid #dfdfdf;
+	margin-top: 10px;
 }
+
+/* 안의 테이블로 정리 */
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.tg-0lax {
+	padding-right: 260px;
+}
+
+.tg-0lax>span {
+	margin: 10px;
+}
+
+.serarch_ti {
+	padding-right: 10px;
+	font-size: x-large;
+}
+
+#select_code {
+	width: 220px;
+	height: 30px;
+}
+
+.search_content {
+	height: 30px;
+	width: 350px;
+}
+
+/* 버튼 효과 */
+.bu {
+	width: 75px;
+	border-radius: 15px;
+	background: #2ecc71;
+	border: 1px solid #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #fff;
+}
+
+.bu:hover {
+	color: #2ecc71;
+	background: #fff;
+	border: 1px solid #2ecc71;
+	left: -35%;
+	top: 0;
+	transition-duration: 1s;
+	transform-origin: top left;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	transition: all 1s;
+	height: 100%;
+}
+
+/* 리스트 아래 부분 */
+.content_bottom {
+	background: #fff;
+	position: relative;
+	width: 1280px;
+	margin-top: 15px;
+}
+
+.content_bottom>p {
+	font-size: x-large;
+	font-weight: 600;
+}
+
+.content_bottom {
+	width: 1280px;
+    padding: 17px 30px;
+}
+
+.list_bottom > .table_list{
+	height: 519px;
+    border: 1px solid #f8f8f8;
+}
+
+
+.list_bottom>.table_list>.list_table {
+	border-top: 1px solid #191919;
+	width: 100%;
+}
+
+.list_bottom>.table_list>.list_table th {
+	height: 52px;
+	min-height: 0;
+	padding: 6px 10px 0;
+	border-left: 1px solid #dfdfdf;
+	color: #444;
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	background: #f6f6f6;
+	font-size: inherit;
+}
+
+
+
+
+
+
+
+
 
 
 

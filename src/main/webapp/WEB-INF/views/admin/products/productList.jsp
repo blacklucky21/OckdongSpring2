@@ -47,14 +47,58 @@
 				</table>
 			</div>
 		</div>
-		<div class="search_box search_field">
-			
 		
+		<div class="search_box search_field">
+			<form class="search_form">
+
+				<table class="tg">
+  					<tr>
+    					<th class="tg-0lax serarch_ti">검색어</th>
+   						<th class="tg-0lax">
+   							<span>
+   							<select id="select_code">
+   								<option>상품번호</option>
+   								<option>상품명</option>						
+   							</select>
+   							</span>
+   							<span>	<input type="text" class="search_content"></span>
+   						</th>
+   					
+    					<td >
+    						<input type="button" value="검색" class="bu" id="se">
+    						<input type="button" value="초기화" class="bu" id="can">	
+    					</td>
+  					</tr>  					
+				</table>
+			</form>
 		</div>
 	</div>
-				
-				
-				
+<!-- 리스트 윗 부분 끝 -->
+				<div class="content_bottom">
+					<p>
+						검색 결과 <span>3</span>건
+					</p>
+				<div class="list_bottom">
+					<div class="table_list">
+						<table class="list_table">
+							<tr>
+								<th>상품번호</th>
+								<th>상품명</th>
+								<th>판매상태</th>
+								<th>판매상태 설정 </th>
+								<th>가격</th>
+								<th>수량 </th>
+								<th>카테고리</th>
+								<th>재고수량 </th>
+								<th>판매수량</th>
+								<th>삭제 </th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				</div>
+
+				<!-- 전체 부위 끝 -->
 				</div>
 			</div>
 	</div>

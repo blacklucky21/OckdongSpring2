@@ -24,7 +24,7 @@
 <!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="header/header.jsp"/>
 	<button onclick="location.href='adminView.do'">관리자 ㅇㅇ</button>
-
+	
 	<!-- 슬라이드 쇼 -->
 	<div class="content" style="width:100%; height:100%; overflow:hidden; margin:55px auto;">
 		<div id="slider">
@@ -134,11 +134,12 @@
 	</div>
 	<!-- 희망 배송 끝 -->
 	<!-- 나만의 도시락 -->
+	<%-- <c:url var="blist" value="blist.do"/> --%>
 	<div class="modal fade bd-example-modal-xl" id="myModal3" tabindex="-1"role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl ">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title" id="myModalLabel">나만의 도시락</h1>
+					<h1 class="modal-title" id="myModalLabel"><a href="blist.do">나만의 도시락</a></h1>
 				</div>
 			
 				<div class="modal-footer">

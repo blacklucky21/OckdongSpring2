@@ -22,5 +22,19 @@ public class AdminController {
 	public String productList() {
 		return "admin/products/productList";
 	}
+	
+	// 관리자에서 로고 누를시 처음 화면으로 이동
+	@RequestMapping("adminhome.do")
+	public String adminHome() {
+		return "admin/adminMain";
+	}
+	
+	//결제 통합리스트
+	
+	@RequestMapping("PayResultList.do")
+	public String PayResultList() {
+		
+		return"admin/Payment/adminResultList";
+	}
 
 }
