@@ -60,25 +60,31 @@ tr {
 	transition: 800ms ease all;
 }
 
-.tableResult{
+.tableResult {
+	margin: 5%;
+	border: 0.5px solid gray;
+}
 
-margin: 8%;
-border: 0.5px solid gray;
+.tableResult tbody{
+	overflow:scroll;
+    height: 200px;
+    width:400px;
+
 }
 
 .tableResult th {
-	text-align:center;
+	text-align: center;
 	padding: 5px;
-	margin-right:30px;
+	margin-right: 30px;
 	font-size: 13px;
 	border: 0.5px solid gray;
-	background-color:#bdb7b7;
+	background-color: #bdb7b7;
 }
 
-.tableResult td{
-	text-align:center;
-	padding:5px;	
-	border:thin solid gray;
+.tableResult td {
+	text-align: center;
+	padding: 5px;
+	border: thin solid gray;
 }
 </style>
 </head>
@@ -143,43 +149,52 @@ border: 0.5px solid gray;
 
 		</div>
 		<div style="border: 1px solid black; width: 100%; height: auto; margin-top: 30px">
-			<table class="tableResult">
-			<tr style="border:0">
-			<td style="font-size:18px; border:0;margin-bottom:30px;">검색 결과 상품 수</td>
-			</tr>
-				<tr>
-					<th style="min-height: 200px;">주문번호</th>
-					<th>주문자명</th>
-					<th>주문자 전화번호</th>
-					<th>주문상태</th>
-					<th>상품번호</th>
-					<th>상품명</th>
-					<th>재료명</th>
-					<th>결제금액</th>
-					<th>기사에게 남길말</th>	
+			<div style="width:100%; height:200px; overflow:auto">
+				<table class="tableResult" width="100%" border="0" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
 
-				</tr>
+							<th style="min-height: 200px;">주문번호</th>
+							<th>주문자명</th>
+							<th>주문자 전화번호</th>
+							<th>주문상태</th>
+							<th>상품번호</th>
+							<th>상품명</th>
+							<th>재료명</th>
+							<th>결제금액</th>
+							<th>기사에게 남길말</th>
+							<th>결제시간</th>
+							<th>카테고리</th>
+							<th>판매수량</th>
 
-			<c:forEach var="i" begin="0" end="10">
-				<tr>
-					<td>1231231231</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
+						</tr>
+					</thead>
+							<tbody>
+					<c:forEach var="i" begin="0" end="20">
 				
-				</c:forEach>
-			</table>
-
+							<tr>
+								<td>1231231231</td>
+								<td>2</td>
+								<td>3</td>
+								<td>4</td>
+								<td>5</td>
+								<td>6</td>
+								<td>7</td>
+								<td>8</td>
+								<td>9</td>
+								<td>10</td>
+								<td>11</td>
+								<td>12</td>
+							</tr>
+					
+					</c:forEach>
+						</tbody>
+				</table>
+			</div>
 		</div>
 
+</div>
 
-	</div>
 
 
 
