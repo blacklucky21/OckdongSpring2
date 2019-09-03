@@ -10,5 +10,11 @@ public class BoastController {
 	public String boastList() {
 		return "boast/boastList";
 	}
+	
+	@RequestMapping("binsert.do")
+	public String boastInsert() {
+		return "boast/boastInsert";
+	}
+
 
 }
