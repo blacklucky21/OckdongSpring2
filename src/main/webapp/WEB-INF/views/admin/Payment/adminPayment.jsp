@@ -158,7 +158,7 @@ width:1280px;
 
 
 		</div>
-		<div style="border: 1px solid black; height: 700px; margin-top: 30px" class="pay1">
+		<div style="border: 1px solid black;  margin-top: 30px" class="pay1">
 	
 			<div style=" height:600px; overflow:auto">
 				<table class="tableResult" >

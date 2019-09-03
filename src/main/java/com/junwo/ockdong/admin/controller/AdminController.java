@@ -28,5 +28,13 @@ public class AdminController {
 	public String adminHome() {
 		return "admin/adminMain";
 	}
+	
+	//결제 통합리스트
+	
+	@RequestMapping("PayResultList.do")
+	public String PayResultList() {
+		
+		return"admin/Payment/adminResultList";
+	}
 
 }
