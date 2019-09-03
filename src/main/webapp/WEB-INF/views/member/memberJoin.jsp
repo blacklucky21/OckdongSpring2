@@ -61,7 +61,7 @@
             </tr>
             <tr>
                <th height="40px">우편번호</th>
-               <td><input type="text" name="address1"  id="address1" class="form-control"></td>
+               <td><input type="text" name="post"  id="post" class="form-control"></td>
                <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()">검색</div></td>
             </tr>
             <tr>
@@ -135,7 +135,7 @@
                                 document.getElementById("address3").value = '';
                             }
                             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                              document.getElementById('address1').value = data.zonecode;
+                              document.getElementById('post').value = data.zonecode;
                               document.getElementById("address2").value = addr;
                             // 커서를 상세주소 필드로 이동한다.
                              document.getElementById("address4").focus();

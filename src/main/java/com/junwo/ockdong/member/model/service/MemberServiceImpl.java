@@ -15,4 +15,9 @@ public class MemberServiceImpl implements MemberService {
 	public int memberJoin(Member m) {
 		return mDAO.memberJoin(m);
 	}
+
+	@Override
+	public Member memberLogin(Member m) {
+		return mDAO.memberLogin(m);
+	}
 }
