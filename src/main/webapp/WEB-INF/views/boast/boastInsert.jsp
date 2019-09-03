@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
 
 
 	<!-- ############### 헤더 부분 ############### -->
-	<jsp:include page='/views/header/header.jsp' />
+	<c:import url="../header/header.jsp"/>
 
 	<!-- 첫번쨰 <div class="ht-body-wrapper ht-layout ht-wrapper">
 		<div class="container">
@@ -191,7 +192,7 @@
 
 
 	<!-- ##################### 풋터 부분 ##################### -->
-	<jsp:include page='/views/footer/footer.jsp' />
+	<c:import url="../footer/footer.jsp"/>
 
 </body>
 </html>

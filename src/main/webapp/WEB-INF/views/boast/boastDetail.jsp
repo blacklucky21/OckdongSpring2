@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -111,8 +112,7 @@ a:link, a:visited {
 </head>
 <body>
 	<!-- ############### 헤더 부분 ############### -->
-	<!-- 	<c:import url="../header/header.jsp"/> -->
-	<jsp:include page='/views/header/header.jsp' />
+	<c:import url="../header/header.jsp"/>
 
 	<form class="frm">
 	<table class="board_view">
@@ -190,8 +190,8 @@ a:link, a:visited {
 
 
 	<!-- ##################### 풋터 부분 ##################### -->
-	<!-- <c:import url="../footer/footer.jsp"/> -->
-	<jsp:include page='/views/footer/footer.jsp' />
+	<c:import url="../footer/footer.jsp"/>
+
 
 
 </body>
