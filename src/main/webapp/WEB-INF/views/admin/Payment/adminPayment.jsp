@@ -56,7 +56,7 @@ tr {
 }
 
 .buttonSearch:hover:before, .buttonSearch:hover:after {
-	width: 100%;
+//	width: 100%;
 	transition: 800ms ease all;
 }
 
@@ -86,6 +86,16 @@ tr {
 	padding: 5px;
 	border: thin solid gray;
 }
+
+body{
+background-color:#e9eaed !important;
+}
+
+.pay1 {
+background-color:white;
+border-radius:20px;
+width:1280px;
+}
 </style>
 </head>
 <body>
@@ -96,7 +106,7 @@ tr {
 		<h1>주문 통합 리스트</h1>
 
 
-		<div style="border: 0.5px solid black; width: 100%; height: 300px;">
+		<div style="border: 0.5px radius 15deg black; height: 300px;" class="pay1">
 			<div class="PayPlz">
 				<table style='border-width: 1px; border-collapse: collapse;' class="searchBoard">
 					<tr>
@@ -148,9 +158,10 @@ tr {
 
 
 		</div>
-		<div style="border: 1px solid black; width: 100%; height: auto; margin-top: 30px">
-			<div style="width:100%; height:200px; overflow:auto">
-				<table class="tableResult" width="100%" border="0" cellspacing="0" cellpadding="0">
+		<div style="border: 1px solid black; height: 700px; margin-top: 30px" class="pay1">
+	
+			<div style=" height:600px; overflow:auto">
+				<table class="tableResult" >
 					<thead>
 						<tr>
 
