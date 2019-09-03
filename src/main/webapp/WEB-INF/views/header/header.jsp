@@ -134,7 +134,7 @@
             <legend>검색폼</legend>
             <div>
                 <input type="text" id="search-form" name="keyword" class="text" title="" placeholder="" autocomplete="off" />
-                <input type="image" class="image" id="btnSearchTop" title="검색" value="검색" src="<%= request.getContextPath()%>/img/Search.png"  width="28" height="30" alt="검색"/>
+                <input type="image" class="image" id="btnSearchTop" title="검색" value="검색" src="resources/img/Search.png"  width="28" height="30" alt="검색"/>
                 
             </div>
         </fieldset>
