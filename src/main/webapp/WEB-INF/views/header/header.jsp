@@ -183,7 +183,7 @@
         </ul>
     </li>
     <li  >
-        <a href="" >나만의 도시락</a>
+        <a href="blist.do">나만의 도시락</a>
     </li>
    
    
