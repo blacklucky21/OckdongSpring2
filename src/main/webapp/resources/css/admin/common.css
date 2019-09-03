@@ -18,6 +18,9 @@
     flex: auto;
 }
 
+img{
+	cursor: pointer;
+}
 
 #top_main > .div1 {
 	display: inherit;

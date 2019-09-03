@@ -78,6 +78,7 @@ table.ncp_tbl {
     background: #f6f6f6;
 }
 
+/* 아래 검색 창 */
 .search_field {
     display: block;
     margin: 0;
@@ -87,6 +88,85 @@ table.ncp_tbl {
     border: 1px solid #dfdfdf;
     margin-top: 10px;
 }
+
+/* 안의 테이블로 정리 */
+
+.tg  {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+.tg-0lax{
+	padding-right: 260px;
+}
+
+.tg-0lax > span{
+	margin:10px;
+	
+}
+
+.serarch_ti{
+    padding-right: 10px;
+    font-size: x-large;
+}
+
+#select_code{
+	width: 220px;
+    height: 30px;
+}
+
+.search_content{
+	height: 30px;
+    width: 350px;
+}
+
+/* 버튼 효과 */
+.bu{
+	width: 75px;
+    background: #2ecc71;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    
+}
+
+
+.bu:hover{
+	color: #2ecc71;
+	background: #fff;
+	border: 1px solid #2ecc71;
+
+  left: -35%;
+  top: 0;
+  transition-duration: 1s;
+  transform-origin: top left;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+  -o-transition: all 1s;
+	transition: all 1s;
+	 height: 100%;
+ 
+}
+
+/* 리스트 아래 부분 */
+.content_bottom{
+	background: #fff;
+    position: relative;
+    border: 2px solid blue;
+    width: 1280px;
+    margin-top: 15px;
+	
+}
+
+.content_bottom > p{
+	padding: 26px;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+
+
 
 
 
