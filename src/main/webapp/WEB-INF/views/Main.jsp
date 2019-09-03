@@ -134,12 +134,12 @@
 	</div>
 	<!-- 희망 배송 끝 -->
 	<!-- 나만의 도시락 -->
-	<c:url var="blist" value="blist.do"/>
+	<%-- <c:url var="blist" value="blist.do"/> --%>
 	<div class="modal fade bd-example-modal-xl" id="myModal3" tabindex="-1"role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl ">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title" id="myModalLabel"><a href="${ blist }">나만의 도시락</a></h1>
+					<h1 class="modal-title" id="myModalLabel"><a href="blist.do">나만의 도시락</a></h1>
 				</div>
 			
 				<div class="modal-footer">
