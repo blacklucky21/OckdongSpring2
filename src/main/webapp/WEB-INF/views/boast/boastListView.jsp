@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../common/css/boast/boastListView.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/boast/boastListView.csss">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>도시락 자랑 게시판</title>
 </head>
@@ -21,7 +21,7 @@
   <table>
   <tr>
   <td>
-    <div class="gallery-item" onclick="location.href='<%= request.getContextPath() %>/views/boast/boastDetailView.jsp'">
+    <div class="gallery-item" onclick="location.href='<%= request.getContextPath() %>/views/boast/boastDetail.jsp'">
       <div class="gallery-item-image">
         <img src="http://tong.joins.com/wp-content/uploads/sites/3/2017/05/2017-05-25-11.01.25-1_resized_.jpg" style="width:300px; height:300px;"></div>
       <div class="gallery-item-description">
@@ -106,10 +106,10 @@
       </ul>
     </div>
   </div>
-  
+  	
   <!-- ############### 글쓰기 버튼 ###############  --> 
   <div class="container" id="btnwrite">
-  <button class="btn btn-danger" id="btnwrite1" onclick="location.href='<%= request.getContextPath() %>/views/boast/boastInsertForm.jsp'">글쓰기</button>
+ <button class="btn btn-danger" id="btnwrite1" onclick="location.href='<%= request.getContextPath() %>/views/boast/boastInsert.jsp'">글쓰기</button> 
   </div>
   </div>
 </div>
