@@ -30,7 +30,7 @@
 				<tr>
 					<td colspan="3"><input
 						style="width: 300px; height: 30px; text-align: center;"
-						type="password" class="form-control" id="userPwd" name="userPwd"
+						type="password" class="form-control" id="userPwd" name="password"
 						onkeypress="if(event.keyCode==13){login();}"
 						placeholder="비밀번호를 입력하세요"></td>
 				</tr>

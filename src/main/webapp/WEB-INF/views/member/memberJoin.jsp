@@ -31,7 +31,7 @@
             </tr>
             <tr>
                <th height="40px">비밀번호</th>
-               <td><input type="password" maxlength="13" id="userPwd" name="userPwd" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
+               <td><input type="password" maxlength="13" id="userPwd" name="password" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
                <td></td>
             </tr>
             <tr>
@@ -62,7 +62,7 @@
             <tr>
                <th height="40px">우편번호</th>
                <td><input type="text" name="post"  id="post" class="form-control"></td>
-               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()"><button class="bu">검색</button></div></td>
+               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()"><input type="button" class="bu"value="검색"/></div></td>
             </tr>
             <tr>
                <th height="40px">주소</th>
@@ -89,7 +89,7 @@
          <br>
          <div class="btns" align="center">
             <div id="goMain" style="margin-left:20px; font-size:13px"><button onclick="goMain()" class="bu">메인으로</button></div>&nbsp;
-            <div id="joinBtn" style="font-size:13px"><button onclick="insertMember();" class="bu">가입하기</button></div>
+            <div id="joinBtn" style="font-size:13px"><button type="submit" onclick="insertMember();" class="bu">가입하기</button></div>
          </div>
          <script>
  

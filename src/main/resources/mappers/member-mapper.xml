@@ -5,12 +5,12 @@
 	<insert id="insertMember" parameterType="Member">
 		insert into member
 		values(
-			#{USERID},
-			#{PASSWORD},
-			#{NICKNAME},
-			#{EMAIL},
-			#{ADDRESS},
-			#{PHONE},
+			#{userId},
+			#{password},
+			#{nickName},
+			#{email},
+			#{address},
+			#{phone},
 			sysdate,
 			sysdate,
 			default
@@ -18,7 +18,7 @@
 	</insert>
 	
 	<!-- Login -->
-	<select id="loginMember" parameterType="Member">
+	<select id="loginMember" parameterType="string" resultType="Member">
 		select *
 		from member
 		where userId=#{userId} and status='Y'
