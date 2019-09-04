@@ -17,7 +17,7 @@
 	<br>
 	<br>
 	<div class="loginForm">
-		<a href="<%=request.getContextPath()%>/index.jsp">
+		<a href="Main.jsp">
 			<img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
 		<form id="loginForm" action="login.me" method="post">
 			<table align="center" class="log_tb">
@@ -47,9 +47,9 @@
 			</table>
 		</form>
 		<div class="findAndJoin">
-			<a href="<%=request.getContextPath()%>/views/member/findId.jsp">아이디 찾기 │</a> 
-			<a href="<%=request.getContextPath()%>/views/member/findPass.jsp">비밀번호 찾기 │</a> 
-			<a href="<%=request.getContextPath()%>/views/member/joinAgree.jsp">회원가입</a>
+			<a href="idFind.me">아이디 찾기 │</a> 
+			<a href="passFind.me">비밀번호 찾기 │</a> 
+			<a href="memberJoin.me">회원가입</a>
 		</div>
 
 	</div>
@@ -61,7 +61,7 @@
 
 		function logout() {
 
-			location.href = "<%= request.getContextPath() %>/index.jsp";
+			location.href = "Main.jsp";
 		}
 	
 	</script>

@@ -5,98 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.searchBoard {
-	margin: 5%;
-}
+<link rel="stylesheet" href="resources/css/admin/PayList.css">
 
-.PayPlz td {
-	margin-bottom: 5%;
-	padding: 15px;
-}
-
-tr {
-	margin: 5%;
-}
-
-.buttonSearch {
-	background: #1AAB8A;
-	color: #fff;
-	border: none;
-	position: relative;
-	height: 30px;
-	width: 70px;
-	font-size: 13px;
-	cursor: pointer;
-	transition: 800ms ease all;
-	outline: none;
-}
-
-.buttonSearch:hover {
-	background: #fff;
-	color: #1AAB8A;
-}
-
-.buttonSearch:before, .buttonSearch:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 2px;
-	width: 0;
-	background: #1AAB8A;
-	transition: 400ms ease all;
-}
-
-.buttonSearch:after {
-	right: inherit;
-	top: inherit;
-	left: 0;
-	bottom: 0;
-}
-
-.buttonSearch:hover:before, .buttonSearch:hover:after {
-//	width: 100%;
-	transition: 800ms ease all;
-}
-
-.tableResult {
-	margin: 5%;
-	border: 0.5px solid gray;
-}
-
-.tableResult tbody{
-	overflow:scroll;
-    height: 200px;
-    width:400px;
-
-}
-
-.tableResult th {
-	text-align: center;
-	padding: 5px;
-	margin-right: 30px;
-	font-size: 13px;
-	border: 0.5px solid gray;
-	background-color: #bdb7b7;
-}
-
-.tableResult td {
-	text-align: center;
-	padding: 5px;
-	border: thin solid gray;
-}
-
-body{
-background-color:#e9eaed !important;
-}
-
-.pay1 {
-background-color:white;
-border-radius:20px;
-width:1280px;
-}
-</style>
 </head>
 <body>
 
@@ -158,10 +68,16 @@ width:1280px;
 
 
 		</div>
-		<div style="border: 1px solid black;  margin-top: 30px" class="pay1">
-	
-			<div style=" height:600px; overflow:auto">
-				<table class="tableResult" >
+		<div style="border: 1px solid black; margin-top: 30px" class="pay1">
+
+			<div class="content_bottom">
+				<p>
+					검색 결과 <span>0</span>건
+				</p>
+			</div>
+
+			<div style="height: 600px; overflow: auto">
+				<table class="tableResult">
 					<thead>
 						<tr>
 
@@ -180,9 +96,9 @@ width:1280px;
 
 						</tr>
 					</thead>
-							<tbody>
-					<c:forEach var="i" begin="0" end="20">
-				
+					<tbody>
+						<c:forEach var="i" begin="0" end="20">
+
 							<tr>
 								<td>1231231231</td>
 								<td>2</td>
@@ -197,14 +113,14 @@ width:1280px;
 								<td>11</td>
 								<td>12</td>
 							</tr>
-					
-					</c:forEach>
-						</tbody>
+
+						</c:forEach>
+					</tbody>
 				</table>
 			</div>
 		</div>
 
-</div>
+	</div>
 
 
 
