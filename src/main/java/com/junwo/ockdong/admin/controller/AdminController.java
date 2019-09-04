@@ -43,5 +43,11 @@ public class AdminController {
 		return"admin/Payment/adminWarnningList";
 	}
 	
+	// 메인 화면 로고 누르면 메인 화면으로 이동한다.ㄴ
+	@RequestMapping("main.do")
+	public String main() {
+		return "Main";
+	}
+	
 
 }
