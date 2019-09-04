@@ -28,7 +28,7 @@
                     <span class=" this end" title="현재페이지"><strong>03</strong> 주문완료</span>
                 </div>
             </div>
-            <img src="../../img/etc/delivary.png" alt="배달이요">
+            <img src="resources/img/etc/delivary.png" alt="배달이요">
             <h2>주문이 완료 되었습니다.</h2>
             <h3 class="fir">주문상세내역</h3>
             <div class="table1 type1">
@@ -49,10 +49,10 @@
                     <tr>
                         <td class="gi this-product">
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
+                            <span><a href="resources/img/etc/delivary.png/goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
 
-                                <a href="../goods/goods_view.php?goodsNo=1000000107">AVA SUMMER DENIM</a>
+                                <a href="resources/img/etc/delivary.png/goods/goods_view.php?goodsNo=1000000107">AVA SUMMER DENIM</a>
 
                                 <dl>
                                     <dt>사이즈 :</dt>

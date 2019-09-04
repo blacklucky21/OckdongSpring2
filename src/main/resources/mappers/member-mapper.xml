@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
+	<!-- Join -->
 	<insert id="insertMember" parameterType="Member">
 		insert into member
 		values(
-			#{USERID},
-			#{PASSWORD},
-			#{NICKNAME},
-			#{EMAIL},
-			#{ADDRESS},
-			#{PHONE},
+			#{userId},
+			#{password},
+			#{nickName},
+			#{email},
+			#{address},
+			#{phone},
 			sysdate,
 			sysdate,
-			default
+			default,
+			#{userName}
 		)
 	</insert>
+	
+	<!-- Login -->
+	<select id="loginMember" parameterType="string" resultType="Member">
+		select *
+		from member
+		where userId=#{userId} and status='Y'
+	</select>
+	
 </mapper>

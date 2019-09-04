@@ -6,4 +6,7 @@ public interface MemberService {
 
 	int memberJoin(Member m);
 
+	
+	Member memberLogin(Member m);
+
 }

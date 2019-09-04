@@ -78,22 +78,53 @@
 					<p>
 						검색 결과 <span>3</span>건
 					</p>
-				<div class="list_bottom">
-					<div class="table_list">
-						<table class="list_table">
-							<tr>
-								<th>상품번호</th>
-								<th>상품명</th>
-								<th>판매상태</th>
-								<th>판매상태 설정 </th>
-								<th>가격</th>
-								<th>수량 </th>
-								<th>카테고리</th>
-								<th>재고수량 </th>
-								<th>판매수량</th>
-								<th>삭제 </th>
-							</tr>
-						</table>
+
+					<div class="list_bottom">
+						<div class="table_list">
+							<table class="list_table">
+							<thead>
+								<tr>
+									<th>상품번호</th>
+									<th>상품명 </th>
+									<th>판매상태</th>
+									<th>판매상태설정</th>
+									<th>가격</th>
+									<th>수량</th>
+									<th>카테고리</th>
+									<th>재고수량</th>
+									<th>판매수량</th>
+									<th>삭제</th>
+								</tr>
+								</thead>
+								<tbody class="list_content">
+									<!-- 리스트 가져 오기 -->
+									<c:forEach var="i" begin="1" end="30">
+									
+							 	<tr>
+											<td class="py" id="py">${ i }</td>
+											<td class="pp">상품명이 이게 맞나?</td>
+											<td class="pp">판매상태</td>
+											<td>
+												<select>
+													<option id="yy">판매중</option>
+													<option id="nn">판매중지</option>
+												</select>
+											</td>
+											<td class="pp">${ i }</td>
+											<td class="pp">${ i }</td>
+											<td class="pp">카테고리</td>
+											<td class="pp">${ i }</td>
+											<td class="pp">${ i }</td>
+											<td class="py" id="deleted">삭제</td>
+											
+										</tr>  
+									</c:forEach>
+									
+								</tbody>
+							</table>
+
+						</div>
+
 					</div>
 				</div>
 				</div>
@@ -101,6 +132,6 @@
 				<!-- 전체 부위 끝 -->
 				</div>
 			</div>
-	</div>
+
 </body>
 </html>

@@ -166,9 +166,22 @@ table.ncp_tbl {
 }
 
 
+
+.list_bottom>.table_list {
+	    overflow-y: scroll;
+	height: 545px;
+	  
+}
+
+.list_content{
+	        text-align: center;
+}
+
+
 .list_bottom>.table_list>.list_table {
 	border-top: 1px solid #191919;
 	width: 100%;
+	border-left: 1px solid #f8f8f8;
 }
 
 .list_bottom>.table_list>.list_table th {
@@ -186,11 +199,24 @@ table.ncp_tbl {
 
 
 
+.list_bottom > .table_list >.list_table tr:nth-child(1n):hover{
+	    background: #dfdfdf;
+}
 
+ .list_bottom > .table_list >.list_table tr:nth-child(1n):{
+	   font-size: 25px;
+    
+    padding-bottom: 9px;;
+} 
 
+.list_bottom > .table_list >.list_table .py{
+	cursor: pointer;
+}
 
-
-
+.list_bottom > .table_list >.list_table .pp{
+	cursor: default;
+}
+    
 
 
 

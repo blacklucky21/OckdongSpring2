@@ -958,7 +958,26 @@ span.txt-field {
 	width: 300px;
 	height: 61px;
 	line-height: 59px;
+	border:1px solid white;
 	font-size: 20px;
+	color:white;
+	background:black;
+	margin-bottom:15px;
+}
+
+.skinbtn.point2.order-buy:hover{
+
+	color:black;
+	background:#fff;
+	top: 0;
+	border:1px solid gray;
+   transition-duration: 1s;
+   transform-origin: top left;
+   -webkit-transition: all 1s;
+   -moz-transition: all 1s;
+   -o-transition: all 1s;
+   transition: all 1s;
+   height: 100%;
 }
 
 .skinbtn.point2.oe-confirm {
@@ -972,6 +991,7 @@ span.txt-field {
 	width: 100px;
 	height: 42px;
 	line-height: 40px;
+	
 }
 /*
     주문끝
@@ -1005,7 +1025,7 @@ span.txt-field {
 	display: inline-block;
 	min-height: 20px;
 	padding: 0 0 0 28px;
-	background: url('../img/icon/completed.png') no-repeat left 3px;
+	background: url('resources/img/icon/completed.png') no-repeat left 3px;
 	color: #3e3d3c;
 	font-size: 13px;
 }
@@ -1137,7 +1157,7 @@ span.txt-field {
 .table1.type2 td.tit span.reply a {
 	display: inline-block;
 	padding: 0 0 0 15px;
-	background: url('../img/icon/board-reply.png') no-repeat left 5px;
+	background: url('resources/img/icon/board-reply.png') no-repeat left 5px;
 }
 
 .table1.type2 .notice-item td img {
@@ -1189,7 +1209,7 @@ input.edit {
 
 .normal-btn.small2 {
     height:28px;
-    background:url('../../img/etc/btn-small2-bg.png') repeat-x left top;
+    background:url('resources/img/etc/btn-small2-bg.png') repeat-x left top;
     font-size:12px !important;
     line-height:26px;
 }

@@ -22,7 +22,7 @@
   <table>
   <tr>
   <td>
-    <div class="gallery-item" onclick="location.href='<%= request.getContextPath() %>/views/boast/boastDetail.jsp'">
+    <div class="gallery-item" onclick="location.href='bdetail.do'">
       <div class="gallery-item-image">
         <img src="http://tong.joins.com/wp-content/uploads/sites/3/2017/05/2017-05-25-11.01.25-1_resized_.jpg" style="width:300px; height:300px;"></div>
       <div class="gallery-item-description">
