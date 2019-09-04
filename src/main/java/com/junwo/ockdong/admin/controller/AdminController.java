@@ -49,5 +49,19 @@ public class AdminController {
 		return "Main";
 	}
 	
+	// 나만의 도시락 관리 페이지
+	@RequestMapping("mydo.do")
+	public String mydo() {
+		return "myOwn_lunch";
+	}
+	
+	// 나만의 도시락 재료관리
 
 }
+
+
+
+
+
+
+
