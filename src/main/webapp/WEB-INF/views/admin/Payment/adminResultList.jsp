@@ -51,7 +51,9 @@
 							<button class="today buttonSearch" id="3days">3일</button>
 							<button class="today buttonSearch" id="7days">1주일</button>
 							<button class="today buttonSearch" id="1month">1개월</button>
+							<button class="today buttonSearch" id="1years">1년</button>
 							<input type="date" class="startDatePicker"> ~ <input type="date" id="endDatePicker" class="endDatePicker">
+							
 						</td>
 					</tr>
 				<!-- 	<tr>
@@ -158,6 +160,7 @@
 				case '3days': $('.startDatePicker').val(days3Ago());break;
 				case '7days': $('.startDatePicker').val(lastWeek());break;
 				case '1month': $('.startDatePicker').val(lastMonth());break;
+				case '1years':  $('.startDatePicker').val(lastYear());break;
 				}
 				
 			});
@@ -206,6 +209,16 @@
 		  var monthOfYear = d.getMonth()
 		  d.setMonth(monthOfYear - 1)
 		  return getDateStr(d)
+		}
+		
+		
+		/* 오늘로부터 1년전 날짜 반환 */
+		function lastYear() {
+		  var d = new Date()
+		  var Year = d.getFullYear()
+		  console.log(Year);
+		  d.setYear(Year - 1)
+		  return getDateStr(d);
 		}
 	</script>
 
