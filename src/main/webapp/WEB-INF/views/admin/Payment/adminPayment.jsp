@@ -76,7 +76,11 @@
 				</p>
 			</div>
 
+
+			<div style="min-height: 600px; overflow: auto">
+
 			<div style="height: 600px; overflow: auto">
+
 				<table class="tableResult">
 					<thead>
 						<tr>
@@ -100,9 +104,9 @@
 						<c:forEach var="i" begin="0" end="20">
 
 							<tr>
-								<td>1231231231</td>
+								<td>123412312312213</td>
 								<td>2</td>
-								<td>3</td>
+								<td>반값븐디ㅏ!</td>
 								<td>4</td>
 								<td>5</td>
 								<td>6</td>

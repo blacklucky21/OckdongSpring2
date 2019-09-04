@@ -56,7 +56,11 @@ tr {
 .tableResult {
 	margin:30px;
 	border: 0.5px solid gray;
+
+	min-width:1200px;
+
 	width:1200px;
+
 	background:#e3e1e1
 	;
 }
@@ -95,7 +99,11 @@ width:1280px;
 }
 
 .content_bottom > p{
+
+	margin-left:26px;
+
 	padding: 26px;
+
     font-size: x-large;
     font-weight: 600;
 }
