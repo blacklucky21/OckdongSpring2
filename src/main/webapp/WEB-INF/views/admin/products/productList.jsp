@@ -81,6 +81,7 @@
 					<div class="list_bottom">
 						<div class="table_list">
 							<table class="list_table">
+							<thead>
 								<tr>
 									<th>상품번호</th>
 									<th>상품명 </th>
@@ -93,6 +94,7 @@
 									<th>판매수량</th>
 									<th>삭제</th>
 								</tr>
+								</thead>
 							</table>
 
 
@@ -101,7 +103,7 @@
 								<tbody>
 									<!-- 리스트 가져 오기 -->
 									<c:forEach var="i" begin="1" end="15">
-										 <tr>
+									 <tr>
 											<th style="width: 131px;" class="plist">${ i }</th>
 											<th style="width: 107px;" class="sh">상품명이 얼마나 늘어날지 나도 모르는 일이다.</th>
 										
@@ -115,7 +117,7 @@
 											<th style="width: 132px;" class="sh">${ i }</th>
 											<th style="width: 83px;" class="plist"id="deleteList" >삭제</th>
 										</tr> 
-									<%-- 	<tr>
+								<%-- 	<tr>
 											<td>${ i }</td>
 											<td>상품명이 이게 맞나?</td>
 											<td>판매상태 설정</td>
@@ -127,7 +129,7 @@
 											<td>${ i }</td>
 											<td>삭제</td>
 											
-										</tr> --%>
+										</tr>  --%>
 									</c:forEach>
 									
 								</tbody>

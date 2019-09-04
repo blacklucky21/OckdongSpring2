@@ -162,7 +162,7 @@ table.ncp_tbl {
 }
 
 .list_bottom{
-	  overflow: scroll;
+	  overflow-y: scroll;
 }
 
 .list_bottom>.table_list {
