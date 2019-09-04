@@ -221,7 +221,7 @@ ul, ol, li {
 #topbar li {
 	float: left;
 	display: inline-block;
-	*display: inline;
+	display: inline;
 	height: 34px;
 	line-height: 34px;
 	font-size: 11px;
@@ -244,8 +244,14 @@ ul, ol, li {
 	border-right: 1px solid #666 !important;
 }
 
+
+
 #topbar li a:hover {
 	color: #fff;
+}
+
+#topbar li .logout{
+	cursor:pointer;
 }
 
 #topbar li a img {

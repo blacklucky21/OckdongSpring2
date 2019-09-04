@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,16 +97,42 @@
 
 
 <!-- :::::::::::::::::::::::::::::::::::::: 상단오른쪽 :::::::::::::::::::::::::::::::::::::: -->
+
 <div class="topbar_right">
 <ul>
+<!-- 로그인 상태가 아닐때 -->
+<c:if test="${ empty sessionScope.loginUser }">
+	<li><a href="loginView.me">LOGIN</a></li>
+	<li><a href="enrollView.me">JOIN US</a>
+	<!-- 회원가입 포인트 -->	
+	</li>
 
-<li><a href="loginView.me">LOGIN</a></li>
-<li><a href="enrollView.me">JOIN US</a>
-<!-- 회원가입 포인트 -->	
-</li>
+	<li><a href="CartView.do">CART</a></li>
+	<li><a href="../mypage/order_list.php">ORDER</a></li>
+</c:if>
 
-<li><a href="CartView.do">CART</a></li>
-<li><a href="../mypage/order_list.php">ORDER</a></li>
+<!-- 로그인 상태 -->
+<c:if test="${ !empty sessionScope.loginUser}">
+	<c:choose >
+		<c:when test="${ loginUser.userId == 'admin' }">
+		<li><a href="mypage.do"> <c:out value="${ loginUser.nickName }"/> 님 환영 합니다.</a></li>
+		<li><a href="CartView.do">CART</a></li>
+		<li><a href="">ORDER</a></li>
+		<li><a href="logout.me">log out</a><li>
+		<li><a href="adminhome.do">ad page</a></li>				
+		</c:when>
+		<c:otherwise>
+		
+		<li><a href="mypage.do"> <c:out value="${ loginUser.nickName }"/> 님 환영 합니다.</a></li>
+		<li><a href="CartView.do">CART</a></li>
+		<li><a href="">ORDER</a></li>
+		<li><a href="logout.me">log out</a><li>
+
+		</c:otherwise>
+
+	</c:choose>
+</c:if>
+
 
 
 </ul>
@@ -126,7 +153,7 @@
 
 <div class="logoBox">
     <div class="logo">
-        <h1><a href="<%= request.getContextPath()%>/index.jsp"><img src="resources/img/mainlogo.png"  alt="상단 로고" title="상단 로고" /></a></h1>
+        <h1><a href="main.do"><img src="resources/img/mainlogo.png"  alt="상단 로고" title="상단 로고" /></a></h1>
         <!-- 검색 폼 -->
         <div class="search">
     <form name="frmSearchTop" id="frmSearchTop" action="" method="get">
