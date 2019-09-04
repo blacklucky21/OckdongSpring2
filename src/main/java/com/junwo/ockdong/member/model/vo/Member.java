@@ -103,6 +103,14 @@ public class Member {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Member [userId=" + userId + ", password=" + password + ", nickName=" + nickName + ", email=" + email
+				+ ", address=" + address + ", phone=" + phone + ", enroll_Date=" + enroll_Date + ", modify_Date="
+				+ modify_Date + ", status=" + status + "]";
+	}
+	
+	
+	
 }

@@ -12,6 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<br><br><br>
 	<div class="loginForm">
 	<a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>

@@ -36,7 +36,7 @@ public class MemberController {
 		return "member/joinAgree";
 	}
 	// 가입 페이지 이동
-	@RequestMapping("memberJoinView")
+	@RequestMapping("memberJoinView.me")
 	public String insertView() {
 		return "member/memberJoin";
 	}
@@ -47,11 +47,15 @@ public class MemberController {
 							 @RequestParam("address2") String address2,
 							 @RequestParam("address3") String address3,
 							 @RequestParam("address4") String address4) {
+		System.out.println(m);
+		System.out.println(m.getPassword());
 		String encPwd = bCryptPasswordEncoder.encode(m.getPassword());
 		m.setPassword(encPwd);
 		m.setAddress(post + "/" + address2 + "/" + address3 + "/" + address4);
 		
 		int result = mService.memberJoin(m);
+		
+		
 		if(result > 0) {
 			return "Main";
 		}else {
@@ -67,7 +71,9 @@ public class MemberController {
 	@RequestMapping(value="login.me", method = RequestMethod.POST)
 	public String memberLogin(Member m, Model model) {
 		
+	
 		Member loginUser = mService.memberLogin(m);
+		System.out.println("login member : " + loginUser);
 		
 		if(bCryptPasswordEncoder.matches(m.getPassword(), loginUser.getPassword())) {
 			model.addAttribute("loginUser", loginUser);
