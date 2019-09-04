@@ -13,7 +13,8 @@
 			#{phone},
 			sysdate,
 			sysdate,
-			default
+			default,
+			#{userName}
 		)
 	</insert>
 	

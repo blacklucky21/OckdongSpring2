@@ -47,8 +47,6 @@ public class MemberController {
 							 @RequestParam("address2") String address2,
 							 @RequestParam("address3") String address3,
 							 @RequestParam("address4") String address4) {
-		System.out.println(m);
-		System.out.println(m.getPassword());
 		String encPwd = bCryptPasswordEncoder.encode(m.getPassword());
 		m.setPassword(encPwd);
 		m.setAddress(post + "/" + address2 + "/" + address3 + "/" + address4);
@@ -91,5 +89,18 @@ public class MemberController {
 		return "Main";
 	}
 	
+	/*** ID찾기 ***/
+	// 화면 이동
+	@RequestMapping("idFind.me")
+	public String findIdView() {
+		return "member/findId";
+	}
+	
+	/*** PW찾기 ***/
+	// 화면 이동
+	@RequestMapping("passFind.me")
+	public String findPwdView() {
+		return "member/findPass";
+	}
 	
 }
