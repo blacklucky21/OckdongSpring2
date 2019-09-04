@@ -58,7 +58,7 @@
             <tr>
                <th height="40px">이메일</th>
                <td><input type="email" id="email" name="email" class="form-control" placeholder="example@naver.com"></td>
-               <td width="150px" style="padding-left:10px"><label id="emailResult"></label></td>
+               <td width="150px" style="padding-left:10px"><span id="validEmail"></span></td>
             </tr>
             <tr>
                <th height="40px">우편번호</th>
@@ -95,7 +95,7 @@
          <script>
  
             function goMain(){
-               location.href="Main.jsp";
+               location.href="main.do";
             }
             
             function searchAdd() {
@@ -143,7 +143,11 @@
                         }
                     }).open();
                 }
+            
+
          </script>
+         
+         
       </form>
    </div>
 </body>
