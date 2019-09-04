@@ -15,6 +15,11 @@ public class BoastController {
 	public String boastInsert() {
 		return "boast/boastInsert";
 	}
+	
+	@RequestMapping("bdetail.do")
+	public String boastDetail() {
+		return "boast/boastDetail";
+	}
 
 
 }
