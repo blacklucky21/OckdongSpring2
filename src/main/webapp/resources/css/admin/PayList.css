@@ -54,8 +54,11 @@ tr {
 }
 
 .tableResult {
-	margin: 5%;
+	margin:30px;
 	border: 0.5px solid gray;
+	min-width:1200px;
+	background:#e3e1e1
+	;
 }
 
 .tableResult tbody{
@@ -78,6 +81,7 @@ tr {
 	text-align: center;
 	padding: 5px;
 	border: thin solid gray;
+	background:#fff;
 }
 
 body{
@@ -88,4 +92,10 @@ background-color:#e9eaed !important;
 background-color:white;
 border-radius:20px;
 width:1280px;
+}
+
+.content_bottom > p{
+	margin-left:26px;
+    font-size: x-large;
+    font-weight: 600;
 }
