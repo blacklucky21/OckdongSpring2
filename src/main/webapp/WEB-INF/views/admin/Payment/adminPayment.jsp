@@ -76,7 +76,11 @@
 				</p>
 			</div>
 
+
 			<div style="min-height: 600px; overflow: auto">
+
+			<div style="height: 600px; overflow: auto">
+
 				<table class="tableResult">
 					<thead>
 						<tr>

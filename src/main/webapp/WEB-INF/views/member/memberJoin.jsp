@@ -21,8 +21,8 @@
 <body>
 	   <br><br><br>
    <div class="loginForm">
-   <a href="<%=request.getContextPath() %>/index.jsp"><img class="image" src="<%=request.getContextPath() %>/img/mainlogo.png" id="logo" align="center"></a>
-   <form id="joinForm" name="joinForm" action="<%=request.getContextPath()%>/insertUser.me" method="post" onsubmit="return validate();">
+   <a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
+   <form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
          <table align="center">
             <tr>
                <th width="100px" height="40px">아이디</th>
@@ -94,7 +94,7 @@
          <script>
  
             function goMain(){
-               location.href="<%=request.getContextPath()%>/index.jsp";
+               location.href="Main.jsp";
             }
             
             function searchAdd() {
@@ -135,7 +135,7 @@
                                 document.getElementById("address3").value = '';
                             }
                             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                               document.getElementById('address1').value = data.zonecode;
+                              document.getElementById('address1').value = data.zonecode;
                               document.getElementById("address2").value = addr;
                             // 커서를 상세주소 필드로 이동한다.
                              document.getElementById("address4").focus();

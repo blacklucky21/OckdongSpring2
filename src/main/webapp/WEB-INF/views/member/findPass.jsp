@@ -15,8 +15,8 @@
 	<br><br><br>
 	
 	<div class="loginForm">
-	<a href="<%=request.getContextPath()%>/index.jsp"><img class="image" src="<%=request.getContextPath()%>/img/mainlogo.png" id="logo" align="center"></a>
-	<form id="passFindForm" action="<%=request.getContextPath()%>/passFind.me" method="post">
+	<a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
+	<form id="passFindForm" action="passFind.me" method="post">
 	<table align="center" class="findd">
 		<tr>
 			<td colspan="3">
@@ -38,10 +38,10 @@
 		</tr>
 		<tr class="find">
 			<td colspan="4">
-				<a href="findId.jsp" >아이디 찾기 │</a>
-				<a href="findPass.jsp" style="color:black">비밀번호 찾기 │</a>
+				<a href="findId.me" >아이디 찾기 │</a>
+				<a href="findPass.me" style="color:black">비밀번호 찾기 │</a>
 				<a href="joinAgree.jsp">회원가입 │</a>
-				<a href="login.jsp">로그인</a>
+				<a href="login.me">로그인</a>
 			</td>
 		</tr>
 	</table>
