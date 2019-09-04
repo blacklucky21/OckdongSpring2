@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  <link href='<%= request.getContextPath() %>/views/member/memberJoin.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="resources/css/member/memberJoin.css">
   <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -62,7 +62,7 @@
             <tr>
                <th height="40px">우편번호</th>
                <td><input type="text" name="post"  id="post" class="form-control"></td>
-               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()">검색</div></td>
+               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()"><button class="bu">검색</button></div></td>
             </tr>
             <tr>
                <th height="40px">주소</th>
@@ -88,8 +88,8 @@
          </table>
          <br>
          <div class="btns" align="center">
-            <div id="goMain" style="margin-left:20px; font-size:13px" onclick="goMain()">메인으로</div>&nbsp;
-            <div id="joinBtn" style="font-size:13px" onclick="insertMember();">가입하기</div>
+            <div id="goMain" style="margin-left:20px; font-size:13px"><button onclick="goMain()" class="bu">메인으로</button></div>&nbsp;
+            <div id="joinBtn" style="font-size:13px"><button onclick="insertMember();" class="bu">가입하기</button></div>
          </div>
          <script>
  

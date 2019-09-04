@@ -30,10 +30,15 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	/*** Join ***/
-	// 페이지 이동
+	// 약관 페이지 이동
 	@RequestMapping("enrollView.me")
-	public String enrollView() {
+	public String agreeView() {
 		return "member/joinAgree";
+	}
+	// 가입 페이지 이동
+	@RequestMapping("memberJoinView")
+	public String insertView() {
+		return "member/memberJoin";
 	}
 	// 가입 하기 버튼 눌렀을 경우
 	@RequestMapping("memberJoin.me")

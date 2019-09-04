@@ -138,7 +138,7 @@ FARMER RECIPE는 회원관리, 서비스 개발・제공 및 향상, 안전한 �
 				    </tr>
 				</table>
 				<br>
-				  <button type = "button"  class="btn btn-default" style="margin:10px;" onclick="memberJoin()" id="joinBtn">일반 회원 가입</button>
+				  <button type = "button"  class="bu" style="margin:10px;" onclick="memberJoin()" id="joinBtn">일반 회원 가입</button>
 					<br><br>
     </table>
     </center>
@@ -157,7 +157,7 @@ FARMER RECIPE는 회원관리, 서비스 개발・제공 및 향상, 안전한 �
 				return;
 			}
 			
-			location.href="memberJoin.me";
+			location.href="memberJoinView.me";
 		}
 	</script>
 
