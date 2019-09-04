@@ -85,10 +85,10 @@
                     <tr>
                         <td class="gi this-product">
                             <input type="hidden" name="cartSno[]" value="15">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000088"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="ADIE WIDE CROPPED PANTS OFF WHITE" title="ADIE WIDE CROPPED PANTS OFF WHITE" class="middle"></a></span>
+                            <span><a href=""><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="ADIE WIDE CROPPED PANTS OFF WHITE" title="ADIE WIDE CROPPED PANTS OFF WHITE" class="middle"></a></span>
                             <div>
 
-                                <a href="../goods/goods_view.php?goodsNo=1000000088">ADIE WIDE CROPPED PANTS OFF WHITE</a>
+                                <a href="">ADIE WIDE CROPPED PANTS OFF WHITE</a>
 
                                 <dl>
                                     <dt>사이즈 :</dt>
@@ -130,8 +130,8 @@
                 <div>
                     <p>
                         <span class="detail">총 <em>2</em>개의 상품금액 <strong>97,000</strong>원</span>
-                        <span><img src="../../img/etc/plus.png" alt="더하기">배송비 <strong>0</strong>원</span>
-                        <span class="total"><img src="../../img/etc/total.png" alt="합계"><strong>97,000</strong>원
+                        <span><img src="resources/img/etc/plus.png" alt="더하기">배송비 <strong>0</strong>원</span>
+                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong>97,000</strong>원
                         </span>
                     </p>
                     <span class="mileage">적립예정 마일리지 : <span>0</span> 원</span>
@@ -426,11 +426,11 @@
                     </div>
 
                     <div class="how-to-pay orderplz">
-                        <h3>결제수단 선택 / 결제</h3>
-                        <div class="method">
+                        <h3>결제하기</h3>
+               <!--          <div class="method">
                             <div class="js-pay-content">
 
-                                <!-- 일반결제 컨텐츠 -->
+                                일반결제 컨텐츠
                                 <div class="process" id="settlekind_general">
                                     <div class="title-element">
                                         일반결제
@@ -441,7 +441,7 @@
                                             <label class="choice-s on" for="settleKind_gb">무통장 입금</label>
                                         </span>
 
-                                        <!-- 무통장입금 컨텐츠 -->
+                                        무통장입금 컨텐츠
                                         <ul class="bank" id="settlekind_general_gb" style="display: block;">
                                             <li>
                                                 <p>( 무통장 입금 의 경우 입금확인 후부터 배송단계가 진행됩니다. )</p>
@@ -465,7 +465,7 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <!-- //무통장입금 컨텐츠 -->
+                                        //무통장입금 컨텐츠
 
 
 
@@ -474,13 +474,13 @@
 
                                     </div>
                                 </div>
-                                <!-- //일반결제 컨텐츠 -->
+                                //일반결제 컨텐츠
 
 
                             </div>
 
                         
-                        </div>
+                        </div> -->
                         <div class="buy">
                             <div class="final-settlement">
                                 <em>최종 결제 금액</em>
@@ -493,9 +493,9 @@
                                     <label for="termAgree_orderCheck" class="check-s"><strong>(필수)</strong> <em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em></label>
                                 </span>
                             </div>
-                            <div class="btn" style="text-align:center">
+                            <div class="btn" style="float:right">
                             <div>
-                                <button class="skinbtn point2 order-buy"><em>결제하기</em></button>
+                                <button class="skinbtn point2 order-buy" ><em>결제하기</em></button>
                             </div>
                             </div>
                         </div>
