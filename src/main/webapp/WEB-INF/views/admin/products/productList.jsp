@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,7 +79,7 @@
 					<p>
 						검색 결과 <span>3</span>건
 					</p>
-
+					<!-- 상품 번호 p_Id -->
 					<div class="list_bottom">
 						<div class="table_list">
 							<table class="list_table">
@@ -98,14 +99,15 @@
 								</thead>
 								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
-									<c:forEach var="i" begin="1" end="30">
 									
-							 	<tr>
+									<c:forEach var="i" begin="1" end="30" varStatus="num">
+									
+							 			<tr class="list"+ ${num}>
 											<td class="py" id="py">${ i }</td>
 											<td class="pp">상품명이 이게 맞나?</td>
-											<td class="pp">판매상태</td>
+											<td class="pp"></td>
 											<td>
-												<select>
+												<select id="select">
 													<option id="yy">판매중</option>
 													<option id="nn">판매중지</option>
 												</select>
@@ -115,7 +117,7 @@
 											<td class="pp">카테고리</td>
 											<td class="pp">${ i }</td>
 											<td class="pp">${ i }</td>
-											<td class="py" id="deleted">삭제</td>
+											<td class="py" id="deleted" onclick="delete('list${num}');" >삭제</td>
 											
 										</tr>  
 									</c:forEach>
@@ -134,4 +136,5 @@
 			</div>
 
 </body>
+>>>>>>> f1bb245d89dbcdbd860de7cb85d04a6ee8c2d993
 </html>
