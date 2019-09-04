@@ -85,7 +85,7 @@ a:hover {
 	<br>
 	<div class="loginForm">
 
-		<a href="Main.jsp"><img class="image"
+		<a href="main.do"><img class="image"
 			src="resources/img/mainlogo.png" id="logo" align="center"></a>
 
 		<center>
