@@ -23,4 +23,5 @@
 		from member
 		where userId=#{userId} and status='Y'
 	</select>
+	
 </mapper>
