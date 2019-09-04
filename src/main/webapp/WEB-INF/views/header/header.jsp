@@ -62,7 +62,7 @@
 
 <li class="topbar_com"><a href="#"><img src="resources/img/list_icon2.png"> COMMUNITY</a>
 <div class="com_sub">
-<div><a href="">NOTICE</a></div>
+<div><a href="nlist.do">NOTICE</a></div>
 <div><a href="">Q&A</a></div>
 <div><a href="">REVIEW</a></div>
 <div><a href="">EVENT</a></div>
