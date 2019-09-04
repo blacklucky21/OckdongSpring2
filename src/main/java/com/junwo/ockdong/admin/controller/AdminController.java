@@ -20,6 +20,8 @@ public class AdminController {
 
 	@RequestMapping("productList.do")
 	public String productList() {
+		
+		
 		return "admin/products/productList";
 	}
 	
@@ -60,6 +62,20 @@ public class AdminController {
 	public String myIn() {
 		return "admin/mydo/myOwn_Ingredients";
 	}
+	
+	// 상품관리 상품등록
+	@RequestMapping("productsInsert.do")
+	public String productsInert() {
+		return "admin/products/productInsert";
+	}
+	
+	// 상품 문의
+	@RequestMapping("productInquiry.do")
+	public String productInquiry() {
+		return "admin/products/productInquiry";
+	}
+	
+	
 }
 
 
