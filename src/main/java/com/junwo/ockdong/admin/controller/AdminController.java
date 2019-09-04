@@ -52,11 +52,14 @@ public class AdminController {
 	// 나만의 도시락 관리 페이지
 	@RequestMapping("mydo.do")
 	public String mydo() {
-		return "myOwn_lunch";
+		return "admin/mydo/myOwn_lunch";
 	}
 	
 	// 나만의 도시락 재료관리
-
+	@RequestMapping("myIn")
+	public String myIn() {
+		return "admin/mydo/myOwn_Ingredients";
+	}
 }
 
 
