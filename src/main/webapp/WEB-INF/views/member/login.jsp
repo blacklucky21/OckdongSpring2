@@ -16,7 +16,7 @@
 	<br>
 	<br>
 	<div class="loginForm">
-		<a href="Main.jsp">
+		<a href="main.do">
 			<img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
 		<form id="loginForm" action="login.me" method="post">
 			<table align="center" class="log_tb">

@@ -22,7 +22,7 @@
 <body>
 	   <br><br><br>
    <div class="loginForm">
-   <a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
+   <a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
    <form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
          <table align="center">
             <tr>
