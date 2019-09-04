@@ -64,7 +64,7 @@
                 <li><a href="adminPaymentList.do" class="menu_depth2">주문통합 리스트</a></li>
 
                 <li><a href="PayResultList.do" class="menu_depth2">결제완료 리스트</a></li>
-                <li><a href="#" class="menu_depth2">반품 리스트</a></li>
+                <li><a href="adminWarnning.do" class="menu_depth2">신고 리스트</a></li>
             </ul>
         </li>
         <li class="accor_has_sub">

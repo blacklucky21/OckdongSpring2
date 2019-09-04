@@ -36,5 +36,12 @@ public class AdminController {
 		
 		return"admin/Payment/adminResultList";
 	}
+	
+	@RequestMapping("adminWarnning.do")
+	public String Warnninng() {
+		
+		return"admin/Payment/adminWarnningList";
+	}
+	
 
 }

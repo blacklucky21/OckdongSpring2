@@ -50,7 +50,7 @@
 							<button class="today buttonSearch">1주일</button>
 							<button class="today buttonSearch">1개월</button>
 
-							<input type="date" class="startDatePicker"> ~ <input type="date" class="endDatePicker">
+							<input type="date" class="startDatePicker"> ~ <input type="date" id="endDatePicker" class="endDatePicker">
 						</td>
 					</tr>
 					<tr>
@@ -85,7 +85,7 @@
 					<thead>
 						<tr>
 
-							<th style="min-height: 200px;">주문번호</th>
+							<th style="min-height: 200px;" >주문번호</th>
 							<th>주문자명</th>
 							<th>주문자 전화번호</th>
 							<th>주문상태</th>
@@ -104,7 +104,7 @@
 						<c:forEach var="i" begin="0" end="20">
 
 							<tr>
-								<td>123412312312213</td>
+								<td style=" cursor:pointer" class="search num${i} value='${i }'" >123412312312213</td>
 								<td>2</td>
 								<td>반값븐디ㅏ!</td>
 								<td>4</td>
@@ -131,8 +131,10 @@
 
 
 	<script>
-		$(document).ready(function() {
 
+	
+		$(document).ready(function() {
+			  document.getElementById('endDatePicker').value= new Date().toISOString().substring(0, 10);
 			//최상단 체크박스 클릭
 			$(".SelectAll").click(function() {
 				//클릭되었으면
@@ -146,6 +148,11 @@
 				}
 			});
 		});
+		
+		
+		
+	
+	
 	</script>
 
 

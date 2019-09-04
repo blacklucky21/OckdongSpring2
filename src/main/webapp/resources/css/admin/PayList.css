@@ -17,6 +17,7 @@ tr {
 	color: #fff;
 	border: none;
 	position: relative;
+	border-radius:25px;
 	height: 30px;
 	width: 70px;
 	font-size: 13px;
@@ -96,8 +97,17 @@ background-color:#e9eaed !important;
 background-color:white;
 border-radius:20px;
 width:1280px;
+height: auto;
+padding:2px;
 }
+input[type='date']{
 
+	border-radius:20px;
+	font-size:20px;
+	font-weight: bold;
+	width:180px;
+	
+}
 .content_bottom > p{
 
 	margin-left:26px;
@@ -107,3 +117,70 @@ width:1280px;
     font-size: x-large;
     font-weight: 600;
 }
+input[type="text"]{
+	border-radius: 15px;
+	height:40px;
+	width: 500px;
+	margin-left:10px;
+}
+
+select{
+	height:40px;
+	border-radius: 15px;
+}
+
+.ResultBtn {
+   width: 150px;
+   height: 60px;
+   background: #2ecc71;
+      border-radius:25px;
+   border: 1px solid #fff;
+   text-transform: uppercase;
+   font-weight: bold;
+   color: #fff;
+}
+
+.ResultBtn:hover {
+   color: #2ecc71;
+   background: #fff;
+   border: 1px solid #2ecc71;
+   
+   left: -35%;
+   top: 0;
+   transition-duration: 1s;
+   transform-origin: top left;
+   -webkit-transition: all 1s;
+   -moz-transition: all 1s;
+   -o-transition: all 1s;
+   transition: all 1s;
+     height: 60px;
+}
+
+
+.Rest {
+   width: 150px;
+   height: 60px;
+   background: #ffae00;
+   border-radius:25px;
+   border: 1px solid #fff;
+   text-transform: uppercase;
+   font-weight: bold;
+   color: #fff;
+}
+
+.Rest:hover {
+   color: #ffae00;
+   background: #fff;
+   border: 1px solid #ffae00;
+   left: -35%;
+   top: 0;
+   transition-duration: 1s;
+   transform-origin: top left;
+   -webkit-transition: all 1s;
+   -moz-transition: all 1s;
+   -o-transition: all 1s;
+   transition: all 1s;
+     height: 60px;
+}
+
+
