@@ -413,9 +413,9 @@ border-bottom:1px solid gray;
 				<thead>
 					<tr style="border: 0; background: gray;">
 						<th><span class="form-element"> <input type="checkbox"
-								id="allCheck-1" class="checkbox gd_checkbox_all"
+								id="allCheck-1" class="checkbox gd_checkbox_all SelectAll"
 								data-target-id="cartSno1_" data-target-form="#frmCart"
-								checked="checked"> <label for="allCheck-1"
+								> <label for="allCheck-1"
 								class="check-s on">전체선택</label>
 						</span></th>
 						<th>상품/옵션 정보</th>
@@ -427,12 +427,12 @@ border-bottom:1px solid gray;
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var='i' begin="0" end="5">
+					<c:forEach var="i" begin="0" end="5" step="1">
 					<tr class="">
 						<td rowspan="2" class="ta-c cb-array"><span
 							class="form-element"> <input type="checkbox"
-								name="cartSno[]" id="cartSno1_9" value="9" class="checkbox"
-								checked="checked" data-price="48500" data-mileage="0"
+								name="check" id="cartSno${i }" value= 3 class="checkbox"
+								 data-price="48500" data-mileage="0"
 								data-goodsdc="0" data-memberdc="0" data-coupondc="0"
 								data-possible="y" /> <label for="cartSno1_9" class="check-s on">선택</label>
 						</span></td>
@@ -544,7 +544,7 @@ border-bottom:1px solid gray;
 	</div>
 
 	<script type="text/javascript">
-		$('#frmCart input:checkbox[name="cartSno[]"]')
+/* 		$('#frmCart input:checkbox[name="cartSno[]"]')
 				.click(
 						function() {
 							console.log("check");
@@ -579,7 +579,7 @@ border-bottom:1px solid gray;
 										.find(
 												'thead > tr > th:first-child label[for*=allCheck-]')
 										.removeClass('on');
-							}
+							} */
 							/* 
 							 window.setTimeout(function(){
 							 $.ajax({
@@ -603,8 +603,27 @@ border-bottom:1px solid gray;
 							 alert(e);
 							 });
 							 }, 200); */
-						});
+					
+		
+		
+	
+		$(document).ready(function() {
+
+			//최상단 체크박스 클릭
+			$(".SelectAll").click(function() {
+				//클릭되었으면
+				if ($(".SelectAll").prop("checked")) {
+				
+					$("input[name=check]").prop("checked", true);
+					//클릭이 안되있으면
+				} else {
+				
+					$("input[name=check]").prop("checked", false);
+				}
+			});
+		});
 	</script>
+	
 
 </body>
 		<c:import url="../footer/footer.jsp"/>

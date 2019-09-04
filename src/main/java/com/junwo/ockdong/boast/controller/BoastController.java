@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BoastController {
-//	public ModelAndView boastList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {
+//	public ModelAndView boastList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv) {9
+	
 	@RequestMapping("blist.do")
 	public String boastList() {
 		return "boast/boastList";
@@ -14,6 +15,11 @@ public class BoastController {
 	@RequestMapping("binsert.do")
 	public String boastInsert() {
 		return "boast/boastInsert";
+	}
+	
+	@RequestMapping("bdetail.do")
+	public String boastDetail() {
+		return "boast/boastDetail";
 	}
 
 
