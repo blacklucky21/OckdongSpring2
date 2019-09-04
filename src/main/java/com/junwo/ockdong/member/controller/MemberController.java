@@ -103,4 +103,11 @@ public class MemberController {
 		return "member/findPass";
 	}
 	
+	/*** MyPage ***/
+	// 화면 이동
+	@RequestMapping("myPageView.me")
+	public String myPageView() {
+		return "member/myPage";
+	}
+	
 }
