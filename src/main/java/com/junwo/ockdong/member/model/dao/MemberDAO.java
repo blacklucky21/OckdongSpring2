@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.member.model.vo.Member;
 
+
 @Repository("mDAO")
 public class MemberDAO {
 	

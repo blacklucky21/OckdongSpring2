@@ -71,6 +71,7 @@ public class MemberController {
 	@RequestMapping(value="login.me", method = RequestMethod.POST)
 	public String memberLogin(Member m, Model model) {
 		
+	
 		Member loginUser = mService.memberLogin(m);
 		System.out.println("login member : " + loginUser);
 		
