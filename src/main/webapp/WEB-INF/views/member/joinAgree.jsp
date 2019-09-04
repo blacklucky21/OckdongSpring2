@@ -1,87 +1,124 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/join.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/pdsr.css">
-  <link rel="stylesheet" href="css/button.css">
-  <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/join.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/pdsr.css">
+<link rel="stylesheet" href="css/button.css">
+<link
+	href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css'
+	rel='stylesheet' type='text/css'>
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
-	.image {
-		width: 200px;
-		height: auto;
-	}
-	
-	.loginForm {
-		text-align:center;
-	}
-	#logo {
-		margin-bottom:50px;
-	}
-	
-	a {
-		color:darkgray;
-	}
-	
-	a:hover{
-		color:black;
-	}
-	
-	#joinBtn {
-		background-color: black;
-		color: white;
-		border-radius: 10px;
-		width: 200px;
-		height: 50px;
-		
-	}
-	
-	
+.image {
+	width: 200px;
+	height: auto;
 }
-	
 
+.loginForm {
+	text-align: center;
+}
+
+#logo {
+	margin-bottom: 50px;
+}
+
+a {
+	color: darkgray;
+}
+
+a:hover {
+	color: black;
+}
+
+#joinBtn {
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+	width: 200px;
+	height: 50px;
+}
+
+.bu {
+	width: 75px;
+	background: #2ecc71;
+	border: 1px solid #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #fff;
+}
+
+.bu:hover {
+	color: #2ecc71;
+	background: #fff;
+	border: 1px solid #2ecc71;
+	left: -35%;
+	top: 0;
+	transition-duration: 1s;
+	transform-origin: top left;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	transition: all 1s;
+	height: 100%;
+}
+}
 </style>
 </head>
 <body>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 	<div class="loginForm">
 
-	<a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
+		<a href="Main.jsp"><img class="image"
+			src="resources/img/mainlogo.png" id="logo" align="center"></a>
 
-	<center>
-  	<table width=960px align=center>
-		<tr>
-			<td align=center>
-			      <center><div class="stepLine">
-			        <div title="이용약관" class="stepDot activeStep"></div>
-			        <div title="실명인증" class="stepDot"></div>
-			        <div title="정보입력" class="stepDot"></div>
-			        <div title="가입완료" class="stepDot"></div>
-			      </div>
-			      </center><br><br><br>
-			</td>
-		</tr>
-		<tr>
-			<td align=center>
-	          <table width=810>
-	            <tr>
-	              <td>
-	                <div style="margin-left:30px">
-	                 <font color="#f67001" size=4>01</font> <font size=3>이용약관 <font style="font-weight:bold">(필수)</font></font>
-	                </div>
-	             </td>
-	           </tr>
-	           <tr>
-	             <td align=center>
-	               <textarea name="tos" rows=15 cols=100 readonly>
+		<center>
+			<table width=960px align=center>
+				<tr>
+					<td align=center>
+						<center>
+							<div class="stepLine">
+								<div title="이용약관" class="stepDot activeStep"></div>
+								<div title="실명인증" class="stepDot"></div>
+								<div title="정보입력" class="stepDot"></div>
+								<div title="가입완료" class="stepDot"></div>
+							</div>
+						</center>
+						<br>
+					<br>
+					<br>
+					</td>
+				</tr>
+				<tr>
+					<td align=center>
+						<table width=810>
+							<tr>
+								<td>
+									<div style="margin-left: 30px">
+										<font color="#f67001" size=4>01</font> <font size=3>이용약관
+											<font style="font-weight: bold">(필수)</font>
+										</font>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td align=center><textarea name="tos" rows=15 cols=100
+										readonly>
 제 1 조 (목적)		
  이 약관은 파머레시피(FARMER RECIPE) 주식회사가 제공하는 FARMER 및 FARMERRECIPE 관련 제반 서비스의 이용과 관련하여 회사와 회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
 
@@ -94,24 +131,28 @@
 ⑤"유료서비스"라 함은 "회사"가 유료로 제공하는 각종 온라인디지털콘텐츠(각종 정보콘텐츠, VOD, 아이템 기타 유료콘텐츠를 포함) 및 제반 서비스를 의미합니다.
 ⑥"포인트"라 함은 서비스의 효율적 이용을 위해 회사가 임의로 책정 또는 지급, 조정할 수 있는 재산적 가치가 없는 "서비스" 상의 가상 데이터를 의미합니다.
 ⑦"게시물"이라 함은 "회원"이 "서비스"를 이용함에 있어 "서비스상"에 게시한 부호ㆍ문자ㆍ음성ㆍ음향ㆍ화상ㆍ동영상 등의 정보 형태의 글, 사진, 동영상 및 각종 파일과 링크 등을 의미합니다.
-                </textarea>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" style="margin-left:30px" name="check1" id="check1"><label for="check1">이용약관에 동의합니다.</label><br><br><br><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div style="margin-left:30px">
-                 <font color="#f67001" size=4>02</font> <font size=3>개인정보 수집 및 이용에 대한 안내 <font style="font-weight:bold">(필수)</font></font>
-                </div>
-             </td>
-           </tr>
-           <tr>
-             <td align=center>
-<textarea name="tos" rows=15 cols=100 readonly>
+                </textarea></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" style="margin-left: 30px"
+									name="check1" id="check1"><label for="check1">이용약관에
+										동의합니다.</label><br>
+								<br>
+								<br>
+								<br></td>
+							</tr>
+							<tr>
+								<td>
+									<div style="margin-left: 30px">
+										<font color="#f67001" size=4>02</font> <font size=3>개인정보
+											수집 및 이용에 대한 안내 <font style="font-weight: bold">(필수)</font>
+										</font>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td align=center><textarea name="tos" rows=15 cols=100
+										readonly>
 1. 수집하는 개인정보
 이용자는 회원가입을 하지 않아도 직거래 블로그 등 대부분의파머레시피(FARMER RECIPE) 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 메일, 캘린더, 카페, 블로그 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, FARMER RECIPE는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
 
@@ -124,24 +165,25 @@
 2. 수집한 개인정보의 이용
 FARMER RECIPE는 회원관리, 서비스 개발・제공 및 향상, 안전한 인터넷 이용환경 구축 등 아래의 목적으로만 개인정보를 이용합니다.
 - 회원 가입 의사의 확인, 연령 확인 및 법정대리인 동의 진행, 이용자 및 법정대리인의 본인 확인, 이용자 식별, 회원탈퇴 의사의 확인 등 회원관리를 위하여 개인정보를 이용합니다.
-				</textarea>
-				              </td>
-				            </tr>
-				            <tr>
-				              <td>
-				                <input type="checkbox"  style="margin-left:30px" name="check2" id="check2"><label for="check2">개인정보 수집 및 이용에 대한 안내에 동의합니다.</label>
-				              </td>
-				            </tr>
-				          </table>
-				
-				      </td>
-				    </tr>
-				</table>
-				<br>
-				  <button type = "button"  class="btn btn-default" style="margin:10px;" onclick="memberJoin()" id="joinBtn">일반 회원 가입</button>
-					<br><br>
-    </table>
-    </center>
+				</textarea></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" style="margin-left: 30px"
+									name="check2" id="check2"><label for="check2">개인정보
+										수집 및 이용에 대한 안내에 동의합니다.</label></td>
+							</tr>
+						</table>
+
+					</td>
+				</tr>
+			</table>
+			<br>
+			<button type="button" class="bu" style="margin: 10px;"
+				onclick="memberJoin()" id="joinBtn">일반 회원 가입</button>
+			<br>
+			<br>
+			</table>
+		</center>
 	</div>
 	<script>	
 		function memberJoin() {
@@ -157,7 +199,7 @@ FARMER RECIPE는 회원관리, 서비스 개발・제공 및 향상, 안전한 �
 				return;
 			}
 			
-			location.href="memberJoin.me";
+			location.href="memberJoinView.me";
 		}
 	</script>
 

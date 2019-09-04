@@ -66,3 +66,26 @@ td {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
+.bu {
+   width: 75px;
+   background: #2ecc71;
+   border: 1px solid #fff;
+   text-transform: uppercase;
+   font-weight: bold;
+   color: #fff;
+}
+
+.bu:hover {
+   color: #2ecc71;
+   background: #fff;
+   border: 1px solid #2ecc71;
+   left: -35%;
+   top: 0;
+   transition-duration: 1s;
+   transform-origin: top left;
+   -webkit-transition: all 1s;
+   -moz-transition: all 1s;
+   -o-transition: all 1s;
+   transition: all 1s;
+   height: 100%;
+}

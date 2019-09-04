@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href='<%= request.getContextPath() %>/views/member/findPass.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="resources/css/member/findPass.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -23,7 +23,7 @@
 			<input type="text" id="userId" name="userId" class="form-control" placeholder="아이디를 입력해주세요" style="font-size:13px;">
 			</td>
 			<td rowspan="2">
-			<input type="button" id="passFindBtn" name="passFindBtn" style="padding:0px" value="확인">
+			<input type="button" id="bu" class="bu" name="bu" style="padding:0px" value="확인">
 			<!-- <input type="hidden" name="code_check" id="code_check" value="<%=getRandom() %>" readonly> -->
 			</td>
 		</tr>
@@ -50,7 +50,7 @@
 	<br><br><br><br>
 	<script>
 		$(function(){
-			  $("#passFindBtn").click(function(){	
+			  $("#bu").click(function(){	
 				
 				  $("#passFindForm").submit();
 			  });
