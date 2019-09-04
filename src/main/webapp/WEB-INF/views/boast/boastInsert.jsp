@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="<%= request.getContextPath() %>/ckeditor/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+
 <style>
 .mb-style1 .table-write {
     border-top: 1px solid #dbdbdb !important;
@@ -23,7 +24,6 @@
     margin: 0;
     padding: 0;
 }
-
 
 </style>
 </head>
@@ -160,7 +160,7 @@
           <div class="col_c" style="margin-bottom: 30px;">
                 <div class="input-group">                 
                   <textarea class="form-control" id="p_content"></textarea>
-                  <script type="text/javascript">
+                  <script type="text/javascript"  src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js">
                   CKEDITOR.replace('p_content', {
                 	  width: '700px', height: '700px', startupFocus: false
                 	  });
@@ -188,8 +188,6 @@
   </div>
 </div>
 <div style="margin-bottom: 50px;"></div>
-
-
 
 	<!-- ##################### 풋터 부분 ##################### -->
 	<c:import url="../footer/footer.jsp"/>
