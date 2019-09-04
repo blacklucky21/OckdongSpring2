@@ -1,4 +1,4 @@
-package model.vo;
+package com.junwo.ockdong.myOwn.model.vo;
 
 public class Img {
 	private int imgNo;
