@@ -15,9 +15,9 @@
 
 #content .content {
 	min-width: 1280px;
-	padding-left: 214px;
-	margin-left: 5%;
-	height: 919px;
+    padding-left: 214px;
+    height: 919px;
+    text-align: center;
 }
 
 .page_title_wrap {
@@ -39,9 +39,10 @@
 }
 
 .listContent {
-	margin-top: 3%;
-	position: relative;
-	width: 1280px;
+	    margin-top: 3%;
+    position: relative;
+    width: 1280px;
+    display: inline-block;
 }
 
 .content_top {
@@ -157,12 +158,13 @@ table.ncp_tbl {
 
 .content_bottom {
 	width: 1280px;
-    padding: 17px 30px;
+	    display: inline-block;
 }
 
 .list_bottom > .table_list{
-	height: 519px;
-    border: 1px solid #f8f8f8;
+	width: 1280px;
+    padding: 17px 30px;
+    display: inline-block;
 }
 
 

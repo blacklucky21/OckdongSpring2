@@ -56,9 +56,9 @@
             <strong class="menu_depth1">상품관리</strong>
             <ul class="acc_subject">
                 <li><a href="productList.do" class="menu_depth2">상품 리스트</a></li>
-                <li><a href="#" class="menu_depth2">상품등록</a></li>
+                <li><a href="productsInsert.do" class="menu_depth2">상품등록</a></li>
                 <li><a href="#" class="menu_depth2">상품후기</a></li>
-                <li><a href="#" class="menu_depth2">상품문의</a></li>
+                <li><a href="productInquiry.do" class="menu_depth2">상품문의</a></li>
             </ul>
         </li>
         <li class="accor_has_sub">
