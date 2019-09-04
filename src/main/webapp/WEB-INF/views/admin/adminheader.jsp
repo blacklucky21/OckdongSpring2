@@ -100,9 +100,10 @@
             </ul>
         </li>
          <li class="accor_has_sub">
-          <strong class="menu_depth1">프로모션 관리</strong>
+          <strong class="menu_depth1">나만의 도시락</strong>
             <ul class="acc_subject">
-                <li><a href="#" class="menu_depth2">할인쿠폰관리</a></li>
+                <li><a href="mydo.do" class="menu_depth2">도시락 관리</a></li>
+                <li><a href="myIn" class="menu_depth2">재료 관리</a></li>
             </ul>
         </li>
         

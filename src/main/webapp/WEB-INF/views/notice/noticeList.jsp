@@ -1,25 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="UTF-8">
-
-
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-
-
 
 <title>board</title>
 
@@ -31,15 +22,10 @@ body {
 </style>
 
 <script>
-
 	$(document).on('click', '#btnWriteForm', function(e){
-
 		e.preventDefault();
-
 		location.href = "${pageContext.request.contextPath}/board/boardForm";
-
 	});
-
 </script>
 
 </head>
@@ -47,9 +33,6 @@ body {
 	<!-- ############### 헤더 부분 ############### -->
 	<c:import url="../header/header.jsp" />
 
-	<title>board</title>
-</head>
-<body>
 	<h2 style="text-align: center">공지사항</h2>
 
 	<article>
@@ -132,12 +115,12 @@ body {
 				</table>
 			</div>
 
-			<div>
+			<!-- <div>
 
 				<button type="button" class="btn btn-sm btn-primary"
 					id="btnWriteForm">글쓰기</button>
 
-			</div>
+			</div> -->
 
 
 		</div>
