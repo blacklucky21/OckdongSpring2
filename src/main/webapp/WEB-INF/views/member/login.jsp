@@ -48,7 +48,7 @@
 		<div class="findAndJoin">
 			<a href="idFind.me">아이디 찾기 │</a> 
 			<a href="passFind.me">비밀번호 찾기 │</a> 
-			<a href="memberJoin.me">회원가입</a>
+			<a href="enrollView.me">회원가입</a>
 		</div>
 
 	</div>

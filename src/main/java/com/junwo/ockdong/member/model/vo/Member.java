@@ -13,13 +13,14 @@ public class Member {
 	private Date enroll_Date;
 	private Date modify_Date;
 	private String status;
+	private String userName;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Member(String userId, String password, String nickName, String email, String address, String phone,
-			Date enroll_Date, Date modify_Date, String status) {
+			Date enroll_Date, Date modify_Date, String status, String userName) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -30,6 +31,17 @@ public class Member {
 		this.enroll_Date = enroll_Date;
 		this.modify_Date = modify_Date;
 		this.status = status;
+		this.userName = userName;
+	}
+	
+	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserId() {
@@ -108,7 +120,7 @@ public class Member {
 	public String toString() {
 		return "Member [userId=" + userId + ", password=" + password + ", nickName=" + nickName + ", email=" + email
 				+ ", address=" + address + ", phone=" + phone + ", enroll_Date=" + enroll_Date + ", modify_Date="
-				+ modify_Date + ", status=" + status + "]";
+				+ modify_Date + ", status=" + status + ", userName=" + userName +  "]";
 	}
 	
 	

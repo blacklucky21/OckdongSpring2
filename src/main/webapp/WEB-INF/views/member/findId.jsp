@@ -37,10 +37,10 @@
 		</tr>
 		<tr class="find">
 			<td colspan="4">
-				<a href="findId.me" style="color:black">아이디 찾기 │</a>
-				<a href="findPass.me">비밀번호 찾기 │</a>
-				<a href="joinAgree.jsp">회원가입 │</a>
-				<a href="login.me">로그인</a>
+				<a href="idFind.me" style="color:black">아이디 찾기 │</a>
+				<a href="passFind.me">비밀번호 찾기 │</a>
+				<a href="enrollView.me">회원가입 │</a>
+				<a href="loginView.me">로그인</a>
 			</td>
 		</tr>
 	</table>
