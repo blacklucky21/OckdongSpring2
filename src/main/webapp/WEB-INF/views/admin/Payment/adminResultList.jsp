@@ -127,10 +127,10 @@
 
 	<script>
 		$(document).ready(function() {
-
+			document.getElementById('endDatePicker').value= new Date().toISOString().substring(0, 10);
 			//최상단 체크박스 클릭
 			$(".SelectAll").click(function() {
-				 document.getElementById('endDatePicker').value= new Date().toISOString().substring(0, 10);
+				 
 				//클릭되었으면
 				if ($(".SelectAll").prop("checked")) {
 			
