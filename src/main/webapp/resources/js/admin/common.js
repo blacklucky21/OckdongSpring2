@@ -20,3 +20,16 @@ $(function(){
 		
 	});
 });
+
+
+$(function(){
+	$('.div1').on("click", function(){
+		location.href="adminView.do";
+	});
+});
+
+$(function(){
+	$('.logout').on("click", function(){
+		location.href="logout.me";
+	});
+});
