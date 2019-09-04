@@ -79,23 +79,6 @@
 						검색 결과 <span>3</span>건
 					</p>
 
-				<div class="list_bottom">
-					<div class="table_list">
-						<table class="list_table">
-							<tr>
-								<th>상품번호</th>
-								<th>상품명</th>
-								<th>판매상태</th>
-								<th>판매상태 설정 </th>
-								<th>가격</th>
-								<th>수량 </th>
-								<th>카테고리</th>
-								<th>재고수량 </th>
-								<th>판매수량</th>
-								<th>삭제 </th>
-							</tr>
-						</table>
-
 					<div class="list_bottom">
 						<div class="table_list">
 							<table class="list_table">
@@ -113,7 +96,7 @@
 									<th>삭제</th>
 								</tr>
 								</thead>
-								<tbody>
+								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
 									<c:forEach var="i" begin="1" end="30">
 									
@@ -140,10 +123,6 @@
 								</tbody>
 							</table>
 
-
-							
-								
-						
 						</div>
 
 					</div>
@@ -153,6 +132,6 @@
 				<!-- 전체 부위 끝 -->
 				</div>
 			</div>
-	</div>
+
 </body>
 </html>

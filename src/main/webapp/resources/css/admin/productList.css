@@ -168,9 +168,13 @@ table.ncp_tbl {
 
 
 .list_bottom>.table_list {
-	
+	    overflow-y: scroll;
 	height: 545px;
 	  
+}
+
+.list_content{
+	        text-align: center;
 }
 
 
@@ -192,10 +196,6 @@ table.ncp_tbl {
 	background: #f6f6f6;
 	font-size: inherit;
 }
-
-
-
-
 
 
 
