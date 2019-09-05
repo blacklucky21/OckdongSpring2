@@ -65,7 +65,7 @@
 
 
 		</div>
-		<div style="border: 1px solid black; margin-top: 30px" class="pay1">
+		<div  class="pay2">
 
 			<div class="content_bottom">
 				<p>
@@ -91,24 +91,28 @@
 							<th>주소</th>
 							<th>가입날짜</th>
 							<th>상태</th>
-							<th>주문횟수</th>
+						
 
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 
-							<tr>
+							<tr class="mCheck">
 								<td>${m.mNum }</td>
-								<td>${m.userId}</td>
+								<td >${m.userId}
+								<input type="hidden" class="userId" value="${m.userId}"></td>
 								<td>${m.nickName}</td>
 								<td>${m.userName}</td>
 								<td>${m.phone}</td>
 								<td>${m.email}</td>
 								<td>${m.address}</td>
 								<td>${m.enroll_Date}</td>
-								<td>${m.status}</td>
-								<td></td>
+								<td>
+								<c:if test="${m.status eq 'Y'}">
+								회원
+								</c:if>
+								</td>
 								
 							</tr>
 
@@ -218,6 +222,15 @@
 		  d.setYear(Year - 1)
 		  return getDateStr(d);
 		}
+		
+		
+		
+		$('.mCheck').click(function(){
+			
+			var userid =$('.userId').val();
+			
+			alert($('.userId').val());
+		});
 	</script>
 
 

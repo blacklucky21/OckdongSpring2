@@ -18,7 +18,7 @@
 
 		<div style="border: 0.5px radius 15deg black; height: 300px;" class="pay1">
 			<div class="PayPlz">
-				<form id="SearchInputform" action="adminMemberList2.do" method="post">
+				<form id="SearchInputform" action="adminSecessionList.do" method="post">
 				<table style='border-width: 1px; border-collapse: collapse;' class="searchBoard">
 				
 					<tr>
@@ -65,7 +65,7 @@
 
 
 		</div>
-		<div style="border: 1px solid black; margin-top: 30px" class="pay1">
+		<div  class="pay2">
 
 			<div class="content_bottom">
 				<p>
@@ -91,7 +91,7 @@
 							<th>주소</th>
 							<th>가입날짜</th>
 							<th>상태</th>
-							<th>주문횟수</th>
+						
 
 						</tr>
 					</thead>
@@ -107,10 +107,10 @@
 								<td>${m.email}</td>
 								<td>${m.address}</td>
 								<td>${m.enroll_Date}</td>
-								<td><c:if test=${m.status eq 'N' }>
+								<td><c:if test="${m.status eq 'N'}">
 								탈퇴
 								</c:if></td>
-								<td></td>
+								
 								
 							</tr>
 

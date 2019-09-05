@@ -170,7 +170,7 @@ public class AdminController {
 		search.put("searchForm",searchForm);
 		search.put("startDatePicker",startDatePicker);
 		search.put("endDatePicker",endDatePicker);
-		ArrayList<Member> list = mService.SelectMemberList2(search);
+		ArrayList<Member> list = mService.SelectSecessionMemberList(search);
 //		int listCount = mService.MemberListCount();
 //		System.out.println(list);
 		if(list !=null) {
@@ -185,6 +185,29 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping("adminSecession2.do")
+public ModelAndView adminScessionMemberFirst(@RequestParam(value="page",required=false)ModelAndView mv)  {	
+	mv = new ModelAndView(); 
+
+	
+	ArrayList<Member> list = mService.SelectSecessionListFirst();
+	
+	if(list !=null) {
+		mv.addObject("list",list);
+		mv.setViewName("admin/Member/adminMemberSecession");
+		 	
+	}else {
+		
+	
+		
+	}
+	
+	return mv;
+	
+	
+}
 
 
 }
