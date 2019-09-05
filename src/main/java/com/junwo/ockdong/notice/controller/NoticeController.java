@@ -35,7 +35,7 @@ public class NoticeController {
 		ArrayList<Notice> list = nService.selectList(pi);
 		
 		if(list != null) {
-			mv.addObject("list", list);
+			mv.addObject("list", list);	
 			mv.addObject("pi", pi);
 			mv.setViewName("notice/noticeList");
 		} else {
