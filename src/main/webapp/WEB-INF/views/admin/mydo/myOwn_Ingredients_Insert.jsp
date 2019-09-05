@@ -47,7 +47,7 @@
 						<table>
 							<tr>
 								<th class="head">재료명</th>
-								<td class="sub"><input type="text" name="iName" id="iName"></td>
+								<td class="sub"><input type="text" name="inName" id="inName"></td>
 							</tr>
 							<tr>
 								<th class="head">도시락 타입</th>
@@ -57,20 +57,20 @@
 								</td>
 							</tr>
 							<tr class="typeResult">
-								<th class="head"><span id="typeTitle">4찬<input type='hidden' id="nCategory" name='lType' value='4찬'/></span></th>
+								<th class="head"><span id="typeTitle">4찬<input type='hidden' id="inCategory" name="inCategory" value="4찬"/></span></th>
 								<td class="sub">
 									<select id="select4" name="selected4">
-										<option id="4rice">밥</option>
-										<option id="4main">메인</option>
-										<option id="4sub1">서브1</option>
-										<option id="4sub2">서브2</option>
+										<option id="4rice">1_밥</option>
+										<option id="4sub1">2_서브1</option>
+										<option id="4sub2">3_서브2</option>
+										<option id="4main">4_메인</option>
 									</select>
-									<select id="select5" name="selected4">
-										<option id="5rice">밥</option>
-										<option id="5main">메인</option>
-										<option id="5sub1">서브1</option>
-										<option id="5sub2">서브2</option>
-										<option id="soup">국</option>
+									<select id="select5" name="selected5">
+										<option id="5rice">5_밥</option>
+										<option id="5main">6_메인</option>
+										<option id="5sub1">7_서브1</option>
+										<option id="5sub2">8_서브2</option>
+										<option id="soup">9_수프</option>
 									</select>
 								</td>
 							</tr>
@@ -85,11 +85,11 @@
 						<table>
 							<tr>
 								<th class="head">판매가</th>
-								<td class="sub mi"><input type="text" name="sell" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >&nbsp;원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
+								<td class="sub mi"><input type="text" name="inPrice" id="inPrice" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >&nbsp;원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
 							</tr>
 							<tr>
 								<th class="head">1인분 기준 양</th>
-								<td class="sub mi"><input type="text" name="Inventory" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">&nbsp;g</td>
+								<td class="sub mi"><input type="text" name="inGram" id="inGram" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">&nbsp;g</td>
 							</tr>
 							<tr style="height: 320px;">
 								<th class="head">상품 이미지</th>
@@ -101,7 +101,7 @@
 					</div>
 				</div>
 				<div class="insert_middle">
-					<input type="button" value="추가하기" onclick="return validate();"/>
+					<input type="submit" value="추가하기" onclick="return validate();"/>
 				</div>
 				<div style="display:none;">
 					<input type="file" id="ingredientImg" multiple="multiple" name="ingredientImg" onchange="LoadImg(this);">
@@ -133,12 +133,12 @@
 					console.log($(".lType")[0].checked);
 					if($(".lType")[0].checked == "1"){
 						$("#typeTitle").empty();
-						$("#typeTitle").html("4찬<input type='hidden' id='nCategory' name='lType' value='4찬'/>");
+						$("#typeTitle").html("4찬<input type='hidden' id='inCategory' name='inCategory' value='4찬'/>");
 			            $("#select4").css("display","block");
 			            $("#select5").css("display","none");
 			        }else if($(".lType")[0].checked == "0"){
 			        	$("#typeTitle").empty();
-						$("#typeTitle").html("5찬<input type='hidden' id='nCategory' name='lType' value='5찬'/>");
+						$("#typeTitle").html("5찬<input type='hidden' id='inCategory' name='inCategory' value='5찬'/>");
 			        	$("#select4").css("display","none");
 			        	$("#select5").css("display","block");
 			        }
@@ -146,14 +146,14 @@
 			});
 			
 			function validate(){
-				var iName = $("#iName").val();
-				var nCategory = $("#nCategory").val();
-				var sell = $("#sell").val();
-				var inventory = $("#Inventory").val();
+				var inName = $("#inName").val();
+				var inCategory = $("#inCategory").val();
+				var inPrice = $("#inPrice").val();
+				var inGram = $("#inGram").val();
 				var imgArea = $("#imgArea");
 				
-				if(iName != "" && nCategory != "" && sell != "" && inventory != "" && imgArea.attr("src") != ""){
-					console.log("iName : " + iName + ", nCategory : " + nCategory + ", sell : " + sell + ", inventory : " + inventory);
+				if(inName != "" && inCategory != "" && inPrice != "" && inGram != "" && imgArea.attr("src") != ""){
+					console.log("inName : " + inName + ", inCategory : " + inCategory + ", inPrice : " + inPrice + ", inGram : " + inGram);
 					console.log("이미지 있음");
 					return true;
 				}
