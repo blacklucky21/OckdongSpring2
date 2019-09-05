@@ -25,6 +25,6 @@ public interface MemberService {
 
 
 
-	Member memberLogin(Member m);
+	ArrayList<Member> SelectSecessionMemberList(HashMap<String, String> search);
 
 }

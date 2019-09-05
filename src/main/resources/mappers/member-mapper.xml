@@ -106,3 +106,5 @@
 		where status = 'Y'
 	 
 	</select>
+	
+	</mapper>
