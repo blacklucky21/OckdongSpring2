@@ -63,6 +63,12 @@ public class AdminController {
 		return "admin/mydo/myOwn_Ingredients";
 	}
 	
+	// 나만의 도시락 재료 등록
+	@RequestMapping("IngredientsInsert.do")
+	public String IngredientsInsert() {
+		return "admin/mydo/myOwn_Ingredients_Insert";
+	}
+	
 	// 상품관리 상품등록
 	@RequestMapping("productsInsert.do")
 	public String productsInert() {
@@ -74,6 +80,8 @@ public class AdminController {
 	public String productInquiry() {
 		return "admin/products/productInquiry";
 	}
+	
+	
 	
 	
 }
