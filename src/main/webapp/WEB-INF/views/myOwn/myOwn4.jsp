@@ -246,7 +246,7 @@ table, tr, td {
 					<dd class="side_tedo">
 						<div class="viewport">
 							<ul class="sub1_ul">
-								<c:forEach var="sub1" items="${sub1List }" varStatus="i">
+								<c:forEach var="sub1" items="${sub1List }" varStatus="i"> 
 									<li class="sub1s_li"><img id="sub1${i.count}" name="${sub1.imgName }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/${sub1.imgRealPath}"/></li>
 								</c:forEach>
 							</ul>
@@ -489,6 +489,4 @@ table, tr, td {
 		}
 	</script>
 </body>
->>>>>>> Stashed changes
->>>>>>> cd62370dab581a17a741459148b508e614fcb51e
 </html>

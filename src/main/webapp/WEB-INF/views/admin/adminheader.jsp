@@ -104,6 +104,7 @@
             <ul class="acc_subject">
                 <li><a href="mydo.do" class="menu_depth2">도시락 관리</a></li>
                 <li><a href="myIn" class="menu_depth2">재료 관리</a></li>
+                <li><a href="IngredientsInsert.do" class="menu_depth2">재료 등록</a></li>
             </ul>
         </li>
         
