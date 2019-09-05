@@ -115,7 +115,7 @@
 <c:if test="${ !empty sessionScope.loginUser}">
 	<c:choose >
 		<c:when test="${ loginUser.userId == 'admin' }">
-		<li><a href="mypage.do"> <c:out value="${ loginUser.nickName }"/> 님 환영 합니다.</a></li>
+		<li><a href="myPageView.me"> <c:out value="${ loginUser.nickName }"/> 님 환영 합니다.</a></li>
 		<li><a href="CartView.do">CART</a></li>
 		<li><a href="">ORDER</a></li>
 		<li><a href="logout.me">log out</a><li>
@@ -123,7 +123,7 @@
 		</c:when>
 		<c:otherwise>
 		
-		<li><a href="mypage.do"> <c:out value="${ loginUser.nickName }"/> 님 환영 합니다.</a></li>
+		<li><a href="myPageView.me"> <c:out value="${ loginUser.nickName }"/> 님 환영 합니다.</a></li>
 		<li><a href="CartView.do">CART</a></li>
 		<li><a href="">ORDER</a></li>
 		<li><a href="logout.me">log out</a><li>
