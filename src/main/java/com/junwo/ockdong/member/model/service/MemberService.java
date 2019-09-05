@@ -27,4 +27,8 @@ public interface MemberService {
 
 	ArrayList<Member> SelectSecessionMemberList(HashMap<String, String> search);
 
+
+
+	ArrayList<Member> SelectSecessionListFirst();
+
 }

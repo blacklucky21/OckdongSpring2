@@ -71,7 +71,7 @@
 
 
 		</div>
-		<div style="border: 1px solid black;  margin-top: 30px" class="pay1">
+		<div  class="pay2">
 						<div class="content_bottom">
 				<p>
 					검색 결과 <span>0</span>건

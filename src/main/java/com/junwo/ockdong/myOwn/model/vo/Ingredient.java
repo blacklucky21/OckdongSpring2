@@ -1,11 +1,14 @@
 package com.junwo.ockdong.myOwn.model.vo;
 
+import java.sql.Date;
+
 public class Ingredient {
 	private int inNo;
 	private String inName;
 	private String inType;
 	private int inGram;
 	private int inPrice;
+	private Date inCreateDate;
 	private String status;
 	private String inOriginalFile;
 	private String inRenameFile;
@@ -24,7 +27,7 @@ public class Ingredient {
 	}
 
 	public Ingredient(int inNo, String inName, String inType, int inGram, int inPrice, String status,
-			String inOriginalFile, String inRenameFile) {
+			String inOriginalFile, String inRenameFile, Date inCreateDate) {
 		super();
 		this.inNo = inNo;
 		this.inName = inName;
@@ -34,6 +37,7 @@ public class Ingredient {
 		this.status = status;
 		this.inOriginalFile = inOriginalFile;
 		this.inRenameFile = inRenameFile;
+		this.inCreateDate = inCreateDate;
 	}
 
 	public int getInNo() {
@@ -100,11 +104,19 @@ public class Ingredient {
 		this.inRenameFile = inRenameFile;
 	}
 
+	public Date getInCreateDate() {
+		return inCreateDate;
+	}
+
+	public void setInCreateDate(Date inCreateDate) {
+		this.inCreateDate = inCreateDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Ingredient [inNo=" + inNo + ", inName=" + inName + ", inType=" + inType + ", inGram=" + inGram
-				+ ", inPrice=" + inPrice + ", status=" + status + ", inOriginalFile=" + inOriginalFile
-				+ ", inRenameFile=" + inRenameFile + "]";
+				+ ", inPrice=" + inPrice + ", inCreateDate=" + inCreateDate + ", status=" + status + ", inOriginalFile="
+				+ inOriginalFile + ", inRenameFile=" + inRenameFile + "]";
 	}
 	
 }

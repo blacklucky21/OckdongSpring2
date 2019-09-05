@@ -47,8 +47,16 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ArrayList<Member> SelectSecessionMemberList(HashMap<String, String> search) {
-		// TODO Auto-generated method stub
 		
+		return mDAO.memberSecessionList(search);
+		
+	}
+
+
+	@Override
+	public ArrayList<Member> SelectSecessionListFirst() {
+		// TODO Auto-generated method stub
+		return mDAO.memberScessionListFirst();
 	}
 
 
