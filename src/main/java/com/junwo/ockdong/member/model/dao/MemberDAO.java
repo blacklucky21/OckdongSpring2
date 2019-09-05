@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.member.model.vo.Member;
 
+
 @Repository("mDAO")
 public class MemberDAO {
 	
@@ -18,8 +19,6 @@ public class MemberDAO {
 	public int memberJoin(Member m) {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
-<<<<<<< Updated upstream
-=======
 
 	public Member memberLogin(Member m) {
 		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
@@ -39,6 +38,6 @@ public class MemberDAO {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList");
 	}
->>>>>>> Stashed changes
+
 	
 }

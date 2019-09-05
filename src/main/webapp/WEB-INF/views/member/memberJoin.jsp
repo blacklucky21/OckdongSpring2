@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  <link href='<%= request.getContextPath() %>/views/member/memberJoin.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="resources/css/member/memberJoin.css">
   <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -17,11 +17,12 @@
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>Join</title>
+
 </head>
 <body>
 	   <br><br><br>
    <div class="loginForm">
-   <a href="Main.jsp"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
+   <a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
    <form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
          <table align="center">
             <tr>
@@ -31,7 +32,7 @@
             </tr>
             <tr>
                <th height="40px">비밀번호</th>
-               <td><input type="password" maxlength="13" id="userPwd" name="userPwd" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
+               <td><input type="password" maxlength="13" id="userPwd" name="password" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
                <td></td>
             </tr>
             <tr>
@@ -57,12 +58,12 @@
             <tr>
                <th height="40px">이메일</th>
                <td><input type="email" id="email" name="email" class="form-control" placeholder="example@naver.com"></td>
-               <td width="150px" style="padding-left:10px"><label id="emailResult"></label></td>
+               <td width="150px" style="padding-left:10px"><span id="validEmail"></span></td>
             </tr>
             <tr>
                <th height="40px">우편번호</th>
-               <td><input type="text" name="address1"  id="address1" class="form-control"></td>
-               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()">검색</div></td>
+               <td><input type="text" name="post"  id="post" class="form-control"></td>
+               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()"><input type="button" class="bu"value="검색"/></div></td>
             </tr>
             <tr>
                <th height="40px">주소</th>
@@ -79,22 +80,16 @@
                <td><input type="text" name="address4" id="address4" class="form-control"></td>
                <td></td>
             </tr>
-            <tr>
-               <th height="40px">생일</th>
-               <td><input type="date" name="birth" id="birth" class="form-control"></td>
-               <td></td>
-            </tr>
-            
          </table>
          <br>
          <div class="btns" align="center">
-            <div id="goMain" style="margin-left:20px; font-size:13px" onclick="goMain()">메인으로</div>&nbsp;
-            <div id="joinBtn" style="font-size:13px" onclick="insertMember();">가입하기</div>
+            <div id="goMain" style="margin-left:20px; font-size:13px"><button onclick="goMain()" class="bu">메인으로</button></div>&nbsp;
+            <div id="joinBtn" style="font-size:13px"><button type="submit" onclick="insertMember();" class="bu">가입하기</button></div>
          </div>
          <script>
  
             function goMain(){
-               location.href="Main.jsp";
+               location.href="main.do";
             }
             
             function searchAdd() {
@@ -135,15 +130,20 @@
                                 document.getElementById("address3").value = '';
                             }
                             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                              document.getElementById('address1').value = data.zonecode;
+                              document.getElementById('post').value = data.zonecode;
                               document.getElementById("address2").value = addr;
                             // 커서를 상세주소 필드로 이동한다.
                              document.getElementById("address4").focus();
                         }
                     }).open();
                 }
+            
+
          </script>
+         
+         
       </form>
    </div>
 </body>
+>>>>>>> f1bb245d89dbcdbd860de7cb85d04a6ee8c2d993
 </html>

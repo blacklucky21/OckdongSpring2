@@ -1,0 +1,263 @@
+@charset "UTF-8";
+
+.centerWrapArea {
+	display: inline-block;
+	width: 79%;
+	height: 600px;
+	background: white;
+	float: right;
+	font-family: dotum;
+	font-size: 12px;
+}
+
+.center_top_title {
+	height: 40px;
+	background: white;
+	font-size: 28px;
+	font-weight: bold;
+	padding: 20px 22px;
+	color: #000;
+}
+.ml10 {
+    margin-left: 10px !important;
+}
+
+.figure {
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 915px;
+	line-height: 40px;
+}
+
+div, li, dd, dt, table, td {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+div {
+	display: block;
+}
+
+.figure>div>.nth-child1 {
+	width: 120px;
+}
+
+.figure .info_input {
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	width: 769px;
+	height: 15px;
+	line-height: 0px;
+}
+
+.bg_f3f4f6 {
+	background-color: #f3f4f6;
+}
+
+input[type="text"], select {
+	padding: 0px;
+	box-shadow: none;
+	border: 1px solid #ccc;
+	font-size: 12px;
+}
+
+.section .figure>div>div {
+	display: inline-block;
+}
+
+.section .figure {
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 915px;
+	line-height: 40px;
+}
+
+input {
+	-webkit-appearance: textfield;
+	background-color: white;
+	-webkit-rtl-ordering: logical;
+	cursor: text;
+	padding: 1px;
+	border-width: 2px;
+	border-style: inset;
+	border-color: initial;
+	border-image: initial;
+}
+
+.vtop {
+	vertical-align: top;
+}
+
+.section .figure .sub_input1_1 {
+	width: 150px;
+	margin-right: 10px;
+	height: 15px;
+	line-height: 0px;
+	float:left;
+}
+.section .figure .sub_input1_2 {
+	width: 230px;
+	margin-right: 10px;
+	height: 15px;
+	line-height: 0px;
+	float:left;
+}
+.section .figure .sub_input1_3 {
+	width: 190px;
+	margin-right: 10px;
+	height: 15px;
+	line-height: 0px;
+	float:left;
+}
+
+
+.section .figure .sub_input2 {
+	width: 240px;
+	margin-right: 9px;
+	height: 15px;
+	line-height: 0px;
+
+}
+.no_m {
+    margin: 0px !important;
+}
+
+.btn_124_bg_blue {
+	background-color: #454C5F;
+	width: 124px;
+	padding: 10.5px 0px;
+	height: 12px;
+	color: #fff;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	line-height: 12px;
+}
+
+.figure .info_select {
+	border: 1px solid #ccc;
+	width: 237px;
+	margin-right: 10px;
+	height: 33px;
+	line-height: 0px;
+}
+
+select {
+	padding-left: 10px !important;
+}
+
+select {
+	-webkit-appearance: menulist;
+	box-sizing: border-box;
+	align-items: center;
+	white-space: pre;
+	-webkit-rtl-ordering: logical;
+	color: black;
+	background-color: white;
+	cursor: default;
+	border-width: 1px;
+	border-style: solid;
+	border-color: initial;
+	border-image: initial;
+}
+
+.section .figure {
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 915px;
+	line-height: 40px;
+}
+
+.figure>div>.nth-child2 {
+	width: 790px;
+}
+
+.section .figure .info_mail .info_mail_1 {
+	border: 0px;
+	height: 30px;
+	padding-left: 10px;
+	width: 222px;
+}
+
+.section .figure .info_mail {
+	border: 1px solid #ccc;
+	width: 643px;
+	display: inline-block;
+	margin-right: 10px;
+	height: 33px;
+	line-height: 33px;
+	float:left;
+}
+
+.figure .info_select2 {
+	width: 124px;
+	height: 33px;
+	border: 1px solid #ccc;
+	padding: 0px;
+}
+
+.section .figure_footer {
+    margin-top: 20px;
+    padding-left: 10px;
+    line-height: 20px;
+}
+
+
+.section .figure_footer .info_radio {
+    float: right;
+    margin: 0px 5px 0px 5px;
+}
+
+.section .figure_footer .info_radio .nth-child2 {
+    margin-left: 20px;
+}
+.text-red {
+    color: #e31738;
+}
+input[type="radio" i] {
+    margin: 3px 3px 0px 5px;
+}
+
+input[type="radio" i] {
+    -webkit-appearance: radio;
+    box-sizing: border-box;
+}
+
+input[type="radio" i], input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    margin: 3px 0.5ex;
+    padding: initial;
+    border: initial;
+}
+
+.section .figure_footer .btn_box {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn_140_red {
+    display: inline-block;
+    background-color: #fff;
+    color: #E01737;
+    border: 1px #E01737 solid;
+    height: 12px;
+    font-size: 12px;
+    padding: 9.5px 0px;
+    width: 138px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 12px;
+}
+.btn_140_bg_red {
+    display: inline-block;
+    background-color: #E01737;
+    color: #fff;
+    height: 12px;
+    font-size: 12px;
+    padding: 10.4px 0px;
+    width: 140px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 12px;
+}

@@ -10,8 +10,7 @@ public interface MemberService {
 
 	int memberJoin(Member m);
 
-<<<<<<< Updated upstream
-=======
+
 	
 	Member memberLogin(Member m);
 
@@ -26,8 +25,6 @@ public interface MemberService {
 
 
 
+	Member memberLogin(Member m);
 
-
-
->>>>>>> Stashed changes
 }

@@ -33,6 +33,8 @@ public class AdminController {
 
 	@RequestMapping("productList.do")
 	public String productList() {
+		
+		
 		return "admin/products/productList";
 	}
 	
@@ -56,10 +58,44 @@ public class AdminController {
 		return"admin/Payment/adminWarnningList";
 	}
 	
-
+	// 메인 화면 로고 누르면 메인 화면으로 이동한다.ㄴ
+	@RequestMapping("main.do")
+	public String main() {
+		return "Main";
+	}
+	
+	// 나만의 도시락 관리 페이지
+	@RequestMapping("mydo.do")
+	public String mydo() {
+		return "admin/mydo/myOwn_lunch";
+	}
+	
+	// 나만의 도시락 재료관리
+	@RequestMapping("myIn")
+	public String myIn() {
+		return "admin/mydo/myOwn_Ingredients";
+	}
+	
+	// 나만의 도시락 재료 등록
+	@RequestMapping("IngredientsInsert.do")
+	public String IngredientsInsert() {
+		return "admin/mydo/myOwn_Ingredients_Insert";
+	}
+	
+	// 상품관리 상품등록
+	@RequestMapping("productsInsert.do")
+	public String productsInert() {
+		return "admin/products/productInsert";
+	}
+	
+	// 상품 문의
+	@RequestMapping("productInquiry.do")
+	public String productInquiry() {
+		return "admin/products/productInquiry";
+	}
 	
 	
-	@RequestMapping("adminMemberList.do")
+		@RequestMapping("adminMemberList.do")
 	public ModelAndView adminMemberList(@RequestParam(value="page",required=false)ModelAndView mv)  {	
 		mv = new ModelAndView(); 
 	
@@ -117,3 +153,7 @@ public class AdminController {
 	}
 
 }
+	
+}
+
+

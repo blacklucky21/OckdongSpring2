@@ -14,12 +14,12 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO;
 
+	
 	@Override
 	public int memberJoin(Member m) {
 		return mDAO.memberJoin(m);
 	}
-<<<<<<< Updated upstream
-=======
+
 
 	@Override
 	public Member memberLogin(Member m) {
@@ -44,6 +44,5 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.memberSelectList();
 	}
 
-	
->>>>>>> Stashed changes
+
 }

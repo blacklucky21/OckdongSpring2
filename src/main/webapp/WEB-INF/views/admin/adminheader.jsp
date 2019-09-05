@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +29,17 @@
 	<div class="div1"><img src="resources/img/admin/admin-logo.png"  alt="상단 로고" title="상단 로고" /></div>
 
 	<div class="div2">
-		<span><img src="resources/img/admin/set.png"></span>
+		<span><a href="main.do"><img src="resources/img/admin/home.png" style="width:50px; height:29px;"></a></span>
 		<span><img src="resources/img/admin/bell.png"></span>
-		<span><img src="resources/img/admin/menu.png">전체메뉴 열기</span>
-	<div>
-		<span>운영자 님</span><!-- 여기에 로그인 정보 넣기 -->
+	<div class="div3">
+		<span><c:out value="${ loginUser.userId }"/></span><!-- 여기에 로그인 정보 넣기 -->
+		<span class="logout"><img src="resources/img/admin/logout.png" style="width:30px; hegiht:29px"></span>
 	</div>
+	
+	<div class="info">
+		
+	</div>
+	
 	</div>
 </div>
 
@@ -51,9 +56,9 @@
             <strong class="menu_depth1">상품관리</strong>
             <ul class="acc_subject">
                 <li><a href="productList.do" class="menu_depth2">상품 리스트</a></li>
-                <li><a href="#" class="menu_depth2">상품등록</a></li>
+                <li><a href="productsInsert.do" class="menu_depth2">상품등록</a></li>
                 <li><a href="#" class="menu_depth2">상품후기</a></li>
-                <li><a href="#" class="menu_depth2">상품문의</a></li>
+                <li><a href="productInquiry.do" class="menu_depth2">상품문의</a></li>
             </ul>
         </li>
         <li class="accor_has_sub">
@@ -95,9 +100,11 @@
             </ul>
         </li>
          <li class="accor_has_sub">
-          <strong class="menu_depth1">프로모션 관리</strong>
+          <strong class="menu_depth1">나만의 도시락</strong>
             <ul class="acc_subject">
-                <li><a href="#" class="menu_depth2">할인쿠폰관리</a></li>
+                <li><a href="mydo.do" class="menu_depth2">도시락 관리</a></li>
+                <li><a href="myIn" class="menu_depth2">재료 관리</a></li>
+                <li><a href="IngredientsInsert.do" class="menu_depth2">재료 등록</a></li>
             </ul>
         </li>
         
