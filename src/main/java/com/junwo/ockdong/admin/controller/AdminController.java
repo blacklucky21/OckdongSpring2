@@ -25,9 +25,19 @@ public class AdminController {
 	@Autowired
 	private MemberService mService;
 
+	
 	@Autowired
-	private MyOwnService moService;
-
+	   private MyOwnService moService;
+	
+	/*
+	 * @Autowired private ProductsList pService;
+	 */
+	
+	@RequestMapping("main.do")
+	public String mainView() {
+		return "Main";
+	}
+	
 	@RequestMapping("adminView.do")
 	public String adminView() {
 
