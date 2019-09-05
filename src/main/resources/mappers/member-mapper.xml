@@ -107,4 +107,63 @@
 	 
 	</select>
 	
+	
+	<select id="selectMemberSecession" resultType="Member" resultMap="memberResultSet">
+	
+		select *
+		from memberlist
+		where status ='N'
+		
+		<!--2) choose,when,otherwise  -->
+  	
+  	<choose>
+  		<when test="searchInput !=''">
+  			<if test="searchForm.equals('allSearch')">
+  			
+  			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
+			
+		
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('Paynum')">
+  			
+  			and userid like '%'||  #{searchInput}|| '%'
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('PayName')">
+  			
+  			and username like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  		
+  			<if test="searchForm.equals('PayNickName')">
+  			and nickname like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			
+  			
+  			</when>
+  			
+  			<when test="startDatePicker!=''">
+  				
+  			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
+  			</when> 
+  				
+  		<!-- <otherwise>
+  		 and bcontent like '%' || #{content} || '%'
+  		</otherwise>  -->
+  	
+  	</choose>
+	
+	
+	</select>
+	
+		<select id="selectMemberSecession2" resultType="Member" resultMap="memberResultSet">
+		select *
+		from memberlist
+		where status ='N'
+		</select>
+	
 	</mapper>

@@ -16,7 +16,7 @@
 		<h1>주문 통합 리스트</h1>
 
 
-		<div style="border: 0.5px radius 15deg black; height: 300px;" class="pay1">
+		<div  class="pay1">
 			<div class="PayPlz">
 				<table style='border-width: 1px; border-collapse: collapse;' class="searchBoard">
 					<tr>
@@ -68,7 +68,7 @@
 
 
 		</div>
-		<div style="border: 1px solid black; margin-top: 30px" class="pay1">
+		<div  class="pay2">
 
 			<div class="content_bottom">
 				<p>
@@ -81,7 +81,7 @@
 
 			<div style="height: 600px; overflow: auto">
 
-				<table class="tableResult">
+				<table class="tableResult ">
 					<thead>
 						<tr>
 
@@ -100,7 +100,7 @@
 
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="hover">
 						<c:forEach var="i" begin="0" end="20">
 
 							<tr>

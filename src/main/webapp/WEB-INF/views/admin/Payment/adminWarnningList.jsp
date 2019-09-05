@@ -15,7 +15,7 @@
 	<c:import url="../adminheader.jsp" />
 
 	<div style="margin-left: 250px">
-		<h1>결제 완료 리스트</h1>
+		<h1>신고 리스트</h1>
 
 
 		<div style="border: 0.5px radius 15deg black; " class="pay1">
@@ -50,7 +50,7 @@
 
 
 		</div>
-		<div style="border: 1px solid black;  margin-top: 30px" class="pay1">
+		<div  class="pay2">
 						<div class="content_bottom">
 				<p>
 					검색 결과 <span>0</span>건

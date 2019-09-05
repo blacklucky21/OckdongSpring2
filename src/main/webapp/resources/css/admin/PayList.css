@@ -93,13 +93,7 @@ body{
 background-color:#e9eaed !important;
 }
 
-.pay1 {
-background-color:white;
-border-radius:20px;
-width:1280px;
-height: auto;
-padding:2px;
-}
+
 input[type='date']{
 
 	border-radius:20px;
@@ -183,4 +177,24 @@ select{
      height: 60px;
 }
 
+table.tableResult tr:nth-child(1n):hover td{
+	    background: #dfdfdf;
+	    cursor:pointer;
+	        
+}
 
+.pay2 {
+	margin-top:30px;
+	background-color:white;
+border-radius:20px;
+width:1280px;
+height: auto;
+}
+
+.pay1 {
+background-color:white;
+border-radius:20px;
+width:1280px;
+height: auto;
+padding:1px;
+}
