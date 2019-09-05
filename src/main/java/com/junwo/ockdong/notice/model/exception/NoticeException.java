@@ -1,5 +1,10 @@
 package com.junwo.ockdong.notice.model.exception;
 
-public class NoticeException {
+public class NoticeException extends RuntimeException {
+	public NoticeException() {}
+	
+	public NoticeException(String msg) {
+		super(msg);
+	}
 
 }

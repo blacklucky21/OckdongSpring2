@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="noticeMapper">
+
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from notice
+		where status = 'Y'
+	</select>
+	
+	<resultMap type="Notice" id="noticeResultSet">
+		<id property="nNo" column="NNO"/>
+		<result property="id" column="ID"/>
+		<result property="nTitle" column="NTITLE"/>
+		<result property="nContent" column="NCONTENT"/>
+		<result property="nCount" column="NCOUNT"/>
+		<result property="status" column="STATUS"/>
+		<result property="nDate" column="NDATE"/>
+		<result property="modifyDate" column="MODIFY_DATE"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="noticeResultSet">
+		select *
+		from notice
+		where status = 'Y'
+		order by NNO desc
+	</select>
+		
+		
   
 </mapper>
