@@ -81,8 +81,7 @@
 							<input type='text' id="email" name="email" class='info_mail_1'>
 						</div>
 						<span class='btn_124_bg_blue ml10' id="emailCheck2">중복확인</span>
-						<input type="hidden" name="id_overlab_chk_flag"
-							id="id_overlab_chk_flag">
+						<input type="hidden" name="id_overlab_chk_flag" id="id_overlab_chk_flag">
 					</div>
 				</div>
 			</div>
@@ -248,19 +247,15 @@
 		
 		/* 이메일 정보 받아오기 */
 		var address = document.getElementById("userAddress").value; + "";
-		var addressArr = address.split('|', 3);
+		var addressArr = address.split('|', 4);
 		
-		$("#address1").val(addressArr[0]);
+		$("#post").val(addressArr[0]);
 		$("#address2").val(addressArr[1]);
 		$("#address3").val(addressArr[2]);
+		$("#address4").val(addressArr[3]);
 		
 		/* 연락처 정보 받아오기 */
 		var phone = document.getElementById("userPhone").value; + "";
-		var phoneArr = phone.split('-', 3);
-		
-		$("#phone1").val(phoneArr[0]);
-		$("#phone2").val(phoneArr[1]);
-		$("#phone3").val(phoneArr[2]);
 		
 		/* 이메일 정보 받아오기 */
 		var email = document.getElementById("userEmail").value;

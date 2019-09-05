@@ -41,11 +41,6 @@
 					<div class='text-red'>일요일, 공휴일 휴무</div>
 				</div>
 			</div>
-
-
-
-
-
 		</div>
 	</div>
 </body>
