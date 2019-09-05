@@ -1,5 +1,7 @@
 package com.junwo.ockdong.myOwn.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,10 @@ public class MyOwnDAO {
 	
 	public int insert(Ingredient in) {
 		return sqlSession.insert("myOwnMapper.insertIngredient", in);
+	}
+
+	public ArrayList<Ingredient> selectAll() {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.selectAll");
 	}
 
 }
