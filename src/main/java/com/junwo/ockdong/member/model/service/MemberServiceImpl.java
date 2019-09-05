@@ -45,4 +45,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public ArrayList<Member> SelectSecessionMemberList(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

@@ -94,7 +94,7 @@ public class AdminController {
 		return "admin/products/productInquiry";
 	}
 	
-	
+	// 회원리스트~~
 		@RequestMapping("adminMemberList.do")
 	public ModelAndView adminMemberList(@RequestParam(value="page",required=false)ModelAndView mv)  {	
 		mv = new ModelAndView(); 
@@ -151,9 +151,42 @@ public class AdminController {
 		
 		
 	}
-
-}
 	
+	//탈퇴 회원 리스트~~
+	
+
+	@RequestMapping("adminSecessionList.do")
+	public ModelAndView adminSecession(@RequestParam(value="page",required=false)ModelAndView mv,@RequestParam("searchInput")String searchInput
+			,@RequestParam("searchForm")String searchForm,@RequestParam("startDatePicker")String startDatePicker,String endDatePicker)  {	
+		mv = new ModelAndView(); 
+		System.out.println(searchInput);
+		System.out.println(searchForm);
+		System.out.println(endDatePicker);
+		System.out.println(startDatePicker);
+		
+		
+		HashMap<String,String> search = new HashMap<String,String>();
+		search.put("searchInput",searchInput);
+		search.put("searchForm",searchForm);
+		search.put("startDatePicker",startDatePicker);
+		search.put("endDatePicker",endDatePicker);
+		ArrayList<Member> list = mService.SelectMemberList2(search);
+//		int listCount = mService.MemberListCount();
+//		System.out.println(list);
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/Member/adminMemberSecession");
+			 	
+		}else {
+			
+		
+			
+		}
+		
+		return mv;
+	}
+
+
 }
 
 
