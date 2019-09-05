@@ -21,13 +21,14 @@ $(function(){
 	});
 });
 
-
+// 관리자 메인 페이지
 $(function(){
 	$('.div1').on("click", function(){
 		location.href="adminView.do";
 	});
 });
 
+// 로그 아웃
 $(function(){
 	$('.logout').on("click", function(){
 		location.href="logout.me";

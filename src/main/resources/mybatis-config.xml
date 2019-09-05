@@ -6,7 +6,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.junwo.ockdong.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.junwo.ockdong.notice.notice.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.junwo.ockdong.notice.model.vo.Notice" alias="Notice"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
