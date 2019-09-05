@@ -80,12 +80,6 @@
                <td><input type="text" name="address4" id="address4" class="form-control"></td>
                <td></td>
             </tr>
-            <tr>
-               <th height="40px">생일</th>
-               <td><input type="date" name="birth" id="birth" class="form-control"></td>
-               <td></td>
-            </tr>
-            
          </table>
          <br>
          <div class="btns" align="center">

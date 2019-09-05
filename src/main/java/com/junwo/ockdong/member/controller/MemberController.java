@@ -107,7 +107,7 @@ public class MemberController {
 	// 화면 이동
 	@RequestMapping("myPageView.me")
 	public String myPageView() {
-		return "member/myPage";
+		return "myPage/myPage";
 	}
 	
 }
