@@ -1,39 +1,30 @@
-<%@page import="com.junwo.ockdong.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	Member m = (Member) request.getSession().getAttribute("loginUser");
-	String msg = (String)request.getAttribute("msg");
-%>
-<!DOCTYPE html>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>myPageCheck</title>
-<script type="text/javascript" src="/resource/js/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" href="/resource/css/mypage_css/myPageCheck.css">
-<link rel="stylesheet" href="/resource/css/mypage_css/mypage.css">
-<script>
-$(function(){
-	if('<%=msg%>' != 'null'){
-		alert('<%=msg%>');
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.bodyArea {
+		text-align:center;
+		width:1000px;
+		background:white;
+		height:1000px;
+		margin:0 auto;
 	}
-});
-</script>
+</style>
 </head>
 <body>
-	<!-- header부분 입니다. -->
-	<c:import url="../header/header.jsp"/>
-	<br clear="all">
 
+<c:import url="../views/header/header.jsp"/>
+<div class="bodyArea">
+<c:import url="../views/myPage/myPageLeft.jsp"/>
+<c:import url="../views/myPage/myPageInfo.jsp"/>
+</div>
+<c:import url="../views/footer/footer.jsp"/>
 	
-
-
-
-	<!-- footer부분입니다. -->
-	<c:import url="../footer/footer.jsp"/>
-
 
 
 </body>
