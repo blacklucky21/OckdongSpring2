@@ -32,12 +32,12 @@
             </tr>
             <tr>
                <th height="40px">비밀번호</th>
-               <td><input type="password" maxlength="13" id="userPwd" name="password" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
+               <td><input type="password" maxlength="13" id="password" name="password" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
                <td></td>
             </tr>
             <tr>
                <th height="40px">비밀번호 확인</th>
-               <td><input type="password" maxlength="13" id="userPwd2" name="userPwd2" class="form-control"></td>
+               <td><input type="password" maxlength="13" id="password2" name="password2" class="form-control"></td>
                <td><label id="pwdResult"></label></td>
             </tr>
             <tr>
@@ -138,12 +138,76 @@
                     }).open();
                 }
             
+            var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    		var regPhone = /^[0-9]+$/;
+    		var regPwd = /^(?=.*[a-zA-Z]+)(?=.*[0-9]+).{6,12}$/;
+            
+            function insertMember() {
+            	
+            	if(!regPhone.test($('#phone').val())){
+                	alert("숫자만 가능합니다.");
+                	$('#phone').focus();
+                	return;
+                }
+            	
+            	if(!regPwd.test($('#password').val())){
+     			   alert('영문+숫자  조합으로 6-12자를 입력해 주세요.');
+     			   $('#password').focus();
+     			   return;
+     			}
+     			
+     			if(!regEmail.test($('#email').val())) {
+                     alert("이메일 주소가 유효하지 않습니다");
+                     $('#email').focus();            
+                 }else{
+     				if($('#password').val()!="" && $('#password2').val() == $('#password').val() && $('#phone').val()!="" && $('#address3').val()!="" && $('#email').val()!=""){			
+     					alert("회원이 되신걸 환영합니다.");
+     					$("#joinForm").submit();
+     				}
+                 }
+			}
+            
+            $(function(){
+  			  $("#joinBtn").click(function(){
+  	
+  				   if($('#password').val()==""){
+  					    alert("비밀번호를 입력 해 주세요");
+  					    $('#password').focus();
+  					    return;	
+  				   }
+  				   
+  				   if($('#password2').val() != $('#password').val()){
+  					    alert("입력하신 비밀번호를 확인 해 주세요");
+  					    $('#password2').focus();
+  					    return;
+  				   }
+  				   
+  				   if($('#address3').val()==""){
+  					    alert("주소를 입력 해 주세요");
+  					    $('#address3').focus();
+  					    return;
+  				   }
+  				   
+  				   if($('#phone').val()==""){
+  					    alert("연락처를 입력 해 주세요");
+  					    $('#phone').focus();
+  					    return;
+  				   }
+  			   
+  				   if($('#email').val()==""){
+  					    alert("이메일을 입력 해 주세요");
+  					    $('#email').focus();
+  					    return;
+  				   }
+  				   
+  			});
+  		});
 
          </script>
          
          
       </form>
    </div>
+   
 </body>
->>>>>>> f1bb245d89dbcdbd860de7cb85d04a6ee8c2d993
-</html>
+ㄴ</html>
