@@ -1,11 +1,24 @@
 package com.junwo.ockdong.admin.controller;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.junwo.ockdong.member.model.service.MemberService;
+import com.junwo.ockdong.member.model.vo.Member;
+
 
 @Controller
 public class AdminController {
-
+	@Autowired
+	private MemberService mService;
+	
 	@RequestMapping("adminView.do")
 	public String adminView() {
 
@@ -43,5 +56,64 @@ public class AdminController {
 		return"admin/Payment/adminWarnningList";
 	}
 	
+
+	
+	
+	@RequestMapping("adminMemberList.do")
+	public ModelAndView adminMemberList(@RequestParam(value="page",required=false)ModelAndView mv)  {	
+		mv = new ModelAndView(); 
+	
+		
+		ArrayList<Member> list = mService.SelectMemberList();
+		
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/Member/adminMemberList");
+			 	
+		}else {
+			
+		
+			
+		}
+		
+		return mv;
+		
+		
+	}
+	
+	
+	
+	@RequestMapping("adminMemberList2.do")
+	public ModelAndView adminMemberList2(@RequestParam(value="page",required=false)ModelAndView mv,@RequestParam("searchInput")String searchInput
+			,@RequestParam("searchForm")String searchForm,@RequestParam("startDatePicker")String startDatePicker,String endDatePicker)  {	
+		mv = new ModelAndView(); 
+		System.out.println(searchInput);
+		System.out.println(searchForm);
+		System.out.println(endDatePicker);
+		System.out.println(startDatePicker);
+		
+		
+		HashMap<String,String> search = new HashMap<String,String>();
+		search.put("searchInput",searchInput);
+		search.put("searchForm",searchForm);
+		search.put("startDatePicker",startDatePicker);
+		search.put("endDatePicker",endDatePicker);
+		ArrayList<Member> list = mService.SelectMemberList2(search);
+//		int listCount = mService.MemberListCount();
+//		System.out.println(list);
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/Member/adminMemberList");
+			 	
+		}else {
+			
+		
+			
+		}
+		
+		return mv;
+		
+		
+	}
 
 }

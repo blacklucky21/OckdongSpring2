@@ -1,5 +1,8 @@
 package com.junwo.ockdong.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +18,27 @@ public class MemberDAO {
 	public int memberJoin(Member m) {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
+<<<<<<< Updated upstream
+=======
+
+	public Member memberLogin(Member m) {
+		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
+	}
+
+	public ArrayList<Member> memberSelectList2(HashMap<String, String> search) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList2",search);
+	}
+
+	public int memberListCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("memberMapper.selectListCount");
+	}
+
+	public ArrayList<Member> memberSelectList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList");
+	}
+>>>>>>> Stashed changes
 	
 }

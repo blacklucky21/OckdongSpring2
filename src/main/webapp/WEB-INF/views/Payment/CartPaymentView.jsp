@@ -489,8 +489,8 @@
                             <div class="required-check termAgree-check">
                                 <h4 class="dn">청약의사 재확인</h4>
                                 <span class="form-element">
-                                    <input type="checkbox" id="termAgree_orderCheck" class="checkbox require">
-                                    <label for="termAgree_orderCheck" class="check-s"><strong>(필수)</strong> <em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em></label>
+                                    <input type="checkbox" id="termAgree_orderCheck orderCheck" class="checkbox require">
+                                    <label for="termAgree_orderCheck " class="check-s"><strong>(필수)</strong> <em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em></label>
                                 </span>
                             </div>
                             <div class="btn" style="float:right">
@@ -578,38 +578,49 @@ function postcode_search(){
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 
+
+
 $('.order-buy').click(function(){
 
-var IMP = window.IMP; // 생략가능
-IMP.init('imp03747157'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	if($('.require').prop("checked")){
+		
 
-IMP.request_pay({
-    pg : 'inicis', // version 1.1.0부터 지원.
-    pay_method : 'card',
-    merchant_uid : 'merchant_' + new Date().getTime(),
-    name : '주문명:또시락이에염',
-    amount : 100,
-    buyer_email : 'iamport@siot.do',
-    buyer_name : '구매자이름',
-    buyer_tel : '010-1234-5678',
-    buyer_addr : '서울특별시 강남구 삼성동',
-    buyer_postcode : '123-456',
-    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-}, function(rsp) {
-    if ( rsp.success ) {
-        var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
-        msg += '상점 거래ID : ' + rsp.merchant_uid;
-        msg += '결제 금액 : ' + rsp.paid_amount;
-        msg += '카드 승인번호 : ' + rsp.apply_num;
-    	location.href="paymentResult.do"; 
-        
-    } else {
-        var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-    }
-    alert(msg);
-});
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp03747157'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '주문명:또시락이에염',
+		    amount : 100,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    	location.href="paymentResult.do"; 
+		        
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});
+		
+	}else{
+		
+		alert("구매진행사항 동의를 체크해주세요");
+	}
+	
 });
 
 </script>
