@@ -1,6 +1,7 @@
 package com.junwo.ockdong.admin.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junwo.ockdong.Product.Exception.ProductException;
+import com.junwo.ockdong.Product.model.service.ProductService;
+import com.junwo.ockdong.Product.model.vo.Product;
 import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
@@ -29,9 +33,10 @@ public class AdminController {
 	@Autowired
 	   private MyOwnService moService;
 	
-	/*
-	 * @Autowired private ProductsList pService;
-	 */
+	
+	 @Autowired
+	 private ProductService pService;
+	 
 	
 	@RequestMapping("main.do")
 	public String mainView() {
@@ -140,9 +145,11 @@ public class AdminController {
 	// 저장할 파일의 이름 만들기? + 확장자 명도 추가
 	public String inSaveFile(MultipartFile file, HttpServletRequest request, String inCategory) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\img\\myOwn\\" + inCategory;
+		String savePath = root  + inCategory;
 		File folder = new File(savePath);
 
+		
+		
 		if (!folder.exists()) {// 해당 폴더가 없으면
 			folder.mkdirs();// 만들어라
 		}
@@ -268,6 +275,98 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+// ============================================================================================================================
+	// 상품 관리 관리자 상품 등록하기
+	@RequestMapping("insertProduct.do")
+	public String insertProduct(@ModelAttribute Product p,
+									  @RequestParam(value="thumbnailImg1" , required=true) MultipartFile thumbnailImg1 ,
+									  @RequestParam(value="thumbnailImg2" , required=false) MultipartFile thumbnailImg2 ,
+									  @RequestParam(value="thumbnailImg3" , required=false) MultipartFile thumbnailImg3 ,
+									  @RequestParam(value="thumbnailImg4" , required=false) MultipartFile thumbnailImg4 ,
+									  @RequestParam("p_lunchtype") String p_lunchtype,
+									  HttpServletRequest request) throws ProductException {
+		
+		// 값 확인을 위해서 가지고 온다.
+		System.out.println(p);
+		System.out.println(thumbnailImg1);
+		System.out.println(thumbnailImg2);
+		System.out.println(thumbnailImg3);
+		System.out.println(thumbnailImg4);
+		
+		System.out.println(thumbnailImg1.getOriginalFilename());
+		System.out.println(thumbnailImg2.getOriginalFilename());
+		System.out.println(thumbnailImg3.getOriginalFilename());
+		System.out.println(thumbnailImg4.getOriginalFilename());
+		
+		ArrayList<MultipartFile> list = new ArrayList<>();
+		list.add(thumbnailImg1);
+		list.add(thumbnailImg2);
+		list.add(thumbnailImg3);
+		list.add(thumbnailImg4);
+		
+		saveproduct(list, request); // 리스트에 잇는 사진 이름 변경후 받아온다.
+		
+		// 사진 불러오기
+		
+		int result = pService.insertProduct(p, list);
+		
+		if(result > 0) {
+			return "admin/products/productList";	
+		}else {
+			throw new ProductException("상품 등록에 실패했습니다.");
+		}
+		
+		
+		
+	}
+	
+		// 사진 원래 사진 이름 변경하는 메소드
+	  public ArrayList<String> saveproduct(ArrayList<MultipartFile> list, HttpServletRequest request) {
 
+		  ArrayList<String> renamePaths = new ArrayList<>();
+		  
+		  for(int i = 0; i < list.size(); i++) {
+			  
+			  MultipartFile file = list.get(i);
+			  
+			  String root = request.getSession().getServletContext().getRealPath("resources"); // 경로를 찾다.
+			  String savePath = root + "\\img\\products"; // 경로에 이름으로 저장한다.
+			  
+			  // 파일 없으면 파일 만들고
+			  File folder = new File(savePath);
+			  if(!folder.exists()) {
+				  folder.mkdir();
+			  }
+			  
+			  // 날짜 변경
+			  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			  
+			  String originalFileName = file.getOriginalFilename();
+			  String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + '.' +
+					  							originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+			  
+			  String renamePath = folder + "\\" + renameFileName; // 경로에 변경된 이름 저장한다.
+			  
+			  renamePaths.add(renamePath);
+			  
+			  try {
+				  file.transferTo(new File(renamePath));
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+		  }
+		  
+		  return renamePaths;
+		  
+	  }
+	
+	
+	
+// ============================================================================================================================
 
 }

@@ -2,6 +2,8 @@ package com.junwo.ockdong.Product.model.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.junwo.ockdong.Product.model.vo.Product;
 import com.junwo.ockdong.common.PageInfo;
 
@@ -15,5 +17,5 @@ public interface ProductService {
 	
 	// 이후 게시글 등록 할수 있게 한다.
 	
-	int insertProduct(Product p);
+	int insertProduct(Product p, ArrayList<MultipartFile> list);
 }
