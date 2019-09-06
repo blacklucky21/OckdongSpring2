@@ -20,7 +20,10 @@
 
 <!-- js 끝 -->
 <style type="text/css">
-.delButton:hover{
+.delBtn{
+	color: red;
+}
+.delBtn:hover{
 	cursor: pointer;
 }
 </style>
@@ -35,7 +38,7 @@
 			<div class="content">
 				<!-- 상품 제목 -->
 				<div class="page_title_wrap">
-					<div class="page_tit">도시락 제료 리스트</div>
+					<div class="page_tit">도시락 재료 리스트</div>
 				</div>
 				<!-- 제목 끝 -->
 
@@ -47,15 +50,20 @@
 							<table class="tg">
 								<tr>
 									<th class="tg-0lax serarch_ti">검색어</th>
-									<th class="tg-0lax"><span> <select id="select_code">
-												<option>상품번호</option>
-												<option>상품명</option>
-										</select>
-									</span> <span> <input type="text" class="search_content"></span>
+									<th class="tg-0lax">
+										<span>
+											<select id="select_code">
+												<option>재료번호</option>
+												<option>재료명</option>
+											</select>
+										</span>
+										<span>
+											<input type="text" id="search_Content" class="search_content">
+										</span>
 									</th>
-
-									<td><input type="button" value="검색" class="bu" id="se">
-										<input type="button" value="초기화" class="bu" id="can">
+									<td>
+										<input type="button" value="검색" class="bu" id="se" onclick="searchIn();">
+										<input type="button" value="초기화" class="bu" id="can" onclick="replyIn();">
 									</td>
 								</tr>
 							</table>
@@ -65,7 +73,7 @@
 				<!-- 리스트 윗 부분 끝 -->
 				<div class="content_bottom">
 					<p>
-						검색 결과 <span>3</span>건
+						검색 결과 <span>${inList.size() }</span>건
 					</p>
 					<!-- 상품 번호 p_Id -->
 					<div class="list_bottom">
@@ -84,8 +92,7 @@
 								</thead>
 								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
-										<c:forEach var="i" items="${inList }" varStatus="num">
-									
+									<c:forEach var="i" items="${inList }" varStatus="num">
 							 			<tr class="list${num.count}">
 											<td class="py" id="py">${ i.inNo }</td>
 											<td class="pp">${i.inName }</td>
@@ -93,7 +100,7 @@
 											<td class="pp">${ i.inGram }</td>
 											<td class="pp">${ i.inType }</td>
 											<td class="pp">${ i.inCreateDate }</td>
-											<td class="py" class="delButton" id="deleted" onclick="deleteOne('list${num.count}','${ i.inNo }');" >삭제</td>
+											<td class="py delBtn" id="deleted" onclick="deleteOne('list${num.count}','${ i.inNo }');" >[삭제]</td>
 										</tr>  
 									</c:forEach>
 								</tbody>
@@ -112,17 +119,85 @@
 						return false;
 					}
 					console.log("삭제 진행");
-					/* $.ajax({
-						url: "ingredientDelete",
+					$.ajax({
+						url: "ingredientDelete.do",
 						data: {inNo : inNo},
-						type: post,
+						type: "post",
 						success: function(data){
 							alert("삭제에 성공하였습니다.");
 							$('.'+listNum).remove();
 						}, error: function(data){
 							alert("삭제에 실패하였습니다.");
 						}
-					}); */
+					});
+				}
+				
+				function searchIn(){
+					var sContent = $("#search_Content").val();
+					var select_code = $("#select_code").val();
+					
+					
+					if(sContent.length > 0){
+						$.ajax({
+							url : "searchIn.do",
+							data : {sContent:sContent,type:select_code},
+							dataType : "json",
+							success : function(data){
+								if(data.length > 0){
+									$(".list_content").empty();
+									var count = 1;
+									for(var i in data){
+										$tr = $("<tr class='list'" + count + ">");
+										$tdNo = $("<td class='py' id='py'>").text(data[i].inNo);
+	
+										console.log(data);
+										console.log(i);
+										console.log(data[i]);
+										
+										$tdName = $("<td class='pp'>").text(decodeURIComponent(data[i].inName.replace(/\+/g, " ")));
+										$tdPrice = $("<td class='pp'>").text(data[i].inPrice);
+										$tdGram = $("<td class='pp'>").text(data[i].inGram);
+										$tdType = $("<td class='pp'>").text(decodeURIComponent(data[i].inType.replace(/\+/g, " ")));
+										$tdCreateDate = $("<td class='pp'>").text(data[i].inCreateDate);
+										$tdDelBtn = $("<td class='py delBtn' id='deleted' onclick=\"deleteOne('list" + count + "','" + data[i].inNo + "');\" >[삭제]</td>");
+										
+										count = count + 1;
+										
+										$tr.append($tdNo);
+										$tr.append($tdName);
+										$tr.append($tdPrice);
+										$tr.append($tdGram);
+										$tr.append($tdType);
+										$tr.append($tdCreateDate);
+										$tr.append($tdDelBtn);
+										$(".list_content").append($tr);
+										
+									}
+									
+								}else{
+									alert("검색 결과가 없습니다.");									
+								}
+							}, error : function(data){
+								alert("검색 결과가 없습니다.");
+							}
+						});
+					}else{
+						alert("검색어를 입력해 주세요.");
+					}
+				}
+				
+				
+				function replyIn(){
+					
+					$.ajax({
+						url : "searchAllIn.do",
+						type : "json",
+						success : function(data){
+							
+						}, error : function(data){
+							
+						}
+					});
 				}
 			</script>
 		</div>
