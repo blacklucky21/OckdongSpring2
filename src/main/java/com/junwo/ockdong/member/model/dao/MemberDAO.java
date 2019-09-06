@@ -39,5 +39,15 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList");
 	}
 
+	public ArrayList<Member> memberSecessionList(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberSecession",search);
+	}
+
+	public ArrayList<Member> memberScessionListFirst() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberSecession2");
+	}
+
 	
 }

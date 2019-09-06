@@ -76,7 +76,7 @@
           <strong class="menu_depth1">회원 관리</strong>
             <ul class="acc_subject">
                 <li><a href="adminMemberList.do" class="menu_depth2">회원 리스트</a></li>
-                <li><a href="#" class="menu_depth2">탈퇴회원 리스트</a></li>
+                <li><a href="adminSecession2.do" class="menu_depth2">탈퇴회원 리스트</a></li>
             </ul>
         </li>
         <li class="accor_has_sub">
