@@ -60,4 +60,39 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int deleteAdminMember(String memId) {
+		// TODO Auto-generated method stub
+		return mDAO.deleteAdminMember(memId);
+	}
+
+
+	@Override
+	public ArrayList<Member> BlackListMember() {
+		// TODO Auto-generated method stub
+		return mDAO.BlackAdminList();
+	}
+
+
+	@Override
+	public ArrayList<Member> BlackListSearch(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return mDAO.BlackListSearch(search);
+	}
+
+
+	@Override
+	public int BlackListCancel(String memId) {
+
+
+		
+		return mDAO.BlackListCancel(memId);
+		
+	}
+
+
+
+
+
+
 }
