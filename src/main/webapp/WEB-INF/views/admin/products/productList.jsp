@@ -100,27 +100,34 @@
 								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
 									
-									<c:forEach var="i" begin="1" end="30" varStatus="num">
-									
-							 			<tr class="list"+ ${num}>
-											<td class="py" id="py">${ i }</td>
+								<c:forEach var="i" begin="0" end="30"> 
+										<tr class="list${i}">
+											<td class="py" id="py">2</td>
 											<td class="pp">상품명이 이게 맞나?</td>
-											<td class="pp"></td>
+											<td class="pp" id="result${i}">   </td>
+											
 											<td>
-												<select id="select">
-													<option id="yy">판매중</option>
-													<option id="nn">판매중지</option>
+												<select class="select" id="select${i}" onchange="change(${i});">
+													<c:if test="">
+														<option value="판매중" selected>판매중</option>
+														<option value="판매중지">판매중지</option>
+													</c:if>
+													<c:if test="">
+														<option value="판매중">판매중</option>
+														<option value="판매중지" selected>판매중지</option>
+													</c:if>
 												</select>
 											</td>
+											
 											<td class="pp">${ i }</td>
 											<td class="pp">${ i }</td>
-											<td class="pp">카테고리</td>
+											<td class="pp">아 망할</td>
 											<td class="pp">${ i }</td>
 											<td class="pp">${ i }</td>
-											<td class="py" id="deleted" onclick="delete('list${num}');" >삭제</td>
+											<td class="py deleted" onclick="deleted('list${i}');"  >삭제</td>
 											
 										</tr>  
-									</c:forEach>
+									 </c:forEach> 
 									
 								</tbody>
 							</table>
@@ -136,5 +143,12 @@
 			</div>
 
 </body>
+<script>
+
+
+
+</script>
+
+
 
 </html>

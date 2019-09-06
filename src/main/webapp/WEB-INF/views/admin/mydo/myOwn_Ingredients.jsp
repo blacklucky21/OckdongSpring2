@@ -19,6 +19,11 @@
 <script type="text/javascript" src="resources/js/admin/productList.js"></script>
 
 <!-- js 끝 -->
+<style type="text/css">
+.delButton:hover{
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 	<!-- 헤더 부름 -->
@@ -70,9 +75,8 @@
 									<tr>
 										<th>재료번호</th>
 										<th>재료명</th>
-										<th>재료타입</th>
-										<th>용량</th>
 										<th>가격</th>
+										<th>용량(g)</th>
 										<th>등록일</th>
 										<th>판매상태</th>
 										<th>삭제</th>
@@ -80,26 +84,17 @@
 								</thead>
 								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
-
-									<c:forEach var="i" varStatus="num" items="">
-
-										<%-- <tr class="list"+ ${num}>
-											<td class="py" id="py">${ i }</td>
-											<td class="pp">상품명이 이게 맞나?</td>
-											<td class="pp"></td>
-											<td>
-												<select id="select">
-													<option id="yy">판매중</option>
-													<option id="nn">판매중지</option>
-												</select>
-											</td>
-											<td class="pp">${ i }</td>
-											<td class="pp">${ i }</td>
-											<td class="pp">카테고리</td>
-											<td class="pp">${ i }</td>
-											<td class="pp">${ i }</td>
-											<td class="py" id="deleted" onclick="delete('list${num}');" >삭제</td>
-										</tr>   --%>
+										<c:forEach var="i" items="${inList }" varStatus="num">
+									
+							 			<tr class="list${num.count}">
+											<td class="py" id="py">${ i.inNo }</td>
+											<td class="pp">${i.inName }</td>
+											<td class="pp">${ i.inPrice }</td>
+											<td class="pp">${ i.inGram }</td>
+											<td class="pp">${ i.inType }</td>
+											<td class="pp">${ i.inCreateDate }</td>
+											<td class="py" class="delButton" id="deleted" onclick="deleteOne('list${num.count}','${ i.inNo }');" >삭제</td>
+										</tr>  
 									</c:forEach>
 								</tbody>
 							</table>
@@ -108,6 +103,28 @@
 				</div>
 			</div>
 			<!-- 전체 부위 끝 -->
+			<script>
+				function deleteOne(listNum, inNo){
+					console.log("listNum : " + listNum + ", inNo : " + inNo);
+					
+					if(!confirm("삭제 하시겠습니까?")){
+						console.log("삭제 안함");
+						return false;
+					}
+					console.log("삭제 진행");
+					/* $.ajax({
+						url: "ingredientDelete",
+						data: {inNo : inNo},
+						type: post,
+						success: function(data){
+							alert("삭제에 성공하였습니다.");
+							$('.'+listNum).remove();
+						}, error: function(data){
+							alert("삭제에 실패하였습니다.");
+						}
+					}); */
+				}
+			</script>
 		</div>
 	</div>
 </body>

@@ -23,7 +23,7 @@
 		<c:import url="../adminheader.jsp" />
 			<div id="content"> <!-- 전체 범위  -->
 				<div class="content"><!-- nav 제외 범위 -->
-				<form action="insertP" method="post" enctype="Multipart/form-data">
+				<form action="insertP" method="post" enctype="Multipart/form-data" >
 				<!-- 상품 제목 -->
 					<div class="page_title_wrap">
 						<div class="page_tit">상품 등록</div>
@@ -63,16 +63,41 @@
 								<th class="head">재고 수량</th>
 								<th class="sub mi"><input type="text" name="Inventory" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">개</th>
 							</tr>
-							<tr>
-								<th class="head">상품 이미지</th>
-								<td></td>
+							
+							<tr class="heim">
+								<th class="head one">상품 이미지</th>
+								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 88px; hegith:88px;"><span id="m1">대표이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s1">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s2">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s3">추가이미지</span></div></td>
 							</tr>
 							
+							
+							<tr style="height: 364px;">
+								<th class="head" >상품 상세</th>
+								<td class="sub"><div><textarea rows="" cols="" ></textarea></div></td>
+							</tr>
 						</table>
 					</div>
-				</div>				
+				</div>		
+				<div>
+							<input type="submit" value="등록" class="bu" onclick="check">
+				</div>		
 				<!-- 상품등록 중 끝 -->
-						
+				<div id="fileArea">
+					<div id="area0"><img alt="" src=""><button onclick="areaDelete(0);"></button></div>
+					<script type="text/javascript">
+						function areaDelete(num){
+							$('#area' + num).remove();
+						}
+					</script>
+					
+					
+					<input type="file" id="thumbnailImg1" multiple="multiple"name="thumbnailImg1" onchange="LoadImg(this,1)">
+					<input type="file" id="thumbnailImg2" multiple="multiple"name="thumbnailImg2" onchange="LoadImg(this,2)">
+					<input type="file" id="thumbnailImg3" multiple="multiple"name="thumbnailImg3" onchange="LoadImg(this,3)">
+					<input type="file" id="thumbnailImg4" multiple="multiple"name="thumbnailImg4" onchange="LoadImg(this,4)">
+				</div>
 			
 			</form>
 			</div><!-- nav 제외 범위 -->
@@ -82,14 +107,66 @@
 
 
 
-
-
-
-
-
-
-
-
-
 </body>
+<script>
+$(function() {
+	$("#fileArea").hide();
+
+	$("#titleImgArea").click(function() {
+		$("#thumbnailImg1").click();
+		
+	});
+	$("#contentImgArea1").click(function() {
+		$("#thumbnailImg2").click();
+	});
+	$("#contentImgArea2").click(function() {
+		$("#thumbnailImg3").click();
+	});
+	$("#contentImgArea3").click(function() {
+		$("#thumbnailImg4").click();
+	});
+	$("#contentImgArea4").click(function() {
+		$("#thumbnailImg5").click();
+	});
+});
+
+
+function LoadImg(value, num) {
+	if (value.files && value.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function(e) {
+			switch (num) {
+			case 1:
+				$("#titleImgArea").prop("src", e.target.result);
+				break;
+			case 2:
+				$("#contentImgArea1").prop("src", e.target.result);
+				break;
+			case 3:
+				$("#contentImgArea2").prop("src", e.target.result);
+				break;
+			case 4:
+				$("#contentImgArea3").prop("src", e.target.result);
+				break;
+			}
+		}
+
+		reader.readAsDataURL(value.files[0]);
+	}
+}
+
+// 등록 버튼이 눌렷을대 작동 하기
+function check(){
+	
+}
+
+
+
+
+</script>
+
+
+
+
 </html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myOwnMapper">
+	
+	<insert id="insertIngredient" parameterType="Ingredient">
+		insert into ingredients
+		values(INGREDIENTS_SEQ.NEXTVAL,#{inName},#{inType},#{inGram},#{inPrice},default,default,#{inOriginalFile},#{inRenameFile})
+	</insert>
+	
+	
+	<resultMap type="Ingredient" id="IngredientAllList">
+		<id property="inNo" column="IN_NO"/>
+		<result property="inName" column="IN_NAME"/>
+		<result property="inType" column="IN_TYPE"/>
+		<result property="inGram" column="IN_GRAM"/>
+		<result property="inPrice" column="IN_PRICE"/>
+		<result property="inCreateDate" column="IN_CREATEDATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="inOriginalFile" column="IN_ORIGINALFILE"/>
+		<result property="inRenameFile" column="IN_RENAMEFILE"/>
+	</resultMap>
+	
+	
+	<select id="selectAll" resultMap="IngredientAllList">
+		select *
+		from ingredients
+		where STATUS = 'Y'
+	</select>
+	
+</mapper>
