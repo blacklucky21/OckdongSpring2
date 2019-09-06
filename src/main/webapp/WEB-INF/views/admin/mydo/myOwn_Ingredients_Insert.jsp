@@ -15,7 +15,6 @@
 <!-- js 시작 -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/admin/productinsert.js"></script>
 <style>
 .insert_middle, .insert_top{
 	border: 0px solid white;
@@ -26,6 +25,24 @@
 }
 .sub > input[type='text'] {
     width: 300px;
+}
+.imgArea{
+	background-image: url("resources/img/myOwn/Plus-Add.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: 1px solid black;
+}
+.deleteImg{
+	position: relative;
+    right: -267px;
+    bottom: 298px;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 70%;
+    display: none;
+}
+.deleteImg:hover{
+	cursor: pointer;
 }
 </style>
 </head>
@@ -94,7 +111,10 @@
 							<tr style="height: 320px;">
 								<th class="head">상품 이미지</th>
 								<td class="sub mi">
-									<img id="imgArea" name="imgArea" width="300" height="300" src="">
+									<div style="float: left;">
+										<img id="imgArea" class="imgArea" name="imgArea" width="300" height="300" onerror="delImg(this);">
+										<img id="deleteImg" class="deleteImg" src="resources/img/myOwn/del-logo.png"/>
+									</div>
 								</td>
 							</tr>
 						</table>
@@ -117,12 +137,15 @@
 				});
 			});
 			function LoadImg(value) {
+				console.log()
 				if (value.files && value.files[0]) {
 					var reader = new FileReader();
 
 					reader.onload = function(e) {$("#imgArea").attr("src", e.target.result);}
 
 					reader.readAsDataURL(value.files[0]);
+					
+					$("#deleteImg").css("display","block");
 				}
 			}
 		
@@ -160,6 +183,20 @@
 				
 				
 				return false;
+			}
+			
+			$(function(){
+				$("#deleteImg").click(function(){
+					$("#imgArea").attr("src","");
+					$("#deleteImg").css("display","none");
+					$("#ingredientImg").files = null;
+				});
+			});
+			
+			function delImg(value){
+				value.src="resources/img/myOwn/Plus-Add.png";
+				console.log(value);
+				$("#imgArea").css("border","1px solid black");
 			}
 		</script>
 	</div><!-- warp 끝 -->

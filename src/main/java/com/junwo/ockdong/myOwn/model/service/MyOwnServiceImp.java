@@ -1,6 +1,7 @@
 package com.junwo.ockdong.myOwn.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,16 @@ public class MyOwnServiceImp implements MyOwnService{
 	@Override
 	public ArrayList<Ingredient> selectAll() {
 		return moDAO.selectAll();
+	}
+
+	@Override
+	public int deleteIn(int inNo) {
+		return moDAO.deleteIn(inNo);
+	}
+
+	@Override
+	public ArrayList<Ingredient> searchList(Map<String, String> search) {
+		return moDAO.searchList(search);
 	}
 
 }
