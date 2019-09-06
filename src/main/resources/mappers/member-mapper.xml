@@ -1,18 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
+	<!-- Join -->
 	<insert id="insertMember" parameterType="Member">
 		insert into member
 		values(
-			#{USERID},
-			#{PASSWORD},
-			#{NICKNAME},
-			#{EMAIL},
-			#{ADDRESS},
-			#{PHONE},
+			#{userId},
+			#{password},
+			#{nickName},
+			#{email},
+			#{address},
+			#{phone},
 			sysdate,
 			sysdate,
-			default
+			default,
+			#{userName}
 		)
 	</insert>
-</mapper>
+	
+	<!-- Login -->
+	<select id="loginMember" parameterType="string" resultType="Member">
+		select *
+		from member
+		where userId=#{userId} and status='Y'
+	</select>
+	
+	<select id="selectMemberList" resultType="Member" resultMap="memberResultSet">
+		select *
+		from memberlist
+		where status ='Y'
+		</select>
+	<select id="selectMemberList2" resultType="Member" resultMap="memberResultSet">
+		select *
+		from memberlist
+		where status ='Y'
+		
+		<!--2) choose,when,otherwise  -->
+  	
+  	<choose>
+  		<when test="searchInput !=''">
+  			<if test="searchForm.equals('allSearch')">
+  			
+  			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
+			
+		
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('Paynum')">
+  			
+  			and userid like '%'||  #{searchInput}|| '%'
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('PayName')">
+  			
+  			and username like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  		
+  			<if test="searchForm.equals('PayNickName')">
+  			and nickname like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			
+  			
+  			</when>
+  			
+  			<when test="startDatePicker!=''">
+  				
+  			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
+  			</when> 
+  				
+  		<!-- <otherwise>
+  		 and bcontent like '%' || #{content} || '%'
+  		</otherwise>  -->
+  	
+  	</choose>
+	
+	</select>
+	
+	
+		<resultMap type="Member" id="memberResultSet">
+		<id property="userId" column="USERID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="userName" column="USERNAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="age" column="age"/>
+		<result property="phone" column="PHONE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="enroll_Date" column="ENROLL_DATE"/>
+		<result property="modify_Date" column="MODIFY_DATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="mNum" column="RNUM"/>
+
+	
+	
+	</resultMap>
+	
+	
+	<select id="selectListCount" resultType="_int">
+		select count(*)
+		from memberlist
+		where status ='Y'
+	
+	 
+	</select>
+	
+	
+	<select id="selectMemberSecession" resultType="Member" resultMap="memberResultSet">
+	
+		select *
+		from memberlist
+		where status ='N'
+		
+		<!--2) choose,when,otherwise  -->
+  	
+  	<choose>
+  		<when test="searchInput !=''">
+  			<if test="searchForm.equals('allSearch')">
+  			
+  			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
+			
+		
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('Paynum')">
+  			
+  			and userid like '%'||  #{searchInput}|| '%'
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('PayName')">
+  			
+  			and username like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  		
+  			<if test="searchForm.equals('PayNickName')">
+  			and nickname like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			
+  			
+  			</when>
+  			
+  			<when test="startDatePicker!=''">
+  				
+  			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
+  			</when> 
+  				
+  		<!-- <otherwise>
+  		 and bcontent like '%' || #{content} || '%'
+  		</otherwise>  -->
+  	
+  	</choose>
+	
+	
+	</select>
+	
+		<select id="selectMemberSecession2" resultType="Member" resultMap="memberResultSet">
+		select *
+		from memberlist
+		where status ='N'
+		</select>
+
+	
+	<update id="deleteMemAdmin"  parameterType="string">
+	
+	update member
+	set status ='B'
+	where userid = #{memId}
+	
+	</update>
+
+
+	<select id="blackMemberList"  resultType="Member" resultMap="memberResultSet">
+	
+	select *
+	from memberlist
+	where status ='B'
+	
+	</select>
+	
+	<select id ="blackMemberSearch" resultType="Member" resultMap="memberResultSet">
+		select *
+		from memberlist
+		where status ='B'
+		
+		<!--2) choose,when,otherwise  -->
+  	
+  	<choose>
+  		<when test="searchInput !=''">
+  			<if test="searchForm.equals('allSearch')">
+  			
+  			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
+			
+		
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('Paynum')">
+  			
+  			and userid like '%'||  #{searchInput}|| '%'
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('PayName')">
+  			
+  			and username like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  		
+  			<if test="searchForm.equals('PayNickName')">
+  			and nickname like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			
+  			
+  			</when>
+  			
+  			<when test="startDatePicker!=''">
+  				
+  			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
+  			</when> 
+  				
+  		<!-- <otherwise>
+  		 and bcontent like '%' || #{content} || '%'
+  		</otherwise>  -->
+  	
+  	</choose>
+	
+	
+	
+	</select>
+	
+	
+	<update id="BlackListCancel" parameterType="String">
+	
+	update member
+	set status ='Y'
+	where userid = #{memId}
+	
+	</update>
+
+	
+	</mapper>
+	

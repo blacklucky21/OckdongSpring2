@@ -1,0 +1,145 @@
+.warp {
+	width: 100%;
+	height: 100%;
+}
+
+#content {
+	overflow: visible;
+	position: static;
+	max-width: none;
+	padding-bottom: 0;
+	background: #e9eaed;
+}
+
+#content .content {
+	min-width: 1280px;
+	padding-left: 214px;
+	height: 919px;
+	text-align: center;
+	/* border: 1px solid black; */
+}
+
+.page_tit {
+	position: relative;
+	height: 39px;
+	padding-top: 21px;
+	border: 0;
+	background: none;
+	font-size: 22px;
+	font-weight: normal;
+	line-height: 38px;
+	color: #222;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+/* 시작 */
+.insert_top, .insert_middle {
+	margin-top: 1.5%;
+	position: relative;
+	width: 1280px;
+	display: inline-block;
+	background: #fff;
+	/* border: 3px solid blue; */
+}
+
+.mt {
+	float: left;
+	padding-left: 20px;
+	font-size: 20px;
+}
+
+.sub_top, .sub_middle {
+	padding: 20px;
+}
+
+.sub_top>table, .sub_middle>table {
+	border: 1px solid #dfdfdf;
+	width: 1220px;
+}
+
+.head {
+	float: left;
+	margin: 10px 14px;
+}
+
+.sub {
+	float: left;
+	margin-left: 100px;
+	margin: 10px 115px;
+	position: absolute;
+}
+
+.sub>input[type='text'] {
+	width: 350px;
+	text-overflow: ellipsis
+}
+
+#hide {
+	color: #ff3c3c;
+	font-size: 12px;
+	line-height: 14px;
+}
+
+#hide::before {
+	background: url("/resources/img/admin/sin.png");
+	width: 13px;
+	height: 13px;
+}
+
+input::placeholder {
+	color: #bcccf3;
+}
+
+.mi>input[type='text'] {
+	width: 200px;
+}
+
+.heim {
+	float: left;
+}
+
+.heim td {
+	width: 100px;
+}
+
+.prim {
+	border: 1px solid #a9a9a9;
+	width: 88px;
+	height: 88px;
+}
+
+.one {
+	padding-top: 20px;
+}
+
+textarea {
+	width: 900px;
+	height: 320px;
+}
+
+
+.bu {
+	width: 75px;
+	border-radius: 15px;
+	background: #2ecc71;
+	border: 1px solid #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #fff;
+}
+
+.bu:hover {
+	color: #2ecc71;
+	background: #fff;
+	border: 1px solid #2ecc71;
+	left: -35%;
+	top: 0;
+	transition-duration: 1s;
+	transform-origin: top left;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	transition: all 1s;
+	height: 100%;
+}

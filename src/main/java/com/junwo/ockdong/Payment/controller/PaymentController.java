@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PaymentController {
 	
-	
+	/*
 	@RequestMapping("CartView.do")
 	public String CartView() {
 		
@@ -34,5 +34,5 @@ public class PaymentController {
 		
 		return"Payment/PaymentResultView";
 	}
-	
+	*/
 }

@@ -5,6 +5,7 @@ public class MemberException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	public MemberException(String msg) {
 		super(msg);
 	}

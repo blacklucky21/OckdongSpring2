@@ -16,7 +16,7 @@
 		<h1>주문 통합 리스트</h1>
 
 
-		<div style="border: 0.5px radius 15deg black; height: 300px;" class="pay1">
+		<div  class="pay1">
 			<div class="PayPlz">
 				<table style='border-width: 1px; border-collapse: collapse;' class="searchBoard">
 					<tr>
@@ -43,14 +43,14 @@
 
 					<tr>
 						<th>주문일자</th>
-						<td>
+						<td class="dayBtn">
 
-							<button class="today buttonSearch">오늘</button>
-							<button class="today buttonSearch">3일</button>
-							<button class="today buttonSearch">1주일</button>
-							<button class="today buttonSearch">1개월</button>
-
-							<input type="date" class="startDatePicker"> ~ <input type="date" class="endDatePicker">
+							<button class="today buttonSearch" id="today">오늘</button>
+							<button class="today buttonSearch" id="3days">3일</button>
+							<button class="today buttonSearch" id="7days">1주일</button>
+							<button class="today buttonSearch" id="1month">1개월</button>
+							<button class="today buttonSearch" id="1years">1년</button>
+							<input type="date" class="startDatePicker"> ~ <input type="date" id="endDatePicker" class="endDatePicker">
 						</td>
 					</tr>
 					<tr>
@@ -68,7 +68,7 @@
 
 
 		</div>
-		<div style="border: 1px solid black; margin-top: 30px" class="pay1">
+		<div  class="pay2">
 
 			<div class="content_bottom">
 				<p>
@@ -76,12 +76,16 @@
 				</p>
 			</div>
 
+
+			<div style="min-height: 600px; overflow: auto">
+
 			<div style="height: 600px; overflow: auto">
-				<table class="tableResult">
+
+				<table class="tableResult ">
 					<thead>
 						<tr>
 
-							<th style="min-height: 200px;">주문번호</th>
+							<th style="min-height: 200px;" >주문번호</th>
 							<th>주문자명</th>
 							<th>주문자 전화번호</th>
 							<th>주문상태</th>
@@ -96,13 +100,13 @@
 
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="hover">
 						<c:forEach var="i" begin="0" end="20">
 
 							<tr>
-								<td>1231231231</td>
+								<td style=" cursor:pointer" class="search num${i} value='${i }'" >123412312312213</td>
 								<td>2</td>
-								<td>3</td>
+								<td>반값븐디ㅏ!</td>
 								<td>4</td>
 								<td>5</td>
 								<td>6</td>
@@ -121,14 +125,19 @@
 		</div>
 
 	</div>
+	
+	</div>
 
 
 
 
 
 	<script>
-		$(document).ready(function() {
 
+	
+		$(document).ready(function() {
+			  document.getElementById('endDatePicker').value= new Date().toISOString().substring(0, 10);
+			  
 			//최상단 체크박스 클릭
 			$(".SelectAll").click(function() {
 				//클릭되었으면
@@ -142,6 +151,81 @@
 				}
 			});
 		});
+		
+		
+		$(document).ready(function(){
+			
+			
+			$('.dayBtn :button').click(function(){
+				
+				var checkDay = $(this).attr('id');
+				
+				console.log(checkDay);
+				console.log(lastWeek());
+				switch(checkDay){
+				case 'today':$('.startDatePicker').val(today());break;	
+				case '3days': $('.startDatePicker').val(days3Ago());break;
+				case '7days': $('.startDatePicker').val(lastWeek());break;
+				case '1month': $('.startDatePicker').val(lastMonth());break;
+				case '1years':  $('.startDatePicker').val(lastYear());break;
+				}
+				
+			});
+		});
+
+		
+		
+		/* 날짜 객체 받아서 문자열로 리턴하는 함수 */
+		function getDateStr(myDate){
+			var d =new Date();
+			
+		
+				d = (myDate.getFullYear() + '-' + ('0'+(myDate.getMonth() + 1)).slice(-2) + '-' +('0'+ myDate.getDate()).slice(-2));
+			
+		
+			return d;
+		}
+
+		/* 오늘 날짜를 문자열로 반환 */
+		function today() {
+		  var d = new Date();
+		  return getDateStr(d);
+		}
+		
+		/* 오늘로부터 3일전 날짜 반환 */
+		function days3Ago() {
+		  var d = new Date()
+		  var dayOfMonth = d.getDate()
+		  d.setDate(dayOfMonth - 3)
+		  return getDateStr(d)
+		}
+
+
+		/* 오늘로부터 1주일전 날짜 반환 */
+		function lastWeek() {
+		  var d = new Date()
+		  var dayOfMonth = d.getDate()
+		  d.setDate(dayOfMonth - 7)
+		  return getDateStr(d)
+		}
+	
+
+		/* 오늘로부터 1개월전 날짜 반환 */
+		function lastMonth() {
+		  var d = new Date()
+		  var monthOfYear = d.getMonth()
+		  d.setMonth(monthOfYear - 1)
+		  return getDateStr(d)
+		}
+		
+		/* 오늘로부터 1년전 날짜 반환 */
+		function lastYear() {
+		  var d = new Date()
+		  var Year = d.getFullYear()
+		  console.log(Year);
+		  d.setYear(Year - 1)
+		  return getDateStr(d);
+		}
 	</script>
 
 

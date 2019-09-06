@@ -1,3 +1,4 @@
+
 package com.junwo.ockdong.member.model.vo;
 
 import java.sql.Date;
@@ -13,13 +14,15 @@ public class Member {
 	private Date enroll_Date;
 	private Date modify_Date;
 	private String status;
+	private String userName;
+	private String mNum;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Member(String userId, String password, String nickName, String email, String address, String phone,
-			Date enroll_Date, Date modify_Date, String status) {
+			Date enroll_Date, Date modify_Date, String status, String userName, String mNum) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -30,6 +33,18 @@ public class Member {
 		this.enroll_Date = enroll_Date;
 		this.modify_Date = modify_Date;
 		this.status = status;
+		this.userName = userName;
+		this.setmNum(mNum);
+	}
+	
+	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserId() {
@@ -103,6 +118,22 @@ public class Member {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Member [userId=" + userId + ", password=" + password + ", nickName=" + nickName + ", email=" + email
+				+ ", address=" + address + ", phone=" + phone + ", enroll_Date=" + enroll_Date + ", modify_Date="
+				+ modify_Date + ", status=" + status + ", userName=" + userName +  "]";
+	}
+
+	public String getmNum() {
+		return mNum;
+	}
+
+	public void setmNum(String mNum) {
+		this.mNum = mNum;
+	}
+	
+	
+	
 }
