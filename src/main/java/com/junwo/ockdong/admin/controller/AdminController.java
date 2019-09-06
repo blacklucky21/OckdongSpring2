@@ -28,7 +28,7 @@ public class AdminController {
 	@RequestMapping("adminPaymentList.do")
 	public String adminPaymentList() {
 
-		return "admin/Payment/adminPayment";
+		return "admin/Payment/adminPaym;ent";
 	}
 
 	@RequestMapping("productList.do")

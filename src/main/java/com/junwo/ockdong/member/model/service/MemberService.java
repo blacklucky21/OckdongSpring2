@@ -49,9 +49,6 @@ public interface MemberService {
 
 
 
-	int MemberListCount(char c);
-
-
 
 	
 
