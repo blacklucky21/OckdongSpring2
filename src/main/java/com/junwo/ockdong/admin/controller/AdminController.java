@@ -4,16 +4,17 @@ package com.junwo.ockdong.admin.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-
-import java.sql.Date;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.junwo.ockdong.Product.Exception.ProductException;
@@ -21,6 +22,8 @@ import com.junwo.ockdong.Product.model.service.ProductService;
 import com.junwo.ockdong.Product.model.vo.Product;
 import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
+import com.junwo.ockdong.myOwn.model.service.MyOwnService;
+import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 
 
 @Controller
@@ -307,7 +310,7 @@ public class AdminController {
 		System.out.println(thumbnailImg3.getOriginalFilename());
 		System.out.println(thumbnailImg4.getOriginalFilename());
 		
-		ArrayList<MultipartFile> list = new ArrayList<>();
+		ArrayList<MultipartFile> list = new ArrayList<MultipartFile>();
 		list.add(thumbnailImg1);
 		list.add(thumbnailImg2);
 		list.add(thumbnailImg3);
@@ -332,7 +335,7 @@ public class AdminController {
 		// 사진 원래 사진 이름 변경하는 메소드
 	  public ArrayList<String> saveproduct(ArrayList<MultipartFile> list, HttpServletRequest request) {
 
-		  ArrayList<String> renamePaths = new ArrayList<>();
+		  ArrayList<String> renamePaths = new ArrayList<String>();
 		  
 		  for(int i = 0; i < list.size(); i++) {
 			  
