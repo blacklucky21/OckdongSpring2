@@ -39,5 +39,35 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList");
 	}
 
+	public ArrayList<Member> memberSecessionList(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberSecession",search);
+	}
+
+	public ArrayList<Member> memberScessionListFirst() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberSecession2");
+	}
+
+	public int deleteAdminMember(String memId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.deleteMemAdmin",memId);
+	}
+
+	public ArrayList<Member> BlackAdminList() {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.blackMemberList");
+	}
+
+	public ArrayList<Member> BlackListSearch(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.blackMemberSearch",search);
+	}
+
+	public int BlackListCancel(String memId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.BlackListCancel",memId);
+	}
+
 	
 }

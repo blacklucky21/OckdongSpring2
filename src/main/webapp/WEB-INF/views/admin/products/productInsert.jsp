@@ -23,7 +23,7 @@
 		<c:import url="../adminheader.jsp" />
 			<div id="content"> <!-- 전체 범위  -->
 				<div class="content"><!-- nav 제외 범위 -->
-				<form action="insertP" method="post" enctype="Multipart/form-data" >
+				<form action="insertProduct.do" method="post" enctype="Multipart/form-data" >
 				<!-- 상품 제목 -->
 					<div class="page_title_wrap">
 						<div class="page_tit">상품 등록</div>
@@ -35,14 +35,14 @@
 					<div class="sub_top">
 						<table>
 							<tr>
-								<th class="head">상품명</th>
-								<td class="sub"><input type="text" name="pname" id="pname"></td>
+								<th class="head" >상품명</th>
+								<td class="sub"><input type="text" name="p_name" id="pname"></td>
 							</tr>
 							<tr>
 								<th class="head">카테고리</th>
-								<td class="sub">
-									<input type="radio" name="pcategory" id="pcategory" checked="checked" ><label>도시락</label>
-									<input type="radio" name="pcategory" id="pcategory" ><label>샐러드</label>
+								<td class="sub" >
+									<input type="radio" name="p_lunchtype" id="pcategory" checked="checked" value="도시락" ><label>도시락</label>
+									<input type="radio" name="p_lunchtype" id="pcategory" value="샐러드"><label>샐러드</label>
 								</td>
 							</tr>
 						</table>
@@ -57,11 +57,11 @@
 						<table>
 							<tr>
 								<th class="head">판매가</th>
-								<td class="sub mi"><input type="text" name="sell" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
+								<td class="sub mi"><input type="text" name="p_price" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
 							</tr>
 							<tr>
 								<th class="head">재고 수량</th>
-								<th class="sub mi"><input type="text" name="Inventory" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">개</th>
+								<th class="sub mi"><input type="text" name="p_quantity" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">개</th>
 							</tr>
 							
 							<tr class="heim">
@@ -70,12 +70,16 @@
 								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s1">추가이미지</span></div></td>
 								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s2">추가이미지</span></div></td>
 								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s3">추가이미지</span></div></td>
+								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
+
+
+							
 							</tr>
 							
 							
 							<tr style="height: 364px;">
 								<th class="head" >상품 상세</th>
-								<td class="sub"><div><textarea rows="" cols="" ></textarea></div></td>
+								<td class="sub"><div><textarea rows="" cols="" name="p_content"></textarea></div></td>
 							</tr>
 						</table>
 					</div>

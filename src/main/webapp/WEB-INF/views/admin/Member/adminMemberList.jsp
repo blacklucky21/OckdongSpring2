@@ -65,11 +65,12 @@
 
 
 		</div>
-		<div style="border: 1px solid black; margin-top: 30px" class="pay1">
+		<div  class="pay2">
 
 			<div class="content_bottom">
 				<p>
-					검색 결과 <span>0</span>건
+					검색 결과 <span><c:set var="listcount" value='${listCount}'/>
+					${list.size()}</span>건
 				</p>
 			</div>
 
@@ -91,24 +92,33 @@
 							<th>주소</th>
 							<th>가입날짜</th>
 							<th>상태</th>
-							<th>주문횟수</th>
+						
 
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 
-							<tr>
+							<tr class="mCheck">
+								
 								<td>${m.mNum }</td>
-								<td>${m.userId}</td>
+								<td >${m.userId}</td>
 								<td>${m.nickName}</td>
 								<td>${m.userName}</td>
 								<td>${m.phone}</td>
 								<td>${m.email}</td>
 								<td>${m.address}</td>
 								<td>${m.enroll_Date}</td>
-								<td>${m.status}</td>
-								<td></td>
+								<td>
+								<c:if test="${m.status eq 'Y' && m.userId ne 'admin' }">
+								회원
+								</c:if>
+								
+								<c:if test="${m.userId eq 'admin' }">
+								
+								관리자</c:if>
+								<input type="hidden" class="userId" value="${m.userId}">
+								</td>
 								
 							</tr>
 
@@ -121,7 +131,10 @@
 	</div>
 
 </div>
+<form name="deleteAdminMember" action="deleteAdminMem.del" method="post">
+	<input type="hidden" name="MemId">
 
+</form>
 
 
 	<script>
@@ -218,6 +231,35 @@
 		  d.setYear(Year - 1)
 		  return getDateStr(d);
 		}
+		
+		
+		//row행 블랙
+		$('.mCheck').click(function(){
+			
+			
+			var tr = $(this);
+	        var td = tr.children();
+	 		
+
+
+		var userid =td.eq(1).text();
+			
+		alert(userid);
+			
+			
+			var bool = confirm("회원 "+userid+"를 정말로 블랙 시키겠습니까?");
+			
+			if(bool){
+				var delMem = document.deleteAdminMember;	
+				
+				delMem.MemId.value = userid;
+				delMem.submit();
+				
+/* 				location.href='deleteAdminMember.aa'; */
+<%-- 				location.href='<%= request.getContextPath( )%>/deletereply.bo?bid=<%=board.getBid() %>&no='+num; --%>
+				<%-- location.href='<%= request.getContextPath( )%>/deletereply.bo?no='+number+&bid=<%=board.getBid() %>; --%>	
+			}
+		});
 	</script>
 
 
