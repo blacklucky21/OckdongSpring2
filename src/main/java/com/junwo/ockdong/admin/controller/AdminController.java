@@ -3,20 +3,28 @@ package com.junwo.ockdong.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+//github.com/blacklucky21/OckdongSpring2.git
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.junwo.ockdong.Product.Exception.ProductException;
 import com.junwo.ockdong.Product.model.service.ProductService;
 import com.junwo.ockdong.Product.model.vo.Product;
@@ -30,18 +38,13 @@ import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 public class AdminController {
 	@Autowired
 	private MemberService mService;
+	
 	@Autowired
-	   private MyOwnService moService;
+	private MyOwnService moService;
 	
 	
-	 @Autowired
-	 private ProductService pService;
-	 
-	
-	@RequestMapping("main.do")
-	public String mainView() {
-		return "Main";
-	}
+	@Autowired
+	private ProductService pService;
 
 	
 	@RequestMapping("adminView.do")
@@ -83,7 +86,7 @@ public class AdminController {
 		return"admin/Payment/adminWarnningList";
 	}
 	
-	// 메인 화면 로고 누르면 메인 화면으로 이동한다.ㄴ
+	// 메인 화면 로고 누르면 메인 화면으로 이동한다.
 	@RequestMapping("main.do")
 	public String main() {
 		return "Main";
@@ -110,10 +113,12 @@ public class AdminController {
 
 	// 나만의 도시락 재료 등록
 	@RequestMapping("Ingredients_Insert.do")
-	public String Ingredients_Insert(@ModelAttribute Ingredient in, @RequestParam("inCategory") String inCategory,
-			@RequestParam("selected4") String selected4, @RequestParam("selected5") String selected5,
-			@RequestParam(value = "ingredientImg", required = false) MultipartFile uploadFile,
-			HttpServletRequest request) {
+	public String Ingredients_Insert(@ModelAttribute Ingredient in,
+									 @RequestParam("inCategory") String inCategory,
+									 @RequestParam("selected4") String selected4,
+									 @RequestParam("selected5") String selected5,
+									 @RequestParam(value = "ingredientImg", required = false) MultipartFile uploadFile,
+									 HttpServletRequest request) {
 
 		System.out.println(in);
 
@@ -176,6 +181,45 @@ public class AdminController {
 		}
 
 		return renameFile;
+	}
+	
+	// 재료 리스트에서 선택한 재료 삭제하기
+	@RequestMapping("ingredientDelete.do")
+	@ResponseBody
+	public String ingredientDel(int inNo) {
+		System.out.println("inNo : " + inNo);
+		int result = moService.deleteIn(inNo);
+		
+		if(result > 0) {
+			System.out.println("성공");
+			return "success";
+		}else {
+			System.out.println("실패");
+			return "fail";
+		}
+		
+	}
+	
+	// 재료 리스트에서 검색하기 타입이랑 내용 받아옴
+	@RequestMapping("searchIn.do")
+	public void searchIngredient(HttpServletResponse response, String sContent, String type) throws JsonIOException, IOException {
+		
+		Map<String, String> search = new HashMap<String, String>();
+		search.put( "sContent", sContent );
+		search.put( "type", type );
+		
+		ArrayList<Ingredient> inList = moService.searchList(search);
+		if(inList != null) {
+			for(Ingredient i : inList) {
+				i.setInName(URLEncoder.encode(i.getInName(), "utf-8"));
+				i.setInOriginalFile(URLEncoder.encode(i.getInOriginalFile(), "utf-8"));
+				i.setInType(URLEncoder.encode(i.getInType(), "utf-8"));
+			}
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(inList, response.getWriter());
+		
 	}
 
 
@@ -427,7 +471,7 @@ public ModelAndView adminScessionMemberFirst(@RequestParam(value="page",required
 
 		
 		ArrayList<Member> list = mService.BlackListMember();
-		
+		System.out.println(list);
 		if(list !=null) {
 			mv.addObject("list",list);
 			mv.setViewName("admin/Member/adminBlackList");

@@ -27,4 +27,24 @@
 		where STATUS = 'Y'
 	</select>
 	
+	<update id="deleteIn" parameterType="_int">
+		update ingredients
+		set status = 'N'
+		where in_no = #{inNo}
+	</update>
+	
+	<select id="searchList" parameterType="map" resultMap="IngredientAllList">
+		select *
+		from ingredients
+		where STATUS = 'Y'
+		<choose>
+			<when test="type.equals('재료번호')">
+				and in_no = #{sContent}
+			</when>
+			<when test="type.equals('재료명')">
+				and in_name like '%' || #{sContent} || '%'
+			</when>
+		</choose>
+	</select>
+	
 </mapper>

@@ -427,11 +427,11 @@ border-bottom:1px solid gray;
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="i" begin="0" end="5" step="1">
+					<c:forEach var="c" items="${list }" varStatus="cart">
 					<tr class="">
 						<td rowspan="2" class="ta-c cb-array"><span
 							class="form-element"> <input type="checkbox"
-								name="check" id="cartSno${i }" value= 3 class="checkbox"
+								name="check" id="cartSno${c.cNo}" value= '${c.cNo}' class="checkbox"
 								 data-price="48500" data-mileage="0"
 								data-goodsdc="0" data-memberdc="0" data-coupondc="0"
 								data-possible="y" /> <label for="cartSno1_9" class="check-s on">선택</label>
@@ -446,38 +446,40 @@ border-bottom:1px solid gray;
 								<!-- <div id="coupon_apply_9">
                                     <button type="button" class="btn-alert-login"><img src="/data/skin/front/no85/img/btn/coupon-apply.png" alt="쿠폰적용"/></button>
                                 </div> -->
-								<a href="../goods/goods_view.php?goodsNo=1000000068">븅신도시락</a>
+								<a href="../goods/goods_view.php?goodsNo=1000000068">${c.cName }</a>
 
 
-								<dl>
+							<!-- 	<dl>
 									<dt>사이즈 :</dt>
 									<dd>55</dd>
 								</dl>
 								<dl>
 									<dt>색상 :</dt>
 									<dd>빨강</dd>
-								</dl>
+								</dl> -->
 
 							</div></td>
 						<td class="ta-c count this-product"><input type="text"
-							name="goodsCnt[]" value="1" title="수량" class="text"
+							name="goodsCnt[]" value="${c.cAmount}" title="수량" class="text cNo${c.cNo}"
 							data-stock-fl="n" data-total-stock="0" data-min-order-cnt="1"
 							data-max-order-cnt="0" data-sales-unit="1"
 							onchange="input_count_change(this,'1');return false;" />
 							<button type="button"
-								class="normal-btn small1 js-goods-cnt-change" data-sno="9"
-								data-goodsno="1000000068">
+								class="normal-btn small1 js-goods-cnt-change" onclick="updateCartAmount(${c.cNo})">
 								<em>수정</em>
 							</button></td>
-						<td class="ta-c this-product"><strong class="price">48,500원
+						<td class="ta-c this-product CartAmount"><strong class="price">${c.cPrice}원
 						</strong>
 							<p class="add_currency"></p></td>
 						<td rowspan="2" class="benefits"></td>
-						<td rowspan="2" class="ta-c"><strong class="price">48,500원</strong>
+						<td rowspan="2" class="ta-c"><strong class="price">${c.cPrice *c.cAmount }원</strong>
 							<p class="add_currency"></p></td>
-						<td rowspan="2" class="ta-c"><span class="c-gray"> 기본
+						
+						<c:if test="${cart.count== 1}">
+						<td rowspan="${list.size()*2 }" class="ta-c"><span class="c-gray"> 기본
 								- 금액별배송비<br /> 2,500원
 						</span></td>
+						</c:if>
 					</tr>
 					<tr class="op">
 						<td colspan="3">
@@ -503,8 +505,8 @@ border-bottom:1px solid gray;
 			<div class="price-box">
 				<div>
 					<p>
-						<span class="detail">총 <em id="totalGoodsCnt">2</em> 개의
-							상품금액 <strong id="totalGoodsPrice">97,000</strong>원
+						<span class="detail">총 <em id="totalGoodsCnt">${list.size()}</em> 개의
+							상품금액 <strong id="totalGoodsPrice">${c.cPrice * c.cAmount}</strong>원
 						</span> <span id="deliveryCalculateNone"><img
 							src="resources/img/etc/plus.png" alt="더하기">배송비 <strong
 							id="totalDeliveryCharge">0</strong>원</span> <span class="total"><img
@@ -622,6 +624,25 @@ border-bottom:1px solid gray;
 				}
 			});
 		});
+							 
+							 
+	function updateCartAmount(no){
+		
+
+		var amount = $('.cNo'+no).val();
+	
+		console.log(amount);
+
+		location.href="CartAmountUpdate.do?no="+no+"&amount="+amount;
+
+
+			
+	}
+
+							 
+							 
+							 	
+							 
 	</script>
 	
 

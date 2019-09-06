@@ -91,11 +91,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+
 	@Override
 	public int MemberListCount(char c) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 
 
