@@ -31,4 +31,28 @@ public interface MemberService {
 
 	ArrayList<Member> SelectSecessionListFirst();
 
+
+
+	int deleteAdminMember(String memId);
+
+
+
+	ArrayList<Member> BlackListMember();
+
+
+
+	ArrayList<Member> BlackListSearch(HashMap<String, String> search);
+
+
+
+	int BlackListCancel(String memId);
+
+
+
+	int MemberListCount(char c);
+
+
+
+	
+
 }
