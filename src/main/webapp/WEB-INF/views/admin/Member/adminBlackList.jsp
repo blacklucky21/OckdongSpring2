@@ -13,12 +13,12 @@
 	<c:import url="../adminheader.jsp" />
 
 	<div style="margin-left: 250px">
-		<h1>탈퇴 회원 리스트 </h1>
+		<h1>블랙 리스트 </h1>
 
 
 		<div style="border: 0.5px radius 15deg black; height: 300px;" class="pay1">
 			<div class="PayPlz">
-				<form id="SearchInputform" action="adminSecessionList.do" method="post">
+				<form id="SearchInputform" action="adminBlackListSearch.search" method="post">
 				<table style='border-width: 1px; border-collapse: collapse;' class="searchBoard">
 				
 					<tr>
@@ -74,7 +74,7 @@
 			</div>
 
 
-			<div style=" overflow: auto">
+			<div style="min-width: 600px; overflow: auto">
 
 			<div style="height: 600px; overflow: auto">
 
@@ -91,7 +91,6 @@
 							<th>주소</th>
 							<th>가입날짜</th>
 							<th>상태</th>
-							<th>탈퇴사유</th>
 						
 
 						</tr>
@@ -99,7 +98,7 @@
 					<tbody>
 						<c:forEach var="m" items="${ list }">
 
-							<tr>
+							<tr class="mCheck">
 								<td>${m.mNum }</td>
 								<td>${m.userId}</td>
 								<td>${m.nickName}</td>
@@ -108,10 +107,11 @@
 								<td>${m.email}</td>
 								<td>${m.address}</td>
 								<td>${m.enroll_Date}</td>
-								<td><c:if test="${m.status eq 'N'}">
-								탈퇴
-								</c:if></td>
-								<td>먹고 탈남</td>
+								<td><c:if test="${m.status eq 'B'}">
+								블랙리스트
+								</c:if>
+									
+								</td>
 								
 								
 							</tr>
@@ -125,8 +125,9 @@
 	</div>
 
 </div>
-
-
+<form name="blackListMemberCancel" action="blackListMemberCancel.cancel" method="post">
+	<input type="hidden" name="MemId">
+</form>
 
 	<script>
 
@@ -222,7 +223,35 @@
 		  d.setYear(Year - 1)
 		  return getDateStr(d);
 		}
+		
+		
+$('.mCheck').click(function(){
+			
+			
+			var tr = $(this);
+	        var td = tr.children();
+	 		
+
+
+		var userid =td.eq(1).text();
+			
+		alert(userid);
+			
+			
+			var bool = confirm("회원 "+userid+"의 블랙을 해제 하시겠습니까?");
+			
+			if(bool){
+				var blackCancel = document.blackListMemberCancel;	
+				
+				blackCancel.MemId.value = userid;
+				blackCancel.submit();
+				
+
+			}
+		});
 	</script>
+		
+
 
 
 </body>

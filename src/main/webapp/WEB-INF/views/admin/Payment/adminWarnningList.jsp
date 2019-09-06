@@ -15,7 +15,7 @@
 	<c:import url="../adminheader.jsp" />
 
 	<div style="margin-left: 250px">
-		<h1>신고 리스트</h1>
+		<h1>신고 리스트	</h1>
 
 
 		<div style="border: 0.5px radius 15deg black; " class="pay1">

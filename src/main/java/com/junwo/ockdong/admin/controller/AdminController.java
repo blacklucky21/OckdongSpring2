@@ -135,10 +135,12 @@ public class AdminController {
 		search.put("startDatePicker",startDatePicker);
 		search.put("endDatePicker",endDatePicker);
 		ArrayList<Member> list = mService.SelectMemberList2(search);
-//		int listCount = mService.MemberListCount();
+		//int listCount = mService.MemberListCount();
+	
 //		System.out.println(list);
 		if(list !=null) {
 			mv.addObject("list",list);
+			
 			mv.setViewName("admin/Member/adminMemberList");
 			 	
 		}else {
@@ -208,6 +210,78 @@ public ModelAndView adminScessionMemberFirst(@RequestParam(value="page",required
 	
 	
 }
+	//회원 블랙 하기
+	@RequestMapping("deleteAdminMem.del")
+	public String deleteAdminMem(String MemId) {
+		
+		
+		mService.deleteAdminMember(MemId);
+		
+		return "redirect:/adminMemberList.do";
+	}
+	// 블랙리스트 해제 하기
+	@RequestMapping("blackListMemberCancel.cancel")
+	public String BlackListCancel(String MemId) {
+		
+		mService.BlackListCancel(MemId);
+		
+		return "redirect:/adminBlack.do";
+	}
+	
+	
+	//블래리스트
+	@RequestMapping("adminBlack.do")
+	public ModelAndView BlackMemberList(@RequestParam(value="page",required=false)ModelAndView mv)  {	
+		mv = new ModelAndView(); 
+
+		
+		ArrayList<Member> list = mService.BlackListMember();
+		
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/Member/adminBlackList");
+			 	
+		}else {
+			
+		
+			
+		}
+		
+		return mv;
+		
+		
+	}
+	
+	@RequestMapping("adminBlackListSearch.search")
+	public ModelAndView BlackListSearch(@RequestParam(value="page",required=false)ModelAndView mv,@RequestParam("searchInput")String searchInput
+			,@RequestParam("searchForm")String searchForm,@RequestParam("startDatePicker")String startDatePicker,String endDatePicker)  {	
+		mv = new ModelAndView(); 
+		System.out.println(searchInput);
+		System.out.println(searchForm);
+		System.out.println(endDatePicker);
+		System.out.println(startDatePicker);
+		
+		
+		HashMap<String,String> search = new HashMap<String,String>();
+		search.put("searchInput",searchInput);
+		search.put("searchForm",searchForm);
+		search.put("startDatePicker",startDatePicker);
+		search.put("endDatePicker",endDatePicker);
+		ArrayList<Member> list = mService.BlackListSearch(search);
+//		int listCount = mService.MemberListCount();
+//		System.out.println(list);
+		if(list !=null) {
+			mv.addObject("list",list);
+			mv.setViewName("admin/Member/adminBlackList");
+			 	
+		}else {
+			
+		
+			
+		}
+		
+		return mv;
+	}
 
 
 }
