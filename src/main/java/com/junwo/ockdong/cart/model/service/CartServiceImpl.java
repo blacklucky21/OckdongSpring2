@@ -1,6 +1,7 @@
 package com.junwo.ockdong.cart.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,4 +22,12 @@ public class CartServiceImpl implements CartService{
 		// TODO Auto-generated method stub
 		return cDAO.selectCartList(loginUserId);
 	}
+
+	@Override
+	public int updateAmount(HashMap<String, String> amountMap) {
+		// TODO Auto-generated method stub
+		return cDAO.updateAmount(amountMap);
+	}
+
+
 }

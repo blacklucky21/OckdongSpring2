@@ -40,7 +40,7 @@ public class AdminController {
 	@RequestMapping("adminPaymentList.do")
 	public String adminPaymentList() {
 
-		return "admin/Payment/adminPaym;ent";
+		return "admin/Payment/adminPayment";
 	}
 
 	@RequestMapping("productList.do")
@@ -248,7 +248,7 @@ public ModelAndView adminScessionMemberFirst(@RequestParam(value="page",required
 
 		
 		ArrayList<Member> list = mService.BlackListMember();
-		
+		System.out.println(list);
 		if(list !=null) {
 			mv.addObject("list",list);
 			mv.setViewName("admin/Member/adminBlackList");

@@ -1,6 +1,7 @@
 package com.junwo.ockdong.cart.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,7 +26,7 @@ public class CartController {
 	
 	
 	@RequestMapping("CartView.do")
-	public String CartView(ModelAndView mv,	
+	public ModelAndView CartView(ModelAndView mv,	
 			HttpServletRequest request,HttpSession session) {
 		
 		
@@ -36,6 +37,24 @@ public class CartController {
 			
 		  
 		  System.out.println("리스트:"+list);
+		  
+
+		
+		// 리스트 출력@@@@@@@@@@@@@@@@
+			if(list !=null) {
+				mv.addObject("list",list);
+				mv.setViewName("Payment/CartListView");
+				 	
+			}else { 
+				
+			
+				
+			}
+			
+			return mv;
+			
+			
+		  
 //		if(reloadFile !=null && !reloadFile.isEmpty()) {
 //			if(b.getRenameFileName()!=null) {
 //				deleteFile(b.getRenameFileName(),request);
@@ -57,10 +76,43 @@ public class CartController {
 //			}
 //		}
 		
-		return "Payment/CartListView";
+	
 		
 	}
 	
+/*	
+	@RequestMapping("CartSelectPayment.do")
+	public String CartSelect(ModelAndView mv,	
+			HttpServletRequest request,HttpSession session) {
+		
+		
+		return null;
+	}
+	*/
+	
+	
+	@RequestMapping("CartAllPayment.do")
+	public String CartAll() {
+		
+		return "Payment/CartPaymentView";
+	}
+	
+	@RequestMapping("CartAmountUpdate.do")
+	public String CartAmount(String no,String amount) {
+		
+		
+		System.out.println(no);
+		System.out.println(amount);
+		
+		HashMap<String,String> amountMap = new HashMap<String,String>();
+		
+		amountMap.put("no",no);
+		amountMap.put("amount",amount);
+		int updateAmount = CartService.updateAmount(amountMap);
+		
+		return "redirect:CartView.do";
+		
+	}
 	
 	
 }
