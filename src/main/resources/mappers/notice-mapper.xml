@@ -26,6 +26,18 @@
 		where status = 'Y'
 		order by NNO desc
 	</select>
+	
+	<update id="updateCount" parameterType="_int">
+		update notice
+		set ncount = ncount + 1
+		where nNo = #{nNo}
+	</update>
+	
+	<select id="selectOne" parameterType="_int" resultMap="noticeResultSet">
+		select *
+		from notice
+		where nNo= #{nNo} and status='Y'
+	</select>	
 		
 		
   

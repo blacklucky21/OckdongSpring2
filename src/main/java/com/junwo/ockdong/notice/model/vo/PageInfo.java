@@ -1,6 +1,6 @@
 package com.junwo.ockdong.notice.model.vo;
 
-public class PageInfo {
+public class PageInfo implements java.io.Serializable{
 	private int currentPage;
 	private int listCount;
 	private int pageLimit;

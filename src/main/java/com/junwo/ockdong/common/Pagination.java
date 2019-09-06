@@ -1,4 +1,4 @@
-package com.junwo.ockdong.notice;
+package com.junwo.ockdong.common;
 
 import com.junwo.ockdong.notice.model.vo.PageInfo;
 
@@ -17,7 +17,7 @@ public class Pagination {
       int startPage;      // 현재 페이지에서 보여질 페이징 버튼의 시작 페이지
       int endPage;      // 현재 페이지에서 보여될 페이징 버튼의 끝 페이지
       
-      int boardLimit = 5; // 한 페이지에 보여질 게시글 갯수
+      int boardLimit = 10; // 한 페이지에 보여질 게시글 갯수
       
       // * maxPage - 총 페이지 수
       // 목록 수가 123개이면 페이지 수는 13페이지임
@@ -27,12 +27,12 @@ public class Pagination {
       // * startPage - 현재 페이지에 보여질 시작 페이지 수 
       //   아래쪽에 페이지 수가 10개씩 보여지게 할 경우
       //   1, 11, 21, 31, .....
-      startPage = (((int)((double)currentPage / pageLimit + 0.9)) - 1) * pageLimit + 1;
+      startPage = (((int)((double)currentPage / boardLimit + 0.9)) - 1) * boardLimit + 1;
       
       // * endPage - 현재 페이지에서 보여질 마지막 페이지 수
       //   아래쪽에 페이지 수가 10개씩 보여지게 할 경우
       //   10, 20, 30, 40, .....
-      endPage = startPage + pageLimit - 1;
+      endPage = startPage + boardLimit - 1;
       
       // 하지만 마지막 페이지 수가 총 페이지 수보다 클 경우
       // maxPage가 13페이지고 endPage가 20페이지일 경우

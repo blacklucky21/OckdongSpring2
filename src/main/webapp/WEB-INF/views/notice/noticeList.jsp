@@ -20,23 +20,43 @@ body {
 	padding-top: 70px;
 	padding-bottom: 30px;
 }
+
+.searchForm{
+	text-align: center;
+}
 </style>
 
 <script>
-	$(document).on('click', '#btnWriteForm', function(e){
-		e.preventDefault();
-		location.href = "${pageContext.request.contextPath}/board/boardForm";
-	});
+	/*  $(document).ready( function() {
+	    var jbExcerpt = $('.boardDay').text().substring( 0, 9 );
+	      $('.boardDay').after('<th>' + jbExcerpt + '</th>' );
+	 }); */
+	
+	/* function checkAll(){
+		 if($("#noInput1").is(':checked')){
+			 $("input[name=nNo]").prop("checked", true);
+		 }else{
+			 $("input[name=nNo]").prop("checked", false);
+		 }
+	 } 
+	
+	 var arrayParam = new Array();
+	 
+	 $("input:checkbox[name=nNo]:checked").each(function(){
+		 arrayParam.push($(this).val());
+	 });  */
+	
 </script>
 
 </head>
 <body>
 	<!-- ############### 헤더 부분 ############### -->
 	<c:import url="../header/header.jsp" />
-
-	<h3 align="center">총 게시글 개수 : ${ pi.listCount }</h3>
+	
+	<!-- 게시판  -->	
 	<h2 style="text-align: center">공지사항</h2>
 
+	<h6 align="center">《《총 게시글 개수 : ${ pi.listCount }》》</h6>		
 	<article>
 		<div class="container">
 
@@ -55,11 +75,11 @@ body {
 					<thead>
 
 						<tr>
-							<th>NO</th>
-							<th>글제목</th>
-							<th>작성자</th>
-							<th>조회수</th>
-							<th>작성일</th>
+							<th class="nNo">NO</th>
+							<th class="nTitle">글제목</th>
+							<th class="nickName">작성자</th>
+							<th class="nCount">조회수</th>
+							<th class="nDate">작성일</th>
 						</tr> 
 
 					</thead>
@@ -74,19 +94,28 @@ body {
 							<c:when test="${!empty list }">
 								<c:forEach var="n" items="${ list }">
 									<tr>
-										<td><c:out value="${n.nNo}" /></td>
-										<td><c:out value="${n.nTitle}" /></td>
-										<td><c:out value="${n.id}" /></td>
-										<td><c:out value="${n.nCount}" /></td>
-										<td><c:out value="${n.nDate}" /></td>
+										<td>${ n.nNo }</td>
+										<td>
+										<c:url var="ndetail" value="ndetail.do">
+											<c:param name="nNo" value="${ n.nNo }" />
+											<c:param name="page" value="${ pi.currentPage }" />
+										</c:url> 
+										<a href="${ ndetail }" style=" text-decoration:none">${ n.nTitle }</a>
+										<%-- <c:if test="${ empty loginUser }">
+											${ n.nTitle }		
+											</c:if> --%>
+										</td>
+										<td>${ n.id }</td>
+										<td>${ n.nCount }</td>
+										<td>${ n.nDate }</td>
 									</tr>
 								</c:forEach>
-							</c:when>
+							</c:when> 
 						</c:choose>
 					</tbody>
-					
 				</table>
-			</div>
+			</div> 
+			
 		
 		<!-- 페이징 처리  -->
 		<div class="w3-container" id="buttonTab">
@@ -100,13 +129,13 @@ body {
 				 	<c:url var="before" value="nlist.do">
 				 		<c:param name="page" value="${ pi.currentPage - 1 }"/>
 				 	</c:url>				 
-  				 <a href="${ before }" class="w3-button w3-green">«이전</a> &nbsp;
+  				 <a href="${ before }" class="w3-button">«이전</a> &nbsp;
 				 </c:if>
 				 
 				 <!-- 페이지 -->
 				 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				 	<c:if test="${ p eq cureentPage }">
-				 		<font color="red" size="5"><a class="w3-button">${ p }</a></font>
+				 		<font color="red" size="4"><a class="w3-button">${ p }</a></font>
 				 	</c:if>
 				 	
 				 	<c:if test="${ p ne currentPage }">
@@ -119,12 +148,14 @@ body {
 				 
 				 <!-- 다음» -->
 				 <c:if test="${ pi.currentPage >= pi.maxPage }">
+				 	&nbsp; 다음»
+				 </c:if>
+				 <c:if test="${ pi.currentPage < pi.maxPage }">
 				 	<c:url var="after" value="nlist.do">
 				 		<c:param name="page" value="${ pi.currentPage + 1 }"/>
 				 	</c:url>
 				 	<a href="${ after }" class="w3-button">다음»</a>
 				 </c:if>
-				 
 			</div>
 		</div>
 
@@ -134,9 +165,25 @@ body {
 					id="btnWriteForm">글쓰기</button>
 
 			</div> -->
-
-
-		</div>
+			
+			<!-- 검색  -->
+			<form action="searchBoard.do" name="search" method="get" class="searchForm">
+						<table>
+							<tr>
+								<td><select class="form-control input-xshort" name="searchType">
+										<option value="nTitle">제목</option>
+										<option value="nContent">내용</option>
+										<option value="nickName">작성자</option>
+								</select></td>
+								<td><input id="boardInput" name="search"
+									class="form-control input-short" type="text" placeholder="Search...">
+								</td>
+								<td><button id="boardBtn" type="submit"
+										class="btn btn-primary">검색</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
 
 	</article>
 
