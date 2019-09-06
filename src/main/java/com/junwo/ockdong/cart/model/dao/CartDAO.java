@@ -1,6 +1,7 @@
 package com.junwo.ockdong.cart.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,16 @@ public class CartDAO {
 		return (ArrayList)sqlSession.selectList("cartMapper.selectCartList",loginUserId);
 	}
 
+
+	public int updateAmount(HashMap<String, String> amountMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cartMapper.updateAmount",amountMap);
+	}
+
+
+
+
+
+
+	
 }

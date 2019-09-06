@@ -14,7 +14,7 @@ public class Cart {
 	
 	public Cart() {}
 	public Cart(int cNo, String cName, int cAmount, int cPrice, Date cCreateDate, int p_id, String id) {
-		super();
+		
 		this.cNo = cNo;
 		this.cName = cName;
 		this.cAmount = cAmount;
@@ -65,6 +65,8 @@ public class Cart {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "cart [cNo=" + cNo + ", cName=" + cName + ", cAmount=" + cAmount + ", cPrice=" + cPrice

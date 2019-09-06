@@ -2,12 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cartMapper">
 
-<select id="selectCartList"  parameterType="String" resultType="Cart">
+<select id="selectCartList"  resultType="Cart" >
 
 select *
 from cart
+where id = #{loginUserId}
 
+<!-- select *
+from member
+where userid = #{loginUserId} -->
 
 </select>
+
+	<resultMap type="Cart" id="CartResultMap">
+		<id property="cNo" column="CNO"/>
+		<result property="cName" column="CNAME"/>
+		<result property="cAmount" column="CAMOUNT"/>
+		<result property="cPrice" column="CPRICE"/>
+		<result property="cCreateDate" column="CCREATEDATE"/>
+		<result property="p_id" column="P_ID"/>
+		<result property="id" column="ID"/>
+
+	</resultMap>
+	
+
+	<update id="updateAmount" parameterType="_int">
+	
+	
+	update cart
+	set camount = #{amount}
+	where cno = #{no}
+	
+	</update>
+
 
 </mapper>
