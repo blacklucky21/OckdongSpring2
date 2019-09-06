@@ -157,6 +157,15 @@ public class Product {
 		this.p_sell = p_sell;
 		this.p_status = p_status;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Product [p_Id=" + p_Id + ", p_name=" + p_name + ", p_content=" + p_content + ", p_createDate="
+		        + p_createDate + ", p_updateDate=" + p_updateDate + ", p_like=" + p_like + ", p_quantity=" + p_quantity
+		        + ", p_lunchtype=" + p_lunchtype + ", p_price=" + p_price + ", p_sell=" + p_sell + ", p_status="
+		        + p_status + "]";
+	}
 	
 	
 	

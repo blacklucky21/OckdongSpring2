@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.junwo.ockdong.Product.model.dao.ProductDAO;
 import com.junwo.ockdong.Product.model.vo.Product;
@@ -28,11 +29,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int insertProduct(Product p) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertProduct(Product p, ArrayList<MultipartFile> list) {
+		return pDAO.insertProduct(p,list);
 	}
-	// dao 연결
 	
 
 }
