@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="productMapper">
+	<select id = "selectProductList" resultType="Product" >
+		select *
+		from PRODUCT
+		where P_STATUS ='Y'
+	</select>
+
+	<select id ="selectProductList1" resultType="Product">
+		select *
+		from PRODUCT
+		where p_STATUS = 'Y' and p_sell = 'Y'
+	</select>
+
+
+	<insert id="insertProduct" parameterType="map">
+		insert all 
+			into Product 
+			values(SQL_P_ID.NEXTVAL, #{p_name}, #{P_CONTENT}, SYSDATE,SYSDATE, DEFAULT, #{P_QUANTITY},  #{P_LUNCHTYPE} , #{P_PRICE} , DEFAULT, DEFAULT)
+			<foreach collection="list" item="item" index="index">
+				into table_img value(
+					SQL_PT_ID.NEXTVAL,
+					#{PT_REALPATH},
+					#{PT_NAME},
+					#{PT_REALNAME},
+					SYSDATE,
+					SYSDATE,
+					SQL_P_ID.currval,
+					DEFAULT
+				
+					
+				) 
+			</foreach>
+	</insert>
+	
+	
+	
+</mapper>

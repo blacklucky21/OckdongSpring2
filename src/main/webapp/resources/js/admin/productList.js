@@ -47,7 +47,7 @@ function change(result){
 	var selected = $('#select'+num).val();
 	console.log(selected);
     //$(this).closest('td').prev().children('.result').text(selected);
-	$('#result'+num).text(selected);
+	$('#result'+num).text(selected );
 }
 
 

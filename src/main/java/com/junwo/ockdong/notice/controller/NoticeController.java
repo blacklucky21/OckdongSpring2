@@ -20,7 +20,6 @@ import com.junwo.ockdong.notice.model.exception.NoticeException;
 import com.junwo.ockdong.notice.model.service.NoticeService;
 import com.junwo.ockdong.notice.model.vo.Notice;
 import com.junwo.ockdong.notice.model.vo.PageInfo;
-import com.kh.baraonda.board.model.exception.BoardException;
 
 @Controller
 public class NoticeController {
@@ -136,4 +135,5 @@ public class NoticeController {
 				return mv;
 			}
 
+}
 }
