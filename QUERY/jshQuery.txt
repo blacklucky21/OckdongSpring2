@@ -1,13 +1,20 @@
+
+grant create view to FinalPro; 
+
+**************Î∑∞Í∂åÌïú **************************
+
+
+
 CREATE SEQUENCE SEQ_MEM 
 START WITH 100000;
-grant create view to FinalPro;
+
 
 
 CREATE SEQUENCE SEQ_CART 
 START WITH 100000;
-
-    CREATE OR REPLACE VIEW MEMBERLIST AS SELECT ROWNUM RNUM,USERID,NICKNAME,USERNAME,EMAIL,ADDRESS,PHONE,ENROLL_DATE,MODIFY_DATE,STATUS
-    FROM MEMBER;
+ 
+  CREATE OR REPLACE VIEW MEMBERLIST AS SELECT ROWNUM RNUM,USERID,NICKNAME,USERNAME,EMAIL,ADDRESS,PHONE,ENROLL_DATE,MODIFY_DATE,STATUS
+  FROM MEMBER;
     
     
 select *
@@ -16,7 +23,7 @@ where status ='Y' and userid like '%ad%'
 and enroll_date between '2019-09-05' and to_date('2019-09-05')+1;
 
 
-insert into cart values(seq_cart.nextval,'≥Î∏¿µµΩ√∂Ù',2,4500,sysdate,111,'admin');
+insert into cart values(seq_cart.nextval,'ÎÖ∏ÎßõÎèÑÏãúÎùΩ',2,4500,sysdate,111,'admin');
 
 select *
 from cart

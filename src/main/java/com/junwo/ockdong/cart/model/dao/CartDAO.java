@@ -28,6 +28,12 @@ public class CartDAO {
 	}
 
 
+	public int deleteCart(String cNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("cartMapper.delCart",cNo);
+	}
+
+
 
 
 

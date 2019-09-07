@@ -29,5 +29,11 @@ public class CartServiceImpl implements CartService{
 		return cDAO.updateAmount(amountMap);
 	}
 
+	@Override
+	public int deleteCart(String cNo) {
+		// TODO Auto-generated method stub
+		return cDAO.deleteCart(cNo);
+	}
+
 
 }

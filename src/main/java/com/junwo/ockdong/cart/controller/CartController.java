@@ -110,6 +110,28 @@ public class CartController {
 		amountMap.put("amount",amount);
 		int updateAmount = CartService.updateAmount(amountMap);
 		
+		
+		
+		return "redirect:CartView.do";
+		
+	}
+	
+	@RequestMapping("CartDelete.del")
+	public String CartDelete(String cNo) {
+
+		
+		System.out.println(cNo);
+		
+		String[] checkcNo =	 cNo.split(",");
+		for(String c:checkcNo) {
+			if(!c.equals("null")) {
+				int dCart= CartService.deleteCart(c) ;
+			}
+		}
+	
+		
+		
+		
 		return "redirect:CartView.do";
 		
 	}
