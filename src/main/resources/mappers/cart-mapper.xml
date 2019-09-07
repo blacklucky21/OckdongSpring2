@@ -26,7 +26,7 @@ where userid = #{loginUserId} -->
 	</resultMap>
 	
 
-	<update id="updateAmount" parameterType="_int">
+	<update id="updateAmount" parameterType="map" >
 	
 	
 	update cart
@@ -34,6 +34,13 @@ where userid = #{loginUserId} -->
 	where cno = #{no}
 	
 	</update>
+	
+	<delete id="delCart" parameterType="String">
+	
+	delete cart
+	where cno = #{cNo}
+	
+	</delete>
 
 
 </mapper>

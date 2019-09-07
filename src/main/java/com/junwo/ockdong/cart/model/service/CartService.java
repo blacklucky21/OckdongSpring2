@@ -11,6 +11,6 @@ public interface CartService {
 
 	int updateAmount(HashMap<String, String> amountMap);
 
-
+	int deleteCart(String cNo);
 
 }
