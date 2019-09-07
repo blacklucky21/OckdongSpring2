@@ -1,14 +1,15 @@
-package com.junwo.ockdong.Product.model.service;
+package com.junwo.ockdong.product.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.junwo.ockdong.Product.model.dao.ProductDAO;
-import com.junwo.ockdong.Product.model.vo.Product;
 import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.product.model.dao.ProductDAO;
+import com.junwo.ockdong.product.model.vo.Product;
 
 @Service("pService")
 public class ProductServiceImpl implements ProductService{
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService{
 		return null;
 	}
 
-
+	
 	@Override
 	public ArrayList<Product> selectList() {
 
@@ -48,6 +49,18 @@ public class ProductServiceImpl implements ProductService{
 
 		return pDAO.productSelectList1();
 	}
-	
+
+	// 상품 리스트 검색한다.
+	@Override
+	public ArrayList<Product> searchList(Map<String, String> search) {
+		return pDAO.searchList(search);
+	}
+
+	// 상품 삭제
+	@Override
+	public int deleteProduct(int p_Id) {
+		return pDAO.deletedProduct(p_Id);
+	}
+
 
 }

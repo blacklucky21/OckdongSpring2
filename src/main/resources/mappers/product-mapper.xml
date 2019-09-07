@@ -34,6 +34,42 @@
 			</foreach>
 	</insert>
 	
+	<resultMap type="Product" id="ProductList">
+		<id property="p_Id" column ="P_ID"/>
+		<result property="p_name" column="P_NAME"/>
+		<result property="p_content" column="P_CONTENT"/>
+		<result property="p_createDate" column="P_CREATEDATE"/>
+		<result property="p_updateDate" column="P_UPDATEDATE"/>
+		<result property="p_like" column="P_LIKE"/>
+		<result property="p_quantity" column="P_QUANTITY"/>
+		<result property="p_lunchtype" column="P_LUNCHTYPE"/>
+		<result property="p_price" column="P_PRICE"/>
+		<result property="p_sell" column="P_SELL"/>
+		<result property="p_status" column="P_STATUS"/>
+		
+	</resultMap>
+	<!-- 상품 리스트 검색 -->
+	<select id="searchList" parameterType="map" resultMap="ProductList">
+		select *
+		from PRODUCT
+		where P_STATUS = 'Y'
+		<choose>
+			<when test="type.equals('상품번호')">
+				and P_ID like '%' || #{sContent} || '%'
+			</when>
+			<when test="type.equals('상품명')">
+				and P_NAME like '%' ||  #{sContent}|| '%'
+			</when>
+		</choose>
+		
+	</select>
+	
+	<update id="deletedProduct" parameterType="_int">
+		update product
+		set P_STATUS ='N'
+		where P_ID = #{p_Id}
+	</update>
+	
 	
 	
 </mapper>

@@ -1,10 +1,11 @@
-package com.junwo.ockdong.Product.model.service;
+package com.junwo.ockdong.product.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import com.junwo.ockdong.Product.model.vo.Product;
 import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.product.model.vo.Product;
 
 public interface ProductService {
 
@@ -20,7 +21,13 @@ public interface ProductService {
 
 	// 게시글 등록 /
 	int insertProduct(HashMap<String, Object> map);
-	
+
+	// 상품 검색 리스트
+	ArrayList<Product> searchList(Map<String, String> search);
+
+	// 상품을 삭제 한다.
+	int deleteProduct(int p_Id);
+
 	
 	
 }

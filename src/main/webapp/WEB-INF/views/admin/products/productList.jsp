@@ -57,17 +57,17 @@
     					<th class="tg-0lax serarch_ti">검색어</th>
    						<th class="tg-0lax">
    							<span>
-   							<select id="select_code">
-   								<option>상품번호</option>
-   								<option>상품명</option>						
+   							<select id="select_code" name="searchForm">
+   								<option >상품번호</option>
+   								<option >상품명</option>						
    							</select>
    							</span>
-   							<span>	<input type="text" class="search_content"></span>
+   							<span>	<input type="text" id="search_Content" class="search_content" name="search_content"></span>
    						</th>
    					
     					<td >
-    						<input type="button" value="검색" class="bu" id="se">
-    						<input type="button" value="초기화" class="bu" id="can">	
+    						<input type="button" value="검색" class="bu" id="se" onclick="searchIn();">
+    						<input type="button" value="초기화" class="bu" id="can" onclick="replyIn();">	
     					</td>
   					</tr>  					
 				</table>
@@ -79,6 +79,7 @@
 					<p>
 						검색 결과 <span>${ list.size() }</span>건
 					</p>
+			
 					<!-- 상품 번호 p_Id -->
 					<div class="list_bottom">
 						<div class="table_list">
@@ -97,11 +98,13 @@
 									<th>삭제</th>
 								</tr>
 								</thead>
+								
 								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
-									
-								<c:forEach var='p' items="${ list }"> 
-										<tr class="${p.p_Id}">
+									<!-- list 크기 가져온 만큼 돌린다. 삭제 안됀 것만 가지고온다. -->
+								<c:forEach var='p' items="${ list }" varStatus="num"> 
+								
+										<tr class="list${num.count }">
 											<td class="py" id="py">${ p.p_Id}</td> <!-- 상품번호 -->
 											<td class="pp">${ p.p_name }</td> <!-- 상품명 -->
 											
@@ -113,7 +116,7 @@
 											<td class="pp" id="result${p.p_Id}">판매중지</td> <!-- 판매상태 -->
 											</c:if>
 											
-											
+											<!-- ------------------------------------------------------------- -->
 											<td>
 												<select class="select" id="select${p.p_Id}" onchange="change(${p.p_Id});"> <!-- 판매상태 설정 -->
 													<c:if test="${p.p_sell eq 'Y'}">
@@ -126,13 +129,13 @@
 													</c:if>
 												</select>
 											</td>
+											<!-- ------------------------------------------------------------- -->
 											
 											<td class="pp">${ p.p_price }</td>										
 											<td class="pp">${ p.p_lunchtype }</td>
 											<td class="pp">${ p.p_quantity }</td>
 											<td class="pp"></td><!-- 판매 수량 -->
-											<td class="py deleted" onclick="deleted('Select${p.p_Id}');" >삭제</td>
-											
+											<td class="py deleted" id="de${p.p_Id}"  onclick="deleted(${p_Id});">삭제</td>
 										</tr>  
 									 </c:forEach> 
 									
@@ -142,18 +145,143 @@
 						</div>
 
 					</div>
+			
 				</div>
 				</div>
 
 				<!-- 전체 부위 끝 -->
 				</div>
 			</div>
+			
+				
 
 </body>
 <script>
+ 	function searchIn(){
+		
+ 		var sContent = $("#search_Content").val(); // 검색어
+ 		var select_code = $("#select_code").val(); // 내용 
+ 		
+ 		// 검색어가 등록돼지 않앗으면
+		if(sContent.length > 0){
+			$.ajax({
+				url : "searchProduct.do",
+				data : {sContent:sContent, type:select_code}, // 타입과 내용을 보낸다.
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					
+					var list = data;
+				 	if(data.length > 0){
+				 		$(".list_content").empty(); // tobody 가 비움
+						var count = 1;
+						for(var i in data){
+							
+					$tr = $("<tr class='list'" + count +  ">");
+					$tdNo = $("<td class='py' id='py'>").text(data[i].p_Id);
+					$tdpname = $("<td class='pp'>").text(decodeURIComponent(data[i].p_name.replace(/\+/g, " ")));
+					
+					// 판매 상태
+					if(data[i].p_sell == 'Y'){
+					$tdpsell = $("<td class='pp' id='result " + data[i].p_Id + "'>").text("판매중");
+						
+					}else{
+						$tdpsell = $("<td class='pp' id='result" + data[i].p_Id + "'>").text("판매중지");
+						
+					}
+			
+					// 판매 상태 변경
+					//$tdselect = $("<td> <select class='select' id='select" + data[i].p_pId + "' onclick=\"change("+ data[i].p_pId + ");\" >  ");
+					
+					if(data[i].p_sell == 'Y'){
+						$tdselect = $("<td>").html("<select class='select' id='select" + data[i].p_Id + "' onclick='change("+ data[i].p_Id + ");'><option value='판매중' selected>판매중</option><option value='판매중지'>판매중지</option></select>");
+					}else{
+						$tdselect = $("<td>").html("<select class='select' id='select" + data[i].p_Id + "' onclick='change("+ data[i].p_Id + ");'><option value='판매중'>판매중</option><option value='판매중지' selected>판매중지</option></select>");
+						
+					}
+					
+					
+					$tdpprice = $("<td class='pp'>").text(data[i].p_price);
+				
+					$tdplunchtype = $("<td class='pp'>").text(decodeURIComponent(data[i].p_lunchtype.replace(/\+/g, " ")));
+					$tdquantity = $("<td class='pp'>").text(data[i].p_quantity);
+					
+					$tdpcount =$("<td class='pp'>").text("");
+					$tddelete = $("<td class='py deleted' conclick='deleted("+ data[i].p_Id + ");'>").text("삭제");
+					
+					
+					$tr.append($tdNo);
+					$tr.append($tdpname);
+					$tr.append($tdpsell);
+					$tr.append($tdselect);
+					$tr.append($tdpprice);
+					$tr.append($tdplunchtype);
+					$tr.append($tdquantity);
+					$tr.append($tdpcount);
+					$tr.append($tddelete);
+					$(".list_content").append($tr);
+					} 
+					
+						}else{
+							alert("검색 결과가 없습니다.");
+						}
+					
+				}, error : function(data){
+					alert("검색 결과가 없습니다.");
+				}
+			});
+		}else{
+			alert("검색어를 입력해주세요.");
+		} 
+		 
+		
+		
+	}  
+ 	
+ 	// 초기화
+	function replyIn(){
+		location.href="productList.do";
+	}
+ 	
+ 	
 
+ 	
+ 	
+ 	
+ 	// 삭제 버튼
+ 	
+function deleted(p_Id){
+ 		
 
-
+	console.log("상품 번호 : " + p_Id);
+	
+	
+	var key = confirm("선택한 상품을 삭제하겠습니까?");
+	
+	if(key){
+		location.href='${ deletedProduct }';
+	}
+	
+	
+ 	/* 	if(!confirm("정말 삭제 하시겠습니까?")){
+			console.log("삭제안함");
+			return false;
+	}
+ 		$.ajax({
+ 			url: "deletedProduct.do",
+ 			data : {p_Id:p_Id},
+ 			type:"post",
+ 			success:function(data){
+ 				alert("상품을 삭제 했습니다.");
+ 				$(listNum).remove();
+ 			}, error:function(data){
+ 				alert("삭제에 실패하였습니다.");
+ 			}
+ 		}); */
+	
+	
+}
+	
 </script>
 
 
