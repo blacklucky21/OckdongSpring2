@@ -1,4 +1,4 @@
-package com.junwo.ockdong.Product.Exception;
+package com.junwo.ockdong.product.Exception;
 
 public class ProductException extends Exception{
 

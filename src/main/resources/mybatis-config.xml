@@ -9,7 +9,7 @@
 		<typeAlias type="com.junwo.ockdong.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.junwo.ockdong.myOwn.model.vo.Ingredient" alias="Ingredient"/>
 		<typeAlias type="com.junwo.ockdong.cart.model.vo.Cart" alias ="Cart" />
-		<typeAlias type="com.junwo.ockdong.Product.model.vo.Product" alias ="Product"/>
+		<typeAlias type="com.junwo.ockdong.product.model.vo.Product" alias ="Product"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>

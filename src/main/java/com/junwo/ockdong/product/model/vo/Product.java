@@ -1,4 +1,4 @@
-package com.junwo.ockdong.Product.model.vo;
+package com.junwo.ockdong.product.model.vo;
 
 import java.sql.Date;
 

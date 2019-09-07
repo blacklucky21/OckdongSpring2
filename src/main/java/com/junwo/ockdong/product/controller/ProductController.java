@@ -1,24 +1,31 @@
-package com.junwo.ockdong.Product.controller;
+package com.junwo.ockdong.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.junwo.ockdong.Product.Exception.ProductException;
-import com.junwo.ockdong.Product.model.service.ProductService;
-import com.junwo.ockdong.Product.model.vo.PictureList;
-import com.junwo.ockdong.Product.model.vo.Product;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.junwo.ockdong.product.Exception.ProductException;
+import com.junwo.ockdong.product.model.service.ProductService;
+import com.junwo.ockdong.product.model.vo.PictureList;
+import com.junwo.ockdong.product.model.vo.Product;
 
 @Controller
 public class ProductController {
@@ -160,7 +167,47 @@ public class ProductController {
 			  return renamePaths;
 			  
 		  }
-		
+//=====================================================================================================
+		// 리스트 검색
+		  @RequestMapping("searchProduct.do")
+		  @ResponseBody
+		  public void searchProduct(HttpServletResponse response, String sContent, String type) throws JsonIOException, IOException {
+			  
+			  Map<String,String> search = new HashMap<String,String>();
+			  search.put("sContent", sContent); // 내용 즉 입력값
+			  search.put("type",type); // 타입 내용 인지 번호 인지
+			  
+			  System.out.println(sContent);
+			  System.out.println(type);
+			  
+			  ArrayList<Product> pList = pService.searchList(search);
+			  
+			  if(pList != null) {
+				  for(Product i : pList) {
+					  i.setP_name(URLEncoder.encode(i.getP_name(), "utf-8")); // 상품명
+					  i.setP_content(URLEncoder.encode(i.getP_content(), "utf-8")); // 상품설명
+					  i.setP_lunchtype(URLEncoder.encode(i.getP_lunchtype(), "utf-8")); // 타입
+					  
+				  }
+			  }
+			  Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			  gson.toJson(pList, response.getWriter());
+			  
+		  }
 	
+		  // 상품 삭제
+		  @RequestMapping("deletedProduct.do")
+		 
+		  public String deletedProduct(int p_Id) {
+			  System.out.println("p_Id : "  + p_Id );
+			  
+			  int result = pService.deleteProduct(p_Id);
+			  
+			  if(result > 0) {
+				  System.out.println("삭제 완료");
+				  return "redirect:productList.do";
+			  }
+			return "redirect:productList.do";
+		  }
 	
 }
