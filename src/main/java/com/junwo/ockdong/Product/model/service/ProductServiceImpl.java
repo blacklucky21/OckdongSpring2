@@ -1,10 +1,10 @@
 package com.junwo.ockdong.Product.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.junwo.ockdong.Product.model.dao.ProductDAO;
 import com.junwo.ockdong.Product.model.vo.Product;
@@ -28,9 +28,25 @@ public class ProductServiceImpl implements ProductService{
 		return null;
 	}
 
+
 	@Override
-	public int insertProduct(Product p, ArrayList<MultipartFile> list) {
-		return pDAO.insertProduct(p,list);
+	public ArrayList<Product> selectList() {
+
+		return pDAO.productSelectList();
+	}
+
+	// 등록
+	@Override
+	public int insertProduct(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return pDAO.insertProduct(map);
+	}
+
+	// 판매중인것만 가지고 가는 리스트
+	@Override
+	public ArrayList<Product> selectList1() {
+
+		return pDAO.productSelectList1();
 	}
 	
 
