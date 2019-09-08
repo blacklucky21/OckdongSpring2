@@ -51,36 +51,55 @@ public class ProductController {
 			System.out.println(thumbnailImg4);
 			System.out.println("=================원래 이름=========================");
 			
+			ArrayList orign = new ArrayList();
+			orign.add(thumbnailImg1.getOriginalFilename());
+			orign.add(thumbnailImg2.getOriginalFilename());
+			orign.add(thumbnailImg3.getOriginalFilename());
+			orign.add(thumbnailImg4.getOriginalFilename());
+			
+			int size = 0;
+			for(int i = 0; i < orign.size(); i++) {
+				if(!orign.get(i).equals("")) {
+					size += 1;
+				}
+			}
+			System.out.println("size 크기 : " + size);
+			
 			System.out.println(thumbnailImg1.getOriginalFilename()); // 원래 이름 저장한다.
 			System.out.println(thumbnailImg2.getOriginalFilename());
 			System.out.println(thumbnailImg3.getOriginalFilename());
 			System.out.println(thumbnailImg4.getOriginalFilename());
 			System.out.println("==========================================");
 			
+			
+			
 			// 사진을 list 에 담아서 처리 한다.  추가후
-			ArrayList<MultipartFile> list = new ArrayList<MultipartFile>();
+			ArrayList<MultipartFile> list = new ArrayList<MultipartFile>(size);
 			
 			list.add(thumbnailImg1); // 메인
 			list.add(thumbnailImg2); // 서브들
 			list.add(thumbnailImg3);
 			list.add(thumbnailImg4);
 			
-			PictureList pt = new PictureList(); // 사진 객체 
+			PictureList pt; // 사진 객체 
 			
 			ArrayList<String> renameList  =	saveproduct(list, request); // 리스트에 잇는 사진 이름 변경후 받아온다.
 			
-			ArrayList<PictureList> pList = new ArrayList<PictureList>(); // 
+			ArrayList<PictureList> pList = new ArrayList<PictureList>(); // 사진 담을 객체
 			
 			// 출력 결과 이름이 중복으로 됨........ 사진 결과 중복 됨
 			for(int i = 0; i < renameList.size(); i++) {
 				System.out.println("saveproduct 후  : " + renameList);
 			}
-			// 메인 이미지 출력하기
+			
+			// 메인 이미지 구분
 			if(renameList != null) {
-				for (int i = 0; i <renameList.size(); i++) {
+				for (int i = 0; i < size; i++) {
+					pt = new PictureList();
 				pt.setPt_realName(list.get(i).getOriginalFilename());
 				pt.setPt_naem(renameList.get(i));
 					
+				System.out.println("origin 이름 : " +  pt.getPt_realName());
 				if(i == 0) {
 						pt.setPt_type(0);
 					}else {
@@ -95,20 +114,29 @@ public class ProductController {
 							System.out.println("변경된 이름? 출력 한다.  : " + renameList);
 						}
 
-			HashMap<String, Object> map = new HashMap<>(); // 해쉬맵으로 전달한다.
+		/*
+		 	HashMap<String, Object> map = new HashMap<>(); // 해쉬맵으로 전달한다.  두개를 전달
 			map.put("p", p);
 			map.put("pList", pList);
+		*/
 			
+			// DAO 두개로 전달 도전
+			int result1 = pService.inProduct(p);
+			int result2 = pService.inPicture(pList);
+			
+			int result3 = result1 + result2;
+		/*	
 			for(int i = 0; i < map.size(); i++) {
 				System.out.println(map.toString());
 			}
+		*/	
 			// 등록하기
-		int result = pService.insertProduct(map);
+		/*int result = pService.insertProduct(map);*/
 
-		if (result > 0) {
-			return "admin/products/productList";
+		if (result3 == 2) {
+			return "redirect:productList.do";
 		} else {
-			return("view/common/errorPage");
+			return "view/common/errorPage";
 		}
 
 		}

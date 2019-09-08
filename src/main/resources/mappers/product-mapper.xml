@@ -14,24 +14,6 @@
 	</select>
 
 
-	<insert id="insertProduct" parameterType="map">
-		insert  all
-			into Product 
-			values(SQL_P_ID.NEXTVAL, #{p_name}, #{P_CONTENT}, SYSDATE,SYSDATE, DEFAULT, #{P_QUANTITY},  #{P_LUNCHTYPE} , #{P_PRICE} , DEFAULT, DEFAULT)
-			<foreach collection="" item="item" index="index">
-				into PICTURELIST values(
-					SQL_PT_ID.NEXTVAL,
-					#{PT_REALPATH},
-					#{PT_NAME},
-					#{PT_REALNAME},
-					SYSDATE,
-					SYSDATE,
-					SQL_P_ID.currval,
-					DEFAULT
-				) 
-			</foreach>
-	</insert>
-	
 	<resultMap type="Product" id="ProductList">
 		<id property="p_Id" column ="P_ID"/>
 		<result property="p_name" column="P_NAME"/>
@@ -81,4 +63,27 @@
 		where P_ID =#{p_Id}
 	</update>
 	
+<!-- 등록부분 2개로 ================================================================= -->	
+<insert id="inProduct" parameterType="Product">
+	insert  into product 
+	values(SEQ_P_ID.nextval, #{p_name}, #{p_content}, SYSDATE,SYSDATE, default, #{p_quantity},  #{p_lunchtype} , #{p_price} ,default, default, default)
+			
+</insert>
+
+<!-- 메인 사진 -->
+<insert id="insertMain"  parameterType="PictureList">
+	insert into pictureList
+	values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
+
+
+</insert>
+
+<insert id="insertSub" parameterType="PictureList">
+	insert into PictureList
+		values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
+</insert>
+
+	
+	
+<!-- 등록부분 2개로 ================================================================= -->	
 </mapper>

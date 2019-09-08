@@ -14,8 +14,19 @@ public class Product {
 	private int p_price; // 가격
 	private String p_sell; // 판매 여부
 	private String p_status; // 삭제 여부
+	private int p_count; // 판매수량
 	
 	
+	public int getP_count() {
+		return p_count;
+	}
+
+
+	public void setP_count(int p_count) {
+		this.p_count = p_count;
+	}
+
+
 	public int getP_Id() {
 		return p_Id;
 	}
@@ -143,7 +154,7 @@ public class Product {
 
 
 	public Product(int p_Id, String p_name, String p_content, Date p_createDate, Date p_updateDate, int p_like,
-	        int p_quantity, String p_lunchtype, int p_price, String p_sell, String p_status) {
+			int p_quantity, String p_lunchtype, int p_price, String p_sell, String p_status, int p_count) {
 		super();
 		this.p_Id = p_Id;
 		this.p_name = p_name;
@@ -156,16 +167,20 @@ public class Product {
 		this.p_price = p_price;
 		this.p_sell = p_sell;
 		this.p_status = p_status;
+		this.p_count = p_count;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Product [p_Id=" + p_Id + ", p_name=" + p_name + ", p_content=" + p_content + ", p_createDate="
-		        + p_createDate + ", p_updateDate=" + p_updateDate + ", p_like=" + p_like + ", p_quantity=" + p_quantity
-		        + ", p_lunchtype=" + p_lunchtype + ", p_price=" + p_price + ", p_sell=" + p_sell + ", p_status="
-		        + p_status + "]";
+				+ p_createDate + ", p_updateDate=" + p_updateDate + ", p_like=" + p_like + ", p_quantity=" + p_quantity
+				+ ", p_lunchtype=" + p_lunchtype + ", p_price=" + p_price + ", p_sell=" + p_sell + ", p_status="
+				+ p_status + ", p_count=" + p_count + "]";
 	}
+
+
+	
 	
 	
 	
