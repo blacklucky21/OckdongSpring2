@@ -62,5 +62,18 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.deletedProduct(p_Id);
 	}
 
+	// 상품 상태 변경 N로
+	@Override
+	public int updatePsell(int p_Id) {
+		// TODO Auto-generated method stub
+		return pDAO.updatePsell(p_Id);
+	}
+	// 상태 변경 Y 로
+	@Override
+	public int updatePsell2(int p_Id) {
+		// TODO Auto-generated method stub
+		return pDAO.updatePsell2(p_Id);
+	}
+
 
 }

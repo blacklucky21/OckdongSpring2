@@ -15,11 +15,11 @@
 
 
 	<insert id="insertProduct" parameterType="map">
-		insert all 
+		insert  all
 			into Product 
 			values(SQL_P_ID.NEXTVAL, #{p_name}, #{P_CONTENT}, SYSDATE,SYSDATE, DEFAULT, #{P_QUANTITY},  #{P_LUNCHTYPE} , #{P_PRICE} , DEFAULT, DEFAULT)
-			<foreach collection="list" item="item" index="index">
-				into table_img value(
+			<foreach collection="" item="item" index="index">
+				into PICTURELIST values(
 					SQL_PT_ID.NEXTVAL,
 					#{PT_REALPATH},
 					#{PT_NAME},
@@ -28,8 +28,6 @@
 					SYSDATE,
 					SQL_P_ID.currval,
 					DEFAULT
-				
-					
 				) 
 			</foreach>
 	</insert>
@@ -70,6 +68,17 @@
 		where P_ID = #{p_Id}
 	</update>
 	
+	<!-- 상품 상태 변경 -->
+	<update id="updatePsell" parameterType="_int">
+		update product
+		set P_SELL ='N'
+		where P_ID = #{p_Id}
+	</update>
 	
+	<update id="updatePsell2" parameterType="_int">
+		update PRODUCT
+		set P_SELL = 'Y'
+		where P_ID =#{p_Id}
+	</update>
 	
 </mapper>

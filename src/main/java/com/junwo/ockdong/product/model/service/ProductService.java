@@ -28,6 +28,11 @@ public interface ProductService {
 	// 상품을 삭제 한다.
 	int deleteProduct(int p_Id);
 
+	// 상품 상태 변경 N 로
+	int updatePsell(int p_Id);
+
+	int updatePsell2(int p_Id);
+
 	
 	
 }

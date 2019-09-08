@@ -42,7 +42,7 @@
 						<tr>
 							<td>전체 ${ list.size() } 건</td>
 							<td>판매중 ${ list2.size() } 건</td>
-							<td>품절<a></a>건</td>
+							<td>품절 건</td>
 						</tr>
 					</tbody>
 				</table>
@@ -62,7 +62,7 @@
    								<option >상품명</option>						
    							</select>
    							</span>
-   							<span>	<input type="text" id="search_Content" class="search_content" name="search_content"></span>
+   							<span>	<input type="text" id="search_Content" class="search_content" name="search_content" required></span>
    						</th>
    					
     					<td >
@@ -109,11 +109,11 @@
 											<td class="pp">${ p.p_name }</td> <!-- 상품명 -->
 											
 											<c:if test="${p.p_sell eq 'Y'}">
-											<td class="pp" id="result${p.p_Id}">판매중</td> <!-- 판매상태 -->
+											<td class="pp dd" id="result${p.p_Id}">판매중</td> <!-- 판매상태 -->
 											</c:if>
 											
 											<c:if test="${p.p_sell eq 'N'}">
-											<td class="pp" id="result${p.p_Id}">판매중지</td> <!-- 판매상태 -->
+											<td class="pp dd" id="result${p.p_Id}">판매중지</td> <!-- 판매상태 -->
 											</c:if>
 											
 											<!-- ------------------------------------------------------------- -->
@@ -135,7 +135,7 @@
 											<td class="pp">${ p.p_lunchtype }</td>
 											<td class="pp">${ p.p_quantity }</td>
 											<td class="pp"></td><!-- 판매 수량 -->
-											<td class="py deleted" id="de${p.p_Id}"  onclick="deleted(${p_Id});">삭제</td>
+											<td class="py deleted" id="de${num.count }"  onclick="deleted( ${num.count} ,${p.p_Id} );">[삭제]</td>
 										</tr>  
 									 </c:forEach> 
 									
@@ -183,10 +183,10 @@
 					
 					// 판매 상태
 					if(data[i].p_sell == 'Y'){
-					$tdpsell = $("<td class='pp' id='result " + data[i].p_Id + "'>").text("판매중");
+					$tdpsell = $("<td class='pp' id='result" + data[i].p_Id+"'>").text("판매중");
 						
 					}else{
-						$tdpsell = $("<td class='pp' id='result" + data[i].p_Id + "'>").text("판매중지");
+						$tdpsell = $("<td class='pp' id='result"+data[i].p_Id+"'>").text("판매중지");
 						
 					}
 			
@@ -207,8 +207,9 @@
 					$tdquantity = $("<td class='pp'>").text(data[i].p_quantity);
 					
 					$tdpcount =$("<td class='pp'>").text("");
-					$tddelete = $("<td class='py deleted' conclick='deleted("+ data[i].p_Id + ");'>").text("삭제");
+					$tddelete = $("<td class='py deleted' id='de' onclick='deleted(" + count + "," + data[i].p_Id + ");'>").text("[삭제]");
 					
+					count = count +1;
 					
 					$tr.append($tdNo);
 					$tr.append($tdpname);
@@ -220,6 +221,7 @@
 					$tr.append($tdpcount);
 					$tr.append($tddelete);
 					$(".list_content").append($tr);
+					
 					} 
 					
 						}else{
@@ -243,44 +245,40 @@
 		location.href="productList.do";
 	}
  	
- 	
-
- 	
- 	
- 	
- 	// 삭제 버튼
- 	
-function deleted(p_Id){
+// 삭제 버튼
+function deleted(listNum , p_Id){
  		
-
+	console.log("행 번호 : " + listNum);
 	console.log("상품 번호 : " + p_Id);
 	
 	
 	var key = confirm("선택한 상품을 삭제하겠습니까?");
 	
-	if(key){
-		location.href='${ deletedProduct }';
-	}
-	
-	
- 	/* 	if(!confirm("정말 삭제 하시겠습니까?")){
-			console.log("삭제안함");
-			return false;
-	}
- 		$.ajax({
+	if(!key){
+		console.log("삭제안함");
+	}else{
+		$.ajax({
  			url: "deletedProduct.do",
  			data : {p_Id:p_Id},
  			type:"post",
  			success:function(data){
+ 				$('.'+listNum).remove();
  				alert("상품을 삭제 했습니다.");
- 				$(listNum).remove();
+ 				
+ 				
+ 				
  			}, error:function(data){
  				alert("삭제에 실패하였습니다.");
  			}
- 		}); */
-	
-	
+ 		});
+	}
 }
+	
+
+	
+
+ 	
+ 	
 	
 </script>
 
