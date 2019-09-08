@@ -34,6 +34,14 @@ public class CartDAO {
 	}
 
 
+	public ArrayList<Cart> cartPayment(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.cartPaymentList",totalMap);
+	}
+
+
+
+
 
 
 

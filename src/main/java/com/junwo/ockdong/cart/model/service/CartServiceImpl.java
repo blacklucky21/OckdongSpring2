@@ -36,4 +36,12 @@ public class CartServiceImpl implements CartService{
 	}
 
 
+	@Override
+	public ArrayList<Cart> CartPayment(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return cDAO.cartPayment(totalMap);
+	}
+
+
+
 }

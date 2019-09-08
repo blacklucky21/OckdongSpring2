@@ -14,6 +14,7 @@
 <body>
 
 	<c:import url="../header/header.jsp"/>
+	<c:set var="pa" value="${list }"/>
 	<div class="content" style="width:100%; text-align:center">
 	
 	<div class="order-page" style="display:inline-block">
@@ -40,82 +41,54 @@
                     </tr>
                     </thead>
                     <tbody>
-
+					<c:forEach var="c" items="${list }" varStatus="cart">
                     <tr>
                         <td class="gi this-product">
                             <input type="hidden" name="cartSno[]" value="16">
                             <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
 
-                                <a href="../goods/goods_view.php?goodsNo=1000000107">AVA SUMMER DENIM</a>
+                                <a href="../goods/goods_view.php?goodsNo=1000000107">${c.cName }</a>
 
                                 <dl>
-                                    <dt>사이즈 :</dt>
-                                    <dd>55
+                                    <dt>재료 :</dt>
+                                    <dd>넣을까
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>색상 :</dt>
-                                    <dd>화이트
+                                    <dt>말까 :</dt>
+                                    <dd>공간
                                     </dd>
                                 </dl>
 
                             </div>
                         </td>
                         <td class="ta-c count this-product">
-                            1
+                          ${c.cAmount}
                         </td>
                         <td class="ta-c this-product">
-                            <strong class="price">48,500원</strong>
+                            <strong class="price">${c.cPrice}원</strong>
                         </td>
                         <td class="benefits">
 
                         </td>
                         <td class="ta-c">
-                        <strong class="price">48,500원</strong>
+                        <strong class="price totalAmount" >${c.cPrice *c.cAmount }</strong><strong class="price">원</strong>
                         </td>
-                        <td rowspan="2" class="ta-c">
-                        <span class="c-gray">
+                        
+                        <c:if test="${cart.count== 1}">
+                        <td rowspan="${list.size() }" class="ta-c">
+                        <span class="c-gray delivaryAmount">
                             기본 - 금액별배송비<br>
                             0원
-                        </span>
-                        </td>
+                        </span> <br>  <span style="font-size:11px;">2만원 이상 주문시<br> 
+																	 배송비 무료!</span> 
+                                     </td>
+                                     
+                                     </c:if>
                     </tr>
 
-                    <tr>
-                        <td class="gi this-product">
-                            <input type="hidden" name="cartSno[]" value="15">
-                            <span><a href=""><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="ADIE WIDE CROPPED PANTS OFF WHITE" title="ADIE WIDE CROPPED PANTS OFF WHITE" class="middle"></a></span>
-                            <div>
-
-                                <a href="">ADIE WIDE CROPPED PANTS OFF WHITE</a>
-
-                                <dl>
-                                    <dt>사이즈 :</dt>
-                                    <dd>55
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt>색상 :</dt>
-                                    <dd>빨강
-                                    </dd>
-                                </dl>
-
-                            </div>
-                        </td>
-                        <td class="ta-c count this-product">
-                            1
-                        </td>
-                        <td class="ta-c this-product">
-                            <strong class="price">48,500원</strong>
-                        </td>
-                        <td class="benefits">
-
-                        </td>
-                        <td class="ta-c">
-                        <strong class="price">48,500원</strong>
-                        </td>
-                    </tr>
+                 </c:forEach>
 
 
 
@@ -124,21 +97,21 @@
                 <!-- 장바구니 상품리스트 끝 -->
 
             </div>
-            <a class="btn-move-home" href="./cart.php">장바구니 가기</a>
+            <a class="btn-move-home" href="CartView.do">장바구니 가기</a>
 
             <div class="price-box">
                 <div>
                     <p>
-                        <span class="detail">총 <em>2</em>개의 상품금액 <strong>97,000</strong>원</span>
-                        <span><img src="resources/img/etc/plus.png" alt="더하기">배송비 <strong>0</strong>원</span>
-                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong>97,000</strong>원
+                        <span class="detail">총 <em id="totalGoodsCnt"></em>개의 상품금액 <strong id="totalGoodsPrice">0</strong>원</span>
+                        <span><img src="resources/img/etc/plus.png" alt="더하기">배송비 <strong class="totalDeliveryCharge">0</strong>원</span>
+                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong id="totalSettlePrice">0</strong>원
                         </span>
                     </p>
                     <span class="mileage">적립예정 마일리지 : <span>0</span> 원</span>
                 </div>
             </div>
 
-
+		<c:set var="m" value="${member}"/> 
             <span class="join-form">
                 <fieldset id="fds-order-info">
                     <legend>주문폼</legend>
@@ -154,7 +127,7 @@
                                 <th class="ta-l required" aria-required="true">주문하시는 분</th>
                                 <td>
                                     <div class="txt-field hs" style="width:160px;">
-                                        <input type="text" name="orderName" value="김개도" data-pattern="gdEngKor" maxlength="20" class="text">
+                                        <input type="text" name="orderName" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
                                     </div>
                                 </td>
                             </tr>
@@ -162,7 +135,7 @@
                                 <th class="ta-l">전화번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="phoneNum" name="orderPhone" value="" maxlength="20" class="text">
+                                        <input type="text" id="phoneNum" name="orderPhone" value="${m.phone }" maxlength="20" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -170,7 +143,7 @@
                                 <th class="ta-l required" aria-required="true">휴대폰 번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="mobileNum" name="orderCellPhone" value="" maxlength="20" class="text">
+                                        <input type="text" id="mobileNum" name="orderCellPhone" value="${m.phone}" maxlength="20" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -179,7 +152,7 @@
                                 <td>
                                     <div class="email" style="display:inline">
                                         <span class="txt-field hs" style="width:160px;">
-                                            <input type="text" name="orderEmail" value="" class="text">
+                                            <input type="text" name="orderEmail" value="${m.email }" class="text">
                                         </span>
                                         <div class="choice-select">
                                             <span class="st-hs">
@@ -236,7 +209,7 @@
                                 <th class="ta-l required" aria-required="true">받으실분</th>
                                 <td>
                                     <div class="txt-field hs" style="width:160px;">
-                                        <input type="text" name="receiverName" value="" data-pattern="gdEngKor" maxlength="20" class="text">
+                                        <input type="text" name="receiverName" value="${m.userName}" data-pattern="gdEngKor" maxlength="20" class="text">
                                     </div>
                                 </td>
                             </tr>
@@ -245,7 +218,7 @@
                                 <td>
                                     <div class="post" style="width:auto; display:flex">
                                         <div class="txt-field hs" style="width:100px;">
-                                            <input type="text" name="receiverZonecode" id="receiverZonecode" value="" readonly="readonly" style="width:80px; " class="text" >
+                                            <input type="text" name="receiverZonecode" id="receiverZonecode" value="${m.address}" readonly="readonly" style="width:80px; " class="text" >
                                             <input type="hidden" name="receiverZipcode" value="">
                                             <span id="receiverZipcodeText" class="text" ></span>
                                                
@@ -266,7 +239,7 @@
                                 <th class="ta-l">전화번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="receiverPhone" name="receiverPhone" value="" class="text">
+                                        <input type="text" id="receiverPhone" name="receiverPhone" value="${m.phone }" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -274,7 +247,7 @@
                                 <th class="ta-l required" aria-required="true">휴대폰 번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" value="" class="text">
+                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" value="${m.phone }" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -315,13 +288,13 @@
                             <tr>
                                 <th class="ta-l">상품 합계 금액</th>
                                 <td>
-                                    <strong class="total" id="totalGoodsPrice">97,000원</strong>
+                                    <strong class="total" id="totalGoodsPrice2">원</strong>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="ta-l">배송비</th>
                                 <td>
-                                    <span id="totalDeliveryCharge">0</span>원
+                                    <span class="totalDeliveryCharge">2000</span>원
                                 </td>
                             </tr>
                             <tr id="rowDeliveryInsuranceFee" class="dn">
@@ -418,7 +391,7 @@
                                     <input type="hidden" name="settlePrice" value="97000">
                                     <input type="hidden" name="overseasSettlePrice" value="0">
                                     <input type="hidden" name="overseasSettleCurrency" value="KRW">
-                                    <strong id="totalSettlePrice">97,000</strong>원</span>
+                                    <strong id="finalTotalPrice"></strong>원</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -484,7 +457,7 @@
                         <div class="buy">
                             <div class="final-settlement">
                                 <em>최종 결제 금액</em>
-                                <span class="c-red"><strong id="totalSettlePriceView">97,000</strong>원</span>
+                                <span class="c-red"><strong id="totalSettlePriceView"></strong>원</span>
                             </div>
                             <div class="required-check termAgree-check">
                                 <h4 class="dn">청약의사 재확인</h4>
@@ -509,9 +482,9 @@
 	<script type="text/javascript">
 	
 	//이메일
-	 select_email_domain('orderEmail');
+	 /* select_email_domain('orderEmail');
      select_email_domain('taxEmail','taxEmailDomain');
-     $("#taxEmailDomain_chosen").width("120px");
+     $("#taxEmailDomain_chosen").width("120px"); */
 	</script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -581,7 +554,11 @@ function postcode_search(){
 
 
 $('.order-buy').click(function(){
-
+	
+	var count = parseInt('${pa.size()}')-1;
+	var payText ='${pa.get(0).cName}'+' 외 '+ count +' 개 상품';
+	var totalAmount = parseInt($('#finalTotalPrice').text());
+	
 	if($('.require').prop("checked")){
 		
 
@@ -592,11 +569,11 @@ $('.order-buy').click(function(){
 		    pg : 'inicis', // version 1.1.0부터 지원.
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '주문명:또시락이에염',
-		    amount : 100,
+		    name : payText,
+		    amount : totalAmount,
 		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
+		    buyer_name : '${m.userName}',
+		    buyer_tel : '${m.phone}',
 		    buyer_addr : '서울특별시 강남구 삼성동',
 		    buyer_postcode : '123-456',
 		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
@@ -622,6 +599,46 @@ $('.order-buy').click(function(){
 	}
 	
 });
+
+</script>
+
+//
+<script type="text/javascript">
+$(document).ready(function() {
+	var check;
+	var totalAmount = 0;
+	var delivary = 2500;
+	var count =0;
+
+	
+	console.log(totalAmount);
+	
+	$('table').find('.totalAmount').each(function(i,e){
+		
+		totalAmount += parseInt($(this).text());
+		count ++;
+	});
+	console.log("dd"+totalAmount);
+
+	
+	if(totalAmount>=20000){
+		$('.delivaryAmount').text('배송비 0원');
+		delivary=0;
+		}
+	if(totalAmount ==0){
+		delivary =0;
+	}
+	$('#totalGoodsCnt').text(count);
+	$('.totalDeliveryCharge').text(delivary);
+	$('#totalGoodsPrice').text(totalAmount);
+	$('#totalGoodsPrice2').text(totalAmount);
+	$('#totalSettlePrice').text(totalAmount+delivary);
+	$('#finalTotalPrice').text(totalAmount+delivary);
+	$('#totalSettlePriceView').text(totalAmount+delivary);
+
+
+});
+
 
 </script>
 </body>

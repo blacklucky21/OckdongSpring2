@@ -13,4 +13,10 @@ public interface CartService {
 
 	int deleteCart(String cNo);
 
+	ArrayList<Cart> CartPayment(HashMap<String, String[]> totalMap);
+
+
+
+
+
 }

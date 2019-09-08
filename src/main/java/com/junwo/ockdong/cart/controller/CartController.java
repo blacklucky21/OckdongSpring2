@@ -1,5 +1,6 @@
 package com.junwo.ockdong.cart.controller;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -91,12 +93,7 @@ public class CartController {
 	*/
 	
 	
-	@RequestMapping("CartAllPayment.do")
-	public String CartAll() {
-		
-		return "Payment/CartPaymentView";
-	}
-	
+
 	@RequestMapping("CartAmountUpdate.do")
 	public String CartAmount(String no,String amount) {
 		
@@ -110,7 +107,7 @@ public class CartController {
 		amountMap.put("amount",amount);
 		int updateAmount = CartService.updateAmount(amountMap);
 		
-		
+	
 		
 		return "redirect:CartView.do";
 		
@@ -135,6 +132,51 @@ public class CartController {
 		return "redirect:CartView.do";
 		
 	}
+	
+	
+	
+	@RequestMapping("CartAllPayment.do")
+	public ModelAndView CartAll(@RequestParam("totalArr") String[] totalArr,ModelAndView mv,	
+			HttpServletRequest request,HttpSession session) {
+		
+		for(String i:totalArr) {
+			
+			System.out.println(i);
+			
+			
+		}
+		
+		  Member m = (Member)session.getAttribute("loginUser");
+		  String loginUserId = m.getUserId();
+		  System.out.println("dd"+m.getUserId());
+
+		
+			
+			HashMap<String,String[]> totalMap = new HashMap<String,String[]>();
+			
+			totalMap.put("totalArr",totalArr);
+			
+			ArrayList<Cart> list = CartService.CartPayment(totalMap);
+		
+			System.out.println(list);
+			
+			
+			if(list !=null) {
+				mv.addObject("list",list);
+				mv.addObject("member",m);
+				mv.setViewName("Payment/CartPaymentView");
+				 	
+			}else { 
+				
+			
+				
+			}
+			
+			return mv;
+	}
+	
+
+	
 	
 	
 }

@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="resources/css/cart/CartView.css">
 <style>
 table {
 	border-collapse: collapse;
@@ -477,12 +479,12 @@ border-bottom:1px solid gray;
 																	 배송비 무료!</span></td>
 						</c:if>
 					</tr>
-					<tr class="op">
+		<tr class="op">
 						<td colspan="3">
 							<div>
 								<a href="#optionViewLayer"
 									class="btn-open-layer btn-option-layer normal-btn small1 btn-op"
-									data-goodsno="1000000068" data-sno="9"><em>옵션변경</em></a>
+									data-goodsno="1000000068" data-sno="9"><em></em></a>
 							</div>
 						</td>
 					</tr>
@@ -531,7 +533,7 @@ border-bottom:1px solid gray;
 						<em>선택 상품 주문</em>
 					</button>
 					<button type="button" class="skinbtn point2 cart-orderall"
-						onclick="location.href='CartAllPayment.do'">
+						onclick="">
 						<em>전체 상품 주문</em>
 					</button>
 				</div>
@@ -610,6 +612,7 @@ border-bottom:1px solid gray;
 			var check;
 			var totalAmount = 0;
 			var delivary = 2500;
+			var count =0;
 		
 			$("input[name=check]").prop("checked", true);
 			
@@ -638,7 +641,7 @@ border-bottom:1px solid gray;
 					$("input[name=check]").prop("checked", true);
 					
 					$("input[name=check]:checked").each(function() {
-						
+						count ++;
 						check =$(this).parent().parent().parent().children().eq(4).text();
 						totalAmount += parseInt(check);
 				
@@ -649,14 +652,22 @@ border-bottom:1px solid gray;
 						delivary=0;
 						}
 					
+					
+					if(totalAmount ==0){
+						delivary =0;
+					}
+					
+					
+					$('#totalGoodsCnt').text(count);
 					$('#totalDeliveryCharge').text(delivary);
 					$('#totalGoodsPrice').text(totalAmount);
 					$('#totalSettlePrice').text(totalAmount+delivary);
 				
 				} else {
 					totalAmount = 0;
+					count =0;
 					$("input[name=check]").prop("checked", false);
-					
+					$('#totalGoodsCnt').text(count);
 					$('#totalGoodsPrice').text(totalAmount);
 					$('#totalSettlePrice').text(totalAmount)
 					
@@ -703,13 +714,14 @@ border-bottom:1px solid gray;
 		var check;
 		var totalAmount = 0;
 		var delivary = 2500;
+		var count =0;
 		$("input[name=check]:checked").each(function() {
 			
 			check =$(this).parent().parent().parent().children().eq(4).text();
 			totalAmount += parseInt(check);
 			console.log("check:"+ $(this).val());
 			console.log(check);
-	
+			count ++;
 	
 		});
 		
@@ -718,11 +730,36 @@ border-bottom:1px solid gray;
 			$('.delivaryAmount').text('배송비 0원');
 			delivary=0;
 			}
-		
+		if(totalAmount ==0){
+			delivary =0;
+		}
+		$('#totalGoodsCnt').text(count);
 		$('#totalDeliveryCharge').text(delivary);
 		$('#totalGoodsPrice').text(totalAmount);
 		$('#totalSettlePrice').text(totalAmount+delivary);
 	});
+	
+	$('.cart-orderall').click(function(){
+		
+		var totalArr = new Array();
+		var check =0;
+		console.log($('#totalSettlePrice').text());
+		
+		//location.href='CartAllPayment.do';
+		
+		$("input[name=check]:checked").each(function() {
+			
+			
+		 totalArr[check++] = $(this).val();
+		
+	
+		});
+		
+		
+		location.href='CartAllPayment.do?totalArr='+totalArr;
+
+		});
+	
 	
 
 							 
