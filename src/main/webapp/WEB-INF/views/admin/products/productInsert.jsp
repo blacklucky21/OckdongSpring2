@@ -15,7 +15,6 @@
 <!-- js 시작 -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/admin/productinsert.js"></script>
 
 </head>
 <body>
@@ -36,7 +35,7 @@
 						<table>
 							<tr>
 								<th class="head" >상품명</th>
-								<td class="sub"><input type="text" name="p_name" id="pname"></td>
+								<td class="sub"><input type="text" name="p_name" id="pname"  required></td>
 							</tr>
 							<tr>
 								<th class="head">카테고리</th>
@@ -57,11 +56,11 @@
 						<table>
 							<tr>
 								<th class="head">판매가</th>
-								<td class="sub mi"><input type="text" name="p_price" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
+								<td class="sub mi"><input type="text" name="p_price" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
 							</tr>
 							<tr>
-								<th class="head">재고 수량</th>
-								<th class="sub mi"><input type="text" name="p_quantity" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">개</th>
+								<th class="head">상품 수량</th>
+								<th class="sub mi"><input type="text" name="p_quantity" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required >개</th>
 							</tr>
 							
 							<tr class="heim">
@@ -71,11 +70,7 @@
 								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s2">추가이미지</span></div></td>
 								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s3">추가이미지</span></div></td>
 								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
-
-
-							
 							</tr>
-							
 							
 							<tr style="height: 364px;">
 								<th class="head" >상품 상세</th>

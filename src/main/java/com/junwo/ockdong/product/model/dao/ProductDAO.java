@@ -30,7 +30,7 @@ public class ProductDAO {
 	// 상품 등록하기
 	public int insertProduct(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("insertProduct", map);
+		return sqlSession.insert("productMapper.insertProduct", map);
 	}
 
 	// 판매중인 리시트만 가져오기
@@ -46,6 +46,17 @@ public class ProductDAO {
 
 	public int deletedProduct(int p_Id) {
 		return sqlSession.update("productMapper.deletedProduct", p_Id);
+	}
+	
+	// 상품 상태 변경
+	public int updatePsell(int p_Id) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("productMapper.updatePsell",p_Id);
+	}
+
+	public int updatePsell2(int p_Id) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("productMapper.updatePsell2",p_Id);
 	}
 	
 }
