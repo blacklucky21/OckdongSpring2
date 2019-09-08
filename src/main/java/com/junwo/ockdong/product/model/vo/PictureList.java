@@ -9,21 +9,10 @@ public class PictureList {
 	private String pt_realName; // 실제 사진명
 	private Date pt_createDate; // 생성 날짜
 	private Date pt_updateDate; // 수정 날짜
+	private int p_Id; // 왜래키 상품 번호
+	private String pt_status;
 	private int pt_type; // 메인인지 구분
-	private String p_status; // 삭제여부
 	
-	public String getP_status() {
-		return p_status;
-	}
-	public void setP_status(String p_status) {
-		this.p_status = p_status;
-	}
-	public int getPt_type() {
-		return pt_type;
-	}
-	public void setPt_type(int pt_type) {
-		this.pt_type = pt_type;
-	}
 	public int getPt_Id() {
 		return pt_Id;
 	}
@@ -60,10 +49,30 @@ public class PictureList {
 	public void setPt_updateDate(Date pt_updateDate) {
 		this.pt_updateDate = pt_updateDate;
 	}
-
-
+	public int getP_Id() {
+		return p_Id;
+	}
+	public void setP_Id(int p_Id) {
+		this.p_Id = p_Id;
+	}
+	public int getPt_type() {
+		return pt_type;
+	}
+	public void setPt_type(int pt_type) {
+		this.pt_type = pt_type;
+	}
+	public String getPt_status() {
+		return pt_status;
+	}
+	public void setPt_status(String pt_status) {
+		this.pt_status = pt_status;
+	}
+	
+	public PictureList() {
+		super();
+	}
 	public PictureList(int pt_Id, String pt_realPath, String pt_naem, String pt_realName, Date pt_createDate,
-			Date pt_updateDate, int pt_type, String p_status) {
+			Date pt_updateDate, int p_Id, int pt_type, String pt_status) {
 		super();
 		this.pt_Id = pt_Id;
 		this.pt_realPath = pt_realPath;
@@ -71,13 +80,11 @@ public class PictureList {
 		this.pt_realName = pt_realName;
 		this.pt_createDate = pt_createDate;
 		this.pt_updateDate = pt_updateDate;
+		this.p_Id = p_Id;
 		this.pt_type = pt_type;
-		this.p_status = p_status;
+		this.pt_status = pt_status;
 	}
-	public PictureList() {
-		super();
-	}
-	
+
 	
 	
 }

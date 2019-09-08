@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.dao.ProductDAO;
+import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
 
 @Service("pService")
@@ -34,13 +35,6 @@ public class ProductServiceImpl implements ProductService{
 	public ArrayList<Product> selectList() {
 
 		return pDAO.productSelectList();
-	}
-
-	// 등록
-	@Override
-	public int insertProduct(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
-		return pDAO.insertProduct(map);
 	}
 
 	// 판매중인것만 가지고 가는 리스트
@@ -73,6 +67,19 @@ public class ProductServiceImpl implements ProductService{
 	public int updatePsell2(int p_Id) {
 		// TODO Auto-generated method stub
 		return pDAO.updatePsell2(p_Id);
+	}
+	
+//	 ================== 여기  2개 추가해봄 =========
+	@Override
+	public int inProduct(Product p) {
+		// TODO Auto-generated method stub
+		return pDAO.inProduct(p);
+	}
+
+	@Override
+	public int inPicture(ArrayList<PictureList> pList) {
+		// TODO Auto-generated method stub
+		return pDAO.inPicture(pList);
 	}
 
 

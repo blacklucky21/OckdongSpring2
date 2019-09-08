@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
 
 @Repository("pDAO")
@@ -27,11 +28,6 @@ public class ProductDAO {
 		return (ArrayList)sqlSession.selectList("productMapper.selectProductList");
 	}
 
-	// 상품 등록하기
-	public int insertProduct(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("productMapper.insertProduct", map);
-	}
 
 	// 판매중인 리시트만 가져오기
 	public ArrayList<Product> productSelectList1() {
@@ -44,6 +40,7 @@ public class ProductDAO {
 		return (ArrayList)sqlSession.selectList("productMapper.searchList",search);
 	}
 
+	// 상품 삭제
 	public int deletedProduct(int p_Id) {
 		return sqlSession.update("productMapper.deletedProduct", p_Id);
 	}
@@ -57,6 +54,27 @@ public class ProductDAO {
 	public int updatePsell2(int p_Id) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("productMapper.updatePsell2",p_Id);
+	}
+
+	//============================================= 등록 추가
+	
+	public int inProduct(Product p) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("productMapper.inProduct",p);
+	}
+
+	public int inPicture(ArrayList<PictureList> pList) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		for(int i = 0; i < pList.size(); i++) {
+			if(i == 0) {
+				result = sqlSession.insert("productMapper.insertMain",pList.get(0));
+			}else {
+				result = sqlSession.insert("productMapper.insertSub",pList.get(i));
+			}
+		}
+		
+		return result;
 	}
 	
 }

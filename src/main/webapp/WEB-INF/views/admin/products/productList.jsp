@@ -134,7 +134,7 @@
 											<td class="pp">${ p.p_price }</td>										
 											<td class="pp">${ p.p_lunchtype }</td>
 											<td class="pp">${ p.p_quantity }</td>
-											<td class="pp"></td><!-- 판매 수량 -->
+											<td class="pp">${ p.p_count }</td><!-- 판매 수량 -->
 											<td class="py deleted" id="de${num.count }"  onclick="deleted( ${num.count} ,${p.p_Id} );">[삭제]</td>
 										</tr>  
 									 </c:forEach> 
@@ -206,7 +206,7 @@
 					$tdplunchtype = $("<td class='pp'>").text(decodeURIComponent(data[i].p_lunchtype.replace(/\+/g, " ")));
 					$tdquantity = $("<td class='pp'>").text(data[i].p_quantity);
 					
-					$tdpcount =$("<td class='pp'>").text("");
+					$tdpcount =$("<td class='pp'>").text(data[i].p_count);
 					$tddelete = $("<td class='py deleted' id='de' onclick='deleted(" + count + "," + data[i].p_Id + ");'>").text("[삭제]");
 					
 					count = count +1;
