@@ -41,6 +41,20 @@ where userid = #{loginUserId} -->
 	where cno = #{cNo}
 	
 	</delete>
+	
+	
+	<select id="cartPaymentList" resultType="Cart" parameterType="map">
+	
+	select *
+	from cart
+	where cno in
+	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
+	#{tArr}
+	</foreach>
+
+	
+	
+	</select>
 
 
 </mapper>
