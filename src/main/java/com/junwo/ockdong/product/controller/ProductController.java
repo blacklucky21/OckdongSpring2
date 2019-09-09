@@ -97,7 +97,7 @@ public class ProductController {
 				for (int i = 0; i < size; i++) {
 					pt = new PictureList();
 				pt.setPt_realName(list.get(i).getOriginalFilename());
-				pt.setPt_naem(renameList.get(i));
+				pt.setPt_name(renameList.get(i));
 					
 				System.out.println("origin 이름 : " +  pt.getPt_realName());
 				if(i == 0) {
@@ -277,7 +277,7 @@ public class ProductController {
 			  
 			  ArrayList<PictureList> pt = pService.selectPt(p_Id);
 			  for(int i = 0; i < pt.size(); i++) {
-			  System.out.println("컨트롤러 사진 정보 : " + pt.toString());
+			  System.out.println("컨트롤러 사진 정보 : " + pt.get(i).toString());
 			  }			  
 			  mv.addObject("p",p);
 			  mv.addObject("pt",pt);
@@ -295,8 +295,18 @@ public class ProductController {
 			  */
 			  
 			  return mv;
-			  
 		  }
 		  
+		  @RequestMapping("updatePo.do")
+		  public String updatepo(@ModelAttribute Product p,
+										  @RequestParam(value="thumbnailImg1") MultipartFile thumbnailImg1 ,
+										  @RequestParam(value="thumbnailImg2" , required=false) MultipartFile thumbnailImg2 ,
+										  @RequestParam(value="thumbnailImg3" , required=false) MultipartFile thumbnailImg3 ,
+										  @RequestParam(value="thumbnailImg4" , required=false) MultipartFile thumbnailImg4 ,
+										  @RequestParam("p_lunchtype") String p_lunchtype,
+										  HttpServletRequest request) {
+				return p_lunchtype;
+			  
+		  }
 		  
 }

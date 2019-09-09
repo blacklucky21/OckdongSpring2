@@ -22,7 +22,7 @@
 		<c:import url="../adminheader.jsp" />
 			<div id="content"> <!-- 전체 범위  -->
 				<div class="content"><!-- nav 제외 범위 -->
-				<form action="Pupdate.do" method="post" enctype="Multipart/form-data" id="location">
+				<form action="updatePo.do" method="post" enctype="Multipart/form-data" id="location">
 				<!-- 상품 제목 -->
 					<div class="page_title_wrap">
 						<div class="page_tit">상품 수정</div>
@@ -81,11 +81,16 @@
 							
 							<tr class="heim">
 								<th class="head one">상품 이미지</th>
-								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 88px; hegith:88px;"><span id="m1">대표이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s1">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s2">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s3">추가이미지</span></div></td>
-								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
+								
+								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/products/${ pt[0].pt_name } " style="width: 88px; hegith:55px;"><span id="m1">대표이미지</span></div></td>
+								
+								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/products/${ pt[1].pt_name }  " style="width: 88px; hegith:55px;"><span id="s1">추가이미지</span></div></td>
+								
+								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/products/${ pt[2].pt_name }  " style="width: 88px; hegith:55px;"><span id="s2">추가이미지</span></div></td>
+								
+								
+								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/products/${ pt[3].pt_name }  " style="width: 88px; hegith:55px;"><span id="s3">추가이미지</span></div></td>
+							
 							</tr>
 							
 							<tr style="height: 364px;">

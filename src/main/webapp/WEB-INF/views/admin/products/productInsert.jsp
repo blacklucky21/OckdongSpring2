@@ -65,13 +65,12 @@
 							
 							<tr class="heim">
 								<th class="head one">상품 이미지</th>
-								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 88px; hegith:88px;"><span id="m1">대표이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s1">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s2">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s3">추가이미지</span></div></td>
+								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 100%; height: 80%;"><span id="m1">대표이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s1">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s2">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s3">추가이미지</span></div></td>
 								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
 							</tr>
-							
 							<tr style="height: 364px;">
 								<th class="head" >상품 상세</th>
 								<td class="sub"><div><textarea rows="" cols="" name="p_content"></textarea></div></td>
@@ -138,27 +137,30 @@ function LoadImg(value, num) {
 			switch (num) {
 			case 1:
 				$("#titleImgArea").prop("src", e.target.result);
+				$('#m1').html("삭제");
 				break;
 			case 2:
 				$("#contentImgArea1").prop("src", e.target.result);
+				$('#s1').html("삭제");
 				break;
 			case 3:
 				$("#contentImgArea2").prop("src", e.target.result);
+				$('#s2').html("삭제");
 				break;
 			case 4:
 				$("#contentImgArea3").prop("src", e.target.result);
+				$('#s3').html("삭제");
 				break;
 			}
 		}
 
 		reader.readAsDataURL(value.files[0]);
+		
 	}
 }
 
-// 등록 버튼이 눌렷을대 작동 하기
-function check(){
-	
-}
+// 사진 등록 되면
+
 
 
 
