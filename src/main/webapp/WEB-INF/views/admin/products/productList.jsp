@@ -40,9 +40,9 @@
 				<table class="ncp_tbl">
 					<tbody>		
 						<tr>
-							<td>전체 ${ list.size() } 건</td>
-							<td>판매중 ${ list2.size() } 건</td>
-							<td>품절 건</td>
+							<td>전체 <span class="l1">${ list.size() }</span> 건</td>
+							<td>판매중 <span class="l2">${ list2.size() }</span> 건</td>
+							<td>품절 건 </td>
 						</tr>
 					</tbody>
 				</table>
@@ -77,7 +77,7 @@
 <!-- 리스트 윗 부분 끝 -->
 				<div class="content_bottom">
 					<p>
-						검색 결과 <span>${ list.size() }</span>건
+						검색 결과 <span class="countSpan">${ list.size() }</span>건
 					</p>
 			
 					<!-- 상품 번호 p_Id -->
@@ -173,11 +173,13 @@
 					
 					var list = data;
 				 	if(data.length > 0){
+				 		$(".countSpan").empty();
+				 		$(".countSpan").text(data.length);
 				 		$(".list_content").empty(); // tobody 가 비움
 						var count = 1;
 						for(var i in data){
 							
-					$tr = $("<tr class='list'" + count +  ">");
+					$tr = $("<tr class='list" + count +  "'>");
 					$tdNo = $("<td class='py' id='py'>").text(data[i].p_Id);
 					$tdpname = $("<td class='pp'>").text(decodeURIComponent(data[i].p_name.replace(/\+/g, " ")));
 					
@@ -262,11 +264,33 @@ function deleted(listNum , p_Id){
  			data : {p_Id:p_Id},
  			type:"post",
  			success:function(data){
- 				$('.'+listNum).remove();
+ 				$('.list'+listNum).remove();
  				alert("상품을 삭제 했습니다.");
+ 				var count = $(".l1").html(); // html 태그의 안에 등록
+ 				 count = count - 1;
  				
+ 				var sell = $(".dd").html(); // 판매 중인지 구분한다.
  				
+ 				 if(sell == "판매중지"){
+ 					var count2 = $(".l2").html();
+ 					count2 = count2 - 1;
+ 					 
+ 					$(".l2").html(count2);
+ 				 }
  				
+ 				$(".l1").html(count);
+ 				
+ 				/* 
+ 					$(".l1").empty();
+ 					$(".l1").text(count); 
+ 				*/
+ 			/* 
+ 				$(".l2").empty();
+ 				$(".l2").text(count);
+ 			 */	
+ 			 
+ 			 	
+ 			 
  			}, error:function(data){
  				alert("삭제에 실패하였습니다.");
  			}

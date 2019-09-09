@@ -86,4 +86,45 @@
 	
 	
 <!-- 등록부분 2개로 ================================================================= -->	
+<select id="selectList8"  resultType = "hashmap">
+	<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  	left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y'
+		  order by P_CREATEDATE desc)
+		  where rownum < 9
+		 
+	 ]]>
+		  
+</select>
+
+
+<select id="pictureList" resultType = "hashmap">
+
+	<![CDATA[
+
+	select *
+	from (select *
+		  from PICTURELIST
+		  where PT_STATUS = 'Y' AND PT_TYPE = 0
+		  order by PT_CREATEDATE desc)
+		  where rownum < 9
+	 ]]>
+	
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

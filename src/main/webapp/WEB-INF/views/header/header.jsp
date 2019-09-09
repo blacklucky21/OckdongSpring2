@@ -52,7 +52,7 @@
 <div><a></a></div>
 <div><a href="">Lunch box of the month</a></div>
 <div><a></a></div>
-<div><a href="">Regular delivery</a></div>
+<div><a href="test.do">Regular delivery</a></div>
 <div><a></a></div>
 </div>
 </li>
