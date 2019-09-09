@@ -75,7 +75,6 @@ public class ProductController {
 			
 			// 사진을 list 에 담아서 처리 한다.  추가후
 			ArrayList<MultipartFile> list = new ArrayList<MultipartFile>(size);
-			
 			list.add(thumbnailImg1); // 메인
 			list.add(thumbnailImg2); // 서브들
 			list.add(thumbnailImg3);
@@ -169,9 +168,10 @@ public class ProductController {
 				  String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + '.' +
 						  							originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 				  
-				  String renamePath = folder + "\\" + renameFileName; // 경로에 변경된 이름 저장한다.
+				  
+				  String renamePath = folder + "\\"+ renameFileName; // 경로에 변경된 이름 저장한다.
 				  // 넘어온 파일을 리스트로 저장
-				  renamePaths.add(renamePath);
+				  renamePaths.add(renameFileName);
 					
 				  System.out.println("이름 변경 된거 확인: " + renamePaths.get(i));
 				  try {
@@ -225,6 +225,7 @@ public class ProductController {
 			  
 			  int result = pService.deleteProduct(p_Id);
 			  
+			  
 			  if(result > 0) {
 				  System.out.println("삭제 완료");
 				  return "success";
@@ -240,9 +241,11 @@ public class ProductController {
 			  System.out.println("넘어온 값 : " + p_Id);
 			  System.out.println("컨트롤에서 판매상태 값 : " + selected);
 			  int result = 0;
+			  // 상태가 판매 중지 일때
 			  if(selected.equals("판매중지")) {
 				  result = pService.updatePsell(p_Id);
 			  }else {
+				  // 판매중 일때
 				  result = pService.updatePsell2(p_Id);
 			  }
 			  if(result > 0) {
@@ -253,6 +256,13 @@ public class ProductController {
 			  
 		  }
 		  
-		  
-		  
+	/*
+	 * @RequestMapping("startdo.do") public ModelAndView test(ModelAndView mv) {
+	 * 
+	 * System.out.println("1"); ArrayList pList = pService.selectList8(1); // 판매중인
+	 * 상품만 가지고 오기
+	 * System.out.println("===================== 메인 =======================");
+	 * mv.addObject("pList", pList); mv.setViewName("Main"); return mv; }
+	 * 
+	 */
 }
