@@ -1,7 +1,5 @@
 package com.junwo.ockdong.common;
 
-import com.junwo.ockdong.notice.model.vo.PageInfo;
-
 public class PaginationComment {
 	//페이징 처리하는 메소드
 	public static PageInfo getPageInfo(int currentPage, int listCount){
