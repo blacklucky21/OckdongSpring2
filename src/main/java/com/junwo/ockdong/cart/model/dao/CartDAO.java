@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.cart.model.vo.Cart;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
 
 @Repository("cDAO")
 public class CartDAO {
@@ -37,6 +38,12 @@ public class CartDAO {
 	public ArrayList<Cart> cartPayment(HashMap<String, String[]> totalMap) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("cartMapper.cartPaymentList",totalMap);
+	}
+
+
+	public int insertPayment(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cartMapper.insertPayment",totalMap);
 	}
 
 

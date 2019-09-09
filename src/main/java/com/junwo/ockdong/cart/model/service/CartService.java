@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.junwo.ockdong.cart.model.vo.Cart;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
 
 public interface CartService {
 
@@ -14,6 +15,8 @@ public interface CartService {
 	int deleteCart(String cNo);
 
 	ArrayList<Cart> CartPayment(HashMap<String, String[]> totalMap);
+
+	int insertPayment(HashMap<String, String[]> totalMap);
 
 
 
