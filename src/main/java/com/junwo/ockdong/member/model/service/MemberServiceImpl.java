@@ -99,6 +99,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int deleteMember(String userId) {
+		return mDAO.deleteMember(userId);
+	}
+
+
 
 
 

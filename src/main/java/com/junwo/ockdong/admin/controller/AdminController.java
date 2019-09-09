@@ -96,8 +96,17 @@ public class AdminController {
 
 	// 메인 화면 로고 누르면 메인 화면으로 이동한다.
 	@RequestMapping("main.do")
-	public String main() {
-		return "Main";
+	public ModelAndView main(ModelAndView mv) {
+		mv = new ModelAndView();
+		
+		System.out.println("1");
+		ArrayList pList = pService.selectList8(1); // 판매중인 상품만 가지고 오기
+		System.out.println("===================== 메인 =======================");
+		mv.addObject("pList", pList);
+		
+		mv.setViewName("Main");
+
+		return mv;
 	}
 
 	// 나만의 도시락 관리 페이지
@@ -514,9 +523,7 @@ public class AdminController {
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.setViewName("admin/Member/adminBlackList");
-
 		} else {
-
 		}
 
 		return mv;

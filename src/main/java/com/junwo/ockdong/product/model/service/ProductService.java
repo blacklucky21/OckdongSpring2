@@ -1,7 +1,6 @@
 package com.junwo.ockdong.product.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.junwo.ockdong.common.PageInfo;
@@ -35,6 +34,11 @@ public interface ProductService {
 	int inProduct(Product p);
 
 	int inPicture(ArrayList<PictureList> pList);
+
+	// 메인 화면 리스트 8개 가지고 가기
+
+	ArrayList selectList8(int i);
+
 
 
 

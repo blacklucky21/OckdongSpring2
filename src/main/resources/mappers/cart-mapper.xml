@@ -55,6 +55,20 @@ where userid = #{loginUserId} -->
 	
 	
 	</select>
+	
+	<select id="insertPayment" parameterType="map">
+	
+	
+INSERT INTO PAYMENT_PRODUCT( PNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID)
+SELECT SEQ_PRODUCT.NEXTVAL AS PNO,CNAME,CAMOUNT,CPRICE,CCREATEDATE,ID
+FROM CART
+WHERE CNO in
+	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
+	#{tArr}
+	</foreach>
+	
+	
+	</select>
 
 
 </mapper>
