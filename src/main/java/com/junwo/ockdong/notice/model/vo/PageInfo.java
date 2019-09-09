@@ -1,13 +1,13 @@
 package com.junwo.ockdong.notice.model.vo;
 
 public class PageInfo implements java.io.Serializable{
-	private int currentPage;
-	private int listCount;
-	private int pageLimit;
-	private int maxPage;
-	private int startPage;
-	private int endPage;
-	private int boardLimit;
+	private int currentPage; // 현재 페이지
+	private int listCount; // 총 페이지
+	private int pageLimit; // 한번에 보여줄 페이지 수
+	private int maxPage; // 전체 페이징 마지막 페이지
+	private int startPage; // 현재 페이지에서 보여질 페이징의 시작점
+	private int endPage; // 현재 페이지에서 보여질 게시글 최대 개수
+	private int boardLimit; // 딱히 없어도 문제 x
 	
 	public PageInfo() {}
 

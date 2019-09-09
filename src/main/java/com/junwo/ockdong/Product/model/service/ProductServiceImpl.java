@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.junwo.ockdong.Product.model.dao.ProductDAO;
 import com.junwo.ockdong.Product.model.vo.Product;
-import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.notice.model.vo.PageInfo;
 
 @Service("pService")
 public class ProductServiceImpl implements ProductService{
@@ -32,6 +32,5 @@ public class ProductServiceImpl implements ProductService{
 	public int insertProduct(Product p, ArrayList<MultipartFile> list) {
 		return pDAO.insertProduct(p,list);
 	}
-	
 
 }
