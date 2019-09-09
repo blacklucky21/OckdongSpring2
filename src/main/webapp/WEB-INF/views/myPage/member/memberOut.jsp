@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.junwo.ockdong.member.model.vo.Member"%>
-<%
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,23 +18,26 @@
 			<div class='figure'>
 				<div class="center_top_title" align="left">회원 탈퇴</div>
 				<div>
-					<div class='nth-child1'>회원아이디</div>
+					<div class='nth-child1'>
+						회원아이디<br>
+						<span>'${loginUser.getUserId() }'</span>
+					</div>
 					<div class='nth-child2'>
-						<input name="userId" class='info_input bg_f3f4f6'
-							 type='text' value="${ loginUser.getUserId() }" readonly/>
+						<c:url var="mdelete" value="mdelete.me">
+							<c:param name = "userId" value="${ loginUser.getUserId() }"/>
+						</c:url>
 					</div>
 				</div>
 				<div>
 					<div class='nth-child1 '>비밀번호 입력</div>
 					<div class='nth-child2'>
-						<input name="userPwd" id="userPwd" class='info_input red_focus' type='password' maxlength="16" />
+						<input name="password" id="password" class='info_input red_focus' type='password' maxlength="16" />
 					</div>
 				</div>
 				<div>
 					<div class='nth-child1 '>비밀번호 확인</div>
 					<div class='nth-child2'>
-						<input name="userPwd2" id="userPwd2" class='info_input red_focus'
-							type='password' maxlength="16" />
+						<input name="password2" id="password2" class='info_input red_focus' type='password' maxlength="16" />
 					</div>
 				</div>
 			</div>
@@ -49,21 +51,19 @@
 	<script>
 		function ByeBye(){
 
-		   if($('#userPwd').val()==""){
+		   if($('#password').val()==""){
 			    alert("비밀번호를 입력 해 주세요");
-			    $('#userPwd').focus();
+			    $('#password').focus();
 			    return;	
-		   }else if($('#userPwd2').val() != $('#userPwd').val()){
+		   }else if($('#password2').val() != $('#password').val()){
 			    alert("입력하신 비밀번호를 확인 해 주세요");
-			    $('#userPwd2').focus();
+			    $('#password2').focus();
 			    return;
 		   }else{
 			   	var trueBye = confirm("정말 탈퇴하시겠습니까?");
 			   
 			    if(trueBye == true){
-			   
-			    $("#MemberOutForm").submit();
-				  
+			    	location.href="${ mdelete }"
 			    }
 		   }
 

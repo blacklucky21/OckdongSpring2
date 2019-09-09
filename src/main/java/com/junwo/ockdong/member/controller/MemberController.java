@@ -111,4 +111,20 @@ public class MemberController {
 
 	}
 	
+	// 회원탈퇴 화면 이동
+	@RequestMapping("MemberOut.me")
+	public String memberOutView() {
+		return "myPage/member/myPage2";
+	}
+	// 회원탈퇴 눌렀을 경우
+	@RequestMapping("mdelete.me")
+	public String deleteMember(@RequestParam("userId") String userId, SessionStatus status) {
+		int result = mService.deleteMember(userId);
+		
+		if(result > 0) {
+			return "redirect:logout.me";
+		}else {
+			throw new MemberException("회원 탈퇴에 실패하였습니다.");
+		}
+	}
 }

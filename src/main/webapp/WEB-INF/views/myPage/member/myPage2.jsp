@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -18,12 +19,12 @@
 </head>
 <body>
 
-	<c:import url="../header/header.jsp" />
+	<c:import url="../../header/header.jsp" />
 	<div class="bodyArea">
-		<c:import url="../myPage/myPageLeft.jsp" />
-		<c:import url="../myPage/memberOut.jsp" />
+		<c:import url="../member/myPageLeft.jsp" />
+		<c:import url="../member/memberOut.jsp" />
 	</div>
-	<c:import url="../footer/footer.jsp" />
+	<c:import url="../../footer/footer.jsp" />
 
 </body>
 </html>

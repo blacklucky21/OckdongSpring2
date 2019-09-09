@@ -19,8 +19,6 @@
 			<div class="text"
 				onclick="location.href='view_history.me'">구매내역</div>
 			<br>
-			<div class="text" onclick="location.href='SelectCartList.swy'">장바구니</div>
-			<br>
 			<div class="text"
 				onclick="location.href='ReviewServlet.bo'">내가 쓴 게시물</div>
 			<br>
