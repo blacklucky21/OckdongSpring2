@@ -73,14 +73,14 @@
 <!-- 메인 사진 -->
 <insert id="insertMain"  parameterType="PictureList">
 	insert into pictureList
-	values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
+	values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
 
 
 </insert>
 
 <insert id="insertSub" parameterType="PictureList">
 	insert into PictureList
-		values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
+		values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
 </insert>
 
 	
