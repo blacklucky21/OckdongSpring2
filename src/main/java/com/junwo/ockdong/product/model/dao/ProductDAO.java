@@ -87,6 +87,20 @@ public class ProductDAO {
 	public ArrayList pictureList() {
 		return (ArrayList)sqlSession.selectList("productMapper.pictureList");
 	}
+
+	public ArrayList<Product> selectUpdate(int p_Id) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("productMapper.selectUpdate");
+	}
+
+	// 객체 정보를 가지고 오기
+	public Product selectProduct(int p_Id) {
+		return sqlSession.selectOne("productMapper.updateProduct",p_Id);
+	}
+
+	public ArrayList<PictureList> selectPt(int p_Id) {
+		return (ArrayList)sqlSession.selectList("productMapper.updatePicture",p_Id);
+	}
 	
 	
 }

@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.junwo.ockdong.cart.model.service.CartService;
 import com.junwo.ockdong.cart.model.vo.Cart;
-import com.junwo.ockdong.cart.model.vo.PayProduct;
 import com.junwo.ockdong.member.model.vo.Member;
 
 @SessionAttributes("loginUser")
@@ -111,7 +110,7 @@ public class CartController {
 
 	@RequestMapping("CartAllPayment.do")
 	public ModelAndView CartAll(@RequestParam("totalArr") String[] totalArr, ModelAndView mv,
-			HttpServletRequest request, HttpSession session) {
+	        HttpServletRequest request, HttpSession session) {
 
 		for (String i : totalArr) {
 
@@ -121,7 +120,6 @@ public class CartController {
 
 		Member m = (Member) session.getAttribute("loginUser");
 		String loginUserId = m.getUserId();
-		
 
 		HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
 
@@ -134,7 +132,7 @@ public class CartController {
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("member", m);
-	
+
 			mv.setViewName("Payment/CartPaymentView");
 
 		} else {
@@ -143,66 +141,59 @@ public class CartController {
 
 		return mv;
 	}
-	//결제 완료 리스트
-	@RequestMapping("adminPaymentList.do")
-	public ModelAndView adminPaymentList(ModelAndView mv,  @RequestParam("Arr") String[] Arr,HttpSession session) {
-
-	
-		System.out.println("dddd"+Arr);
-//		String[] arrList = list.split("cart ");
-//		String[] realList = new String[arrList.length-1];
-//		
-//		System.out.println("===============================================");
-//		for(int i = 1; i< arrList.length; i++) {
-//			System.out.println(arrList[i].split(","));
-//			
-//		}
-//		System.out.println("===============================================");
-//		
-//		for(int i = 0; i < realList.length; i++) {
-//			realList[i] = arrList[i + 1];
-//		}
-	
-		
-	
-//		System.out.println("dd" + m.getUserId());
-
-//		System.out.println("커트" + list);
-
-		/*
-		 * if (list != null) { mv.addObject("list", list); mv.addObject("member", m);
-		 * mv.setViewName("Payment/PaymentResultView");
-		 * 
-		 * } else {
-		 * 
-		 * }
-		 */
-	
-
-		Member m = (Member) session.getAttribute("loginUser");
-		String loginUserId = m.getUserId();
-		System.out.println("dd" + m.getUserId());
-
-		HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
-
-		totalMap.put("totalArr", Arr);
-
-		ArrayList<Cart> list = CartService.CartPayment(totalMap);
-
-		System.out.println("리스트크기"+list.size());
-
-		if (list != null) {
-			mv.addObject("list", list);
-			mv.addObject("member", m);
-	
-			mv.setViewName("Payment/PaymentResultView");
-
-		} else {}
-		
-	
-		int plist = CartService.insertPayment(totalMap);
-
-		return mv;
-	}
+	/*
+	 * //결제 완료 리스트
+	 * 
+	 * @RequestMapping("adminPaymentList.do") public ModelAndView
+	 * adminPaymentList(ModelAndView mv, @RequestParam("Arr") String[]
+	 * Arr,HttpSession session) {
+	 * 
+	 * 
+	 * System.out.println("dddd"+Arr); // String[] arrList = list.split("cart "); //
+	 * String[] realList = new String[arrList.length-1]; // //
+	 * System.out.println("==============================================="); //
+	 * for(int i = 1; i< arrList.length; i++) { //
+	 * System.out.println(arrList[i].split(",")); // // } //
+	 * System.out.println("==============================================="); // //
+	 * for(int i = 0; i < realList.length; i++) { // realList[i] = arrList[i + 1];
+	 * // }
+	 * 
+	 * 
+	 * 
+	 * // System.out.println("dd" + m.getUserId());
+	 * 
+	 * // System.out.println("커트" + list);
+	 * 
+	 * 
+	 * if (list != null) { mv.addObject("list", list); mv.addObject("member", m);
+	 * mv.setViewName("Payment/PaymentResultView");
+	 * 
+	 * } else {
+	 * 
+	 * }
+	 * 
+	 * 
+	 * 
+	 * Member m = (Member) session.getAttribute("loginUser"); String loginUserId =
+	 * m.getUserId(); System.out.println("dd" + m.getUserId());
+	 * 
+	 * HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
+	 * 
+	 * totalMap.put("totalArr", Arr);
+	 * 
+	 * ArrayList<Cart> list = CartService.CartPayment(totalMap);
+	 * 
+	 * System.out.println("리스트크기"+list.size());
+	 * 
+	 * if (list != null) { mv.addObject("list", list); mv.addObject("member", m);
+	 * 
+	 * mv.setViewName("Payment/PaymentResultView");
+	 * 
+	 * } else {}
+	 * 
+	 * 
+	 * int plist = CartService.insertPayment(totalMap);
+	 * 
+	 * return mv; }
+	 */
 }
-

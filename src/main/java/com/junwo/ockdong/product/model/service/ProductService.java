@@ -36,8 +36,19 @@ public interface ProductService {
 	int inPicture(ArrayList<PictureList> pList);
 
 	// 메인 화면 리스트 8개 가지고 가기
-
+	// 사진이랑 리스트 다 가지고 온다.
 	ArrayList selectList8(int i);
+
+
+	// 정보 담아오기
+	Product selectListUpdate(int p_Id);
+
+	// 사진 담아오기
+	ArrayList<PictureList> selectPt(int p_Id);
+
+
+
+	
 
 
 
