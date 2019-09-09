@@ -33,16 +33,16 @@
 					</div>
 				<!-- 제목 끝 -->
 				
-	<!-- 리스트 뽑기 -->
+	<!-- 리스트 뽑기  -->
 	<div class="listContent">
 		<div class="content_top">
 			<div class="products_summary search_tab">
 				<table class="ncp_tbl">
 					<tbody>		
 						<tr>
-							<td>전체<a></a>건</td>
-							<td>판매중<a></a>건</td>
-							<td>품절<a></a>건</td>
+							<td>전체 ${ list.size() } 건</td>
+							<td>판매중 ${ list2.size() } 건</td>
+							<td>품절 건</td>
 						</tr>
 					</tbody>
 				</table>
@@ -57,17 +57,17 @@
     					<th class="tg-0lax serarch_ti">검색어</th>
    						<th class="tg-0lax">
    							<span>
-   							<select id="select_code">
-   								<option>상품번호</option>
-   								<option>상품명</option>						
+   							<select id="select_code" name="searchForm">
+   								<option >상품번호</option>
+   								<option >상품명</option>						
    							</select>
    							</span>
-   							<span>	<input type="text" class="search_content"></span>
+   							<span>	<input type="text" id="search_Content" class="search_content" name="search_content" required></span>
    						</th>
    					
     					<td >
-    						<input type="button" value="검색" class="bu" id="se">
-    						<input type="button" value="초기화" class="bu" id="can">	
+    						<input type="button" value="검색" class="bu" id="se" onclick="searchIn();">
+    						<input type="button" value="초기화" class="bu" id="can" onclick="replyIn();">	
     					</td>
   					</tr>  					
 				</table>
@@ -77,8 +77,9 @@
 <!-- 리스트 윗 부분 끝 -->
 				<div class="content_bottom">
 					<p>
-						검색 결과 <span>3</span>건
+						검색 결과 <span>${ list.size() }</span>건
 					</p>
+			
 					<!-- 상품 번호 p_Id -->
 					<div class="list_bottom">
 						<div class="table_list">
@@ -90,37 +91,53 @@
 									<th>판매상태</th>
 									<th>판매상태설정</th>
 									<th>가격</th>
-									<th>수량</th>
+									
 									<th>카테고리</th>
 									<th>재고수량</th>
 									<th>판매수량</th>
 									<th>삭제</th>
 								</tr>
 								</thead>
+								
 								<tbody class="list_content">
 									<!-- 리스트 가져 오기 -->
-									
-									<c:forEach var="i" begin="1" end="30" varStatus="num">
-									
-							 			<tr class="list"+ ${num}>
-											<td class="py" id="py">${ i }</td>
-											<td class="pp">상품명이 이게 맞나?</td>
-											<td class="pp"></td>
+									<!-- list 크기 가져온 만큼 돌린다. 삭제 안됀 것만 가지고온다. -->
+								<c:forEach var='p' items="${ list }" varStatus="num"> 
+								
+										<tr class="list${num.count }">
+											<td class="py" id="py">${ p.p_Id}</td> <!-- 상품번호 -->
+											<td class="pp">${ p.p_name }</td> <!-- 상품명 -->
+											
+											<c:if test="${p.p_sell eq 'Y'}">
+											<td class="pp dd" id="result${p.p_Id}">판매중</td> <!-- 판매상태 -->
+											</c:if>
+											
+											<c:if test="${p.p_sell eq 'N'}">
+											<td class="pp dd" id="result${p.p_Id}">판매중지</td> <!-- 판매상태 -->
+											</c:if>
+											
+											<!-- ------------------------------------------------------------- -->
 											<td>
-												<select id="select">
-													<option id="yy">판매중</option>
-													<option id="nn">판매중지</option>
+												<select class="select" id="select${p.p_Id}" onchange="change(${p.p_Id});"> <!-- 판매상태 설정 -->
+													<c:if test="${p.p_sell eq 'Y'}">
+														<option value="판매중" selected>판매중</option>
+														<option value="판매중지">판매중지</option>
+													</c:if>
+													<c:if test="${p.p_sell eq 'N'}">
+														<option value="판매중">판매중</option>
+														<option value="판매중지" selected>판매중지</option>
+													</c:if>
 												</select>
 											</td>
-											<td class="pp">${ i }</td>
-											<td class="pp">${ i }</td>
-											<td class="pp">카테고리</td>
-											<td class="pp">${ i }</td>
-											<td class="pp">${ i }</td>
-											<td class="py" id="deleted" onclick="delete('list${num}');" >삭제</td>
+											<!-- ------------------------------------------------------------- -->
 											
+											<td class="pp">${ p.p_price }</td>										
+											<td class="pp">${ p.p_lunchtype }</td>
+											<td class="pp">${ p.p_quantity }</td>
+											<td class="pp">${ p.p_count }</td><!-- 판매 수량 -->
+											<td class="py deleted" id="de${num.count }"  onclick="deleted( ${num.count} ,${p.p_Id} );">[삭제]</td>
 										</tr>  
-									</c:forEach>
+									 </c:forEach> 
 									
 								</tbody>
 							</table>
@@ -128,13 +145,143 @@
 						</div>
 
 					</div>
+			
 				</div>
 				</div>
 
 				<!-- 전체 부위 끝 -->
 				</div>
 			</div>
+			
+				
 
 </body>
+<script>
+ 	function searchIn(){
+		
+ 		var sContent = $("#search_Content").val(); // 검색어
+ 		var select_code = $("#select_code").val(); // 내용 
+ 		
+ 		// 검색어가 등록돼지 않앗으면
+		if(sContent.length > 0){
+			$.ajax({
+				url : "searchProduct.do",
+				data : {sContent:sContent, type:select_code}, // 타입과 내용을 보낸다.
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					
+					var list = data;
+				 	if(data.length > 0){
+				 		$(".list_content").empty(); // tobody 가 비움
+						var count = 1;
+						for(var i in data){
+							
+					$tr = $("<tr class='list'" + count +  ">");
+					$tdNo = $("<td class='py' id='py'>").text(data[i].p_Id);
+					$tdpname = $("<td class='pp'>").text(decodeURIComponent(data[i].p_name.replace(/\+/g, " ")));
+					
+					// 판매 상태
+					if(data[i].p_sell == 'Y'){
+					$tdpsell = $("<td class='pp' id='result" + data[i].p_Id+"'>").text("판매중");
+						
+					}else{
+						$tdpsell = $("<td class='pp' id='result"+data[i].p_Id+"'>").text("판매중지");
+						
+					}
+			
+					// 판매 상태 변경
+					//$tdselect = $("<td> <select class='select' id='select" + data[i].p_pId + "' onclick=\"change("+ data[i].p_pId + ");\" >  ");
+					
+					if(data[i].p_sell == 'Y'){
+						$tdselect = $("<td>").html("<select class='select' id='select" + data[i].p_Id + "' onclick='change("+ data[i].p_Id + ");'><option value='판매중' selected>판매중</option><option value='판매중지'>판매중지</option></select>");
+					}else{
+						$tdselect = $("<td>").html("<select class='select' id='select" + data[i].p_Id + "' onclick='change("+ data[i].p_Id + ");'><option value='판매중'>판매중</option><option value='판매중지' selected>판매중지</option></select>");
+						
+					}
+					
+					
+					$tdpprice = $("<td class='pp'>").text(data[i].p_price);
+				
+					$tdplunchtype = $("<td class='pp'>").text(decodeURIComponent(data[i].p_lunchtype.replace(/\+/g, " ")));
+					$tdquantity = $("<td class='pp'>").text(data[i].p_quantity);
+					
+					$tdpcount =$("<td class='pp'>").text(data[i].p_count);
+					$tddelete = $("<td class='py deleted' id='de' onclick='deleted(" + count + "," + data[i].p_Id + ");'>").text("[삭제]");
+					
+					count = count +1;
+					
+					$tr.append($tdNo);
+					$tr.append($tdpname);
+					$tr.append($tdpsell);
+					$tr.append($tdselect);
+					$tr.append($tdpprice);
+					$tr.append($tdplunchtype);
+					$tr.append($tdquantity);
+					$tr.append($tdpcount);
+					$tr.append($tddelete);
+					$(".list_content").append($tr);
+					
+					} 
+					
+						}else{
+							alert("검색 결과가 없습니다.");
+						}
+					
+				}, error : function(data){
+					alert("검색 결과가 없습니다.");
+				}
+			});
+		}else{
+			alert("검색어를 입력해주세요.");
+		} 
+		 
+		
+		
+	}  
+ 	
+ 	// 초기화
+	function replyIn(){
+		location.href="productList.do";
+	}
+ 	
+// 삭제 버튼
+function deleted(listNum , p_Id){
+ 		
+	console.log("행 번호 : " + listNum);
+	console.log("상품 번호 : " + p_Id);
+	
+	
+	var key = confirm("선택한 상품을 삭제하겠습니까?");
+	
+	if(!key){
+		console.log("삭제안함");
+	}else{
+		$.ajax({
+ 			url: "deletedProduct.do",
+ 			data : {p_Id:p_Id},
+ 			type:"post",
+ 			success:function(data){
+ 				$('.'+listNum).remove();
+ 				alert("상품을 삭제 했습니다.");
+ 				
+ 				
+ 				
+ 			}, error:function(data){
+ 				alert("삭제에 실패하였습니다.");
+ 			}
+ 		});
+	}
+}
+	
+
+	
+
+ 	
+ 	
+	
+</script>
+
+
 
 </html>

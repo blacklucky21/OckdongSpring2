@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="resources/css/cart/CartView.css">
 <style>
 table {
 	border-collapse: collapse;
@@ -413,28 +415,24 @@ border-bottom:1px solid gray;
 				<thead>
 					<tr style="border: 0; background: gray;">
 						<th><span class="form-element"> <input type="checkbox"
-								id="allCheck-1" class="checkbox gd_checkbox_all SelectAll"
-								data-target-id="cartSno1_" data-target-form="#frmCart"
-								> <label for="allCheck-1"
+								id="allCheck-1" class="checkbox gd_checkbox_all SelectAll" checked="checked"> <label for="allCheck-1"
 								class="check-s on">전체선택</label>
 						</span></th>
 						<th>상품/옵션 정보</th>
 						<th>수량</th>
 						<th>상품금액</th>
-						<th></th>
+				<!-- 		<th></th> -->
 						<th>합계금액</th>
 						<th>배송비</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="i" begin="0" end="5" step="1">
-					<tr class="">
+					<c:forEach var="c" items="${list }" varStatus="cart">
+					<tr class="checkCart">
 						<td rowspan="2" class="ta-c cb-array"><span
 							class="form-element"> <input type="checkbox"
-								name="check" id="cartSno${i }" value= 3 class="checkbox"
-								 data-price="48500" data-mileage="0"
-								data-goodsdc="0" data-memberdc="0" data-coupondc="0"
-								data-possible="y" /> <label for="cartSno1_9" class="check-s on">선택</label>
+								name="check" id="cartSno${c.cNo}" value= '${c.cNo}' class="checkbox cartCheckBox"
+								/> <label for="cartSno1_9" class="check-s on">선택</label>
 						</span></td>
 						<td class="gi this-product"><span style="float: left;"><a
 								href="../goods/goods_view.php?goodsNo=1000000068"><img
@@ -446,45 +444,47 @@ border-bottom:1px solid gray;
 								<!-- <div id="coupon_apply_9">
                                     <button type="button" class="btn-alert-login"><img src="/data/skin/front/no85/img/btn/coupon-apply.png" alt="쿠폰적용"/></button>
                                 </div> -->
-								<a href="../goods/goods_view.php?goodsNo=1000000068">븅신도시락</a>
+								<a href="../goods/goods_view.php?goodsNo=1000000068">${c.cName }</a>
 
 
-								<dl>
+							<!-- 	<dl>
 									<dt>사이즈 :</dt>
 									<dd>55</dd>
 								</dl>
 								<dl>
 									<dt>색상 :</dt>
 									<dd>빨강</dd>
-								</dl>
+								</dl> -->
 
 							</div></td>
-						<td class="ta-c count this-product"><input type="text"
-							name="goodsCnt[]" value="1" title="수량" class="text"
-							data-stock-fl="n" data-total-stock="0" data-min-order-cnt="1"
-							data-max-order-cnt="0" data-sales-unit="1"
-							onchange="input_count_change(this,'1');return false;" />
+						<td class="ta-c count this-product"><input type="number" max="100"
+							name="goodsCnt[]" value="${c.cAmount}" title="수량" class="text cNo${c.cNo}"
+							 />
 							<button type="button"
-								class="normal-btn small1 js-goods-cnt-change" data-sno="9"
-								data-goodsno="1000000068">
+								class="normal-btn small1 js-goods-cnt-change" onclick="updateCartAmount(${c.cNo})">
 								<em>수정</em>
 							</button></td>
-						<td class="ta-c this-product"><strong class="price">48,500원
+						<td class="ta-c this-product CartAmount"><strong class="price">${c.cPrice}원
 						</strong>
 							<p class="add_currency"></p></td>
-						<td rowspan="2" class="benefits"></td>
-						<td rowspan="2" class="ta-c"><strong class="price">48,500원</strong>
+						<td rowspan="2" class="benefits" style="display:none">${c.cPrice *c.cAmount }</td>
+						<td rowspan="2" class="ta-c semiTotal" id="${c.cPrice *c.cAmount }" ><strong class="price">${c.cPrice *c.cAmount }원</strong>
 							<p class="add_currency"></p></td>
-						<td rowspan="2" class="ta-c"><span class="c-gray"> 기본
-								- 금액별배송비<br /> 2,500원
-						</span></td>
+						
+						<c:if test="${cart.count== 1}">
+						<td rowspan="${list.size()*2 }" class="ta-c">
+							 <span class="delivaryAmount"> 기본
+								 2,500원
+						</span> <br >  <span style="font-size:11px;">2만원 이상 주문시<br> 
+																	 배송비 무료!</span></td>
+						</c:if>
 					</tr>
-					<tr class="op">
+		<tr class="op">
 						<td colspan="3">
 							<div>
 								<a href="#optionViewLayer"
 									class="btn-open-layer btn-option-layer normal-btn small1 btn-op"
-									data-goodsno="1000000068" data-sno="9"><em>옵션변경</em></a>
+									data-goodsno="1000000068" data-sno="9"><em></em></a>
 							</div>
 						</td>
 					</tr>
@@ -503,8 +503,8 @@ border-bottom:1px solid gray;
 			<div class="price-box">
 				<div>
 					<p>
-						<span class="detail">총 <em id="totalGoodsCnt">2</em> 개의
-							상품금액 <strong id="totalGoodsPrice">97,000</strong>원
+						<span class="detail">총 <em id="totalGoodsCnt">${list.size()}</em> 개의
+							상품금액 <strong id="totalGoodsPrice">${c.cPrice * c.cAmount}</strong>원
 						</span> <span id="deliveryCalculateNone"><img
 							src="resources/img/etc/plus.png" alt="더하기">배송비 <strong
 							id="totalDeliveryCharge">0</strong>원</span> <span class="total"><img
@@ -523,7 +523,7 @@ border-bottom:1px solid gray;
 			<div class="btn-justify">
 				<div>
 					<button type="button" class="skinbtn default cart-cartdelete"
-						onclick="cart_process('cartDelete');" style="background: none">
+						onclick="cartDelete();" style="background: none">
 						<em>선택 상품 삭제</em>
 					</button>
 				</div>
@@ -533,7 +533,7 @@ border-bottom:1px solid gray;
 						<em>선택 상품 주문</em>
 					</button>
 					<button type="button" class="skinbtn point2 cart-orderall"
-						onclick="location.href='CartAllPayment.do'">
+						onclick="">
 						<em>전체 상품 주문</em>
 					</button>
 				</div>
@@ -608,20 +608,164 @@ border-bottom:1px solid gray;
 		
 	
 		$(document).ready(function() {
-
+			
+			var check;
+			var totalAmount = 0;
+			var delivary = 2500;
+			var count =0;
+		
+			$("input[name=check]").prop("checked", true);
+			
+			$("input[name=check]:checked").each(function() {
+				
+				check =$(this).parent().parent().parent().children().eq(4).text();
+				totalAmount += parseInt(check);
+		
+			});
+		
+			if(totalAmount>=20000){
+				$('.delivaryAmount').text('배송비 0원');
+				delivary=0;
+				}
+			
+			$('#totalDeliveryCharge').text(delivary);
+			$('#totalGoodsPrice').text(totalAmount);
+			$('#totalSettlePrice').text(totalAmount+delivary);
+			
 			//최상단 체크박스 클릭
 			$(".SelectAll").click(function() {
 				//클릭되었으면
+
 				if ($(".SelectAll").prop("checked")) {
 				
 					$("input[name=check]").prop("checked", true);
-					//클릭이 안되있으면
-				} else {
+					
+					$("input[name=check]:checked").each(function() {
+						count ++;
+						check =$(this).parent().parent().parent().children().eq(4).text();
+						totalAmount += parseInt(check);
 				
+					});
+				
+					if(totalAmount>=20000){
+						$('.delivaryAmount').text('배송비 0원');
+						delivary=0;
+						}
+					
+					
+					if(totalAmount ==0){
+						delivary =0;
+					}
+					
+					
+					$('#totalGoodsCnt').text(count);
+					$('#totalDeliveryCharge').text(delivary);
+					$('#totalGoodsPrice').text(totalAmount);
+					$('#totalSettlePrice').text(totalAmount+delivary);
+				
+				} else {
+					totalAmount = 0;
+					count =0;
 					$("input[name=check]").prop("checked", false);
+					$('#totalGoodsCnt').text(count);
+					$('#totalGoodsPrice').text(totalAmount);
+					$('#totalSettlePrice').text(totalAmount)
+					
 				}
 			});
 		});
+							 
+							 
+	function updateCartAmount(no){
+		
+
+		var amount = $('.cNo'+no).val();
+	
+		console.log(amount);
+
+		location.href="CartAmountUpdate.do?no="+no+"&amount="+amount;
+
+
+			
+	}
+	
+	function cartDelete(){
+		var cNo=null;
+	
+	
+		
+		$("input[name=check]:checked").each(function() {
+			
+		
+			cNo +=","+ $(this).val();
+	
+	
+		});
+		
+		console.log(cNo)
+		
+		location.href="CartDelete.del?cNo="+cNo;
+	
+	}
+	
+	
+	$("input[name=check]").change(function() {
+		
+		var check;
+		var totalAmount = 0;
+		var delivary = 2500;
+		var count =0;
+		$("input[name=check]:checked").each(function() {
+			
+			check =$(this).parent().parent().parent().children().eq(4).text();
+			totalAmount += parseInt(check);
+			console.log("check:"+ $(this).val());
+			console.log(check);
+			count ++;
+	
+		});
+		
+		console.log(totalAmount);
+		if(totalAmount>=20000){
+			$('.delivaryAmount').text('배송비 0원');
+			delivary=0;
+			}
+		if(totalAmount ==0){
+			delivary =0;
+		}
+		$('#totalGoodsCnt').text(count);
+		$('#totalDeliveryCharge').text(delivary);
+		$('#totalGoodsPrice').text(totalAmount);
+		$('#totalSettlePrice').text(totalAmount+delivary);
+	});
+	
+	$('.cart-orderall').click(function(){
+		
+		var totalArr = new Array();
+		var check =0;
+		console.log($('#totalSettlePrice').text());
+		
+		//location.href='CartAllPayment.do';
+		
+		$("input[name=check]:checked").each(function() {
+			
+			
+		 totalArr[check++] = $(this).val();
+		
+	
+		});
+		
+		
+		location.href='CartAllPayment.do?totalArr='+totalArr;
+
+		});
+	
+	
+
+							 
+							 
+							 	
+							 
 	</script>
 	
 

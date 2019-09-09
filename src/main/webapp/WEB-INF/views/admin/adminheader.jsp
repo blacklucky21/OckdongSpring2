@@ -75,8 +75,10 @@
         <li class="accor_has_sub">
           <strong class="menu_depth1">회원 관리</strong>
             <ul class="acc_subject">
-                <li><a href="#" class="menu_depth2">회원 리스트</a></li>
-                <li><a href="#" class="menu_depth2">탈퇴회원 리스트</a></li>
+                <li><a href="adminMemberList.do" class="menu_depth2">회원 리스트</a></li>
+                <li><a href="adminBlack.do" class="menu_depth2">블랙 리스트</a></li>
+                <li><a href="adminSecession2.do" class="menu_depth2">탈퇴회원 리스트</a></li>
+                
             </ul>
         </li>
         <li class="accor_has_sub">
@@ -103,7 +105,8 @@
           <strong class="menu_depth1">나만의 도시락</strong>
             <ul class="acc_subject">
                 <li><a href="mydo.do" class="menu_depth2">도시락 관리</a></li>
-                <li><a href="myIn" class="menu_depth2">재료 관리</a></li>
+                <li><a href="myIn.do" class="menu_depth2">재료 관리</a></li>
+                <li><a href="IngredientsInsert.do" class="menu_depth2">재료 등록</a></li>
             </ul>
         </li>
         

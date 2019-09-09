@@ -1,8 +1,34 @@
 package com.junwo.ockdong.myOwn.model.dao;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 
 @Repository
 public class MyOwnDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	public int insert(Ingredient in) {
+		return sqlSession.insert("myOwnMapper.insertIngredient", in);
+	}
+
+	public ArrayList<Ingredient> selectAll() {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.selectAll");
+	}
+
+	public int deleteIn(int inNo) {
+		return sqlSession.update("myOwnMapper.deleteIn", inNo);
+	}
+
+	public ArrayList<Ingredient> searchList(Map<String, String> search) {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.searchList", search);
+	}
 
 }

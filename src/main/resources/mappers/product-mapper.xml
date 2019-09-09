@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="productMapper">
+	<select id = "selectProductList" resultType="Product" >
+		select *
+		from PRODUCT
+		where P_STATUS ='Y'
+	</select>
+
+	<select id ="selectProductList1" resultType="Product">
+		select *
+		from PRODUCT
+		where p_STATUS = 'Y' and p_sell = 'Y'
+	</select>
+
+
+	<resultMap type="Product" id="ProductList">
+		<id property="p_Id" column ="P_ID"/>
+		<result property="p_name" column="P_NAME"/>
+		<result property="p_content" column="P_CONTENT"/>
+		<result property="p_createDate" column="P_CREATEDATE"/>
+		<result property="p_updateDate" column="P_UPDATEDATE"/>
+		<result property="p_like" column="P_LIKE"/>
+		<result property="p_quantity" column="P_QUANTITY"/>
+		<result property="p_lunchtype" column="P_LUNCHTYPE"/>
+		<result property="p_price" column="P_PRICE"/>
+		<result property="p_sell" column="P_SELL"/>
+		<result property="p_status" column="P_STATUS"/>
+		
+	</resultMap>
+	<!-- 상품 리스트 검색 -->
+	<select id="searchList" parameterType="map" resultMap="ProductList">
+		select *
+		from PRODUCT
+		where P_STATUS = 'Y'
+		<choose>
+			<when test="type.equals('상품번호')">
+				and P_ID like '%' || #{sContent} || '%'
+			</when>
+			<when test="type.equals('상품명')">
+				and P_NAME like '%' ||  #{sContent}|| '%'
+			</when>
+		</choose>
+		
+	</select>
+	
+	<update id="deletedProduct" parameterType="_int">
+		update product
+		set P_STATUS ='N'
+		where P_ID = #{p_Id}
+	</update>
+	
+	<!-- 상품 상태 변경 -->
+	<update id="updatePsell" parameterType="_int">
+		update product
+		set P_SELL ='N'
+		where P_ID = #{p_Id}
+	</update>
+	
+	<update id="updatePsell2" parameterType="_int">
+		update PRODUCT
+		set P_SELL = 'Y'
+		where P_ID =#{p_Id}
+	</update>
+	
+<!-- 등록부분 2개로 ================================================================= -->	
+<insert id="inProduct" parameterType="Product">
+	insert  into product 
+	values(SEQ_P_ID.nextval, #{p_name}, #{p_content}, SYSDATE,SYSDATE, default, #{p_quantity},  #{p_lunchtype} , #{p_price} ,default, default, default)
+			
+</insert>
+
+<!-- 메인 사진 -->
+<insert id="insertMain"  parameterType="PictureList">
+	insert into pictureList
+	values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
+
+
+</insert>
+
+<insert id="insertSub" parameterType="PictureList">
+	insert into PictureList
+		values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
+</insert>
+
+	
+	
+<!-- 등록부분 2개로 ================================================================= -->	
+</mapper>

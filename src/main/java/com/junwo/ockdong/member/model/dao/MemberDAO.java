@@ -1,5 +1,8 @@
 package com.junwo.ockdong.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,5 +23,51 @@ public class MemberDAO {
 	public Member memberLogin(Member m) {
 		return (Member)sqlSession.selectOne("memberMapper.loginMember", m);
 	}
+
+	public ArrayList<Member> memberSelectList2(HashMap<String, String> search) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList2",search);
+	}
+
+	public int memberListCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("memberMapper.selectListCount");
+	}
+
+	public ArrayList<Member> memberSelectList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList");
+	}
+
+	public ArrayList<Member> memberSecessionList(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberSecession",search);
+	}
+
+	public ArrayList<Member> memberScessionListFirst() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberSecession2");
+	}
+
+	public int deleteAdminMember(String memId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.deleteMemAdmin",memId);
+	}
+
+	public ArrayList<Member> BlackAdminList() {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.blackMemberList");
+	}
+
+	public ArrayList<Member> BlackListSearch(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("memberMapper.blackMemberSearch",search);
+	}
+
+	public int BlackListCancel(String memId) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("memberMapper.BlackListCancel",memId);
+	}
+
 	
 }

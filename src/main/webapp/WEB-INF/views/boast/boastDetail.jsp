@@ -138,16 +138,24 @@ a:link, a:visited {
 			</tr>
 			<tr>
 				<th scope="row">제목</th>
-				<td colspan="3">${map.TITLE }wwwwwwwwwwwwwwwwwwwwwww</td>
+				<td colspan="3">${map.TITLE }</td>
 			</tr>
 			<tr>
 				<td colspan="4">${map.CONTENTS }내용입니다.</td>
 			</tr>
 		</tbody>
 	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+	
 	<a href="#this" class="btn" id="list">목록으로</a>
 	<a href="#this" class="btn" id="update">수정하기</a>
 	<a href="#this" class="btn" id="delete">삭제하기</a>
+	
+	
 
 	<form id="frm">
 		<table class="board_view">
@@ -176,7 +184,7 @@ a:link, a:visited {
 				<tr>
 					<td colspan="2">
 						<div>
-							<textarea rows="5" cols="130" name="COM_CONTENTS" style="margin-left: 50px"></textarea>
+							<textarea rows="5" cols="130" name="COM_CONTENTS" style="margin-left: 50px; resize: none;"></textarea>
 							<p align="right">
 								<a href="#this" id="com_write" class="btn">등록</a>
 							</p>
