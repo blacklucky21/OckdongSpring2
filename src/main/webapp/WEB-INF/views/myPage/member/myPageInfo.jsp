@@ -57,8 +57,8 @@
 					<div class='nth-child2'>
 
 						<div>
-							<input type="text" name="post"  id="post" class="info_input sub_input1_1" readonly>
-							<input type="text" name="address2" id="address2" class="info_input sub_input1_2" readonly>
+							<input type="text" name="post"  id="post" class="info_input sub_input1_1">
+							<input type="text" name="address2" id="address2" class="info_input sub_input1_2">
 							<input type="text" name="address3" id="address3" class="info_input sub_input1_3">
 							<input type="text" name="address4" id="address4" class="info_input sub_input1_3">
 							
@@ -185,7 +185,7 @@
 			
 			$.ajax({
 				
-				url:"<%=request.getContextPath()%>/emailCheck.do",
+				url:"emailCheck.do",
 				data:{email:email},
 				type:"get",
 				success:function(data){

@@ -1,20 +1,13 @@
 package com.junwo.ockdong.notice.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
-
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.notice.model.dao.NoticeDAO;
-import com.junwo.ockdong.notice.model.exception.NoticeException;
 import com.junwo.ockdong.notice.model.vo.Notice;
-import com.junwo.ockdong.notice.model.vo.PageInfo;
 
 @Service("nService")
 public class NoticeServiceImpl implements NoticeService {

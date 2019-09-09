@@ -1,5 +1,6 @@
 package com.junwo.ockdong.common;
 
+
 import com.junwo.ockdong.notice.model.vo.PageInfo;
 
 public class Pagination {

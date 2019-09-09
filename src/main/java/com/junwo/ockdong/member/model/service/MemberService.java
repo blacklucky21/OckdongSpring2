@@ -53,6 +53,10 @@ public interface MemberService {
 
 
 
+	int deleteMember(String userId);
+
+
+
 
 	
 

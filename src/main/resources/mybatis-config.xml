@@ -18,6 +18,6 @@
 		<mapper resource="mappers/myown-mapper.xml"/>
 		<mapper resource="mappers/cart-mapper.xml"/>
 		<mapper resource="mappers/product-mapper.xml"/>
-		
+		<mapper resource="mappers/mypage-mapper.xml"/>
 	</mappers>
 </configuration>

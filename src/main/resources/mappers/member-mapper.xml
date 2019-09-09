@@ -167,7 +167,8 @@
 		where status ='N'
 		</select>
 
-	
+
+	<!-- 관리자 관점 회원 탈퇴 -->
 	<update id="deleteMemAdmin"  parameterType="string">
 	
 	update member
@@ -175,6 +176,14 @@
 	where userid = #{memId}
 	
 	</update>
+	
+	<!-- 회원 관점 탈퇴 -->
+	<update id="deleteMember" parameterType="string">
+		update member
+		set status = 'N'
+		where userId = #{USERID}
+	</update>
+	
 
 
 	<select id="blackMemberList"  resultType="Member" resultMap="memberResultSet">

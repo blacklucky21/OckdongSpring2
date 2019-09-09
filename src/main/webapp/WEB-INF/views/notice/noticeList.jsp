@@ -159,12 +159,11 @@ body {
 			</div>
 		</div>
 
-			<!-- <div>
+			<div>
 
-				<button type="button" class="btn btn-sm btn-primary"
-					id="btnWriteForm">글쓰기</button>
+				<button type="button" class="btn btn-sm btn-primary" id="boardWrite" onclick="location.href='boardWrite.do'">글쓰기</button>
 
-			</div> -->
+			</div> 
 			
 			<!-- 검색  -->
 			<form action="searchBoard.do" name="search" method="get" class="searchForm">

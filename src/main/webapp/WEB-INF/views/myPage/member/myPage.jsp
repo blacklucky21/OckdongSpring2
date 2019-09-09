@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -17,11 +18,11 @@
 </style>
 </head>
 <body>
-	<c:import url="../header/header.jsp" />
+	<c:import url="../../header/header.jsp" />
 	<div class="bodyArea">
-		<c:import url="../myPage/myPageLeft.jsp" />
-		<c:import url="../myPage/myPageInfo.jsp" />
+		<c:import url="../member/myPageLeft.jsp" />
+		<c:import url="../member/myPageInfo.jsp" />
 	</div>
-	<c:import url="../footer/footer.jsp" />
+	<c:import url="../../footer/footer.jsp" />
 </body>
 </html>

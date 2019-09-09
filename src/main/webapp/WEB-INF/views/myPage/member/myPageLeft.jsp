@@ -14,17 +14,15 @@
 		<div class="myMenu_left">
 
 			<br> <br>
-			<div class="text" onclick="location.href='views/mypage/member/myPage.jsp'">회원정보</div>
+			<div class="text" onclick="location.href='myPageView.me'">회원정보</div>
 			<br>
 			<div class="text"
-				onclick="location.href='<%= request.getContextPath() %>/view_history'">구매내역</div>
-			<br>
-			<div class="text" onclick="location.href='<%=request.getContextPath()%>/SelectCartList.swy'">장바구니</div>
+				onclick="location.href='view_history.me'">구매내역</div>
 			<br>
 			<div class="text"
-				onclick="location.href='<%=request.getContextPath()%>/ReviewServlet'">내가 쓴 게시물</div>
+				onclick="location.href='ReviewServlet.bo'">내가 쓴 게시물</div>
 			<br>
-			<div class="text" onclick="location.href='<%=request.getContextPath() %>/views/mypage/member/myPage2.jsp'">회원 탈퇴</div>
+			<div class="text" onclick="location.href='MemberOut.me'">회원 탈퇴</div>
 				
 				<br>
 				<br>
