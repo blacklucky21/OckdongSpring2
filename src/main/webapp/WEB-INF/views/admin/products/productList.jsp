@@ -105,7 +105,7 @@
 								<c:forEach var='p' items="${ list }" varStatus="num"> 
 								
 										<tr class="list${num.count }">
-											<td class="py" id="py">${ p.p_Id}</td> <!-- 상품번호 -->
+											<td class="py" id="py" onclick="updatePro(${p.p_Id});">${ p.p_Id}</td> <!-- 상품번호 -->
 											<td class="pp">${ p.p_name }</td> <!-- 상품명 -->
 											
 											<c:if test="${p.p_sell eq 'Y'}">
@@ -180,7 +180,7 @@
 						for(var i in data){
 							
 					$tr = $("<tr class='list" + count +  "'>");
-					$tdNo = $("<td class='py' id='py'>").text(data[i].p_Id);
+					$tdNo = $("<td class='py' id='py' onclick='updatePro("+data[i].p_Id +" );' >").text(data[i].p_Id);
 					$tdpname = $("<td class='pp'>").text(decodeURIComponent(data[i].p_name.replace(/\+/g, " ")));
 					
 					// 판매 상태
@@ -298,7 +298,9 @@ function deleted(listNum , p_Id){
 	}
 }
 	
-
+function updatePro(p_Id){
+	location.href="updatePro.do?p_Id="+p_Id;
+}
 	
 
  	

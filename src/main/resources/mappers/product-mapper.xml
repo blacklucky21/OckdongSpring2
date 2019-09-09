@@ -116,9 +116,18 @@
 	
 </select>
 
+<!-- 업데이트 사진 정보 가지고 가기 -->
+<select id="updateProduct" parameterType="_int" resultMap="ProductList">
+	select *
+	from PRODUCT
+	where P_ID = #{p_Id}
+</select>
 
-
-
+<select id="updatePicture" parameterType="_int" resultType="PictureList">
+	select *
+	from PICTURELIST
+	where PT_STATUS = 'Y' and  P_ID = #{p_Id}
+</select>
 
 
 

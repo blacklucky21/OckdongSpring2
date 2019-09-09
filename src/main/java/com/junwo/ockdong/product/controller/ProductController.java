@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -265,4 +266,37 @@ public class ProductController {
 	 * mv.addObject("pList", pList); mv.setViewName("Main"); return mv; }
 	 * 
 	 */
+		  // 업데이트 폼 상품을 수정 하겠다.
+		  @RequestMapping("updatePro.do")
+		  public ModelAndView updatePro(ModelAndView mv, @RequestParam("p_Id") int p_Id) {
+			  System.out.println("번호 잘넘어 오는지 확인 : "  + p_Id);
+			  
+			  Product p = pService.selectListUpdate(p_Id);
+			  System.out.println("=============================================");
+			  System.out.println("컨트롤러 상품 정보 : " + p.toString());
+			  
+			  ArrayList<PictureList> pt = pService.selectPt(p_Id);
+			  for(int i = 0; i < pt.size(); i++) {
+			  System.out.println("컨트롤러 사진 정보 : " + pt.toString());
+			  }			  
+			  mv.addObject("p",p);
+			  mv.addObject("pt",pt);
+			  mv.setViewName("admin/products/productUpdate");
+			  /* 
+			   	1. 뷰로 넘길 값이 Product 객체와 ArrayList이기 때문에 ModelAndView로 View로 넘기기
+			   	2. 뷰에 넘어온 값을 각 input 매칭 시키기
+			   	--------------------------업데이트 뷰 완성
+			   	
+			   	1. 뷰에서 controller로 넘어갈 때 (뷰에는 Product / PictureList 두 부분이 나뉘어져 있음)
+			   		해당 url을 처리할 메소드의 매개변수에 @ModelAttribute 사용해서 Product를
+			   		@RequestParam 이용해서 사진들을 넘겨주기 ==> 상품 등록 할 때에 대한 로직 참고
+			   	2. (spring 게시판 수정 부분 참고)
+			   		
+			  */
+			  
+			  return mv;
+			  
+		  }
+		  
+		  
 }

@@ -84,6 +84,12 @@ public class PictureList {
 		this.pt_type = pt_type;
 		this.pt_status = pt_status;
 	}
+	@Override
+	public String toString() {
+		return "PictureList [pt_Id=" + pt_Id + ", pt_realPath=" + pt_realPath + ", pt_naem=" + pt_naem
+		        + ", pt_realName=" + pt_realName + ", pt_createDate=" + pt_createDate + ", pt_updateDate="
+		        + pt_updateDate + ", p_Id=" + p_Id + ", pt_status=" + pt_status + ", pt_type=" + pt_type + "]";
+	}
 
 	
 	
