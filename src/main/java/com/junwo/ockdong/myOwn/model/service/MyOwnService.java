@@ -15,4 +15,8 @@ public interface MyOwnService {
 
 	ArrayList<Ingredient> searchList(Map<String, String> search);
 
+	Ingredient selectOne(int inNo);
+
+	int update(Ingredient in);
+
 }
