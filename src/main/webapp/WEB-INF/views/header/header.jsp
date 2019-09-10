@@ -52,7 +52,7 @@
 <div><a></a></div>
 <div><a href="">Lunch box of the month</a></div>
 <div><a></a></div>
-<div><a href="">Regular delivery</a></div>
+<div><a href="test.do">Regular delivery</a></div>
 <div><a></a></div>
 </div>
 </li>
@@ -211,6 +211,9 @@
     </li>
     <li  >
         <a href="myOwn4.do">나만의 도시락</a>
+    </li>
+    <li>
+    	<a href="blist.do">도시락 자랑하기</a>
     </li>
    
    

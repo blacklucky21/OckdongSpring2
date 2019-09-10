@@ -1,7 +1,6 @@
 package com.junwo.ockdong.product.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +80,40 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return pDAO.inPicture(pList);
 	}
+// ===================================================
+	// 메인에 상품과 사진 가지고 가기
 
+
+	@Override
+	public ArrayList selectList8(int i) {
+		ArrayList list = null;
+		if(i == 1) {
+			list = pDAO.selectList8();
+		}else {
+			list = pDAO.pictureList();
+		}
+		
+		return list;
+	}
+
+	// 객체를 담아올 정보
+	@Override
+	public Product selectListUpdate(int p_Id) {
+		// TODO Auto-generated method stub
+		return pDAO.selectProduct(p_Id);
+	}
+
+	// 사진을 담아올 정보
+	@Override
+	public ArrayList<PictureList> selectPt(int p_Id) {
+		return pDAO.selectPt(p_Id);
+	}
+
+
+
+
+
+	
+	
 
 }

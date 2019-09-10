@@ -31,4 +31,12 @@ public class MyOwnDAO {
 		return (ArrayList)sqlSession.selectList("myOwnMapper.searchList", search);
 	}
 
+	public Ingredient selectOne(int inNo) {
+		return sqlSession.selectOne("myOwnMapper.searchOne", inNo);
+	}
+
+	public int update(Ingredient in) {
+		return sqlSession.update("myOwnMapper.updateIn", in);
+	}
+
 }

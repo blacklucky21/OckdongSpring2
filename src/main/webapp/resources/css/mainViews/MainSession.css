@@ -43,7 +43,6 @@
 .products_list>.btn_more>span:hover, .info>.name>span:hover {
 	color: white;
 	text-shadow: 1px 1px #000, 2px 2px #000, 3px 3px #000;
-	
 	-webkit-transition: all 0.2s ease-out;
 	-moz-transition: all 0.2s ease-out;
 	-ms-transition: all 0.2s ease-out;
@@ -159,9 +158,9 @@
 }
 
 /* 라디오 버튼을 숨긴다. */
- input[type=radio]{
-	display:none;	
-} 
+input[type=radio] {
+	display: none;
+}
 
 .prd_basic {
 	float: left;
@@ -202,6 +201,10 @@
 
 .prd_basic .box .info .price .consumer {
 	float: right;
+}
+
+.consumer::after {
+	content: "원";
 }
 
 .prd_basic .box .preview {

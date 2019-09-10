@@ -137,7 +137,7 @@
 				});
 			});
 			function LoadImg(value) {
-				console.log()
+				console.log(value);
 				if (value.files && value.files[0]) {
 					var reader = new FileReader();
 
@@ -175,12 +175,13 @@
 				var inGram = $("#inGram").val();
 				var imgArea = $("#imgArea");
 				
-				if(inName != "" && inCategory != "" && inPrice != "" && inGram != "" && imgArea.attr("src") != ""){
+				if(inName != "" && inCategory != "" && inPrice != "" && inGram != "" && imgArea.attr("src") != "" && imgArea.attr("src") != "resources/img/myOwn/Plus-Add.png"){
 					console.log("inName : " + inName + ", inCategory : " + inCategory + ", inPrice : " + inPrice + ", inGram : " + inGram);
 					console.log("이미지 있음");
 					return true;
 				}
 				
+				alert("빈 칸이 있습니다. 전부 채워주세요...");
 				
 				return false;
 			}
@@ -197,6 +198,7 @@
 				value.src="resources/img/myOwn/Plus-Add.png";
 				console.log(value);
 				$("#imgArea").css("border","1px solid black");
+				$("#ingredientImg").val("");
 			}
 		</script>
 	</div><!-- warp 끝 -->

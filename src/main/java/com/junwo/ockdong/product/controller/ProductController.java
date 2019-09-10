@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -75,7 +76,6 @@ public class ProductController {
 			
 			// 사진을 list 에 담아서 처리 한다.  추가후
 			ArrayList<MultipartFile> list = new ArrayList<MultipartFile>(size);
-			
 			list.add(thumbnailImg1); // 메인
 			list.add(thumbnailImg2); // 서브들
 			list.add(thumbnailImg3);
@@ -97,7 +97,7 @@ public class ProductController {
 				for (int i = 0; i < size; i++) {
 					pt = new PictureList();
 				pt.setPt_realName(list.get(i).getOriginalFilename());
-				pt.setPt_naem(renameList.get(i));
+				pt.setPt_name(renameList.get(i));
 					
 				System.out.println("origin 이름 : " +  pt.getPt_realName());
 				if(i == 0) {
@@ -169,9 +169,10 @@ public class ProductController {
 				  String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + '.' +
 						  							originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 				  
-				  String renamePath = folder + "\\" + renameFileName; // 경로에 변경된 이름 저장한다.
+				  
+				  String renamePath = folder + "\\"+ renameFileName; // 경로에 변경된 이름 저장한다.
 				  // 넘어온 파일을 리스트로 저장
-				  renamePaths.add(renamePath);
+				  renamePaths.add(renameFileName);
 					
 				  System.out.println("이름 변경 된거 확인: " + renamePaths.get(i));
 				  try {
@@ -225,6 +226,7 @@ public class ProductController {
 			  
 			  int result = pService.deleteProduct(p_Id);
 			  
+			  
 			  if(result > 0) {
 				  System.out.println("삭제 완료");
 				  return "success";
@@ -240,9 +242,11 @@ public class ProductController {
 			  System.out.println("넘어온 값 : " + p_Id);
 			  System.out.println("컨트롤에서 판매상태 값 : " + selected);
 			  int result = 0;
+			  // 상태가 판매 중지 일때
 			  if(selected.equals("판매중지")) {
 				  result = pService.updatePsell(p_Id);
 			  }else {
+				  // 판매중 일때
 				  result = pService.updatePsell2(p_Id);
 			  }
 			  if(result > 0) {
@@ -253,6 +257,56 @@ public class ProductController {
 			  
 		  }
 		  
+	/*
+	 * @RequestMapping("startdo.do") public ModelAndView test(ModelAndView mv) {
+	 * 
+	 * System.out.println("1"); ArrayList pList = pService.selectList8(1); // 판매중인
+	 * 상품만 가지고 오기
+	 * System.out.println("===================== 메인 =======================");
+	 * mv.addObject("pList", pList); mv.setViewName("Main"); return mv; }
+	 * 
+	 */
+		  // 업데이트 폼 상품을 수정 하겠다.
+		  @RequestMapping("updatePro.do")
+		  public ModelAndView updatePro(ModelAndView mv, @RequestParam("p_Id") int p_Id) {
+			  System.out.println("번호 잘넘어 오는지 확인 : "  + p_Id);
+			  
+			  Product p = pService.selectListUpdate(p_Id);
+			  System.out.println("=============================================");
+			  System.out.println("컨트롤러 상품 정보 : " + p.toString());
+			  
+			  ArrayList<PictureList> pt = pService.selectPt(p_Id);
+			  for(int i = 0; i < pt.size(); i++) {
+			  System.out.println("컨트롤러 사진 정보 : " + pt.get(i).toString());
+			  }			  
+			  mv.addObject("p",p);
+			  mv.addObject("pt",pt);
+			  mv.setViewName("admin/products/productUpdate");
+			  /* 
+			   	1. 뷰로 넘길 값이 Product 객체와 ArrayList이기 때문에 ModelAndView로 View로 넘기기
+			   	2. 뷰에 넘어온 값을 각 input 매칭 시키기
+			   	--------------------------업데이트 뷰 완성
+			   	
+			   	1. 뷰에서 controller로 넘어갈 때 (뷰에는 Product / PictureList 두 부분이 나뉘어져 있음)
+			   		해당 url을 처리할 메소드의 매개변수에 @ModelAttribute 사용해서 Product를
+			   		@RequestParam 이용해서 사진들을 넘겨주기 ==> 상품 등록 할 때에 대한 로직 참고
+			   	2. (spring 게시판 수정 부분 참고)
+			   		
+			  */
+			  
+			  return mv;
+		  }
 		  
+		  @RequestMapping("updatePo.do")
+		  public String updatepo(@ModelAttribute Product p,
+										  @RequestParam(value="thumbnailImg1") MultipartFile thumbnailImg1 ,
+										  @RequestParam(value="thumbnailImg2" , required=false) MultipartFile thumbnailImg2 ,
+										  @RequestParam(value="thumbnailImg3" , required=false) MultipartFile thumbnailImg3 ,
+										  @RequestParam(value="thumbnailImg4" , required=false) MultipartFile thumbnailImg4 ,
+										  @RequestParam("p_lunchtype") String p_lunchtype,
+										  HttpServletRequest request) {
+				return p_lunchtype;
+			  
+		  }
 		  
 }

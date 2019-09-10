@@ -26,6 +26,9 @@
 .delBtn:hover{
 	cursor: pointer;
 }
+.detailBtn:hover{
+	cursor: pointer !important;
+}
 </style>
 </head>
 <body>
@@ -73,7 +76,7 @@
 				<!-- 리스트 윗 부분 끝 -->
 				<div class="content_bottom">
 					<p>
-						검색 결과 <span>${inList.size() }</span>건
+						검색 결과 <span class="countSpan">${inList.size() }</span>건
 					</p>
 					<!-- 상품 번호 p_Id -->
 					<div class="list_bottom">
@@ -85,8 +88,8 @@
 										<th>재료명</th>
 										<th>가격</th>
 										<th>용량(g)</th>
+										<th>타입</th>
 										<th>등록일</th>
-										<th>판매상태</th>
 										<th>삭제</th>
 									</tr>
 								</thead>
@@ -95,7 +98,7 @@
 									<c:forEach var="i" items="${inList }" varStatus="num">
 							 			<tr class="list${num.count}">
 											<td class="py" id="py">${ i.inNo }</td>
-											<td class="pp">${i.inName }</td>
+											<td class="pp detailBtn" onclick="detailBtn(${ i.inNo });">${i.inName }</td>
 											<td class="pp">${ i.inPrice }</td>
 											<td class="pp">${ i.inGram }</td>
 											<td class="pp">${ i.inType }</td>
@@ -126,6 +129,9 @@
 						success: function(data){
 							alert("삭제에 성공하였습니다.");
 							$('.'+listNum).remove();
+							var count = $(".countSpan").html();
+							count = count - 1;
+							$(".countSpan").html(count);
 						}, error: function(data){
 							alert("삭제에 실패하였습니다.");
 						}
@@ -145,16 +151,21 @@
 							success : function(data){
 								if(data.length > 0){
 									$(".list_content").empty();
+									/* $(".countSpan").empty();
+									$(".countSpan").text(data.length); */
+									$(".countSpan").html(data.length);
 									var count = 1;
 									for(var i in data){
-										$tr = $("<tr class='list'" + count + ">");
+										$tr = $("<tr class='list" + count + "'>");
 										$tdNo = $("<td class='py' id='py'>").text(data[i].inNo);
+										
+										
 	
 										console.log(data);
 										console.log(i);
 										console.log(data[i]);
 										
-										$tdName = $("<td class='pp'>").text(decodeURIComponent(data[i].inName.replace(/\+/g, " ")));
+										$tdName = $("<td class='pp detailBtn' onclick='detailBtn(" + data[i].inNo + ");'>").text(decodeURIComponent(data[i].inName.replace(/\+/g, " ")));
 										$tdPrice = $("<td class='pp'>").text(data[i].inPrice);
 										$tdGram = $("<td class='pp'>").text(data[i].inGram);
 										$tdType = $("<td class='pp'>").text(decodeURIComponent(data[i].inType.replace(/\+/g, " ")));
@@ -188,16 +199,11 @@
 				
 				
 				function replyIn(){
-					
-					$.ajax({
-						url : "searchAllIn.do",
-						type : "json",
-						success : function(data){
-							
-						}, error : function(data){
-							
-						}
-					});
+					location.href="myIn.do";
+				}
+				
+				function detailBtn(inNo){
+					location.href="myInDetail.do?inNo="+inNo;
 				}
 			</script>
 		</div>

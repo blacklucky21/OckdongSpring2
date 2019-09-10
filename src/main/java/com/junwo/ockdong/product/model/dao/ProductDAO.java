@@ -1,7 +1,6 @@
 package com.junwo.ockdong.product.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -63,6 +62,7 @@ public class ProductDAO {
 		return sqlSession.insert("productMapper.inProduct",p);
 	}
 
+	
 	public int inPicture(ArrayList<PictureList> pList) {
 		// TODO Auto-generated method stub
 		int result = 0;
@@ -76,5 +76,31 @@ public class ProductDAO {
 		
 		return result;
 	}
+	// 메인 게시판에 걸거 가지고 가기
+
+
+	public ArrayList selectList8() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("productMapper.selectList8");
+	}
+
+	public ArrayList pictureList() {
+		return (ArrayList)sqlSession.selectList("productMapper.pictureList");
+	}
+
+	public ArrayList<Product> selectUpdate(int p_Id) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("productMapper.selectUpdate");
+	}
+
+	// 객체 정보를 가지고 오기
+	public Product selectProduct(int p_Id) {
+		return sqlSession.selectOne("productMapper.updateProduct",p_Id);
+	}
+
+	public ArrayList<PictureList> selectPt(int p_Id) {
+		return (ArrayList)sqlSession.selectList("productMapper.updatePicture",p_Id);
+	}
+	
 	
 }

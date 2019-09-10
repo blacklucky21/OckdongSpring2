@@ -47,4 +47,16 @@
 		</choose>
 	</select>
 	
+	<select id="searchOne" parameterType="int" resultMap="IngredientAllList">
+		select *
+		from ingredients
+		where status = 'Y' and in_no = #{inNo}
+	</select>
+	
+	<update id="updateIn" parameterType="Ingredient">
+		update ingredients
+		set in_name=#{inName}, in_type=#{inType}, in_gram=#{inGram}, in_price=#{inPrice}, in_originalfile=#{inOriginalFile}, in_renamefile=#{inRenameFile}
+		where in_no = #{inNo} and status = 'Y'
+	</update>
+	
 </mapper>

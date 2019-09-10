@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -196,46 +198,47 @@
 	</div>
 	<div class="cate_box cate_box1">
 		<div class="top_title">
-			<p class="title">도시락</p>
+			<p class="title">신상품</p>
 			<p class="update">전 주 일주일 간의 데이터를 기준으로 매주 월요일 에 업데이트 됩니다.</p>
 		</div>
 
 	<div class="products_list">
-		<dl class="sort">
+	<!-- 	<dl class="sort">
 			<dt >가격대별 베스트</dt>
 			<dd class="active" ><div><input type = "radio" value="1"  name = "all"><span>전체</span></div></dd>
 			<dd class=""  ><div><input type = "radio" value="2"  name = ""><span>3만원 이하</span></div></dd>
 			<dd class="" ><div><input type = "radio" value="3"  name = ""><span>3만원 이상</span></div></dd>
 			<dd class=""  ><div><input type = "radio" value="4"  name = ""><span>5만원 </span></div></dd>
 		
-		</dl>
+		</dl> -->
 		<p class="btn_more">
 			<span class="detail_list"id="list1">더보기</span>
 		</p>
 		<ul class="prd_basic">
+		
 		<!-- 일단 임시로 6개 DB 넣으면 채울거 -->
-			<% for(int i =0; i < 8; i++){ %>
+		<c:forEach var="p" items="${ pList }">
 			<li>
 				<div class="box">
 					<div class="img">
-						<img src="resources/img/mainViews/111.jpg">
+						<img src="resources/img/products/${ p.PT_NAME }">
 					</div>
 					<div class="info">
 						<p class="name">
-							<span>제품이름 가지고 오기</span>
+							<span>${ p.P_NAME }</span>
 						</p>
 						<p class="price">
-						<span class="consumer">30000 원</span>
+						<span class="consumer">${p.P_PRICE }</span>
 						</p>
 						<p class="preview">
-							<span>좋아요 100</span>
-							<span class="sid">상품후기 100</span>
+							<span>좋아요 ${p.P_LIKE}</span>
+							
 							<span>상품문의 100</span>
 						</p>
 					</div>
 				</div>
 			</li>
-		<% } %>
+			</c:forEach>
 			
 		</ul>
 	</div>
@@ -263,9 +266,7 @@
 		<dl class="sort">
 			<dt >가격대별 베스트</dt>
 			<dd class="active" onclick="bestPrice('1002','',this); return false;">전체</dd>
-			<dd class=""  onclick="bestPrice('1002','',this); return false;">3만원 미만</dd>
-			<dd class=""  onclick="bestPrice('1002','',this); return false;">5만원 미만</dd>
-			<dd class=""  onclick="bestPrice('1002','',this); return false;">5만원 이상</dd>
+			
 		
 		</dl>
 		<p class="btn_more">
@@ -283,7 +284,7 @@
 							<span>제품이름 가지고 오기</span>
 						</p>
 						<p class="price">
-						<span class="consumer">30000 원</span>
+						<span class="consumer">30000</span>
 						</p>
 						<p class="preview">
 							<span>좋아요 100</span>
@@ -382,6 +383,25 @@ $('#slider').vmcSlider({
 		duration: 2000,
 		speed: 900
 	});
+	
+// 도시락 샐러드 게시판 시작하자마자 돌아라
+/* $(function(){
+	startdo();
+	startsal();
+	startwoo();
+});
+
+
+function startdo(){
+	$.ajax({
+		url : "startdo.do"
+		
+	});
+} */
+
+	
+	
+	
 </script>	
 	
 </body>

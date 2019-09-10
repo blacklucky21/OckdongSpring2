@@ -73,17 +73,67 @@
 <!-- 메인 사진 -->
 <insert id="insertMain"  parameterType="PictureList">
 	insert into pictureList
-	values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
+	values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
 
 
 </insert>
 
 <insert id="insertSub" parameterType="PictureList">
 	insert into PictureList
-		values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
+		values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
 </insert>
 
 	
 	
 <!-- 등록부분 2개로 ================================================================= -->	
+<select id="selectList8"  resultType = "hashmap">
+	<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  	left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y'
+		  order by P_CREATEDATE desc)
+		  where rownum < 9
+		 
+	 ]]>
+		  
+</select>
+
+
+<select id="pictureList" resultType = "hashmap">
+
+	<![CDATA[
+
+	select *
+	from (select *
+		  from PICTURELIST
+		  where PT_STATUS = 'Y' AND PT_TYPE = 0
+		  order by PT_CREATEDATE desc)
+		  where rownum < 9
+	 ]]>
+	
+</select>
+
+<!-- 업데이트 사진 정보 가지고 가기 -->
+<select id="updateProduct" parameterType="_int" resultMap="ProductList">
+	select *
+	from PRODUCT
+	where P_ID = #{p_Id}
+</select>
+
+<select id="updatePicture" parameterType="_int" resultType="PictureList">
+	select *
+	from PICTURELIST
+	where PT_STATUS = 'Y' and  P_ID = #{p_Id}
+</select>
+
+
+
+
+
+
+
+
 </mapper>

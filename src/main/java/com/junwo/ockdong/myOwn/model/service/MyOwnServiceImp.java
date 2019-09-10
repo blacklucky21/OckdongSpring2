@@ -35,4 +35,14 @@ public class MyOwnServiceImp implements MyOwnService{
 		return moDAO.searchList(search);
 	}
 
+	@Override
+	public Ingredient selectOne(int inNo) {
+		return moDAO.selectOne(inNo);
+	}
+
+	@Override
+	public int update(Ingredient in) {
+		return moDAO.update(in);
+	}
+
 }
