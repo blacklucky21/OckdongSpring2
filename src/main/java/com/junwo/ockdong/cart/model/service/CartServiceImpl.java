@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.cart.model.dao.CartDAO;
 import com.junwo.ockdong.cart.model.vo.Cart;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
+import com.junwo.ockdong.cart.model.vo.Payment;
 
 
 @Service("CartService")
@@ -42,6 +44,26 @@ public class CartServiceImpl implements CartService{
 		return cDAO.cartPayment(totalMap);
 	}
 
+	@Override
+	public int insertPayment(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return cDAO.insertPayment(totalMap);
+	}
+
+	@Override
+	public int PaymentInsertDB(Payment p) {
+		// TODO Auto-generated method stub
+		return cDAO.PaymentInsertDB(p);
+	}
+
+	@Override
+	public int delCartNum(HashMap<String, String[]> totalMap) {
+
+		return cDAO.delCartNum(totalMap);
+	}
+
+
+	
 
 
 }

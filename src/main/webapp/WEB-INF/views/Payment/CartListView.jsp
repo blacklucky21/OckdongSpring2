@@ -758,7 +758,7 @@ border-bottom:1px solid gray;
 		
 		location.href='CartAllPayment.do?totalArr='+totalArr;
 
-		});
+		});	
 	
 	
 

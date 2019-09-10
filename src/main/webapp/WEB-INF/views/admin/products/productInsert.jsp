@@ -15,7 +15,6 @@
 <!-- js 시작 -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/admin/productinsert.js"></script>
 
 </head>
 <body>
@@ -23,7 +22,7 @@
 		<c:import url="../adminheader.jsp" />
 			<div id="content"> <!-- 전체 범위  -->
 				<div class="content"><!-- nav 제외 범위 -->
-				<form action="insertP" method="post" enctype="Multipart/form-data" >
+				<form action="insertProduct.do" method="post" enctype="Multipart/form-data" >
 				<!-- 상품 제목 -->
 					<div class="page_title_wrap">
 						<div class="page_tit">상품 등록</div>
@@ -35,14 +34,14 @@
 					<div class="sub_top">
 						<table>
 							<tr>
-								<th class="head">상품명</th>
-								<td class="sub"><input type="text" name="pname" id="pname"></td>
+								<th class="head" >상품명</th>
+								<td class="sub"><input type="text" name="p_name" id="pname"  required></td>
 							</tr>
 							<tr>
 								<th class="head">카테고리</th>
-								<td class="sub">
-									<input type="radio" name="pcategory" id="pcategory" checked="checked" ><label>도시락</label>
-									<input type="radio" name="pcategory" id="pcategory" ><label>샐러드</label>
+								<td class="sub" >
+									<input type="radio" name="p_lunchtype" id="pcategory" checked="checked" value="도시락" ><label>도시락</label>
+									<input type="radio" name="p_lunchtype" id="pcategory" value="샐러드"><label>샐러드</label>
 								</td>
 							</tr>
 						</table>
@@ -57,25 +56,24 @@
 						<table>
 							<tr>
 								<th class="head">판매가</th>
-								<td class="sub mi"><input type="text" name="sell" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" >원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
+								<td class="sub mi"><input type="text" name="p_price" id="sell" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
 							</tr>
 							<tr>
-								<th class="head">재고 수량</th>
-								<th class="sub mi"><input type="text" name="Inventory" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">개</th>
+								<th class="head">상품 수량</th>
+								<th class="sub mi"><input type="text" name="p_quantity" id="Inventory" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" required >개</th>
 							</tr>
 							
 							<tr class="heim">
 								<th class="head one">상품 이미지</th>
-								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 88px; hegith:88px;"><span id="m1">대표이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s1">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s2">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 88px; hegith:88px;"><span id="s3">추가이미지</span></div></td>
+								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 100%; height: 80%;"><span id="m1">대표이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s1">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s2">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s3">추가이미지</span></div></td>
+								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
 							</tr>
-							
-							
 							<tr style="height: 364px;">
 								<th class="head" >상품 상세</th>
-								<td class="sub"><div><textarea rows="" cols="" ></textarea></div></td>
+								<td class="sub"><div><textarea rows="" cols="" name="p_content"></textarea></div></td>
 							</tr>
 						</table>
 					</div>
@@ -139,27 +137,30 @@ function LoadImg(value, num) {
 			switch (num) {
 			case 1:
 				$("#titleImgArea").prop("src", e.target.result);
+				$('#m1').html("삭제");
 				break;
 			case 2:
 				$("#contentImgArea1").prop("src", e.target.result);
+				$('#s1').html("삭제");
 				break;
 			case 3:
 				$("#contentImgArea2").prop("src", e.target.result);
+				$('#s2').html("삭제");
 				break;
 			case 4:
 				$("#contentImgArea3").prop("src", e.target.result);
+				$('#s3').html("삭제");
 				break;
 			}
 		}
 
 		reader.readAsDataURL(value.files[0]);
+		
 	}
 }
 
-// 등록 버튼이 눌렷을대 작동 하기
-function check(){
-	
-}
+// 사진 등록 되면
+
 
 
 

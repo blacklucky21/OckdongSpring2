@@ -1,6 +1,7 @@
 package com.junwo.ockdong.myOwn.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,22 @@ public class MyOwnDAO {
 
 	public ArrayList<Ingredient> selectAll() {
 		return (ArrayList)sqlSession.selectList("myOwnMapper.selectAll");
+	}
+
+	public int deleteIn(int inNo) {
+		return sqlSession.update("myOwnMapper.deleteIn", inNo);
+	}
+
+	public ArrayList<Ingredient> searchList(Map<String, String> search) {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.searchList", search);
+	}
+
+	public Ingredient selectOne(int inNo) {
+		return sqlSession.selectOne("myOwnMapper.searchOne", inNo);
+	}
+
+	public int update(Ingredient in) {
+		return sqlSession.update("myOwnMapper.updateIn", in);
 	}
 
 }

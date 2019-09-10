@@ -91,7 +91,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	
+
+	@Override
+	public int MemberListCount(char c) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int deleteMember(String userId) {
+		return mDAO.deleteMember(userId);
+	}
+
+
 
 
 
