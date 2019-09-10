@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.cart.model.vo.Cart;
 import com.junwo.ockdong.cart.model.vo.PayProduct;
+import com.junwo.ockdong.cart.model.vo.Payment;
 
 @Repository("cDAO")
 public class CartDAO {
@@ -44,6 +45,18 @@ public class CartDAO {
 	public int insertPayment(HashMap<String, String[]> totalMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("cartMapper.insertPayment",totalMap);
+	}
+
+
+	public int PaymentInsertDB(Payment p) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cartMapper.PaymentInsertDB",p);
+	}
+
+
+	public int delCartNum(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("cartMapper.delCartNum",totalMap);
 	}
 
 

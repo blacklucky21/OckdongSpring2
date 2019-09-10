@@ -59,8 +59,11 @@ where userid = #{loginUserId} -->
 	<select id="insertPayment" parameterType="map">
 	
 	
-INSERT INTO PAYMENT_PRODUCT( PNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID)
-SELECT SEQ_PRODUCT.NEXTVAL AS PNO,CNAME,CAMOUNT,CPRICE,CCREATEDATE,ID
+INSERT INTO PAYMENT_PRODUCT( PNO,PPNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID,TOTALPRICE)
+SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}</foreach> AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
+
+<foreach collection="total" item ="tt" index="index">#{tt}</foreach>
+ AS TOTALPRICE
 FROM CART
 WHERE CNO in
 	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
@@ -69,6 +72,25 @@ WHERE CNO in
 	
 	
 	</select>
+	
+	
+	<select id="PaymentInsertDB" parameterType="Payment">
+	
+INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{payphone},#{paycellphone},#{payemail},#{receiverName},#{receiverPhone},#{receiverCellPhone}
+,#{payprice},#{orderMemo},sysdate,#{delivaryDate},#{payrecipe},#{payaddress},default)
+	
+	</select>
+	
+	
+	<delete id="delCartNum" >
+	
+	DELETE FROM CART 
+	WHERE CNO IN
+	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
+	#{tArr}
+	</foreach>
+	
+	</delete>
 
 
 </mapper>
