@@ -1,92 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-  <link rel="stylesheet" href="resources/css/member/memberJoin.css">
-  <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-  <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180619/1529384927473/180619.js"></script>
-  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
-  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="resources/css/member/memberJoin.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180619/1529384927473/180619.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>Join</title>
 
 </head>
 <body>
-	   <br><br><br>
-   <div class="loginForm">
-   <a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
-   <form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
-         <table align="center">
-            <tr>
-               <th width="100px" height="40px">아이디</th>
-               <td><input type="text" maxlength="13" name="userId" id="userId" class="form-control" placeholder="띄어쓰기 없이  6-12자"></td>
-               <td width="150px" style="padding-left:10px"><label id="idResult"></label></td>
-            </tr>
-            <tr>
-               <th height="40px">비밀번호</th>
-               <td><input type="password" maxlength="13" id="password" name="password" class="form-control" placeholder="영문+숫자  조합으로 6-12자 "></td>
-               <td></td>
-            </tr>
-            <tr>
-               <th height="40px">비밀번호 확인</th>
-               <td><input type="password" maxlength="13" id="password2" name="password2" class="form-control"></td>
-               <td><label id="pwdResult"></label></td>
-            </tr>
-            <tr>
-               <th width="120px" height="40px" float="left">이름</th>
-               <td><input type="text" maxlength="13" name="userName" id="userName" class="form-control"></td>
-            </tr>
-            <tr>
-               <th width="120px" height="40px" float="left">닉네임</th>
-               <td><input type="text" maxlength="13" name="nickName" id="nickName" class="form-control"></td>
-               <td width="150px" style="padding-left:10px"><label id="nickResult"></label></td>
-            </tr>
-            <tr>
-               <th height="40px">휴대폰 번호</th>
-               <td>
-                  <input type="text" maxlength="11" id="phone" name="phone" style="width:200px" class="form-control2">
-               </td>
-            </tr>
-            <tr>
-               <th height="40px">이메일</th>
-               <td><input type="email" id="email" name="email" class="form-control" placeholder="example@naver.com"></td>
-               <td width="150px" style="padding-left:10px"><span id="validEmail"></span></td>
-            </tr>
-            <tr>
-               <th height="40px">우편번호</th>
-               <td><input type="text" name="post"  id="post" class="form-control"></td>
-               <td style="padding-left:10px"><div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()"><input type="button" class="bu"value="검색"/></div></td>
-            </tr>
-            <tr>
-               <th height="40px">주소</th>
-               <td><input type="text" name="address2" id="address2" class="form-control"></td>
-               <td></td>
-            </tr>
-            <tr>
-               <th height="40px">주소</th>
-               <td><input type="text" name="address3" id="address3" class="form-control"></td>
-               <td></td>
-            </tr>
-            <tr>
-               <th height="40px">상세주소</th>
-               <td><input type="text" name="address4" id="address4" class="form-control"></td>
-               <td></td>
-            </tr>
-         </table>
-         <br>
-         <div class="btns" align="center">
-            <div id="goMain" style="margin-left:20px; font-size:13px"><button onclick="goMain()" class="bu">메인으로</button></div>&nbsp;
-            <div id="joinBtn" style="font-size:13px"><button type="submit" onclick="insertMember();" class="bu">가입하기</button></div>
-         </div>
-         <script>
+	<c:import url="../header/header.jsp" />
+	<br>
+	<br>
+	<br>
+	<div class="loginForm">
+		<!-- <a href="main.do"><img class="image"
+			src="resources/img/mainlogo.png" id="logo" align="center"></a> -->
+		<form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
+			<span class="join-form">
+				<fieldset id="fds-order-info">
+					<legend></legend>
+					<h3 align="center" style="font-size: 35px;">회원 가입</h3>
+					<div class="table1 orderplz">
+						<table>
+							<colgroup>
+								<col >
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<th class="ta-l required" aria-required="true">ID</th>
+									<td><input type="text" maxlength="13" name="userId" id="userId" class="text" placeholder="띄어쓰기 없이  6-12자"></td>
+									<td width="150px" style="padding-left: 10px"><label id="idResult"></label></td>
+								</tr>
+								<tr>
+									<th height="40px">비밀번호</th>
+									<td><input type="password" maxlength="13" id="password" name="password" class="text" placeholder="영문+숫자  조합으로 6-12자 "></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th height="40px">비밀번호 확인</th>
+									<td><input type="password" maxlength="13" id="password2" name="password2" class="text"></td>
+									<td><label id="pwdResult"></label></td>
+								</tr>
+								<tr>
+									<th width="120px" height="40px" float="left">이름</th>
+									<td><input type="text" maxlength="13" name="userName" id="userName" class="text"></td>
+								</tr>
+								<tr>
+									<th width="120px" height="40px" float="left">닉네임</th>
+									<td><input type="text" maxlength="13" name="nickName" id="nickName" class="text"></td>
+									<td width="150px" style="padding-left: 10px"><label id="nickResult"></label></td>
+								</tr>
+								<tr>
+									<th height="40px">휴대폰 번호</th>
+									<td><input type="text" maxlength="11" id="phone" name="phone" style="width: 200px" class="text"></td>
+								</tr>
+								<tr>
+									<th height="40px">이메일</th>
+									<td><input type="email" id="email" name="email" class="text" placeholder="example@naver.com"></td>
+									<td width="150px" style="padding-left: 10px"><span id="validEmail"></span></td>
+								</tr>
+								<tr>
+									<th height="40px">우편번호</th>
+									<td><input type="text" name="post" id="post" class="text"></td>
+									<td style="padding-left: 10px">
+										<div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()">
+											<input type="button" class="bu" value="검색" />
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th height="40px">주소</th>
+									<td><input type="text" name="address2" id="address2"
+										class="text"></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th height="40px">주소</th>
+									<td><input type="text" name="address3" id="address3"
+										class="text"></td>
+									<td></td>
+								</tr>
+								<tr>
+									<th height="40px">상세주소</th>
+									<td><input type="text" name="address4" id="address4"
+										class="text"></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div class="btns" align="center">
+							<div id="goMain">
+								<button onclick="goMain()" class="bu">메인으로</button>
+								<button type="submit" onclick="insertMember();" class="bu">가입하기</button>
+							</div>
+						</div>
+						<script>
  
             function goMain(){
                location.href="main.do";
@@ -204,10 +226,9 @@
   		});
 
          </script>
-         
-         
-      </form>
-   </div>
-   
+		</form>
+	</div>
+	<br><br>
+	<c:import url="../footer/footer.jsp" />
 </body>
-ㄴ</html>
+</html>
