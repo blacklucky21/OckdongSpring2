@@ -104,7 +104,7 @@ public class MemberController {
 	}
 	
 	/*** MyPage ***/
-	// 마이페이지 메인 화면 이동
+	// 마이페이지 회원정보 화면 이동
 	@RequestMapping("myPageView.me")
 	public String myPageView() {
 		return "myPage/member/myPage";
@@ -112,7 +112,7 @@ public class MemberController {
 	}
 	
 	// 회원탈퇴 화면 이동
-	@RequestMapping("MemberOut.me")
+	@RequestMapping("memberOutView.me")
 	public String memberOutView() {
 		return "myPage/member/myPage2";
 	}
@@ -126,5 +126,17 @@ public class MemberController {
 		}else {
 			throw new MemberException("회원 탈퇴에 실패하였습니다.");
 		}
+	}
+	
+	// 구매 내역 화면 이동
+	@RequestMapping("view_history.me")
+	public String viewHistoryView() {
+		return "myPage/buy/buyHistory";
+	}
+	
+	// 비밀번호 변경 화면 이동
+	@RequestMapping("updatePwd_myPage.me")
+	public String updatePwd_myPage(){
+		return "myPage/member/updatePwd_myPage";
 	}
 }
