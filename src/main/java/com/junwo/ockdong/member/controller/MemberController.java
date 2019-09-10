@@ -107,7 +107,6 @@ public class MemberController {
 	@RequestMapping("myPageView.me")
 	public String myPageView() {
 		return "myPage/myPage";
-
 	}
 	
 	// 회원탈퇴 화면 이동
