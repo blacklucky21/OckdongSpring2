@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/myPage/myPageLeft.css">
-<title>myPage</title>
+<title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/myPage/buyLeft.css">
 </head>
 <body>
 	<div class="leftWrapArea">
@@ -16,16 +16,15 @@
 			<br> <br>
 			<div class="text" onclick="location.href='myPageView.me'">회원정보</div>
 			<br>
-			<div class="text"
-				onclick="location.href='view_history.me'">구매내역</div>
+			<div class="text" onclick="location.href='view_history.me'">구매내역</div>
 			<br>
-			<div class="text"
-				onclick="location.href='reviewServletView.bo'">내가 쓴 게시물</div>
+			<div class="text" onclick="location.href='reviewServletView.bo'">내가 쓴 게시물</div>
+			<br>
+			<div class="text" onclick="location.href='updatePwd_myPage.me'">비밀번호 변경</div>
 			<br>
 			<div class="text" onclick="location.href='memberOutView.me'">회원 탈퇴</div>
-				
-				<br>
-				<br>
+
+			<br> <br> <br> <br>
 
 			<div class='sub_text last-child'>
 				<div class='first-child'>

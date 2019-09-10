@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.junwo.ockdong.member.model.vo.Member"%>
+	pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <link rel="stylesheet" href="resources/css/myPage/myPageInfo.css">
@@ -15,193 +16,83 @@
 	<input type="hidden" id="userPhone" value="${ loginUser.getPhone() }"> <!-- 연락처 불러오기용 -->
 	<input type="hidden" id="userEmail" value="${ loginUser.getEmail() }"> <!-- 이메일 불러오기용 -->
 	
-	<form id="ModifyInfoForm" action="ModifyInfo.me" method="post">
-	<div class="centerWrapArea">
-		<div class="section">
-			<div class='figure'>
-				<div class="center_top_title" align="left">회원정보수정</div>
-				<div>
-					<div class='nth-child1'>회원아이디</div>
-					<div class='nth-child2'>
-						<input name="userId" class='info_input bg_f3f4f6'
-							 type='text' value="${ loginUser.getUserId() }" readonly/>
-					</div>
-				</div>
-
-				<div>
-					<div class='nth-child1'>이름</div>
-					<div class='nth-child2'>
-						<input name="userName" class='info_input bg_f3f4f6' type='text' value="${ loginUser.getUserName() }" readonly/>
-					</div>
-				</div>
-
-
-				<div>
-					<div class='nth-child1'>비밀번호 입력</div>
-					<div class='nth-child2'>
-						<input name="userPwd" id="userPwd" class='info_input red_focus'
-							type='password' maxlength="16" />
-					</div>
-				</div>
-
-				<div>
-					<div class='nth-child1'>비밀번호 확인</div>
-					<div class='nth-child2'>
-						<input name="userPwd2" id="userPwd2" class='info_input red_focus'
-							type='password' maxlength="16" />
-					</div>
-				</div>
-
-				<div>
-					<div class='nth-child1 vtop'>회원주소</div>
-					<div class='nth-child2'>
-
-						<div>
-							<input type="text" name="post"  id="post" class="info_input sub_input1_1">
-							<input type="text" name="address2" id="address2" class="info_input sub_input1_2">
-							<input type="text" name="address3" id="address3" class="info_input sub_input1_3">
-							<input type="text" name="address4" id="address4" class="info_input sub_input1_3">
-							
-							<span class='btn_124_bg_blue' onclick="searchAdd();">검색</span>
-						</div>
-
-					</div>
-				</div>
-
-				<div>
-					<div class='nth-child1'>연락처</div>
-					<div class='nth-child2' align="left">
-						<input type="text" id="phone" name="phone" style="width:60px" class="info_input sub_input2"> 
-					</div>
-				</div>
-				<div>
-					<div class='nth-child1'>이메일</div>
-					<div class='nth-child2'>
-						<div class='info_mail'>
-							<input type='text' id="email" name="email" class='info_mail_1'>
-						</div>
-						<span class='btn_124_bg_blue ml10' id="emailCheck2">중복확인</span>
-						<input type="hidden" name="id_overlab_chk_flag" id="id_overlab_chk_flag">
-					</div>
-				</div>
-			</div>
-				<br><br>
-				<div class='btn_box'>
-					<a href="/"><span class='btn_140_red'>취소</span></a>
-					<span id="wSend" class='btn_140_bg_red' onclick="wSend();">변경</span>
-				</div>
-
-			</div>
-
-		</div>
-
-	</form>
-	
-	<script>
-		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-		var regPhone = /^[0-9]+$/;
-		var regPwd = /^(?=.*[a-zA-Z]+)(?=.*[0-9]+).{6,12}$/;
-		
-		function wSend(){	
-			if(!regPhone.test($('#phone1').val())){
-            	alert("숫자만 가능합니다.");
-            	$('#phone1').focus();
-            	return;
-            }
-			if(!regPhone.test($('#phone2').val())){
-            	alert("숫자만 가능합니다.");
-            	$('#phone2').focus();
-            	return;
-            }
-			if(!regPhone.test($('#phone3').val())){
-            	alert("숫자만 가능합니다.");
-            	$('#phone3').focus();
-            	return;
-            }
-
-			if(!regPwd.test($('#userPwd').val())){
-			   alert('영문+숫자  조합으로 6-12자를 입력해 주세요.');
-			   $('#userPwd').focus();
-			   return;
-			}
+	<form id="ModifyInfoForm" action="" method="post">
+	<c:set var="m" value="${member}" />
+	<span class="join-form">
+		<fieldset id="fds-order-info">
+			<legend>주문폼</legend>
+			<h3>회원 정보</h3>
+			<div class="table1 orderplz">
+				<table>
+					<colgroup>
+						<col style="width: 133px;">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th class="ta-l required" aria-required="true">ID</th>
+							<td>
+								<div class="txt-field-id hs" style="width: 350px;">
+									<input type="text" name="userId" value="${ member.getUserId() }" class="text" readonly>
+								</div>
+								<td></td>
+							</td>
+						</tr>
+						<tr>
+							<th class="ta-l required" aria-required="true">닉네임</th>
+							<td>
+								<div class="txt-field hs" style="width: 350px;">
+									<input type="text" name="userName" value="${ member.getNickName() }" class="text">
+								</div>
+								<td></td>
+							</td>
+						</tr>
+						<tr>
+							<th class="ta-l required" aria-required="true">휴대폰 번호</th>
+							<td>
+								<span class="txt-field hs" style="width: 350px;">
+									<input type="text" id="mobileNum" name="orderCellPhone" value="${ member.getPhone() }" class="text">
+								</span>
+								<td></td>
+							</td>
+						</tr>
+						<tr>
+							<th class="ta-l required" aria-required="true">이메일</th>
+							<td>
+								<div class="email" style="display: inline">
+									<span class="txt-field hs" style="width: 350px;"> 
+										<input type="text" name="orderEmail" value="${ member.getEmail() }" class="text">
+									</span>
+									<td></td>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="ta-l required" aria-required="true">주소</th>
+							<td>
+								<div class="address" style="display: inline">
+									<span class="txt-field hs" style="width: 530px;"> 
+										<input type="text" id="address" name="address" value="${ member.getAddress() }" class="text" style="width: 500px;">
+										<td><span><button class='bu' onclick="searchAdd();">검색</button></span></td>
+									</span>
+								</div>
+							</td>
+						</tr>
+						
+					</tbody>
 			
-			if(!regEmail.test($('#email').val())) {
-                alert("이메일 주소가 유효하지 않습니다");
-                $('#email').focus();            
-            }else{
-				if($('#userPwd').val()!="" && $('#userPwd2').val() == $('#userPwd').val() && $('#phone').val()!="" && $('#address3').val()!="" && $('#email').val()!=""){			
-					alert("정보 수정이 완료되었습니다.");
-					$("#ModifyInfoForm").submit();
-				}
-            }
-			
-		}
-		
-		$(function(){
-			  $("#wSend").click(function(){
-	
-				   if($('#userPwd').val()==""){
-					    alert("비밀번호를 입력 해 주세요");
-					    $('#userPwd').focus();
-					    return;	
-				   }
-				   
-				   if($('#userPwd2').val() != $('#userPwd').val()){
-					    alert("입력하신 비밀번호를 확인 해 주세요");
-					    $('#userPwd2').focus();
-					    return;
-				   }
-				   
-				   if($('#address3').val()==""){
-					    alert("주소를 입력 해 주세요");
-					    $('#address3').focus();
-					    return;
-				   }
-				   
-				   if($('#phone').val()==""){
-					    alert("연락처를 입력 해 주세요");
-					    $('#phone').focus();
-					    return;
-				   }
-			   
-				   if($('#email').val()==""){
-					    alert("이메일을 입력 해 주세요");
-					    $('#email').focus();
-					    return;
-				   }
-				   
-			});
-		});
-		
-		$("#emailCheck2").click(function(){
-			
-			var email = $("#email").val();
-			
-			if(!regEmail.test(email)) {
-	               alert('사용할 수 없는 이메일입니다.');
-	               email.focus();
-	               return false;
-	           }
-			
-			$.ajax({
 				
-				url:"emailCheck.do",
-				data:{email:email},
-				type:"get",
-				success:function(data){
-					if(data == 0){
-						alert("사용 가능한 이메일입니다.");
-						checkValue2 = 1;
-					}else{
-						alert("사용 중인 이메일입니다.");
-					}
-				}
-			});
-		});
+				</table>
+				<br><br>
+				<div style="text-align:center">
+					<div>
+						<span><button class='buSub'>취소</button></span>
+						<span><button id="wSend" class='buSub' onclick="wSend();">변경</button></span>
+					</div>
+				</div>
+			</div>
+</form>
 	
-	</script>
-		
-		
 	<script>
 		function searchAdd() {
 			 new daum.Postcode({
@@ -233,7 +124,7 @@
 		 
 		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 		                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
-		                document.getElementById('address2').value = fullRoadAddr;
+		                /* document.getElementById('address2').value = fullRoadAddr; */
 		                /* document.getElementById('address3').value = data.jibunAddress; */
 	
 		                
@@ -241,7 +132,115 @@
 		        }).open();
 		    }
 		</script>
-		
+	
+	<script>
+		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		var regPhone = /^[0-9]+$/;
+		var regPwd = /^(?=.*[a-zA-Z]+)(?=.*[0-9]+).{6,12}$/;
+
+		function wSend() {
+			if (!regPhone.test($('#phone1').val())) {
+				alert("숫자만 가능합니다.");
+				$('#phone1').focus();
+				return;
+			}
+			if (!regPhone.test($('#phone2').val())) {
+				alert("숫자만 가능합니다.");
+				$('#phone2').focus();
+				return;
+			}
+			if (!regPhone.test($('#phone3').val())) {
+				alert("숫자만 가능합니다.");
+				$('#phone3').focus();
+				return;
+			}
+
+			if (!regPwd.test($('#userPwd').val())) {
+				alert('영문+숫자  조합으로 6-12자를 입력해 주세요.');
+				$('#userPwd').focus();
+				return;
+			}
+
+			if (!regEmail.test($('#email').val())) {
+				alert("이메일 주소가 유효하지 않습니다");
+				$('#email').focus();
+			} else {
+				if ($('#userPwd').val() != ""
+						&& $('#userPwd2').val() == $('#userPwd').val()
+						&& $('#phone').val() != ""
+						&& $('#address3').val() != ""
+						&& $('#email').val() != "") {
+					alert("정보 수정이 완료되었습니다.");
+					$("#ModifyInfoForm").submit();
+				}
+			}
+
+		}
+
+		$(function() {
+			$("#wSend").click(function() {
+
+				if ($('#userPwd').val() == "") {
+					alert("비밀번호를 입력 해 주세요");
+					$('#userPwd').focus();
+					return;
+				}
+
+				if ($('#userPwd2').val() != $('#userPwd').val()) {
+					alert("입력하신 비밀번호를 확인 해 주세요");
+					$('#userPwd2').focus();
+					return;
+				}
+
+				if ($('#address3').val() == "") {
+					alert("주소를 입력 해 주세요");
+					$('#address3').focus();
+					return;
+				}
+
+				if ($('#phone').val() == "") {
+					alert("연락처를 입력 해 주세요");
+					$('#phone').focus();
+					return;
+				}
+
+				if ($('#email').val() == "") {
+					alert("이메일을 입력 해 주세요");
+					$('#email').focus();
+					return;
+				}
+
+			});
+		});
+
+		$("#emailCheck2").click(function() {
+
+			var email = $("#email").val();
+
+			if (!regEmail.test(email)) {
+				alert('사용할 수 없는 이메일입니다.');
+				email.focus();
+				return false;
+			}
+
+			$.ajax({
+
+				url : "emailCheck.do",
+				data : {
+					email : email
+				},
+				type : "get",
+				success : function(data) {
+					if (data == 0) {
+						alert("사용 가능한 이메일입니다.");
+						checkValue2 = 1;
+					} else {
+						alert("사용 중인 이메일입니다.");
+					}
+				}
+			});
+		});
+	</script>
 	
 		<script> 
 		

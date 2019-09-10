@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+.leftWrapArea {
+	display: inline-block;
+	width: 210px;
+	height: 600px;
+	float: left;
+	background: white;
+	color: #464646;
+	font-family: dotum;
+	font-size: 15px;
+	text-align: left;
+}
+
+}
+.myMenu_left {
+	float: left;
+	width: 233px;
+	border: 1px #ccc solid;
+}
+
+.text:hover {
+	color: #c70000;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.sub_text>.first-child {
+	padding: 15px -1px 5px 10px;
+}
+
+.sub_text>div>.first-child {
+	margin-bottom: 12px;
+	margin-top: 0px;
+}
+
+.text-bold {
+	font-weight: bold;
+}
+
+.sub_text>div>div {
+	margin-top: 6px;
+}
+
+.sub_text .sub_span {
+	width: 36px;
+	display: inline-block;
+}
+
+.text-red {
+	color: #e31738;
+}
+
+.sub_text>div>div {
+	margin-top: 6px;
+}
+
+.text-red {
+	color: #e31738;
+}
