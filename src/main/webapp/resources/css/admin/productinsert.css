@@ -142,3 +142,15 @@ textarea {
 	transition: all 1s;
 	height: 100%;
 }
+
+.heim span:hover{
+	cursor: pointer;
+}
+
+.contentImgArea1, .contentImgArea2, .contentImgArea3{
+	background-image: url("resources/img/admin/plus2.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: 1px solid black;
+}
+

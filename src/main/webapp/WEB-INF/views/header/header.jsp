@@ -66,7 +66,6 @@
 <div><a href="nlist.do">NOTICE</a></div>
 <div><a href="">Q&A</a></div>
 <div><a href="">REVIEW</a></div>
-<div><a href="">EVENT</a></div>
 <div><a href="" target="_blank">DELIVERY</a></div>
 </div>
 </li>
@@ -185,16 +184,13 @@
         <a href="">이달의 도시락</a>
     </li>
     <li>
-        <a href="">제품</a>
+        <a href="listproduct.do">전체 상품</a>
         <ul class="sub_menu">
             <li  >
-                <a href="" >도시락</a>
+                <a href="listdo.do" >도시락</a>
             </li>
             <li  >
-                <a href="" >샐러드</a>
-            </li>
-            <li  >
-                <a href="" >단백질</a>
+                <a href="listsal.do" >샐러드</a>
             </li>
         </ul>
    </li>
