@@ -15,10 +15,11 @@
 <body>
 
 	<c:import url="../header/header.jsp"/>
-	<c:set var="pa" value="${list }"/>
-
-	<div class="content" style="width:100%; text-align:center">
 	
+	<c:set var="pa" value="${list }"/>
+	<form action="PaymentResultList.do" method="post" id="insertPaymentAbout">
+	<div class="content" style="width:100%; text-align:center">
+
 	<div class="order-page" style="display:inline-block">
             <div class="step-top">
          
@@ -46,7 +47,7 @@
 					<c:forEach var="c" items="${list }" varStatus="cart">
                     <tr>
                         <td class="gi this-product">
-                        	<input type="hidden" name="shit" value='${c.cNo }'>
+                        	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
                             <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
@@ -101,7 +102,7 @@
 
             </div>
             <a class="btn-move-home" href="CartView.do">장바구니 가기</a>
-
+	
             <div class="price-box">
                 <div>
                     <p>
@@ -115,6 +116,7 @@
             </div>
 
 		<c:set var="m" value="${member}"/> 
+		
             <span class="join-form">
                 <fieldset id="fds-order-info">
                     <legend>주문폼</legend>
@@ -130,7 +132,7 @@
                                 <th class="ta-l required" aria-required="true">주문하시는 분</th>
                                 <td>
                                     <div class="txt-field hs" style="width:160px;">
-                                        <input type="text" name="orderName" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
+                                        <input type="text" name="payname" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
                                     </div>
                                 </td>
                             </tr>
@@ -138,7 +140,7 @@
                                 <th class="ta-l">전화번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="phoneNum" name="orderPhone" value="${m.phone }" maxlength="20" class="text">
+                                        <input type="text" id="phoneNum" name="payphone" value="${m.phone }" maxlength="20" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -146,7 +148,7 @@
                                 <th class="ta-l required" aria-required="true">휴대폰 번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="mobileNum" name="orderCellPhone" value="${m.phone}" maxlength="20" class="text">
+                                        <input type="text" id="mobileNum" name="paycellphone" value="${m.phone}" maxlength="20" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -156,6 +158,7 @@
                                     <div class="email" style="display:inline">
                                         <span class="txt-field hs" style="width:160px;">
                                             <input type="text" name="orderEmail1" value="" class="text orderEmail">
+                                            <input type="hidden" name="payemail" class="payemail">
                                         </span>
                                         <span class="txt-field hs" style="width:100px;">
                                             <input type="text" name="orderEmail" value="" class="text orderEmail2">
@@ -269,14 +272,19 @@
                                 <th class="ta-l">배송 날짜 선택</th>
                                 <td>
                                     <span class="form-element">
-                                  		<input type="date" class="delivaryDate">
+                                  		<input type="date" class="delivaryDate" id="delivaryDate" name="">
+                                  		<input type="time" class="delivaryTime" id="delivaryTime" name="delivaryTime" value="13:00">
                                     </span>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
+                    <input type="hidden" class="toTalCheckArr">
+                    <input type="hidden" name="userid" value="${loginUser.userId }">
+                    	<input type="hidden" name="payaddress" class="payaddress">
+                    	<input type="hidden" name="delivaryDate" class="delivaryCheck">
+				</form>
 
                     <h3>결제정보</h3>
                     <div class="table1 orderplz">
@@ -469,7 +477,7 @@
                             </div>
                             <div class="btn" style="float:right">
                             <div>
-                                <button class="skinbtn point2 order-buy" ><em>결제하기</em></button>
+                                <button type="button" class="skinbtn point2 order-buy" ><em>결제하기</em></button>
                             </div>
                             </div>
                         </div>
@@ -608,26 +616,43 @@ $('.order-buy').click(function(){
 
 	var checkArr = '${CheckArr}';
 	var totalArr = new Array();
-	var totalPrice = parseInt($('#totalSettlePriceView').text());
+	var totalPrice = $('#totalSettlePriceView').text();
+	var total = new Array();
 	console.log("합"+totalPrice);
 	var check = 0;
 
 
-	$('.this-product').find('input[name=shit]').each(function(i,e){
+	$('.this-product').find('input[name=cNo]').each(function(i,e){
 		
 		console.log($(this).val());
+		total[check] = totalPrice;
 		totalArr[check++] = $(this).val();
+		
 	});
 	
-	location.href="adminPaymentList.do?Arr="+totalArr"&total="+totalPrice;
-
-	//console.log("가기전"+list);	
+	var username = $('[name="receiverName"]').val();
+	var email = $('.orderEmail').val()+$('.orderEmail2').val();
+	var address = $('#receiverZonecode').val()+'/'+$('#receiverAddress').val()+'/'+$('.receiverAddressSub').val();	
+	var delivaryDate = $('.delivaryDate').val();
+	var delivaryTime = $('.delivaryTime').val();
+	console.log("이름"+username)
+	console.log(email);
+	console.log("주소"+address);
+	$('.payemail').val(email);
+	$('.delivaryCheck').val(delivaryDate+'/'+delivaryTime);
+	$('.payaddress').val(address);
+	
+	var form = document.forms["insertPaymentAbout"];
+	
+	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice
+	
+	form.submit();
 
 
 
 });
 
-</script>
+</script>	
 
 //
 <script type="text/javascript">
@@ -668,6 +693,8 @@ $(document).ready(function() {
 
 $(document).ready(function(){
 	
+	document.getElementById('delivaryDate').value = new Date().toISOString().substring(0, 10);
+	//document.getElementById('delivaryTime').value = new Date().toISOString().slice(11, 16);
 	var email = '${m.email}'
 	var emailSplit = email.split('@');
 	var address = '${m.address}';
@@ -754,6 +781,7 @@ function selectEmail(ele){
 	
 
 
+	
 
 
 

@@ -96,5 +96,24 @@ public class ProductServiceImpl implements ProductService{
 		return list;
 	}
 
+	// 객체를 담아올 정보
+	@Override
+	public Product selectListUpdate(int p_Id) {
+		// TODO Auto-generated method stub
+		return pDAO.selectProduct(p_Id);
+	}
+
+	// 사진을 담아올 정보
+	@Override
+	public ArrayList<PictureList> selectPt(int p_Id) {
+		return pDAO.selectPt(p_Id);
+	}
+
+
+
+
+
+	
+	
 
 }
