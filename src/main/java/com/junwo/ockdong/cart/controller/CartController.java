@@ -123,7 +123,6 @@ public class CartController {
 
 		Member m = (Member) session.getAttribute("loginUser");
 		String loginUserId = m.getUserId();
-		
 
 		HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
 
@@ -136,7 +135,7 @@ public class CartController {
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("member", m);
-	
+
 			mv.setViewName("Payment/CartPaymentView");
 
 		} else {
@@ -144,9 +143,7 @@ public class CartController {
 		}
 
 		return mv;
-	}
-	
-	
+  }
 	//결제 완료 리스트
 	@RequestMapping("PaymentResultList.do")
 	public ModelAndView PaymentResultList(ModelAndView mv,  @RequestParam("Arr") String[] Arr,@RequestParam("total") String[] total, HttpSession session,
@@ -234,9 +231,5 @@ public class CartController {
 		System.out.println("힝힝"+p);
 		System.out.println("힝힝"+c);
 		
-	}
-	
-
-		
+  }
 }
-
