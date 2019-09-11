@@ -81,7 +81,8 @@ public class ProductDAO {
 
 	public ArrayList selectList8() {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("productMapper.selectList8");
+		/* return (ArrayList)sqlSession.selectList("productMapper.selectList8"); */
+		return null;
 	}
 
 	public ArrayList pictureList() {
