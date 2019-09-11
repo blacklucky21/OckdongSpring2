@@ -130,9 +130,8 @@ table, tr, td {
 } */
 .bottom {
 	width: 70%;
-	height: 400px;
+	height: 100px;
 	margin-left: 15%;
-	margin-top: 5%;
 	text-align: center;
 }
 .buttons input[type=button], .buttons input[type=submit]{
@@ -167,7 +166,7 @@ table, tr, td {
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="../header/header.jsp" />
 
-	<div style="width: 100%; height: 1600px; margin: 5% 0;">
+	<div style="width: 100%; height: 1000px; margin: 5% 0;">
 		<form id="formChange" action="myOwnInsert.do" method="post">
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
@@ -273,7 +272,6 @@ table, tr, td {
 						<br clear="all">
 						<div class="sub2Buttons" style="text-align: center;"></div>
 					</dd>
-
 				</dl>
 			</div>
 			<div class="bottom">
@@ -285,12 +283,15 @@ table, tr, td {
 					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
 					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
 				</div>
+				<br>
+				<div align="center">(주)옥동도시락</div>
 			</div>
 		</div>
 		</form>
 		<br clear="all">
 	</div>
-	<c:import url="../footer/footer.jsp" />
+	
+<%-- 	<c:import url="../footer/footer.jsp" /> --%>
 
 
 
