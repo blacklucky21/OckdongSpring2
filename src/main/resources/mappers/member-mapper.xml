@@ -181,7 +181,7 @@
 	<update id="deleteMember" parameterType="string">
 		update member
 		set status = 'N'
-		where userId = #{USERID}
+		where userId = #{userId}
 	</update>
 	
 

@@ -13,7 +13,7 @@
 <!-- <link rel="stylesheet" href="resources/css/myPage/memberOut.css"> -->
 </head>
 <body>
-	<form id="MemberOutForm" action="memberOutView.me" method="post">
+	<form id="MemberOutForm" action="mdelete.me" method="post">
 		<span class="join-form">
 		<fieldset id="fds-order-info">
 			<legend></legend>
@@ -60,7 +60,7 @@
 				<br><br>
 				<div style="text-align:center">
 					<div>
-						<span><button id="bu" class='bu' onclick="ByeBye();" style="width: auto;">탈퇴하기</button></span>
+						<span><button id="bu" class='bu' onclick="return ByeBye();" style="width: auto;">탈퇴하기</button></span>
 					</div>
 				</div>
 			</div>
@@ -71,19 +71,18 @@
 		   if($('#password').val()==""){
 			    alert("비밀번호를 입력 해 주세요");
 			    $('#password').focus();
-			    return;	
+			    return false;	
 		   }else if($('#password2').val() != $('#password').val()){
 			    alert("입력하신 비밀번호를 확인 해 주세요");
 			    $('#password2').focus();
-			    return;
+			    return false;
 		   }else{
 			   	var trueBye = confirm("정말 탈퇴하시겠습니까?");
 			   
 			    if(trueBye == true){
-			    	location.href="${ mdelete }"
+			    	return true;
 			    }
 		   }
-
 		}
 
 	</script>

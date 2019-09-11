@@ -12,9 +12,6 @@
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180619/1529384927473/180619.js"></script>
 <body>
 </head>
-	<input type="hidden" id="userAddress" value="${ loginUser.getAddress() }"> <!-- 주소 불러오기용 -->
-	<input type="hidden" id="userPhone" value="${ loginUser.getPhone() }"> <!-- 연락처 불러오기용 -->
-	<input type="hidden" id="userEmail" value="${ loginUser.getEmail() }"> <!-- 이메일 불러오기용 -->
 	
 	<form id="ModifyInfoForm" action="" method="post">
 	<c:set var="m" value="${member}" />
@@ -33,7 +30,7 @@
 							<th class="ta-l required" aria-required="true">ID</th>
 							<td>
 								<div class="txt-field-id hs" style="width: 350px;">
-									<input type="text" name="userId" value="${ member.getUserId() }" class="text" readonly>
+									<input type="text" name="userId" value="${ loginUser.getUserId() }" class="text" readonly>
 								</div>
 								<td></td>
 							</td>
@@ -42,7 +39,7 @@
 							<th class="ta-l required" aria-required="true">닉네임</th>
 							<td>
 								<div class="txt-field hs" style="width: 350px;">
-									<input type="text" name="userName" value="${ member.getNickName() }" class="text">
+									<input type="text" name="userName" value="${ loginUser.getNickName() }" class="text">
 								</div>
 								<td></td>
 							</td>
@@ -51,7 +48,7 @@
 							<th class="ta-l required" aria-required="true">휴대폰 번호</th>
 							<td>
 								<span class="txt-field hs" style="width: 350px;">
-									<input type="text" id="mobileNum" name="orderCellPhone" value="${ member.getPhone() }" class="text">
+									<input type="text" id="mobileNum" name="orderCellPhone" value="${ loginUser.getPhone() }" class="text">
 								</span>
 								<td></td>
 							</td>
@@ -61,24 +58,44 @@
 							<td>
 								<div class="email" style="display: inline">
 									<span class="txt-field hs" style="width: 350px;"> 
-										<input type="text" name="orderEmail" value="${ member.getEmail() }" class="text">
+										<input type="text" name="orderEmail" value="${ loginUser.getEmail() }" class="text">
 									</span>
 									<td></td>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th class="ta-l required" aria-required="true">주소</th>
-							<td>
-								<div class="address" style="display: inline">
-									<span class="txt-field hs" style="width: 530px;"> 
-										<input type="text" id="address" name="address" value="${ member.getAddress() }" class="text" style="width: 500px;">
-										<td><span><button class='bu' onclick="searchAdd();">검색</button></span></td>
-									</span>
+						<%-- <input type="hidden" id = "add" value="${ loginUser.address}" style="width:100%"> --%>
+						
+							<th height="40px">우편번호</th>
+							<td><input type="text" name="post" id="post" class="text" value=""></td>
+							<td style="padding-left: 10px">
+								<div id="ckZip"
+									style="display: table-cell; vertical-align: middle;"
+									onclick="searchAdd()">
+									<input type="button" class="bu" value="검색" />
 								</div>
 							</td>
 						</tr>
-						
+						<tr>
+							<th height="40px">주소</th>
+							<td><input type="text" name="address2" id="address2"
+								class="text"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th height="40px">주소</th>
+							<td><input type="text" name="address3" id="address3"
+								class="text"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th height="40px">상세주소</th>
+							<td><input type="text" name="address4" id="address4"
+								class="text"></td>
+							<td></td>
+						</tr>
+
 					</tbody>
 			
 				
@@ -97,35 +114,45 @@
 		function searchAdd() {
 			 new daum.Postcode({
 		            oncomplete: function(data) {
-		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-		 
-		                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-		                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-		 
-		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-		                    extraRoadAddr += data.bname;
-		                }
-		                // 건물명이 있고, 공동주택일 경우 추가한다.
-		                if(data.buildingName !== '' && data.apartment === 'Y'){
-		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-		                }
-		                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-		                if(extraRoadAddr !== ''){
-		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-		                }
-		                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-		                if(fullRoadAddr !== ''){
-		                    fullRoadAddr += extraRoadAddr;
-		                }
-		 
-		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		                document.getElementById('address1').value = data.zonecode; //5자리 새우편번호 사용
-		                /* document.getElementById('address2').value = fullRoadAddr; */
-		                /* document.getElementById('address3').value = data.jibunAddress; */
+		            	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                        var addr = ''; // 주소 변수
+                        var extraAddr = ''; // 참고항목 변수
+        
+                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                            addr = data.roadAddress;
+                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                            addr = data.jibunAddress;
+                        }
+        
+                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                        if(data.userSelectedType === 'R'){
+                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                extraAddr += data.bname;
+                            }
+                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                            if(data.buildingName !== '' && data.apartment === 'Y'){
+                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                            if(extraAddr !== ''){
+                                extraAddr = ' (' + extraAddr + ')';
+                            }
+                            // 조합된 참고항목을 해당 필드에 넣는다.
+                            document.getElementById("address3").value = extraAddr;
+                        
+                        } else {
+                            document.getElementById("address3").value = '';
+                        }
+                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                          document.getElementById('post').value = data.zonecode;
+                          document.getElementById("address2").value = addr;
+                        // 커서를 상세주소 필드로 이동한다.
+                         document.getElementById("address4").focus();
 	
 		                
 		            }
@@ -211,6 +238,27 @@
 				}
 
 			});
+			
+			/* 주소 정보 받아오기 */
+			var address = '${ loginUser.address }';
+			var addressArr = address.split('/', 4);
+			console.log(addressArr);
+			
+			$("#post").val(addressArr[0]);
+			$("#address2").val(addressArr[1]);
+			$("#address3").val(addressArr[2]);
+			$("#address4").val(addressArr[3]);
+			
+			/* 연락처 정보 받아오기 */
+			var phone = document.getElementById("userPhone").value; + "";
+			
+			/* 이메일 정보 받아오기 */
+			var email = document.getElementById("userEmail").value;
+			$("#email").val(email);
+			
+			/* $('#post').html(addressArr[0]); */
+			
+			
 		});
 
 		$("#emailCheck2").click(function() {
@@ -240,27 +288,8 @@
 				}
 			});
 		});
-	</script>
+		
 	
-		<script> 
-		
-		/* 이메일 정보 받아오기 */
-		var address = document.getElementById("userAddress").value; + "";
-		var addressArr = address.split('|', 4);
-		
-		$("#post").val(addressArr[0]);
-		$("#address2").val(addressArr[1]);
-		$("#address3").val(addressArr[2]);
-		$("#address4").val(addressArr[3]);
-		
-		/* 연락처 정보 받아오기 */
-		var phone = document.getElementById("userPhone").value; + "";
-		
-		/* 이메일 정보 받아오기 */
-		var email = document.getElementById("userEmail").value;
-		$("#email").val(email);
-
 	</script>
-
 </body>
 </html>
