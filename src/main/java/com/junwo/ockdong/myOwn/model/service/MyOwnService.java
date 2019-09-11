@@ -19,4 +19,8 @@ public interface MyOwnService {
 
 	int update(Ingredient in);
 
+	int insertRecipe(Map<String, String> list);
+
+
+
 }

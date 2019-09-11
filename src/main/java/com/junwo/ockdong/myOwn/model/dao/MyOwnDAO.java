@@ -39,4 +39,8 @@ public class MyOwnDAO {
 		return sqlSession.update("myOwnMapper.updateIn", in);
 	}
 
+	public int insertRecipe(Map<String, String> list) {
+		return sqlSession.update("myOwnMapper.insertRecipe", list);
+	}
+
 }

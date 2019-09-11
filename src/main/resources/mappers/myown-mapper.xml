@@ -47,7 +47,7 @@
 		</choose>
 	</select>
 	
-	<select id="searchOne" parameterType="int" resultMap="IngredientAllList">
+	<select id="searchOne" parameterType="_int" resultMap="IngredientAllList">
 		select *
 		from ingredients
 		where status = 'Y' and in_no = #{inNo}
@@ -58,5 +58,9 @@
 		set in_name=#{inName}, in_type=#{inType}, in_gram=#{inGram}, in_price=#{inPrice}, in_originalfile=#{inOriginalFile}, in_renamefile=#{inRenameFile}
 		where in_no = #{inNo} and status = 'Y'
 	</update>
+	
+	<insert id="insertRecipe" parameterType="map">
+		insert into MBLRECIPE values(SEQ_MBLRECIPE.NEXTVAL,#{racipeName},#{userId},#{numbers},#{fileName},DEFAULT,#{type})
+	</insert>
 	
 </mapper>

@@ -45,4 +45,9 @@ public class MyOwnServiceImp implements MyOwnService{
 		return moDAO.update(in);
 	}
 
+	@Override
+	public int insertRecipe(Map<String, String> list) {
+		return moDAO.insertRecipe(list);
+	}
+
 }
