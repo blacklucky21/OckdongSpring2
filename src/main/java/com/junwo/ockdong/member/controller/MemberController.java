@@ -106,24 +106,7 @@ public class MemberController {
 	/*** MyPage ***/
 	@RequestMapping("myPageView.me")
 	public String myPageView() {
-		return "myPage/myPage";
-	}
-	
-	// 회원탈퇴 화면 이동
-	@RequestMapping("memberOutView.me")
-	public String memberOutView() {
-		return "myPage/member/myPage2";
-	}
-	// 회원탈퇴 눌렀을 경우
-	@RequestMapping("mdelete.me")
-	public String deleteMember(@RequestParam("userId") String userId, SessionStatus status) {
-		int result = mService.deleteMember(userId);
-		
-		if(result > 0) {
-			return "redirect:logout.me";
-		}else {
-			throw new MemberException("회원 탈퇴에 실패하였습니다.");
-		}
+		return "myPage/member/myPage";
 	}
 	
 	// 구매 내역 화면 이동
@@ -132,9 +115,33 @@ public class MemberController {
 		return "myPage/buy/buyHistory";
 	}
 	
+	// 내가 쓴 게시물 화면 이동
+		@RequestMapping("reviewServletView.bo")
+		public String myBoardView() {
+			return "myPage/myBoard/myBoardView";
+	}
+	
 	// 비밀번호 변경 화면 이동
 	@RequestMapping("updatePwd_myPage.me")
 	public String updatePwd_myPage(){
 		return "myPage/member/updatePwd_myPage";
+	}
+	
+	// 회원탈퇴 화면 이동
+	@RequestMapping("memberOutView.me")
+	public String memberOutView() {
+		return "myPage/member/myPage_memberOut";
+	}
+	// 회원탈퇴 눌렀을 경우
+	@RequestMapping("mdelete.me")
+	public String deleteMember(@RequestParam("userId") String userId, SessionStatus status) {
+		System.out.println("탈퇴했을 떄 : " + userId);
+		int result = mService.deleteMember(userId);
+		
+		if(result > 0) {
+			return "redirect:logout.me";
+		}else {
+			throw new MemberException("회원 탈퇴에 실패하였습니다.");
+		}
 	}
 }
