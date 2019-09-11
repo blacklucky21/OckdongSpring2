@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.junwo.ockdong.myOwn.model.vo.Img"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <title>Insert title here</title>
 <style>
 .lunch_size:hover {
@@ -143,7 +144,6 @@ table, tr, td {
 	margin-top: 5%;
 	text-align: center;
 }
-
 .buttons input[type=button], .buttons input[type=submit]{
 	border-radius: 15px;
 	background: #2ecc71;
@@ -172,7 +172,7 @@ table, tr, td {
 	<c:import url="../header/header.jsp" />
 
 	<div style="width: 100%; height: 1700px; margin: 5% 0;">
-		<form action="myOwnInsert.do" method="post">
+		<form id="formChange" action="myOwnInsert.do" method="post">
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
 				<h1 style="font-family: 'Single Day', cursive;">나만의 도시락</h1>
@@ -210,7 +210,10 @@ table, tr, td {
 								ondragover="allowDrop(event)"> </span>
 						</div>
 					</div>
-
+					<!-- 이미지 캡쳐하는 부분 -->
+					<div class="buttons" style="text-align:center;">
+						<input type="hidden" name="imgSrc" id="imgSrc"/>
+					</div>
 				</div>
 			</div>
 			<div class="acodian_menu_list"
@@ -224,7 +227,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="rices_ul">
 								<c:forEach var="rice" items="${riceList }" varStatus="i">
-									<li class="rices_li"><img id="rice${i.count}" name="${rice.imgName }" class="rices" draggable="true" ondragstart="drag(event)" src="resources/${rice.imgRealPath}"/></li>
+									<li class="rices_li"><img id="rice${i.count}" name="${rice.inNo }" class="rices" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/5_밥/${rice.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -240,7 +243,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="soup_ul">
 								<c:forEach var="soup" items="${soupList }" varStatus="i">
-									<li class="soups_li"><img id="soup${i.count}" name="${soup.imgName }" class="soups" draggable="true" ondragstart="drag(event)" src="resources/${soup.imgRealPath}"/></li>
+									<li class="soups_li"><img id="soup${i.count}" name="${soup.inNo }" class="soups" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/9_수프/${soup.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -256,7 +259,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="main_ul">
 								<c:forEach var="main" items="${mainList }" varStatus="i">
-									<li class="mains_li"><img id="main${i.count}" name="${main.imgName }" class="mains" draggable="true" ondragstart="drag(event)" src="resources/${main.imgRealPath}"/></li>
+									<li class="mains_li"><img id="main${i.count}" name="${main.inNo }" class="mains" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/6_메인/${main.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -272,7 +275,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="sub1_ul">
 								<c:forEach var="sub1" items="${sub1List }" varStatus="i">
-									<li class="sub1s_li"><img id="sub1${i.count}" name="${sub1.imgName }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/${sub1.imgRealPath}"/></li>
+									<li class="sub1s_li"><img id="sub1${i.count}" name="${sub1.inNo }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/7_서브1/${sub1.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -288,7 +291,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="sub2_ul">
 								<c:forEach var="sub2" items="${sub2List }" varStatus="i">
-									<li class="sub2s_li"><img id="sub2${i.count}" name="${sub2.imgName }" class="sub2s" draggable="true" ondragstart="drag(event)" src="resources/${sub2.imgRealPath}"/></li>
+									<li class="sub2s_li"><img id="sub2${i.count}" name="${sub2.inNo }" class="sub2s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/8_서브2/${sub2.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -304,7 +307,8 @@ table, tr, td {
 				</div>
 				<div class="buttons">
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
-					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
+					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;"/>
+					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
 				</div>
 			</div>
 		</div>
@@ -334,16 +338,6 @@ table, tr, td {
 				
 			});
 		});
-		function validate(){
-			var selectedCnt = $('.selected').length;
-			
-			if(selectedCnt > 4){
-				return true;
-			}else{
-				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
-				return false;
-			}
-		}
 		
 		$(function(){
 			$('.lunch4').click(function(){
@@ -569,6 +563,53 @@ table, tr, td {
 			    }
 			}
 		}
+		
+		
+		// insert하는 부분가기전에 선택된 메뉴들의 개수를 새서 부족하면 메시지 띄우기
+		function validate(){
+			var selectedCnt = $('.selected').length;
+			
+			if(selectedCnt > 4){
+				return true;
+			}else{
+				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
+				return false;
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		$(function(){
+		   $(".myOwnAddBtn").click(function() { 
+		        html2canvas($(".myOwnTable"), {
+		            onrendered: function(canvas) {
+		            	console.log(canvas);
+		            	$("#imgSrc").val(canvas.toDataURL("image/png"));
+		            	var imgSrc = $("#imgSrc").val();
+		            	
+		            	$("#formChange").attr("action", "imageCreate.do");
+		            	$(".myOwnInsertBtn").click();
+		            	
+		            	/* $.ajax({
+		            		type : "post",
+		            		data : {imgSrc: imgSrc},
+		            		url : "imageCreate.do",
+		            		success: function(data){
+		            			console.log("성공");
+		            		}, error: function(error){
+		            			console.log("실패");
+		            		}
+		            	}); */
+		            	
+ 		            	// getCanvas = canvas; // 주석
+		            	// upload(); // 주석
+		                /* canvas.toBlob(function(blob) {
+		                	console.log(blob);
+		                    saveAs(blob, 'image.png');
+		                }); */
+		            }
+		        });
+		   	});
+		});
 	</script>
 </body>
 </html>
