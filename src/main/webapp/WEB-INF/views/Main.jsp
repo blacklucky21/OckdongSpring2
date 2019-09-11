@@ -216,10 +216,11 @@
 		</p>
 		<ul class="prd_basic">
 		
-		<!-- 일단 임시로 6개 DB 넣으면 채울거 -->
+		
 		<c:forEach var="p" items="${ pList }">
 			<li>
 				<div class="box">
+				<input type="hidden" value="${ p.p_Id }"> 
 					<div class="img">
 						<img src="resources/img/products/${ p.PT_NAME }">
 					</div>
@@ -228,12 +229,12 @@
 							<span>${ p.P_NAME }</span>
 						</p>
 						<p class="price">
-						<span class="consumer">${p.P_PRICE }</span>
+						<span class="consumer">${p.P_PRICE } </span>
 						</p>
 						<p class="preview">
-							<span>좋아요 ${p.P_LIKE}</span>
+						<%-- 	<span>좋아요 ${p.P_LIKE}</span>
 							
-							<span>상품문의 100</span>
+							<span>상품문의 100</span> --%>
 						</p>
 					</div>
 				</div>

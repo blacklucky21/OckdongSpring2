@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.notice.model.vo.PageInfo;
 import com.junwo.ockdong.product.model.dao.ProductDAO;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
@@ -17,19 +17,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductDAO pDAO;
 	 
-	@Override
-	public int getListCount() {
-		
-		return pDAO.getListCount();
-	}
 
-	@Override
-	public ArrayList<Product> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 	@Override
 	public ArrayList<Product> selectList() {
 
@@ -107,6 +95,49 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<PictureList> selectPt(int p_Id) {
 		return pDAO.selectPt(p_Id);
+	}
+
+	// 상품 정보 수정하기
+	@Override
+	public int updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		return pDAO.updateProduct(p);
+	}
+
+	// 사진 수정 하기
+	@Override
+	public int updatePicture(ArrayList<PictureList> pList) {
+		// TODO Auto-generated method stub
+		return pDAO.updatePicture(pList);
+	}
+// =======================================================================================
+	// 페이징 하기 위해서 갯수 가지고 온다.
+	@Override
+	public int listproduct() {
+		return pDAO.listproduct();
+	}
+
+	@Override
+	public int listdo() {
+		return pDAO.listdo(); // 도시락 타입
+	}
+
+	@Override
+	public int listsal() {
+		return pDAO.listsal(); // 샐러드 타입
+	}
+
+	// 페이징 처리 하기 위해서 리스트와 함게 가지고 간다.
+	@Override
+	public ArrayList<Product> selectList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return pDAO.selectList(pi);
+	}
+
+	@Override
+	public ArrayList<Product> selectList(PageInfo pi, String string) {
+		
+		return pDAO.selectList(pi,string);
 	}
 
 

@@ -5,6 +5,7 @@
 		select *
 		from PRODUCT
 		where P_STATUS ='Y'
+		order by P_ID 
 	</select>
 
 	<select id ="selectProductList1" resultType="Product">
@@ -83,9 +84,8 @@
 		values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
 </insert>
 
-	
-	
-<!-- 등록부분 2개로 ================================================================= -->	
+
+<!-- 등록부분 2개로  끝================================================================= -->	
 <select id="selectList8"  resultType = "hashmap">
 	<![CDATA[
 	
@@ -130,10 +130,59 @@
 </select>
 
 
+<!-- 상품 수정 쿼리 -->
+
+<!--  -->
 
 
+<!-- ====================  페이징 갯수 가지고 가기  ====================================  -->
+<select id="listproduct"  resultType="_int" >
+	select count(*)
+	from PRODUCT
+	where P_STATUS = 'Y'
+</select>
+
+<select id="listdo"  resultType="_int">
+select count(*)
+	from PRODUCT
+	where P_STATUS = 'Y' and P_LUNCHTYPE = '도시락'
 
 
+</select>
+<select id="listsal"  resultType="_int">
+select count(*)
+	from PRODUCT
+	
+	where P_STATUS = 'Y' and P_LUNCHTYPE = '샐러드'
+</select>
+
+
+<select id="select" resultType="hashmap">
+<![CDATA[
+	select *
+	from (select *
+		  from PRODUCT
+		  	left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y'
+		  order by P_CREATEDATE desc)
+ 
+	 ]]>
+</select>
+
+<select id="selectType" parameterType="string" resultType="hashmap" >
+	
+	<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = 'string'
+		  order by P_CREATEDATE desc)
+ 
+	 ]]>
+
+</select>
 
 
 </mapper>
