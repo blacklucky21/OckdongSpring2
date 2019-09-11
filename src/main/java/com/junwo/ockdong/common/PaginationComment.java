@@ -11,6 +11,7 @@ public class PaginationComment {
 		int startPage;			//한번에 표시될 페이지 버튼의 시작할 페이지
 		int endPage;			//한번에 표시될 페이지 버튼의 끝나는 페이지
 		
+		
 		//총 페이지 수 계산
 		maxPage = (int)((double)listCount / pageLimit + 0.9);
 		

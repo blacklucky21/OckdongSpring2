@@ -65,10 +65,10 @@
 							
 							<tr class="heim">
 								<th class="head one">상품 이미지</th>
-								<td><div class="prim"><img id="titleImgArea" name="titleImg" src="resources/img/admin/plus1.png" style="width: 100%; height: 80%;"><span id="m1">대표이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s1">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s2">추가이미지</span></div></td>
-								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" src="resources/img/admin/plus2.png" style="width: 100%; height: 80%;"><span id="s3">추가이미지</span></div></td>
+								<td><div class="prim"><img id="titleImgArea" name="titleImg" style="width: 100%; height: 80%;" src="resources/img/admin/plus1.png"><span id="m1">대표이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" onerror="delImg(this);" style="width: 100%; height: 80%;"><span id="s1">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" onerror="delImg(this);" style="width: 100%; height: 80%;"><span id="s2">추가이미지</span></div></td>
+								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" onerror="delImg(this);" style="width: 100%; height: 80%;"><span id="s3">추가이미지</span></div></td>
 								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
 							</tr>
 							<tr style="height: 364px;">
@@ -123,9 +123,7 @@ $(function() {
 	$("#contentImgArea3").click(function() {
 		$("#thumbnailImg4").click();
 	});
-	$("#contentImgArea4").click(function() {
-		$("#thumbnailImg5").click();
-	});
+	
 });
 
 
@@ -162,6 +160,13 @@ function LoadImg(value, num) {
 // 사진 등록 되면
 
 
+
+function delImg(value){
+				value.src="resources/img/admin/plus2.png";
+				console.log(value);
+				$("#ingredientImg").val("");
+				$("#imgArea").css("border","1px solid black");
+			}
 
 
 
