@@ -33,13 +33,13 @@
 					<li class="products">
 					<input type="hidden" value="${ p.P_ID }"> 
 						<div class="p1">
-							<img src="resources/img/products/${ p.PT_NAME }" style="height: 540px;">
+							<img src="resources/img/products/${ p.PT_NAME }" style="width:560px; height: 540px;" onclick="detailform(${p.P_ID});">
 							<div class="exhibition_vis">
 								<!-- 조건 판매 상태가 만약 판매 중지 이면 나오게 한다. -->
 								<c:if test="${p.P_SELL eq 'N'}">
 								<div class="exhibition_vis_line">
 									<img src="resources/img/stop.png" alt="" class="i_p"
-										style="width: 84px; height: 30px;">
+										style="width: 84px; height: 30px;" >
 								</div>
 								</c:if>
 								
@@ -49,7 +49,7 @@
 
 
 							<div class="exhibition_infor">
-								<p class="exhibition_tit">${ p.P_NAME }</p>
+								<p class="exhibition_tit" onclick="detailform(${p.P_ID});">${ p.P_NAME }</p>
 								<p class="exhibition_price">
 									<strong>${p.P_PRICE } 원</strong>
 								</p>
@@ -106,5 +106,11 @@
 	</div>
 	<!-- ##################### 풋터 부분 ##################### -->
 	 <c:import url="../../footer/footer.jsp" /> 
+	  <script>
+	// 상세 페이지로 넘어가기
+	 function detailform(p_Id){
+	 	location.href="productDetail.do?p_Id="+p_Id;
+	 }
+	 </script>
 </body>
 </html>

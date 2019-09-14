@@ -23,6 +23,7 @@
 <body>
 <!-- ############### 헤더 부분 ############### -->
 	<c:import url="../../header/header.jsp" /> 
+	<h1 class="maintitle">전체 상품</h1>
 	<div class="main">
   		<div class="warp">
   			<div class="element-exhibition type3" style="left: 0%;top: 0%;width: 100%;height: 100%; z-index: 100;">
@@ -32,7 +33,7 @@
 					<li class="products">
 					<input type="hidden" value="${ p.P_ID }"> 
 						<div class="p1">
-							<img src="resources/img/products/${ p.PT_NAME }" style="height: 540px;">
+							<img src="resources/img/products/${ p.PT_NAME }" style="width:560px; height: 540px;" onclick="detailform(${p.P_ID});">
 							<div class="exhibition_vis">
 								<!-- 조건 판매 상태가 만약 판매 중지 이면 나오게 한다. -->
 								<c:if test="${p.P_SELL eq 'N'}">
@@ -48,7 +49,7 @@
 
 
 							<div class="exhibition_infor">
-								<p class="exhibition_tit">${ p.P_NAME }</p>
+								<p class="exhibition_tit" onclick="detailform(${p.P_ID});">${ p.P_NAME }</p>
 								<p class="exhibition_price">
 									<strong>${p.P_PRICE } 원</strong>
 								</p>
@@ -60,7 +61,7 @@
   		</div>
   		<!-- 페이징 처리  -->
 		<div class="w3-container" id="buttonTab">
-			<div class="w3-bar"	style="text-align: center; text-decoration:none; margin-bottom:30px">
+			<div class="w3-bar"	style="text-align: center; text-decoration:none; margin-bottom:7%;">
 			
 				 <!-- «이전  -->
 				 <c:if test="${ pi.currentPage <= 1 }">
@@ -105,5 +106,15 @@
 	</div>
 	<!-- ##################### 풋터 부분 ##################### -->
 	 <c:import url="../../footer/footer.jsp" /> 
+	 
+	 <script>
+	// 상세 페이지로 넘어가기
+	 function detailform(p_Id){
+	 	location.href="productDetail.do?p_Id="+p_Id;
+	 }
+
+	 </script>
+	 
+	 
 </body>
 </html>

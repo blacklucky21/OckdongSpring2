@@ -22,7 +22,8 @@
 		<c:import url="../adminheader.jsp" />
 			<div id="content"> <!-- 전체 범위  -->
 				<div class="content"><!-- nav 제외 범위 -->
-				<form action="updatePo.do" method="post" enctype="Multipart/form-data" id="location">
+				<form action="updatePo.do" method="post" enctype="Multipart/form-data" id="location" onsubmit="return chk();">
+				<!-- action="updatePo.do" -->
 				<!-- 상품 제목 -->
 					<div class="page_title_wrap">
 						<div class="page_tit">상품 수정</div>
@@ -319,6 +320,19 @@ function delImg(value){
 	consleo.log(value);
 	$(this).val("");
 }
+
+function chk(){
+	var img = $('#titleImgArea')[0];
+	alert(img);
+	if(img.src != ''){
+		alert('메인 이미지 존재함');
+		return false;
+	}else{
+		alert("사진 존재함");
+		return false;
+	}
+}
+
 
 </script>
 

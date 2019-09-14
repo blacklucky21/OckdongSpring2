@@ -83,7 +83,17 @@ public class ProductServiceImpl implements ProductService{
 		
 		return list;
 	}
+	
+	@Override
+	public ArrayList<Product> selectList8do() {
+		return pDAO.selectList8do();
+	}
 
+	@Override
+	public ArrayList<Product> selectList8sal() {
+		return pDAO.selectList8sal();
+	}
+// ===================================================
 	// 객체를 담아올 정보
 	@Override
 	public Product selectListUpdate(int p_Id) {
@@ -96,7 +106,9 @@ public class ProductServiceImpl implements ProductService{
 	public ArrayList<PictureList> selectPt(int p_Id) {
 		return pDAO.selectPt(p_Id);
 	}
+	
 
+// ===================================================
 	// 상품 정보 수정하기
 	@Override
 	public int updateProduct(Product p) {
@@ -130,15 +142,22 @@ public class ProductServiceImpl implements ProductService{
 	// 페이징 처리 하기 위해서 리스트와 함게 가지고 간다.
 	@Override
 	public ArrayList<Product> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
 		return pDAO.selectList(pi);
 	}
 
 	@Override
-	public ArrayList<Product> selectList(PageInfo pi, String string) {
-		
-		return pDAO.selectList(pi,string);
+	public ArrayList<Product> selectList2(PageInfo pi) {
+		return pDAO.selectList2(pi);
 	}
+
+	@Override
+	public ArrayList<Product> selectList3(PageInfo pi) {
+		return pDAO.selectList3(pi);
+	}
+
+
+
+	
 
 
 

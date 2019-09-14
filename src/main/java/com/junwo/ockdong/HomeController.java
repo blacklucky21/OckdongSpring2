@@ -60,10 +60,15 @@ public class HomeController {
 		 */
 		 
 		System.out.println("1");
-		ArrayList pList = pService.selectList8(1); // 판매중인 상품만 가지고 오기
+		ArrayList pList = pService.selectList8(1); // 판매중인 상품만 가지고 오기 신제품
+		ArrayList pList2 = pService.selectList8do(); // 도시락 8개
+		ArrayList pList3 = pService.selectList8sal(); // 샐러드 8개
+		
 		System.out.println("===================== 메인 =======================");
 		
 		mv.addObject("pList", pList);
+		mv.addObject("pList2",pList2);
+		mv.addObject("pList3",pList3);
 		
 		mv.setViewName("Main");
 

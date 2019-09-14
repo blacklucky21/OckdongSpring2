@@ -78,13 +78,23 @@ public class ProductDAO {
 	// 메인 게시판에 걸거 가지고 가기
 	public ArrayList selectList8() {
 		// TODO Auto-generated method stub
-		/* return (ArrayList)sqlSession.selectList("productMapper.selectList8"); */
-		return null;
+		return (ArrayList)sqlSession.selectList("productMapper.selectList8"); 
+		
 	}
 
 	public ArrayList pictureList() {
 		return (ArrayList)sqlSession.selectList("productMapper.pictureList");
 	}
+	
+	public ArrayList<Product> selectList8do() {
+		return (ArrayList)sqlSession.selectList("productMapper.selectList8do");
+	}
+
+
+	public ArrayList<Product> selectList8sal() {
+		return (ArrayList)sqlSession.selectList("productMapper.selectList8sal");
+	}
+
 // ===================================
 	
 	public ArrayList<Product> selectUpdate(int p_Id) {
@@ -142,13 +152,22 @@ public class ProductDAO {
 	}
 
 
-	public ArrayList<Product> selectList(PageInfo pi, String string) {
+	public ArrayList<Product> selectList2(PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("productMapper.selectType", string, rowBounds);
+		return (ArrayList)sqlSession.selectList("productMapper.selectType1", null, rowBounds);
 	}
 
+	public ArrayList<Product> selectList3(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("productMapper.selectType2", null, rowBounds);
+	}
+
+
+	
 
 
 
