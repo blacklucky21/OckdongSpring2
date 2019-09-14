@@ -60,7 +60,24 @@
 	</update>
 	
 	<insert id="insertRecipe" parameterType="map">
-		insert into MBLRECIPE values(SEQ_MBLRECIPE.NEXTVAL,#{racipeName},#{userId},#{numbers},#{fileName},DEFAULT,#{type})
+		insert into MBLRECIPE values(SEQ_MBLRECIPE.NEXTVAL,#{racipeName},#{userId},#{numbers},#{fileName},DEFAULT,#{type},DEFAULT)
 	</insert>
+	
+	<resultMap type="MBLRecipe" id="MBLRecipeAllList">
+		<id property="mblId" column="NBL_ID"/>
+		<result property="mblTitle" column="MBL_TITLE"/>
+		<result property="userId" column="USERID"/>
+		<result property="numbers" column="NUMBERS"/>
+		<result property="mblFileName" column="MBL_FILENAME"/>
+		<result property="createDate" column="MBL_CREATEDATE"/>
+		<result property="mblType" column="MBL_TYPE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="getAllRecipe" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where status='Y'
+	</select>
 	
 </mapper>

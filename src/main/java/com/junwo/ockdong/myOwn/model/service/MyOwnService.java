@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
 public interface MyOwnService {
 
@@ -20,6 +21,8 @@ public interface MyOwnService {
 	int update(Ingredient in);
 
 	int insertRecipe(Map<String, String> list);
+
+	ArrayList<MBLRecipe> getAllRecipe();
 
 
 

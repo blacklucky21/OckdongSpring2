@@ -518,6 +518,7 @@ table, tr, td {
 				return false;
 			}
 		}
+		
 	</script>
 	<script type="text/javascript">
 		$(function(){
