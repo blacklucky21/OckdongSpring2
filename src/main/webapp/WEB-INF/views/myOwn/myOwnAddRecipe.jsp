@@ -78,6 +78,8 @@
 				<div class="imgArea">
 					<input type="hidden" name="fileName" id="fileName" value="${fileName }.png"/>
 					<img src="resources/img/Recipe/${fileName }.png" style="width: 600px; height: 480px;"/>
+					<% String str = (String)request.getAttribute("fileName");
+					   System.out.println("화면으로 넘어온 fileName : " + str);%>
 				</div>
 				<div class="Ingredients">
 					<table class="table">

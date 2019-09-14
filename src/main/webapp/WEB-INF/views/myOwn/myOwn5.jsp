@@ -70,7 +70,6 @@ table, tr, td {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	/* position: absolute; */
 	overflow: hidden;
 	display: inline-block;
 	width: 500px;
@@ -139,9 +138,8 @@ table, tr, td {
 } */
 .bottom {
 	width: 70%;
-	height: 200px;
+	height: 100px;
 	margin-left: 15%;
-	margin-top: 5%;
 	text-align: center;
 }
 .buttons input[type=button], .buttons input[type=submit]{
@@ -171,11 +169,11 @@ table, tr, td {
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="../header/header.jsp" />
 
-	<div style="width: 100%; height: 1700px; margin: 5% 0;">
+	<div style="width: 100%; height: 1200px; margin: 0 5% 0 0;">
 		<form id="formChange" action="myOwnInsert.do" method="post">
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
-				<h1 style="font-family: 'Single Day', cursive;">나만의 도시락</h1>
+				<h1 style="font-family: 'Single Day', cursive; margin:0">나만의 도시락</h1>
 				<img src="resources/img/myOwn/5찬예시및설명.png" style="width: 70%; border-radius: 15px;">
 			</div>
 			<div
@@ -315,7 +313,6 @@ table, tr, td {
 		</form>
 		<br clear="all">
 	</div>
-	<c:import url="../footer/footer.jsp" />
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
