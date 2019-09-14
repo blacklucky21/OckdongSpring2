@@ -159,8 +159,6 @@ function LoadImg(value, num) {
 
 // 사진 등록 되면
 
-
-
 function delImg(value){
 				value.src="resources/img/admin/plus2.png";
 				console.log(value);

@@ -128,7 +128,32 @@
 	from PICTURELIST
 	where PT_STATUS = 'Y' and  P_ID = #{p_Id}
 </select>
-
+<select id="selectList8do" resultType="hashmap">
+<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '도시락'
+		  order by P_LIKE desc)
+		   where rownum < 9
+ 
+	 ]]>
+</select>
+<select id="selectList8sal" resultType="hashmap">
+<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '샐러드'
+		  order by P_LIKE desc)
+		   where rownum < 9
+ 
+	 ]]>
+</select>
 
 <!-- 상품 수정 쿼리 -->
 
@@ -169,7 +194,7 @@ select count(*)
 	 ]]>
 </select>
 
-<select id="selectType" parameterType="string" resultType="hashmap" >
+<select id="selectType1" resultType="hashmap" >
 	
 	<![CDATA[
 	
@@ -177,12 +202,29 @@ select count(*)
 	from (select *
 		  from PRODUCT
 		  left join PICTURELIST using(P_ID)
-		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = 'string'
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '도시락'
 		  order by P_CREATEDATE desc)
  
 	 ]]>
 
 </select>
+<select id="selectType2" resultType="hashmap" >
+	
+	<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '샐러드'
+		  order by P_LIKE )
+		   where rownum < 9
+ 
+	 ]]>
+
+</select>
+
+
 
 
 </mapper>

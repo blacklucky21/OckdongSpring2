@@ -34,7 +34,8 @@ public interface ProductService {
 	// 메인 화면 리스트 8개 가지고 가기
 	// 사진이랑 리스트 다 가지고 온다.
 	ArrayList selectList8(int i); // 딱 8개만 가지고 오기 때문에 사용 못함 메인에서 밖에 사용 못함
-
+	ArrayList<Product> selectList8do(); // 도시락 8개
+	ArrayList<Product> selectList8sal(); // 샐러드 8개
 
 	// 정보 담아오기
 	Product selectListUpdate(int p_Id);
@@ -56,7 +57,9 @@ public interface ProductService {
 
 	ArrayList<Product> selectList(PageInfo pi); // 상품 전체 가져가기 위한 메소드
 	
-	ArrayList<Product> selectList(PageInfo pi, String string); // 상품에서 카테고리로 나눠 가져가는 메소드
+	ArrayList<Product> selectList2(PageInfo pi); 
+	ArrayList<Product> selectList3(PageInfo pi);
+	
 	
 	
 	
