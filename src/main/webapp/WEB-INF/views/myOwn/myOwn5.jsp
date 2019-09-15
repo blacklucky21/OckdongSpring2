@@ -21,7 +21,7 @@
 	width: 20px;
 	height: 20px;
 	float: right;
-	margin: 2px 3%;
+	margin: 2px 2%;
 }
 
 .side_menu {
@@ -351,6 +351,8 @@ table, tr, td {
 				if($("+dd",this).css("display")=="none"){
 					$("dd").slideUp("slow");
 					$("+dd",this).slideDown("slow");
+				}else{
+					$("+dd",this).slideUp("slow");
 				}
 			});
 		});
