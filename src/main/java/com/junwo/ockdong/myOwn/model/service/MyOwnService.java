@@ -28,6 +28,8 @@ public interface MyOwnService {
 
 	int deleteRecipe(int mblId);
 
+	ArrayList<MBLRecipe> getUserRecipe(String userId);
+
 
 
 }

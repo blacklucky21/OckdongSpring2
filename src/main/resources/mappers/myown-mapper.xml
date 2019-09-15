@@ -89,5 +89,9 @@
 		update mblrecipe set status='N' where mbl_id=#{mblId} and status = 'Y'
 	</update>
 	
+	<select id="getUserRecipe" parameterType="String" resultMap="MBLRecipeAllList">
+		select * from mblrecipe where status='Y' and userid=#{userId}
+	</select>
+	
 	
 </mapper>
