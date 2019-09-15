@@ -48,4 +48,12 @@ public class MyOwnDAO {
 		return (ArrayList)sqlSession.selectList("myOwnMapper.getAllRecipe");
 	}
 
+	public MBLRecipe searchRecipeOne(String mblId) {
+		return sqlSession.selectOne("myOwnMapper.searchRecipeOne", mblId);
+	}
+
+	public int deleteRecipe(int mblId) {
+		return sqlSession.update("myOwnMapper.deleteRecipe", mblId);
+	}
+
 }

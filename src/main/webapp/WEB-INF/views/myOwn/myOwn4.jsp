@@ -69,7 +69,6 @@ table, tr, td {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	/* position: absolute; */
 	overflow: hidden;
 	display: inline-block;
 	width: 500px;
@@ -130,7 +129,7 @@ table, tr, td {
 } */
 .bottom {
 	width: 70%;
-	height: 100px;
+	height: 50px;
 	margin-left: 15%;
 	text-align: center;
 }
@@ -166,7 +165,7 @@ table, tr, td {
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="../header/header.jsp" />
 
-	<div style="width: 100%; height: 1000px; margin: 5% 0;">
+	<div style="width: 100%; height: 1000px;">
 		<form id="formChange" action="myOwnInsert.do" method="post">
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
@@ -275,16 +274,16 @@ table, tr, td {
 				</dl>
 			</div>
 			<div class="bottom">
-				<div class="payment">
+				<!-- <div class="payment">
 					<span>가격 : 4000원</span>
-				</div>
+				</div> -->
 				<div class="buttons">
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
 					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
 				</div>
-				<br>
-				<div align="center">(주)옥동도시락</div>
+<!-- 				<br>
+				<div align="center">(주)옥동도시락</div> -->
 			</div>
 		</div>
 		</form>
@@ -369,7 +368,7 @@ table, tr, td {
 			$(".viewport img").css({width:width, height:height});
 			$(".viewport").css({width:width*4, height:height, overflow:"hidden"});
 			$(".viewport .soups_ul").css({width:width * mainLength});
-			$(".viewport li").css({width:width, height:height,float:"left"});
+			$(".viewport li").css({width:width, height:height, float:"left"});
 			
 			var m = mainLength%4>0?1:0;
 			console.log("나머지 값은 : " + m);

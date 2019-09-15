@@ -28,6 +28,7 @@ import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.Product;
 
@@ -355,7 +356,78 @@ public class AdminController {
 		gson.toJson(inList, response.getWriter());
 
 	}
-
+	
+	@RequestMapping("recipeDetail.do")
+	public ModelAndView recipeDetail(ModelAndView mv, @RequestParam("mblId") String mblId) {
+		
+		System.out.println(mblId);
+		
+		MBLRecipe mblR = moService.searchRecipeOne(mblId);
+		
+		System.out.println(mblR);
+		
+		String[] list = mblR.getNumbers().split("/");
+		
+		Ingredient in = null;
+		
+		Ingredient rice = null;
+		Ingredient sub1 = null;
+		Ingredient sub2 = null;
+		Ingredient soup = null;
+		Ingredient main = null;
+		
+		for(int i = 0; i < list.length; i++) {
+			in = moService.selectOne(Integer.parseInt(list[i]));
+			
+			switch(in.getInType()) {
+				case "1_밥": case "5_밥":
+					rice = in;
+					break;
+				case "2_서브1": case "7_서브1":
+					sub1 = in;
+					break;
+				case "3_서브2": case "8_서브2":
+					sub2 = in;
+					break;
+				case "4_메인": case "6_메인":
+					main = in;
+					break;
+				case "9_수프":
+					soup = in;
+					break;
+					
+			}
+			
+		}
+		
+		mv.addObject("rice",rice);
+		mv.addObject("sub1",sub1);
+		mv.addObject("sub2",sub2);
+		mv.addObject("main",main);
+		mv.addObject("soup",soup);
+		mv.addObject("mbl",mblR);
+		mv.setViewName("admin/mydo/myOwn_RecipeOne");
+		return mv;
+	}
+	
+	@RequestMapping("deleteRecipe.do")
+	public String deleteRecipe(@RequestParam("mblId") int mblId) {
+		
+		int result = moService.deleteRecipe(mblId);
+		
+		if(result > 0) {
+			return "redirect:allRecipe.do";
+		}else {
+			return null;
+		}
+		
+	}
+	
+	@RequestMapping("searchRecipe.do")
+	public void searchRecipe(HttpServletResponse response, String sContent, String type) {
+		
+	}
+	
 	// 상품관리 상품등록
 	@RequestMapping("productsInsert.do")
 	public String productsInert() {

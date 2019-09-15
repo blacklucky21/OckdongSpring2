@@ -121,8 +121,11 @@ public class MyOwnController {
 		}
 
 		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
-
-		return null;
+		
+		
+		mv.setViewName("myOwn/myOwnPayment");
+		
+		return mv;
 	}
 
 	@RequestMapping("myOwnAddRecipe.do")
