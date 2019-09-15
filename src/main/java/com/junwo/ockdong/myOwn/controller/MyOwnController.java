@@ -308,4 +308,17 @@ public class MyOwnController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("myOwnList.me")
+	public ModelAndView myOwnListMyPage(ModelAndView mv, HttpSession session) {
+		
+		Member member = (Member)session.getAttribute("loginUser");
+		
+		ArrayList<MBLRecipe> rList = service.getUserRecipe(member.getUserId());
+		if(rList != null) {
+			mv.addObject("rList",rList);
+		}
+		mv.setViewName("myOwn/myPage_RecipeList");
+		return mv;
+	}
 }
