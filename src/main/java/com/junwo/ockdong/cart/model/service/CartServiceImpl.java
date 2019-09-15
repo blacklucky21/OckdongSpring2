@@ -67,6 +67,13 @@ public class CartServiceImpl implements CartService{
 		return cDAO.SelectPayMem(checkno);
 	}
 
+	@Override
+	public int checkNum() {
+		// TODO Auto-generated method stub
+		return cDAO.plzPayNum();
+	}
+
+
 
 
 	

@@ -66,6 +66,12 @@ public class CartDAO {
 	}
 
 
+	public int plzPayNum() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.PayNum");
+	}
+
+
 
 
 
