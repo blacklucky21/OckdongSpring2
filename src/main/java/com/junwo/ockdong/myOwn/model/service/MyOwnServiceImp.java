@@ -56,4 +56,14 @@ public class MyOwnServiceImp implements MyOwnService{
 		return moDAO.getAllRecipe();
 	}
 
+	@Override
+	public MBLRecipe searchRecipeOne(String mblId) {
+		return moDAO.searchRecipeOne(mblId);
+	}
+
+	@Override
+	public int deleteRecipe(int mblId) {
+		return moDAO.deleteRecipe(mblId);
+	}
+
 }

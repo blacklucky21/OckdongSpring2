@@ -24,6 +24,10 @@ public interface MyOwnService {
 
 	ArrayList<MBLRecipe> getAllRecipe();
 
+	MBLRecipe searchRecipeOne(String mblId);
+
+	int deleteRecipe(int mblId);
+
 
 
 }

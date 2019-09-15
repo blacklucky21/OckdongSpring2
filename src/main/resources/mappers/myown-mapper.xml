@@ -64,7 +64,7 @@
 	</insert>
 	
 	<resultMap type="MBLRecipe" id="MBLRecipeAllList">
-		<id property="mblId" column="NBL_ID"/>
+		<id property="mblId" column="MBL_ID"/>
 		<result property="mblTitle" column="MBL_TITLE"/>
 		<result property="userId" column="USERID"/>
 		<result property="numbers" column="NUMBERS"/>
@@ -79,5 +79,15 @@
 		from mblrecipe
 		where status='Y'
 	</select>
+	
+	
+	<select id="searchRecipeOne" resultMap="MBLRecipeAllList">
+		select * from mblrecipe where mbl_id=#{mblId}
+	</select>
+	
+	<update id="deleteRecipe">
+		update mblrecipe set status='N' where mbl_id=#{mblId} and status = 'Y'
+	</update>
+	
 	
 </mapper>
