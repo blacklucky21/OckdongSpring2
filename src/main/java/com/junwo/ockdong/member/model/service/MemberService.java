@@ -57,6 +57,10 @@ public interface MemberService {
 
 
 
+	int updatePwd(Member m);
+
+
+
 
 	
 

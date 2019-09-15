@@ -1,5 +1,7 @@
 package com.junwo.ockdong.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,13 +126,37 @@ public class MemberController {
 	// 비밀번호 변경 화면 이동
 	@RequestMapping("updatePwd_myPage.me")
 	public String updatePwd_myPage(){
-		return "myPage/member/updatePwd_myPage";
+		return "myPage/updatePwd/updatePwd_myPage";
+	}
+	
+	// 비밀번호 변경 눌렀을 경우
+	@RequestMapping("updatePwd.me")
+	public String memberPwdUpdate(HttpSession session,
+								  @RequestParam("password") String password,
+								  @RequestParam("newPwd1") String newPwd1) {
+		Member m = (Member)session.getAttribute("loginUser");
+		
+		if(bCryptPasswordEncoder.matches(password, m.getPassword())) {
+			
+			m.setPassword(bCryptPasswordEncoder.encode(newPwd1));
+			
+			int result = mService.updatePwd(m);
+			
+			if(result > 0) {
+				return "member/myPage/myPage";
+			}else {
+				throw new MemberException("비밀번호 변경 실패");
+			}
+			
+		}else {
+			throw new MemberException("비밀번호가 일치하지 않습니다.");
+		}
 	}
 	
 	// 회원탈퇴 화면 이동
 	@RequestMapping("memberOutView.me")
 	public String memberOutView() {
-		return "myPage/member/myPage_memberOut";
+		return "myPage/memberOut/myPage_memberOut";
 	}
 	// 회원탈퇴 눌렀을 경우
 	@RequestMapping("mdelete.me")

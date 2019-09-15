@@ -105,6 +105,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int updatePwd(Member m) {
+		return mDAO.updatePwd(m);
+	}
+
+
 
 
 
