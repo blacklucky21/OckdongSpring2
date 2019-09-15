@@ -20,7 +20,7 @@
 	width: 20px;
 	height: 20px;
 	float: right;
-	margin: 2px 3%;
+	margin: 2px 2%;
 }
 
 .side_menu {
@@ -69,7 +69,6 @@ table, tr, td {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	/* position: absolute; */
 	overflow: hidden;
 	display: inline-block;
 	width: 500px;
@@ -130,7 +129,7 @@ table, tr, td {
 } */
 .bottom {
 	width: 70%;
-	height: 100px;
+	height: 50px;
 	margin-left: 15%;
 	text-align: center;
 }
@@ -166,7 +165,7 @@ table, tr, td {
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="../header/header.jsp" />
 
-	<div style="width: 100%; height: 1000px; margin: 5% 0;">
+	<div style="width: 100%; height: 1000px;">
 		<form id="formChange" action="myOwnInsert.do" method="post">
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
@@ -203,7 +202,7 @@ table, tr, td {
 				</div>
 				<!-- 이미지 캡쳐한것을 임시로 저장할 부분 -->
 				<div class="buttons" style="text-align:center;">
-					<input type="hidden" name="imgSrc" id="imgSrc"/>
+					<input type="hidden" class="imgSrc" name="imgSrc" id="imgSrc"/>
 				</div>
 			</div>
 			<div class="acodian_menu_list"
@@ -275,16 +274,17 @@ table, tr, td {
 				</dl>
 			</div>
 			<div class="bottom">
-				<div class="payment">
+				<!-- <div class="payment">
 					<span>가격 : 4000원</span>
-				</div>
+				</div> -->
 				<div class="buttons">
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
 					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
+					<input class="createImg" type="hidden">
 				</div>
-				<br>
-				<div align="center">(주)옥동도시락</div>
+<!-- 				<br>
+				<div align="center">(주)옥동도시락</div> -->
 			</div>
 		</div>
 		</form>
@@ -294,11 +294,7 @@ table, tr, td {
 <%-- 	<c:import url="../footer/footer.jsp" /> --%>
 
 
-
-
-
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript"src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		/* $(".lunch_size").click(function() {
 			var src = $(this).attr('src');
@@ -332,6 +328,8 @@ table, tr, td {
 				if($("+dd",this).css("display")=="none"){
 					$("dd").slideUp("slow");
 					$("+dd",this).slideDown("slow");
+				}else{
+					$("+dd",this).slideUp("slow");
 				}
 			});
 		});
@@ -369,7 +367,7 @@ table, tr, td {
 			$(".viewport img").css({width:width, height:height});
 			$(".viewport").css({width:width*4, height:height, overflow:"hidden"});
 			$(".viewport .soups_ul").css({width:width * mainLength});
-			$(".viewport li").css({width:width, height:height,float:"left"});
+			$(".viewport li").css({width:width, height:height, float:"left"});
 			
 			var m = mainLength%4>0?1:0;
 			console.log("나머지 값은 : " + m);
@@ -505,19 +503,24 @@ table, tr, td {
 			}
 		}
 		
-		
-		
 		// insert하는 부분가기전에 선택된 메뉴들의 개수를 새서 부족하면 메시지 띄우기
 		function validate(){
 			var selectedCnt = $('.selected').length;
-			
 			if(selectedCnt > 3){
-				return true;
+				if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
+					console.log("비어있음");
+					$(".createImg").click();
+				}else{
+					console.log("안비어있음");
+					return true;
+				}
 			}else{
 				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
 				return false;
 			}
+			return false;
 		}
+		
 	</script>
 	<script type="text/javascript">
 		$(function(){
@@ -551,6 +554,18 @@ table, tr, td {
 		            }
 		        });
 		   	});
+		   $(".createImg").click(function(){
+			   html2canvas($(".myOwnTable"), {
+					onrendered: function(canvas) {
+						$("#imgSrc").val(canvas.toDataURL("image/png"));
+						console.log("이미지 생성됨");
+						console.log($(".imgSrc").val());
+						
+						$(".myOwnInsertBtn").click();
+					}
+				});
+		   });
+		   
 		});
 	</script>
 </body>

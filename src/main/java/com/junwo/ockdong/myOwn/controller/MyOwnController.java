@@ -11,10 +11,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
 @Controller
 public class MyOwnController {
@@ -106,23 +106,49 @@ public class MyOwnController {
 		return mv;
 
 	}
-
+	
+	//결제 페이지로 이동
 	@RequestMapping("myOwnInsert.do")
-	public ModelAndView myOwnInsert(ModelAndView mv, @RequestParam("selectedRice") String rice,
+	public ModelAndView myOwnInsert(ModelAndView mv,
+			@RequestParam("imgSrc") String imgSrc,
+			@RequestParam("selectedRice") int rice,
 			@RequestParam(value = "selectedSoup", required = false) String soup,
-			@RequestParam("selectedMain") String main, @RequestParam("selectedSub1") String sub1,
-			@RequestParam("selectedSub2") String sub2) {
+			@RequestParam("selectedMain") int main,
+			@RequestParam("selectedSub1") int sub1,
+			@RequestParam("selectedSub2") int sub2,
+			HttpServletRequest request) throws IOException {
+		
+		System.out.println("myOwnInsert.do로 들어옴");
+		System.out.println("imgSrc : " + imgSrc);
+		
+		String fileName = CreateRecipe(imgSrc, request);
+		
+		System.out.println("fileName : " + fileName);
+		
 		System.out.println("Controller > myOwnInsert()");
-
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		Ingredient riceIn = service.selectOne(rice);
+		Ingredient mainIn = service.selectOne(main);
+		Ingredient sub1In = service.selectOne(sub1);
+		Ingredient sub2In = service.selectOne(sub2);
+		Ingredient soupIn = null;
 		if (soup != null) {
 			System.out.println("5찬");
+			soupIn = service.selectOne(Integer.parseInt(soup));
 		} else {
 			System.out.println("4찬");
 		}
 
-		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
-
-		return null;
+		mv.addObject("rice",riceIn);
+		mv.addObject("main",mainIn);
+		mv.addObject("sub1",sub1In);
+		mv.addObject("sub2",sub2In);
+		mv.addObject("soup",soupIn);
+		mv.addObject("fileName",fileName);
+		mv.setViewName("myOwn/myOwnPayment");
+		
+		return mv;
 	}
 
 	@RequestMapping("myOwnAddRecipe.do")
@@ -134,7 +160,9 @@ public class MyOwnController {
 	public String myOwnPayment() {
 		return "myOwn/myOwnPayment";
 	}
-
+	
+	
+	//이미지 만들면서 추가 페이지로 이동
 	@RequestMapping("imageCreate.do")
 	public ModelAndView createImage(ModelAndView mv,
 									@RequestParam("imgSrc") String imgSrc,
@@ -190,8 +218,7 @@ public class MyOwnController {
 							   HttpServletRequest request) throws IOException {
 		FileOutputStream stream = null;
 		String fileName = "";
-
-		System.out.println("imgSrc : " + imgSrc);
+		
 		try {
 			System.out.println("binary file " + imgSrc);
 			if (imgSrc == null || imgSrc == "") {
@@ -205,6 +232,7 @@ public class MyOwnController {
 			
 			String root = request.getSession().getServletContext().getRealPath("resources");
 			String savePath = root + "\\img\\Recipe";
+			System.out.println("savePath : " + savePath);
 			File folder = new File(savePath);
 			
 			stream = new FileOutputStream(folder + "\\" + fileName + ".png");
@@ -226,6 +254,9 @@ public class MyOwnController {
 							   @RequestParam("sub1No") int sub1No,
 							   @RequestParam("sub2No") int sub2No,
 							   HttpSession session){
+		
+		System.out.println("recipeInsert.do에서의 fileName : " + fileName);
+		
 		Member member = (Member)session.getAttribute("loginUser");
 		System.out.println(member);
 		
@@ -239,18 +270,20 @@ public class MyOwnController {
 		list.put("userId", member.getUserId());
 		list.put("fileName", fileName);
 		list.put("racipeName", racipeName);
+		System.out.println("soupNo :" + soupNo);
 		
-		if(soupNo != null && soupNo != "") {
+		
+		if(soupNo != null && soupNo !="") {
 			System.out.println("soupNo : " + soupNo);
 			soup = Integer.parseInt(soupNo);
 			System.out.println("soup : " + soup);
 			numbers = riceNo + "/" + soup + "/" + mainNo + "/" + sub1No + "/" + sub2No;
-			list.put("type", "4찬");
+			list.put("type", "5찬");
 			list.put("numbers", numbers);
 			result = service.insertRecipe(list);
 		}else {
 			numbers = riceNo + "/" + mainNo + "/" + sub1No + "/" + sub2No;
-			list.put("type", "5찬");
+			list.put("type", "4찬");
 			list.put("numbers", numbers);
 			result = service.insertRecipe(list);
 		}
@@ -264,5 +297,15 @@ public class MyOwnController {
 		}
 	}
 	
-	
+	@RequestMapping("allRecipe.do")
+	public ModelAndView allRecipe(ModelAndView mv) {
+		
+		ArrayList<MBLRecipe> rList = service.getAllRecipe();
+		
+		
+		mv.addObject("rList", rList);
+		mv.setViewName("admin/mydo/myOwn_Recipe");
+		
+		return mv;
+	}
 }

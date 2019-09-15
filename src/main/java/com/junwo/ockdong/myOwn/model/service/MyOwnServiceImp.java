@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.myOwn.model.dao.MyOwnDAO;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
 @Service
 public class MyOwnServiceImp implements MyOwnService{
@@ -48,6 +49,21 @@ public class MyOwnServiceImp implements MyOwnService{
 	@Override
 	public int insertRecipe(Map<String, String> list) {
 		return moDAO.insertRecipe(list);
+	}
+
+	@Override
+	public ArrayList<MBLRecipe> getAllRecipe() {
+		return moDAO.getAllRecipe();
+	}
+
+	@Override
+	public MBLRecipe searchRecipeOne(String mblId) {
+		return moDAO.searchRecipeOne(mblId);
+	}
+
+	@Override
+	public int deleteRecipe(int mblId) {
+		return moDAO.deleteRecipe(mblId);
 	}
 
 }

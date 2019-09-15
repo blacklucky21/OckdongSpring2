@@ -21,7 +21,7 @@
 	width: 20px;
 	height: 20px;
 	float: right;
-	margin: 2px 3%;
+	margin: 2px 2%;
 }
 
 .side_menu {
@@ -70,7 +70,6 @@ table, tr, td {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	/* position: absolute; */
 	overflow: hidden;
 	display: inline-block;
 	width: 500px;
@@ -139,9 +138,8 @@ table, tr, td {
 } */
 .bottom {
 	width: 70%;
-	height: 200px;
+	height: 50px;
 	margin-left: 15%;
-	margin-top: 5%;
 	text-align: center;
 }
 .buttons input[type=button], .buttons input[type=submit]{
@@ -171,11 +169,11 @@ table, tr, td {
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="../header/header.jsp" />
 
-	<div style="width: 100%; height: 1700px; margin: 5% 0;">
+	<div style="width: 100%; height: 1200px; margin: 0 5% 0 0;">
 		<form id="formChange" action="myOwnInsert.do" method="post">
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
-				<h1 style="font-family: 'Single Day', cursive;">나만의 도시락</h1>
+				<h1 style="font-family: 'Single Day', cursive; margin:0">나만의 도시락</h1>
 				<img src="resources/img/myOwn/5찬예시및설명.png" style="width: 70%; border-radius: 15px;">
 			</div>
 			<div
@@ -302,20 +300,20 @@ table, tr, td {
 				</dl>
 			</div>
 			<div class="bottom">
-				<div class="payment">
+				<!-- <div class="payment">
 					<span>가격 : 5000원</span>
-				</div>
+				</div> -->
 				<div class="buttons">
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;"/>
 					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
+					<input class="createImg" type="hidden">
 				</div>
 			</div>
 		</div>
 		</form>
 		<br clear="all">
 	</div>
-	<c:import url="../footer/footer.jsp" />
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
@@ -354,6 +352,8 @@ table, tr, td {
 				if($("+dd",this).css("display")=="none"){
 					$("dd").slideUp("slow");
 					$("+dd",this).slideDown("slow");
+				}else{
+					$("+dd",this).slideUp("slow");
 				}
 			});
 		});
@@ -570,11 +570,18 @@ table, tr, td {
 			var selectedCnt = $('.selected').length;
 			
 			if(selectedCnt > 4){
-				return true;
+				if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
+					console.log("비어있음");
+					$(".createImg").click();
+				}else{
+					console.log("안비어있음");
+					return true;
+				}
 			}else{
 				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
 				return false;
 			}
+			return false;
 		}
 	</script>
 	<script type="text/javascript">
@@ -609,6 +616,17 @@ table, tr, td {
 		            }
 		        });
 		   	});
+		   $(".createImg").click(function(){
+			   html2canvas($(".myOwnTable"), {
+					onrendered: function(canvas) {
+						$("#imgSrc").val(canvas.toDataURL("image/png"));
+						console.log("이미지 생성됨");
+						console.log($(".imgSrc").val());
+						
+						$(".myOwnInsertBtn").click();
+					}
+				});
+		   });
 		});
 	</script>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
 @Repository
 public class MyOwnDAO {
@@ -41,6 +42,18 @@ public class MyOwnDAO {
 
 	public int insertRecipe(Map<String, String> list) {
 		return sqlSession.update("myOwnMapper.insertRecipe", list);
+	}
+
+	public ArrayList<MBLRecipe> getAllRecipe() {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.getAllRecipe");
+	}
+
+	public MBLRecipe searchRecipeOne(String mblId) {
+		return sqlSession.selectOne("myOwnMapper.searchRecipeOne", mblId);
+	}
+
+	public int deleteRecipe(int mblId) {
+		return sqlSession.update("myOwnMapper.deleteRecipe", mblId);
 	}
 
 }

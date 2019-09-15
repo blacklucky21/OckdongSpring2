@@ -14,6 +14,7 @@
 </head>
 <body>
 	<c:import url="../header/header.jsp"/>
+	
 	<div class="content" style="width:100%; text-align:center">
 	
 	<div class="order-page result-page" style="display:inline-block">
@@ -113,7 +114,144 @@
                    
                 </div>
             </div>
+            <c:set var="pm" value="${paymem}"/>
+             <h3>주문자 정보 확인</h3>
+                    <div class="table1 orderplz" >
+                        <table>
+                            <colgroup>
+                                <col style="width:133px;">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th class="ta-l required" aria-required="true">주문하시는 분</th>
+                                <td>
+                                    <div class="txt-field hs" style="width:160px;">
+                                        <input type="text" name="payname" value="${pm.payname }" data-pattern="gdEngKor" maxlength="20" class="text">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l">전화번호</th>
+                                <td>
+                                    <span class="txt-field hs" style="width:160px;">
+                                        <input type="text" id="phoneNum" name="payphone" value="${pm.payphone }" maxlength="20" class="text">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l required" aria-required="true">휴대폰 번호</th>
+                                <td>
+                                    <span class="txt-field hs" style="width:160px;">
+                                        <input type="text" id="mobileNum" name="paycellphone" value="${pm.paycellphone}" maxlength="20" class="text">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l required" aria-required="true">이메일</th>
+                                <td>
+                                    <div class="email" style="display:inline">
+                                        <span class="txt-field hs" style="width:250px;">
+                                            <input type="text" name="orderEmail1" value="${pm.payemail }" class="text orderEmail">
+                                           
+                                        </span>
+                                
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+            
+ <h3 style="margin-top:60px;">배송지 확인</h3>
+                    <div class="table1 orderplz orderCheckTable">
+                        <table>
+                            <colgroup>
+                                <col style="width:133px;">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                         
+                            <tr>
+                                <th class="ta-l required" aria-required="true">받으실분</th>
+                                <td>
+                                    <div class="txt-field hs" style="width:160px;">
+                                        <input type="text" name="receiverName" value="${pm.receiverName}" data-pattern="gdEngKor" maxlength="20" class="text" readonly="readonly">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l required" aria-required="true">받으실 곳</th>
+                                <td>
+                                    <div class="post" style="width:auto; display:flex">
+                                        <div class="txt-field hs" style="width:100px;">
+                                            <input type="text" name="receiverZonecode" id="receiverZonecode" placeholder="우편번호"value="${pm.payaddress}" readonly="readonly" style="width:80px; " class="text" >
+                                            <input type="hidden" name="receiverZipcode" value="" readonly="readonly">
+                                            <span id="receiverZipcodeText" class="text" ></span>
+                                               
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="sa">
+                                        <span class="txt-field hs" style="width:400px;">
+                                            <input type="text" name="receiverAddress" readonly="readonly"id="receiverAddress" value="" readonly="readonly" placeholder="기본주소"class="text">
+                                        </span>
+                                        <span class="txt-field hs" style="width:300px;">
+                                            <input type="text" name="receiverAddressSub" readonly="readonly"value="" class="text receiverAddressSub" placeholder="상세주소">
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l">전화번호</th>
+                                <td>
+                                    <span class="txt-field hs" style="width:160px;">
+                                        <input type="text" id="receiverPhone" readonly="readonly"name="receiverPhone" value="${pm.receiverPhone}" class="text">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l required" aria-required="true">휴대폰 번호</th>
+                                <td>
+                                    <span class="txt-field hs" style="width:160px;">
+                                        <input type="text" id="receiverCellPhone" readonly="readonly"name="receiverCellPhone" value="${pm.receiverCellPhone}" class="text">
+                                    </span>
+                                </td>
+                            </tr>   
+                            <tr>
+                                <th class="ta-l">기사에게 남길말</th>
+                                <td>
+                                    <div class="txt-field hs">
+                                        <input type="text" name="orderMemo" readonly="readonly"value="${pm.orderMemo}" class="text">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l">배송 예약 날짜 </th>
+                                <td>
+                                    <span class="txt-field hs form-element">
+                                  		<input type="text" class="text delivaryDate" readonly="readonly" id="delivaryDate" value="">
+                                  	
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="ta-l">배송 예약 시간 </th>
+                                <td>
+                                    <span class="txt-field hs form-element">
+                                  		<input type="text" class="text delivaryDate" readonly="readonly" id="delivaryTime" value="">
+                                  	
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
 </div>
+
+
 	</div>
 	
 	<script>
@@ -122,7 +260,7 @@
 		var totalAmount = 0;
 		var delivary = 2500;
 		var count =0;
-
+		delivaryAddressInfo();
 		
 		console.log(totalAmount);
 		
@@ -151,6 +289,28 @@
 
 
 	});
+	function delivaryAddressInfo(){
+		var address = '${pm.payaddress}';
+		var addSplit =  address.split('/');
+		
+		var delivaryTime = '${pm.delivaryDate}';
+		var delivarySplit = delivaryTime.split('/');
+		
+		$('#receiverZonecode').val(addSplit[0]);
+		$('#receiverAddress').val(addSplit[1]);
+		$('.receiverAddressSub').val(addSplit[2]);
+		
+		$('#delivaryDate').val(delivarySplit[0]);
+		$('#delivaryTime').val(delivarySplit[1]);
+		 
+		
+		
+
+		
+		
+	}
+	
+	
 	
 	</script>
 	<c:import url="../footer/footer.jsp"/>

@@ -6,7 +6,7 @@ public class Payment {
 	
 	private int payno;
 	private String userid;
-	private int p_id;
+	private String p_id;
 	private String payname;
 	private String payphone;
 	private String paycellphone;
@@ -16,7 +16,7 @@ public class Payment {
 	private String receiverCellPhone;
 	private int payprice;
 	private String orderMemo;
-	private Date paydate;
+	private String paydate;
 	private String delivaryDate;
 	private String payrecipe;
 	private String payaddress;
@@ -25,9 +25,9 @@ public class Payment {
 	
 	public Payment() {}
 
-	public Payment(int payno, String userid, int p_id, String payname, String payphone, String paycellphone,
+	public Payment(int payno, String userid, String p_id, String payname, String payphone, String paycellphone,
 			String payemail, String receiverName, String receiverPhone, String receiverCellPhone, int payprice,
-			String orderMemo, Date paydate, String delivaryDate, String payrecipe, String payaddress, String pstatus) {
+			String orderMemo, String paydate, String delivaryDate, String payrecipe, String payaddress, String pstatus) {
 		super();
 		this.payno = payno;
 		this.userid = userid;
@@ -64,11 +64,11 @@ public class Payment {
 		this.userid = userid;
 	}
 
-	public int getP_id() {
+	public String getP_id() {
 		return p_id;
 	}
 
-	public void setP_id(int p_id) {
+	public void setP_id(String p_id) {
 		this.p_id = p_id;
 	}
 
@@ -144,11 +144,11 @@ public class Payment {
 		this.orderMemo = orderMemo;
 	}
 
-	public Date getPaydate() {
+	public String getPaydate() {
 		return paydate;
 	}
 
-	public void setPaydate(Date paydate) {
+	public void setPaydate(String paydate) {
 		this.paydate = paydate;
 	}
 

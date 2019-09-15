@@ -37,8 +37,7 @@
 		
 		<!--2) choose,when,otherwise  -->
   	
-  	<choose>
-  		<when test="searchInput !=''">
+
   			<if test="searchForm.equals('allSearch')">
   			
   			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
@@ -64,20 +63,19 @@
   			
   			</if>
   			
-  			
-  			</when>
-  			
-  			<when test="startDatePicker!=''">
+  			  			
+  			<if test="startDatePicker!=''">
   				
   			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
-  			</when> 
+  			</if> 
+  
+
   				
   		<!-- <otherwise>
   		 and bcontent like '%' || #{content} || '%'
   		</otherwise>  -->
   	
-  	</choose>
-	
+
 	</select>
 	
 	
@@ -108,7 +106,7 @@
 	 
 	</select>
 	
-	
+	<!-- 탈퇴회원조회 -->
 	<select id="selectMemberSecession" resultType="Member" resultMap="memberResultSet">
 	
 		select *
@@ -201,8 +199,7 @@
 		
 		<!--2) choose,when,otherwise  -->
   	
-  	<choose>
-  		<when test="searchInput !=''">
+
   			<if test="searchForm.equals('allSearch')">
   			
   			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
@@ -229,18 +226,18 @@
   			</if>
   			
   			
-  			</when>
+  	
   			
-  			<when test="startDatePicker!=''">
+  			<if test="startDatePicker!=''">
   				
   			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
-  			</when> 
+  			</if> 
   				
   		<!-- <otherwise>
   		 and bcontent like '%' || #{content} || '%'
   		</otherwise>  -->
   	
-  	</choose>
+
 	
 	
 	
