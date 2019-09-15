@@ -26,6 +26,10 @@ public interface CartService {
 
 	Payment SelectPayMem(int checkno);
 
+	int checkNum();
+
+
+
 
 
 

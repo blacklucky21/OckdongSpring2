@@ -1,6 +1,8 @@
 package com.junwo.ockdong.cart.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -152,7 +154,13 @@ public class CartController {
 		System.out.println("dddd"+Arr);
 	
 		System.out.println("힝힝"+c);
-	
+		Date now = new Date();
+		SimpleDateFormat sfmt = new SimpleDateFormat("YYMMdd");
+		String pdate = sfmt.format(now);
+		String PayNum ;
+		
+		//int reg = CartService.checkNum();
+		  //		System.out.println(reg);
 //		String[] arrList = list.split("cart ");
 //		String[] realList = new String[arrList.length-1];
 //		
@@ -190,6 +198,7 @@ public class CartController {
 		String loginUserId = m.getUserId();
 		System.out.println("dd" + m.getUserId());
 		String[]  hitPno=  new String[1];
+		String[]  hitPno2=  new String[1];
 		int checkno ;
 	
 		HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
@@ -199,10 +208,11 @@ public class CartController {
 	
 		ArrayList<Cart> list = CartService.CartPayment(totalMap);
 		hitPno[0] = String.valueOf(list.get(0).getcNo());
+		hitPno2[0] = "Ock"+pdate+hitPno[0];
 		checkno = Integer.parseInt(hitPno[0]);
-		totalMap.put("hitPno",hitPno);
+		totalMap.put("hitPno",hitPno2);
 		System.out.println("리스트크기"+list.size());
-		p.setP_id( Integer.parseInt(hitPno[0]));
+		p.setP_id("Ock"+pdate+hitPno[0]);
 		p.setPayprice( Integer.parseInt(total[0]));
 		//Payment PayMem = CartService.SelectPayMem(checkno);
 		//System.out.println("넘어오는 멤버체크:"+PayMem);
