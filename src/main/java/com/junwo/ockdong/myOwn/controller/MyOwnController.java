@@ -106,23 +106,46 @@ public class MyOwnController {
 		return mv;
 
 	}
-
+	
+	//결제 페이지로 이동
 	@RequestMapping("myOwnInsert.do")
-	public ModelAndView myOwnInsert(ModelAndView mv, @RequestParam("selectedRice") String rice,
+	public ModelAndView myOwnInsert(ModelAndView mv,
+			@RequestParam("imgSrc") String imgSrc,
+			@RequestParam("selectedRice") int rice,
 			@RequestParam(value = "selectedSoup", required = false) String soup,
-			@RequestParam("selectedMain") String main, @RequestParam("selectedSub1") String sub1,
-			@RequestParam("selectedSub2") String sub2) {
+			@RequestParam("selectedMain") int main,
+			@RequestParam("selectedSub1") int sub1,
+			@RequestParam("selectedSub2") int sub2,
+			HttpServletRequest request) throws IOException {
+		
+		System.out.println("myOwnInsert.do로 들어옴");
+		System.out.println("imgSrc : " + imgSrc);
+		
+		String fileName = CreateRecipe(imgSrc, request);
+		
+		System.out.println("fileName : " + fileName);
+		
 		System.out.println("Controller > myOwnInsert()");
-
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		Ingredient riceIn = service.selectOne(rice);
+		Ingredient mainIn = service.selectOne(main);
+		Ingredient sub1In = service.selectOne(sub1);
+		Ingredient sub2In = service.selectOne(sub2);
+		Ingredient soupIn = null;
 		if (soup != null) {
 			System.out.println("5찬");
+			soupIn = service.selectOne(Integer.parseInt(soup));
 		} else {
 			System.out.println("4찬");
 		}
 
-		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
-		
-		
+		mv.addObject("rice",riceIn);
+		mv.addObject("main",mainIn);
+		mv.addObject("sub1",sub1In);
+		mv.addObject("sub2",sub2In);
+		mv.addObject("soup",soupIn);
+		mv.addObject("fileName",fileName);
 		mv.setViewName("myOwn/myOwnPayment");
 		
 		return mv;

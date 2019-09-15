@@ -202,7 +202,7 @@ table, tr, td {
 				</div>
 				<!-- 이미지 캡쳐한것을 임시로 저장할 부분 -->
 				<div class="buttons" style="text-align:center;">
-					<input type="hidden" name="imgSrc" id="imgSrc"/>
+					<input type="hidden" class="imgSrc" name="imgSrc" id="imgSrc"/>
 				</div>
 			</div>
 			<div class="acodian_menu_list"
@@ -281,6 +281,7 @@ table, tr, td {
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
 					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
+					<input class="createImg" type="hidden">
 				</div>
 <!-- 				<br>
 				<div align="center">(주)옥동도시락</div> -->
@@ -293,11 +294,7 @@ table, tr, td {
 <%-- 	<c:import url="../footer/footer.jsp" /> --%>
 
 
-
-
-
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript"src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		/* $(".lunch_size").click(function() {
 			var src = $(this).attr('src');
@@ -509,14 +506,19 @@ table, tr, td {
 		// insert하는 부분가기전에 선택된 메뉴들의 개수를 새서 부족하면 메시지 띄우기
 		function validate(){
 			var selectedCnt = $('.selected').length;
-			
 			if(selectedCnt > 3){
-				
-				return true;
+				if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
+					console.log("비어있음");
+					$(".createImg").click();
+				}else{
+					console.log("안비어있음");
+					return true;
+				}
 			}else{
 				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
 				return false;
 			}
+			return false;
 		}
 		
 	</script>
@@ -552,6 +554,18 @@ table, tr, td {
 		            }
 		        });
 		   	});
+		   $(".createImg").click(function(){
+			   html2canvas($(".myOwnTable"), {
+					onrendered: function(canvas) {
+						$("#imgSrc").val(canvas.toDataURL("image/png"));
+						console.log("이미지 생성됨");
+						console.log($(".imgSrc").val());
+						
+						$(".myOwnInsertBtn").click();
+					}
+				});
+		   });
+		   
 		});
 	</script>
 </body>
