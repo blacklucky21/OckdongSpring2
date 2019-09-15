@@ -73,5 +73,9 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.deleteMember",userId);
 	}
 
+	public int updatePwd(Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+
 	
 }

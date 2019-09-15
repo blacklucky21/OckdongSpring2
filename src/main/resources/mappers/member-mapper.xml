@@ -251,6 +251,12 @@
 	where userid = #{memId}
 	
 	</update>
+	
+	<update id="updatePwd" parameterType="Member">
+		update member
+		set password=#{password}
+		where userId=#{userId}
+	</update>
 
 	
 	</mapper>

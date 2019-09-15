@@ -22,7 +22,7 @@
 	<c:import url="../../header/header.jsp" />
 	<div class="bodyArea">
 		<c:import url="../member/myPageLeft.jsp" />
-		<c:import url="../member/memberOut.jsp" />
+		<c:import url="../memberOut/memberOut.jsp" />
 	</div>
 	<c:import url="../../footer/footer.jsp" />
 
