@@ -567,10 +567,18 @@ $('.post-search').click(function(){
 
 $('.order-buy').click(function(){
 	
+	//location.href="PaymentResultList2.do"
+	CallPayRequest();
+	
 	var count = parseInt('${pa.size()}')-1;
-	var payText ='${pa.get(0).cName}'+' 외 '+ count +' 개 상품';
+	var payText ='${pa.get(0).cName}';
+	
+	if(count>=1){
+		
+		payText =  '${pa.get(0).cName}'+ '외 '+count +' 개 상품';
+	}
 	var totalAmount = parseInt($('#finalTotalPrice').text());
-	/* 
+	
 	if($('.require').prop("checked")){
 		
 
@@ -596,7 +604,9 @@ $('.order-buy').click(function(){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    	location.href="paymentResult.do"; 
+		    
+		    	
+		    	CallPayRequest();
 		        
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
@@ -610,10 +620,17 @@ $('.order-buy').click(function(){
 		alert("구매진행사항 동의를 체크해주세요");
 	}
 	
-	//결제하기 후 */
+
 	
 	//var  checkList = '${list}';
 
+
+
+
+
+});
+
+function CallPayRequest(){
 	var checkArr = '${CheckArr}';
 	var totalArr = new Array();
 	var totalPrice = $('#totalSettlePriceView').text();
@@ -647,10 +664,7 @@ $('.order-buy').click(function(){
 	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice
 	
 	form.submit();
-
-
-
-});
+}
 
 </script>	
 
@@ -673,7 +687,7 @@ $(document).ready(function() {
 	console.log("dd"+totalAmount);
 
 	
-	if(totalAmount>=20000){
+	if(totalAmount>=20000 || totalAmount==100){
 		$('.delivaryAmount').text('배송비 0원');
 		delivary=0;
 		}

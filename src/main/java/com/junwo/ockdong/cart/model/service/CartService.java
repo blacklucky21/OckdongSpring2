@@ -24,6 +24,8 @@ public interface CartService {
 
 	int delCartNum(HashMap<String, String[]> totalMap);
 
+	Payment SelectPayMem(int checkno);
+
 
 
 

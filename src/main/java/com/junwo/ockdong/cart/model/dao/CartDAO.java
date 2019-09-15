@@ -60,6 +60,12 @@ public class CartDAO {
 	}
 
 
+	public Payment SelectPayMem(int checkno) {
+		// TODO Auto-generated method stub
+		return (Payment)sqlSession.selectOne("cartMapper.selectPayMem",checkno);
+	}
+
+
 
 
 

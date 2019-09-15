@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -191,7 +190,7 @@ public class CartController {
 		String loginUserId = m.getUserId();
 		System.out.println("dd" + m.getUserId());
 		String[]  hitPno=  new String[1];
-		
+		int checkno ;
 	
 		HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
 
@@ -200,15 +199,19 @@ public class CartController {
 	
 		ArrayList<Cart> list = CartService.CartPayment(totalMap);
 		hitPno[0] = String.valueOf(list.get(0).getcNo());
+		checkno = Integer.parseInt(hitPno[0]);
 		totalMap.put("hitPno",hitPno);
 		System.out.println("리스트크기"+list.size());
 		p.setP_id( Integer.parseInt(hitPno[0]));
 		p.setPayprice( Integer.parseInt(total[0]));
+		//Payment PayMem = CartService.SelectPayMem(checkno);
+		//System.out.println("넘어오는 멤버체크:"+PayMem);
+		
 		
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("member", m);
-			
+			mv.addObject("paymem",p);
 			mv.setViewName("Payment/PaymentResultView");
 
 		} else {}
@@ -216,20 +219,16 @@ public class CartController {
 	
 		int plist = CartService.insertPayment(totalMap);
 		int insertPay = CartService.PaymentInsertDB(p);
-		
-		
-		
 		int delCartNum = CartService.delCartNum(totalMap);
 		return mv;
 	}
 	
 	
-
-	@RequestMapping("PaymentResultAbout.do")
-	public void PaymentRAbout(@ModelAttribute Payment p, @ModelAttribute Cart c) {
+//뷰 체크용
+	@RequestMapping("PaymentResultList2.do")
+	public String PaymentRAbout() {
 	
-		System.out.println("힝힝"+p);
-		System.out.println("힝힝"+c);
+		return "Payment/PaymentResultView";
 		
   }
 }
