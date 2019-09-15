@@ -12,6 +12,9 @@
 		<typeAlias type="com.junwo.ockdong.product.model.vo.Product" alias ="Product"/>
 		<typeAlias type="com.junwo.ockdong.product.model.vo.PictureList" alias="PictureList"/>
 		<typeAlias type="com.junwo.ockdong.cart.model.vo.Payment" alias="Payment"/>
+		<typeAlias type="com.junwo.ockdong.product.model.vo.Productreview" alias="Productreview"/>
+		
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>

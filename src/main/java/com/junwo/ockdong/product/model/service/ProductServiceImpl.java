@@ -10,6 +10,7 @@ import com.junwo.ockdong.notice.model.vo.PageInfo;
 import com.junwo.ockdong.product.model.dao.ProductDAO;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Service("pService")
 public class ProductServiceImpl implements ProductService{
@@ -153,6 +154,18 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<Product> selectList3(PageInfo pi) {
 		return pDAO.selectList3(pi);
+	}
+
+	// 상세페이지 댓글 등록
+	@Override
+	public int insertReply(Productreview pv) {
+		return pDAO.insertReply(pv);
+	}
+
+	// 상품 디테일 댓글 리스트 읽어가기
+	@Override
+	public ArrayList<Productreview> selectReplyList(int p_Id) {
+		return pDAO.selectRelyList(p_Id);
 	}
 
 
