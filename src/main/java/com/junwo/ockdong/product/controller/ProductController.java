@@ -2,6 +2,7 @@ package com.junwo.ockdong.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.junwo.ockdong.common.Pagination;
+import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.notice.model.vo.PageInfo;
 import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Controller
 public class ProductController {
@@ -579,6 +583,43 @@ public class ProductController {
 		return mv;
 	}
 // =============================================================================================================================================		
+	// 댓글 리스트 가져오기
+	@RequestMapping("pvList.do")
+	public void getReplyList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
+		ArrayList<Productreview> pvList = pService.selectReplyList(p_Id); // 게시판의 댓글 가지고온다.
+		
+
+		for(Productreview pv : pvList) {
+			pv.setPv_reviewContent(URLEncoder.encode(pv.getPv_reviewContent(),"utf-8"));
+			pv.setPv_user(URLEncoder.encode(pv.getPv_user(),"utf-8"));
+			System.out.println(pvList);
+		}
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		gson.toJson(pvList, response.getWriter());
+	}
+	
+	//	상품 디테일에서 댓글 등록
+	@RequestMapping("addReply.do")
+	@ResponseBody
+	public String addReply(Productreview pv, HttpSession session) throws Exception {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String pv_User = loginUser.getNickName(); // 작성자 닉네임으로 할거임
+		
+		pv.setPv_user(pv_User);
+		
+		System.out.println(pv); // 잘나오는지 확인 한다.
+		
+		int result = pService.insertReply(pv); // 서비스단에 넘겨준다.
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			throw new Exception("댓글 등록 실패");
+		}
+		
+		
+	}
 	
 	
 	

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.junwo.ockdong.notice.model.vo.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 public interface ProductService {
 
@@ -59,6 +60,11 @@ public interface ProductService {
 	
 	ArrayList<Product> selectList2(PageInfo pi); 
 	ArrayList<Product> selectList3(PageInfo pi);
+	// ==========================================
+		// 디테일 댓글 등록
+	
+	ArrayList<Productreview> selectReplyList(int p_Id); // 리스트 가지고 온다.
+	int insertReply(Productreview pv);
 	
 	
 	

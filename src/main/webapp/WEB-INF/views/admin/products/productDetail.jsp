@@ -83,16 +83,21 @@
 			<div class="viewBody">
 				<ul class="contentNav">
 					<li class="active"><a href="">상품 정보</a></li>
-					<li><a href="">상품 후기<span>(<span class="count">20</span>)</span></a></li>
+					<li><a href="">상품 후기<span>(<span class="count" id="pvcount"></span>)</span></a></li>
 					<li><a href="">Q & A <span></span></a></li>
 					<li><a href="">반품 / 교환</a></li>
 				</ul>
 				<!-- 탭부분 끝 -->
 				<!-- 상품정보 -->
+				<div class="tproduct-info active" id="contentin">
+					<h2>상세 내용</h2>
 					<p id="productinfo" class="productinfo">${ p.p_content }</p>
 					<img src="resources/img/detail01.jpg" id = "intro"class="productinfo">
+				</div>
 				
 					<table class="tproduct-info active">
+					<tr>
+					</tr>
 						<tr>
 							<td>제품명</td>
 							<td>${p.p_name }</td>
@@ -123,55 +128,141 @@
 					</table>
 		
 				<!-- 상품 후기 -->
+				<!-- 댓글 게시판 -->
 				<table class="tproduct-review">
 					<thead>
+					<tr style="background: none;">
+						<td style="background: none;">작성자  ${ loginUser.nickName }</td>
+						<td><textarea cols="100" rows="4" id=pv_reviewContent style="resize: none;width: 639px;"></textarea><td>
+					<c:if test="${ !empty sessionScope.loginUser }">	
+						<td><button id="rSubmit">등록하기</button></td>
+					</c:if>
+					</tr>
 						<tr>
-							<td>평점</td>
+							<td></td>
 							<td>내용</td>
 							<td>작성자</td>
 							<td>작성일</td>
 						</tr>
 					</thead>
-					<tr>
-						<td>별점</td>
-						<td class="tcontent"><img src="" alt=""><span>내용 - 짧은 내용(동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세</span></td>
-						<td>rud***</td>
-						<td>2017-09-26 10:20</td>
+					<!-- 여기서 내용 나온다. -->
+								
+					<!-- 여기가 댓글 리스트 읽어 오는 것  -->
+					<tbody id="pvList">
+					<tr >
+						<td></td>
+						<td class="tcontent"><span></span></td>
+						<td></td>
+						<td></td>
 					</tr>
 					<tr class="detail-content">
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
+						<!-- 댓글 작성자와 로그인한 상태가 같으면 수정 삭제 기능 -->
+				<c:if test="${ pv.pv_user eq loginUser.nickName }">
+						<td><button class="btn ctrl">수정</button><button class="btn ctrl">삭제</button></td>
+				</c:if>
 					</tr>
+					
+					</tbody>
 				</table>
 				<!-- Q & A  -->
-					<table class="tquestion">
-						<thead>
-							<tr>
-								<td>번호</td>
-								<td colspan="2">내용</td>
-								<td>작성자</td>
-								<td>작성일
-								<a href="">문의 하기</a>
-								</td>
-							</tr>
-					</thead>
-						<tr>
-							<td>글번호</td>
-							<td class="answer-no">미완료</td>
-							<td class="tcontent">내용 - 문의</td>
-							<td>rud***</td>
-							<td>2017-09-26 10:20</td>
-						</tr>
-						<tr>
-							<td>글번호</td>
-							<td class="answer-ok">답변완료</td>
-							<td class="tcontent">내용 - 문의</td>
-							<td>rud***</td>
-							<td>2017-09-26 10:20</td>
-						</tr>
-					</table>
+				<div class="tquestion" id="qn">
+					<div class="con-consultation" style="display: block;">
+						<div class="consultation-text">
+							<form id="formInquiry" action="">
+								<h2>
+									<strong>상품문의</strong> <span>상품에 관한 문의사항을 입력해주세요.</span>
+								</h2>
+								<div class="text-wrap">
+									<div class="textarea">
+										<textarea class="textarea-normal textarea_inquiriy"
+											name="content" id="contentInquiry" cols="30" rows="10"
+											maxlength="1000" onkeydown="updateLength('inquiriy')"
+											onkeypress="updateLength('inquiriy')"
+											onkeyup="updateLength('inquiriy')"
+											onchange="updateLength('inquiriy')"></textarea>
+										<p class="textarea-limit length_inquiriy">
+											<span>0</span>자 / 1000자
+										</p>
+										<!-- 20190225 -->
+									</div>
+								</div>
+								<div class="secret cf">
+									<dl class="txt">
+										<dt>
+											<div class="qa-checkbox">
+												<p class="checkbox-normal"
+													style="display: inline-block; vertical-align: middle;">
+													<input id="secretedCheckBox" type="checkbox"><label></label>
+												</p>
+												<span class="ico-lock">lock</span><label
+													for="secretedCheckBox">비밀글 문의</label>
+											</div>
+										</dt>
+										<dd></dd>
+									</dl>
+									<p class="btn-row">
+									 <c:if test="${ !empty sessionScope.loginUser }">
+										<button type="submit" class="btn black style-3-1">등록하기</button>
+										</c:if>
+									</p>
+								</div>
+							</form>
+						</div>
+						<!-- 여기서 상품 문의가 있다면 -->
+						<div class="history">
+							<div class="history_wrap">
+								<div id="proInquiry" style="border-top: 1px solid #ababab;">
+									<div>
+										<ul id="inquiry" class="inquiry">
+											<li id="content" class="txt_wrap">
+												<!-- 상품문의 -->
+
+												<div class="con-qa">
+													<div class="info_top">
+														<span class="name">st******@naver.com</span> <span
+															class="date">2019-09-15 13:19:31</span>
+													</div>
+													<p class="txt">ddzzz</p>
+													<!-- 만약 작성자 본인 이면 -->
+													<c:if test="${ pv.pv_user eq sessionScope.lopginUser}">
+													<div class="btn-row left">
+														<button type="button" class="btn ctrl"
+															onclick="modifyInquiry(this)">수정</button>
+														<button type="button" class="btn ctrl"
+															onclick="deleteInquiry(this)">삭제</button>
+													</div>
+													</c:if>
+												</div> <!-- //상품문의 -->
+											</li>
+										</ul>
+										<ul id="inquiryAnswer" class="open"></ul>
+										<!-- 답변시 생겨야 할 부분 -->
+										<li colspan="5">
+											<div class="message">
+												<!-- <p class="txt"></p> -->
+												<dl class="reply">
+													<img src="resources/img/line.png" class="answerline">
+													<dt>
+														운영자
+														<time>2019-09-15 13:19:30</time>
+													</dt>
+													<dd>응 여러번 폭발 하긴 했어</dd>
+												</dl>
+											</div>
+										</li>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<table class="tquestion">
+				</table>
+				<!-- 판매 반품 안내 -->	
 				<table class="">
 					<tr>
 						<td class="law"><strong>배송안내</strong><br> - 지역별 도서
@@ -268,20 +359,31 @@
 	    }
 	}
 
-	
+	// 하단의 탭 부분
 	var price_sum = 0;
 	var options = [];
 
-	// 가격초기화 되지않는 문제
+	
 	 $(document).ready(function(){
 	
 	   // 탭 변경 부분
-	   $('.contentNav li').click(function(e){
+	   $('.contentNav > li').click(function(e){
 	      e.preventDefault(); /* 상의 이벤트 전파를 막기 위해 사용 a 태그 작동 안하게됨  */
-	  var idx = $(this).index();
-	  $('.contentNav li').removeClass('active').eq(idx).addClass('active');
+	  var idx = $(this).index(); // 클릭 한 인덱스 번호 찾기
+	      console.log(idx);
+	  $('.contentNav > li').removeClass('active').eq(idx).addClass('active'); // ul 색상 부분
+	 
 	  $('table').removeClass('active').eq(idx).addClass('active');
-	 });
+	  
+	  $('#contentin').removeClass('active').eq(idx).addClass('active');
+	  if(idx == "2"){
+		  $('#qn').show();
+	  }else{
+		  $('#qn').hide();
+	  }
+
+	  
+	  });
 
 	   // 상품 후기 부분 
 	   $('.tproduct-review tbody tr .tcontent').click(function(){
@@ -321,6 +423,120 @@
 	var price_sum = 0;
 	});
 	var price_sum = 0;
+	
+	var updateLength = function (key) {
+	    var len = $('.textarea_' + key).val().length;
+	    $('.length_' + key).text(len + '자 / 1000자');
+	}
+	
+	/* 수정 버튼 눌리며 */
+	var modifyInquiry = function (ctrl,index) {
+		
+		alert("수정 버튼 눌려 이쪽으로 옴");
+	    var e = getEvent(); 
+	    e.stopPropagation();
+	    if (currentEditId !== '') {
+	        $('#modform' + currentEditId).remove();
+	        var target = $('#' + currentEditId);
+	        target.show();
+	    }
+	    currentEditId = 'inquiry' + index;
+
+	    var inquiry = shop.product.getInquiry(index);
+	    var target = $('#inquiry' + index);
+	    target.after('<tr id="modforminquiry' + index + '" style="display:block"></tr>');
+	    $('#inquiriy-modify-template').renderTemplate({ "inquiriy": inquiry, "index": index }, '#modforminquiry' + index);
+
+	    target.hide();
+	    $('#inquiryAnswer' + index).hide();
+	}
+	
+	// 취소
+	var cancelModifyInquiry = function (index) {
+	    var e = getEvent();
+	    e.stopPropagation();
+
+	    $('#modforminquiry' + index).remove();
+	    var target = $('#inquiry' + index);
+	    target.show();
+	    if ($('#inquiryAnswer' + index + ' .message').html().trim() != '') {
+	        $('#inquiryAnswer' + index).show();
+	    }
+	    currentEditId = '';
+	}
+	$(function(){
+		getReplyList(); // 디테일뷰 들어오면 메소드 실행 한다.
+	});
+	/* 상품 댓글 등록 기능 */
+	$('#rSubmit').on("click", function(){
+		var pv_reviewContent = $("#pv_reviewContent").val();
+		console.log(pv_reviewContent); // 넘어온다.
+		var p_Id = ${p.p_Id};
+		
+		console.log(p_Id);
+		
+		// 작성자 게시판 번호 넘긴다.
+		$.ajax({
+			url: "addReply.do",
+			data:{pv_reviewContent:pv_reviewContent, p_Id:p_Id}, // 내용과 게시판 번호 넘김
+			type:"post",
+			success:function(data){
+				if(data == "success"){
+					getReplyList(); // 성공하면 리스트 불러와서 갱신 한다.
+					$("#pv_reviewContent").val(""); // 댓글 추가후 비워둔다.
+				}
+			}
+		});
+
+	});
+	/* 댓글 리스트 ajax 가지고 오기*/
+ 	function getReplyList(){
+		var p_Id = ${p.p_Id};
+		
+		$.ajax({
+			url:"pvList.do",
+			data:{p_Id:p_Id},
+			dataType:"json",
+			success:function(data){
+				$tableBody = $('#pvList');
+				$tableBody.html("");
+				
+				var $tr;
+				var $td;
+				var $pv_content;
+				var $pv_User;
+				var $pv_createDate;
+				
+				$('#pvcount').text(data.length);
+				
+				if(data.length > 0){
+					for(var i in data){
+						$tr = $("<tr>");
+						$td = $("<td>");
+						$pv_content = $("<td class='tcontent'>").html("<span>").text(decodeURIComponent(data[i].pv_reviewContent.replace(/\+/g,"")));
+						$pv_User = $("<td>").text(decodeURIComponent(data[i].pv_user.replace(/\+/g,"")));
+						$pv_createDate = $("<td>").text(data[i].pv_createDate);
+						
+						$tr.append($td);
+						$tr.append($pv_content);
+						$tr.append($pv_User);
+						$tr.append($pv_createDate);
+						$tableBody.append($tr);
+						
+						
+					}
+				}else{
+					$tr = $("<tr>");
+					$td = $("<td>");
+					$pv_User = $("<td class='tcontent'>").html("<span>").text("등록된 댓글이 업습니다.");
+					$tr.append($td);
+					$tr.append($pv_User);
+					$tableBody.append($tr);
+				}
+			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

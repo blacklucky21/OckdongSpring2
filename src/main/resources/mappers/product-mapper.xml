@@ -223,8 +223,22 @@ select count(*)
 	 ]]>
 
 </select>
+<select id="selectReplyList" parameterType="_int" resultType="Productreview">
+	select *
+	from (select *
+		  from 	PRODUCTREVIEW left join PRODUCT using(P_ID)
+		  where p_ID = #{p_Id}
+		  order by p_Id desc )
+	order by p_Id desc
+</select>
 
 
+<insert id="insertReply" parameterType="Productreview">
+
+insert into PRODUCTREVIEW
+values(SEQ_PV_ID.nextval, #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sysdate, default, 0 )
+
+</insert>
 
 
 </mapper>

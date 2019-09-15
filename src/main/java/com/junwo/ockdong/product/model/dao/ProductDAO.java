@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.junwo.ockdong.notice.model.vo.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Repository("pDAO")
 public class ProductDAO {
@@ -165,6 +166,16 @@ public class ProductDAO {
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectType2", null, rowBounds);
 	}
+
+	// 댓글 리스트 가지고 가기
+	public ArrayList<Productreview> selectRelyList(int p_Id) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectReplyList",p_Id);
+	}
+	// 상세 페이지 댓글 등록
+	public int insertReply(Productreview pv) {
+		return sqlSession.insert("productMapper.insertReply" ,pv);
+	}
+
 
 
 	
