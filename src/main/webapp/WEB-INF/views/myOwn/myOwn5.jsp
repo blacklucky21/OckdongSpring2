@@ -307,6 +307,7 @@ table, tr, td {
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;"/>
 					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
+					<input class="createImg" type="hidden">
 				</div>
 			</div>
 		</div>
@@ -569,11 +570,18 @@ table, tr, td {
 			var selectedCnt = $('.selected').length;
 			
 			if(selectedCnt > 4){
-				return true;
+				if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
+					console.log("비어있음");
+					$(".createImg").click();
+				}else{
+					console.log("안비어있음");
+					return true;
+				}
 			}else{
 				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
 				return false;
 			}
+			return false;
 		}
 	</script>
 	<script type="text/javascript">
@@ -608,6 +616,17 @@ table, tr, td {
 		            }
 		        });
 		   	});
+		   $(".createImg").click(function(){
+			   html2canvas($(".myOwnTable"), {
+					onrendered: function(canvas) {
+						$("#imgSrc").val(canvas.toDataURL("image/png"));
+						console.log("이미지 생성됨");
+						console.log($(".imgSrc").val());
+						
+						$(".myOwnInsertBtn").click();
+					}
+				});
+		   });
 		});
 	</script>
 </body>
