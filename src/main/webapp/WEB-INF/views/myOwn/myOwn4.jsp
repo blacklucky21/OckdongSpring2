@@ -506,13 +506,12 @@ table, tr, td {
 			}
 		}
 		
-		
-		
 		// insert하는 부분가기전에 선택된 메뉴들의 개수를 새서 부족하면 메시지 띄우기
 		function validate(){
 			var selectedCnt = $('.selected').length;
 			
 			if(selectedCnt > 3){
+				
 				return true;
 			}else{
 				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");

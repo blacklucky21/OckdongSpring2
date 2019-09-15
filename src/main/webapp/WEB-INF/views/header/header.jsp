@@ -206,7 +206,7 @@
         </ul>
     </li>
     <li  >
-        <a href="myOwn4.do">나만의 도시락</a>
+        <a onclick="myOwnClick();">나만의 도시락</a>
     </li>
     <li>
     	<a href="blist.do">도시락 자랑하기</a>
@@ -225,5 +225,14 @@
 
 <hr/>
     </div>
+    <script>
+    	function myOwnClick(){
+    		if(${sessionScope.loginUser eq null}){
+    			alert("로그인 후 이용가능한 서비스 입니다.");
+    		}else{
+    			location.href="myOwn4.do";
+    		}
+    	}
+    </script>
 </body>
 </html>
