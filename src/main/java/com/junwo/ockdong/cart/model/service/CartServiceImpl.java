@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.cart.model.dao.CartDAO;
 import com.junwo.ockdong.cart.model.vo.Cart;
-import com.junwo.ockdong.cart.model.vo.PayProduct;
 import com.junwo.ockdong.cart.model.vo.Payment;
 
 
@@ -61,6 +60,13 @@ public class CartServiceImpl implements CartService{
 
 		return cDAO.delCartNum(totalMap);
 	}
+
+	@Override
+	public Payment SelectPayMem(int checkno) {
+		// TODO Auto-generated method stub
+		return cDAO.SelectPayMem(checkno);
+	}
+
 
 
 	

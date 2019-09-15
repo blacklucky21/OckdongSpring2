@@ -91,6 +91,15 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{pa
 	</foreach>
 	
 	</delete>
+	
+	
+	<select id="selectPayMem" parameterType="Payment" resultType="Payment">
+	SELECT *
+	FROM PAYMENT
+	WHERE P_ID = #{checkno}
+	
+	</select>
+	
 
 
 </mapper>
