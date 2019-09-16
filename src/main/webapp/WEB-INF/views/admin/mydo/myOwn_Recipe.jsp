@@ -155,7 +155,7 @@
 									var count = 1;
 									for(var i in data){
 										$tr = $("<tr class='list" + count + "'>");
-										$tdImg = $("<td class='py' id='py'>").text("<img src=\"resources/img/Recipe/" + decodeURIComponent(data[i].mblFileName.replace(/\+/g, " ")) + "\" width=\"100px\" height=\"100px\"/>");
+										$tdImg = $("<td class='py' id='py'><img src='resources/img/Recipe/" + decodeURIComponent(data[i].mblFileName.replace(/\+/g, ' ')) + "' width='100px' height='100px'/>");
 										$tdTitle = $("<td class='pp detailBtn' onclick='detailBtn(" + data[i].mblId + ");'>").text(decodeURIComponent(data[i].mblTitle.replace(/\+/g, " ")));
 										$tdUserId = $("<td class='pp'>").text(data[i].userId);
 										$tdType = $("<td class='pp'>").text(decodeURIComponent(data[i].mblType.replace(/\+/g, " ")));

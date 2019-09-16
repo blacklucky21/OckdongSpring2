@@ -32,6 +32,10 @@ public interface MyOwnService {
 
 	ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search);
 
+	int deleteMblRecipe(int mblId);
+
+	MBLRecipe myRecipeDetail(int mblId);
+
 
 
 }
