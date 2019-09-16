@@ -19,6 +19,7 @@ public interface CartService {
 
 	int insertPayment(HashMap<String, String[]> totalMap);
 
+	
 
 	int PaymentInsertDB(Payment p);
 

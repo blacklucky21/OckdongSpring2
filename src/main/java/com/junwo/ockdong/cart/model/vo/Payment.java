@@ -71,6 +71,7 @@ public class Payment {
 	public void setP_id(String p_id) {
 		this.p_id = p_id;
 	}
+	
 
 	public String getPayname() {
 		return payname;

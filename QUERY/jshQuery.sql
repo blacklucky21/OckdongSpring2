@@ -5,6 +5,7 @@ grant create view to FinalPro;
 
 
 
+
 CREATE SEQUENCE SEQ_MEM 
 START WITH 100000;
 

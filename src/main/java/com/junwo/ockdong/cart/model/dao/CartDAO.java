@@ -24,6 +24,7 @@ public class CartDAO {
 	}
 
 
+	
 	public int updateAmount(HashMap<String, String> amountMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("cartMapper.updateAmount",amountMap);
