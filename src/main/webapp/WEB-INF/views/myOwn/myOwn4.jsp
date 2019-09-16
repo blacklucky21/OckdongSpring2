@@ -511,14 +511,17 @@ table, tr, td {
 		// insert하는 부분가기전에 선택된 메뉴들의 개수를 새서 부족하면 메시지 띄우기
 		function validate(){
 			var selectedCnt = $('.selected').length;
+			
 			if(selectedCnt > 3){
-				if(confirm("결제 페이지로 이동하시겠습니까? (이동하게 되면 만든 도시락은 자동으로 나만의 도시락에 추가됩니다.)")){
-					if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
-						console.log("비어있음");
-						$(".createImg").click();
-					}else{
+				if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
+					console.log("비어있음");
+					$(".createImg").click();
+				}else{
+					if(confirm("결제 페이지로 이동하시겠습니까? (이동하게 되면 만든 도시락은 자동으로 나만의 도시락에 추가됩니다.)")){
 						console.log("안비어있음");
 						return true;
+					}else{
+						return false;
 					}
 				}
 			}else{

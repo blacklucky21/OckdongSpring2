@@ -218,7 +218,9 @@
 				if (value.files && value.files[0]) {
 					var reader = new FileReader();
 
-					reader.onload = function(e) {$("#imgArea").attr("src", e.target.result);}
+					reader.onload = function(e) {
+						$("#imgArea").attr("src", e.target.result);
+					}
 
 					reader.readAsDataURL(value.files[0]);
 					

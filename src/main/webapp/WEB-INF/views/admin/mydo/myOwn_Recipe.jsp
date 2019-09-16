@@ -56,8 +56,9 @@
 									<th class="tg-0lax">
 										<span>
 											<select id="select_code">
-												<option>나만의 도시락 번호</option>
 												<option>도시락 명</option>
+												<option>작성자</option>
+												<option>도시락 타입</option>
 											</select>
 										</span>
 										<span>
@@ -150,35 +151,26 @@
 							success : function(data){
 								if(data.length > 0){
 									$(".list_content").empty();
-									/* $(".countSpan").empty();
-									$(".countSpan").text(data.length); */
 									$(".countSpan").html(data.length);
 									var count = 1;
 									for(var i in data){
 										$tr = $("<tr class='list" + count + "'>");
-										$tdNo = $("<td class='py' id='py'>").text(data[i].inNo);
-										
-										
-	
-										console.log(data);
-										console.log(i);
-										console.log(data[i]);
-										
-										$tdName = $("<td class='pp detailBtn' onclick='detailBtn(" + data[i].inNo + ");'>").text(decodeURIComponent(data[i].inName.replace(/\+/g, " ")));
-										$tdPrice = $("<td class='pp'>").text(data[i].inPrice);
-										$tdGram = $("<td class='pp'>").text(data[i].inGram);
-										$tdType = $("<td class='pp'>").text(decodeURIComponent(data[i].inType.replace(/\+/g, " ")));
-										$tdCreateDate = $("<td class='pp'>").text(data[i].inCreateDate);
-										$tdDelBtn = $("<td class='py delBtn' id='deleted' onclick=\"deleteOne('list" + count + "','" + data[i].inNo + "');\" >[삭제]</td>");
+										$tdImg = $("<td class='py' id='py'>").text("<img src=\"resources/img/Recipe/" + decodeURIComponent(data[i].mblFileName.replace(/\+/g, " ")) + "\" width=\"100px\" height=\"100px\"/>");
+										$tdTitle = $("<td class='pp detailBtn' onclick='detailBtn(" + data[i].mblId + ");'>").text(decodeURIComponent(data[i].mblTitle.replace(/\+/g, " ")));
+										$tdUserId = $("<td class='pp'>").text(data[i].userId);
+										$tdType = $("<td class='pp'>").text(decodeURIComponent(data[i].mblType.replace(/\+/g, " ")));
+										$tdCreateDate = $("<td class='pp'>").text(data[i].createDate);
+										$tdStatus = $("<td class='pp'>").text(data[i].status);
+										$tdDelBtn = $("<td class='py delBtn' id='deleted' onclick=\"deleteOne('list" + count + "','" + data[i].mblId + "');\" >[삭제]</td>");
 										
 										count = count + 1;
 										
-										$tr.append($tdNo);
-										$tr.append($tdName);
-										$tr.append($tdPrice);
-										$tr.append($tdGram);
+										$tr.append($tdImg);
+										$tr.append($tdTitle);
+										$tr.append($tdUserId);
 										$tr.append($tdType);
 										$tr.append($tdCreateDate);
+										$tr.append($tdStatus);
 										$tr.append($tdDelBtn);
 										$(".list_content").append($tr);
 									}

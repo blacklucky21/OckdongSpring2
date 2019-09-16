@@ -93,5 +93,21 @@
 		select * from mblrecipe where status='Y' and userid=#{userId}
 	</select>
 	
+	<select id="searchRecipeList" parameterType="map" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where status='Y'
+		<choose>
+			<when test="type.equals('도시락 명')">
+				and mbl_title = #{sContent}
+			</when>
+			<when test="type.equals('작성자')">
+				and userid like '%' || #{sContent} || '%'
+			</when>
+			<when test="type.equals('도시락 타입')">
+				and mbl_type like '%' || #{sContent} || '%'
+			</when>
+		</choose>
+	</select>
 	
 </mapper>

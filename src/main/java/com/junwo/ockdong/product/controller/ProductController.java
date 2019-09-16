@@ -2,7 +2,6 @@ package com.junwo.ockdong.product.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
 import com.junwo.ockdong.member.model.vo.Member;
-import com.junwo.ockdong.notice.model.vo.PageInfo;
 import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;
