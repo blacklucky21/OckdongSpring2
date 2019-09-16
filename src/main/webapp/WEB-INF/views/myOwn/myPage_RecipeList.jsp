@@ -71,16 +71,18 @@
 			</c:if>
 			<c:if test="${!empty rList }">
 				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne recipe${sts.count }">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
+					<div class="recipeOne">
+						<div class="${r.mblId }">
+							<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
+							<div class="recipeDetail">
+								<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
+								<c:if test="${r.mblType eq '4찬'}">
+									<a class="recipePrice">4000원</a>
+								</c:if>
+								<c:if test="${r.mblType eq '5찬'}">
+									<a class="recipePrice">5000원</a>
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -91,7 +93,10 @@
 	<script>
 		$(function(){
 			$(".recipeOne").click(function(){
-				console.log(this);
+				
+				var mblId = $(this).children('div').attr('class');
+				
+				location.href="recipeDetailOne.me?mblId="+mblId;
 			});
 		});
 	</script>

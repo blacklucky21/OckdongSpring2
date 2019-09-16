@@ -68,11 +68,50 @@ th{
 									</div>
 								</div>
 								<div class="box_right">
-									<div class="option"><span>수량 : 1</span> <span></span> <span> 0 원</span> </div>
+									<div class="option">
+										<span>수량 :
+											<input type="number" class="quantity" name="quantity" min="1" max="100" value="1">
+        								</span>
+        							</div>
 									<div class="price_box">
 										<p class="price_text">상품 금액</p>
-										<p class="price">42,000 원</p>
+										<p class="price">
+											<c:if test="${empty soup}">
+												<input type="hidden" class="standardPrice" name="standardPrice" value="4000"/>
+												<a class="totalPrice">4000</a>원
+											</c:if>
+											<c:if test="${!empty soup}">
+												<input type="hidden" class="standardPrice" name="standardPrice" value="4000"/>
+												<a class="totalPrice">5000</a>원
+											</c:if>
+										</p>
 									</div>
+									<script>
+										$(function(){
+											$(".quantity").click(function(){
+												console.log(this);
+												var quantity = $(this).val();
+												console.log(quantity);
+												var price = $(".standardPrice").val();
+												console.log(price);
+												var result = quantity * price;
+												console.log(result);
+												$(".totalPrice").text("");
+												$(".totalPrice").text(result);
+											});
+											$(".quantity").keyup(function(){
+												console.log(this);
+												var quantity = $(this).val();
+												console.log(quantity);
+												var price = $(".standardPrice").val();
+												console.log(price);
+												var result = quantity * price;
+												console.log(result);
+												$(".totalPrice").text("");
+												$(".totalPrice").text(result);
+											});
+										});
+									</script>
 								</div>
 							</li>
 							<li>
@@ -205,35 +244,7 @@ th{
 								</tr>
 								<tr>
 									<th>배송비 합계</th>
-									<td class="orange">+ <span id="dlv_prc_cart">0</span> 원
-									</td>
-								</tr>
-								<tr>
-									<th>할인 금액 합계</th>
-									<td class="orange">- <span class="total_sale_prc">12,100</span>원
-										<div class="view_info">
-											<div class="order_area_event_prc" style="display: none;">
-												이벤트 할인금액 : <span class="order_saleinfo_event_prc">0</span>원
-											</div>
-											<div class="order_area_timesale">
-												타임세일금액 : <span class="order_saleinfo_timesale">12,100</span>원
-											</div>
-											<div class="order_area_member_prc" style="display: none;">
-												회원할인금액 : <span class="order_saleinfo_member_prc">0</span>원
-											</div>
-											<div class="order_area_cpn_prc" style="display: none;">
-												쿠폰할인금액 : <span class="order_saleinfo_cpn_prc">0</span>원
-											</div>
-											<div class="order_area_prd_prc" style="display: none;">
-												상품금액별할인금액 : <span class="order_saleinfo_prd_prc">0</span>원
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th>적립금 사용</th>
-									<td class="orange">- <span class="use_milage_prc">0</span>
-										원
+									<td class="orange"> + <span id="dlv_prc_cart">0</span> 원
 									</td>
 								</tr>
 							</tbody>
@@ -254,70 +265,6 @@ th{
 					</div>
 				</div>
 				<div class="area_left">
-				
-					<!-- 쿠폰 여부 판단하는 영역 -->
-					<%-- <h3 class="title">할인/혜택 사용</h3>
-					<table class="tbl_order">
-						<caption class="hidden">할인 / 혜택 사용</caption>
-						<colgroup>
-							<col style="width: 18%;">
-							<col>
-						</colgroup>
-						<tbody>
-							<!-- 쿠폰사용 -->
-							<tr>
-								<th scope="row">쿠폰 사용</th>
-								<td>
-									<ul class="coupon_list">
-										<li><span class="check"><input type="hidden"
-												id="coupon_stype_81052" value="1"><input
-												type="hidden" name="coupon_pay_type" value="1"><input
-												type="radio" name="coupon" id="coupon" value="81052"
-												onclick="useCpn(0,'p','10','10','5000','1','81052','')"></span>
-											<p class="name">첫 구매 지원! 전 제품 10% 할인 쿠폰 (최대 5,000원)</p>
-											<p class="content">
-												최소주문금액 : 10원 이상 / 할인액(율) : 10% / 사용기간 : ~ 2019-09-22 <br>최대할인금액
-												5,000 원
-											</p></li>
-										<li><span class="check"><input type="radio"
-												id="no_cpn" name="coupon" value=""
-												onclick="useCpn(this.form,'','');"></span>
-											<p class="name">사용안함</p>
-											<p class="content"></p></li>
-									</ul>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">쿠폰 등록하기</th>
-								<td class="offcpn">
-									<div id="off_cpn_div1">
-										<input type="text" name="cpn_auth_code"
-											placeholder="쿠폰 번호 입력란" class="form_input">
-										<div class="box_btn">
-											<a href="javascript:;" onclick="cpnAuthCode();">확인</a>
-										</div>
-										<p class="msg"></p>
-									</div>
-									<div id="off_cpn_div2">
-										<p id="off_cpn_msg"></p>
-										<p id="off_cpn_img2"></p>
-										<p id="off_cpn_used"></p>
-										<p id="off_cpn_img1" class="offbtn">
-											<span class="box_btn"><a href="javascript:;"
-												onclick="useOffCpn();">쿠폰사용</a></span>
-										</p>
-										<p class="offbtn">
-											<span class="box_btn white"><a href="javascript:;"
-												onclick="cancelOffCpn();">쿠폰사용취소</a></span>
-										</p>
-									</div>
-								</td>
-							</tr>
-							<!--// 쿠폰사용 -->
-						</tbody>
-					</table> --%>
-					<!-- 쿠폰여부 판단 영역 끝 -->
-
 					<h3 class="title">주문자 입력</h3>
 					<table class="tbl_order">
 						<caption class="hidden">주문자 입력</caption>
@@ -338,7 +285,13 @@ th{
 								</td>
 							</tr>
 							<tr>
-								<th scope="row"><label for="buyer_cell">휴대전화번호</label></th>
+								<th scope="row"><label for="buyer_ph">집전화 번호</label></th>
+								<td>
+									<input type="text" name="buyer_ph" id="buyer_ph" value="" class="form_input remove_dash">
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="buyer_cell">휴대전화 번호</label></th>
 								<td>
 									<c:if test="${sessionScope.loginUser.phone ne null}">
 										<input type="text" name="buyer_cell" id="buyer_cell" value="${sessionScope.loginUser.phone}" class="form_input remove_dash">
@@ -423,8 +376,7 @@ th{
         $( window ).scroll( function() {
           if ( $( document ).scrollTop() > areaRight.top ) {
             $( '.area_right' ).addClass('fixed');
-          }
-          else {
+          } else {
             $( '.area_right' ).removeClass('fixed');
           }
         });
