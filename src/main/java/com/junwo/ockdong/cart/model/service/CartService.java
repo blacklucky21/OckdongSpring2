@@ -28,6 +28,13 @@ public interface CartService {
 
 	int checkNum();
 
+	ArrayList<Payment> PayList();
+
+	ArrayList<Payment> selectPayList(HashMap<String, String> search);
+
+	int updateStatus(HashMap<String, String> ppcheck);
+
+
 
 
 

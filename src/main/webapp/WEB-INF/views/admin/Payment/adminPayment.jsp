@@ -6,38 +6,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/admin/PayList.css">
+<style>
 
+</style>
 </head>
 <body>
 
 	<c:import url="../adminheader.jsp" />
-
+<form id="SearchInputform" action="adminPaymentList2.do" method="post">
 	<div style="margin-left: 250px">
 		<h1>주문 통합 리스트</h1>
 
 
 		<div  class="pay1">
 			<div class="PayPlz">
+			
 				<table style='border-width: 1px; border-collapse: collapse;' class="searchBoard">
 					<tr>
 						<th>검색어</th>
 						<td>
-							<select id="searchForm">
+							<select id="searchForm" name="searchForm">
 								<option value="allSearch">통합검색</option>
-								<option value="Paynum">상품번호</option>
+								<option value="Paynum">주문번호</option>
 								<option value="PayName">상품명</option>
-								<option value="hhhh">주문자아이디</option>
-								<option value="audi">주문자번호</option>
+								<option value="PayId">주문자아이디</option>
+								<option value="Payphone">주문자번호</option>
+								<option value="PayUserName">주문자번호</option>
 							</select>
 
-							<input type="text" value="222" style="">
+			<input type="text" placeholder="검색어를 입력해주세요" class="SearchInput" name="searchInput">
 
 
 						</td>
 						<td rowspan="4">
 							<button class="ResultBtn Search">검색</button>
 							<br> <br>
-							<button class="ResultBtn Rest">초기화</button>
+							<button type="button" class="ResultBtn Rest">초기화</button>
 						</td>
 					</tr>
 
@@ -45,19 +49,19 @@
 						<th>주문일자</th>
 						<td class="dayBtn">
 
-							<button class="today buttonSearch" id="today">오늘</button>
-							<button class="today buttonSearch" id="3days">3일</button>
-							<button class="today buttonSearch" id="7days">1주일</button>
-							<button class="today buttonSearch" id="1month">1개월</button>
-							<button class="today buttonSearch" id="1years">1년</button>
-							<input type="date" class="startDatePicker"> ~ <input type="date" id="endDatePicker" class="endDatePicker">
+							<button type="button" class="today buttonSearch" id="today">오늘</button>
+							<button type="button" class="today buttonSearch" id="3days">3일</button>
+							<button type="button" class="today buttonSearch" id="7days">1주일</button>
+							<button type="button" class="today buttonSearch" id="1month">1개월</button>
+							<button type="button" class="today buttonSearch" id="1years">1년</button>
+							<input type="date" class="startDatePicker" name ="startDatePicker"> ~ <input type="date" id="endDatePicker" name="endDatePicker" class="endDatePicker">
 						</td>
 					</tr>
 					<tr>
 						<th>주문 상태</th>
 						<td>
 							<div class="checkBox Item">
-								<input type="checkBox" class="checkPay SelectAll ">전체선택 <input type="checkBox" class="checkPay PayConfirm" name="check">결제완료 <input type="checkBox" class="checkPay PayReady " name="check">상품준비중 <input type="checkBox" class="checkPay PayDelivary" name="check">배송중 <input type="checkBox" class="checkPay DelivaryEnd" name="check">배송완료 <input type="checkBox" class="checkPay PayEnd" name="check">구매확정
+								<input type="checkBox" class="checkPay SelectAll ">전체선택 <input type="checkBox" class="checkPay PayConfirm" name="check">결제완료 <input type="checkBox" class="checkPay PayReady " name="check" value="ready">상품준비중 <input type="checkBox" class="checkPay PayDelivary" name="check" value="ing">배송중 <input type="checkBox" class="checkPay DelivaryEnd" name="check" value="end">배송완료 <input type="checkBox" class="checkPay PayEnd" name="check" value="buyend">구매확정
 							</div>
 						</td>
 					</tr>
@@ -72,50 +76,70 @@
 
 			<div class="content_bottom">
 				<p>
-					검색 결과 <span>0</span>건
+					검색 결과 <span>${list.size()}</span>건
 				</p>
 			</div>
 
 
-			<div style="min-height: 600px; overflow: auto">
-
 			<div style="height: 600px; overflow: auto">
+
+			<div style="height: auto; width:auto; overflow: auto">
 
 				<table class="tableResult ">
 					<thead>
-						<tr>
+						<tr >
 
-							<th style="min-height: 200px;" >주문번호</th>
-							<th>주문자명</th>
-							<th>주문자 전화번호</th>
-							<th>주문상태</th>
-							<th>상품번호</th>
-							<th>상품명</th>
-							<th>재료명</th>
-							<th>결제금액</th>
-							<th>기사에게 남길말</th>
-							<th>결제시간</th>
-							<th>카테고리</th>
-							<th>판매수량</th>
+							<th nowrap style="min-height: 200px;" >주문번호</th>
+							<th nowrap>주문자명</th>
+							<th nowrap>주문자 전화번호</th>
+							<th nowrap>주문상태</th>
+							<th nowrap>상품번호</th>
+							<th nowrap>상품명</th>
+							<th nowrap>배달주소</th>
+							<th nowrap>결제금액</th>
+							<th nowrap>기사에게 남길말</th>
+							<th nowrap>결제시간</th>
+							<th nowrap>배송날짜</th>
+							<th nowrap>판매수량</th>
 
 						</tr>
 					</thead>
 					<tbody class="hover">
-						<c:forEach var="i" begin="0" end="20">
+						<c:forEach var="p" items='${list }' varStatus="pay">
 
 							<tr>
-								<td style=" cursor:pointer" class="search num${i} value='${i }'" >123412312312213</td>
-								<td>2</td>
-								<td>반값븐디ㅏ!</td>
-								<td>4</td>
-								<td>5</td>
-								<td>6</td>
-								<td>7</td>
-								<td>8</td>
-								<td>9</td>
-								<td>10</td>
-								<td>11</td>
-								<td>12</td>
+								<td nowrap style=" cursor:pointer" class="search" >${p.p_id}</td>
+								<td nowrap> ${p.payname }</td>
+								<td nowrap>${p.payphone }</td>
+								<td nowrap>
+								
+								<select id="delivaryForm" onchange="inputPid('${p.p_id}')">
+								<c:if test="${p.pstatus eq 'Y' }">
+								<option class="Ready" value="Ready" selected>상품준비중</option>
+								<option class="DelivaryIng"value="DelivaryIng">배송중</option>
+								<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
+								</c:if>
+								
+								<c:if test="${p.pstatus eq 'R' }">
+								<option class="Ready" value="Ready" >상품준비중</option>
+								<option class="DelivaryIng"value="DelivaryIng" selected>배송중</option>
+								<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
+								</c:if>
+								
+								<c:if test="${p.pstatus eq 'E' }">
+								<option class="Ready" value="Ready" >상품준비중</option>
+								<option class="DelivaryIng"value="DelivaryIng" >배송중</option>
+								<option class="DelivaryEnd"value="DelivaryEnd" selected>배송완료</option>
+								</c:if>
+							</select></td>
+								<td nowrap></td>
+								<td nowrap>${p.paytext }</td>
+								<td nowrap>${p.payaddress }</td>
+								<td nowrap>${p.payprice }</td>
+								<td nowrap>${p.orderMemo }</td>
+								<td nowrap>${p.paydate }</td>
+								<td nowrap>${p.delivaryDate }</td>
+								<td nowrap>${p.payrecipe }</td>
 							</tr>
 
 						</c:forEach>
@@ -131,7 +155,7 @@
 
 
 
-
+</form>
 	<script>
 
 	
@@ -226,6 +250,35 @@
 		  d.setYear(Year - 1)
 		  return getDateStr(d);
 		}
+		
+		
+		
+		function inputPid(id){
+			var check = $('#delivaryForm').val()
+			
+			
+			if(check == 'Ready'){
+				check = 'Y';
+			}else if(check=='DelivaryIng'){
+				check = 'R';
+			}else{
+				check = 'E';
+			}
+			
+			$.ajax({
+				
+				 url :"inputPid.do",
+			        type: "POST",
+			        data : {"id":id,"check":check},
+			        success : function(data){
+			        	
+			        	
+			        }
+				
+			});
+			
+		}
+		
 	</script>
 
 

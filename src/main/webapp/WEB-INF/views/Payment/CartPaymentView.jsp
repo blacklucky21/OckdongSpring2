@@ -7,10 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <link rel="stylesheet" href="resources/css/cart/CartView.css">
 
 <style>
 
+.area_right.fixed {
+    position: fixed;
+    top: 81px;
+}
 </style>
 <body>
 
@@ -20,7 +25,72 @@
 	<form action="PaymentResultList.do" method="post" id="insertPaymentAbout">
 	<div class="content" style="width:100%; text-align:center">
 
+	<div class="area_right">
+					<div class="box">
+						<p class="title">1회 배송 주문정보</p>
+						<table class="tbl_order3">
+							<colgroup>
+								<col style="width: 50%;">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>총 상품금액</th>
+									<td><span class="totalGoodsPrice"></span> 원</td>
+						
+								</tr>
+								<tr>
+									<th>배송비 합계</th>
+									<td class="orange">+ <span class="totalDeliveryCharge">0</span> 원
+									</td>
+								</tr>
+								<!-- <tr>
+									<th>할인 금액 합계</th>
+									<td class="orange">- <span class="total_sale_prc">12,100</span>원
+										<div class="view_info">
+											<div class="order_area_event_prc" style="display: none;">
+												이벤트 할인금액 : <span class="order_saleinfo_event_prc">0</span>원
+											</div>
+											<div class="order_area_timesale">
+												타임세일금액 : <span class="order_saleinfo_timesale">12,100</span>원
+											</div>
+											<div class="order_area_member_prc" style="display: none;">
+												회원할인금액 : <span class="order_saleinfo_member_prc">0</span>원
+											</div>
+											<div class="order_area_cpn_prc" style="display: none;">
+												쿠폰할인금액 : <span class="order_saleinfo_cpn_prc">0</span>원
+											</div>
+											<div class="order_area_prd_prc" style="display: none;">
+												상품금액별할인금액 : <span class="order_saleinfo_prd_prc">0</span>원
+											</div>
+										</div>
+									</td>
+								</tr> -->
+								<tr>
+									<th>적립금 사용</th>
+									<td class="orange">- <span class="use_milage_prc">0</span>
+										원
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p class="order_price_text">결제 금액</p>
+						<p class="order_price">
+							<span class="price"><span class="totalSettlePrice"></span></span>원
+						</p>
+						<p class="mileage_complete">
+							적립예정 <span><span class="total_milage">0</span></span> 원
+						</p>
+						<p style="padding: 5px 0px;">
+							<label for="agree-private"><input type="checkbox" class="require" id="agree-private" name="agree_private" value="Y">상기
+								결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
+						</p>
+						<input type="button" value="결제하기" class="btn_pay order-buy">
+					</div>
+				</div>
 	<div class="order-page" style="display:inline-block">
+	
+	
             <div class="step-top">
          
                 <div>
@@ -106,9 +176,9 @@
             <div class="price-box">
                 <div>
                     <p>
-                        <span class="detail">총 <em id="totalGoodsCnt"></em>개의 상품금액 <strong id="totalGoodsPrice">0</strong>원</span>
+                        <span class="detail">총 <em id="totalGoodsCnt"></em>개의 상품금액 <strong class="totalGoodsPrice">0</strong>원</span>
                         <span><img src="resources/img/etc/plus.png" alt="더하기">배송비 <strong class="totalDeliveryCharge">0</strong>원</span>
-                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong id="totalSettlePrice">0</strong>원
+                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong class="totalSettlePrice">0</strong>원
                         </span>
                     </p>
                     <span class="mileage">적립예정 마일리지 : <span>0</span> 원</span>
@@ -284,6 +354,7 @@
                     <input type="hidden" name="userid" value="${loginUser.userId }">
                     	<input type="hidden" name="payaddress" class="payaddress">
                     	<input type="hidden" name="delivaryDate" class="delivaryCheck">
+                    	<input type="hidden" name="paytext" class="paytext">
 				</form>
 
                     <h3>결제정보</h3>
@@ -568,17 +639,19 @@ $('.post-search').click(function(){
 $('.order-buy').click(function(){
 	
 	//location.href="PaymentResultList2.do"
-	CallPayRequest();
+
 	
 	var count = parseInt('${pa.size()}')-1;
 	var payText ='${pa.get(0).cName}';
 	
 	if(count>=1){
 		
-		payText =  '${pa.get(0).cName}'+ '외 '+count +' 개 상품';
+		payText =  '${pa.get(0).cName}'+ ' 외 '+count +'개 ';
 	}
 	var totalAmount = parseInt($('#finalTotalPrice').text());
+	$('.paytext').val(payText);
 	
+	 CallPayRequest();
 	if($('.require').prop("checked")){
 		
 
@@ -696,9 +769,9 @@ $(document).ready(function() {
 	}
 	$('#totalGoodsCnt').text(count);
 	$('.totalDeliveryCharge').text(delivary);
-	$('#totalGoodsPrice').text(totalAmount);
+	$('.totalGoodsPrice').text(totalAmount);
 	$('#totalGoodsPrice2').text(totalAmount);
-	$('#totalSettlePrice').text(totalAmount+delivary);
+	$('.totalSettlePrice').text(totalAmount+delivary);
 	$('#finalTotalPrice').text(totalAmount+delivary);
 	$('#totalSettlePriceView').text(totalAmount+delivary);
 
@@ -791,7 +864,22 @@ function selectEmail(ele){
 	
 	
 	
-	
+	$( document ).ready( function() {
+        var areaRight = $( '.area_right' ).offset();
+        if ( $( document ).scrollTop() > areaRight.top ) {
+        	$( '.area_right' ).addClass('fixed');
+        }else {
+        	$( '.area_right' ).removeClass('fixed');
+        }
+        $( window ).scroll( function() {
+          if ( $( document ).scrollTop() > areaRight.top ) {
+            $( '.area_right' ).addClass('fixed');
+          }
+          else {
+            $( '.area_right' ).removeClass('fixed');
+          }
+        });
+      } );
 	
 
 

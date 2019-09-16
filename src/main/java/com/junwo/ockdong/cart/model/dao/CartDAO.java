@@ -72,6 +72,24 @@ public class CartDAO {
 	}
 
 
+	public ArrayList<Payment> selectPayList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectPayList");
+	}
+
+
+	public ArrayList<Payment> selectPayListSearch(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectPaySearch",search);
+	}
+
+
+	public int updateStatus(HashMap<String, String> ppcheck) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cartMapper.updateStatus",ppcheck);
+	}
+
+
 
 
 
