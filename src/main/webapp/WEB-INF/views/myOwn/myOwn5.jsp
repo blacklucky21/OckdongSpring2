@@ -164,6 +164,7 @@ table, tr, td {
 }
 </style>
 <link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
@@ -225,7 +226,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="rices_ul">
 								<c:forEach var="rice" items="${riceList }" varStatus="i">
-									<li class="rices_li"><img id="rice${i.count}" name="${rice.inNo }" class="rices" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/5_밥/${rice.inRenameFile}"/></li>
+									<li class="rices_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${rice.inName }, 중량(g) : ${rice.inGram}"><img id="rice${i.count}" name="${rice.inNo }" class="rices" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/5_밥/${rice.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -241,7 +242,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="soup_ul">
 								<c:forEach var="soup" items="${soupList }" varStatus="i">
-									<li class="soups_li"><img id="soup${i.count}" name="${soup.inNo }" class="soups" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/9_수프/${soup.inRenameFile}"/></li>
+									<li class="soups_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${soup.inName }, 중량(g) : ${soup.inGram}"><img id="soup${i.count}" name="${soup.inNo }" class="soups" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/9_수프/${soup.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -257,7 +258,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="main_ul">
 								<c:forEach var="main" items="${mainList }" varStatus="i">
-									<li class="mains_li"><img id="main${i.count}" name="${main.inNo }" class="mains" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/6_메인/${main.inRenameFile}"/></li>
+									<li class="mains_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${main.inName }, 중량(g) : ${main.inGram}"><img id="main${i.count}" name="${main.inNo }" class="mains" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/6_메인/${main.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -273,7 +274,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="sub1_ul">
 								<c:forEach var="sub1" items="${sub1List }" varStatus="i">
-									<li class="sub1s_li"><img id="sub1${i.count}" name="${sub1.inNo }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/7_서브1/${sub1.inRenameFile}"/></li>
+									<li class="sub1s_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${sub1.inName }, 중량(g) : ${sub1.inGram}"><img id="sub1${i.count}" name="${sub1.inNo }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/7_서브1/${sub1.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -289,7 +290,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="sub2_ul">
 								<c:forEach var="sub2" items="${sub2List }" varStatus="i">
-									<li class="sub2s_li"><img id="sub2${i.count}" name="${sub2.inNo }" class="sub2s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/8_서브2/${sub2.inRenameFile}"/></li>
+									<li class="sub2s_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${sub2.inName }, 중량(g) : ${sub2.inGram}"><img id="sub2${i.count}" name="${sub2.inNo }" class="sub2s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/5찬/8_서브2/${sub2.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -316,12 +317,18 @@ table, tr, td {
 	</div>
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 	<script>
 		/* $(".lunch_size").click(function() {
 			var src = $(this).attr('src');
 			$('.myOwnTable').css('background-image', 'url(' + src + ')');
 		}); */
-		
 		$(function(){
 			$(".myOwnAddBtn").click(function(){
 				var selectedCnt = $('.selected').length;
@@ -331,9 +338,6 @@ table, tr, td {
 				}else{
 					alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
 				}
-
-				
-				
 			});
 		});
 		

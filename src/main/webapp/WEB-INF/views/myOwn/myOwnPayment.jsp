@@ -59,7 +59,7 @@ th{
 							<li>
 								<div class="box_left">
 									<div class="img">
-										<a><img src="resources/img/Recipe/${fileName }.png" barder="0"></a>
+										<a><img src="resources/img/Recipe/${fileName }" barder="0"></a>
 									</div>
 									<div class="box">
 										<p class="brand"></p>

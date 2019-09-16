@@ -116,12 +116,15 @@ public class MyOwnController {
 			@RequestParam("selectedMain") int main,
 			@RequestParam("selectedSub1") int sub1,
 			@RequestParam("selectedSub2") int sub2,
-			HttpServletRequest request) throws IOException {
+			HttpServletRequest request,
+			HttpSession session) throws IOException {
 		
 		System.out.println("myOwnInsert.do로 들어옴");
 		System.out.println("imgSrc : " + imgSrc);
 		
 		String fileName = CreateRecipe(imgSrc, request);
+		
+		fileName = fileName + ".png";
 		
 		System.out.println("fileName : " + fileName);
 		
