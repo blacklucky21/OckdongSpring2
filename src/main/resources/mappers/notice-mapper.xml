@@ -39,6 +39,67 @@
 		where nNo= #{nNo} and status='Y'
 	</select>	
 		
-		
+	<!-- 게시글 작성  -->
+	<insert id="insertNotice"  parameterType="Notice">
+		insert into notice values(seq_nno.nextval, #{id}, #{nTitle}, #{nContent}, 
+      default, default, sysdate, sysdate, #{nickName})
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteNotice">
+		delete from notice
+		where nNo = #{nNO}
+	</delete>
+	
+	<!-- 수정  페이지 -->
+	<select id="updateNoticePage" parameterType="_int" resultMap="noticeResultSet">
+		select *
+		from notice
+		where nNo = #{nNo} and status='Y'
+	</select>
+	
+	<!-- 수정 update -->
+	<update id="updateNotice" parameterType="Notice">
+		update notice
+		set nTitle=#{nTitle}, nContent=#{nContent}, MODIFY_DATE=sysdate
+		where nNo = #{nNo}
+	</update>
+	
+	<!-- 게시글 검색 개수 -->
+	<select id="searchBoardCount" resultType="_int">
+		select count(*) from notice n
+		join member m on (n.id = m.userId)
+		where n.status = 'Y'
+		<choose>
+			<when test="writer != null">
+				and m.userId like '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				and nTitle like '%' || #{title} || '%'
+			</when>
+			<otherwise>
+				and nContent like '%' || #{content} || '%'
+			</otherwise>			
+		</choose>
+	</select>
+	
+	<!-- 검색 -->
+	<select id="searchBoardList" resultType="java.util.HashMap" parameterType="java.util.List">
+		select * from notice n
+		join member m on (n.id = m.userId)
+		where n.status = 'Y'
+		<choose>
+			<when test="writer != null">
+				and m.userId like '%' || #{writer} || '%'
+			</when>
+			<when test="title != null">
+				and nTitle like '%' || #{title} || '%'
+			</when>
+			<otherwise>
+				and nContent like '%' || #{content} || '%'
+			</otherwise>			
+		</choose>
+		order by nNo desc
+	</select>
   
 </mapper>

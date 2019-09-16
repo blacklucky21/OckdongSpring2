@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
-import com.junwo.ockdong.notice.model.vo.PageInfo;
+import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Controller
 public class ProductController {
@@ -356,6 +359,8 @@ public class ProductController {
 		System.out.println("서브3 원레 네임: " + sub3_realname);
 		System.out.println("서브3 타입 : " + sub3_type);
 
+		
+		
 		ArrayList npt = new ArrayList(); // 기존 사진을 없앨 을 경우
 		npt.add(title_realname);
 		npt.add(sub1_realname);
@@ -376,6 +381,8 @@ public class ProductController {
 		System.out.println(thumbnailImg3.getOriginalFilename());
 		System.out.println(thumbnailImg4.getOriginalFilename());
 		System.out.println("==========================================");
+		
+		
 
 		for (int i = 0; i < orign.size(); i++) {
 			System.out.println("수정 컨트롤러 사진 변경된 이름 출력 해본다. : " + orign.get(i).toString());
@@ -579,8 +586,73 @@ public class ProductController {
 		return mv;
 	}
 // =============================================================================================================================================		
+	// 댓글 리스트 가져오기
+	@RequestMapping("pvList.do")
+	public void getReplyList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
+		ArrayList<Productreview> pvList = pService.selectReplyList(p_Id); // 게시판의 댓글 가지고온다.
+		
+
+		for(Productreview pv : pvList) {
+			pv.setPv_reviewContent(URLEncoder.encode(pv.getPv_reviewContent(),"utf-8"));
+			pv.setPv_user(URLEncoder.encode(pv.getPv_user(),"utf-8"));
+			System.out.println(pvList);
+		}
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(pvList, response.getWriter());
+	}
 	
+	//	상품 디테일에서 댓글 등록
+	@RequestMapping("addReply.do")
+	@ResponseBody
+	public String addReply(Productreview pv, HttpSession session) throws Exception {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String pv_User = loginUser.getNickName(); // 작성자 닉네임으로 할거임
+		
+		
+		pv.setPv_user(pv_User);
+		
+		System.out.println(pv); // 잘나오는지 확인 한다.
+		
+		int result = pService.insertReply(pv); // 서비스단에 넘겨준다.
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			throw new Exception("댓글 등록 실패");
+		}
+		
+		
+	}
+	@RequestMapping("updateReply.do")
+	@ResponseBody
+	public String updateReply(@ModelAttribute Productreview pv,HttpSession session) throws Exception {
+		
+		System.out.println("업데이트 pv 객체 : " + pv);
+		/* pv.setPv_reviewContent(pv_reviewContent); */// 변경 된거를 집어 넣어 준다.
+		
+		int result = pService.updateReply(pv);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			throw new Exception("댓글 등록 실패");
+		}
+	}
 	
-	
-	
+	// 댓글 삭제
+	@RequestMapping("deletedPv.do")
+	@ResponseBody
+	public String deletePv(Productreview pv, HttpSession session) throws Exception{
+		
+		System.out.println("delete 넘어온 댓글 번호  : " + pv);
+		
+		int result = pService.deleteReply(pv);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			throw new Exception("댓글 등록 실패");		
+		}
+	}
 }

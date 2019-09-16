@@ -56,4 +56,13 @@ public class MyOwnDAO {
 		return sqlSession.update("myOwnMapper.deleteRecipe", mblId);
 	}
 
+	public ArrayList<MBLRecipe> getUserRecipe(String userId) {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.getUserRecipe", userId);
+	}
+
+	public ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search) {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.searchRecipeList", search);
+				
+	}
+
 }

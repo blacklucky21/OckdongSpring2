@@ -8,9 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.junwo.ockdong.notice.model.vo.PageInfo;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Repository("pDAO")
 public class ProductDAO {
@@ -165,6 +166,27 @@ public class ProductDAO {
 		
 		return (ArrayList)sqlSession.selectList("productMapper.selectType2", null, rowBounds);
 	}
+
+	// 댓글 리스트 가지고 가기
+	public ArrayList<Productreview> selectRelyList(int p_Id) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectReplyList",p_Id);
+	}
+	// 상세 페이지 댓글 등록
+	public int insertReply(Productreview pv) {
+		return sqlSession.insert("productMapper.insertReply" ,pv);
+	}
+
+
+	// 댓글 삭제
+	public int deleteReply(Productreview pv) {
+		return sqlSession.delete("productMapper.deleteReply",pv);
+	}
+
+	// 댓글 수정한다.
+	public int updateReply(Productreview pv) {
+		return sqlSession.update("productMapper.updateReply",pv);
+	}
+
 
 
 	

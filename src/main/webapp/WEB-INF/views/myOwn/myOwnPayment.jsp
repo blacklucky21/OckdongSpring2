@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>myOwnPayment</title>
+
 <link rel="stylesheet" href="resources/css/cart/CartView.css">
 <link rel="stylesheet" href="resources/css/myOwn/myOwnPayment1.css">
+
 
 
 </head>
@@ -62,7 +64,9 @@ th{
 								<div class="box_left">
 									<div class="img">
 										<a><img src="resources/img/Recipe/${fileName }" barder="0"></a>
+
 										<input type="hidden" name="p_img" value="resources/img/Recipe/${fileName}">
+
 									</div>
 									<div class="box">
 										<p class="brand"></p>
@@ -77,7 +81,11 @@ th{
         								</span>
         							</div>
 									<div class="price_box">
+
 										<p class="price_text totalAmount">상품 금액</p>
+
+									
+
 										<p class="price">
 											<c:if test="${empty soup}">
 												<input type="hidden" class="standardPrice" name="standardPrice" value="4000"/>
@@ -101,7 +109,10 @@ th{
 												console.log(result);
 												$(".totalPrice").text("");
 												$(".totalPrice").text(result);
+
 												totalCheck(result);
+
+
 											});
 											$(".quantity").keyup(function(){
 												console.log(this);
@@ -113,7 +124,10 @@ th{
 												console.log(result);
 												$(".totalPrice").text("");
 												$(".totalPrice").text(result);
+
 												totalCheck(result);
+
+
 											});
 										});
 									</script>
@@ -250,7 +264,7 @@ th{
 								</tr>
 								<tr>
 									<th>배송비 합계</th>
-									<td class="orange">+ <span class="totalDeliveryCharge">0</span> 원
+  						<td class="orange">+ <span class="totalDeliveryCharge">0</span> 원
 									</td>
 								</tr>
 								<!-- <tr>
@@ -279,6 +293,7 @@ th{
 									<th>적립금 사용</th>
 									<td class="orange">- <span class="use_milage_prc">0</span>
 										원
+
 									</td>
 								</tr>
 							</tbody>
@@ -297,6 +312,7 @@ th{
 						<input type="button" value="결제하기" class="btn_pay order-buy">
 					</div>
 				</div>
+
 				
 				<div class="area_left">
 					<c:set var="m" value="${member}"/> 
@@ -558,6 +574,7 @@ th{
                                             </li>
                                         </ul>
                                         //무통장입금 컨텐츠
+
 
 
 

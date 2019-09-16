@@ -173,7 +173,7 @@
 					
 					var list = data;
 				 	if(data.length > 0){
-				 		$(".countSpan").empty();
+				 		$(".countSpan").empty(); // 검색 결과 비움
 				 		$(".countSpan").text(data.length);
 				 		$(".list_content").empty(); // tobody 가 비움
 						var count = 1;

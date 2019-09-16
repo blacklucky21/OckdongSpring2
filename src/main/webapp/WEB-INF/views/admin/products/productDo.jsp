@@ -24,6 +24,7 @@
 <body>
 <!-- ############### 헤더 부분 ############### -->
 	<c:import url="../../header/header.jsp" /> 
+	<h1 class="maintitle">도시락 상품</h1>
 	<div class="main">
   		<div class="warp">
   			<div class="element-exhibition type3" style="left: 0%;top: 0%;width: 100%;height: 100%; z-index: 100;">

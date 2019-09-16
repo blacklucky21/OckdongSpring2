@@ -20,6 +20,8 @@
 			<br>
 			<div class="text" onclick="location.href='reviewServletView.bo'">내가 쓴 게시물</div>
 			<br>
+			<div class="text" onclick="location.href='myOwnList.me'">나만의 도시락</div>
+			<br>
 			<div class="text" onclick="location.href='updatePwd_myPage.me'">비밀번호 변경</div>
 			<br>
 			<div class="text" onclick="location.href='memberOutView.me'">회원 탈퇴</div>

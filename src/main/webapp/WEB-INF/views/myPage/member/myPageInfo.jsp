@@ -13,11 +13,11 @@
 <body>
 </head>
 	
-	<form id="ModifyInfoForm" action="" method="post">
+	<form id="ModifyInfoForm" action="memberUpdate.me" method="post">
 	<c:set var="m" value="${member}" />
 	<span class="join-form">
-		<fieldset id="fds-order-info">
-			<legend>주문폼</legend>
+	<fieldset id="fds-order-info">
+	<legend>주문폼</legend>
 			<h3>회원 정보</h3>
 			<div class="table1 orderplz">
 				<table>
@@ -32,37 +32,37 @@
 								<div class="txt-field-id hs" style="width: 350px;">
 									<input type="text" name="userId" value="${ loginUser.getUserId() }" class="text" readonly>
 								</div>
-								<td></td>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<th class="ta-l required" aria-required="true">닉네임</th>
 							<td>
 								<div class="txt-field hs" style="width: 350px;">
-									<input type="text" name="userName" value="${ loginUser.getNickName() }" class="text">
+									<input type="text" id="nickName" name="nickName" value="${ loginUser.getNickName() }" class="text">
 								</div>
-								<td></td>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<th class="ta-l required" aria-required="true">휴대폰 번호</th>
 							<td>
 								<span class="txt-field hs" style="width: 350px;">
-									<input type="text" id="mobileNum" name="orderCellPhone" value="${ loginUser.getPhone() }" class="text">
+									<input type="text" id="phone" name="phone" value="${ loginUser.getPhone() }" class="text">
 								</span>
-								<td></td>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<th class="ta-l required" aria-required="true">이메일</th>
 							<td>
 								<div class="email" style="display: inline">
 									<span class="txt-field hs" style="width: 350px;"> 
-										<input type="text" name="orderEmail" value="${ loginUser.getEmail() }" class="text">
+										<input type="text" name="email" value="${ loginUser.getEmail() }" class="text">
 									</span>
-									<td></td>
 								</div>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 						<%-- <input type="hidden" id = "add" value="${ loginUser.address}" style="width:100%"> --%>
@@ -108,6 +108,7 @@
 					</div>
 				</div>
 			</div>
+			
 </form>
 	
 	<script>
@@ -163,28 +164,11 @@
 	<script>
 		var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		var regPhone = /^[0-9]+$/;
-		var regPwd = /^(?=.*[a-zA-Z]+)(?=.*[0-9]+).{6,12}$/;
 
 		function wSend() {
-			if (!regPhone.test($('#phone1').val())) {
+			if (!regPhone.test($('#phone').val())) {
 				alert("숫자만 가능합니다.");
-				$('#phone1').focus();
-				return;
-			}
-			if (!regPhone.test($('#phone2').val())) {
-				alert("숫자만 가능합니다.");
-				$('#phone2').focus();
-				return;
-			}
-			if (!regPhone.test($('#phone3').val())) {
-				alert("숫자만 가능합니다.");
-				$('#phone3').focus();
-				return;
-			}
-
-			if (!regPwd.test($('#userPwd').val())) {
-				alert('영문+숫자  조합으로 6-12자를 입력해 주세요.');
-				$('#userPwd').focus();
+				$('#phone').focus();
 				return;
 			}
 
@@ -193,7 +177,6 @@
 				$('#email').focus();
 			} else {
 				if ($('#userPwd').val() != ""
-						&& $('#userPwd2').val() == $('#userPwd').val()
 						&& $('#phone').val() != ""
 						&& $('#address3').val() != ""
 						&& $('#email').val() != "") {
@@ -207,17 +190,6 @@
 		$(function() {
 			$("#wSend").click(function() {
 
-				if ($('#userPwd').val() == "") {
-					alert("비밀번호를 입력 해 주세요");
-					$('#userPwd').focus();
-					return;
-				}
-
-				if ($('#userPwd2').val() != $('#userPwd').val()) {
-					alert("입력하신 비밀번호를 확인 해 주세요");
-					$('#userPwd2').focus();
-					return;
-				}
 
 				if ($('#address3').val() == "") {
 					alert("주소를 입력 해 주세요");
@@ -256,37 +228,8 @@
 			var email = document.getElementById("userEmail").value;
 			$("#email").val(email);
 			
-			/* $('#post').html(addressArr[0]); */
 			
 			
-		});
-
-		$("#emailCheck2").click(function() {
-
-			var email = $("#email").val();
-
-			if (!regEmail.test(email)) {
-				alert('사용할 수 없는 이메일입니다.');
-				email.focus();
-				return false;
-			}
-
-			$.ajax({
-
-				url : "emailCheck.do",
-				data : {
-					email : email
-				},
-				type : "get",
-				success : function(data) {
-					if (data == 0) {
-						alert("사용 가능한 이메일입니다.");
-						checkValue2 = 1;
-					} else {
-						alert("사용 중인 이메일입니다.");
-					}
-				}
-			});
 		});
 		
 	
