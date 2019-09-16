@@ -71,8 +71,9 @@
 			<div class="addRecipe">
 				<div class="input-group mb-3" style="width: 40%; margin-left: auto; margin-right: auto;">
 					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1" style="color:#fff; background: #2ecc71">제목 : </span>${mblR.mblTitle }
+						<span class="input-group-text" id="basic-addon1" style="color:#fff; background: #2ecc71">제목 : </span>
 					</div>
+					<input type="text" id="racipeName" name="racipeName" value="${mblR.mblTitle }" class="form-control" placeholder="나만의 도시락의 제목을 적어주세요." aria-label="Username" aria-describedby="basic-addon1" style="background-color:white;" readonly>
 				</div>
 				<br clear="all">
 				<div class="imgArea">
@@ -210,6 +211,10 @@
 			$(".myOwnBackBtn").click(function(){
 				history.back();
 			});
+		});
+		
+		$(function(){
+			
 		});
 	</script>
 </body>
