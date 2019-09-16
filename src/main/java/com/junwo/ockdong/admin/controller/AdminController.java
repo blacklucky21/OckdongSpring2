@@ -98,7 +98,7 @@ public class AdminController {
 			switch(checkBox[i]) {
 			
 			case "ready" : search.put("ready",checkBox[i]);System.out.println(checkBox[i]);break;
-			case "ing"   : search.put("ing",checkBox[i]);break;
+			case "ing"   : search.put("ing",checkBox[i]);System.out.println(checkBox[i]);break;
 			case "end" 	 : search.put("end",checkBox[i]);break;
 			case "buyend": search.put("buyend",checkBox[i]);break;
 			}

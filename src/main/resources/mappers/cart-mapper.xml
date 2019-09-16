@@ -148,10 +148,19 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{pa
   			and CHECKDATE between '${startDatePicker}' and  to_date('${endDatePicker}')+1
   			</if> 
   			
+  			<if test="ready !=null">
+  			and PSTATUS = 'Y'
   			
+  			</if>
+  			<if test="ing !=null">
+  			and PSTATUS = 'R'
   			
-  
-	
+  			</if>
+  			<if test="end !=null">
+  			and PSTATUS = 'E'
+  			
+  			</if>
+
 	
 	</select>
 	<update id="updateStatus">
