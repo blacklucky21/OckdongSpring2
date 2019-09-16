@@ -2,11 +2,13 @@ package com.junwo.ockdong.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Spliterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.junwo.ockdong.cart.model.service.CartService;
+import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
@@ -42,6 +46,9 @@ public class AdminController {
 
 	@Autowired
 	private ProductService pService;
+	
+	@Autowired
+	private CartService cService;
 
 	@RequestMapping("adminView.do")
 	public String adminView() {
@@ -50,9 +57,69 @@ public class AdminController {
 	}
 
 	@RequestMapping("adminPaymentList.do")
-	public String adminPaymentList() {
+	public ModelAndView adminPaymentList(ModelAndView mv) {
 
-		return "admin/Payment/adminPayment";
+		ArrayList<Payment> list = cService.PayList();
+		
+		if (list != null) {
+			mv.addObject("list", list);
+
+			mv.setViewName("admin/Payment/adminPayment");
+		}
+		
+		return mv;
+	}
+	//배송리스트
+	@RequestMapping("adminPaymentList2.do")
+	public ModelAndView adminPaymentList2(ModelAndView mv,
+			@RequestParam("searchInput") String searchInput, @RequestParam("searchForm") String searchForm,
+			@RequestParam("startDatePicker") String startDatePicker, String endDatePicker,
+			@RequestParam(value="check",required=false)String check) {
+		mv = new ModelAndView();
+		System.out.println(searchInput);
+		System.out.println(searchForm);
+		System.out.println(endDatePicker);
+		System.out.println(startDatePicker);
+	
+		HashMap<String, String> search = new HashMap<String, String>();
+		search.put("searchInput", searchInput);
+		search.put("searchForm", searchForm);
+		search.put("startDatePicker", startDatePicker);
+		search.put("endDatePicker", endDatePicker);
+		
+		if(check!=null) {
+		String checkBox[] = check.split(",");
+		
+		
+		
+		System.out.println("check"+check);
+		
+		for(int i=0;i<checkBox.length;i++) {
+			
+			switch(checkBox[i]) {
+			
+			case "ready" : search.put("ready",checkBox[i]);System.out.println(checkBox[i]);break;
+			case "ing"   : search.put("ing",checkBox[i]);System.out.println(checkBox[i]);break;
+			case "end" 	 : search.put("end",checkBox[i]);break;
+			case "buyend": search.put("buyend",checkBox[i]);break;
+			}
+		}
+		}
+		ArrayList<Payment> list = cService.selectPayList(search);
+		// int listCount = mService.MemberListCount();
+
+//		System.out.println(list);
+		if (list != null) {
+			mv.addObject("list", list);
+
+			mv.setViewName("admin/Payment/adminPayment");
+
+		} else {
+
+		}
+
+		return mv;
+
 	}
 
 	// 상품 리스트 ~~
@@ -99,15 +166,15 @@ public class AdminController {
 	@RequestMapping("main.do")
 	public ModelAndView main(ModelAndView mv) {
 		mv = new ModelAndView();
-		
+
 		System.out.println("1");
 		ArrayList pList = pService.selectList8(1); // 판매중인 상품만 가지고 오기
 		ArrayList pList2 = pService.selectList8do(); // 도시락 8개
 		ArrayList pList3 = pService.selectList8sal(); // 샐러드 8개
 		mv.addObject("pList", pList);
-		mv.addObject("pList2",pList2);
-		mv.addObject("pList3",pList3);
-		
+		mv.addObject("pList2", pList2);
+		mv.addObject("pList3", pList3);
+
 		mv.setViewName("Main");
 
 		return mv;
@@ -133,20 +200,20 @@ public class AdminController {
 		}
 		return mv;
 	}
-	
+
 	// 나만의 도시락 재료 디테일
 	@RequestMapping("myInDetail.do")
 	public ModelAndView myInDetail(ModelAndView mv, @RequestParam("inNo") int inNo) {
 		System.out.println("inNo : " + inNo);
 		Ingredient ingredient = moService.selectOne(inNo);
-		
-		if(ingredient != null) {
-			mv.addObject("ingredient",ingredient);
+
+		if (ingredient != null) {
+			mv.addObject("ingredient", ingredient);
 			mv.setViewName("admin/mydo/myOwn_Ingredients_detail");
-		}else {
+		} else {
 			mv.setViewName("admin/adminMain");
 		}
-		
+
 		return mv;
 	}
 
@@ -221,19 +288,17 @@ public class AdminController {
 
 		return renameFile;
 	}
-	
-	
+
 	// 수정하기
 	@RequestMapping("Ingredients_Update.do")
 	public String ingredientUpdate(@ModelAttribute Ingredient in, @RequestParam("inCategory") String inCategory,
 			@RequestParam("selected4") String selected4, @RequestParam("selected5") String selected5,
 			@RequestParam(value = "ingredientImg", required = false) MultipartFile uploadFile,
-			@RequestParam("nOldCateAndType") String nOldCateAndType,
-			HttpServletRequest request) {
-		
+			@RequestParam("nOldCateAndType") String nOldCateAndType, HttpServletRequest request) {
+
 		System.out.println(in);
 		System.out.println(uploadFile);
-		
+
 		if (inCategory.equals("4찬")) {
 			in.setInType(selected4);
 			inCategory = inCategory + "\\" + selected4;
@@ -252,7 +317,7 @@ public class AdminController {
 				in.setInOriginalFile(uploadFile.getOriginalFilename());
 				in.setInRenameFile(renameFileName);
 			}
-		}else {
+		} else {
 			System.out.println("uploadFile 비어있음");
 		}
 
@@ -266,9 +331,10 @@ public class AdminController {
 			return "redirect:IngredientsInsert.do";
 		}
 	}
-	
+
 	// 이미지 파일 삭제하고 업데이트 하기
-	public String inUpdateFile(MultipartFile file, HttpServletRequest request, String inCategory, String nOldCateAndType, Ingredient in) {
+	public String inUpdateFile(MultipartFile file, HttpServletRequest request, String inCategory,
+			String nOldCateAndType, Ingredient in) {
 		System.out.println("이미지 업데이트로 들어옴");
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\img\\myOwn\\" + inCategory;
@@ -286,27 +352,25 @@ public class AdminController {
 				+ originalFile.substring(originalFile.lastIndexOf(".") + 1);// 마지막은 확장자명 추가
 
 		String renamePath = folder + "\\" + renameFile;
-		
-		
-		
-		//삭제를 위한 방법
+
+		// 삭제를 위한 방법
 		System.out.println(nOldCateAndType);
 		String removePath = root + "\\img\\myOwn\\" + nOldCateAndType;
 		System.out.println(removePath);
 		File removeFolder = new File(removePath);
 		String removeFilePath = removeFolder + "\\" + in.getInRenameFile();
-		
+
 		System.out.println("try문 들어가기 전");
-		
+
 		try {
 			File removeFile = new File(removeFilePath);
-			if(removeFile.exists()){
-				if(removeFile.delete()) {
+			if (removeFile.exists()) {
+				if (removeFile.delete()) {
 					System.out.println("기존 파일 삭제 성공");
-				}else {
+				} else {
 					System.out.println("기존 파일 삭제 실패");
 				}
-			}else {
+			} else {
 				System.out.println("없는 파일");
 			}
 			file.transferTo(new File(renamePath));// 전달 받은 file이 rename명으로 저장
@@ -316,7 +380,6 @@ public class AdminController {
 
 		return renameFile;
 	}
-	
 
 	// 재료 리스트에서 선택한 재료 삭제하기
 	@RequestMapping("ingredientDelete.do")
@@ -356,78 +419,96 @@ public class AdminController {
 		gson.toJson(inList, response.getWriter());
 
 	}
-	
+
 	@RequestMapping("recipeDetail.do")
 	public ModelAndView recipeDetail(ModelAndView mv, @RequestParam("mblId") String mblId) {
-		
+
 		System.out.println(mblId);
-		
+
 		MBLRecipe mblR = moService.searchRecipeOne(mblId);
-		
+
 		System.out.println(mblR);
-		
+
 		String[] list = mblR.getNumbers().split("/");
-		
+
 		Ingredient in = null;
-		
+
 		Ingredient rice = null;
 		Ingredient sub1 = null;
 		Ingredient sub2 = null;
 		Ingredient soup = null;
 		Ingredient main = null;
-		
-		for(int i = 0; i < list.length; i++) {
+
+		for (int i = 0; i < list.length; i++) {
 			in = moService.selectOne(Integer.parseInt(list[i]));
-			
-			switch(in.getInType()) {
-				case "1_밥": case "5_밥":
-					rice = in;
-					break;
-				case "2_서브1": case "7_서브1":
-					sub1 = in;
-					break;
-				case "3_서브2": case "8_서브2":
-					sub2 = in;
-					break;
-				case "4_메인": case "6_메인":
-					main = in;
-					break;
-				case "9_수프":
-					soup = in;
-					break;
-					
+
+			switch (in.getInType()) {
+			case "1_밥":
+			case "5_밥":
+				rice = in;
+				break;
+			case "2_서브1":
+			case "7_서브1":
+				sub1 = in;
+				break;
+			case "3_서브2":
+			case "8_서브2":
+				sub2 = in;
+				break;
+			case "4_메인":
+			case "6_메인":
+				main = in;
+				break;
+			case "9_수프":
+				soup = in;
+				break;
+
 			}
-			
+
 		}
-		
-		mv.addObject("rice",rice);
-		mv.addObject("sub1",sub1);
-		mv.addObject("sub2",sub2);
-		mv.addObject("main",main);
-		mv.addObject("soup",soup);
-		mv.addObject("mbl",mblR);
+
+		mv.addObject("rice", rice);
+		mv.addObject("sub1", sub1);
+		mv.addObject("sub2", sub2);
+		mv.addObject("main", main);
+		mv.addObject("soup", soup);
+		mv.addObject("mbl", mblR);
 		mv.setViewName("admin/mydo/myOwn_RecipeOne");
 		return mv;
 	}
-	
+
 	@RequestMapping("deleteRecipe.do")
 	public String deleteRecipe(@RequestParam("mblId") int mblId) {
-		
+
 		int result = moService.deleteRecipe(mblId);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			return "redirect:allRecipe.do";
-		}else {
+		} else {
 			return null;
 		}
-		
+
 	}
-	
+
 	@RequestMapping("searchRecipe.do")
-	public void searchRecipe(HttpServletResponse response, String sContent, String type) {
-		
+	public void searchRecipe(HttpServletResponse response, String sContent, String type) throws Exception {
+		Map<String, String> search = new HashMap<String, String>();
+		search.put("sContent", sContent);
+		search.put("type", type);
+
+		ArrayList<MBLRecipe> rList = moService.searchRecipeList(search);
+		if (rList != null) {
+			for (MBLRecipe r : rList) {
+				r.setMblTitle(URLEncoder.encode(r.getMblTitle(), "utf-8"));
+				r.setMblFileName(URLEncoder.encode(r.getMblFileName(), "utf-8"));
+				r.setMblType(URLEncoder.encode(r.getMblType(), "utf-8"));
+			}
+		}
+
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(rList, response.getWriter());
 	}
-	
+
 	// 상품관리 상품등록
 	@RequestMapping("productsInsert.do")
 	public String productsInert() {
@@ -602,6 +683,22 @@ public class AdminController {
 		}
 
 		return mv;
+	}
+	
+	@RequestMapping("inputPid.do")
+	public void inputPid(String id,String check) {
+		
+		
+		HashMap<String, String> ppcheck = new HashMap<String, String>();
+		
+		ppcheck.put("id", id);
+		ppcheck.put("check", check);
+		System.out.println("cc"+id);
+		System.out.println("dd"+check);
+		int gg = cService.updateStatus(ppcheck);
+		
+		//return "redirect:adminPaymentList.do";
+		
 	}
 
 }

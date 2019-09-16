@@ -61,6 +61,18 @@ public interface MemberService {
 
 
 
+	int checkId(String userId);
+
+
+
+	int memberUpdate(Member m);
+
+
+
+	int checkNick(String nickName);
+
+
+
 
 	
 

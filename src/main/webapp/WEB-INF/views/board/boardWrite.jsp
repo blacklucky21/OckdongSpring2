@@ -83,34 +83,31 @@ div#editor {
 										<td class="cateTd">카테고리</td>
 										<td>
 											<select name="writing_type" id="form_control" class="form-control input-xshort">
-												<option value="11">비포&애프터</option>
-												<option value="12">자극사진</option>
-												<option value="13">일기</option>
-												<option value="14">식단</option>
-												<option value="15">고민/질문</option>
-												<option value="18">자유게시판</option>
-												<option value="20">체험단리뷰</option>
-												<option value="19">관리자에게</option>
+												<option value="11">공지사항</option>
+												<option value="12">자유게시판</option>
 											</select>
 										</td>
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
-										<td id="title">제목</td>
+										<th id="title">제목</th>
 										<td>
-											<input id="board_title" name="board_title" type="text" class="form-control">
-											<input name="member_no" type="hidden" value= "${loginUser.member_no}">
+											<input id="nTitle" name="nTitle" type="text" class="form-control">
+										</td>
+										<th>작성자</th>
+										<td>
+											<input type="text" name="id" readonly value="${ loginUser.userId }">
 										</td>
 									</tr>
 
 								</table>
 								<!------------------------------ 글작성 공간 (froala editor) ------------------------------>
-								<textarea id="edit" name="board_content"></textarea>
+								<textarea id="edit" name="nContent"></textarea>
 								
 							</div>
 						<div class="boardWriteBtn">
 							<input id="btnSave" type="button" value="작성하기" class="btn btn-success">
-							<input type="reset" value="취소" class="btn btn-warning">
+							<input type="button" value="취소" class="btn btn-warning" onclick="location.href='nlist.do'">
 						</div>
 						</form>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>
@@ -130,7 +127,7 @@ div#editor {
 		/* 전송 버튼 클릭시 해당 컨트롤러로 전송 */
 		$(document).ready(function(){
 			$("#btnSave").click(function(){
-				var title = $("#board_title").val();
+				var title = $("#nTitle").val();
 				var content = $("#edit").val();
 				if(title == ""){
 					alert("제목을 입력하세요.");

@@ -71,4 +71,9 @@ public class MyOwnServiceImp implements MyOwnService{
 		return moDAO.getUserRecipe(userId);
 	}
 
+	@Override
+	public ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search) {
+		return moDAO.searchRecipeList(search);
+	}
+
 }
