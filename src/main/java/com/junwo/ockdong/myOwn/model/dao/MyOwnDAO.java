@@ -65,4 +65,12 @@ public class MyOwnDAO {
 				
 	}
 
+	public int deleteMblRecipe(int mblId) {
+		return sqlSession.update("myOwnMapper.deleteMblRecipe", mblId);
+	}
+
+	public MBLRecipe myRecipeDetail(int mblId) {
+		return sqlSession.selectOne("myOwnMapper.myRecipeDetail", mblId);
+	}
+
 }

@@ -211,6 +211,11 @@
 				return false;
 			}
 		}
+		$(function(){
+			$(".myOwnBackBtn").click(function(){
+				history.back();
+			});
+		});
 	</script>
 </body>
 </html>

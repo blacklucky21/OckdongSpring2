@@ -99,7 +99,7 @@
 		where status='Y'
 		<choose>
 			<when test="type.equals('도시락 명')">
-				and mbl_title = #{sContent}
+				and mbl_title like '%' || #{sContent} || '%'
 			</when>
 			<when test="type.equals('작성자')">
 				and userid like '%' || #{sContent} || '%'
@@ -108,6 +108,19 @@
 				and mbl_type like '%' || #{sContent} || '%'
 			</when>
 		</choose>
+	</select>
+	
+	<update id="deleteMblRecipe" parameterType="_int">
+		update mblrecipe
+		set status='N'
+		where mbl_id = #{mblId}
+	</update>
+	
+	
+	<select id="myRecipeDetail" parameterType="_int" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where mbl_id = ${mblId}
 	</select>
 	
 </mapper>
