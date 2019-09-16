@@ -53,7 +53,7 @@
 				<div class="productInfo">
 					<h3>${ p.p_name }</h3>
 					<div class="price">
-						<span class="sale-price"> ${p.p_price} 원</span>
+						<span class="sale-price comm" > ${p.p_price} 원</span>
 					</div>
 					
 					<c:if test="${ p.p_sell ne 'N' }">
@@ -63,7 +63,7 @@
 					<div class="items">
 						
 					</div>
-					<div class="all-price">총 상품금액        <span>0</span>원</div>
+					<div class="all-price">총 상품금액        <span class="comm"></span>원</div>
 					<div class="btn">
 						<a href="">장바구니</a>
 						<a href="">구매하기</a>
@@ -139,17 +139,17 @@
 					</c:if>
 					</tr>
 						<tr>
-							<td></td>
-							<td>내용</td>
 							<td>작성자</td>
+							<td>내용</td>
 							<td>작성일</td>
+							<td></td>
 						</tr>
 					</thead>
 					<!-- 여기서 내용 나온다. -->
 								
 					<!-- 여기가 댓글 리스트 읽어 오는 것  -->
 					<tbody id="pvList">
-					<tr >
+					<tr>
 						<td></td>
 						<td class="tcontent"><span></span></td>
 						<td></td>
@@ -308,15 +308,20 @@
 	<c:import url="../../footer/footer.jsp" />
 	
 	<script>
+	
+
+	
 	// 사이드 사진 클릭시 메인으로 변경
 	function side(pick){
 	/* 	$('#mainim').attr("src","pick"); */
 	document.getElementById("mainim").src=pick;
 	}
-	
+// ==========================================================	
 	// 수량 증가/감소 
 	var cntSet = function (type,optionNo) {
 
+	
+	
     var cntElement = null;
     if(optionNo){
         cntElement = $('#orderCnt-' + optionNo);
@@ -327,8 +332,10 @@
     var orderCnt = cntElement.val();
     if (type == 'plus') {
         orderCnt = eval(orderCnt) + 1;
+        
     } else if (type == 'minus') {
         orderCnt = eval(orderCnt) - 1;
+        
     }
     orderCnt = Number(orderCnt.toString().replace(/\D/g, '')) || 1;
 
@@ -360,12 +367,12 @@
 	}
 
 	// 하단의 탭 부분
-	var price_sum = 0;
-	var options = [];
+	
+	
 
-	
+// ===================================================	
+	// 상품 아래 나오는 것들
 	 $(document).ready(function(){
-	
 	   // 탭 변경 부분
 	   $('.contentNav > li').click(function(e){
 	      e.preventDefault(); /* 상의 이벤트 전파를 막기 위해 사용 a 태그 작동 안하게됨  */
@@ -385,17 +392,25 @@
 	  
 	  });
 
-	   // 상품 후기 부분 
-	   $('.tproduct-review tbody tr .tcontent').click(function(){
-	   //전체 글자의 변수를 2번 잡아서 . 한번은 위쪽 내용. 한번은 아래쪽 내용 출력
-	   //위쪽 내용
-	    var text = $(this).children('span').html(); //전체 html또는 text를 가져와서
-	    var full = $(this).closest('tr').next('tr').children('td').eq(1).text(text).css('text-align','left'); // tr 출력후 나머지 글자 출력 및 정렬
-	    // var cut = $(this).closest('tr').next('tr').children('td').eq(1).text();
-	   $(this).closest('tr').next('tr').toggleClass('display'); //자세한 이용후기 tr 출력하기
-	  });
+	  
 	});
-
+//===============================================================================	 
+// 상품 후기
+	$(function(){
+		 // 상품 후기 부분 
+		   $(".tcontent").click(function(){
+		   //전체 글자의 변수를 2번 잡아서 . 한번은 위쪽 내용. 한번은 아래쪽 내용 출력
+		   //위쪽 내용
+		   alert("나와라");
+		    var text = $(this).children('span').html(); //전체 html또는 text를 가져와서
+		    console.log(text);
+		    var full = $(this).closest('tr').next('tr').children('td').eq(1).text(text).css('text-align','left'); // tr 출력후 나머지 글자 출력 및 정렬
+		    // var cut = $(this).closest('tr').next('tr').children('td').eq(1).text();
+		   $(this).closest('tr').next('tr').toggleClass('display'); //자세한 이용후기 tr 출력하기
+		  });
+	});
+	
+//===============================================================================	 
 	//상품 목록에서 삭제 기능 - 완
 	$(document).on('click','.item-close',{},function(e){
 	   e.preventDefault();
@@ -405,6 +420,7 @@
 	   var src_price = $el.siblings('.item-price').text();
 	   var price = src_price.split('원');
 	   var price_sum = $('.all-price span').html();
+	   
 	   var result_price = price_sum - price[0];
 	   $('.all-price span').html(result_price);
 	   // var price_sum = 0;
@@ -424,11 +440,12 @@
 	});
 	var price_sum = 0;
 	
+	// 상품 문의  1000 자 제한 두기
 	var updateLength = function (key) {
 	    var len = $('.textarea_' + key).val().length;
 	    $('.length_' + key).text(len + '자 / 1000자');
 	}
-	
+//===============================================================================	 	
 	/* 수정 버튼 눌리며 */
 	var modifyInquiry = function (ctrl,index) {
 		
@@ -474,7 +491,7 @@
 		var p_Id = ${p.p_Id};
 		
 		console.log(p_Id);
-		
+//===============================================================================	 		
 		// 작성자 게시판 번호 넘긴다.
 		$.ajax({
 			url: "addReply.do",
@@ -489,6 +506,7 @@
 		});
 
 	});
+//===============================================================================	 	
 	/* 댓글 리스트 ajax 가지고 오기*/
  	function getReplyList(){
 		var p_Id = ${p.p_Id};
@@ -507,28 +525,61 @@
 				var $pv_User;
 				var $pv_createDate;
 				
+				var $tr2;
+				var $td1;
+				var $td2;
+				var $td3;
+				var $td4;
+				
+				
 				$('#pvcount').text(data.length);
 				
 				if(data.length > 0){
 					for(var i in data){
-						$tr = $("<tr>");
-						$td = $("<td>");
-						$pv_content = $("<td class='tcontent'>").html("<span>").text(decodeURIComponent(data[i].pv_reviewContent.replace(/\+/g,"")));
+						
+						var nick = $('#nick').val();
+						$tr = $("<tr id='reply" + i + "'>");
+						
 						$pv_User = $("<td>").text(decodeURIComponent(data[i].pv_user.replace(/\+/g,"")));
+						
+						if(data[i].status != 'N'){
+						$pv_content = $("<td class='tcontent'>").html("<span>" + decodeURIComponent(data[i].pv_reviewContent.replace(/\+/g,"")) + "</span>");                         
+							
+						}else{
+						$pv_content = $("<td class='tcontent'>").html("<span> 삭제된 댓글 입니다. </span>");                         
+							
+						}
+					
 						$pv_createDate = $("<td>").text(data[i].pv_createDate);
 						
-						$tr.append($td);
-						$tr.append($pv_content);
-						$tr.append($pv_User);
-						$tr.append($pv_createDate);
-						$tableBody.append($tr);
+						console.log("현재 닉네임 : " + "${loginUser.nickName}");
+						console.log("댓글 번호 가지고 온다. : " + data[i].pv_Id);
 						
+						console.log(nick);
+						
+						if(decodeURIComponent(data[i].pv_user.replace(/\+/g,"")) == nick ){
+							if(data[i].status != 'N'){
+							$td = $("<td>").html("<button id='qwe" + i + "'' class='btn ctrl' onclick='updateRe("+ i + "," + data[i].pv_Id +");'>수정</button><button id='asd"+i+"' class='btn ctrl' onclick='deleteRe("+ data[i].pv_Id +");'>삭제</button>");
+							}else{
+							$td = $("<td>");
+							}
+						} else{
+							$td = $("<td>");
+						} 
+						
+						$tr.append($pv_User);
+						$tr.append($pv_content);
+						$tr.append($pv_createDate);
+						$tr.append($td);
+		
+						
+						$tableBody.append($tr);
 						
 					}
 				}else{
 					$tr = $("<tr>");
 					$td = $("<td>");
-					$pv_User = $("<td class='tcontent'>").html("<span>").text("등록된 댓글이 업습니다.");
+					$pv_User = $("<td class='tcontent' colspan='3'>").html("<span>").text("등록된 댓글이 업습니다.");
 					$tr.append($td);
 					$tr.append($pv_User);
 					$tableBody.append($tr);
@@ -536,7 +587,70 @@
 			}
 		});
 	}
+ 	//===============================================================================		
+	// 댓글 수정 버튼 눌렸을 때
+	function updateRe(i, pv_Id){
+		console.log("수정할 게시판 번호 : " + pv_Id);
+		var tr = $('#reply' + i);
+		var reply = tr.children()[1];
+		var text = reply.childNodes[0].innerHTML;
+		console.log(text);
+		reply.innerHTML = '<textarea id="recontent" style="width : 600px; resize: none;">' + text + '</textarea>';
+		var button = $('#qwe'+i);
+		var button2 = $('#asd'+i);
+		
+		button.attr('onclick', 'modify(' +  pv_Id  + ');');
+		button.text('저장');
+		button2.attr('onclick', 'rollback();');
+		button2.text('취소')
+		
+	}
+	// 저장 버튼 눌리면 수정 된 글로 변경 해준다.
+	function modify(pv_Id){
+		/* console.log("받은 문자 : " + $('#recontent').val() + "댓글 시퀀스 번호 : " + pv_Id ); */
+		
+		var pv_reviewContent = $('#recontent').val(); // 변경된 내용 값 넣는다.
+		
+		$.ajax({
+			url: "updateReply.do",
+			data:{pv_reviewContent:pv_reviewContent , pv_Id:pv_Id},
+			type:"post",
+			success:function(data){
+				getReplyList();
+			}
+		});
+		
+	}
+	//===============================================================================		
+	// 댓글 취소 버튼 누를때 리셋 해준다.
+	function rollback(){
+		getReplyList();
+	}
+	
+	// 댓글 삭제 버튼이 누렸을 때
+	function deleteRe(pv_Id){
+		console.log("삭제 할 댓글 번호 : " + pv_Id);
+		
+		var key = confirm("댓글을 정말로 삭제 하시겠습니까? 삭제한 댓글은 복구 되지 않습니다.");
+		
+		if(!key){
+			alert("삭제을 취소 하셨습니다.");
+		}else{
+			$.ajax({
+				url:"deletedPv.do",
+				data: {pv_Id:pv_Id} ,
+				type:"post",
+				success:function(data){
+					if(data == "success"){
+						getReplyList();
+					}
+				}
+			});
+		}
+	}
+	
 	
 	</script>
+	<input type="hidden" id="nick" value="${loginUser.nickName}">
 </body>
 </html>

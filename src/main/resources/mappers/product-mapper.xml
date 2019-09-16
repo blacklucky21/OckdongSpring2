@@ -228,17 +228,30 @@ select count(*)
 	from (select *
 		  from 	PRODUCTREVIEW left join PRODUCT using(P_ID)
 		  where p_ID = #{p_Id}
-		  order by p_Id desc )
-	order by p_Id desc
+		  order by p_Id  )
+	order by p_Id 
 </select>
 
 
 <insert id="insertReply" parameterType="Productreview">
 
 insert into PRODUCTREVIEW
-values(SEQ_PV_ID.nextval, #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sysdate, default, 0 )
+values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sysdate, default, 0 )
 
 </insert>
+
+<update id="deleteReply">
+	update PRODUCTREVIEW
+	set STATUS = 'N'
+	where PV_ID = #{pv_Id}
+
+</update>
+
+<update id="updateReply">
+	update PRODUCTREVIEW
+	set PV_REVIEWCONTENT = #{pv_reviewContent}
+	where PV_ID = #{pv_Id}
+</update>
 
 
 </mapper>

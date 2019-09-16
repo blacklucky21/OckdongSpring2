@@ -168,6 +168,18 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.selectRelyList(p_Id);
 	}
 
+	// 댓글 삭제
+	@Override
+	public int deleteReply(Productreview pv) {
+		return pDAO.deleteReply(pv);
+	}
+
+	// 댓글 수정
+	@Override
+	public int updateReply(Productreview pv) {
+		return pDAO.updateReply(pv);
+	}
+
 
 
 	

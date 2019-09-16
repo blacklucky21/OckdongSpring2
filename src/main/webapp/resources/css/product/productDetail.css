@@ -50,11 +50,12 @@
 	.shCMSshop .shopView .viewBody .contentNav:after{display: block;content:'';clear: both;}
 	.shCMSshop .shopView .viewBody .contentNav {padding:0;}
 	.shCMSshop .shopView .viewBody .contentNav li{width: 25%; float: left; background: #f2f2f2; border: 1px solid #282e32; box-sizing: border-box; text-align: center;margin-right: -1px;font-size: 18px;}
-	.shCMSshop .shopView .viewBody .contentNav a{display: block; padding:20px 0;     text-decoration: none;}
+	.shCMSshop .shopView .viewBody .contentNav a{display: block; padding:20px 0;    text-decoration: none;     color: #717171;}
 	.shCMSshop .shopView .viewBody .contentNav a span{font-size: 15px;}
 	.shCMSshop .shopView .viewBody .contentNav a span .count{font-size: 15px;}
 	.shCMSshop .shopView .viewBody .contentNav li.active{background: #282e32;}
 	.shCMSshop .shopView .viewBody .contentNav li.active a{color: white;}
+	
 
 	/*테이블 기본 셋팅*/
 	.shCMSshop .shopView .viewBody table tbody {border-top: 1px solid #afafaf; border-bottom: 1px solid #d4d4d4; width: 100%; margin: 60px 0 40px 0; border-collapse: collapse; border-spacing: 0;font-size: 14px;}
@@ -62,9 +63,9 @@
 	.shCMSshop .shopView .viewBody table tr{border-top:1px solid #d4d4d4;}
 	.shCMSshop .shopView .viewBody table tr:first-child{border-top: none;}
 	.shCMSshop .shopView .viewBody table .tcontent{text-align: left;}
-	.shCMSshop .shopView .viewBody table .tcontent:hover{cursor: pointer;}
-	.shCMSshop .shopView .viewBody table .tcontent:hover span{text-decoration: underline;}
-	.shCMSshop .shopView .viewBody table .tcontent span{white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 225px; display: inline-block;}
+	.shCMSshop .shopView .viewBody table .tcontent:hover{cursor: default;}
+
+	.shCMSshop .shopView .viewBody table .tcontent span{white-space: nowrap;  width: 225px; display: inline-block;}
 
 	/*상품 정보*/
 	.shCMSshop .shopView .viewBody #contentin {text-align: center;}

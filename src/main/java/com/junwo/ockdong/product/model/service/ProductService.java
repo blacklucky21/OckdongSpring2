@@ -64,7 +64,9 @@ public interface ProductService {
 		// 디테일 댓글 등록
 	
 	ArrayList<Productreview> selectReplyList(int p_Id); // 리스트 가지고 온다.
-	int insertReply(Productreview pv);
+	int insertReply(Productreview pv); // 댓글 등록
+	int deleteReply(Productreview pv); // 댓글 삭제
+	int updateReply(Productreview pv); // 댓글 수정 한다.
 	
 	
 	

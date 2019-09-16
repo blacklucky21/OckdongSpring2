@@ -88,6 +88,7 @@ public class MemberController {
 	@RequestMapping("logout.me")
 	public String logout(SessionStatus status) {
 		status.setComplete();
+		
 		return "Main";
 	}
 	
