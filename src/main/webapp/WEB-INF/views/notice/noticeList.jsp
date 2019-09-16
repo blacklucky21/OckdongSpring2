@@ -117,10 +117,12 @@ body {
 			</div> 
 			
 		
-		<!-- 페이징 처리  -->
+		<!------------------------------ 페이징 처리------------------------------>
 		<div class="w3-container" id="buttonTab">
 			<div class="w3-bar"	style="text-align: center; text-decoration:none;">
 			
+				<c:if test="${ empty search }">
+				
 				 <!-- «이전  -->
 				 <c:if test="${ pi.currentPage <= 1 }">
  				 	«이전 &nbsp;
@@ -156,23 +158,67 @@ body {
 				 	</c:url>
 				 	<a href="${ after }" class="w3-button">다음»</a>
 				 </c:if>
-			</div>
-		</div>
-
-			<div>
-
-				<button type="button" class="btn btn-sm btn-primary" id="boardWrite" onclick="location.href='boardWrite.do'">글쓰기</button>
-
-			</div> 
+				</c:if>
 			
+		<!----------------------- 검색 페이징 처리 ----------------------->
+				<c:if test="${! empty search }">
+				
+				<!-- «이전  -->
+				 <c:if test="${ pi.currentPage <= 1 }">
+ 				 	«이전 &nbsp;
+				 </c:if>
+				 <c:if test="${ pi.currentPage > 1 }">
+				 	<c:url var="before" value="nlist.do">
+				 		<c:param name="page" value="${ pi.currentPage - 1 }"/>
+				 	</c:url>				 
+  				 <a href="${ before }" class="w3-button">«이전</a> &nbsp;
+				 </c:if>
+				 
+				 <!-- 페이지 -->
+				 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				 	<c:if test="${ p eq cureentPage }">
+				 		<font color="red" size="4"><a class="w3-button">${ p }</a></font>
+				 	</c:if>
+				 	
+				 	<c:if test="${ p ne currentPage }">
+				 		<c:url var="pagination" value="nlist.do">
+				 			<c:param name="page" value="${ p }"/>
+				 		</c:url>
+				 		<a href="${ pagination }" class="w3-button">${ p }</a> &nbsp;
+				 	</c:if>
+				 </c:forEach>
+				 
+				 <!-- 다음» -->
+				 <c:if test="${ pi.currentPage >= pi.maxPage }">
+				 	&nbsp; 다음»
+				 </c:if>
+				 <c:if test="${ pi.currentPage < pi.maxPage }">
+				 	<c:url var="after" value="nlist.do">
+				 		<c:param name="page" value="${ pi.currentPage + 1 }"/>
+				 	</c:url>
+				 	<a href="${ after }" class="w3-button">다음»</a>
+				 </c:if>
+				</c:if>
+				
+				</div>
+			</div>
+			<!-- 끝  -->
+				
+			<!-- 로그인 일때만 버튼 활성화  -->
+			<c:if test="${! empty sessionScope.loginUser }">	
+			<div>
+				<button type="button" class="btn btn-sm btn-primary" id="boardWrite" onclick="location.href='boardWrite.do'">글쓰기</button>
+			</div> 
+			</c:if>
+				
 			<!-- 검색  -->
 			<form action="searchBoard.do" name="search" method="get" class="searchForm">
 						<table>
 							<tr>
 								<td><select class="form-control input-xshort" name="searchType">
-										<option value="nTitle">제목</option>
-										<option value="nContent">내용</option>
-										<option value="nickName">작성자</option>
+										<option value="title">제목</option>
+										<option value="content">내용</option>
+										<option value="writer">작성자</option>
 								</select></td>
 								<td><input id="boardInput" name="search"
 									class="form-control input-short" type="text" placeholder="Search...">
@@ -183,11 +229,8 @@ body {
 						</table>
 					</form>
 				</div>
-
 	</article>
-
-
-
+	
 	<br>
 	<br>
 

@@ -51,24 +51,28 @@
 }
 .date_menu li.da01 span {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_time.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_time.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_time.gif")
 		no-repeat left 1px;
 }
 .date_menu li.da02 span {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_eye.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_eye.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_eye.gif")
 		no-repeat left 1px;
 	color: #ff2626;
 }
 .date_menu li.da03 span {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_balloon.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_balloon.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_balloon.gif")
 		no-repeat left 1px;
 	color: #ff2626;
 }
 .date_menu li {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/bar_9.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bar_9.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif")
 		no-repeat left center;
 	padding-left: 9px;
 	margin-left: 0px;
@@ -101,7 +105,8 @@
 }
 .allmark .bmark {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
 		no-repeat;
 	width: 150px;
 	height: 50px;
@@ -112,7 +117,8 @@
 	display: inline-block;
 	padding-left: 32px;
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_off.png")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_off.png") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_bmark_off.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -122,7 +128,8 @@
 }
 .allmark .bmark1 {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
 		no-repeat;
 	width: 150px;
 	height: 50px;
@@ -133,7 +140,8 @@
 	display: inline-block;
 	padding-left: 32px;
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_on.png")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_on.png") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_bmark_on.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -143,7 +151,8 @@
 }
 .allmark .heart {
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
 		no-repeat;
 	width: 150px;
 	height: 50px;
@@ -155,7 +164,8 @@
 	display: inline-block;
 	padding-left: 35px;
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heart.png")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heart.png") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_heart.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -177,7 +187,8 @@
 	display: inline-block;
 	padding-left: 35px;
 	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heartch.png")
+		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heartch.png") --%>
+		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_heartch.png")
 		no-repeat left center;
 	font-weight: bold;
 	font-size: 15px;
@@ -206,7 +217,7 @@
 #btncmm1 {
 	position: absolute;
 	right: 10px;
-	top: -9px;
+	top: -9px; 
 	width: 90px;
 	height: 120px;
 }
@@ -335,16 +346,19 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					</c:if> --%>
 
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
-					<c:if test="${sessionScope.loginUser.member_no == detail.MEMBER_NO}">
-					<span class="modifyB" onClick="location.href='${path}/baraonda/updateBoardPage.do?board_no=${detail.BOARD_NO}'">수정</span>
-					<img src="/resources/img/boardImg/bar_9.gif" class="listpic1">
-					<span class="deleteB" id="deleteB" onClick="location.href='${path}/baraonda/deleteBoard.do?board_no=${detail.BOARD_NO}'">삭제</span>
+					<c:if test="${sessionScope.loginUser.userId == notice.id}">
+					<c:url var="updateNoticePage" value="updateNoticePage.do">
+						<c:param name="nNo" value="${ notice.nNo }"/>
+						<c:param name="page" value="${ page }"/>
+					</c:url>
+					<span class="modifyB" onClick="location.href='${ updateNoticePage }'">수정</span>
+					<%-- <span class="modifyB" onClick="location.href='${path}/ockdong/updateNoticePage.do?nNo=${notice.nNo}'">수정</span> --%>
+					<img src="${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif" class="listpic1"> 
+					<span class="deleteB" id="deleteB" onClick="location.href='${path}/ockdong/deleteNotice.do?nNo=${notice.nNo}'">삭제</span>
 					</c:if>
-					
 					</h2>
-					<td>
-					<input type="hidden" name="ID" value="${ notice.id }">
 					</td>
+					<input type="hidden" name="id" value="${ notice.nNo }">
 					<!-- 게시글 제목 -->
 					
 					<div>
@@ -357,14 +371,14 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<a href="#">
 							<%-- <img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic"> --%>
 							<%-- <img src="${pageContext.request.contextPath}${detail.FILES_ROOT}${detail.FILES_CHANGE_TITLE}" class="proic"> --%>
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/lee.jpg" class="proic">
+							<img src="${pageContext.request.contextPath}/resources/img/boardImg/lee.jpg" class="proic">
 						</a>
 						
 						</span>
 							<!------------------------------------ 게시글 작성자명 ------------------------------------>
 								<em class="nick_em">
 								<div class="inner_nick_box">
-									<p class="inner_nick">${ member.nickName }</p>
+									<p class="inner_nick">${ notice.nickName }</p>
 								</div>
 						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
 							<div class="group_inner">
@@ -382,7 +396,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 
 					<!------------------------------------ 게시글 내용 ------------------------------------>
 					<div class="viewContent">
-						<p class="view_text">${detail.BOARD_CONTENT}</p>
+						<p class="view_text">${notice.nContent}</p>
 					</div>
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
@@ -409,15 +423,15 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<c:if test="${! empty sessionScope.loginUser}">
 					<div class="btn_ar">
-						<img id="writeBtn" class="pageWriteBtn" onclick="location.href='write.do'" src="<%=request.getContextPath()%>/resources/img/boardImg/btn_write2.gif">
-						<img id="boardList" class="boardList" onclick="history.back();" src="<%=request.getContextPath()%>/resources/img/boardImg/btn_list.gif">	
+						<img id="writeBtn" class="pageWriteBtn" onclick="location.href='write.do'" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_write2.gif">
+						<img id="boardList" class="boardList" onclick="history.back();" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_list.gif">	
 					</div>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
 					<div class="btn_ar">
-						<img id="writeBtn login" class="pageWriteBtn login" src="<%=request.getContextPath()%>/resources/img/boardImg/btn_write2.gif"
+						<img id="writeBtn login" class="pageWriteBtn login" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_write2.gif"
 						 data-toggle="modal" data-target="#login-modal">
-						<img id="boardList" class="boardList" onclick="history.back();" src="<%=request.getContextPath()%>/resources/img/boardImg/btn_list.gif">
+						<img id="boardList" class="boardList" onclick="history.back();" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_list.gif">
 					</div>
 					</c:if>
 					<div id="commList">
@@ -586,16 +600,18 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 		});
 	});	 */
 	
-	//게시물 삭제 버튼
+	//게시물 삭제 버튼 (취소눌르면 삭제되고 400에러뜬다)
 	$(document).ready(function(){
 		$("#deleteB").click(function(){
 			if(confirm("삭제하시겠습니까?") == true){
 				document.form.submit();
 			}else{ //취소
-				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
+				/* location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}"; */
+				location.href="${path}/ockdong/ndetail.do?nNo=${notice.nNo}";
 			}
 		});
 	});
+	
 	//댓글 삭제 버튼
 	$(document).ready(function(){
 		$(".deleteB2").click(function(){

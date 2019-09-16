@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-<title>도시락 - 글쓰기</title>
+<title>옥동도시락 - 수정하기</title>
 <style>
 body {
 	text-align: left;
@@ -54,17 +54,18 @@ div#editor {
 .fr-box{border: 1px solid #dee2e6; margin-top: -16px;}
 .boardC{height: 500px; width: 730px; margin-top: -18px; border: 1px solid #dee2e6;}
 .boardWriteBtn{text-align: center;}
-.text-left{font-weight: bold;}
+
 
 </style>
 
 </head>
 
 <body>
+
 	<!-- ############### 헤더 부분 ############### -->
 	<c:import url="../header/header.jsp" />
-
-	<jsp:include page="floalaResources.jsp"/>
+	<jsp:include page="../board/floalaResources.jsp"/>
+	<br>
 
 	<!---------------------------------- 게시글 작성 페이지(글쓰기) ---------------------------------->
 		<div class="container">
@@ -72,11 +73,13 @@ div#editor {
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<h2 class="text-left">글쓰기</h2>
+						<h2 class="text-left">수정하기</h2>
 						<hr class="hrline"><br>
 						<p></p>
 						<!------------------------------ 카테고리 ------------------------------>
-						<form action="insert.do" method="post" name="form1" enctype="multipart/form-data">
+						<form action="updateNotice.do" method="post" name="form1" enctype="multipart/form-data">
+						<input type="hidden" name="page" value="${ page }">
+						<input type="hidden" name="nNo" value="${ notice.nNo }">
 							<div class="table table-responsive">
 								<table class="table table-striped">
 									<tr>
@@ -87,26 +90,39 @@ div#editor {
 												<option value="12">자유게시판</option>
 											</select>
 										</td>
+										<td>
+										</td>
 									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
-										<th id="title">제목</th>
+										<td>제목</td>
+										<td><input type="text" class="form-control"
+											name="nTitle" value= "${notice.nTitle}"></td>
 										<td>
-											<input id="nTitle" name="nTitle" type="text" class="form-control">
-										</td>
-										<th>작성자</th>
-										<td>
-											<input type="text" name="id" readonly value="${ loginUser.userId }">
+											<input type="hidden" name = "nNo" value = "${notice.nNo}" />
 										</td>
 									</tr>
 
 								</table>
 								<!------------------------------ 글작성 공간 (froala editor) ------------------------------>
-								<textarea id="edit" name="nContent"></textarea>
+								<textarea id="edit" name="nContent">${notice.nContent}</textarea>
+								<!-- <div id="editor" >
+									<div id='edit' style="margin-top: 30px;">
+									</div>
+								</div> -->
+								<!-- <div class="boardC">
+									<textarea id="board_content" name="board_content" rows="2" cols="40"></textarea>
+								</div> -->
+								
+								<!-- <div id="editor">
+									<div id='edit' style="margin-top: 30px;">
+										
+									</div>
+								</div> -->
 								
 							</div>
 						<div class="boardWriteBtn">
-							<input id="btnSave" type="button" value="작성하기" class="btn btn-success">
+							<input id="btnSave" type="submit" value="작성하기" class="btn btn-success">
 							<input type="reset" value="취소" class="btn btn-warning">
 						</div>
 						</form>
@@ -116,62 +132,52 @@ div#editor {
 				<!------------------------------------------------------------------------------------------>
 			</div>
 			<br><br><br><br><br><br><br><br><br>
-	<!-- ##################### 풋터 부분 ##################### -->
-	<c:import url="../footer/footer.jsp" />
 
 	<script>
-		/* froala editor를 textarea에 적용 */	
-	  	$('#edit').froalaEditor({   
-	  		imageUploadURL:'http://i.froala.com/upload'});
+		/* froala editor를 textarea에 적용 */
+	  	$(function(){
+    		  $('#edit').froalaEditor()
+   		 });
+		/* 
+		$(function() {
+			$('#edit').froalaEditor().on(
+					'froalaEditor.image.beforeUpload',
+					function(e, editor, files) {
+						if (files.length) {
+							var reader = new FileReader();
+							reader.onload = function(e) {
+								var result = e.target.result;
+
+								editor.image.insert(result, null, null,
+										editor.image.get());
+							};
+
+							reader.readAsDataURL(files[0]);
+						}
+
+						return false;
+					})
+		}); */
 		
 		/* 전송 버튼 클릭시 해당 컨트롤러로 전송 */
 		$(document).ready(function(){
 			$("#btnSave").click(function(){
 				var title = $("#nTitle").val();
-				var content = $("#edit").val();
 				if(title == ""){
 					alert("제목을 입력하세요.");
-					document.getElementById('title').focus();
-					return;
+					location.href="${path}/ockdong/write.do";
+					document.form1.title.focus();
 				}
-				if(content == ""){
-					alert("내용을 입력하세요.");
-					document.getElementById('edit').focus();
-					return;
-				}
-				document.form1.submit();
 			});
 		});
 	</script>
 	
+	<c:if test="${empty sessionScope.loginUser}">
+		<script>
+			alert("로그인 후 이용해주세요.");
+			location.href="${path}/ockdong/nlist.do";
+		</script>
+	</c:if>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
