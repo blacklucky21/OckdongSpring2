@@ -59,6 +59,7 @@ tr {
 	border: 0.5px solid gray;
 	background:#e3e1e1;
 	min-width:1200px;
+	margin-bottom:0;
 }
 
 .tableResult tbody{
@@ -67,6 +68,7 @@ tr {
     width:400px;
 
 }
+
 .tableResult th {
 	text-align: center;
 	padding: 5px;
