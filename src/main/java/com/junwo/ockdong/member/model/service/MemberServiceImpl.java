@@ -111,6 +111,18 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int checkId(String userId) {
+		return mDAO.checkId(userId);
+	}
+
+
+	@Override
+	public int memberUpdate(Member m) {
+		return mDAO.memberUpdate(m);
+	}
+
+
 
 
 

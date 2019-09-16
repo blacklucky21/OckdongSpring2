@@ -10,14 +10,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180619/1529384927473/180619.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<style type="text/css">
+	span.guide{display: none; font-size: 12px; top: 12px; right: 10px;}
+	span.ok{color: green}
+	span.error{color: red;}
+</style>
 <title>Join</title>
-
 </head>
 <body>
 	<c:import url="../header/header.jsp" />
@@ -28,9 +32,9 @@
 		<!-- <a href="main.do"><img class="image"
 			src="resources/img/mainlogo.png" id="logo" align="center"></a> -->
 		<form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
-			<span class="join-form">
+			<!-- <span class="join-form">
 				<fieldset id="fds-order-info">
-					<legend></legend>
+					<legend></legend> -->
 					<h3 align="center" style="font-size: 35px;">회원 가입</h3>
 					<div class="table1 orderplz">
 						<table>
@@ -41,8 +45,52 @@
 							<tbody>
 								<tr>
 									<th class="ta-l required" aria-required="true">ID</th>
-									<td><input type="text" maxlength="13" name="userId" id="userId" class="text" placeholder="띄어쓰기 없이  6-12자"></td>
-									<td width="150px" style="padding-left: 10px"><label id="idResult"></label></td>
+									<td>
+										<input type="text" maxlength="13" name="userId" id="userId" class="text" placeholder="띄어쓰기 없이  6-12자">
+										<!-- ajax -->
+										<span class="guide ok">이 아이디는 사용 가능합니다.</span>
+										<span class="guide error">이 아이디는 사용 불가능합니다.</span>
+										<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
+										<script type="text/javascript">
+											$(function() {
+												$('#userId').on("keyup", function() {
+													var userId = $(this).val().trim();
+													console.log(userId);
+													if(userId.length < 6){
+														$(".guide").hide();
+														$("#idDuplicateCheck").val(0);
+														
+														return;
+													}
+													$.ajax({
+														url: "dupid.do",
+														type: "POST",
+														data: {userId: userId},
+														dataType: "json",
+														success: function(data) {
+															if(data.isUsable == true){
+																console.log("true");
+																$(".guide.ok").show();
+																$(".guide.error").hide();																				
+																$("#idDuplicateCheck").val(1);																	
+															}else{
+																$(".guide.ok").hide();
+																$(".guide.error").show();																				
+																$("#idDuplicateCheck").val(0);
+															}
+														},
+														error: function(jqxhr, textStatus, errorThrown) {
+															console.log("AjaxError");
+															console.log(jqxhr);
+															console.log(textStatus);
+															console.log(errorThrown);
+														}
+													});
+												});
+											});
+										</script>
+									</td>
+									<td width="150px" style="padding-left: 10px"></td>
 								</tr>
 								<tr>
 									<th height="40px">비밀번호</th>
@@ -101,6 +149,7 @@
 								</tr>
 							</tbody>
 						</table>
+						</div>
 						<br>
 						<div class="btns" align="center">
 							<div id="goMain">
@@ -165,6 +214,14 @@
     		var regPwd = /^(?=.*[a-zA-Z]+)(?=.*[0-9]+).{6,12}$/;
             
             function insertMember() {
+            	
+            	if($('#idDuplicateCheck').val(0) == 0){
+					alert("사용 가능한 아이디를 입력해 주세요");
+					$("#userId").focus();
+					return false;
+				}else{
+					$("#joinForm").submit();
+				}
             	
             	if(!regPhone.test($('#phone').val())){
                 	alert("숫자만 가능합니다.");
