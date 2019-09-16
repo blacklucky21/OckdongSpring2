@@ -749,6 +749,7 @@ function selectEmail(ele){
 		
 		
 		
+		
 	});
 	
 	$('#shippingSameCheck').click(function(){
