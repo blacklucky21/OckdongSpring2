@@ -116,6 +116,13 @@ public class MemberController {
 	public String findIdView() {
 		return "member/findId";
 	}
+	// id 찾기 결과
+	@RequestMapping("idFindResult.me")
+	public String findIdResult(@RequestParam("userName") String userName, 
+							   @RequestParam("email") String email, 
+							   ModelAndView mv){
+		return "";
+	}
 	
 	/*** PW찾기 ***/
 	// 화면 이동
