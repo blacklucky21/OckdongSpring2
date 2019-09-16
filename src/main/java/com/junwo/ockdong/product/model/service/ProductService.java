@@ -3,7 +3,7 @@ package com.junwo.ockdong.product.model.service;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.junwo.ockdong.notice.model.vo.PageInfo;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
 import com.junwo.ockdong.product.model.vo.Productreview;

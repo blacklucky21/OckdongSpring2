@@ -578,8 +578,12 @@ table, tr, td {
 					console.log("비어있음");
 					$(".createImg").click();
 				}else{
-					console.log("안비어있음");
-					return true;
+					if(confirm("결제 페이지로 이동하시겠습니까? (이동하게 되면 만든 도시락은 자동으로 나만의 도시락에 추가됩니다.)")){
+						console.log("안비어있음");
+						return true;
+					}else{
+						return false;
+					}
 				}
 			}else{
 				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");

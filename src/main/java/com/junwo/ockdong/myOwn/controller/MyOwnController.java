@@ -3,7 +3,9 @@ package com.junwo.ockdong.myOwn.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -122,27 +124,66 @@ public class MyOwnController {
 		System.out.println("myOwnInsert.do로 들어옴");
 		System.out.println("imgSrc : " + imgSrc);
 		
-		String fileName = CreateRecipe(imgSrc, request);
+		// session에서 로그인정보 가져오기
+		Member member = (Member)session.getAttribute("loginUser");
 		
+		// 날짜가져오기 yyyymmdd형식으로
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        Calendar c1 = Calendar.getInstance();
+        String strToday = sdf.format(c1.getTime());
+        System.out.println("strToday : " + strToday);
+        
+        
+        // 변수 설정
+        int result = 0;
+		String numbers = "";
+		
+		// 파일 생성
+		String fileName = CreateRecipe(imgSrc, request);
+		// 파일에 식별자 넣기
 		fileName = fileName + ".png";
 		
 		System.out.println("fileName : " + fileName);
-		
 		System.out.println("Controller > myOwnInsert()");
 		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
 		
+		//재료 객체 만들기
 		Ingredient riceIn = service.selectOne(rice);
 		Ingredient mainIn = service.selectOne(main);
 		Ingredient sub1In = service.selectOne(sub1);
 		Ingredient sub2In = service.selectOne(sub2);
 		Ingredient soupIn = null;
-		if (soup != null) {
-			System.out.println("5찬");
+		
+		
+		//등록할 mblRecipe정보 넣기
+		Map<String, String> list = new HashMap<String, String>();
+		
+		list.put("userId", member.getUserId());
+		list.put("fileName", fileName);
+		list.put("racipeName", member.getUserId() + "님이 만드신 나만의 도시락 입니다.(" + strToday + ")");
+		
+		// soup여부 확인 (4찬인지 5찬인지 판별)
+		if(soup != null) {
+			// 재료들의 번호 넣기
+			numbers = rice + "/" + soup + "/" + main + "/" + sub1 + "/" + sub2;
+			list.put("type", "5찬");
+			list.put("numbers", numbers);
+			//재료 객체 만들기
 			soupIn = service.selectOne(Integer.parseInt(soup));
-		} else {
-			System.out.println("4찬");
+		}else {
+			// 재료들의 번호 넣기
+			numbers = rice + "/" + main + "/" + sub1 + "/" + sub2;
+			list.put("type", "4찬");
+			list.put("numbers", numbers);
 		}
-
+		
+		result = service.insertRecipe(list);
+		
+		if(result > 0) {
+			System.out.println("mblRecipe 만들기 성공");
+		}else {
+			System.out.println("mblRecipe 만들기 실패");
+		}
 		mv.addObject("rice",riceIn);
 		mv.addObject("main",mainIn);
 		mv.addObject("sub1",sub1In);
