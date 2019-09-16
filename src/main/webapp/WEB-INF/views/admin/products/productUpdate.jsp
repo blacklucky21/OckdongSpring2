@@ -22,7 +22,7 @@
 		<c:import url="../adminheader.jsp" />
 			<div id="content"> <!-- 전체 범위  -->
 				<div class="content"><!-- nav 제외 범위 -->
-				<form action="updatePo.do" method="post" enctype="Multipart/form-data" id="location" onsubmit="return chk();">
+				<form action="updatePo.do" method="post" enctype="Multipart/form-data" id="location" >
 				<!-- action="updatePo.do" -->
 				<!-- 상품 제목 -->
 					<div class="page_title_wrap">
@@ -174,7 +174,7 @@
 					</div>
 				</div>		
 				<div>
-							<input type="button" value="취소" class="bu" ><input type="submit" value="수정" class="bu" >
+							<input type="button" value="취소" class="bu" ><input type="submit" value="수정" class="bu" onclick="return validate();" >
 				</div>		
 			
 				<!-- 상품등록 중 끝 -->
@@ -185,17 +185,10 @@
 							$('#area' + num).remove();
 						}
 					</script>
-					
-					
 					<input type="file" id="thumbnailImg1" multiple="multiple"name="thumbnailImg1" onchange="LoadImg(this,1)">
 					<input type="file" id="thumbnailImg2" multiple="multiple"name="thumbnailImg2" onchange="LoadImg(this,2)">
 					<input type="file" id="thumbnailImg3" multiple="multiple"name="thumbnailImg3" onchange="LoadImg(this,3)">
 					<input type="file" id="thumbnailImg4" multiple="multiple"name="thumbnailImg4" onchange="LoadImg(this,4)">
-					
-					
-					
-					
-					
 				</div>
 			
 			</form>
@@ -208,12 +201,19 @@
 
 </body>
 <script>
+function validate(){
+	$("#thumbnailImg1").files = null;
+	$("#thumbnailImg2").files = null;
+	$("#thumbnailImg3").files = null;
+	$("#thumbnailImg4").files = null;
+	return true;
+}
+
 $(function() {
 	$("#fileArea").hide();
 
 	$("#titleImgArea").click(function() {
 		$("#thumbnailImg1").click();
-		
 	});
 	$("#contentImgArea1").click(function() {
 		$("#thumbnailImg2").click();
@@ -226,6 +226,8 @@ $(function() {
 	});
 	
 });
+
+
 
 
 function LoadImg(value, num) {
@@ -319,21 +321,10 @@ function delImg(value){
 	value.src="resources/img/admin/plus2.png";
 	consleo.log(value);
 	$(this).val("");
+	
+	$('#contentImgArea1').files = null;
 }
-
-function chk(){
-	var img = $('#titleImgArea')[0];
-	alert(img);
-	if(img.src != ''){
-		alert('메인 이미지 존재함');
-		return false;
-	}else{
-		alert("사진 존재함");
-		return false;
-	}
-}
-
-
+	
 </script>
 
 

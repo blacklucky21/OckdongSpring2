@@ -177,6 +177,17 @@ public class ProductDAO {
 	}
 
 
+	// 댓글 삭제
+	public int deleteReply(Productreview pv) {
+		return sqlSession.delete("productMapper.deleteReply",pv);
+	}
+
+	// 댓글 수정한다.
+	public int updateReply(Productreview pv) {
+		return sqlSession.update("productMapper.updateReply",pv);
+	}
+
+
 
 	
 
