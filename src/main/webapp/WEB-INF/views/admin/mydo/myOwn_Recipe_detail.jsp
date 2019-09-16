@@ -64,6 +64,20 @@ nav.mo_slide_menu {
 	-o-transition: all 1s;
 	transition: all 1s;
 }
+.input-group{
+	width:600px !important;
+	margin-left: auto;
+    margin-right: auto;
+}
+.form-control{
+	background-color: white !important;
+}
+.input-group-prepend, .input-group-prepend, .input-group-text{
+	background-color: #2ecc71 !important;
+	color: white !important;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+}
 </style>
 </head>
 <body>
@@ -74,6 +88,16 @@ nav.mo_slide_menu {
 		<div class="imgAreaContent">
 			<input type="hidden" id="mblId" value="${mbl.mblId }"/>
 			<img class="imgArea" src="resources/img/Recipe/${mbl.mblFileName }">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">도시락 명</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Username" value="${mbl.mblTitle }" readonly>
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">작성자</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Username" value="${mbl.userId }" readonly>
 		</div>
 		<div class="tableDiv">
 			<table>
