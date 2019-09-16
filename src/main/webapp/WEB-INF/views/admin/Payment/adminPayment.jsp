@@ -61,7 +61,7 @@
 						<th>주문 상태</th>
 						<td>
 							<div class="checkBox Item">
-								<input type="checkBox" class="checkPay SelectAll ">전체선택 <input type="checkBox" class="checkPay PayConfirm" name="check">결제완료 <input type="checkBox" class="checkPay PayReady " name="check" value="ready">상품준비중 <input type="checkBox" class="checkPay PayDelivary" name="check" value="ing">배송중 <input type="checkBox" class="checkPay DelivaryEnd" name="check" value="end">배송완료 <input type="checkBox" class="checkPay PayEnd" name="check" value="buyend">구매확정
+								<input type="radio" class="checkPay PayReady " name="check" value="ready">상품준비중 <input type="radio" class="checkPay PayDelivary" name="check" value="ing">배송중 <input type="radio" class="checkPay DelivaryEnd" name="check" value="end">배송완료 <input type="radio" class="checkPay PayEnd" name="check" value="buyend">구매확정
 							</div>
 						</td>
 					</tr>
@@ -162,7 +162,7 @@
 		$(document).ready(function() {
 			  document.getElementById('endDatePicker').value= new Date().toISOString().substring(0, 10);
 			  
-			//최상단 체크박스 클릭
+		/* 	//최상단 체크박스 클릭
 			$(".SelectAll").click(function() {
 				//클릭되었으면
 				if ($(".SelectAll").prop("checked")) {
@@ -173,8 +173,8 @@
 					//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
 					$("input[name=check]").prop("checked", false);
 				}
-			});
-		});
+			});*/
+		}); 
 		
 		
 		$(document).ready(function(){
