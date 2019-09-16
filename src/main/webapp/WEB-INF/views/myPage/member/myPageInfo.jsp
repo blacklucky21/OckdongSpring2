@@ -13,7 +13,7 @@
 <body>
 </head>
 	
-	<form id="ModifyInfoForm" action="" method="post">
+	<form id="ModifyInfoForm" action="memberUpdate.me" method="post">
 	<c:set var="m" value="${member}" />
 	<span class="join-form">
 		<fieldset id="fds-order-info">
@@ -39,7 +39,7 @@
 							<th class="ta-l required" aria-required="true">닉네임</th>
 							<td>
 								<div class="txt-field hs" style="width: 350px;">
-									<input type="text" name="userName" value="${ loginUser.getNickName() }" class="text">
+									<input type="text" name="nickName" value="${ loginUser.getNickName() }" class="text">
 								</div>
 								<td></td>
 							</td>
@@ -48,7 +48,7 @@
 							<th class="ta-l required" aria-required="true">휴대폰 번호</th>
 							<td>
 								<span class="txt-field hs" style="width: 350px;">
-									<input type="text" id="mobileNum" name="orderCellPhone" value="${ loginUser.getPhone() }" class="text">
+									<input type="text" id="phone" name="phone" value="${ loginUser.getPhone() }" class="text">
 								</span>
 								<td></td>
 							</td>
@@ -58,7 +58,7 @@
 							<td>
 								<div class="email" style="display: inline">
 									<span class="txt-field hs" style="width: 350px;"> 
-										<input type="text" name="orderEmail" value="${ loginUser.getEmail() }" class="text">
+										<input type="text" name="email" value="${ loginUser.getEmail() }" class="text">
 									</span>
 									<td></td>
 								</div>
@@ -259,34 +259,6 @@
 			/* $('#post').html(addressArr[0]); */
 			
 			
-		});
-
-		$("#emailCheck2").click(function() {
-
-			var email = $("#email").val();
-
-			if (!regEmail.test(email)) {
-				alert('사용할 수 없는 이메일입니다.');
-				email.focus();
-				return false;
-			}
-
-			$.ajax({
-
-				url : "emailCheck.do",
-				data : {
-					email : email
-				},
-				type : "get",
-				success : function(data) {
-					if (data == 0) {
-						alert("사용 가능한 이메일입니다.");
-						checkValue2 = 1;
-					} else {
-						alert("사용 중인 이메일입니다.");
-					}
-				}
-			});
 		});
 		
 	

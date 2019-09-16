@@ -77,5 +77,13 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updatePwd", m);
 	}
 
+	public int checkId(String userId) {
+		return sqlSession.selectOne("memberMapper.checkId", userId);
+	}
+
+	public int memberUpdate(Member m) {
+		return sqlSession.update("memberMapper.memberUpdate", m);
+	}
+
 	
 }
