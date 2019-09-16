@@ -52,7 +52,7 @@ where userid = #{loginUserId} -->
 	#{tArr}
 	</foreach>
 
-		
+	
 	
 	</select>
 	
@@ -77,7 +77,7 @@ WHERE CNO in
 	<select id="PaymentInsertDB" parameterType="Payment">
 	
 INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{payphone},#{paycellphone},#{payemail},#{receiverName},#{receiverPhone},#{receiverCellPhone}
-,#{payprice},#{orderMemo},to_char(sysdate,'yyyy/mm/dd - hh24:mi:ss'),#{delivaryDate},#{payrecipe},#{payaddress},default,#{paytext},sysdate,null,null)
+,#{payprice},#{orderMemo},to_char(sysdate,'yyyy/mm/dd - hh24:mi:ss'),#{delivaryDate},#{payrecipe},#{payaddress},default)
 	
 	</select>
 	
@@ -91,73 +91,6 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{pa
 	</foreach>
 	
 	</delete>
-	
-	<select id="selectPayList" resultType="Payment">
-	SELECT *
-	FROM PAYMENT
 
-	
-	
-	
-	</select>
-	
-	
-	<select id="selectPaySearch" resultType="Payment">
-	SELECT *
-	FROM PAYMENT
-	where pstatus !='x'
-	
-  			<if test="searchForm.equals('allSearch')">
-  			
-  			and ( p_id like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or payname like '%'|| #{searchInput} || '%' or paycellphone like '%'|| #{searchInput} || '%' or payphone like '%'|| #{searchInput} || '%' or paytext like '%'|| #{searchInput} || '%' )
-			
-		
-  			
-  			</if>
-  			
-  			<if test="searchForm.equals('Paynum')">
-  			
-  			and p_id like '%'||  #{searchInput}|| '%'
-  			
-  			</if>
-  			
-  			<if test="searchForm.equals('PayName')">
-  			
-  			and PAYTEXT like '%' || #{searchInput} || '%'
-  			
-  			</if>
-  		
-  			<if test="searchForm.equals('PayID')">
-  			and USERID like '%' || #{searchInput} || '%'
-  			
-  			</if>
-  			
-  			
-  			<if test="searchForm.equals('Payphone')">
-  			and PAYPHONE like '%' || #{searchInput} || '%' or PAYCELLPHONE like '%' || #{searchInput} || '%'
-  			
-  			</if>
-  			<if test="searchForm.equals('PayUserName')">
-  			and PAYNAME like '%' || #{searchInput} || '%' or PAYCELLPHONE like '%' || #{searchInput} || '%'
-  			
-  			</if>
-  			
-  			  			
-  			<if test="startDatePicker!=''">
-  				
-  			and CHECKDATE between '${startDatePicker}' and  to_date('${endDatePicker}')+1
-  			</if> 
-  			
-  			
-  			
-  
-	
-	
-	</select>
-	<update id="updateStatus">
-	update  payment
-	set pstatus = #{check}
-	where  p_id = #{id}
-	</update>
 
 </mapper>

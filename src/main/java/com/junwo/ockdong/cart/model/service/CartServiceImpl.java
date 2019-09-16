@@ -73,25 +73,6 @@ public class CartServiceImpl implements CartService{
 		return cDAO.plzPayNum();
 	}
 
-	@Override
-	public ArrayList<Payment> PayList() {
-		// TODO Auto-generated method stub
-		return cDAO.selectPayList();
-	}
-
-	@Override
-	public ArrayList<Payment> selectPayList(HashMap<String, String> search) {
-		// TODO Auto-generated method stub
-		return cDAO.selectPayListSearch(search);
-	}
-
-	@Override
-	public int updateStatus(HashMap<String, String> ppcheck) {
-		// TODO Auto-generated method stub
-		return cDAO.updateStatus(ppcheck);
-	}
-
-
 
 
 
