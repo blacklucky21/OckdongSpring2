@@ -24,7 +24,6 @@ public class CartDAO {
 	}
 
 
-	
 	public int updateAmount(HashMap<String, String> amountMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("cartMapper.updateAmount",amountMap);
@@ -70,6 +69,24 @@ public class CartDAO {
 	public int plzPayNum() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("cartMapper.PayNum");
+	}
+
+
+	public ArrayList<Payment> selectPayList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectPayList");
+	}
+
+
+	public ArrayList<Payment> selectPayListSearch(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectPaySearch",search);
+	}
+
+
+	public int updateStatus(HashMap<String, String> ppcheck) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cartMapper.updateStatus",ppcheck);
 	}
 
 

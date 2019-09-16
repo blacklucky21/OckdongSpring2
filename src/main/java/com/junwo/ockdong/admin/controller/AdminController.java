@@ -7,10 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Spliterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.junwo.ockdong.cart.model.service.CartService;
+import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
@@ -43,6 +45,9 @@ public class AdminController {
 
 	@Autowired
 	private ProductService pService;
+	
+	@Autowired
+	private CartService cService;
 
 	@RequestMapping("adminView.do")
 	public String adminView() {
@@ -51,9 +56,69 @@ public class AdminController {
 	}
 
 	@RequestMapping("adminPaymentList.do")
-	public String adminPaymentList() {
+	public ModelAndView adminPaymentList(ModelAndView mv) {
 
-		return "admin/Payment/adminPayment";
+		ArrayList<Payment> list = cService.PayList();
+		
+		if (list != null) {
+			mv.addObject("list", list);
+
+			mv.setViewName("admin/Payment/adminPayment");
+		}
+		
+		return mv;
+	}
+	//배송리스트
+	@RequestMapping("adminPaymentList2.do")
+	public ModelAndView adminPaymentList2(ModelAndView mv,
+			@RequestParam("searchInput") String searchInput, @RequestParam("searchForm") String searchForm,
+			@RequestParam("startDatePicker") String startDatePicker, String endDatePicker,
+			@RequestParam(value="check",required=false)String check) {
+		mv = new ModelAndView();
+		System.out.println(searchInput);
+		System.out.println(searchForm);
+		System.out.println(endDatePicker);
+		System.out.println(startDatePicker);
+	
+		HashMap<String, String> search = new HashMap<String, String>();
+		search.put("searchInput", searchInput);
+		search.put("searchForm", searchForm);
+		search.put("startDatePicker", startDatePicker);
+		search.put("endDatePicker", endDatePicker);
+		
+		if(check!=null) {
+		String checkBox[] = check.split(",");
+		
+		
+		
+		System.out.println("check"+check);
+		
+		for(int i=0;i<checkBox.length;i++) {
+			
+			switch(checkBox[i]) {
+			
+			case "ready" : search.put("ready",checkBox[i]);System.out.println(checkBox[i]);break;
+			case "ing"   : search.put("ing",checkBox[i]);break;
+			case "end" 	 : search.put("end",checkBox[i]);break;
+			case "buyend": search.put("buyend",checkBox[i]);break;
+			}
+		}
+		}
+		ArrayList<Payment> list = cService.selectPayList(search);
+		// int listCount = mService.MemberListCount();
+
+//		System.out.println(list);
+		if (list != null) {
+			mv.addObject("list", list);
+
+			mv.setViewName("admin/Payment/adminPayment");
+
+		} else {
+
+		}
+
+		return mv;
+
 	}
 
 	// 상품 리스트 ~~
@@ -603,6 +668,22 @@ public class AdminController {
 		}
 
 		return mv;
+	}
+	
+	@RequestMapping("inputPid.do")
+	public void inputPid(String id,String check) {
+		
+		
+		HashMap<String, String> ppcheck = new HashMap<String, String>();
+		
+		ppcheck.put("id", id);
+		ppcheck.put("check", check);
+		System.out.println("cc"+id);
+		System.out.println("dd"+check);
+		int gg = cService.updateStatus(ppcheck);
+		
+		//return "redirect:adminPaymentList.do";
+		
 	}
 
 }

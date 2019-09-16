@@ -19,7 +19,6 @@ public interface CartService {
 
 	int insertPayment(HashMap<String, String[]> totalMap);
 
-	
 
 	int PaymentInsertDB(Payment p);
 
@@ -28,6 +27,13 @@ public interface CartService {
 	Payment SelectPayMem(int checkno);
 
 	int checkNum();
+
+	ArrayList<Payment> PayList();
+
+	ArrayList<Payment> selectPayList(HashMap<String, String> search);
+
+	int updateStatus(HashMap<String, String> ppcheck);
+
 
 
 
