@@ -241,4 +241,96 @@ public class CartController {
 		return "Payment/PaymentResultView";
 		
   }
+	
+	
+	
+	
+	//결제 완료 나만도시락 버전
+		@RequestMapping("PaymentResultListMyOwn.do")
+		public ModelAndView PaymentResultListMyOwn(ModelAndView mv,@RequestParam("total") String[] total, HttpSession session,
+				@ModelAttribute Payment p) {
+
+			System.out.println("이미지"+p.getP_img());
+	
+		
+		
+			Date now = new Date();
+			SimpleDateFormat sfmt = new SimpleDateFormat("YYMMdd");
+			String pdate = sfmt.format(now);
+		
+			
+			//int reg = CartService.checkNum();
+			  //		System.out.println(reg);
+//			String[] arrList = list.split("cart ");
+//			String[] realList = new String[arrList.length-1];
+//			
+//			System.out.println("===============================================");
+//			for(int i = 1; i< arrList.length; i++) {
+//				System.out.println(arrList[i].split(","));
+//				
+//			}
+//			System.out.println("===============================================");
+//			
+//			for(int i = 0; i < realList.length; i++) {
+//				realList[i] = arrList[i + 1];
+//			}
+		
+			
+		
+//			System.out.println("dd" + m.getUserId());
+
+//			System.out.println("커트" + list);
+
+			/*
+			 * if (list != null) { mv.addObject("list", list); mv.addObject("member", m);
+			 * mv.setViewName("Payment/PaymentResultView");
+			 * 
+			 * } else {
+			 * 
+			 * }
+			 */
+			for(int i=0;i<total.length;i++) {
+				System.out.println(total[i]);
+				System.out.println("dddd");
+			}
+
+			Member m = (Member) session.getAttribute("loginUser");
+			String loginUserId = m.getUserId();
+			System.out.println("dd" + m.getUserId());
+			String[]  hitPno=  new String[1];
+			String[]  hitPno2=  new String[1];
+			int checkno ;
+		
+			HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
+
+		
+			totalMap.put("total",total);
+		
+			//ArrayList<Cart> list = CartService.CartPayment(totalMap);
+			//hitPno[0] = String.valueOf(list.get(0).getcNo());
+			hitPno2[0] = "Ock"+pdate+hitPno[0];
+			//checkno = Integer.parseInt(hitPno[0]);
+			totalMap.put("hitPno",hitPno2);
+			//System.out.println("리스트크기"+list.size());
+			p.setP_id("Ock"+pdate+hitPno[0]);
+			p.setPayprice( Integer.parseInt(total[0]));
+			//Payment PayMem = CartService.SelectPayMem(checkno);
+			//System.out.println("넘어오는 멤버체크:"+PayMem);
+			
+			
+		
+			
+				mv.addObject("member", m);
+				mv.addObject("paymem",p);
+				mv.setViewName("Payment/PaymentResultView");
+
+	
+			System.out.println("힝힝"+p);
+		
+			//int plist = CartService.insertPayment(totalMap);
+			int insertPay = CartService.PaymentInsertDB(p);
+			//int delCartNum = CartService.delCartNum(totalMap);
+			return mv;
+		}
+		
 }
