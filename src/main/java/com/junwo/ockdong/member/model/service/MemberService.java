@@ -69,6 +69,10 @@ public interface MemberService {
 
 
 
+	int checkNick(String nickName);
+
+
+
 
 	
 

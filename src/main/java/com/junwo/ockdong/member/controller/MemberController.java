@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,21 +48,18 @@ public class MemberController {
 		return "member/memberJoin";
 	}
 	// 회원가입 시 아이디 중복확인
-	@RequestMapping(value="dupid.do")
-	public ModelAndView checkId(@RequestParam("userId") String userId, ModelAndView mv) {
-		System.out.println("dupid.do안으로 들어옴");
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		
+	@RequestMapping("dupid.do")
+	@ResponseBody
+	public String checkId(@RequestParam("userId") String userId, ModelAndView mv) {
 		boolean isUsable = mService.checkId(userId) == 0 ? true: false;
-		
-		map.put("isUsable", isUsable);
-		
-		System.out.println(map);
-		
-		mv.addAllObjects(map);
-		mv.setViewName("jsonView");
-		
-		return mv;
+		return isUsable + "";
+	}
+	// 회원가입 시 닉네임 중복확인
+	@RequestMapping("dupnick.do")
+	@ResponseBody
+	public String checkNick(@RequestParam("nickName") String nickName, ModelAndView mv) {
+		boolean isUsable = mService.checkNick(nickName) == 0 ? true: false;
+		return isUsable + "";
 	}
 	// 가입 하기 버튼 눌렀을 경우
 	@RequestMapping("memberJoin.me")
@@ -183,7 +181,7 @@ public class MemberController {
 			int result = mService.updatePwd(m);
 			
 			if(result > 0) {
-				return "member/myPage/myPage";
+				return "myPage/member/myPage";
 			}else {
 				throw new MemberException("비밀번호 변경 실패");
 			}

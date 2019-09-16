@@ -264,6 +264,12 @@
 		where userId = #{userId} and status = 'Y'
 	</select>
 	
+	<select id="checkNick" parameterType="string" resultType="_int">
+		select count(*)
+		from member
+		where nickName = #{nickName} and status = 'Y'
+	</select>
+	
 	<update id="memberUpdate">
 		update member
 		set nickName=#{nickName}, phone=#{phone}, 
