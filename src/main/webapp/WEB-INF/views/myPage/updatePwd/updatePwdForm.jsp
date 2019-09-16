@@ -11,8 +11,11 @@
 <script charset="UTF-8" type="text/javascript" src="http://t1.daumcdn.net/postcode/api/core/180619/1529384927473/180619.js"></script>
 </head>
 <body>
-		<form id="updatePwdForm" action="updatePwd.me" method="post" onsubmit="return validate()">
-			<h3>회원 탈퇴</h3>
+		<form id="updatePwdForm" action="updatePwd.me" method="post" onsubmit="return validate()">\
+		<span class="join-form">
+		<fieldset id="fds-order-info">
+		<legend>주문폼</legend>
+			<h3>비밀번호 변경</h3>
 			<div class="table1 orderplz">
 				<table>
 					<colgroup>
@@ -75,6 +78,7 @@
 			var newPwd2 = $('input[name=newPwd2]').val();
 			
 			if(newPwd1 == newPwd2){
+				alert("비밀번호가 변경되었습니다.")
 				return true;
 			}else{
 				alert("비밀번호가 일치하지 않습니다.");

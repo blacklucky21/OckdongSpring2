@@ -116,11 +116,17 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.checkId(userId);
 	}
 
+	@Override
+	public int checkNick(String nickName) {
+		return mDAO.checkNick(nickName);
+	}
 
 	@Override
 	public int memberUpdate(Member m) {
 		return mDAO.memberUpdate(m);
 	}
+
+
 
 
 
