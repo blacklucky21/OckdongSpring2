@@ -34,6 +34,8 @@ public interface CartService {
 
 	int updateStatus(HashMap<String, String> ppcheck);
 
+	int insertPayProduct(PayProduct pp);
+
 
 
 

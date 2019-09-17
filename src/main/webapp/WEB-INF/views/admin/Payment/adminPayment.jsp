@@ -108,12 +108,12 @@
 						<c:forEach var="p" items='${list }' varStatus="pay">
 
 							<tr>
-								<td nowrap style=" cursor:pointer" class="search" >${p.p_id}</td>
+								<td nowrap style=" cursor:pointer" class="search" id="searchId" >${p.p_id}</td>
 								<td nowrap> ${p.payname }</td>
 								<td nowrap>${p.payphone }</td>
 								<td nowrap>
 								
-								<select id="delivaryForm" onchange="inputPid('${p.p_id}')">
+								<select id="delivaryForm" class="delivaryForm" >
 								<c:if test="${p.pstatus eq 'Y' }">
 								<option class="Ready" value="Ready" selected>상품준비중</option>
 								<option class="DelivaryIng"value="DelivaryIng">배송중</option>
@@ -251,10 +251,10 @@
 		  return getDateStr(d);
 		}
 		
-		
-		
-		function inputPid(id){
-			var check = $('#delivaryForm').val()
+	 	$('.delivaryForm').change(function () {
+			
+			var check = $(this).val();
+			var id=$(this).parent().parent().children('#searchId').text();
 			
 			
 			if(check == 'Ready'){
@@ -276,8 +276,34 @@
 			        }
 				
 			});
+				
+		});  
+/* 
+		function inputPid(id){
+			var check = ('.delivaryForm').val();
+			alert(check);
 			
-		}
+			if(check == 'Ready'){
+				check = 'Y';
+			}else if(check=='DelivaryIng'){
+				check = 'R';
+			}else{
+				check = 'E';
+			}
+			
+			$.ajax({
+				
+				 url :"inputPid.do",
+			        type: "POST",
+			        data : {"id":id,"check":check},
+			        success : function(data){
+			        	
+			        	
+			        }
+				
+			});
+			
+		}  */
 		
 	</script>
 

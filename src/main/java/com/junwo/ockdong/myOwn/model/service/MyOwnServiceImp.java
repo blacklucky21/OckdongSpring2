@@ -87,8 +87,12 @@ public class MyOwnServiceImp implements MyOwnService{
 	}
 
 	@Override
+	public MBLRecipe myMBLRecipe(String fileName) {
+		return moDAO.myMBLRecipe(fileName);
+
 	public int updateRecipe(MBLRecipe mblR) {
 		return moDAO.updateRecipe(mblR);
+
 	}
 
 }
