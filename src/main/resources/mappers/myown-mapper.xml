@@ -123,10 +123,18 @@
 		where mbl_id = ${mblId}
 	</select>
 	
+
 	<select id="myMBLRecipe" parameterType="string" resultMap="MBLRecipeAllList">
 		select *
 		from mblrecipe
 		where MBL_FILENAME = #{fileName}
 	</select>
+
+	<update id="updateRecipe" parameterType="MBLRecipe">
+		update mblrecipe
+		set mbl_title = #{mblTitle}, numbers = #{numbers}, mbl_filename = #{mblFileName}, mbl_type = #{mblType}
+		where mbl_id = #{mblId}
+	</update>
+
 	
 </mapper>
