@@ -123,7 +123,7 @@ div#editor {
 							</div>
 						<div class="boardWriteBtn">
 							<input id="btnSave" type="submit" value="작성하기" class="btn btn-success">
-							<input type="reset" value="취소" class="btn btn-warning">
+							<input type="button" value="취소" class="btn btn-warning" onclick="location.href='nlist.do'">
 						</div>
 						</form>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>

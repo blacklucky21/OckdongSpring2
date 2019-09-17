@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.SearchCondition;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
 import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.notice.model.vo.NoticeComments;
 
 public interface NoticeService {
 
@@ -34,5 +37,8 @@ public interface NoticeService {
 	// 검색
 	public List<HashMap<String, Object>> searchList(PageInfo info, SearchCondition sc);
 
+	ArrayList<NoticeComments> selectCommentList(int nNo);
+
+	int insertComment(NoticeComments nc);
 
 }

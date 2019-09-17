@@ -22,6 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+<<<<<<< Updated upstream
+=======
+import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.common.Pagination;
+import com.junwo.ockdong.member.model.vo.Member;
+>>>>>>> Stashed changes
 import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;

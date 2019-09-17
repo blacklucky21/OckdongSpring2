@@ -8,6 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+<<<<<<< Updated upstream
+=======
+import com.junwo.ockdong.common.PageInfo;
+>>>>>>> Stashed changes
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
 
