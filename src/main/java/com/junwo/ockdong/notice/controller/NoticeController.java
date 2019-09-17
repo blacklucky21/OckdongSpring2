@@ -48,15 +48,10 @@ public class NoticeController {
 		}
 
 		int listCount = nService.getListCount();
-<<<<<<< Updated upstream
-		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
-=======
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
 
->>>>>>> Stashed changes
 		ArrayList<Notice> list = nService.selectList(pi);
 
 		if (list != null) {
