@@ -13,7 +13,6 @@
 
 #content .content {
 	min-width: 1280px;
-	padding-left: 214px;
 	height: 919px;
 	text-align: center;
 	/* border: 1px solid black; */
@@ -105,8 +104,8 @@ input::placeholder {
 
 .prim {
 	border: 1px solid #a9a9a9;
-	width: 88px;
-	height: 88px;
+	width: 120px;
+    height: 120px;
 }
 
 .one {
@@ -143,3 +142,15 @@ textarea {
 	transition: all 1s;
 	height: 100%;
 }
+
+.heim span:hover{
+	cursor: pointer;
+}
+
+.contentImgArea1, .contentImgArea2, .contentImgArea3{
+	background-image: url("resources/img/admin/plus2.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: 1px solid black;
+}
+

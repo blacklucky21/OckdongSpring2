@@ -52,9 +52,128 @@ where userid = #{loginUserId} -->
 	#{tArr}
 	</foreach>
 
+		
+	
+	</select>
+	
+	<select id="insertPayment" parameterType="map">
+	
+	
+INSERT INTO PAYMENT_PRODUCT( PNO,PPNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID,TOTALPRICE)
+SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}</foreach> AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
+
+<foreach collection="total" item ="tt" index="index">#{tt}</foreach>
+ AS TOTALPRICE
+FROM CART
+WHERE CNO in
+	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
+	#{tArr}
+	</foreach>
 	
 	
 	</select>
+	
+	
+	<select id="PaymentInsertDB" parameterType="Payment">
+	
+INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{payphone},#{paycellphone},#{payemail},#{receiverName},#{receiverPhone},#{receiverCellPhone}
+,#{payprice},#{orderMemo},to_char(sysdate,'yyyy/mm/dd - hh24:mi:ss'),#{delivaryDate},#{payrecipe},#{payaddress},default,#{paytext},sysdate,#{p_num},#{p_img})
+	
+	</select>
+	
+	
+	<delete id="delCartNum" >
+	
+	DELETE FROM CART 
+	WHERE CNO IN
+	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
+	#{tArr}
+	</foreach>
+	
+	</delete>
+	
+	<select id="selectPayList" resultType="Payment">
+	SELECT *
+	FROM PAYMENT
 
+	
+	
+	
+	</select>
+	
+	
+	<select id="selectPaySearch" resultType="Payment">
+	SELECT *
+	FROM PAYMENT
+	where pstatus !='x'
+	
+  			<if test="searchForm.equals('allSearch')">
+  			
+  			and ( p_id like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or payname like '%'|| #{searchInput} || '%' or paycellphone like '%'|| #{searchInput} || '%' or payphone like '%'|| #{searchInput} || '%' or paytext like '%'|| #{searchInput} || '%' )
+			
+		
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('Paynum')">
+  			
+  			and p_id like '%'||  #{searchInput}|| '%'
+  			
+  			</if>
+  			
+  			<if test="searchForm.equals('PayName')">
+  			
+  			and PAYTEXT like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  		
+  			<if test="searchForm.equals('PayID')">
+  			and USERID like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			
+  			
+  			<if test="searchForm.equals('Payphone')">
+  			and PAYPHONE like '%' || #{searchInput} || '%' or PAYCELLPHONE like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			<if test="searchForm.equals('PayUserName')">
+  			and PAYNAME like '%' || #{searchInput} || '%' or PAYCELLPHONE like '%' || #{searchInput} || '%'
+  			
+  			</if>
+  			
+  			  			
+  			<if test="startDatePicker!=''">
+  				
+  			and CHECKDATE between '${startDatePicker}' and  to_date('${endDatePicker}')+1
+  			</if> 
+  			
+  			<if test="ready !=null">
+  			and PSTATUS = 'Y'
+  			
+  			</if>
+  			<if test="ing !=null">
+  			and PSTATUS = 'R'
+  			
+  			</if>
+  			<if test="end !=null">
+  			and PSTATUS = 'E'
+  			
+  			</if>
+
+	
+	</select>
+	<update id="updateStatus">
+	update  payment
+	set pstatus = #{check}
+	where  p_id = #{id}
+	</update>
+	
+	
+	<insert id="insertPayProduct" parameterType="PayProduct">
+	
+	INSERT INTO PAYMENT_PRODUCT VALUES(SEQ_PRODUCT.NEXTVAL,#{ppno},#{pname},#{pamount},#{price},sysdate,#{id},#{totalprice})
+	
+	</insert>
 
 </mapper>

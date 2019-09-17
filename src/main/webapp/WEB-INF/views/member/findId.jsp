@@ -16,7 +16,7 @@
 	<br><br><br>
 	<div class="loginForm">
 	<a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
-	<form id="idFindForm" action="idFind.me" method="post">
+	<form id="idFindForm" action="idFindResult.me" method="post">
 	<table align="center" class="findd">
 		<tr>
 			<td colspan="3">

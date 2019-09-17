@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
 @Repository
 public class MyOwnDAO {
@@ -29,6 +30,56 @@ public class MyOwnDAO {
 
 	public ArrayList<Ingredient> searchList(Map<String, String> search) {
 		return (ArrayList)sqlSession.selectList("myOwnMapper.searchList", search);
+	}
+
+	public Ingredient selectOne(int inNo) {
+		return sqlSession.selectOne("myOwnMapper.searchOne", inNo);
+	}
+
+	public int update(Ingredient in) {
+		return sqlSession.update("myOwnMapper.updateIn", in);
+	}
+
+	public int insertRecipe(Map<String, String> list) {
+		return sqlSession.update("myOwnMapper.insertRecipe", list);
+	}
+
+	public ArrayList<MBLRecipe> getAllRecipe() {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.getAllRecipe");
+	}
+
+	public MBLRecipe searchRecipeOne(String mblId) {
+		return sqlSession.selectOne("myOwnMapper.searchRecipeOne", mblId);
+	}
+
+	public int deleteRecipe(int mblId) {
+		return sqlSession.update("myOwnMapper.deleteRecipe", mblId);
+	}
+
+	public ArrayList<MBLRecipe> getUserRecipe(String userId) {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.getUserRecipe", userId);
+	}
+
+	public ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search) {
+		return (ArrayList)sqlSession.selectList("myOwnMapper.searchRecipeList", search);
+				
+	}
+
+	public int deleteMblRecipe(int mblId) {
+		return sqlSession.update("myOwnMapper.deleteMblRecipe", mblId);
+	}
+
+	public MBLRecipe myRecipeDetail(int mblId) {
+		return sqlSession.selectOne("myOwnMapper.myRecipeDetail", mblId);
+	}
+
+
+	public MBLRecipe myMBLRecipe(String fileName) {
+		return sqlSession.selectOne("myOwnMapper.myMBLRecipe", fileName);
+
+	public int updateRecipe(MBLRecipe mblR) {
+		return sqlSession.update("myOwnMapper.updateRecipe", mblR);
+
 	}
 
 }

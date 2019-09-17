@@ -52,7 +52,7 @@
 <div><a></a></div>
 <div><a href="">Lunch box of the month</a></div>
 <div><a></a></div>
-<div><a href="">Regular delivery</a></div>
+<div><a href="test.do">Regular delivery</a></div>
 <div><a></a></div>
 </div>
 </li>
@@ -66,7 +66,6 @@
 <div><a href="nlist.do">NOTICE</a></div>
 <div><a href="">Q&A</a></div>
 <div><a href="">REVIEW</a></div>
-<div><a href="">EVENT</a></div>
 <div><a href="" target="_blank">DELIVERY</a></div>
 </div>
 </li>
@@ -185,16 +184,13 @@
         <a href="">이달의 도시락</a>
     </li>
     <li>
-        <a href="">제품</a>
+        <a href="listproduct.do">전체 상품</a>
         <ul class="sub_menu">
             <li  >
-                <a href="" >도시락</a>
+                <a href="listdo.do" >도시락</a>
             </li>
             <li  >
-                <a href="" >샐러드</a>
-            </li>
-            <li  >
-                <a href="" >단백질</a>
+                <a href="listsal.do" >샐러드</a>
             </li>
         </ul>
    </li>
@@ -210,7 +206,7 @@
         </ul>
     </li>
     <li  >
-        <a href="myOwn4.do">나만의 도시락</a>
+        <a onclick="myOwnClick();">나만의 도시락</a>
     </li>
     <li>
     	<a href="blist.do">도시락 자랑하기</a>
@@ -229,5 +225,14 @@
 
 <hr/>
     </div>
+    <script>
+    	function myOwnClick(){
+    		if(${sessionScope.loginUser eq null}){
+    			alert("로그인 후 이용가능한 서비스 입니다.");
+    		}else{
+    			location.href="myOwn4.do";
+    		}
+    	}
+    </script>
 </body>
 </html>

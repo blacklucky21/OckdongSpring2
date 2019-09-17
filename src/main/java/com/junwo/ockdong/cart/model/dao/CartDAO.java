@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.cart.model.vo.Cart;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
+import com.junwo.ockdong.cart.model.vo.Payment;
 
 @Repository("cDAO")
 public class CartDAO {
@@ -37,6 +39,60 @@ public class CartDAO {
 	public ArrayList<Cart> cartPayment(HashMap<String, String[]> totalMap) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("cartMapper.cartPaymentList",totalMap);
+	}
+
+
+	public int insertPayment(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cartMapper.insertPayment",totalMap);
+	}
+
+
+	public int PaymentInsertDB(Payment p) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cartMapper.PaymentInsertDB",p);
+	}
+
+
+	public int delCartNum(HashMap<String, String[]> totalMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("cartMapper.delCartNum",totalMap);
+	}
+
+
+	public Payment SelectPayMem(int checkno) {
+		// TODO Auto-generated method stub
+		return (Payment)sqlSession.selectOne("cartMapper.selectPayMem",checkno);
+	}
+
+
+	public int plzPayNum() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.PayNum");
+	}
+
+
+	public ArrayList<Payment> selectPayList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectPayList");
+	}
+
+
+	public ArrayList<Payment> selectPayListSearch(HashMap<String, String> search) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectPaySearch",search);
+	}
+
+
+	public int updateStatus(HashMap<String, String> ppcheck) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cartMapper.updateStatus",ppcheck);
+	}
+
+
+	public int insertPayProduct(PayProduct pp) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cartMapper.insertPayProduct",pp);
 	}
 
 

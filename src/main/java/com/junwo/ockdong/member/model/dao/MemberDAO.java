@@ -69,5 +69,26 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.BlackListCancel",memId);
 	}
 
+	public int deleteMember(String userId) {
+		return sqlSession.update("memberMapper.deleteMember",userId);
+	}
+
+	public int updatePwd(Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+
+	public int checkId(String userId) {
+		return sqlSession.selectOne("memberMapper.checkId", userId);
+	}
+	
+	public int checkNick(String nickName) {
+		return sqlSession.selectOne("memberMapper.checkNick", nickName);
+	}
+
+	public int memberUpdate(Member m) {
+		return sqlSession.update("memberMapper.memberUpdate", m);
+	}
+
+
 	
 }

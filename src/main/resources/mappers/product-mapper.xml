@@ -5,6 +5,7 @@
 		select *
 		from PRODUCT
 		where P_STATUS ='Y'
+		order by P_ID 
 	</select>
 
 	<select id ="selectProductList1" resultType="Product">
@@ -73,17 +74,184 @@
 <!-- 메인 사진 -->
 <insert id="insertMain"  parameterType="PictureList">
 	insert into pictureList
-	values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
+	values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 0)
 
 
 </insert>
 
 <insert id="insertSub" parameterType="PictureList">
 	insert into PictureList
-		values(SEQ_PT_ID.NEXTVAL,#{pt_naem},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
+		values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,SEQ_P_ID.CURRVAL, DEFAULT, 1)
 </insert>
 
+
+<!-- 등록부분 2개로  끝================================================================= -->	
+<select id="selectList8"  resultType = "hashmap">
+	<![CDATA[
 	
+	select *
+	from (select *
+		  from PRODUCT
+		  	left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y'
+		  order by P_CREATEDATE desc)
+		  where rownum < 9
+		 
+	 ]]>
+		  
+</select>
+
+
+<select id="pictureList" resultType = "hashmap">
+
+	<![CDATA[
+
+	select *
+	from (select *
+		  from PICTURELIST
+		  where PT_STATUS = 'Y' AND PT_TYPE = 0
+		  order by PT_CREATEDATE desc)
+		  where rownum < 9
+	 ]]>
 	
-<!-- 등록부분 2개로 ================================================================= -->	
+</select>
+
+<!-- 업데이트 사진 정보 가지고 가기 -->
+<select id="updateProduct" parameterType="_int" resultMap="ProductList">
+	select *
+	from PRODUCT
+	where P_ID = #{p_Id}
+</select>
+
+<select id="updatePicture" parameterType="_int" resultType="PictureList">
+	select *
+	from PICTURELIST
+	where PT_STATUS = 'Y' and  P_ID = #{p_Id}
+</select>
+<select id="selectList8do" resultType="hashmap">
+<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '도시락'
+		  order by P_LIKE desc)
+		   where rownum < 9
+ 
+	 ]]>
+</select>
+<select id="selectList8sal" resultType="hashmap">
+<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '샐러드'
+		  order by P_LIKE desc)
+		   where rownum < 9
+ 
+	 ]]>
+</select>
+
+<!-- 상품 수정 쿼리 -->
+
+<!--  -->
+
+
+<!-- ====================  페이징 갯수 가지고 가기  ====================================  -->
+<select id="listproduct"  resultType="_int" >
+	select count(*)
+	from PRODUCT
+	where P_STATUS = 'Y'
+</select>
+
+<select id="listdo"  resultType="_int">
+select count(*)
+	from PRODUCT
+	where P_STATUS = 'Y' and P_LUNCHTYPE = '도시락'
+
+
+</select>
+<select id="listsal"  resultType="_int">
+select count(*)
+	from PRODUCT
+	
+	where P_STATUS = 'Y' and P_LUNCHTYPE = '샐러드'
+</select>
+
+
+<select id="select" resultType="hashmap">
+<![CDATA[
+	select *
+	from (select *
+		  from PRODUCT
+		  	left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y'
+		  order by P_CREATEDATE desc)
+ 
+	 ]]>
+</select>
+
+<select id="selectType1" resultType="hashmap" >
+	
+	<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '도시락'
+		  order by P_CREATEDATE desc)
+ 
+	 ]]>
+
+</select>
+<select id="selectType2" resultType="hashmap" >
+	
+	<![CDATA[
+	
+	select *
+	from (select *
+		  from PRODUCT
+		  left join PICTURELIST using(P_ID)
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '샐러드'
+		  order by P_LIKE )
+		   where rownum < 9
+ 
+	 ]]>
+
+</select>
+<select id="selectReplyList" parameterType="_int" resultType="Productreview">
+	select *
+	from (select *
+		  from 	PRODUCTREVIEW left join PRODUCT using(P_ID)
+		  where p_ID = #{p_Id}
+		  order by p_Id  )
+	order by p_Id 
+</select>
+
+
+<insert id="insertReply" parameterType="Productreview">
+
+insert into PRODUCTREVIEW
+values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sysdate, default, 0 )
+
+</insert>
+
+<update id="deleteReply">
+	update PRODUCTREVIEW
+	set STATUS = 'N'
+	where PV_ID = #{pv_Id}
+
+</update>
+
+<update id="updateReply">
+	update PRODUCTREVIEW
+	set PV_REVIEWCONTENT = #{pv_reviewContent}
+	where PV_ID = #{pv_Id}
+</update>
+
+
 </mapper>

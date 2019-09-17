@@ -37,9 +37,23 @@ function change(p_Id){
 		data : {p_Id:p_Id, selected:selected},
 		type:"post",
 		success:function(data){
+			var count = 0;
+			if(selected == "판매중지"){
+				 count  = $(".l2").html();
+				 count = count - 1;
+				
+				$(".l2").html(count);
+			}else{
+				
+				count = $(".l2").html();
+				count = Number(count);
+				count = count+1;
+				$(".l2").empty();
+				
+				$(".l2").text(count);
+			}
+			
 			alert("상품 판매상태가 변경 되었습니다.");
-			
-			
 			
 		},error:function(data){
 			alert("수정중 오류 발생");

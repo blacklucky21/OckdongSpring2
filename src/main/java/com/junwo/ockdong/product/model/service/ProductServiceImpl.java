@@ -1,7 +1,6 @@
 package com.junwo.ockdong.product.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.dao.ProductDAO;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Service("pService")
 public class ProductServiceImpl implements ProductService{
@@ -18,19 +18,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductDAO pDAO;
 	 
-	@Override
-	public int getListCount() {
-		
-		return pDAO.getListCount();
-	}
 
-	@Override
-	public ArrayList<Product> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 	@Override
 	public ArrayList<Product> selectList() {
 
@@ -81,6 +69,125 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		return pDAO.inPicture(pList);
 	}
+// ===================================================
+	// 메인에 상품과 사진 가지고 가기
 
+
+	@Override
+	public ArrayList selectList8(int i) {
+		ArrayList list = null;
+		if(i == 1) {
+			list = pDAO.selectList8();
+		}else {
+			list = pDAO.pictureList();
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public ArrayList<Product> selectList8do() {
+		return pDAO.selectList8do();
+	}
+
+	@Override
+	public ArrayList<Product> selectList8sal() {
+		return pDAO.selectList8sal();
+	}
+// ===================================================
+	// 객체를 담아올 정보
+	@Override
+	public Product selectListUpdate(int p_Id) {
+		// TODO Auto-generated method stub
+		return pDAO.selectProduct(p_Id);
+	}
+
+	// 사진을 담아올 정보
+	@Override
+	public ArrayList<PictureList> selectPt(int p_Id) {
+		return pDAO.selectPt(p_Id);
+	}
+	
+
+// ===================================================
+	// 상품 정보 수정하기
+	@Override
+	public int updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		return pDAO.updateProduct(p);
+	}
+
+	// 사진 수정 하기
+	@Override
+	public int updatePicture(ArrayList<PictureList> pList) {
+		// TODO Auto-generated method stub
+		return pDAO.updatePicture(pList);
+	}
+// =======================================================================================
+	// 페이징 하기 위해서 갯수 가지고 온다.
+	@Override
+	public int listproduct() {
+		return pDAO.listproduct();
+	}
+
+	@Override
+	public int listdo() {
+		return pDAO.listdo(); // 도시락 타입
+	}
+
+	@Override
+	public int listsal() {
+		return pDAO.listsal(); // 샐러드 타입
+	}
+
+	// 페이징 처리 하기 위해서 리스트와 함게 가지고 간다.
+	@Override
+	public ArrayList<Product> selectList(PageInfo pi) {
+		return pDAO.selectList(pi);
+	}
+
+	@Override
+	public ArrayList<Product> selectList2(PageInfo pi) {
+		return pDAO.selectList2(pi);
+	}
+
+	@Override
+	public ArrayList<Product> selectList3(PageInfo pi) {
+		return pDAO.selectList3(pi);
+	}
+
+	// 상세페이지 댓글 등록
+	@Override
+	public int insertReply(Productreview pv) {
+		return pDAO.insertReply(pv);
+	}
+
+	// 상품 디테일 댓글 리스트 읽어가기
+	@Override
+	public ArrayList<Productreview> selectReplyList(int p_Id) {
+		return pDAO.selectRelyList(p_Id);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int deleteReply(Productreview pv) {
+		return pDAO.deleteReply(pv);
+	}
+
+	// 댓글 수정
+	@Override
+	public int updateReply(Productreview pv) {
+		return pDAO.updateReply(pv);
+	}
+
+
+	
+
+
+
+
+
+	
+	
 
 }

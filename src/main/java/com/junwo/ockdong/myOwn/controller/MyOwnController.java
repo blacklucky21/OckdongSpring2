@@ -1,187 +1,637 @@
 package com.junwo.ockdong.myOwn.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
-import com.junwo.ockdong.myOwn.model.vo.Img;
+import com.junwo.ockdong.myOwn.model.vo.Ingredient;
+import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
 @Controller
 public class MyOwnController {
-	
+
 	@Autowired
 	private MyOwnService service;
-	
+
 	@RequestMapping("myOwn4.do")
 	public ModelAndView myOwn4(ModelAndView mv) {
-		
-		ArrayList<Img> riceList = new ArrayList<Img>();
 
-		riceList.add(new Img(1,"백미","백미_1.png","img/myOwn/4찬/1_밥/백미_1.png"));
-		riceList.add(new Img(2,"보리밥","보리밥_1.png","img/myOwn/4찬/1_밥/보리밥_1.png"));
-		riceList.add(new Img(3,"볶음밥","볶음밥_1.png","img/myOwn/4찬/1_밥/볶음밥_1.png"));
-		riceList.add(new Img(4,"비빔밥","비빔밥_1.png","img/myOwn/4찬/1_밥/비빔밥_1.png"));
-		riceList.add(new Img(5,"새우볶음밥","새우볶음밥_1.png","img/myOwn/4찬/1_밥/새우볶음밥_1.png"));
-		riceList.add(new Img(5,"오곡밥","오곡밥_1.png","img/myOwn/4찬/1_밥/오곡밥_1.png"));
-		
-		System.out.println(riceList);
-		
-		
-		ArrayList<Img> mainList = new ArrayList<Img>();
-		
-		mainList.add(new Img(1, "갈치구이","갈치구이_4.png","img/myOwn/4찬/4_메인/갈치구이_4.png"));
-		mainList.add(new Img(2, "낙지볶음","낙지볶음_4.png","img/myOwn/4찬/4_메인/낙지볶음_4.png"));
-		mainList.add(new Img(3, "닭갈비","닭갈비_4.png","img/myOwn/4찬/4_메인/닭갈비_4.png"));
-		mainList.add(new Img(4, "닭강정","닭강정_4.png","img/myOwn/4찬/4_메인/닭강정_4.png"));
-		mainList.add(new Img(5, "돈까스","돈까스_4.png","img/myOwn/4찬/4_메인/돈까스_4.png"));
-		mainList.add(new Img(6, "돼지갈비","돼지갈비_4.png","img/myOwn/4찬/4_메인/돼지갈비_4.png"));
-		mainList.add(new Img(7, "돼지고기볶음","돼지고기볶음_4.png","img/myOwn/4찬/4_메인/돼지고기볶음_4.png"));
-		mainList.add(new Img(8, "떡갈비","떡갈비_4.png","img/myOwn/4찬/4_메인/떡갈비_4.png"));
-		mainList.add(new Img(9, "매운갈비찜","매운갈비찜_4.png","img/myOwn/4찬/4_메인/매운갈비찜_4.png"));
-		mainList.add(new Img(10, "생선까스","생선까스_4.png","img/myOwn/4찬/4_메인/생선까스_4.png"));
-		mainList.add(new Img(11, "소불고기","소불고기_4.png","img/myOwn/4찬/4_메인/소불고기_4.png"));
-		mainList.add(new Img(12, "소세지볶음","소세지볶음_4.png","img/myOwn/4찬/4_메인/소세지볶음_4.png"));
-		
-		ArrayList<Img> sub1List = new ArrayList<Img>();
-		
-		sub1List.add(new Img(1,"감자볶음","감자볶음_2.png","img/myOwn/4찬/2_서브1/감자볶음_2.png"));
-		sub1List.add(new Img(2,"건새우볶음","건새우볶음_2.png","img/myOwn/4찬/2_서브1/건새우볶음_2.png"));
-		sub1List.add(new Img(3,"고사리나물","고사리나물_2.png","img/myOwn/4찬/2_서브1/고사리나물_2.png"));
-		sub1List.add(new Img(4,"깻잎나물볶음","깻잎나물볶음_2.png","img/myOwn/4찬/2_서브1/깻잎나물볶음_2.png"));
-		sub1List.add(new Img(5,"느티버섯","느티버섯_2.png","img/myOwn/4찬/2_서브1/느티버섯_2.png"));
-		sub1List.add(new Img(6,"도토리묵","도토리묵_2.png","img/myOwn/4찬/2_서브1/도토리묵_2.png"));
-		sub1List.add(new Img(7,"멸치풋고추볶음","멸치풋고추볶음_2.png","img/myOwn/4찬/2_서브1/멸치풋고추볶음_2.png"));
-		sub1List.add(new Img(8,"미나리나물","미나리나물_2.png","img/myOwn/4찬/2_서브1/미나리나물_2.png"));
-		sub1List.add(new Img(9,"소고기메추리알장조림","소고기메추리알장조림_2.png","img/myOwn/4찬/2_서브1/소고기메추리알장조림_2.png"));
-		sub1List.add(new Img(10,"숙주나물","숙주나물_2.png","img/myOwn/4찬/2_서브1/숙주나물_2.png"));
-		sub1List.add(new Img(11,"연근조림","연근조림_2.png","img/myOwn/4찬/2_서브1/연근조림_2.png"));
-		sub1List.add(new Img(12,"콩나물","콩나물_2.png","img/myOwn/4찬/2_서브1/콩나물_2.png"));
-		sub1List.add(new Img(13,"콩조림","콩조림_2.png","img/myOwn/4찬/2_서브1/콩조림_2.png"));
-		sub1List.add(new Img(14,"파무침","파무침_2.png","img/myOwn/4찬/2_서브1/파무침_2.png"));
-		
-		
-		
-		ArrayList<Img> sub2List = new ArrayList<Img>();
-		
-		sub2List.add(new Img(1,"김치볶음","김치볶음_3.png","img/myOwn/4찬/3_서브2/김치볶음_3.png"));
-		sub2List.add(new Img(2,"깍두기","깍두기_3.png","img/myOwn/4찬/3_서브2/깍두기_3.png"));
-		sub2List.add(new Img(3,"무말랭이무침","무말랭이무침_3.png","img/myOwn/4찬/3_서브2/무말랭이무침_3.png"));
-		sub2List.add(new Img(4,"미역초무침","미역초무침_3.png","img/myOwn/4찬/3_서브2/미역초무침_3.png"));
-		sub2List.add(new Img(5,"배추김치","배추김치_3.png","img/myOwn/4찬/3_서브2/배추김치_3.png"));
-		sub2List.add(new Img(6,"시금치나물","시금치나물_3.png","img/myOwn/4찬/3_서브2/시금치나물_3.png"));
-		sub2List.add(new Img(7,"열무김치","열무김치_3.png","img/myOwn/4찬/3_서브2/열무김치_3.png"));
-		sub2List.add(new Img(8,"오이소박이","오이소박이_3.png","img/myOwn/4찬/3_서브2/오이소박이_3.png"));
-		
+		ArrayList<Ingredient> AllList = service.selectAll();
+
+		ArrayList<Ingredient> riceList = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> mainList = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> sub1List = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> sub2List = new ArrayList<Ingredient>();
+
+		for (Ingredient i : AllList) {
+			switch (i.getInType()) {
+			case "1_밥":
+				riceList.add(i);
+				break;
+			case "4_메인":
+				mainList.add(i);
+				break;
+			case "2_서브1":
+				sub1List.add(i);
+				break;
+			case "3_서브2":
+				sub2List.add(i);
+				break;
+			}
+		}
+
 		mv.addObject("riceList", riceList);
 		mv.addObject("mainList", mainList);
 		mv.addObject("sub1List", sub1List);
 		mv.addObject("sub2List", sub2List);
 		mv.setViewName("myOwn/myOwn4");
-		
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping("myOwn5.do")
 	public ModelAndView myOwn5(ModelAndView mv) {
-		
-		ArrayList<Img> riceList = new ArrayList<Img>();
 
-		riceList.add(new Img(1,"백미","백미_5.png","img/myOwn/5찬/5_밥/백미_5.png"));
-		riceList.add(new Img(2,"보리밥","보리밥_5.png","img/myOwn/5찬/5_밥/보리밥_5.png"));
-		riceList.add(new Img(3,"볶음밥","볶음밥_5.png","img/myOwn/5찬/5_밥/볶음밥_5.png"));
-		riceList.add(new Img(4,"비빔밥","비빔밥_5.png","img/myOwn/5찬/5_밥/비빔밥_5.png"));
-		riceList.add(new Img(5,"새우볶음밥","새우볶음밥_5.png","img/myOwn/5찬/5_밥/새우볶음밥_5.png"));
-		riceList.add(new Img(5,"오곡밥","오곡밥_5.png","img/myOwn/5찬/5_밥/오곡밥_5.png"));
-		
-		System.out.println(riceList);
-		
-		
-		ArrayList<Img> mainList = new ArrayList<Img>();
-		
-		mainList.add(new Img(1, "갈치구이","갈치구이_6.png","img/myOwn/5찬/6_메인/갈치구이_6.png"));
-		mainList.add(new Img(2, "낙지볶음","낙지볶음_6.png","img/myOwn/5찬/6_메인/낙지볶음_6.png"));
-		mainList.add(new Img(3, "닭갈비","닭갈비_6.png","img/myOwn/5찬/6_메인/닭갈비_6.png"));
-		mainList.add(new Img(4, "닭강정","닭강정_6.png","img/myOwn/5찬/6_메인/닭강정_6.png"));
-		mainList.add(new Img(5, "등심돈까스","등심돈까스_6.png","img/myOwn/5찬/6_메인/등심돈까스_6.png"));
-		mainList.add(new Img(6, "돼지갈비","돼지갈비_6.png","img/myOwn/5찬/6_메인/돼지갈비_6.png"));
-		mainList.add(new Img(7, "돼지고기볶음","돼지고기볶음_6.png","img/myOwn/5찬/6_메인/돼지고기볶음_6.png"));
-		mainList.add(new Img(8, "떡갈비","떡갈비_6.png","img/myOwn/5찬/6_메인/떡갈비_6.png"));
-		mainList.add(new Img(9, "매운갈비찜","매운갈비찜_6.png","img/myOwn/5찬/6_메인/매운갈비찜_6.png"));
-		mainList.add(new Img(10, "생선까스","생선까스_6.png","img/myOwn/5찬/6_메인/생선까스_6.png"));
-		mainList.add(new Img(11, "소불고기","소불고기_6.png","img/myOwn/5찬/6_메인/소불고기_6.png"));
-		mainList.add(new Img(12, "소세지볶음","소세지볶음_6.png","img/myOwn/5찬/6_메인/소세지볶음_6.png"));
-		
-		ArrayList<Img> sub1List = new ArrayList<Img>();
-		
-		sub1List.add(new Img(1,"감자볶음","감자볶음_7.png","img/myOwn/5찬/7_서브1/감자볶음_7.png"));
-		sub1List.add(new Img(2,"건새우볶음","건새우볶음_7.png","img/myOwn/5찬/7_서브1/건새우볶음_7.png"));
-		sub1List.add(new Img(3,"고사리나물","고사리나물_7.png","img/myOwn/5찬/7_서브1/고사리나물_7.png"));
-		sub1List.add(new Img(4,"깻잎나물볶음","깻잎나물볶음_7.png","img/myOwn/5찬/7_서브1/깻잎나물볶음_7.png"));
-		sub1List.add(new Img(5,"느티버섯","느티버섯_7.png","img/myOwn/5찬/7_서브1/느티버섯_7.png"));
-		sub1List.add(new Img(6,"도토리묵","도토리묵_7.png","img/myOwn/5찬/7_서브1/도토리묵_7.png"));
-		sub1List.add(new Img(7,"멸치풋고추볶음","멸치풋고추볶음_7.png","img/myOwn/5찬/7_서브1/멸치풋고추볶음_7.png"));
-		sub1List.add(new Img(8,"미나리나물","미나리나물_7.png","img/myOwn/5찬/7_서브1/미나리나물_7.png"));
-		sub1List.add(new Img(9,"소고기메추리알장조림","소고기메추리알장조림_7.png","img/myOwn/5찬/7_서브1/소고기메추리알장조림_7.png"));
-		sub1List.add(new Img(10,"숙주나물","숙주나물_7.png","img/myOwn/5찬/7_서브1/숙주나물_7.png"));
-		sub1List.add(new Img(11,"연근조림","연근조림_7.png","img/myOwn/5찬/7_서브1/연근조림_7.png"));
-		sub1List.add(new Img(12,"콩나물","콩나물_7.png","img/myOwn/5찬/7_서브1/콩나물_7.png"));
-		sub1List.add(new Img(13,"콩조림","콩조림_7.png","img/myOwn/5찬/7_서브1/콩조림_7.png"));
-		sub1List.add(new Img(14,"파무침","파무침_7.png","img/myOwn/5찬/7_서브1/파무침_7.png"));
-		
-		
-		
-		ArrayList<Img> sub2List = new ArrayList<Img>();
-		
-		sub2List.add(new Img(1,"김치볶음","김치볶음_8.png","img/myOwn/5찬/8_서브2/김치볶음_8.png"));
-		sub2List.add(new Img(2,"깍두기","깍두기_8.png","img/myOwn/5찬/8_서브2/깍두기_8.png"));
-		sub2List.add(new Img(3,"무말랭이무침","무말랭이무침_8.png","img/myOwn/5찬/8_서브2/무말랭이무침_8.png"));
-		sub2List.add(new Img(4,"미역초무침","미역초무침_8.png","img/myOwn/5찬/8_서브2/미역초무침_8.png"));
-		sub2List.add(new Img(5,"배추김치","배추김치_8.png","img/myOwn/5찬/8_서브2/배추김치_8.png"));
-		sub2List.add(new Img(6,"시금치나물","시금치나물_8.png","img/myOwn/5찬/8_서브2/시금치나물_8.png"));
-		sub2List.add(new Img(7,"열무김치","열무김치_8.png","img/myOwn/5찬/8_서브2/열무김치_8.png"));
-		sub2List.add(new Img(8,"오이소박이","오이소박이_8.png","img/myOwn/5찬/8_서브2/오이소박이_8.png"));
-		
-		
-		
-		
-		ArrayList<Img> soupList = new ArrayList<Img>();
-		
-		soupList.add(new Img(1,"김치볶음","김치볶음_3.png","img/myOwn/5찬/9_수프/김치국_9.png"));
-		soupList.add(new Img(2,"깍두기","깍두기_3.png","img/myOwn/5찬/9_수프/된장국_9.png"));
-		soupList.add(new Img(3,"무말랭이무침","무말랭이무침_3.png","img/myOwn/5찬/9_수프/미역국_9.png"));
-		soupList.add(new Img(4,"미역초무침","미역초무침_3.png","img/myOwn/5찬/9_수프/콩나물국_9.png"));
-		
+		ArrayList<Ingredient> AllList = service.selectAll();
+
+		ArrayList<Ingredient> riceList = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> mainList = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> sub1List = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> sub2List = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> soupList = new ArrayList<Ingredient>();
+
+		for (Ingredient i : AllList) {
+			switch (i.getInType()) {
+			case "5_밥":
+				riceList.add(i);
+				break;
+			case "6_메인":
+				mainList.add(i);
+				break;
+			case "7_서브1":
+				sub1List.add(i);
+				break;
+			case "8_서브2":
+				sub2List.add(i);
+				break;
+			case "9_수프":
+				soupList.add(i);
+				break;
+			}
+		}
+
 		mv.addObject("riceList", riceList);
 		mv.addObject("mainList", mainList);
 		mv.addObject("sub1List", sub1List);
 		mv.addObject("sub2List", sub2List);
 		mv.addObject("soupList", soupList);
 		mv.setViewName("myOwn/myOwn5");
+
+		return mv;
+
+	}
+
+	//결제 페이지로 이동dddd
+
+
+	@RequestMapping("myOwnInsert.do")
+	public ModelAndView myOwnInsert(ModelAndView mv,
+			@RequestParam("imgSrc") String imgSrc,
+			@RequestParam("selectedRice") int rice,
+			@RequestParam(value = "selectedSoup", required = false) String soup,
+			@RequestParam("selectedMain") int main,
+			@RequestParam("selectedSub1") int sub1,
+			@RequestParam("selectedSub2") int sub2,
+			HttpServletRequest request,
+			HttpSession session) throws IOException {
+
+		Member m = (Member) session.getAttribute("loginUser");
+
+		System.out.println("myOwnInsert.do로 들어옴");
+		System.out.println("imgSrc : " + imgSrc);
 		
+		String fileName = CreateRecipe(imgSrc, request);
+		
+		fileName = fileName + ".png";
+		
+		System.out.println("fileName : " + fileName);
+		
+		System.out.println("Controller > myOwnInsert()");
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		
+		//재료 객체 만들기
+
+		Ingredient riceIn = service.selectOne(rice);
+		Ingredient mainIn = service.selectOne(main);
+		Ingredient sub1In = service.selectOne(sub1);
+		Ingredient sub2In = service.selectOne(sub2);
+		Ingredient soupIn = null;
+
+		if (soup != null) {
+			System.out.println("5찬");
+			soupIn = service.selectOne(Integer.parseInt(soup));
+		} else {
+			System.out.println("4찬");
+		}
+
+
+		// session에서 로그인정보 가져오기
+		Member member = (Member)session.getAttribute("loginUser");
+
+		// 날짜가져오기 yyyymmdd형식으로
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        Calendar c1 = Calendar.getInstance();
+        String strToday = sdf.format(c1.getTime());
+        System.out.println("strToday : " + strToday);
+
+
+        // 변수 설정
+        int result = 0;
+		String numbers = "";
+		MBLRecipe mbl = null;
+		// 파일 생성
+		//등록할 mblRecipe정보 넣기
+		Map<String, String> list = new HashMap<String, String>();
+		
+		list.put("userId", member.getUserId());
+		list.put("fileName", fileName);
+		list.put("racipeName", member.getUserId() + "님이 만드신 나만의 도시락 입니다.(" + strToday + ")");
+		
+		// soup여부 확인 (4찬인지 5찬인지 판별)
+		if(soup != null) {
+			// 재료들의 번호 넣기
+			numbers = rice + "/" + soup + "/" + main + "/" + sub1 + "/" + sub2;
+			list.put("type", "5찬");
+			list.put("numbers", numbers);
+			//재료 객체 만들기
+			soupIn = service.selectOne(Integer.parseInt(soup));
+		}else {
+			// 재료들의 번호 넣기
+			numbers = rice + "/" + main + "/" + sub1 + "/" + sub2;
+			list.put("type", "4찬");
+			list.put("numbers", numbers);
+		}
+		
+		result = service.insertRecipe(list);
+		
+		
+		if(result > 0) {
+			System.out.println("mblRecipe 만들기 성공");
+			 mbl = service.myMBLRecipe(fileName);
+		}else {
+			System.out.println("mblRecipe 만들기 실패");
+		}
+		System.out.println("pid"+mbl.getMblId());
+		mv.addObject("rice",riceIn);
+		mv.addObject("main",mainIn);
+		mv.addObject("sub1",sub1In);
+		mv.addObject("sub2",sub2In);
+		mv.addObject("soup",soupIn);
+		mv.addObject("fileName",fileName);
+		mv.addObject("mbl",mbl);
+		mv.addObject("member",m);
+
+		mv.setViewName("myOwn/myOwnPayment");
+		
+		return mv;
+	}
+
+	@RequestMapping("myOwnAddRecipe.do")
+	public String myOwnAddRecipe() {
+		return "myOwn/myOwnAddRecipe";
+	}
+
+	@RequestMapping("myOwnPayment.do")
+	public String myOwnPayment() {
+		return "myOwn/myOwnPayment";
+	}
+	
+	
+	//이미지 만들면서 추가 페이지로 이동
+	@RequestMapping("imageCreate.do")
+	public ModelAndView createImage(ModelAndView mv,
+									@RequestParam("imgSrc") String imgSrc,
+									@RequestParam(value = "selectedSoup", required = false) String soup,
+									@RequestParam("selectedRice") int rice,
+									@RequestParam("selectedMain") int main,
+									@RequestParam("selectedSub1") int sub1,
+									@RequestParam("selectedSub2") int sub2,
+									HttpServletRequest request) throws Exception {
+		
+		String fileName = CreateRecipe(imgSrc, request);
+		
+		System.out.println("fileName : " + fileName);
+		if (soup != null && soup != "") {
+			System.out.println("5찬");
+		} else {
+			System.out.println("4찬");
+		}
+
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		Ingredient inRice = service.selectOne(rice);
+		
+		Ingredient inSoup = null;
+		System.out.println("soup 번호 : " + soup);
+		if(soup != null && soup != "") {
+			int soupNum = Integer.parseInt(soup);
+			inSoup = service.selectOne(soupNum);
+		}else {
+			inSoup = null;
+		}
+		Ingredient inMain = service.selectOne(main);
+		Ingredient inSub1 = service.selectOne(sub1);
+		Ingredient inSub2 = service.selectOne(sub2);
+		
+		System.out.println(inSoup);
+		
+		
+		mv.addObject("rice",inRice);
+		mv.addObject("soup",inSoup);
+		mv.addObject("main",inMain);
+		mv.addObject("sub1",inSub1);
+		mv.addObject("sub2",inSub2);
+		mv.addObject("fileName",fileName);
+		mv.setViewName("myOwn/myOwnAddRecipe");
 		return mv;
 		
 	}
 	
 	
-	@RequestMapping("myOwnInsert.do")
-	public ModelAndView myOwnInsert(ModelAndView mv,
-									@RequestParam("selectedRice") String rice,
-									@RequestParam("selectedSoup") String soup,
-									@RequestParam("selectedMain") String main,
-									@RequestParam("selectedSub1") String sub1,
-									@RequestParam("selectedSub2") String sub2) {
+	/* 캡쳐한 이미지 프로젝트에 저장하기 */
+	public String CreateRecipe(@RequestParam("imgSrc") String imgSrc,
+							   HttpServletRequest request) throws IOException {
+		FileOutputStream stream = null;
+		String fileName = "";
+		
+		try {
+			System.out.println("binary file " + imgSrc);
+			if (imgSrc == null || imgSrc == "") {
+				throw new Exception();
+			}
+
+			imgSrc = imgSrc.replaceAll("data:image/png;base64,", "");
+			byte[] file = Base64.decodeBase64(imgSrc);
+			System.out.println("file :::::::: " + file + " || " + file.length);
+			fileName = UUID.randomUUID().toString();
+			
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = root + "\\img\\Recipe";
+			System.out.println("savePath : " + savePath);
+			File folder = new File(savePath);
+			
+			stream = new FileOutputStream(folder + "\\" + fileName + ".png");
+			stream.write(file);
+			stream.close();
+			System.out.println("파일 작성 완료");
+		} catch (Exception e) {
+			System.out.println("파일이 정상적으로 넘어오지 않았습니다");
+		}
+		return fileName;
+	}
+	
+	@RequestMapping("recipeInsert.do")
+	public String RecipeInsert(@RequestParam("fileName") String fileName,
+							   @RequestParam("racipeName") String racipeName,
+							   @RequestParam("riceNo") int riceNo,
+							   @RequestParam(value = "soupNo", required = false) String soupNo,
+							   @RequestParam("mainNo") int mainNo,
+							   @RequestParam("sub1No") int sub1No,
+							   @RequestParam("sub2No") int sub2No,
+							   HttpSession session){
+		
+		System.out.println("recipeInsert.do에서의 fileName : " + fileName);
+		
+		Member member = (Member)session.getAttribute("loginUser");
+		System.out.println(member);
+		
+		int soup = 0;
+		int result = 0;
+		
+		String numbers = "";
+		
+		Map<String, String> list = new HashMap<String, String>();
+		
+		list.put("userId", member.getUserId());
+		list.put("fileName", fileName);
+		list.put("racipeName", racipeName);
+		System.out.println("soupNo :" + soupNo);
+		
+		
+		if(soupNo != null && soupNo !="") {
+			System.out.println("soupNo : " + soupNo);
+			soup = Integer.parseInt(soupNo);
+			System.out.println("soup : " + soup);
+			numbers = riceNo + "/" + soup + "/" + mainNo + "/" + sub1No + "/" + sub2No;
+			list.put("type", "5찬");
+			list.put("numbers", numbers);
+			result = service.insertRecipe(list);
+		}else {
+			numbers = riceNo + "/" + mainNo + "/" + sub1No + "/" + sub2No;
+			list.put("type", "4찬");
+			list.put("numbers", numbers);
+			result = service.insertRecipe(list);
+		}
+		
+		if(result > 0) {
+			System.out.println("성공");
+			return "Main";
+		}else {
+			System.out.println("실패");
+			return "Main";
+		}
+	}
+	
+	@RequestMapping("allRecipe.do")
+	public ModelAndView allRecipe(ModelAndView mv) {
+		
+		ArrayList<MBLRecipe> rList = service.getAllRecipe();
+		
+		
+		mv.addObject("rList", rList);
+		mv.setViewName("admin/mydo/myOwn_Recipe");
+		
+		return mv;
+	}
+	
+	@RequestMapping("myOwnList.me")
+	public ModelAndView myOwnListMyPage(ModelAndView mv, HttpSession session) {
+		
+		Member member = (Member)session.getAttribute("loginUser");
+		
+		ArrayList<MBLRecipe> rList = service.getUserRecipe(member.getUserId());
+		if(rList != null) {
+			mv.addObject("rList",rList);
+		}
+		mv.setViewName("myOwn/myPage_RecipeList");
+		return mv;
+	}
+	
+	@RequestMapping("recipeDetailOne.me")
+	public ModelAndView recipeDetailOne(ModelAndView mv, @RequestParam("mblId") String mblId) {
+		
+		MBLRecipe mblR = service.searchRecipeOne(mblId);
+		
+		String[] numbers = mblR.getNumbers().split("/");
+		
+		Ingredient rice = null;
+		Ingredient soup = null;
+		Ingredient main = null;
+		Ingredient sub1 = null;
+		Ingredient sub2 = null;
+		
+		Ingredient in = null;
+		for(int i = 0; i < numbers.length; i++) {
+			in = service.selectOne(Integer.parseInt(numbers[i]));
+			
+			switch(in.getInType()) {
+				case "1_밥": case "5_밥":
+					rice = in;
+					break;
+				case "2_서브1" : case "7_서브1":
+					sub1 = in;
+					break;
+				case "3_서브2" : case "8_서브2":
+					sub2 = in;
+					break;
+				case "4_메인": case "6_메인":
+					main = in;
+					break;
+				case "9_수프":
+					soup = in;
+					break;
+			}
+		}
+		
+		mv.addObject("rice",rice);
+		mv.addObject("soup",soup);
+		mv.addObject("main",main);
+		mv.addObject("sub1",sub1);
+		mv.addObject("sub2",sub2);
+		mv.addObject("mblR",mblR);
+		mv.setViewName("myOwn/myPage_RecipeOne");
+		return mv;
+	}
+	
+	//결제 페이지로 이동
+	@RequestMapping("myPagePaymentInsert.do")
+	public ModelAndView myPagePaymentInsert(ModelAndView mv,
+			@RequestParam("fileName") String fileName,
+			@RequestParam("riceNo") int rice,
+			@RequestParam(value = "soupNo", required = false) String soup,
+			@RequestParam("mainNo") int main,
+			@RequestParam("sub1No") int sub1,
+			@RequestParam("sub2No") int sub2,
+			HttpServletRequest request) throws IOException {
+		
+		System.out.println("fileName : " + fileName);
+		
 		System.out.println("Controller > myOwnInsert()");
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		Ingredient riceIn = service.selectOne(rice);
+		Ingredient mainIn = service.selectOne(main);
+		Ingredient sub1In = service.selectOne(sub1);
+		Ingredient sub2In = service.selectOne(sub2);
+		Ingredient soupIn = null;
+		if (soup != null) {
+			System.out.println("5찬");
+			soupIn = service.selectOne(Integer.parseInt(soup));
+		} else {
+			System.out.println("4찬");
+		}
+
+		mv.addObject("rice",riceIn);
+		mv.addObject("main",mainIn);
+		mv.addObject("sub1",sub1In);
+		mv.addObject("sub2",sub2In);
+		mv.addObject("soup",soupIn);
+		mv.addObject("fileName",fileName);
+		mv.setViewName("myOwn/myOwnPayment");
+		
+		return mv;
+	}
+	
+	@RequestMapping("recipeUpdate.do")
+	public ModelAndView recipeUpdate(ModelAndView mv, @RequestParam("mblId") int mblId) {
+		
+		MBLRecipe mblR = service.myRecipeDetail(mblId);
+		
+		String[] numbers = mblR.getNumbers().split("/");
+		
+		Ingredient rice = null;
+		Ingredient soup = null;
+		Ingredient main = null;
+		Ingredient sub1 = null;
+		Ingredient sub2 = null;
+		
+		Ingredient in = null;
+		for(int i = 0; i < numbers.length; i++) {
+			in = service.selectOne(Integer.parseInt(numbers[i]));
+			
+			switch(in.getInType()) {
+				case "1_밥": case "5_밥":
+					rice = in;
+					break;
+				case "2_서브1" : case "7_서브1":
+					sub1 = in;
+					break;
+				case "3_서브2" : case "8_서브2":
+					sub2 = in;
+					break;
+				case "4_메인": case "6_메인":
+					main = in;
+					break;
+				case "9_수프":
+					soup = in;
+					break;
+			}
+		}
+		
+		mv.addObject("rice",rice);
+		mv.addObject("soup",soup);
+		mv.addObject("main",main);
+		mv.addObject("sub1",sub1);
+		mv.addObject("sub2",sub2);
+		mv.addObject("mblR",mblR);
+		
+		
+		if(soup != null) {
+			//5찬일 경우
+			ArrayList<Ingredient> AllList = service.selectAll();
+
+			ArrayList<Ingredient> riceList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> mainList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub1List = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub2List = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> soupList = new ArrayList<Ingredient>();
+
+			for (Ingredient i : AllList) {
+				switch (i.getInType()) {
+				case "5_밥":
+					riceList.add(i);
+					break;
+				case "6_메인":
+					mainList.add(i);
+					break;
+				case "7_서브1":
+					sub1List.add(i);
+					break;
+				case "8_서브2":
+					sub2List.add(i);
+					break;
+				case "9_수프":
+					soupList.add(i);
+					break;
+				}
+			}
+
+			mv.addObject("riceList", riceList);
+			mv.addObject("mainList", mainList);
+			mv.addObject("sub1List", sub1List);
+			mv.addObject("sub2List", sub2List);
+			mv.addObject("soupList", soupList);
+			mv.setViewName("myOwn/myOwn5RecipeUpdate");
+		}else {
+			//4찬일 경우
+			ArrayList<Ingredient> AllList = service.selectAll();
+
+			ArrayList<Ingredient> riceList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> mainList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub1List = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub2List = new ArrayList<Ingredient>();
+
+			for (Ingredient i : AllList) {
+				switch (i.getInType()) {
+				case "1_밥":
+					riceList.add(i);
+					break;
+				case "4_메인":
+					mainList.add(i);
+					break;
+				case "2_서브1":
+					sub1List.add(i);
+					break;
+				case "3_서브2":
+					sub2List.add(i);
+					break;
+				}
+			}
+
+			mv.addObject("riceList", riceList);
+			mv.addObject("mainList", mainList);
+			mv.addObject("sub1List", sub1List);
+			mv.addObject("sub2List", sub2List);
+			mv.setViewName("myOwn/myOwn4RecipeUpdate");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("myOwnRecipeUpdate.do")
+	public String myOwnRecipeUpdate(@RequestParam("imgSrc") String imgSrc,
+									@RequestParam(value = "selectedSoup", required = false) String soup,
+									@RequestParam("selectedRice") int rice,
+									@RequestParam("selectedMain") int main,
+									@RequestParam("selectedSub1") int sub1,
+									@RequestParam("selectedSub2") int sub2,
+									@RequestParam("mblId") String mblId,
+									@RequestParam("racipeName") String racipeName,
+									HttpServletRequest request,
+									HttpSession session) throws Exception {
+		
+		MBLRecipe mblR = service.searchRecipeOne(mblId);
+		
+		Member member = (Member)session.getAttribute("loginUser");
+		
+		String fileName = CreateRecipe(imgSrc, request);
+		
+		System.out.println("fileName : " + fileName);
+		
+		fileName = fileName + ".png";
+		
+		String numbers = "";
+		if (soup != null && soup != "") {
+			System.out.println("5찬");
+			mblR.setMblType("5찬");
+			numbers = rice + "/" + soup + "/" + main + "/" + sub1 + "/" + sub2;
+		} else {
+			System.out.println("4찬");
+			mblR.setMblType("4찬");
+			numbers = rice + "/" + main + "/" + sub1 + "/" + sub2;
+		}
 		
 		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
 		
+		mblR.setMblTitle(racipeName);
+		mblR.setMblFileName(fileName);
+		mblR.setNumbers(numbers);
 		
-		return null;
+		int result = service.updateRecipe(mblR);
+		
+		if(result > 0) {
+			return "redirect:myOwnList.me";
+		}else {
+			throw new Exception("나만의 도시락 수정 중 에러 발생!!!");
+		}
 	}
-	
 }

@@ -7,17 +7,90 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <link rel="stylesheet" href="resources/css/cart/CartView.css">
+
 <style>
 
+.area_right.fixed {
+    position: fixed;
+    top: 81px;
+}
 </style>
 <body>
 
 	<c:import url="../header/header.jsp"/>
-	<c:set var="pa" value="${list }"/>
-	<div class="content" style="width:100%; text-align:center">
 	
+	<c:set var="pa" value="${list }"/>
+	<form action="PaymentResultList.do" method="post" id="insertPaymentAbout">
+	<div class="content" style="width:100%; text-align:center">
+
+	<div class="area_right">
+					<div class="box">
+						<p class="title">1회 배송 주문정보</p>
+						<table class="tbl_order3">
+							<colgroup>
+								<col style="width: 50%;">
+								<col>
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>총 상품금액</th>
+									<td><span class="totalGoodsPrice"></span> 원</td>
+						
+								</tr>
+								<tr>
+									<th>배송비 합계</th>
+									<td class="orange">+ <span class="totalDeliveryCharge">0</span> 원
+									</td>
+								</tr>
+								<!-- <tr>
+									<th>할인 금액 합계</th>
+									<td class="orange">- <span class="total_sale_prc">12,100</span>원
+										<div class="view_info">
+											<div class="order_area_event_prc" style="display: none;">
+												이벤트 할인금액 : <span class="order_saleinfo_event_prc">0</span>원
+											</div>
+											<div class="order_area_timesale">
+												타임세일금액 : <span class="order_saleinfo_timesale">12,100</span>원
+											</div>
+											<div class="order_area_member_prc" style="display: none;">
+												회원할인금액 : <span class="order_saleinfo_member_prc">0</span>원
+											</div>
+											<div class="order_area_cpn_prc" style="display: none;">
+												쿠폰할인금액 : <span class="order_saleinfo_cpn_prc">0</span>원
+											</div>
+											<div class="order_area_prd_prc" style="display: none;">
+												상품금액별할인금액 : <span class="order_saleinfo_prd_prc">0</span>원
+											</div>
+										</div>
+									</td>
+								</tr> -->
+								<tr>
+									<th>적립금 사용</th>
+									<td class="orange">- <span class="use_milage_prc">0</span>
+										원
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p class="order_price_text">결제 금액</p>
+						<p class="order_price">
+							<span class="price"><span class="totalSettlePrice"></span></span>원
+						</p>
+						<p class="mileage_complete">
+							적립예정 <span><span class="total_milage">0</span></span> 원
+						</p>
+						<p style="padding: 5px 0px;">
+							<label for="agree-private"><input type="checkbox" class="require" id="agree-private" name="agree_private" value="Y">상기
+								결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
+						</p>
+						<input type="button" value="결제하기" class="btn_pay order-buy">
+					</div>
+				</div>
 	<div class="order-page" style="display:inline-block">
+	
+	
             <div class="step-top">
          
                 <div>
@@ -44,6 +117,7 @@
 					<c:forEach var="c" items="${list }" varStatus="cart">
                     <tr>
                         <td class="gi this-product">
+                        	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
                             <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
@@ -80,7 +154,7 @@
                         <td rowspan="${list.size() }" class="ta-c">
                         <span class="c-gray delivaryAmount">
                             기본 - 금액별배송비<br>
-                            0원
+                           2500원
                         </span> <br>  <span style="font-size:11px;">2만원 이상 주문시<br> 
 																	 배송비 무료!</span> 
                                      </td>
@@ -98,13 +172,13 @@
 
             </div>
             <a class="btn-move-home" href="CartView.do">장바구니 가기</a>
-
+	
             <div class="price-box">
                 <div>
                     <p>
-                        <span class="detail">총 <em id="totalGoodsCnt"></em>개의 상품금액 <strong id="totalGoodsPrice">0</strong>원</span>
+                        <span class="detail">총 <em id="totalGoodsCnt"></em>개의 상품금액 <strong class="totalGoodsPrice">0</strong>원</span>
                         <span><img src="resources/img/etc/plus.png" alt="더하기">배송비 <strong class="totalDeliveryCharge">0</strong>원</span>
-                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong id="totalSettlePrice">0</strong>원
+                        <span class="total"><img src="resources/img/etc/total.png" alt="합계"><strong class="totalSettlePrice">0</strong>원
                         </span>
                     </p>
                     <span class="mileage">적립예정 마일리지 : <span>0</span> 원</span>
@@ -112,6 +186,7 @@
             </div>
 
 		<c:set var="m" value="${member}"/> 
+		
             <span class="join-form">
                 <fieldset id="fds-order-info">
                     <legend>주문폼</legend>
@@ -127,7 +202,7 @@
                                 <th class="ta-l required" aria-required="true">주문하시는 분</th>
                                 <td>
                                     <div class="txt-field hs" style="width:160px;">
-                                        <input type="text" name="orderName" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
+                                        <input type="text" name="payname" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
                                     </div>
                                 </td>
                             </tr>
@@ -135,7 +210,7 @@
                                 <th class="ta-l">전화번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="phoneNum" name="orderPhone" value="${m.phone }" maxlength="20" class="text">
+                                        <input type="text" id="phoneNum" name="payphone" value="${m.phone }" maxlength="20" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -143,7 +218,7 @@
                                 <th class="ta-l required" aria-required="true">휴대폰 번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="mobileNum" name="orderCellPhone" value="${m.phone}" maxlength="20" class="text">
+                                        <input type="text" id="mobileNum" name="paycellphone" value="${m.phone}" maxlength="20" class="text">
                                     </span>
                                 </td>
                             </tr>
@@ -152,12 +227,16 @@
                                 <td>
                                     <div class="email" style="display:inline">
                                         <span class="txt-field hs" style="width:160px;">
-                                            <input type="text" name="orderEmail" value="${m.email }" class="text">
+                                            <input type="text" name="orderEmail1" value="" class="text orderEmail">
+                                            <input type="hidden" name="payemail" class="payemail">
                                         </span>
-                                        <div class="choice-select">
+                                        <span class="txt-field hs" style="width:100px;">
+                                            <input type="text" name="orderEmail" value="" class="text orderEmail2">
+                                        </span>
+                                        <div class="choice-select" style="display:inline">
                                             <span class="st-hs">
-                                                <select id="emailDomain" class="tune" style="width: 120px; display:none; " tabindex="-1">
-                                                    <option value="self">직접입력</option>
+                                                <select id="emailDomain" class="tune" style="width: 120px; " tabindex="-1" onchange="selectEmail(this)">
+                                                    <option value="1">직접입력</option>
                                                     <option value="naver.com">naver.com</option>
                                                     <option value="hanmail.net">hanmail.net</option>
                                                     <option value="daum.net">daum.net</option>
@@ -165,7 +244,7 @@
                                                     <option value="hotmail.com">hotmail.com</option>
                                                     <option value="gmail.com">gmail.com</option>
                                                     <option value="icloud.com">icloud.com</option>
-                                                </select><div class="chosen-container chosen-container-single chosen-container-single-nosearch" style="width: 120px;" title="" id="emailDomain_chosen"><a class="chosen-single chosen-sch" tabindex="-1"><span>직접입력</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" readonly="" tabindex="-1"></div><ul class="chosen-results"></ul></div></div>
+                                                </select>
                                             </span>
                                         </div>
                                     </div>
@@ -176,7 +255,7 @@
                     </div>
 
                     <h3>배송정보</h3>
-                    <div class="table1 orderplz">
+                    <div class="table1 orderplz orderCheckTable">
                         <table>
                             <colgroup>
                                 <col style="width:133px;">
@@ -218,19 +297,19 @@
                                 <td>
                                     <div class="post" style="width:auto; display:flex">
                                         <div class="txt-field hs" style="width:100px;">
-                                            <input type="text" name="receiverZonecode" id="receiverZonecode" value="${m.address}" readonly="readonly" style="width:80px; " class="text" >
+                                            <input type="text" name="receiverZonecode" id="receiverZonecode" placeholder="우편번호"value="${m.address}" readonly="readonly" style="width:80px; " class="text" >
                                             <input type="hidden" name="receiverZipcode" value="">
                                             <span id="receiverZipcodeText" class="text" ></span>
                                                
                                         </div>
-                                     	<button type="button" style="margin-left:30px;" onclick="postcode_search('receiverZonecode', 'receiverAddress', 'receiverZipcode');" class="normal-btn small2 post-search"><em>우편번호검색</em></button>
+                                     	<button type="button" style="margin-left:30px;"  class="normal-btn small2 post-search"><em>우편번호검색</em></button>
                                     </div>
                                     <div class="sa">
                                         <span class="txt-field hs" style="width:400px;">
-                                            <input type="text" name="receiverAddress" id="receiverAddress" value="" readonly="readonly" class="text">
+                                            <input type="text" name="receiverAddress" id="receiverAddress" value="" readonly="readonly" placeholder="기본주소"class="text">
                                         </span>
                                         <span class="txt-field hs" style="width:300px;">
-                                            <input type="text" name="receiverAddressSub" value="" class="text" placeholder="상세주소">
+                                            <input type="text" name="receiverAddressSub" value="" class="text receiverAddressSub" placeholder="상세주소">
                                         </span>
                                     </div>
                                 </td>
@@ -260,22 +339,23 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="ta-l">회원정보 반영</th>
+                                <th class="ta-l">배송 날짜 선택</th>
                                 <td>
                                     <span class="form-element">
-                                        <span>
-                                            <input type="checkbox" name="reflectApplyDelivery" value="y" id="reflectApplyDelivery" class="checkbox">
-                                            <label for="reflectApplyDelivery" class="check-s c-blue">나의 배송지에 추가합니다.</label><br>
-                                        </span>
-                                        <input type="checkbox" id="reflectApplyMember" name="reflectApplyMember" value="y" class="checkbox">
-                                        <label for="reflectApplyMember" class="check-s">위 내용을 회원정보에 반영합니다. <span>(주소/전화번호/휴대폰번호)</span></label>
+                                  		<input type="date" class="delivaryDate" id="delivaryDate" name="">
+                                  		<input type="time" class="delivaryTime" id="delivaryTime" name="delivaryTime" value="13:00">
                                     </span>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
+                    <input type="hidden" class="toTalCheckArr">
+                    <input type="hidden" name="userid" value="${loginUser.userId }">
+                    	<input type="hidden" name="payaddress" class="payaddress">
+                    	<input type="hidden" name="delivaryDate" class="delivaryCheck">
+                    	<input type="hidden" name="paytext" class="paytext">
+				</form>
 
                     <h3>결제정보</h3>
                     <div class="table1 orderplz">
@@ -468,7 +548,7 @@
                             </div>
                             <div class="btn" style="float:right">
                             <div>
-                                <button class="skinbtn point2 order-buy" ><em>결제하기</em></button>
+                                <button type="button" class="skinbtn point2 order-buy" ><em>결제하기</em></button>
                             </div>
                             </div>
                         </div>
@@ -486,10 +566,18 @@
      select_email_domain('taxEmail','taxEmailDomain');
      $("#taxEmailDomain_chosen").width("120px"); */
 	</script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
-function postcode_search(){
+
+</script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+
+
+$('.post-search').click(function(){
     new daum.Postcode({
+  
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
@@ -546,19 +634,24 @@ function postcode_search(){
         
         }
     }).open();
-}
-</script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript">
-
-
+});
 
 $('.order-buy').click(function(){
 	
-	var count = parseInt('${pa.size()}')-1;
-	var payText ='${pa.get(0).cName}'+' 외 '+ count +' 개 상품';
-	var totalAmount = parseInt($('#finalTotalPrice').text());
+	//location.href="PaymentResultList2.do"
+
 	
+	var count = parseInt('${pa.size()}')-1;
+	var payText ='${pa.get(0).cName}';
+	
+	if(count>=1){
+		
+		payText =  '${pa.get(0).cName}'+ ' 외 '+count +'개 ';
+	}
+	var totalAmount = parseInt($('#finalTotalPrice').text());
+	$('.paytext').val(payText);
+	
+	 CallPayRequest();
 	if($('.require').prop("checked")){
 		
 
@@ -584,7 +677,9 @@ $('.order-buy').click(function(){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    	location.href="paymentResult.do"; 
+		    
+		    	
+		    	CallPayRequest();
 		        
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
@@ -598,9 +693,53 @@ $('.order-buy').click(function(){
 		alert("구매진행사항 동의를 체크해주세요");
 	}
 	
+
+	
+	//var  checkList = '${list}';
+
+
+
+
+
 });
 
-</script>
+function CallPayRequest(){
+	var checkArr = '${CheckArr}';
+	var totalArr = new Array();
+	var totalPrice = $('#totalSettlePriceView').text();
+	var total = new Array();
+	console.log("합"+totalPrice);
+	var check = 0;
+
+
+	$('.this-product').find('input[name=cNo]').each(function(i,e){
+		
+		console.log($(this).val());
+		total[check] = totalPrice;
+		totalArr[check++] = $(this).val();
+		
+	});
+	
+	var username = $('[name="receiverName"]').val();
+	var email = $('.orderEmail').val()+$('.orderEmail2').val();
+	var address = $('#receiverZonecode').val()+'/'+$('#receiverAddress').val()+'/'+$('.receiverAddressSub').val();	
+	var delivaryDate = $('.delivaryDate').val();
+	var delivaryTime = $('.delivaryTime').val();
+	console.log("이름"+username)
+	console.log(email);
+	console.log("주소"+address);
+	$('.payemail').val(email);
+	$('.delivaryCheck').val(delivaryDate+'/'+delivaryTime);
+	$('.payaddress').val(address);
+	
+	var form = document.forms["insertPaymentAbout"];
+	
+	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice
+	
+	form.submit();
+}
+
+</script>	
 
 //
 <script type="text/javascript">
@@ -621,7 +760,7 @@ $(document).ready(function() {
 	console.log("dd"+totalAmount);
 
 	
-	if(totalAmount>=20000){
+	if(totalAmount>=20000 || totalAmount==100){
 		$('.delivaryAmount').text('배송비 0원');
 		delivary=0;
 		}
@@ -630,17 +769,128 @@ $(document).ready(function() {
 	}
 	$('#totalGoodsCnt').text(count);
 	$('.totalDeliveryCharge').text(delivary);
-	$('#totalGoodsPrice').text(totalAmount);
+	$('.totalGoodsPrice').text(totalAmount);
 	$('#totalGoodsPrice2').text(totalAmount);
-	$('#totalSettlePrice').text(totalAmount+delivary);
+	$('.totalSettlePrice').text(totalAmount+delivary);
 	$('#finalTotalPrice').text(totalAmount+delivary);
 	$('#totalSettlePriceView').text(totalAmount+delivary);
 
 
 });
 
+$(document).ready(function(){
+	
+	document.getElementById('delivaryDate').value = new Date().toISOString().substring(0, 10);
+	//document.getElementById('delivaryTime').value = new Date().toISOString().slice(11, 16);
+	var email = '${m.email}'
+	var emailSplit = email.split('@');
+	var address = '${m.address}';
+	var addSplit = address.split('/');
+	 console.log(addSplit[0]+'222');
+	 $('#receiverZonecode').val(addSplit[0]);
+	 $('#receiverAddress').val(addSplit[1]+' '+addSplit[2]);
+	 $('.receiverAddressSub').val(addSplit[3]);
+	 
+	 $('.orderEmail').val(emailSplit[0]);
+	 $('.orderEmail2').val('@'+emailSplit[1]);
+
+
+});
+
+
+function selectEmail(ele){ 
+	var $ele = $(ele);
+	var $email2 = $('input[name=orderEmail]'); // '1'인 경우 직접입력
+	if($ele.val() == "1")
+	{ $email2.attr('readonly', false); 
+	$email2.val('');
+	}
+	else { $email2.attr('readonly', true);
+	$email2.val('@'+$ele.val());
+	} 
+	}
+	
+	
+	$('#shippingNew').click(function(){
+		console.log("tt");
+		
+		$('.orderCheckTable').find('input').each(function(i,e){
+			console.log("tt"+$(this).val());
+			$(this).val('');
+		});
+		
+		
+		
+		
+	});
+	
+	$('#shippingSameCheck').click(function(){
+
+		$('[name="receiverName"]').val('${m.userName}');
+		$('[name="receiverPhone"]').val('${m.phone}');
+		$('[name="receiverCellPhone"]').val('${m.phone}');
+		var email = '${m.email}'
+		var emailSplit = email.split('@');
+		var address = '${m.address}';
+		var addSplit = address.split('/');
+		 console.log(addSplit[0]+'222');
+		 $('#receiverZonecode').val(addSplit[0]);
+		 $('#receiverAddress').val(addSplit[1]+' '+addSplit[2]);
+		 $('.receiverAddressSub').val(addSplit[3]);
+		 
+		 $('.orderEmail').val(emailSplit[0]);
+		 $('.orderEmail2').val('@'+emailSplit[1]);
+		
+	});
+	
+	$('#shippingBasic').click(function(){
+
+		$('[name="receiverName"]').val('${m.userName}');
+		$('[name="receiverPhone"]').val('${m.phone}');
+		$('[name="receiverCellPhone"]').val('${m.phone}');
+		var email = '${m.email}'
+		var emailSplit = email.split('@');
+		var address = 	'${m.address}';
+		var addSplit = address.split('/');
+		 console.log(addSplit[0]+'222');
+		 $('#receiverZonecode').val(addSplit[0]);
+		 $('#receiverAddress').val(addSplit[1]+' '+addSplit[2]);
+		 $('.receiverAddressSub').val(addSplit[3]);
+		 
+		 $('.orderEmail').val(emailSplit[0]);
+		 $('.orderEmail2').val('@'+emailSplit[1]);
+		
+	});
+	
+	
+	
+	$( document ).ready( function() {
+        var areaRight = $( '.area_right' ).offset();
+        if ( $( document ).scrollTop() > areaRight.top ) {
+        	$( '.area_right' ).addClass('fixed');
+        }else {
+        	$( '.area_right' ).removeClass('fixed');
+        }
+        $( window ).scroll( function() {
+          if ( $( document ).scrollTop() > areaRight.top ) {
+            $( '.area_right' ).addClass('fixed');
+          }
+          else {
+            $( '.area_right' ).removeClass('fixed');
+          }
+        });
+      } );
+	
+
+
+	
+
+
+
+
 
 </script>
+
 </body>
 	<c:import url="../footer/footer.jsp"/>
 </html>

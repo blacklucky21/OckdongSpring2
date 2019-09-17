@@ -99,6 +99,36 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int deleteMember(String userId) {
+		return mDAO.deleteMember(userId);
+	}
+
+
+	@Override
+	public int updatePwd(Member m) {
+		return mDAO.updatePwd(m);
+	}
+
+
+	@Override
+	public int checkId(String userId) {
+		return mDAO.checkId(userId);
+	}
+
+	@Override
+	public int checkNick(String nickName) {
+		return mDAO.checkNick(nickName);
+	}
+
+	@Override
+	public int memberUpdate(Member m) {
+		return mDAO.memberUpdate(m);
+	}
+
+
+
+
 
 
 

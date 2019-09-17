@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <title>Insert title here</title>
 <style>
 .lunch_size:hover {
@@ -18,7 +20,7 @@
 	width: 20px;
 	height: 20px;
 	float: right;
-	margin: 2px 3%;
+	margin: 2px 2%;
 }
 
 .side_menu {
@@ -67,7 +69,6 @@ table, tr, td {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-	/* position: absolute; */
 	overflow: hidden;
 	display: inline-block;
 	width: 500px;
@@ -128,13 +129,11 @@ table, tr, td {
 } */
 .bottom {
 	width: 70%;
-	height: 400px;
+	height: 50px;
 	margin-left: 15%;
-	margin-top: 5%;
 	text-align: center;
 }
-
-.buttons input[type=button] {
+.buttons input[type=button], .buttons input[type=submit]{
 	border-radius: 15px;
 	background: #2ecc71;
 	border: 1px solid #fff;
@@ -143,7 +142,7 @@ table, tr, td {
 	color: #fff;
 }
 
-.buttons input[type=button]:hover {
+.buttons input[type=button]:hover, .buttons input[type=submit]:hover {
 	color: #2ecc71;
 	background: #fff;
 	border: 1px solid #2ecc71;
@@ -154,32 +153,31 @@ table, tr, td {
 	-o-transition: all 1s;
 	transition: all 1s;
 }
+#save:hover{
+	cursor: pointer;
+}
+.tooltip_templates { display: none; }
 </style>
-<link
-	href="https://fonts.googleapis.com/css?family=Single+Day&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap"rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 	<!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="../header/header.jsp" />
 
-	<div style="width: 100%; height: 1600px; margin: 5% 0;">
-		<div
-			style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
+	<div style="width: 100%; height: 1000px;">
+		<form id="formChange" action="myOwnInsert.do" method="post">
+		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
 				<h1 style="font-family: 'Single Day', cursive;">나만의 도시락</h1>
-				<img src="resources/img/myOwn/4찬예시및설명.png"
-					style="width: 70%; border-radius: 15px;">
+				<img src="resources/img/myOwn/4찬예시및설명.png" style="width: 70%; border-radius: 15px;">
 			</div>
 			<div
 				style="width: 70%; height: auto; margin-left: 15%; border: 2px solid black; border-radius: 15px;">
 				<div style="width: 100%; height: 20%;">
-					<span style="width: 100%; height: 100%;"> <img
-						style="margin-right: 28%;" /> <img class="lunch_size lunch4"
-						src="resources/img/myOwn/도시락4찬.PNG"
-						style="width: 20%; margin-right: 5%;" /> <img
-						class="lunch_size lunch5" src="resources/img/myOwn/도시락5찬.PNG"
-						style="width: 20%;" />
+					<span style="width: 100%; height: 100%;">
+					<img style="margin-right: 28%;" /> <img class="lunch_size lunch4" src="resources/img/myOwn/도시락4찬.PNG" style="width: 20%; margin-right: 5%;" />
+					<img class="lunch_size lunch5" src="resources/img/myOwn/도시락5찬.PNG" style="width: 20%;" />
 					</span>
 				</div>
 				<div style="width: 100%; height: 400px; text-align: center;">
@@ -201,7 +199,10 @@ table, tr, td {
 								ondragover="allowDrop(event)"> </span>
 						</div>
 					</div>
-
+				</div>
+				<!-- 이미지 캡쳐한것을 임시로 저장할 부분 -->
+				<div class="buttons" style="text-align:center;">
+					<input type="hidden" class="imgSrc" name="imgSrc" id="imgSrc"/>
 				</div>
 			</div>
 			<div class="acodian_menu_list"
@@ -215,7 +216,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="rices_ul">
 								<c:forEach var="rice" items="${riceList }" varStatus="i">
-									<li class="rices_li"><img id="rice${i.count}" name="${rice.imgName }" class="rices" draggable="true" ondragstart="drag(event)" src="resources/${rice.imgRealPath}"/></li>
+									<li class="rices_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${rice.inName }, 중량(g) : ${rice.inGram}"><img id="rice${i.count}" name="${rice.inNo }" class="rices" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/4찬/1_밥/${rice.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -231,7 +232,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="main_ul">
 								<c:forEach var="main" items="${mainList }" varStatus="i">
-									<li class="mains_li"><img id="main${i.count}" name="${main.imgName }" class="mains" draggable="true" ondragstart="drag(event)" src="resources/${main.imgRealPath}"/></li>
+									<li class="mains_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${main.inName }, 중량(g) : ${main.inGram}"><img id="main${i.count}" name="${main.inNo }" class="mains" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/4찬/4_메인/${main.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -247,7 +248,7 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="sub1_ul">
 								<c:forEach var="sub1" items="${sub1List }" varStatus="i"> 
-									<li class="sub1s_li"><img id="sub1${i.count}" name="${sub1.imgName }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/${sub1.imgRealPath}"/></li>
+									<li class="sub1s_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${sub1.inName }, 중량(g) : ${sub1.inGram}"><img id="sub1${i.count}" name="${sub1.inNo }" class="sub1s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/4찬/2_서브1/${sub1.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -263,42 +264,59 @@ table, tr, td {
 						<div class="viewport">
 							<ul class="sub2_ul">
 								<c:forEach var="sub2" items="${sub2List }" varStatus="i">
-									<li class="sub2s_li"><img id="sub2${i.count}" name="${sub2.imgName }" class="sub2s" draggable="true" ondragstart="drag(event)" src="resources/${sub2.imgRealPath}"/></li>
+									<li class="sub2s_li" data-toggle="tooltip" data-placement="bottom" title="이름 : ${sub2.inName }, 중량(g) : ${sub2.inGram}"><img id="sub2${i.count}" name="${sub2.inNo }" class="sub2s" draggable="true" ondragstart="drag(event)" src="resources/img/myOwn/4찬/3_서브2/${sub2.inRenameFile}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
 						<br clear="all">
 						<div class="sub2Buttons" style="text-align: center;"></div>
 					</dd>
-
 				</dl>
 			</div>
 			<div class="bottom">
-				<div class="payment">
+				<!-- <div class="payment">
 					<span>가격 : 4000원</span>
-				</div>
+				</div> -->
 				<div class="buttons">
-					<input type="button" value="구매하기"
-						style="width: 100px; height: 50px;" /> <input type="button"
-						value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
+					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
+					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;" />
+					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
+					<input class="createImg" type="hidden">
 				</div>
+<!-- 				<br>
+				<div align="center">(주)옥동도시락</div> -->
 			</div>
-
 		</div>
+		</form>
+		<br clear="all">
 	</div>
-	<c:import url="../footer/footer.jsp" />
+	
 
-
-
-
-
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript"src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 	<script>
 		/* $(".lunch_size").click(function() {
 			var src = $(this).attr('src');
 			$('.myOwnTable').css('background-image', 'url(' + src + ')');
 		}); */
+		
+		$(function(){
+			
+			$(".myOwnPaymentBtn").click(function(){
+				location.href="myOwnPayment.do";
+			});
+			
+			$(".myOwnAddRecipeBtn").click(function(){
+				location.href="myOwnAddRecipe.do";
+			});
+			
+		});
 		
 		$(function(){
 			$('.lunch4').click(function(){
@@ -315,6 +333,8 @@ table, tr, td {
 				if($("+dd",this).css("display")=="none"){
 					$("dd").slideUp("slow");
 					$("+dd",this).slideDown("slow");
+				}else{
+					$("+dd",this).slideUp("slow");
 				}
 			});
 		});
@@ -352,7 +372,7 @@ table, tr, td {
 			$(".viewport img").css({width:width, height:height});
 			$(".viewport").css({width:width*4, height:height, overflow:"hidden"});
 			$(".viewport .soups_ul").css({width:width * mainLength});
-			$(".viewport li").css({width:width, height:height,float:"left"});
+			$(".viewport li").css({width:width, height:height, float:"left"});
 			
 			var m = mainLength%4>0?1:0;
 			console.log("나머지 값은 : " + m);
@@ -439,22 +459,22 @@ table, tr, td {
 			    console.log(img.id);
 			    if(img.id.includes('rice') && ev.target.id == 'rice'){
 			    	console.log("밥 확인");
-			    	ev.target.innerHTML = "<img name='selectedRice' id=\'"+img.id+"\' src=\'" + img.src + "\'/>";
+			    	ev.target.innerHTML = "<img id=\'"+img.id+"\' class='selected' src=\'" + img.src + "\'/>";
 			    	ev.target.innerHTML += "<input type='hidden' name='selectedRice' value='" + img.name + "'/>";
 			    }
 			    if(img.id.includes('main') && ev.target.id == 'main'){
 			    	console.log("메인 확인");
-			    	ev.target.innerHTML = "<img name='selectedMain' id=\'"+img.id+"\' src=\'" + img.src + "\'/>";
+			    	ev.target.innerHTML = "<img id=\'"+img.id+"\' class='selected' src=\'" + img.src + "\'/>";
 			    	ev.target.innerHTML += "<input type='hidden' name='selectedMain' value='" + img.name + "'/>";
 			    }
 			    if(img.id.includes('sub1') && ev.target.id == 'sub1'){
 			    	console.log("반찬1 확인");
-			    	ev.target.innerHTML = "<img name='selectedSub1' id=\'"+img.id+"\' src=\'" + img.src + "\'/>";
+			    	ev.target.innerHTML = "<img id=\'"+img.id+"\' class='selected' src=\'" + img.src + "\'/>";
 			    	ev.target.innerHTML += "<input type='hidden' name='selectedSub1' value='" + img.name + "'/>";
 			    }
 			    if(img.id.includes('sub2') && ev.target.id == 'sub2'){
 			    	console.log("반찬1 확인");
-			    	ev.target.innerHTML = "<img name='selectedSub2' id=\'"+img.id+"\' src=\'" + img.src + "\'/>";
+			    	ev.target.innerHTML = "<img id=\'"+img.id+"\' class='selected' src=\'" + img.src + "\'/>";
 			    	ev.target.innerHTML += "<input type='hidden' name='selectedSub2' value='" + img.name + "'/>";
 			    }
 			    
@@ -468,25 +488,101 @@ table, tr, td {
 				if(img.id.includes('rice') && spanId == 'rice'){
 			    	console.log("밥 확인");
 			    	$("#" + spanId).empty();
-			    	$("#" + spanId).html("<img name='selectedRice' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedRice' value='" + img.name + "'/>");
+			    	$("#" + spanId).html("<img class='selected' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedRice' value='" + img.name + "'/>");
 			    }
 			    if(img.id.includes('main') && spanId == 'main'){
 			    	console.log("메인 확인");
 			    	$("#" + spanId).empty();
-			    	$("#" + spanId).html("<img name='selectedMain' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedMain' value='" + img.name + "'/>");
+			    	$("#" + spanId).html("<img class='selected' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedMain' value='" + img.name + "'/>");
 			    }
 			    if(img.id.includes('sub1') && spanId == 'sub1'){
 			    	console.log("반찬1 확인");
 			    	$("#" + spanId).empty();
-			    	$("#" + spanId).html("<img name='selectedSub1' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedSub1' value='" + img.name + "'/>");
+			    	$("#" + spanId).html("<img class='selected' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedSub1' value='" + img.name + "'/>");
 			    }
 			    if(img.id.includes('sub2') && spanId == 'sub2'){
 			    	console.log("반찬1 확인");
 			    	$("#" + spanId).empty();
-			    	$("#" + spanId).html("<img name='selectedSub2' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedSub2' value='" + img.name + "'/>");
+			    	$("#" + spanId).html("<img class='selected' id=\'"+img.id+"\' src=\'" + img.src + "\'/> <input type='hidden' name='selectedSub2' value='" + img.name + "'/>");
 			    }
 			}
 		}
+		
+		// insert하는 부분가기전에 선택된 메뉴들의 개수를 새서 부족하면 메시지 띄우기
+		function validate(){
+			var selectedCnt = $('.selected').length;
+			
+			if(selectedCnt > 3){
+				if($("#imgSrc").val() == null || $("#imgSrc").val() == ""){
+					console.log("비어있음");
+					$(".createImg").click();
+				}else{
+					var action = $("#formChange").attr("action");
+					console.log(action);
+					if(action == "imageCreate.do"){
+						return true;
+					}else{
+						if(confirm("결제 페이지로 이동하시겠습니까? (이동하게 되면 만든 도시락은 자동으로 나만의 도시락에 추가됩니다.)")){
+							console.log("안비어있음");
+							return true;
+						}else{
+							return false;
+						}
+						return false;
+					}
+				}
+			}else{
+				alert("도시락에 선택되지 않은 항목이 있습니다. 확인해 주세요.");
+				return false;
+			}
+			return false;
+		}
+		
+	</script>
+	<script type="text/javascript">
+		$(function(){
+		   $(".myOwnAddBtn").click(function() { 
+		        html2canvas($(".myOwnTable"), {
+		            onrendered: function(canvas) {
+		            	console.log(canvas);
+		            	$("#imgSrc").val(canvas.toDataURL("image/png"));
+		            	var imgSrc = $("#imgSrc").val();
+		            	
+		            	$("#formChange").attr("action", "imageCreate.do");
+		            	$(".myOwnInsertBtn").click();
+		            	
+		            	/* $.ajax({
+		            		type : "post",
+		            		data : {imgSrc: imgSrc},
+		            		url : "imageCreate.do",
+		            		success: function(data){
+		            			console.log("성공");
+		            		}, error: function(error){
+		            			console.log("실패");
+		            		}
+		            	}); */
+		            	
+ 		            	// getCanvas = canvas; // 주석
+		            	// upload(); // 주석
+		                /* canvas.toBlob(function(blob) {
+		                	console.log(blob);
+		                    saveAs(blob, 'image.png');
+		                }); */
+		            }
+		        });
+		   	});
+		   $(".createImg").click(function(){
+			   html2canvas($(".myOwnTable"), {
+					onrendered: function(canvas) {
+						$("#imgSrc").val(canvas.toDataURL("image/png"));
+						console.log("이미지 생성됨");
+						console.log($(".imgSrc").val());
+						
+						$(".myOwnInsertBtn").click();
+					}
+				});
+		   });
+		});
 	</script>
 </body>
 </html>

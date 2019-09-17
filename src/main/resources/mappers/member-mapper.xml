@@ -37,8 +37,7 @@
 		
 		<!--2) choose,when,otherwise  -->
   	
-  	<choose>
-  		<when test="searchInput !=''">
+
   			<if test="searchForm.equals('allSearch')">
   			
   			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
@@ -64,20 +63,19 @@
   			
   			</if>
   			
-  			
-  			</when>
-  			
-  			<when test="startDatePicker!=''">
+  			  			
+  			<if test="startDatePicker!=''">
   				
   			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
-  			</when> 
+  			</if> 
+  
+
   				
   		<!-- <otherwise>
   		 and bcontent like '%' || #{content} || '%'
   		</otherwise>  -->
   	
-  	</choose>
-	
+
 	</select>
 	
 	
@@ -108,7 +106,7 @@
 	 
 	</select>
 	
-	
+	<!-- 탈퇴회원조회 -->
 	<select id="selectMemberSecession" resultType="Member" resultMap="memberResultSet">
 	
 		select *
@@ -167,7 +165,8 @@
 		where status ='N'
 		</select>
 
-	
+
+	<!-- 관리자 관점 회원 탈퇴 -->
 	<update id="deleteMemAdmin"  parameterType="string">
 	
 	update member
@@ -175,6 +174,14 @@
 	where userid = #{memId}
 	
 	</update>
+	
+	<!-- 회원 관점 탈퇴 -->
+	<update id="deleteMember" parameterType="string">
+		update member
+		set status = 'N'
+		where userId = #{userId}
+	</update>
+	
 
 
 	<select id="blackMemberList"  resultType="Member" resultMap="memberResultSet">
@@ -192,8 +199,7 @@
 		
 		<!--2) choose,when,otherwise  -->
   	
-  	<choose>
-  		<when test="searchInput !=''">
+
   			<if test="searchForm.equals('allSearch')">
   			
   			and (nickname like '%' || #{searchInput} || '%' or userid like '%' || #{searchInput} || '%'  or username like '%'|| #{searchInput} || '%')
@@ -220,18 +226,18 @@
   			</if>
   			
   			
-  			</when>
+  	
   			
-  			<when test="startDatePicker!=''">
+  			<if test="startDatePicker!=''">
   				
   			and enroll_Date between '${startDatePicker}' and  to_date('${endDatePicker}')+1
-  			</when> 
+  			</if> 
   				
   		<!-- <otherwise>
   		 and bcontent like '%' || #{content} || '%'
   		</otherwise>  -->
   	
-  	</choose>
+
 	
 	
 	
@@ -244,6 +250,31 @@
 	set status ='Y'
 	where userid = #{memId}
 	
+	</update>
+	
+	<update id="updatePwd" parameterType="Member">
+		update member
+		set password=#{password}
+		where userId=#{userId}
+	</update>
+	
+	<select id="checkId" parameterType="string" resultType="_int">
+		select count(*)
+		from member
+		where userId = #{userId} and status = 'Y'
+	</select>
+	
+	<select id="checkNick" parameterType="string" resultType="_int">
+		select count(*)
+		from member
+		where nickName = #{nickName} and status = 'Y'
+	</select>
+	
+	<update id="memberUpdate">
+		update member
+		set nickName=#{nickName}, phone=#{phone}, 
+			email=#{email},  address=#{address}, MODIFY_DATE=SYSDATE
+		where userId=#{userId}
 	</update>
 
 	

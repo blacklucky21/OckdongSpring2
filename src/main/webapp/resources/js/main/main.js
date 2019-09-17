@@ -26,9 +26,9 @@ $(function(){
 		console.log(listid);
 		
 		if(listid == 'list1'){
-			
+			location.href="listdo.do";
 		}else if(listid == 'list2'){
-			alert("샐러드 리스트 더보기클릭");
+			location.href="listsal.do";
 		}else if(listid == 'list3'){
 			alert("이달의 도시락 더보기 클릭");
 		}
@@ -36,7 +36,10 @@ $(function(){
 	});	
 });
 
-
+// 상세 페이지로 넘어가기
+function detailform(p_Id){
+	location.href="productDetail.do?p_Id="+p_Id;
+}
 
 
 

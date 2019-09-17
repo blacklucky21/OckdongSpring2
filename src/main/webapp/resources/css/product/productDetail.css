@@ -1,0 +1,320 @@
+
+	ul, li{list-style: none; margin:0; padding:0;}
+	a{    text-decoration: none;}
+
+	.shCMSshop{margin: 0;	padding: 60px 0 0 0;	width: 1200px; margin: 0 auto;}
+	.shCMSshop .shopView .viewHeader:after{display: block; content: ''; clear: both;}
+	.shCMSshop .shopView .viewHeader .productImg{float: left; }
+	.shCMSshop .shopView .viewHeader .productImg .mainImg{width: 500px; height:500px; background: #000;}
+	.shCMSshop .shopView .viewHeader .productImg ul{margin-top: 35px; text-align: center; padding:0;}
+	.shCMSshop .shopView .viewHeader .productImg ul li{width: 85px; height:85px; background: #000; display: inline-block;margin-right: 25px; border:1px solid #ccc; cursor: pointer;}
+	.shCMSshop .shopView .viewHeader .productImg ul li:first-child{margin-left: 30px;}
+	.shCMSshop .shopView .viewHeader .productImg .exhibition_vis_line .i_p{position: relative; top: -489px;	left: 397px;	bottom: 0;	right: 0;}
+
+	.shCMSshop .shopView .viewHeader .productInfo{margin-left: 50px; width: 650px; float:left;}
+	.shCMSshop .shopView .viewHeader .productInfo h3{font-size: 23px;margin-bottom: 63px;}
+	.shCMSshop .shopView .viewHeader .productInfo .price{border-bottom: 1px solid #e6e6e6;padding-bottom: 16px;}
+	.shCMSshop .shopView .viewHeader .productInfo .price:after{display: block; content:''; clear: both;}
+	.shCMSshop .shopView .viewHeader .productInfo .sale{font-size: 45px; font-family:"Arial"; color:#e63740; font-weight: bold; float: left;}
+	.shCMSshop .shopView .viewHeader .productInfo .sale span{font-size: 25px;}
+	.shCMSshop .shopView .viewHeader .productInfo .cost-price{float: left; margin: 5px 0 0 20px; font-size: 15px; color: #5a5a5a; text-decoration: line-through;}
+	.shCMSshop .shopView .viewHeader .productInfo .sale-price{float: left;  font-family: "Tahoma"; font-weight: bold; font-size: 25px;}
+	.shCMSshop .shopView .viewHeader .productInfo .origin .amount{    display: inline-block;border: 2px solid #e3e3e3;}
+	.shCMSshop .shopView .viewHeader .productInfo .origin .decrease{width: 25px; background: none;   border: none;  outline:none;}
+	.shCMSshop .shopView .viewHeader .productInfo .origin .increase{width: 25px; background: none;   border: none;  outline:none;}
+	#orderCnt {display: inline-block;  width: 103px;  text-align: center;   border: none;   border-left: 2px solid #e3e3e3;   border-right: 2px solid #e3e3e3;   vertical-align: top; outline:none;}
+	.shCMSshop .shopView .viewHeader .productInfo .price~.manufact, .categori, .origin{padding: 16px 0 16px 10px; border-bottom: 1px solid #e6e6e6; font-size: 18px; white-space: pre;}
+	.shCMSshop .shopView .viewHeader .productInfo .price~.manufact span, .categori span, .origin span{color:#6a6a6a;}
+	.shCMSshop .shopView .viewHeader .productInfo .items{padding: 16px 0;}
+	.shCMSshop .shopView .viewHeader .productInfo .items select{width: 630px; height: 40px; margin: 0 auto; display: block; border: 1px solid #cdcdcd;}
+	.shCMSshop .shopView .viewHeader .productInfo .item{padding: 16px 0 16px 10px; border-bottom: 1px solid #e6e6e6; position: relative;}
+	.shCMSshop .shopView .viewHeader .productInfo .item:after{display: block;content: '';clear: both;}
+	.shCMSshop .shopView .viewHeader .productInfo .item a{width: 25px; height:25px; background: #f8f8f8; border: 1px solid #d8d8d8;box-sizing: border-box; display: inline-block;}
+	.shCMSshop .shopView .viewHeader .productInfo .item .item-name{font-size: 16px; font-weight: 300;}
+	.shCMSshop .shopView .viewHeader .productInfo .item .item-name+span{display: inline-flex; margin-left: 40%;}
+	.shCMSshop .shopView .viewHeader .productInfo .item .item-name+span a{padding-top: 2px; text-align: center;}
+	.shCMSshop .shopView .viewHeader .productInfo input[type="number"]{margin: 0 -1px;padding-top: 4px;width: 40px; border:1px solid #d8d8d8;text-align: right;}
+	.shCMSshop .shopView .viewHeader .productInfo .item-price{font-family: "Tahoma"; font-weight: bold; font-size: 18px; margin-left: 5%;}
+	.shCMSshop .shopView .viewHeader .productInfo .item-price+a{float:right; text-align: center; width: 18px; height: 18px; margin: 5px 10px 0 0; font-weight: bold; padding-bottom: 18px;}
+	.shCMSshop .shopView .viewHeader .productInfo .all-price{margin-top: 55px; text-align: right; white-space: pre; font-size: 18px;}
+	.shCMSshop .shopView .viewHeader .productInfo .all-price span{font-family: "Tahoma"; font-size: 25px; font-weight: bold; color: #e63740;}
+	.shCMSshop .shopView .viewHeader .productInfo .btn{text-align: right;margin: 40px 0 0 88px;}
+	.shCMSshop .shopView .viewHeader .productInfo .btn a{padding: 15px 56px;font-size: 22px; display: inline-block;     text-decoration: none;}
+	.shCMSshop .shopView .viewHeader .productInfo .btn a:first-child{color: black; border: 1px solid black; box-sizing: border-box; border-radius: 15px;}
+	.shCMSshop .shopView .viewHeader .productInfo .btn a:last-child{background: #2ecc71; color: white; font-size: 22px;margin-left: 26px; border-radius: 15px;}
+	.shCMSshop .shopView .viewHeader .productInfo .btn a:last-child:hover{background: #ffffff; color: #2ecc71; font-size: 22px;margin-left: 26px; border-radius: 15px; border: 1px solid #2ecc71; transition-duration: 1s; transform-origin: top left;-webkit-transition: all 1s;-moz-transition: all 1s; -o-transition: all 1s; transition: all 1s;}
+	.shCMSshop .shopView .viewHeader .productInfo .btn .nosell{width: 450px; height: 54px;font-size: 13px; vertical-align: baseline;  background-color: #ccc; color: #fff; outline: none; border: none;}
+
+
+	.shCMSshop .shopView .viewBody{margin: 100px; 0;}
+	.shCMSshop .shopView .viewBody .contentNav:after{display: block;content:'';clear: both;}
+	.shCMSshop .shopView .viewBody .contentNav {padding:0;}
+	.shCMSshop .shopView .viewBody .contentNav li{width: 25%; float: left; background: #f2f2f2; border: 1px solid #282e32; box-sizing: border-box; text-align: center;margin-right: -1px;font-size: 18px;}
+	.shCMSshop .shopView .viewBody .contentNav a{display: block; padding:20px 0;    text-decoration: none;     color: #717171;}
+	.shCMSshop .shopView .viewBody .contentNav a span{font-size: 15px;}
+	.shCMSshop .shopView .viewBody .contentNav a span .count{font-size: 15px;}
+	.shCMSshop .shopView .viewBody .contentNav li.active{background: #282e32;}
+	.shCMSshop .shopView .viewBody .contentNav li.active a{color: white;}
+	
+
+	/*테이블 기본 셋팅*/
+	.shCMSshop .shopView .viewBody table tbody {border-top: 1px solid #afafaf; border-bottom: 1px solid #d4d4d4; width: 100%; margin: 60px 0 40px 0; border-collapse: collapse; border-spacing: 0;font-size: 14px;}
+	.shCMSshop .shopView .viewBody thead>tr{height:40px;background: #f2f2f2;text-align: center;}
+	.shCMSshop .shopView .viewBody table tr{border-top:1px solid #d4d4d4;}
+	.shCMSshop .shopView .viewBody table tr:first-child{border-top: none;}
+	.shCMSshop .shopView .viewBody table .tcontent{text-align: left;}
+	.shCMSshop .shopView .viewBody table .tcontent:hover{cursor: default;}
+
+	.shCMSshop .shopView .viewBody table .tcontent span{white-space: nowrap;  width: 225px; display: inline-block;}
+
+	/*상품 정보*/
+	.shCMSshop .shopView .viewBody #contentin {text-align: center;}
+	.shCMSshop .shopView .viewBody .tproduct-info tr:first-child{border-top:2px solid #5d5d5d;}
+	.shCMSshop .shopView .viewBody .tproduct-info tr td{padding: 0 13px; line-height: 20px;}
+	.shCMSshop .shopView .viewBody .tproduct-info tr td:first-child{background: #f2f2f2; height: 50px; padding-left: 20px; width: 16.5%;}
+	.shCMSshop .shopView .viewBody .tproduct-info tr td:nth-child(3){background: #f2f2f2; width: 16.5%; padding-left: 20px;}
+	#productinfo{font-size:25px; margin:20px 0;}
+	
+	
+	/*상품 후기*/
+	.shCMSshop .shopView .viewBody .tproduct-review thead>tr>td:first-child{width: 130px; background: #f2f2f2; height: 40px;text-align: center;}
+	.shCMSshop .shopView .viewBody .tproduct-review thead>tr>td:nth-child(3){width: 140px;}
+	.shCMSshop .shopView .viewBody .tproduct-review thead>tr>td:last-child{width: 145px;text-align: center;}
+	.shCMSshop .shopView .viewBody .tproduct-review tr{height: 50px; text-align: center;}
+	#rSubmit{
+		background: #2ecc71;
+    color: white;
+    font-size: 22px;
+    margin-left: 26px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+	}
+	#rSubmit:hover{
+		background: #ffffff;
+    color: #2ecc71;
+    font-size: 22px;
+    margin-left: 26px;
+    border-radius: 15px;
+    border: 1px solid #2ecc71;
+    transition-duration: 1s;
+    transform-origin: top left;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+	}
+	
+	/*상품 후기 더보기*/
+	.shCMSshop .shopView .viewBody .tproduct-review .detail-content{display: none;}
+	.shCMSshop .shopView .viewBody .tproduct-review .detail-content td:first-child{width: 130px;}
+	.display{display:table-row!important;border-top:none!important;}
+	.overflow{overflow:inherit!important;}
+	.text{width: 207px!important; text-overflow: unset!important;}
+	
+	/*Q & A*/
+	.con-consultation {padding: 75px 95px 0;}
+.con-consultation .consultation-text h2 {
+    padding-bottom: 10px;
+}
+
+.detail-wrap .con-consultation .consultation-text h2 strong {
+    font-size: 18px;
+    padding-right: 12px;
+}
+.con-consultation .consultation-text h2 span {
+    font-size: 12px;
+    color: #999;
+}
+.con-consultation .consultation-text .text-wrap {
+    height: 300px;
+}
+.detail-wrap .con-consultation .consultation-text .text-wrap {
+    height: 300px;
+}
+
+.con-consultation .consultation-text .text-wrap .textarea {
+    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 15px;
+    padding-bottom: 40px;
+    border: 1px solid #c9c9c9;
+}
+.con-consultation .consultation-text .text-wrap .textarea .textarea-normal {
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.textarea-normal {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 15px 15px 40px;
+    border: 1px solid #c9c9c9;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+}
+/* 글자 제한 */
+.textarea-limit {
+    position: absolute;
+    bottom: 20px;
+    right: 38px;
+    color: #999;
+}
+
+.con-consultation .consultation-text .secret {
+    margin-top: 20px;
+}
+.con-consultation .consultation-text .secret .txt {
+    float: left;
+    margin-top: 0;
+}
+.con-consultation .consultation-text .secret .txt dt {
+    color: #333;
+    font-size: 13px;
+    margin-right: 19px;
+    display: inline-block;
+}
+
+.checkbox-normal {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.con-consultation .consultation-text .secret .txt dt span {
+    vertical-align: -2px;
+  
+}
+
+.ico-lock {
+   width: 21px;
+    height: 13px;
+    display: inline-block;
+    text-indent: -9999px;
+   background: url(../../img/lock.png);
+    background-size: cover;
+}
+
+.con-consultation .consultation-text .secret .btn-row {
+    float: right;
+    margin-top: 0;
+}
+.btn.style-3-1 {
+    width: 168px;
+    height: 43px;
+    border-radius: 2px;
+}
+.btn.black {
+    background-color: #3b3b3b;
+    border-color: #3b3b3b;
+    color: #fff;
+}
+.cf:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 상문문의 등록 윗폼 끝*/
+
+.con-consultation .history {
+    margin-top: 96px;
+}
+
+fieldset, li {
+    border: 0;
+    vertical-align: top;
+}
+
+.history .history_wrap .con-qa {
+    border-bottom: 1px solid #ababab;
+    padding-bottom: 20px;
+}
+.history .history_wrap .info_top {
+    padding-top: 20px;
+}
+/* 작성자 */
+.history .history_wrap .info_top .name {
+    font-size: 13px;
+    color: #464646;
+    font-weight: bold;
+}
+/* 작성자 다음에 | 추가 해주는 after */
+.history .history_wrap .info_top .name:after {
+    display: inline-block;
+    content: '';
+    width: 1px;
+    height: 11px;
+    margin: 0 10px;
+    background: #464646;
+}
+/* 작성 날짜 */
+.history .history_wrap .info_top .date {
+    font-size: 13px;
+    color: #a2a2a2;
+}
+
+.history .history_wrap .txt {
+    line-height: 20px;
+    word-break: break-all;
+    margin-top: 15px;
+}
+#inquiry{
+	padding:0px;
+}
+
+/* 운영자가 상품 답변 해줄시 나오는 창 */
+.message {
+    padding: 20px 0 20px;
+    border-bottom: 1px solid #ababab;
+}
+
+.message .reply {
+    margin: 10px 0 0 21px;
+    padding-left: 27px;
+    line-height: 20px;
+    font-size: 12px;
+  
+}
+.answerline{
+	width: 18px;
+    display: inline-block;
+    left: 566px;
+    position: absolute;
+   
+}
+
+.history .history_wrap .btn-row.left {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.btn.ctrl {
+    border: 1px solid #dadada;
+    background: #fff;
+    color: #595959;
+    text-align: center;
+    padding: 5px 8px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: normal;
+    outline:none;
+}
+
+	/*jquery용 테이블 셋팅*/
+	.shCMSshop .shopView .viewBody table{display: none;}
+	.shCMSshop .shopView .viewBody table.active{display: table;}
+	.shCMSshop .shopView .viewBody #contentin{display: none;}
+	.shCMSshop .shopView .viewBody #contentin.active{display: block;}
+	#qn{ display:none;}
+	
+	
+	
+	
+	

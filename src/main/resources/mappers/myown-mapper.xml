@@ -47,4 +47,94 @@
 		</choose>
 	</select>
 	
+	<select id="searchOne" parameterType="_int" resultMap="IngredientAllList">
+		select *
+		from ingredients
+		where status = 'Y' and in_no = #{inNo}
+	</select>
+	
+	<update id="updateIn" parameterType="Ingredient">
+		update ingredients
+		set in_name=#{inName}, in_type=#{inType}, in_gram=#{inGram}, in_price=#{inPrice}, in_originalfile=#{inOriginalFile}, in_renamefile=#{inRenameFile}
+		where in_no = #{inNo} and status = 'Y'
+	</update>
+	
+	<insert id="insertRecipe" parameterType="map">
+		insert into MBLRECIPE values(SEQ_MBLRECIPE.NEXTVAL,#{racipeName},#{userId},#{numbers},#{fileName},DEFAULT,#{type},DEFAULT)
+	</insert>
+	
+	<resultMap type="MBLRecipe" id="MBLRecipeAllList">
+		<id property="mblId" column="MBL_ID"/>
+		<result property="mblTitle" column="MBL_TITLE"/>
+		<result property="userId" column="USERID"/>
+		<result property="numbers" column="NUMBERS"/>
+		<result property="mblFileName" column="MBL_FILENAME"/>
+		<result property="createDate" column="MBL_CREATEDATE"/>
+		<result property="mblType" column="MBL_TYPE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="getAllRecipe" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where status='Y'
+	</select>
+	
+	
+	<select id="searchRecipeOne" resultMap="MBLRecipeAllList">
+		select * from mblrecipe where mbl_id=#{mblId}
+	</select>
+	
+	<update id="deleteRecipe">
+		update mblrecipe set status='N' where mbl_id=#{mblId} and status = 'Y'
+	</update>
+	
+	<select id="getUserRecipe" parameterType="String" resultMap="MBLRecipeAllList">
+		select * from mblrecipe where status='Y' and userid=#{userId}
+	</select>
+	
+	<select id="searchRecipeList" parameterType="map" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where status='Y'
+		<choose>
+			<when test="type.equals('도시락 명')">
+				and mbl_title like '%' || #{sContent} || '%'
+			</when>
+			<when test="type.equals('작성자')">
+				and userid like '%' || #{sContent} || '%'
+			</when>
+			<when test="type.equals('도시락 타입')">
+				and mbl_type like '%' || #{sContent} || '%'
+			</when>
+		</choose>
+	</select>
+	
+	<update id="deleteMblRecipe" parameterType="_int">
+		update mblrecipe
+		set status='N'
+		where mbl_id = #{mblId}
+	</update>
+	
+	
+	<select id="myRecipeDetail" parameterType="_int" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where mbl_id = ${mblId}
+	</select>
+	
+
+	<select id="myMBLRecipe" parameterType="string" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where MBL_FILENAME = #{fileName}
+	</select>
+
+	<update id="updateRecipe" parameterType="MBLRecipe">
+		update mblrecipe
+		set mbl_title = #{mblTitle}, numbers = #{numbers}, mbl_filename = #{mblFileName}, mbl_type = #{mblType}
+		where mbl_id = #{mblId}
+	</update>
+
+	
 </mapper>

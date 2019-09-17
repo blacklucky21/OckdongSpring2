@@ -16,18 +16,18 @@
 			<br> <br>
 			<div class="text" onclick="location.href='myPageView.me'">회원정보</div>
 			<br>
-			<div class="text"
-				onclick="location.href='view_history.me'">구매내역</div>
+			<div class="text" onclick="location.href='view_history.me'">구매내역</div>
 			<br>
-			<div class="text" onclick="location.href='SelectCartList.swy'">장바구니</div>
+			<div class="text" onclick="location.href='reviewServletView.bo'">내가 쓴 게시물</div>
 			<br>
-			<div class="text"
-				onclick="location.href='ReviewServlet.bo'">내가 쓴 게시물</div>
+			<div class="text" onclick="location.href='myOwnList.me'">나만의 도시락</div>
 			<br>
-			<div class="text" onclick="location.href='MemberOut.me'">회원 탈퇴</div>
-				
-				<br>
-				<br>
+			<div class="text" onclick="location.href='updatePwd_myPage.me'">비밀번호 변경</div>
+			<br>
+			<div class="text" onclick="location.href='memberOutView.me'">회원 탈퇴</div>
+
+			<br> <br> <br> <br>
+
 
 			<div class='sub_text last-child'>
 				<div class='first-child'>

@@ -50,7 +50,7 @@ public class NoticeController {
 		int listCount = nService.getListCount();
 <<<<<<< Updated upstream
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);	
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
 =======
 
