@@ -3,7 +3,7 @@ package com.junwo.ockdong.product.model.service;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.junwo.ockdong.notice.model.vo.PageInfo;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
 import com.junwo.ockdong.product.model.vo.Productreview;
@@ -56,10 +56,10 @@ public interface ProductService {
 
 	int listsal();	// 샐러드
 
-	ArrayList<Product> selectList(PageInfo pi); // 상품 전체 가져가기 위한 메소드
-	
-	ArrayList<Product> selectList2(PageInfo pi); 
-	ArrayList<Product> selectList3(PageInfo pi);
+//	ArrayList<Product> selectList(PageInfo pi); // 상품 전체 가져가기 위한 메소드
+//	
+//	ArrayList<Product> selectList2(PageInfo pi); 
+//	ArrayList<Product> selectList3(PageInfo pi);
 	// ==========================================
 		// 디테일 댓글 등록
 	
@@ -67,6 +67,10 @@ public interface ProductService {
 	int insertReply(Productreview pv); // 댓글 등록
 	int deleteReply(Productreview pv); // 댓글 삭제
 	int updateReply(Productreview pv); // 댓글 수정 한다.
+	int insertReply(Productreview pv);
+	ArrayList<Product> selectList(PageInfo pi);
+	ArrayList<Product> selectList2(PageInfo pi);
+	ArrayList<Product> selectList3(PageInfo pi);
 	
 	
 	

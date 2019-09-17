@@ -25,6 +25,7 @@
 	float:left;
 	border-radius: 15px;
 	margin: 10px;
+	text-align:center;
 /* 	border-top: 5px solid #13ae67;
 	border-left: 5px solid #13ae67; */
 }
@@ -34,6 +35,7 @@
 }
 .recipeDetail{
 	margin-left: 15px;
+	text-align:left;
 }
 .recipeTitle{
 	font-size: 20px;
@@ -70,143 +72,17 @@
 			<c:if test="${!empty rList }">
 				<c:forEach items="${rList }" var="r" varStatus="sts">
 					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty rList }">
-				<c:forEach items="${rList }" var="r" varStatus="sts">
-					<div class="recipeOne">
-						<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
-						<div class="recipeDetail">
-							<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
-							<c:if test="${r.mblType eq '4찬'}">
-								<a class="recipePrice">4000원</a>
-							</c:if>
-							<c:if test="${r.mblType eq '5찬'}">
-								<a class="recipePrice">5000원</a>
-							</c:if>
+						<div class="${r.mblId }">
+							<img class="imgOne" src="resources/img/Recipe/${r.mblFileName }"><br>
+							<div class="recipeDetail">
+								<a class="recipeTitle">${r.mblTitle }</a><a class="recipeType"> (${r.mblType })</a><br>
+								<c:if test="${r.mblType eq '4찬'}">
+									<a class="recipePrice">4000원</a>
+								</c:if>
+								<c:if test="${r.mblType eq '5찬'}">
+									<a class="recipePrice">5000원</a>
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -214,5 +90,15 @@
 		</div>
 	</div>
 	<c:import url="../footer/footer.jsp" />
+	<script>
+		$(function(){
+			$(".recipeOne").click(function(){
+				
+				var mblId = $(this).children('div').attr('class');
+				
+				location.href="recipeDetailOne.me?mblId="+mblId;
+			});
+		});
+	</script>
 </body>
 </html>

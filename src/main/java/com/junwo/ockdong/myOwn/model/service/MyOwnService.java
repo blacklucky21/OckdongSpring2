@@ -30,6 +30,8 @@ public interface MyOwnService {
 
 	ArrayList<MBLRecipe> getUserRecipe(String userId);
 
+	ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search);
+
 
 
 }
