@@ -21,6 +21,7 @@
 <style>
 
 </style>
+
 </head>
 <body>
 	<!-- ############### 헤더 부분 ############### -->
@@ -30,6 +31,7 @@
 	  <!-- ▼▼▼▼ main ▼▼▼▼ -->
 	 <div class="shCMSshop">
 		<div class="shopView">
+	  <form action="dasdaseaes.do"  method="post" id="hoho">
 			<div class="viewHeader">
 				<!-- 상품이미지 -->
 				<div class="productImg">
@@ -53,20 +55,23 @@
 				<div class="productInfo">
 					<h3>${ p.p_name }</h3>
 					<div class="price">
-						<span class="sale-price comm" > ${p.p_price} 원</span>
+						<span class="sale-price comm"  > ${p.p_price} 원</span>
 					</div>
 					
 					<c:if test="${ p.p_sell ne 'N' }">
+					<input type="hidden" id="standard" value="${p.p_price }"/>
 					<div class="categori">분류           <span>${ p.p_lunchtype }</span></div>
-					<div class="manufact">배송비       <span>2500 원</span></div>
+					
+					<div class="manufact">배송비       <span id="del">2500 원 </span>           <span style="font-size: x-small;">20000원 이상 무료 배송</span></div>
+					
 					<div class="origin">수량           <div class="amount"><button class="decrease" onclick="cntSet('minus')">-</button><input id="orderCnt" class="input-normal" type="text" maxlength="8" autocomplete="off"  value="1" onblur="buyCountInputCheck(this)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><button class="increase"  onclick="cntSet('plus')">+</button></div></div>
 					<div class="items">
 						
 					</div>
-					<div class="all-price">총 상품금액        <span class="comm"></span>원</div>
+					<div class="all-price">총 상품금액        <span class="commPrice">${p.p_price}</span>원</div>
 					<div class="btn">
-						<a href="">장바구니</a>
-						<a href="">구매하기</a>
+						<a id="cart">장바구니</a>
+						<a  id="order_buy">구매하기</a>
 					</div>
 					</c:if>	
 					
@@ -78,13 +83,32 @@
 					 
 				</div>
 			</div>
+			<input type="hidden" name = "" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
+			<input type="hidden" name = "" id="p_price" value="${p.p_price }" ><!-- 총가격 -->
+			<input type="hidden" name = "" value="${p.p_Id}" ><!-- 상품번호 -->
+			<input type="hidden" name = "" value="${p.p_price }" ><!-- 개별 -->
+			<input type="hidden" name = "" id = "p_count" value="" ><!-- 갯수 -->
+			<input type="hidden" name = "" id = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->
 			
+			
+		<!-- 카트 -->
+			<input type="hidden" name = "" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
+			<input type="hidden" name = "" id="p_price" value="${p.p_price }" ><!-- 총가격 -->
+			<input type="hidden" name = "" value="${p.p_Id}" ><!-- 상품번호 -->
+			<input type="hidden" name = "" value="${p.p_price }" ><!-- 개별 -->
+			<input type="hidden" name = "" id = "p_count" value="" ><!-- 갯수 -->
+			<input type="hidden" name = "" id = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
+			
+			
+			</form>
+			
+<!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼  -->				
 <!-- 하단의 탭부분 시작 -->
 			<div class="viewBody">
 				<ul class="contentNav">
 					<li class="active"><a href="">상품 정보</a></li>
 					<li><a href="">상품 후기<span>(<span class="count" id="pvcount"></span>)</span></a></li>
-					<li><a href="">Q & A <span></span></a></li>
+					<li><a href="">Q & A <span>(<span id = "qacount"></span>)</span></a></li>
 					<li><a href="">반품 / 교환</a></li>
 				</ul>
 				<!-- 탭부분 끝 -->
@@ -133,7 +157,7 @@
 					<thead>
 					<tr style="background: none;">
 						<td style="background: none;">작성자  ${ loginUser.nickName }</td>
-						<td><textarea cols="100" rows="4" id=pv_reviewContent style="resize: none;width: 639px;"></textarea><td>
+						<td><textarea cols="100" rows="4" id=pv_reviewContent style="resize: none;width: 639px;" onclick="chname('${loginUser.nickName}');"></textarea><td>
 					<c:if test="${ !empty sessionScope.loginUser }">	
 						<td><button id="rSubmit">등록하기</button></td>
 					</c:if>
@@ -167,7 +191,10 @@
 					
 					</tbody>
 				</table>
+<!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->					
+<!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼  -->				
 				<!-- Q & A  -->
+				
 				<div class="tquestion" id="qn">
 					<div class="con-consultation" style="display: block;">
 						<div class="consultation-text">
@@ -178,7 +205,7 @@
 								<div class="text-wrap">
 									<div class="textarea">
 										<textarea class="textarea-normal textarea_inquiriy"
-											name="content" id="contentInquiry" cols="30" rows="10"
+											name="content" id="qna_content" cols="30" rows="10"
 											maxlength="1000" onkeydown="updateLength('inquiriy')"
 											onkeypress="updateLength('inquiriy')"
 											onkeyup="updateLength('inquiriy')"
@@ -205,7 +232,7 @@
 									</dl>
 									<p class="btn-row">
 									 <c:if test="${ !empty sessionScope.loginUser }">
-										<button type="submit" class="btn black style-3-1">등록하기</button>
+										<button type="button" class="btn black style-3-1" id="qSubmit">등록하기</button>
 										</c:if>
 									</p>
 								</div>
@@ -262,6 +289,8 @@
 				</div>
 				<table class="tquestion">
 				</table>
+<!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->				
+<!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ -->				
 				<!-- 판매 반품 안내 -->	
 				<table class="">
 					<tr>
@@ -308,7 +337,27 @@
 	<c:import url="../../footer/footer.jsp" />
 	
 	<script>
-	
+	$(function(){
+		$("#orderCnt").keyup(function(){
+			var count = $("#orderCnt").val();
+			
+			if(parseInt(count) < 1){
+				alert("수량이 1보다 작을 수 없습니다.");
+				$("#orderCnt").val("1");
+				return false;
+			}
+			
+			
+			
+			var standard = $("#standard").val();
+	    	comm = parseInt(count) * parseInt(standard);
+	    	console.log($(".commPrice"));
+	    	console.log($(".commPrice").text());
+	     	$(".commPrice").text("");
+	    	$(".commPrice").text(comm);
+			console.log(count);
+		});
+	});
 
 	
 	// 사이드 사진 클릭시 메인으로 변경
@@ -319,10 +368,11 @@
 // ==========================================================	
 	// 수량 증가/감소 
 	var cntSet = function (type,optionNo) {
-
+	
 	
 	
     var cntElement = null;
+    var standard = $("#standard").val();
     if(optionNo){
         cntElement = $('#orderCnt-' + optionNo);
     }else{
@@ -331,12 +381,37 @@
 
     var orderCnt = cntElement.val();
     if (type == 'plus') {
+    	
+    	var comm = $(".commPrice").text();
+    	comm = parseInt(comm) + parseInt(standard);
+    	console.log($(".commPrice"));
+    	console.log($(".commPrice").text());
+    	$('#p_price').val(comm);
+    	console.log("가격 : " + $('#p_price').val());
+    	
+     	$(".commPrice").text("");
+    	$(".commPrice").text(comm);
         orderCnt = eval(orderCnt) + 1;
+        $('#p_count').val(orderCnt);
+        if(comm >= 20000){
+        	$("#del").text("0 원");
+        }
         
     } else if (type == 'minus') {
+    	var comm = $(".commPrice").text();
+    	comm = parseInt(comm) - parseInt(standard);
+    	console.log($(".commPrice"));
+    	console.log($(".commPrice").text());
+     	$(".commPrice").text("");
+    	$(".commPrice").text(comm);
         orderCnt = eval(orderCnt) - 1;
-        
+        $('#p_count').val(orderCnt);
+        if(comm < 20000){
+        	$("#del").text("2500 원");
+        }
     }
+    
+    console.log("갯수 : " + $('#p_count').val());
     orderCnt = Number(orderCnt.toString().replace(/\D/g, '')) || 1;
 
     if (eval(orderCnt) < 1) {
@@ -351,6 +426,8 @@
         setTotalOptionPrice(optionNo,orderCnt);
         setTotalPrice();
     }
+    
+    
 }
 	// 최소 수량 1개 이상
 	var buyCountInputCheck = function (obj,optionNo) {
@@ -440,50 +517,23 @@
 	});
 	var price_sum = 0;
 	
-	// 상품 문의  1000 자 제한 두기
-	var updateLength = function (key) {
-	    var len = $('.textarea_' + key).val().length;
-	    $('.length_' + key).text(len + '자 / 1000자');
-	}
-//===============================================================================	 	
-	/* 수정 버튼 눌리며 */
-	var modifyInquiry = function (ctrl,index) {
-		
-		alert("수정 버튼 눌려 이쪽으로 옴");
-	    var e = getEvent(); 
-	    e.stopPropagation();
-	    if (currentEditId !== '') {
-	        $('#modform' + currentEditId).remove();
-	        var target = $('#' + currentEditId);
-	        target.show();
-	    }
-	    currentEditId = 'inquiry' + index;
-
-	    var inquiry = shop.product.getInquiry(index);
-	    var target = $('#inquiry' + index);
-	    target.after('<tr id="modforminquiry' + index + '" style="display:block"></tr>');
-	    $('#inquiriy-modify-template').renderTemplate({ "inquiriy": inquiry, "index": index }, '#modforminquiry' + index);
-
-	    target.hide();
-	    $('#inquiryAnswer' + index).hide();
-	}
 	
-	// 취소
-	var cancelModifyInquiry = function (index) {
-	    var e = getEvent();
-	    e.stopPropagation();
 
-	    $('#modforminquiry' + index).remove();
-	    var target = $('#inquiry' + index);
-	    target.show();
-	    if ($('#inquiryAnswer' + index + ' .message').html().trim() != '') {
-	        $('#inquiryAnswer' + index).show();
-	    }
-	    currentEditId = '';
+//===============================================================================	 	
+	// 상품 후기 댓글 부분
+	function chname(ii){
+	console.log(ii);
+	
+	if(ii == ""){
+		alert("로그인 후 후기 등록이 가능합니다.");
+		$('#pv_reviewContent').attr("disabled","disabled");
 	}
+}
 	$(function(){
 		getReplyList(); // 디테일뷰 들어오면 메소드 실행 한다.
 	});
+	// 작성한 댓글을 수정
+	
 	/* 상품 댓글 등록 기능 */
 	$('#rSubmit').on("click", function(){
 		var pv_reviewContent = $("#pv_reviewContent").val();
@@ -491,7 +541,7 @@
 		var p_Id = ${p.p_Id};
 		
 		console.log(p_Id);
-//===============================================================================	 		
+		
 		// 작성자 게시판 번호 넘긴다.
 		$.ajax({
 			url: "addReply.do",
@@ -506,7 +556,7 @@
 		});
 
 	});
-//===============================================================================	 	
+
 	/* 댓글 리스트 ajax 가지고 오기*/
  	function getReplyList(){
 		var p_Id = ${p.p_Id};
@@ -586,8 +636,8 @@
 				}
 			}
 		});
-	}
- 	//===============================================================================		
+	}		
+	
 	// 댓글 수정 버튼 눌렸을 때
 	function updateRe(i, pv_Id){
 		console.log("수정할 게시판 번호 : " + pv_Id);
@@ -621,7 +671,7 @@
 		});
 		
 	}
-	//===============================================================================		
+	
 	// 댓글 취소 버튼 누를때 리셋 해준다.
 	function rollback(){
 		getReplyList();
@@ -648,9 +698,125 @@
 			});
 		}
 	}
+	//상품 후기 끝
+	
+// =========================================================================================	
+	// 상품 문의 시작
+	var currentEditId = "";
+	// 상품 문의  1000 자 제한 두기
+	var updateLength = function (key) {
+	    var len = $('.textarea_' + key).val().length;
+	    $('.length_' + key).text(len + '자 / 1000자');
+	}
+	var getEvent = function () {
+	    return window.event || arguments.callee.caller.arguments[0];
+	}
+
+	var updateLength = function (key) {
+	    var len = $('.textarea_' + key).val().length;
+	    $('.length_' + key).text(len + '자 / 1000자');
+	}
+	
+	// 상품 문의 게시글 불러 오기
+	$(function(){
+		getQnaList();
+	});
+	
+	// 상품문의 등록
+	$('#qSubmit').on("click", function(){
+		var qna_content = $('#qna_content').val();
+		console.log(qna_content);
+		var p_Id = ${p.p_Id};
+		
+		if(qna_content.val().trim() == ""){
+			alert("내용을 입력하세요.");
+			$('#qna_content').focus();
+			return false;
+		}
+		
+		
+		
+		$.ajax({
+			url: "addQna.do",
+			data:{qna_content:qna_content, p_Id:p_Id},
+			type:"post",
+			success:function(data){
+				if(data =="success"){
+					getQnaList();
+					$('#qna_content').val("");
+				}
+			}
+		});
+	});
+	
+	
+	// 상품 문의 ajax 가지고 오기
+	function getQnaList(){
+		
+	}
+	
+	
+	
+	
+	
+	/* 수정 버튼 눌리며 */
+	var modifyInquiry = function (ctrl,index) {
+		
+		alert("수정 버튼 눌려 이쪽으로 옴");
+	    var e = getEvent(); 
+	    e.stopPropagation();
+	    if (currentEditId !== '') {
+	        $('#modform' + currentEditId).remove();
+	        var target = $('#' + currentEditId);
+	        target.show();
+	    }
+	    currentEditId = 'inquiry' + index;
+
+	    var inquiry = shop.product.getInquiry(index);
+	    var target = $('#inquiry' + index);
+	    target.after('<tr id="modforminquiry' + index + '" style="display:block"></tr>');
+	    $('#inquiriy-modify-template').renderTemplate({ "inquiriy": inquiry, "index": index }, '#modforminquiry' + index);
+
+	    target.hide();
+	    $('#inquiryAnswer' + index).hide();
+	}
+	
+	// 취소
+	var cancelModifyInquiry = function (index) {
+	    var e = getEvent();
+	    e.stopPropagation();
+
+	    $('#modforminquiry' + index).remove();
+	    var target = $('#inquiry' + index);
+	    target.show();
+	    if ($('#inquiryAnswer' + index + ' .message').html().trim() != '') {
+	        $('#inquiryAnswer' + index).show();
+	    }
+	    currentEditId = '';
+	}
+	
+	
+	
+	$('#order_buy').click(function(){
+		
+		$('#hoho').submit();
+	});
+	
+	$('#cart').click(function(){
+		
+		var form = document.forms["hoho"];
+		
+		form.action ="CartInsert.do";
+		
+		form.submit();
+		
+	});
 	
 	
 	</script>
+	
+	
+	
 	<input type="hidden" id="nick" value="${loginUser.nickName}">
 </body>
 </html>
