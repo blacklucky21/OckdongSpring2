@@ -31,6 +31,7 @@ import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Controller
@@ -624,6 +625,7 @@ public class ProductController {
 		
 		
 	}
+	// 댓글 수정
 	@RequestMapping("updateReply.do")
 	@ResponseBody
 	public String updateReply(@ModelAttribute Productreview pv,HttpSession session) throws Exception {
@@ -655,4 +657,20 @@ public class ProductController {
 			throw new Exception("댓글 등록 실패");		
 		}
 	}
+	
+	
+	// qna 댓글 등록
+	@RequestMapping("addQna.do")
+	@ResponseBody
+	public String insertQna(ProductQna pq,HttpSession session) {
+		
+		return null;
+	}
 }
+
+
+
+
+
+
+
