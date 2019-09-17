@@ -46,11 +46,12 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${list ne null }">
 	<c:forEach var="c" items="${list }" varStatus="cart">
                     <tr>
                         <td class="gi this-product">
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
 
                                 <a href="../goods/goods_view.php?goodsNo=1000000107">${c.cName }</a>
@@ -89,11 +90,60 @@
                         </span> <br>  <span style="font-size:11px;">2만원 이상 주문시<br> 
 																	 배송비 무료!</span> 
                                      </td>
-                                     
-                                     </c:if>
+                                        </c:if>
+                                  
                     </tr>
 
                  </c:forEach>
+</c:if>			    <c:set var="pm" value="${paymem}"/>
+			<c:set var="pp" value="${pPayProduct}" />
+			
+			<c:if test="${pPayProduct ne null }">
+ 					 <tr>
+                        <td class="gi this-product">
+                            <input type="hidden" name="cartSno[]" value="16">
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${pm.p_img}" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
+                            <div>
+
+                                <a href="../goods/goods_view.php?goodsNo=1000000107">${pp.pname }</a>
+
+                                <dl>
+                                    <dt>재료 :</dt>
+                                    <dd>넣을까
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>말까 :</dt>
+                                    <dd>공간
+                                    </dd>
+                                </dl>
+
+                            </div>
+                        </td>
+                        <td class="ta-c count this-product">
+                          ${pp.pamount}
+                        </td>
+                        <td class="ta-c this-product">
+                            <strong class="price">${pp.price}원</strong>
+                        </td>
+                        <td class="benefits">
+
+                        </td>
+                        <td class="ta-c">
+                        <strong class="price totalAmount" >${pp.price *pp.pamount}</strong><strong class="price">원</strong>
+                        </td>
+                        
+                        
+                        <td rowspan="1" class="ta-c">
+                        <span class="c-gray delivaryAmount">
+                            기본 - 금액별배송비<br>
+                            2500원
+                        </span> <br>  <span style="font-size:11px;">2만원 이상 주문시<br> 
+																	 배송비 무료!</span> 
+                                     </td>
+                                     </tr> 
+                                     </c:if>
+                   
 
 
                     </tbody>
@@ -114,7 +164,7 @@
                    
                 </div>
             </div>
-            <c:set var="pm" value="${paymem}"/>
+        
              <h3>주문자 정보 확인</h3>
                     <div class="table1 orderplz" >
                         <table>

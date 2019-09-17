@@ -66,11 +66,11 @@ th{
 										<a><img src="resources/img/Recipe/${fileName }" barder="0"></a>
 
 										<input type="hidden" name="p_img" value="resources/img/Recipe/${fileName}">
-
+										<input type="hidden" name="p_num" value="${mbl.mblId}">
 									</div>
 									<div class="box">
 										<p class="brand"></p>
-										<p class="name"><a>제목들어가는 부분입니다.</a></p>
+										<p class="name"><a >${mbl.mblTitle }</a></p>
 										<p class="delivery_price">무료배송 | 일반택배배송</p>
 									</div>
 								</div>
@@ -92,7 +92,7 @@ th{
 												<a class="totalPrice">4000</a>원
 											</c:if>
 											<c:if test="${!empty soup}">
-												<input type="hidden" class="standardPrice" name="standardPrice" value="4000"/>
+												<input type="hidden" class="standardPrice" name="standardPrice" value="5000"/>
 												<a class="totalPrice">5000</a>원
 											</c:if>
 										</p>
@@ -610,6 +610,11 @@ th{
                         </div>
                     </div>
 					</div>
+					<input type ="hidden" name="pname" value="${mbl.mblTitle }">
+					<input type ="hidden" name="pamount" class="tCount" >
+					<input type ="hidden" name="price" class="pPrice" >
+					<input type ="hidden" name="totalprice" class="totalSettlePricevalue">
+					
 					</form>
 					
 	</div>
@@ -811,7 +816,7 @@ $(document).ready(function() {
 	var totalAmount = 0;
 	var delivary = 2500;
 	var count =0;
-
+	var price = parseInt($('.standardPrice').val());
 	
 	console.log(totalAmount);
 	
@@ -838,6 +843,9 @@ $(document).ready(function() {
 	$('#finalTotalPrice').text(totalAmount+delivary);
 	$('#totalSettlePriceView').text(totalAmount+delivary);
 
+	$('.tCount').val(parseInt($('.quantity').val()));
+	$('.pPrice').val(price);
+	$('.totalSettlePricevalue').val(parseInt(totalAmount+delivary));
 
 });
 
@@ -848,8 +856,8 @@ function totalCheck(tcheck) {
 	var totalAmount = tcheck;
 	var delivary = 2500;
 	var count =0;
+	var price = parseInt($('.standardPrice').val());
 
-	
 	console.log(totalAmount);
 	
 
@@ -868,13 +876,17 @@ function totalCheck(tcheck) {
 		delivary =0;
 	}
 	$('#totalGoodsCnt').text(count);
+
 	$('.totalDeliveryCharge').text(delivary);
 	$('.totalGoodsPrice').text(totalAmount);
 	$('#totalGoodsPrice2').text(totalAmount);
 	$('.totalSettlePrice').text(totalAmount+delivary);
 	$('#finalTotalPrice').text(totalAmount+delivary);
 	$('#totalSettlePriceView').text(totalAmount+delivary);
-
+	$('.tCount').val(parseInt($('.quantity').val()));
+	$('.pPrice').val(price);
+	$('.totalSettlePricevalue').val(parseInt(totalAmount+delivary));
+	
 
 }
 

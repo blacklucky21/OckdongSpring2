@@ -14,6 +14,7 @@
 		<typeAlias type="com.junwo.ockdong.cart.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.junwo.ockdong.product.model.vo.Productreview" alias="Productreview"/>
 		<typeAlias type="com.junwo.ockdong.myOwn.model.vo.MBLRecipe" alias="MBLRecipe"/>
+		<typeAlias type="com.junwo.ockdong.cart.model.vo.PayProduct" alias="PayProduct"/>
 
 	</typeAliases>
 	<mappers>

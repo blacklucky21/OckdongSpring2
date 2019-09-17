@@ -123,4 +123,10 @@
 		where mbl_id = ${mblId}
 	</select>
 	
+	<select id="myMBLRecipe" parameterType="string" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where MBL_FILENAME = #{fileName}
+	</select>
+	
 </mapper>
