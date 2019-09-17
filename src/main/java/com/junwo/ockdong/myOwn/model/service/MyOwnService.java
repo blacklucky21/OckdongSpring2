@@ -36,6 +36,8 @@ public interface MyOwnService {
 
 	MBLRecipe myRecipeDetail(int mblId);
 
+	int updateRecipe(MBLRecipe mblR);
+
 
 
 }

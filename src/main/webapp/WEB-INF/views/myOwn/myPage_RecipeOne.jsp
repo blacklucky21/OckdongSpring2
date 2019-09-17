@@ -77,10 +77,9 @@
 				</div>
 				<br clear="all">
 				<div class="imgArea">
+					<input type="hidden" name="mblId" id="mblId" value="${mblR.mblId }"/>
 					<input type="hidden" name="fileName" id="fileName" value="${mblR.mblFileName }"/>
 					<img src="resources/img/Recipe/${mblR.mblFileName }" style="width: 600px; height: 480px;"/>
-					<% MBLRecipe mblR = (MBLRecipe)request.getAttribute("mblR");
-					   System.out.println("화면으로 넘어온 fileName : " + mblR.getMblFileName());%>
 				</div>
 				<div class="Ingredients">
 					<table class="table">
@@ -193,7 +192,7 @@
 				</div>
 				<div class="buttons">
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="결제하기" style="width: 100px; height: 50px;" />
-					<input class="myOwnBackBtn" type="button" value="수정하기" style="width: 100px; height: 50px;" />
+					<input class="recipeUpdateBtn" type="button" value="수정하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnBackBtn" type="button" value="뒤로가기" style="width: 100px; height: 50px;" />
 				</div>
 				<br clear="all">
@@ -212,10 +211,10 @@
 			$(".myOwnBackBtn").click(function(){
 				history.back();
 			});
-		});
-		
-		$(function(){
-			
+			$(".recipeUpdateBtn").click(function(){
+				var mblId = $("#mblId").val();
+				location.href="recipeUpdate.do?mblId="+mblId;
+			});
 		});
 	</script>
 </body>

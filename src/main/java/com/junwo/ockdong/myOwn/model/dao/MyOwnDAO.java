@@ -73,4 +73,8 @@ public class MyOwnDAO {
 		return sqlSession.selectOne("myOwnMapper.myRecipeDetail", mblId);
 	}
 
+	public int updateRecipe(MBLRecipe mblR) {
+		return sqlSession.update("myOwnMapper.updateRecipe", mblR);
+	}
+
 }
