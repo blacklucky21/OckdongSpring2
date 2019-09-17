@@ -162,6 +162,13 @@ table, tr, td {
 	-o-transition: all 1s;
 	transition: all 1s;
 }
+#save:hover{
+	cursor: pointer;
+}
+.tooltip_templates { display: none; }
+.titleArea{
+	margin-top: 1%;
+}
 </style>
 <link href="https://fonts.googleapis.com/css?family=Single+Day&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -171,42 +178,51 @@ table, tr, td {
 	<c:import url="../header/header.jsp" />
 
 	<div style="width: 100%; height: 1200px; margin: 0 5% 0 0;">
-		<form id="formChange" action="myOwnInsert.do" method="post">
+		<form id="formChange" action="myOwnRecipeUpdate.do" method="post">
+		<input type="hidden" id="mblId" name="mblId" value="${mblR.mblId }"/>
 		<div style="width: 100%; height: 100%; max-width: 1500px; min-width: 1500px; margin: 0 auto;">
 			<div style="text-align: center;">
 				<h1 style="font-family: 'Single Day', cursive; margin:0">나만의 도시락</h1>
 				<img src="resources/img/myOwn/5찬예시및설명.png" style="width: 70%; border-radius: 15px;">
-			</div>
-			<div
-				style="width: 70%; height: auto; margin-left: 15%; border: 2px solid black; border-radius: 15px;"">
-				<div style="width: 100%; height: 20%;">
-					<span style="width: 100%; height: 100%;">
-						<img style="margin-right: 28%;" />
-						<img class="lunch_size lunch4" src="resources/img/myOwn/도시락4찬.PNG" style="width: 20%; margin-right: 5%;" />
-						<img class="lunch_size lunch5" src="resources/img/myOwn/도시락5찬.PNG" style="width: 20%;" />
-					</span>
+				<div class="input-group mb-3 titleArea" style="width: 40%; margin-left: auto; margin-right: auto;">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon1" style="color:#fff; background: #2ecc71">제목 : </span>
+					</div>
+					<input type="text" id="racipeName" name="racipeName" value="${mblR.mblTitle }" class="form-control" placeholder="나만의 도시락의 제목을 적어주세요." aria-label="Username" aria-describedby="basic-addon1" style="background-color:white;">
 				</div>
+			</div>
+			<div style="width: 70%; height: auto; margin-left: 15%; border: 2px solid black; border-radius: 15px;"">
 				<div style="width: 100%; height: 400px; text-align: center;">
 					<div class="myOwnTable">
 						<div class="rice">
-							<span id="rice" class="myOwnSpan" ondrop="drop(event)"
-								ondragover="allowDrop(event)"> </span>
+							<span id="rice" class="myOwnSpan" ondrop="drop(event)" ondragover="allowDrop(event)">
+								<img id='${rice.inNo }' class='selected' src='resources/img/myOwn/5찬/5_밥/${rice.inRenameFile }'/>
+								<input type='hidden' name='selectedRice' value='${rice.inNo }'/>
+							</span>
 						</div>
 						<div class="soup">
-							<span id="soup" class="myOwnSpan" ondrop="drop(event)"
-								ondragover="allowDrop(event)"> </span>
+							<span id="soup" class="myOwnSpan" ondrop="drop(event)" ondragover="allowDrop(event)">
+								<img id='${soup.inNo }' class='selected' src='resources/img/myOwn/5찬/9_수프/${soup.inRenameFile }'/>
+								<input type='hidden' name='selectedSoup' value='${soup.inNo }'/>
+							</span>
 						</div>
 						<div class="main">
-							<span id="main" class="myOwnSpan" ondrop="drop(event)"
-								ondragover="allowDrop(event)"> </span>
+							<span id="main" class="myOwnSpan" ondrop="drop(event)" ondragover="allowDrop(event)">
+								<img id='${main.inNo }' class='selected' src='resources/img/myOwn/5찬/6_메인/${main.inRenameFile }'/>
+								<input type='hidden' name='selectedMain' value='${main.inNo }'/>
+							</span>
 						</div>
 						<div class="sub1">
-							<span id="sub1" class="myOwnSpan" ondrop="drop(event)"
-								ondragover="allowDrop(event)"> </span>
+							<span id="sub1" class="myOwnSpan" ondrop="drop(event)" ondragover="allowDrop(event)">
+								<img id='${sub1.inNo }' class='selected' src='resources/img/myOwn/5찬/7_서브1/${sub1.inRenameFile }'/>
+								<input type='hidden' name='selectedSub1' value='${sub1.inNo }'/>
+							</span>
 						</div>
 						<div class="sub2">
-							<span id="sub2" class="myOwnSpan" ondrop="drop(event)"
-								ondragover="allowDrop(event)"> </span>
+							<span id="sub2" class="myOwnSpan" ondrop="drop(event)" ondragover="allowDrop(event)">
+								<img id='${sub2.inNo }' class='selected' src='resources/img/myOwn/5찬/8_서브2/${sub2.inRenameFile }'/>
+								<input type='hidden' name='selectedSub2' value='${sub2.inNo }'/>
+							</span>
 						</div>
 					</div>
 					<!-- 이미지 캡쳐하는 부분 -->
@@ -305,9 +321,8 @@ table, tr, td {
 					<span>가격 : 5000원</span>
 				</div> -->
 				<div class="buttons">
-					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="구매하기" style="width: 100px; height: 50px;" />
-					<input class="myOwnAddBtn" type="button" value="내가 만든 도시락 추가" style="width: 200px; height: 50px;"/>
-					<input class="myOwnPaymentBtn" type="button" value="결제 페이지" style="width: 200px; height: 50px;" />
+					<input class="myOwnUpdateBtn" type="submit" onclick="return validate();" value="수정하기" style="width: 100px; height: 50px;" />
+					<input class="myOwnBackBtn" type="button" value="뒤로가기" style="width: 200px; height: 50px;" />
 					<input class="createImg" type="hidden">
 				</div>
 			</div>
@@ -329,15 +344,6 @@ table, tr, td {
 			var src = $(this).attr('src');
 			$('.myOwnTable').css('background-image', 'url(' + src + ')');
 		}); */
-		
-		$(function(){
-			$('.lunch4').click(function(){
-				location.href="myOwn4.do";
-			});
-			$('.lunch5').click(function(){
-				location.href="myOwn5.do";
-			});
-		});
 		
 		$(function(){
 			$("dd:not()").css("display","none");
@@ -567,7 +573,7 @@ table, tr, td {
 					console.log("비어있음");
 					$(".createImg").click();
 				}else{
-					if(confirm("결제 페이지로 이동하시겠습니까? (이동하게 되면 만든 도시락은 자동으로 나만의 도시락에 추가됩니다.)")){
+					if(confirm("나만의 도시락을 수정하겠습니까?")){
 						console.log("안비어있음");
 						return true;
 					}else{
@@ -583,36 +589,6 @@ table, tr, td {
 	</script>
 	<script type="text/javascript">
 		$(function(){
-		   $(".myOwnAddBtn").click(function() { 
-		        html2canvas($(".myOwnTable"), {
-		            onrendered: function(canvas) {
-		            	console.log(canvas);
-		            	$("#imgSrc").val(canvas.toDataURL("image/png"));
-		            	var imgSrc = $("#imgSrc").val();
-		            	
-		            	$("#formChange").attr("action", "imageCreate.do");
-		            	$(".myOwnInsertBtn").click();
-		            	
-		            	/* $.ajax({
-		            		type : "post",
-		            		data : {imgSrc: imgSrc},
-		            		url : "imageCreate.do",
-		            		success: function(data){
-		            			console.log("성공");
-		            		}, error: function(error){
-		            			console.log("실패");
-		            		}
-		            	}); */
-		            	
- 		            	// getCanvas = canvas; // 주석
-		            	// upload(); // 주석
-		                /* canvas.toBlob(function(blob) {
-		                	console.log(blob);
-		                    saveAs(blob, 'image.png');
-		                }); */
-		            }
-		        });
-		   	});
 		   $(".createImg").click(function(){
 			   html2canvas($(".myOwnTable"), {
 					onrendered: function(canvas) {
@@ -620,10 +596,11 @@ table, tr, td {
 						console.log("이미지 생성됨");
 						console.log($(".imgSrc").val());
 						
-						$(".myOwnInsertBtn").click();
+						$(".myOwnUpdateBtn").click();
 					}
 				});
 		   });
+		   $(".myOwnBackBtn").click(function(){history.back();});
 		});
 	</script>
 </body>

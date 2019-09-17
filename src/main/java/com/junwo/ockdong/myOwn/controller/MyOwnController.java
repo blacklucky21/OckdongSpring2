@@ -152,7 +152,7 @@ public class MyOwnController {
 			System.out.println("4찬");
 		}
 
-
+		
 		
 		//등록할 mblRecipe정보 넣기
 		Map<String, String> list = new HashMap<String, String>();
@@ -415,41 +415,205 @@ public class MyOwnController {
 	}
 	
 	//결제 페이지로 이동
-		@RequestMapping("myPagePaymentInsert.do")
-		public ModelAndView myPagePaymentInsert(ModelAndView mv,
-				@RequestParam("fileName") String fileName,
-				@RequestParam("riceNo") int rice,
-				@RequestParam(value = "soupNo", required = false) String soup,
-				@RequestParam("mainNo") int main,
-				@RequestParam("sub1No") int sub1,
-				@RequestParam("sub2No") int sub2,
-				HttpServletRequest request) throws IOException {
+	@RequestMapping("myPagePaymentInsert.do")
+	public ModelAndView myPagePaymentInsert(ModelAndView mv,
+			@RequestParam("fileName") String fileName,
+			@RequestParam("riceNo") int rice,
+			@RequestParam(value = "soupNo", required = false) String soup,
+			@RequestParam("mainNo") int main,
+			@RequestParam("sub1No") int sub1,
+			@RequestParam("sub2No") int sub2,
+			HttpServletRequest request) throws IOException {
+		
+		System.out.println("fileName : " + fileName);
+		
+		System.out.println("Controller > myOwnInsert()");
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		Ingredient riceIn = service.selectOne(rice);
+		Ingredient mainIn = service.selectOne(main);
+		Ingredient sub1In = service.selectOne(sub1);
+		Ingredient sub2In = service.selectOne(sub2);
+		Ingredient soupIn = null;
+		if (soup != null) {
+			System.out.println("5찬");
+			soupIn = service.selectOne(Integer.parseInt(soup));
+		} else {
+			System.out.println("4찬");
+		}
+
+		mv.addObject("rice",riceIn);
+		mv.addObject("main",mainIn);
+		mv.addObject("sub1",sub1In);
+		mv.addObject("sub2",sub2In);
+		mv.addObject("soup",soupIn);
+		mv.addObject("fileName",fileName);
+		mv.setViewName("myOwn/myOwnPayment");
+		
+		return mv;
+	}
+	
+	@RequestMapping("recipeUpdate.do")
+	public ModelAndView recipeUpdate(ModelAndView mv, @RequestParam("mblId") int mblId) {
+		
+		MBLRecipe mblR = service.myRecipeDetail(mblId);
+		
+		String[] numbers = mblR.getNumbers().split("/");
+		
+		Ingredient rice = null;
+		Ingredient soup = null;
+		Ingredient main = null;
+		Ingredient sub1 = null;
+		Ingredient sub2 = null;
+		
+		Ingredient in = null;
+		for(int i = 0; i < numbers.length; i++) {
+			in = service.selectOne(Integer.parseInt(numbers[i]));
 			
-			System.out.println("fileName : " + fileName);
-			
-			System.out.println("Controller > myOwnInsert()");
-			System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
-			
-			Ingredient riceIn = service.selectOne(rice);
-			Ingredient mainIn = service.selectOne(main);
-			Ingredient sub1In = service.selectOne(sub1);
-			Ingredient sub2In = service.selectOne(sub2);
-			Ingredient soupIn = null;
-			if (soup != null) {
-				System.out.println("5찬");
-				soupIn = service.selectOne(Integer.parseInt(soup));
-			} else {
-				System.out.println("4찬");
+			switch(in.getInType()) {
+				case "1_밥": case "5_밥":
+					rice = in;
+					break;
+				case "2_서브1" : case "7_서브1":
+					sub1 = in;
+					break;
+				case "3_서브2" : case "8_서브2":
+					sub2 = in;
+					break;
+				case "4_메인": case "6_메인":
+					main = in;
+					break;
+				case "9_수프":
+					soup = in;
+					break;
+			}
+		}
+		
+		mv.addObject("rice",rice);
+		mv.addObject("soup",soup);
+		mv.addObject("main",main);
+		mv.addObject("sub1",sub1);
+		mv.addObject("sub2",sub2);
+		mv.addObject("mblR",mblR);
+		
+		
+		if(soup != null) {
+			//5찬일 경우
+			ArrayList<Ingredient> AllList = service.selectAll();
+
+			ArrayList<Ingredient> riceList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> mainList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub1List = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub2List = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> soupList = new ArrayList<Ingredient>();
+
+			for (Ingredient i : AllList) {
+				switch (i.getInType()) {
+				case "5_밥":
+					riceList.add(i);
+					break;
+				case "6_메인":
+					mainList.add(i);
+					break;
+				case "7_서브1":
+					sub1List.add(i);
+					break;
+				case "8_서브2":
+					sub2List.add(i);
+					break;
+				case "9_수프":
+					soupList.add(i);
+					break;
+				}
 			}
 
-			mv.addObject("rice",riceIn);
-			mv.addObject("main",mainIn);
-			mv.addObject("sub1",sub1In);
-			mv.addObject("sub2",sub2In);
-			mv.addObject("soup",soupIn);
-			mv.addObject("fileName",fileName);
-			mv.setViewName("myOwn/myOwnPayment");
-			
-			return mv;
+			mv.addObject("riceList", riceList);
+			mv.addObject("mainList", mainList);
+			mv.addObject("sub1List", sub1List);
+			mv.addObject("sub2List", sub2List);
+			mv.addObject("soupList", soupList);
+			mv.setViewName("myOwn/myOwn5RecipeUpdate");
+		}else {
+			//4찬일 경우
+			ArrayList<Ingredient> AllList = service.selectAll();
+
+			ArrayList<Ingredient> riceList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> mainList = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub1List = new ArrayList<Ingredient>();
+			ArrayList<Ingredient> sub2List = new ArrayList<Ingredient>();
+
+			for (Ingredient i : AllList) {
+				switch (i.getInType()) {
+				case "1_밥":
+					riceList.add(i);
+					break;
+				case "4_메인":
+					mainList.add(i);
+					break;
+				case "2_서브1":
+					sub1List.add(i);
+					break;
+				case "3_서브2":
+					sub2List.add(i);
+					break;
+				}
+			}
+
+			mv.addObject("riceList", riceList);
+			mv.addObject("mainList", mainList);
+			mv.addObject("sub1List", sub1List);
+			mv.addObject("sub2List", sub2List);
+			mv.setViewName("myOwn/myOwn4RecipeUpdate");
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("myOwnRecipeUpdate.do")
+	public String myOwnRecipeUpdate(@RequestParam("imgSrc") String imgSrc,
+									@RequestParam(value = "selectedSoup", required = false) String soup,
+									@RequestParam("selectedRice") int rice,
+									@RequestParam("selectedMain") int main,
+									@RequestParam("selectedSub1") int sub1,
+									@RequestParam("selectedSub2") int sub2,
+									@RequestParam("mblId") String mblId,
+									@RequestParam("racipeName") String racipeName,
+									HttpServletRequest request,
+									HttpSession session) throws Exception {
+		
+		MBLRecipe mblR = service.searchRecipeOne(mblId);
+		
+		Member member = (Member)session.getAttribute("loginUser");
+		
+		String fileName = CreateRecipe(imgSrc, request);
+		
+		System.out.println("fileName : " + fileName);
+		
+		fileName = fileName + ".png";
+		
+		String numbers = "";
+		if (soup != null && soup != "") {
+			System.out.println("5찬");
+			mblR.setMblType("5찬");
+			numbers = rice + "/" + soup + "/" + main + "/" + sub1 + "/" + sub2;
+		} else {
+			System.out.println("4찬");
+			mblR.setMblType("4찬");
+			numbers = rice + "/" + main + "/" + sub1 + "/" + sub2;
+		}
+		
+		System.out.println("rice : " + rice + " soup : " + soup + " main : " + main + " sub1 : " + sub1 + " sub2 : " + sub2);
+		
+		mblR.setMblTitle(racipeName);
+		mblR.setMblFileName(fileName);
+		mblR.setNumbers(numbers);
+		
+		int result = service.updateRecipe(mblR);
+		
+		if(result > 0) {
+			return "redirect:myOwnList.me";
+		}else {
+			throw new Exception("나만의 도시락 수정 중 에러 발생!!!");
+		}
+	}
 }
