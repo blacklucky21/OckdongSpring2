@@ -13,6 +13,7 @@ import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.SearchCondition;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
 import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.notice.model.vo.NoticeComments;
 
 @Repository("nDAO")
 public class NoticeDAO {
@@ -75,6 +76,14 @@ public class NoticeDAO {
 		
 		return list;
 	}
-	
+
+	public ArrayList<NoticeComments> selectCommentList(int nNo) {
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectCommentList", nNo);
+	}
+
+	public int insertComment(NoticeComments nc) {
+		return sqlSession.insert("noticeMapper.insertComment", nc);
+	}
+
 
 }

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 상세보기</title>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!--[if lt IE 9]>
  <div style=' clear: both; text-align:center; position: relative;'>
    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -223,12 +223,12 @@
 	position: relative;
 	margin-top: 12px;
 }
-.comment-write textarea {
+-write textarea {
 	width: 88%;
 	height: 120px;
 }
 
-#btncmm1 {
+.btncmm1 {
 	position: absolute;
 	right: 10px;
 	top: -9px; 
@@ -274,7 +274,7 @@
 #ptxt {
 	padding-top: 7px;
 }
-.comment-txt span {
+.comment-txt tbody {
 	padding-left: 10px;
 }
 .btn-re {
@@ -405,7 +405,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 									<li class="da02"><span>${ notice.nCount }</span></li>
 									<!-- 댓글 카운트  -->
  									<%--<li class="da03"><span>${detail.COMMENTS_COUNT}</span></li> --%>
-									<li class="da03"><span>${ notice.nCount }</span></li>
+									<li class="da03"><span id="rCount1"></span></li>
 								</ul>
 							</div>
 						</span>
@@ -480,67 +480,130 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							</div>
 						</div>
 						
-						<!------------------------------------ 댓글 작성 폼 ------------------------------------>
+						<!-- 
+						---------------------------------- 댓글 작성 폼 ----------------------------------
 						<div id="comment-write" class="comment-write">
 							<form action="insertComment.do" name="form1" method="post">
-								<textarea name="COMMENTS_CONTENT" id="comment" class="txtarea r5 placeholder"
-									placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~ 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
+								<textarea name="Comments_Content" id="Comments_Content" class="txtarea r5 placeholder" placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~ 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
 									onfocus="setFlag();"></textarea>
-			 					<input name="BOARD_NO" type="hidden" value="${detail.BOARD_NO}">
-			 					
-								<c:if test="${! empty sessionScope.loginUser}">
+									
 									<button type="submit" id="btncmm1" class="btn btn-primary">입력</button>
-								</c:if>
-								<c:if test="${empty sessionScope.loginUser}">
-									<button type="button" id="btncmm2" class="btn btn-primary login"  data-toggle="modal" data-target="#login-modal">입력</button>
-								</c:if>
 							</form>
-						</div>
+						</div>	
 					</div>
 
-					<!------------------------------------ 게시글에 작성된 댓글 수 ------------------------------------>
+					---------------------------------- 게시글에 작성된 댓글 수 ----------------------------------
 					<div class="comment-count">
 						<p class="comment-count-1">댓글</p>
-						<p class="comment-count-2">${detail.COMMENTS_COUNT}</p>
+						<p class="comment-count-2" id="nCount"></p>
 					</div>
+ 	
+ 				댓글 목록 보기 
+				<table class="replyTable" id="rtb">
+					<thead>
+						<tr>
+							<td colspan="2"><b id="rCount"></b></td>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				 -->
+
+				<!-- 댓글 등록 부분 -->
+				<div id="comment-write" class="comment-write">
+				<table class="replyTable">
+					<tr>
+						<td><textarea cols="98" rows="5" id="Comments_Content" name="COMMENTS_CONTENT" class="txtarea r5 placeholder" placeholder="댓글 등록" onfocus="setFlag();" style="border: none;"></textarea></td>
+						<td><button id="rSubmit" class="btn btn-primary btncmm1">입력</button></td>
+					</tr>
+				</table>
+				</div>
+
+				<!-- 댓글 목록 보기  -->
+				<table class="comment-list" id="rtb">
+					<thead class="comment-list-li">
+						<tr class="comment-count">			
+							<td colspan="2" class="comment-count-1"><b id="rCount" class="comment-count-2"></b></td>
+						</tr>
+					</thead>
+					<tbody class="comment-txts"></tbody>
+				</table>
+				
+				<script>
+					$(function(){
+						getCommentList();
+						
+						setInterval(function(){
+							getCommentList();
+						}, 10000);
+					});
 					
-					<c:forEach items="${commentList}" var="row">
-					<table class="comment-list">
-						<ul>
-							<li class="comment-list-li">
-								<div class="comment-pic">
-								<%-- <c:if test="${row.FILES_CHANGE_TITLE != null}"> --%>
-									<img class="commentPro" src="${pageContext.request.contextPath}${row.FILES_ROOT}${row.FILES_CHANGE_TITLE}">
-								<%-- </c:if>
-								<c:if test="${row.FILES_CHANGE_TITLE == null} ">
-									<img class="commentPro" src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif">
-								</c:if> --%>
-								<%-- <img class="commentPro" src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif"> --%>
-								</div>
-								<div class="comment-txt">
-									<!--------------------------------- 댓글 작성자명 ---------------------------------->
-									<strong id="ntxt">${row.NICK_NAME}</strong>
-									<input type="hidden" >
-									<!---------------------------------- 댓글 작성 시간---------------------------------->
-									<span>${row.COMMENTS_DATE}</span>
-									<!----------------- 댓글 수정, 삭제 (로그인시 적용(해당 게시물 댓글만 가능하도록 설정)) ----------------->
-									<c:if test="${sessionScope.loginUser.member_no == row.MEMBER_NO}">
-									<div class="remd">
-											<span class="deleteB2" id="deleteB2" onClick="location.href='deleteComment.do?comments_no='+${row.COMMENTS_NO}+'&board_no='+${detail.BOARD_NO}">삭제</span>
-									</div>
-									</c:if>
-									<!-- 댓글 내용 -->
-									<p id="ptxt">${row.COMMENTS_CONTENT}</p>
-								</div>
-								<!-- <div class="re">
-									<a href="#" class="btn-re">답글 ▼</a>
-								</div> -->
-							</li>
-							<hr class="hrline">
-						</ul>
-					</table>
-					</c:forEach>
-					<!---------------------------------- 댓글 페이징 처리 ---------------------------------->
+					// 댓글 등록 ajax
+					$("#rSubmit").on("click", function(){
+			         var Comments_Content = $("#Comments_Content").val();
+			         var nNo = ${ notice.nNo };
+			         
+			         $.ajax({
+			            url: "insertComment.do",
+			            data: {Comments_Content: Comments_Content, nNo:nNo},
+			            type: "post",
+			            success: function(data){
+			               if(data == "success"){
+			            	   getCommentList();
+			            	   $("#Comments_Content").val("");
+			               }
+			            }
+			         });
+			      });
+					
+					// 댓글 리스트 ajax
+					function getCommentList(){
+						var nNo = ${ notice.nNo };
+						
+						$.ajax({
+							url: "commentList.do",
+							data: {nNo:nNo},
+							dataType: "json",
+							success: function(data){ 	
+								$tableBody = $("#rtb tbody");
+								$tableBody.html("");
+								
+								var $tr;
+								var $UserId;
+								var $Comments_Content;
+								var $Comments_Date;
+								
+								$("#rCount").text("댓글 (" + data.length + ")");
+								$("#rCount1").text(data.length);
+								
+								if(data.length > 0){
+									for(var i in data){
+										$tr = $("<tr>");
+										$UserId = $("<td class='comment-txt' style='font-weight: bold;'>").text(data[i].UserId);
+										$Comments_Content = $("<td class='ptxt'>").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
+										$Comments_Date = $("<td width='100' >").text(data[i].Comments_Date);
+									
+										
+										$tr.append($UserId);
+										$tr.append($Comments_Content);
+										$tr.append($Comments_Date);
+										$tableBody.append($tr);
+									}
+									
+									} else {
+										$tr = $("<tr>");
+										$Comments_Content = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+										
+										$tr.append($Comments_Content);
+										$tableBody.append($tr);
+									}
+								}	
+						});
+					}
+					
+				</script>
+
+				<!---------------------------------- 댓글 페이징 처리 ---------------------------------->
 					<div class="paginate">
 						<c:if test="${ pi.currentPage <= 1 }">
 							[이전] &nbsp;

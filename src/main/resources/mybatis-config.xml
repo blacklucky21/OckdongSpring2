@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
@@ -14,7 +15,11 @@
 		<typeAlias type="com.junwo.ockdong.cart.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.junwo.ockdong.product.model.vo.Productreview" alias="Productreview"/>
 		<typeAlias type="com.junwo.ockdong.myOwn.model.vo.MBLRecipe" alias="MBLRecipe"/>
+
+		<typeAlias type="com.junwo.ockdong.notice.model.vo.NoticeComments" alias="NoticeComments"/>
+
 		<typeAlias type="com.junwo.ockdong.cart.model.vo.PayProduct" alias="PayProduct"/>
+
 
 	</typeAliases>
 	<mappers>
@@ -25,4 +30,5 @@
 		<mapper resource="mappers/product-mapper.xml"/>
 		<mapper resource="mappers/mypage-mapper.xml"/>
 	</mappers>
+
 </configuration>

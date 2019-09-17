@@ -12,6 +12,7 @@ import com.junwo.ockdong.common.SearchCondition;
 import com.junwo.ockdong.notice.model.dao.NoticeDAO;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
 import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.notice.model.vo.NoticeComments;
 
 @Service("nService")
 public class NoticeServiceImpl implements NoticeService {
@@ -63,6 +64,16 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<HashMap<String, Object>> searchList(PageInfo info, SearchCondition sc) {
 		return nDAO.searchList(sc, info);
 	}
-	
+
+	@Override
+	public ArrayList<NoticeComments> selectCommentList(int nNo) {
+		return nDAO.selectCommentList(nNo);
+	}
+
+	@Override
+	public int insertComment(NoticeComments nc) {
+		return nDAO.insertComment(nc);
+	}
+
 
 }

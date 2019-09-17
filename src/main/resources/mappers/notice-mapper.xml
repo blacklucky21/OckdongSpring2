@@ -20,6 +20,16 @@
 		<result property="nickName" column="NICKNAME"/>
 	</resultMap>
 	
+	<resultMap type="NoticeComments" id="commentsReulstSet">
+		<id property="Comments_No" column="COMMENTS_NO" />
+		<result property="Comments_Content" column="COMMENTS_CONTENT" />
+		<result property="nNo" column="NNo" />
+		<result property="UserId" column="USERID" />
+		<result property="Comments_Date" column="COMMENTS_DATE" />
+		<result property="NickName" column="NICKNAME" />
+		<result property="Comments_Status" column="COMMENTS_STATUS" />
+	</resultMap>
+	
 	<select id="selectList" resultMap="noticeResultSet">
 		select *
 		from notice
@@ -101,5 +111,20 @@
 		</choose>
 		order by nNo desc
 	</select>
+	
+	<!-- 댓글 -->
+	<select id="selectCommentList" parameterType="_int" resultMap="commentsReulstSet">
+	select *
+	from noticecomments nc
+	join notice n on(nc.nno = n.nno)
+	where nc.nno = #{Comments_No}
+	order by Comments_No desc
+	</select>
+	
+	<insert id="insertComment" parameterType="NoticeComments">
+      insert into noticecomments
+      values(seq_Comments_No.nextval, #{Comments_Content}, #{nNo}, #{UserId} , sysdate, default, #{nickName})
+  	</insert>
+	
   
 </mapper>
