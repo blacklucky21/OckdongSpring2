@@ -6,6 +6,7 @@ import java.util.Map;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
 public interface ProductService {
@@ -67,10 +68,12 @@ public interface ProductService {
 	int insertReply(Productreview pv); // 댓글 등록
 	int deleteReply(Productreview pv); // 댓글 삭제
 	int updateReply(Productreview pv); // 댓글 수정 한다.
-	int insertReply(Productreview pv);
+	
 	ArrayList<Product> selectList(PageInfo pi);
 	ArrayList<Product> selectList2(PageInfo pi);
 	ArrayList<Product> selectList3(PageInfo pi);
+	
+	int insertQna(ProductQna pq); // 문의글 생성
 	
 	
 	
