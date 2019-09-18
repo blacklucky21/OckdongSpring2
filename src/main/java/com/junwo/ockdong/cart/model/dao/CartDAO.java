@@ -90,6 +90,12 @@ public class CartDAO {
 	}
 
 
+	public int insertPayProduct(PayProduct pp) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("cartMapper.insertPayProduct",pp);
+	}
+
+
 
 
 

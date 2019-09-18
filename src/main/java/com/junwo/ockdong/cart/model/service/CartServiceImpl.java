@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.cart.model.dao.CartDAO;
 import com.junwo.ockdong.cart.model.vo.Cart;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
 import com.junwo.ockdong.cart.model.vo.Payment;
 
 
@@ -89,6 +90,12 @@ public class CartServiceImpl implements CartService{
 	public int updateStatus(HashMap<String, String> ppcheck) {
 		// TODO Auto-generated method stub
 		return cDAO.updateStatus(ppcheck);
+	}
+
+	@Override
+	public int insertPayProduct(PayProduct pp) {
+		// TODO Auto-generated method stub
+		return cDAO.insertPayProduct(pp);
 	}
 
 

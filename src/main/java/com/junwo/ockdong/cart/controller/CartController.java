@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.junwo.ockdong.cart.model.service.CartService;
 import com.junwo.ockdong.cart.model.vo.Cart;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.member.model.vo.Member;
 
@@ -248,11 +249,11 @@ public class CartController {
 	//결제 완료 나만도시락 버전
 		@RequestMapping("PaymentResultListMyOwn.do")
 		public ModelAndView PaymentResultListMyOwn(ModelAndView mv,@RequestParam("total") String[] total, HttpSession session,
-				@ModelAttribute Payment p) {
+				@ModelAttribute Payment p,@ModelAttribute PayProduct pp) {
 
 			System.out.println("이미지"+p.getP_img());
-	
-		
+			System.out.println(p.getP_num());
+
 		
 			Date now = new Date();
 			SimpleDateFormat sfmt = new SimpleDateFormat("YYMMdd");
@@ -312,22 +313,25 @@ public class CartController {
 			//checkno = Integer.parseInt(hitPno[0]);
 			totalMap.put("hitPno",hitPno2);
 			//System.out.println("리스트크기"+list.size());
-			p.setP_id("Ock"+pdate+hitPno[0]);
+			p.setP_id("Ock"+pdate+p.getP_num());
 			p.setPayprice( Integer.parseInt(total[0]));
+			p.setPaytext(pp.getPname());
 			//Payment PayMem = CartService.SelectPayMem(checkno);
 			//System.out.println("넘어오는 멤버체크:"+PayMem);
 			
 			
 		
-			
+				mv.addObject("pPayProduct",pp);
 				mv.addObject("member", m);
 				mv.addObject("paymem",p);
 				mv.setViewName("Payment/PaymentResultView");
 
 	
 			System.out.println("힝힝"+p);
-		
-			//int plist = CartService.insertPayment(totalMap);
+			pp.setId(m.getUserId());
+			pp.setPpno("Ock"+pdate+p.getP_num());
+			System.out.println("pp"+pp);
+			int payProduct = CartService.insertPayProduct(pp);
 			int insertPay = CartService.PaymentInsertDB(p);
 			//int delCartNum = CartService.delCartNum(totalMap);
 			return mv;

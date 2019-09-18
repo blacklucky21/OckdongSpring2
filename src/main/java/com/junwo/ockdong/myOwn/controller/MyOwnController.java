@@ -124,6 +124,7 @@ public class MyOwnController {
 			HttpSession session) throws IOException {
 
 		Member m = (Member) session.getAttribute("loginUser");
+
 		System.out.println("myOwnInsert.do로 들어옴");
 		System.out.println("imgSrc : " + imgSrc);
 		
@@ -152,8 +153,22 @@ public class MyOwnController {
 			System.out.println("4찬");
 		}
 
-		
-		
+
+		// session에서 로그인정보 가져오기
+		Member member = (Member)session.getAttribute("loginUser");
+
+		// 날짜가져오기 yyyymmdd형식으로
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
+        Calendar c1 = Calendar.getInstance();
+        String strToday = sdf.format(c1.getTime());
+        System.out.println("strToday : " + strToday);
+
+
+        // 변수 설정
+        int result = 0;
+		String numbers = "";
+		MBLRecipe mbl = null;
+		// 파일 생성
 		//등록할 mblRecipe정보 넣기
 		Map<String, String> list = new HashMap<String, String>();
 		
@@ -178,18 +193,21 @@ public class MyOwnController {
 		
 		result = service.insertRecipe(list);
 		
+		
 		if(result > 0) {
 			System.out.println("mblRecipe 만들기 성공");
+			 mbl = service.myMBLRecipe(fileName);
 		}else {
 			System.out.println("mblRecipe 만들기 실패");
 		}
-
+		System.out.println("pid"+mbl.getMblId());
 		mv.addObject("rice",riceIn);
 		mv.addObject("main",mainIn);
 		mv.addObject("sub1",sub1In);
 		mv.addObject("sub2",sub2In);
 		mv.addObject("soup",soupIn);
 		mv.addObject("fileName",fileName);
+		mv.addObject("mbl",mbl);
 		mv.addObject("member",m);
 
 		mv.setViewName("myOwn/myOwnPayment");

@@ -17,6 +17,11 @@
 		<typeAlias type="com.junwo.ockdong.product.model.vo.ProductQna" alias="ProductQna"/>
 		
 
+		<typeAlias type="com.junwo.ockdong.notice.model.vo.NoticeComments" alias="NoticeComments"/>
+
+		<typeAlias type="com.junwo.ockdong.cart.model.vo.PayProduct" alias="PayProduct"/>
+
+
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
@@ -26,4 +31,5 @@
 		<mapper resource="mappers/product-mapper.xml"/>
 		<mapper resource="mappers/mypage-mapper.xml"/>
 	</mappers>
+
 </configuration>
