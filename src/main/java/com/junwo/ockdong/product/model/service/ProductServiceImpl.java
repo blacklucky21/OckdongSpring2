@@ -187,6 +187,17 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.insertQna(pq);
 	}
 
+	// qna 댓글 리스트 호출
+	@Override
+	public ArrayList<ProductQna> selectQnaList(int p_Id) {
+		return pDAO.selectQnaList(p_Id);
+	}
+
+	@Override
+	public int deleteQna(ProductQna pq) {
+		return pDAO.deleteQna(pq);
+	}
+
 
 	
 

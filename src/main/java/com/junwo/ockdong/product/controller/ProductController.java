@@ -24,15 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
-
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
 import com.junwo.ockdong.member.model.vo.Member;
-
-import com.junwo.ockdong.common.PageInfo;
-import com.junwo.ockdong.common.Pagination;
-import com.junwo.ockdong.member.model.vo.Member;
-
 import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;
@@ -675,7 +669,7 @@ public class ProductController {
 		
 		pq.setQna_user(qna_user); // 작성자를 넣어준다.
 		
-		System.out.println("상품문의  객체 : "+pq);
+		System.out.println("상품문의  객체 : " + pq);
 		
 		int result = pService.insertQna(pq);
 		
@@ -686,6 +680,40 @@ public class ProductController {
 		}
 		
 	}
+	
+	//qna 리스트 호출
+	@RequestMapping("qnaList.do")
+	public void getQnaList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
+		ArrayList<ProductQna> pqList = pService.selectQnaList(p_Id);
+		
+		for(ProductQna pq : pqList) {
+			pq.setQna_user(URLEncoder.encode(pq.getQna_user(),"utf-8"));
+			pq.setQna_content(URLEncoder.encode(pq.getQna_content(),"utf-8"));
+		}
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		gson.toJson(pqList, response.getWriter());
+		
+	}
+	
+	// qna 삭제
+	@RequestMapping("deletedQna.do")
+	@ResponseBody
+	public String deleteQna(ProductQna pq, HttpSession session) throws Exception {
+		
+		System.out.println("deleteQna : " + pq);
+		
+		int result = pService.deleteQna(pq);
+		
+		if(result > 0) {
+			return "success";
+			
+		}else {
+			throw new Exception("상품 등록 실패");	
+		}
+		
+		
+	}
+	
 	
 }
 

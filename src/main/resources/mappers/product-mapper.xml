@@ -232,7 +232,7 @@ select count(*)
 	order by p_Id 
 </select>
 
-
+<!-- 댓글 등록 -->
 <insert id="insertReply" parameterType="Productreview">
 
 insert into PRODUCTREVIEW
@@ -240,6 +240,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
 
 </insert>
 
+<!-- 댓글 삭제  -->
 <update id="deleteReply">
 	update PRODUCTREVIEW
 	set STATUS = 'N'
@@ -247,6 +248,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
 
 </update>
 
+<!-- 댓글 수정 -->
 <update id="updateReply">
 	update PRODUCTREVIEW
 	set PV_REVIEWCONTENT = #{pv_reviewContent}
@@ -255,12 +257,31 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
 
 
 <!-- qna 등록 하기 -->
+ 
+<insert id="insertQna" parameterType="ProductQna"> 
+	insert into PRODUCTQNA
+	values(QNA_NO.nextval , #{qna_user}, #{qna_content}, to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'), #{p_Id}, default, default, #{qna_secret})
+
+</insert>
 
 
+<!-- qna 리스트 호출 -->
+<select id="selectQnaList" parameterType="_int" resultType="ProductQna">
+	select *
+	from (select *
+		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
+		  where p_ID = #{p_Id}
+		  order by QNA_ID desc )
+	order by QNA_ID desc
 
+</select>
 
-
-
+<!-- 상품 문의 삭제 -->
+<update id="deletedQna" >
+	update PRODUCTQNA
+	set QNA_STATUS = 'N'
+	where qna_id = #{qna_Id}
+</update>
 
 
 
