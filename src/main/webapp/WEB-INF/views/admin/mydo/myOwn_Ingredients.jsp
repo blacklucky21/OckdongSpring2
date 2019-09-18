@@ -49,7 +49,6 @@
 				<div class="listContent">
 					<div class="search_box search_field">
 						<form class="search_form">
-
 							<table class="tg">
 								<tr>
 									<th class="tg-0lax serarch_ti">검색어</th>

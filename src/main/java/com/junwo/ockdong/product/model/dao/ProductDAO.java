@@ -204,6 +204,15 @@ public class ProductDAO {
 		return sqlSession.update("productMapper.deletedQna", pq);
 	}
 
+	public ArrayList<ProductQna> QnaAll() {
+		return (ArrayList)sqlSession.selectList("productMapper.QnaAdminList");
+	}
+
+
+	public ArrayList<ProductQna> adminSearchQnA(String qnaStatus) {
+		return (ArrayList)sqlSession.selectList("productMapper.adminSearchQnA", qnaStatus);
+	}
+
 
 
 	

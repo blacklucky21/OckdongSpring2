@@ -260,7 +260,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
  
 <insert id="insertQna" parameterType="ProductQna"> 
 	insert into PRODUCTQNA
-	values(QNA_NO.nextval , #{qna_user}, #{qna_content}, to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'), #{p_Id}, default, default, #{qna_secret})
+	values(QNA_NO.nextval , #{qna_user}, #{qna_content}, to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'), #{p_Id}, default, default, #{qna_secret}, default)
 
 </insert>
 
@@ -285,8 +285,44 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
 
 
 
+<resultMap type="ProductQna" id="productQnaAdmin">
+		<id property="qna_Id" column="QNA_ID"/>
+		<result property="qna_user" column="QNA_USER"/>
+		<result property="qna_content" column="QNA_CONTENT"/>
+		<result property="qna_createDate" column="QNA_CREATEDATE"/>
+		<result property="p_Id" column="P_ID"/>
+		<result property="p_title" column="P_NAME"/>
+		<result property="p_lunchType" column="P_LUNCHTYPE"/>
+		<result property="qna_status" column="QNA_STATUS"/>
+		<result property="qna_answer" column="QNA_ANSWER"/>
+		<result property="qna_secret" column="QNA_SECRET"/>
+		<result property="qna_answerDate" column="QNA_ANSWERDATE"/>	
+</resultMap>
 
+<!-- 관리자 QnA 리스트 쿼리 -->
+<select id="QnaAdminList" resultMap="productQnaAdmin">
+	select *
+	from (select *
+		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
+		  order by QNA_ID desc )
+	where QNA_STATUS = 'Y'
+</select>
 
+<select id="adminSearchQnA" parameterType="string" resultMap="productQnaAdmin">
+	select *
+	from (select *
+		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
+		  order by QNA_ID desc )
+	where QNA_STATUS = 'Y'
+	<choose>
+		<when test="type.equals('답변중')">
+			and QNA_ANSWER = 'N'
+		</when>
+		<when test="type.equals('답변완료')">
+			and QNA_ANSWER = 'Y'
+		</when>
+	</choose>
+</select>
 
 
 </mapper>
