@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.leftWrapArea{
+	height: 100% !important;
+}
 .bodyArea {
 	width: 1300px;
 	background: white;
@@ -63,14 +66,39 @@
 	border: 5px solid #13ae67;
 }
 
-#tb {
-	margin: auto;
-	width: 700px;
-	border-collapse: collapse;
+.pagi {
+	list-style:none;
+	float:left;
+	display:inline-block;
 }
-
-#tb tr td {
-	padding: 5px;
+.pagi li {
+	float:left;
+}
+.pagi li a {
+	float:left;
+	padding:4px;
+	margin-right:3px;
+	width:25px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+.pagi li a:hover, .pagi li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+.unClick:hover, .unClick:focus{
+	cursor: default !important;
+	color: black !important;
+	border:1px solid #eee !important;
+	background-color: white !important;
+}
+.paging{
+	width: 100%;
+    text-align: center;
 }
 </style>
 </head>
@@ -81,7 +109,7 @@
 		<div class="recipeAll" style="display:inline-block; float:left;">
 			<c:if test="${!empty rList}">
 				<div style="text-align:left;">
-					<a>전체 (${rList.size()}개)</a>
+					<a>전체 (${listCount}개)</a>
 				</div>
 			</c:if>
 			<c:if test="${empty rList}">
@@ -105,50 +133,42 @@
 					</div>
 				</c:forEach>
 			</c:if>
-			
-			<table id="tb">
-				<!-- 페이징 처리 -->
-				<tr align="center" height="20" id="buttonTab">
-					<td colspan="6">
-					
-						<!-- [이전] -->
-						<c:if test="${ pi.currentPage <= 1 }">
-							[이전] &nbsp;
+		</div>
+		<div class="paging">
+			<div style="display: inline-block;">
+				<ul class="pagi">
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="myOwnList.me">
+							<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						</c:url>
+						<li><a href="${ before }"><</a></li>
+					</c:if>
+					<c:if test="${ pi.currentPage <= 1 }">
+						<li><a class="unClick" href="#"><</a></li>
+					</c:if>
+				   	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq currentPage }">
+							<li><a href="#">${ p }</a></li>
 						</c:if>
-						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="before" value="myOwnList.me">
-								<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						
+						<c:if test="${ p ne currentPage }">
+							<c:url var="pagination" value="myOwnList.me">
+								<c:param name="page" value="${ p }"/>
 							</c:url>
-							<a href="${ before }">[이전]</a> &nbsp;
+							<li><a href="${ pagination }">${ p }</a></li>
 						</c:if>
-						
-						<!-- 페이지 -->
-						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<c:if test="${ p eq currentPage }">
-								<font color="red" size="4"><b>[${ p }]</b></font>
-							</c:if>
-							
-							<c:if test="${ p ne currentPage }">
-								<c:url var="pagination" value="myOwnList.me">
-									<c:param name="page" value="${ p }"/>
-								</c:url>
-								<a href="${ pagination }">${ p }</a> &nbsp;
-							</c:if>
-						</c:forEach>
-						
-						<!-- [다음] -->
-						<c:if test="${ pi.currentPage >= pi.maxPage }">
-							[다음]
-						</c:if>
-						<c:if test="${ pi.currentPage < pi.maxPage }">
-							<c:url var="after" value="myOwnList.me">
-								<c:param name="page" value="${ pi.currentPage + 1 }"/>
-							</c:url> 
-							<a href="${ after }">[다음]</a>
-						</c:if>
-					</td>
-				</tr>
-			</table>
+					</c:forEach>
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						<li><a class="unClick" href="#">></a></li>
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="myOwnList.me">
+							<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						</c:url> 
+						<li><a href="${ after }">></a></li>
+					</c:if>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<c:import url="../footer/footer.jsp" />
@@ -160,6 +180,9 @@
 				
 				location.href="recipeDetailOne.me?mblId="+mblId;
 			});
+		});
+		$('.unClick').click(function (e) {
+			e.preventDefault();
 		});
 	</script>
 </body>

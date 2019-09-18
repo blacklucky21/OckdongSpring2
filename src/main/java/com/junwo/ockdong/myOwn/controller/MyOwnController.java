@@ -395,6 +395,7 @@ public class MyOwnController {
 		System.out.println("가져온 리스트");
 		System.out.println(rList);
 		
+		mv.addObject("listCount",listCount);
 		mv.addObject("rList", rList);
 		mv.addObject("pi",pi);
 		mv.setViewName("myOwn/myPage_RecipeList");
