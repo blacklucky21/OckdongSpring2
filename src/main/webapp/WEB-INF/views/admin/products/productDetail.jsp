@@ -1030,21 +1030,7 @@
 			
 		}
 //=============================================================================
-		// 카트 넘기기
-		$('#order_buy').click(function() {
 
-			$('#hoho').submit();
-		});
-
-		$('#cart').click(function() {
-
-			var form = document.forms["hoho"];
-
-			form.action = "CartInsert.do";
-
-			form.submit();
-
-		});
 		
 		var form = document.forms["CartandPaymentForm"];
 		// 카트 넘기기

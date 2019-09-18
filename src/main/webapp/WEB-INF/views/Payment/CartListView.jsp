@@ -435,16 +435,16 @@ border-bottom:1px solid gray;
 								/> <label for="cartSno1_9" class="check-s on">선택</label>
 						</span></td>
 						<td class="gi this-product"><span style="float: left;"><a
-								href="../goods/goods_view.php?goodsNo=1000000068"><img
+								href=""><img
 									src="${c.c_img }"
-									width="40" alt="KNITTED SUMMER KIMONO NIGHT"
+									width="90" alt="${c.cName }"
 									title="KNITTED SUMMER KIMONO NIGHT" class="middle"
 									class="imgsize-s" /></a></span>
 							<div style="display: block">
 								<!-- <div id="coupon_apply_9">
                                     <button type="button" class="btn-alert-login"><img src="/data/skin/front/no85/img/btn/coupon-apply.png" alt="쿠폰적용"/></button>
                                 </div> -->
-								<a href="../goods/goods_view.php?goodsNo=1000000068">${c.cName }</a>
+								<a href="">${c.cName }</a>
 
 
 							<!-- 	<dl>
