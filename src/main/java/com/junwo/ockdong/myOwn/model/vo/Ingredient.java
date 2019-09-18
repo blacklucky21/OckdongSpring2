@@ -7,7 +7,6 @@ public class Ingredient {
 	private String inName;
 	private String inType;
 	private int inGram;
-	private int inPrice;
 	private Date inCreateDate;
 	private String status;
 	private String inOriginalFile;
@@ -15,25 +14,23 @@ public class Ingredient {
 	
 	public Ingredient() {}
 
-	public Ingredient(String inName, String inType, int inGram, int inPrice, String inOriginalFile,
+	public Ingredient(String inName, String inType, int inGram, String inOriginalFile,
 			String inRenameFile) {
 		super();
 		this.inName = inName;
 		this.inType = inType;
 		this.inGram = inGram;
-		this.inPrice = inPrice;
 		this.inOriginalFile = inOriginalFile;
 		this.inRenameFile = inRenameFile;
 	}
 
-	public Ingredient(int inNo, String inName, String inType, int inGram, int inPrice, String status,
+	public Ingredient(int inNo, String inName, String inType, int inGram, String status,
 			String inOriginalFile, String inRenameFile, Date inCreateDate) {
 		super();
 		this.inNo = inNo;
 		this.inName = inName;
 		this.inType = inType;
 		this.inGram = inGram;
-		this.inPrice = inPrice;
 		this.status = status;
 		this.inOriginalFile = inOriginalFile;
 		this.inRenameFile = inRenameFile;
@@ -72,14 +69,6 @@ public class Ingredient {
 		this.inGram = inGram;
 	}
 
-	public int getInPrice() {
-		return inPrice;
-	}
-
-	public void setInPrice(int inPrice) {
-		this.inPrice = inPrice;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -115,7 +104,7 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [inNo=" + inNo + ", inName=" + inName + ", inType=" + inType + ", inGram=" + inGram
-				+ ", inPrice=" + inPrice + ", inCreateDate=" + inCreateDate + ", status=" + status + ", inOriginalFile="
+				+ ", inCreateDate=" + inCreateDate + ", status=" + status + ", inOriginalFile="
 				+ inOriginalFile + ", inRenameFile=" + inRenameFile + "]";
 	}
 	

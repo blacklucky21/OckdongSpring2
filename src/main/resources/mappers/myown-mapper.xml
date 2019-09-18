@@ -13,7 +13,6 @@
 		<result property="inName" column="IN_NAME"/>
 		<result property="inType" column="IN_TYPE"/>
 		<result property="inGram" column="IN_GRAM"/>
-		<result property="inPrice" column="IN_PRICE"/>
 		<result property="inCreateDate" column="IN_CREATEDATE"/>
 		<result property="status" column="STATUS"/>
 		<result property="inOriginalFile" column="IN_ORIGINALFILE"/>
@@ -55,7 +54,7 @@
 	
 	<update id="updateIn" parameterType="Ingredient">
 		update ingredients
-		set in_name=#{inName}, in_type=#{inType}, in_gram=#{inGram}, in_price=#{inPrice}, in_originalfile=#{inOriginalFile}, in_renamefile=#{inRenameFile}
+		set in_name=#{inName}, in_type=#{inType}, in_gram=#{inGram}, in_originalfile=#{inOriginalFile}, in_renamefile=#{inRenameFile}
 		where in_no = #{inNo} and status = 'Y'
 	</update>
 	
