@@ -85,16 +85,16 @@
 
 			<div style="height: auto; width:auto; overflow: auto">
 
-				<table class="tableResult ">
+				<table class="tableResult " style="border-collapse: collapse;">
 					<thead>
 						<tr >
 
 							<th nowrap style="min-height: 200px;" >주문번호</th>
+							<th nowrap>주문자 아이디</th>
 							<th nowrap>주문자명</th>
 							<th nowrap>주문자 전화번호</th>
 							<th nowrap>주문상태</th>
 							<th nowrap>상품번호</th>
-							<th nowrap>상품명</th>
 							<th nowrap>배달주소</th>
 							<th nowrap>결제금액</th>
 							<th nowrap>기사에게 남길말</th>
@@ -107,8 +107,9 @@
 					<tbody class="hover">
 						<c:forEach var="p" items='${list }' varStatus="pay">
 
-							<tr>
+							<tr >
 								<td nowrap style=" cursor:pointer" class="search" id="searchId" >${p.p_id}</td>
+								<td nowrap>${p.userid }</td>
 								<td nowrap> ${p.payname }</td>
 								<td nowrap>${p.payphone }</td>
 								<td nowrap>
@@ -132,9 +133,9 @@
 								<option class="DelivaryEnd"value="DelivaryEnd" selected>배송완료</option>
 								</c:if>
 							</select></td>
-								<td nowrap></td>
-								<td nowrap>${p.paytext }</td>
-								<td nowrap>${p.payaddress }</td>
+								
+								<td nowrap >${p.paytext }</td>
+								<td nowrap >${p.payaddress }</td>
 								<td nowrap>${p.payprice }</td>
 								<td nowrap>${p.orderMemo }</td>
 								<td nowrap>${p.paydate }</td>
