@@ -10,10 +10,13 @@
 <style>
 .bodyArea {
 	text-align: center;
-	width: 1000px;
+	padding-left: 150px;
+	padding-right: 150px;
+	width: auto;
 	background: white;
-	height: 1000px;
+	height: 600px;
 	margin: 0 auto;
+	margin-bottom: 300px;
 }
 </style>
 </head>
@@ -23,6 +26,6 @@
 		<c:import url="../member/myPageLeft.jsp" />
 		<c:import url="../member/myPageInfo.jsp" />
 	</div>
-	<c:import url="../../footer/footer.jsp" />
+		<c:import url="../../footer/footer.jsp" />
 </body>
 </html>

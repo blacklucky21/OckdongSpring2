@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.myOwn.model.dao.MyOwnDAO;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
@@ -66,10 +67,10 @@ public class MyOwnServiceImp implements MyOwnService{
 		return moDAO.deleteRecipe(mblId);
 	}
 
-	@Override
-	public ArrayList<MBLRecipe> getUserRecipe(String userId) {
-		return moDAO.getUserRecipe(userId);
-	}
+//	@Override
+//	public ArrayList<MBLRecipe> getUserRecipe(String userId) {
+//		return moDAO.getUserRecipe(userId);
+//	}
 
 	@Override
 	public ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search) {
@@ -93,6 +94,16 @@ public class MyOwnServiceImp implements MyOwnService{
 	public int updateRecipe(MBLRecipe mblR) {
 		return moDAO.updateRecipe(mblR);
 
+	}
+
+	@Override
+	public int getListCount(String userId) {
+		return moDAO.getListCount(userId);
+	}
+
+	@Override
+	public ArrayList<MBLRecipe> getUserRecipe(PageInfo pi, String userId) {
+		return moDAO.getUserRecipe(pi, userId);
 	}
 
 }

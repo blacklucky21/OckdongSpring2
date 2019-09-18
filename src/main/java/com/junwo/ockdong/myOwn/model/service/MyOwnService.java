@@ -3,6 +3,7 @@ package com.junwo.ockdong.myOwn.model.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
@@ -28,7 +29,7 @@ public interface MyOwnService {
 
 	int deleteRecipe(int mblId);
 
-	ArrayList<MBLRecipe> getUserRecipe(String userId);
+//	ArrayList<MBLRecipe> getUserRecipe(String userId);
 
 	ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search);
 
@@ -40,6 +41,10 @@ public interface MyOwnService {
 	MBLRecipe myMBLRecipe(String fileName);
 
 	int updateRecipe(MBLRecipe mblR);
+
+	int getListCount(String userId);
+
+	ArrayList<MBLRecipe> getUserRecipe(PageInfo pi, String userId);
 
 
 

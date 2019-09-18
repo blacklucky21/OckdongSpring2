@@ -3,10 +3,12 @@ package com.junwo.ockdong.myOwn.model.dao;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 
@@ -56,9 +58,9 @@ public class MyOwnDAO {
 		return sqlSession.update("myOwnMapper.deleteRecipe", mblId);
 	}
 
-	public ArrayList<MBLRecipe> getUserRecipe(String userId) {
-		return (ArrayList)sqlSession.selectList("myOwnMapper.getUserRecipe", userId);
-	}
+//	public ArrayList<MBLRecipe> getUserRecipe(String userId) {
+//		return (ArrayList)sqlSession.selectList("myOwnMapper.getUserRecipe", userId);
+//	}
 
 	public ArrayList<MBLRecipe> searchRecipeList(Map<String, String> search) {
 		return (ArrayList)sqlSession.selectList("myOwnMapper.searchRecipeList", search);
@@ -80,6 +82,20 @@ public class MyOwnDAO {
 	public int updateRecipe(MBLRecipe mblR) {
 		return sqlSession.update("myOwnMapper.updateRecipe", mblR);
 
+	}
+
+	public int getListCount(String userId) {
+		return sqlSession.selectOne("myOwnMapper.getListCount", userId);
+	}
+
+	public ArrayList<MBLRecipe> getUserRecipe(PageInfo pi, String userId) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		System.out.println(rowBounds.getLimit());//최대 개수
+		System.out.println(rowBounds.getOffset());//몇개를 재외하고 가져올건지
+		
+		return (ArrayList)sqlSession.selectList("myOwnMapper.getUserRecipe", userId, rowBounds);
 	}
 
 }

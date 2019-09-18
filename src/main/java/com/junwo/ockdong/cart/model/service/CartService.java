@@ -36,6 +36,10 @@ public interface CartService {
 
 	int insertPayProduct(PayProduct pp);
 
+	int CartInsert(Cart c);
+
+	int UpdateProductCount(Cart c);
+
 
 
 

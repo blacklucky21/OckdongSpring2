@@ -29,9 +29,10 @@
 	<!-- 윗부분 -->
 	 <!-- 전체 감싸기 -->
 	  <!-- ▼▼▼▼ main ▼▼▼▼ -->
+	 
 	 <div class="shCMSshop">
 		<div class="shopView">
-	  <form action="dasdaseaes.do"  method="post" id="hoho">
+	   <form action="payinsert.pay"  method="post" id="CartandPaymentForm">
 			<div class="viewHeader">
 				<!-- 상품이미지 -->
 				<div class="productImg">
@@ -71,7 +72,7 @@
 					<div class="all-price">총 상품금액        <span class="commPrice">${p.p_price}</span>원</div>
 					<div class="btn">
 						<a id="cart">장바구니</a>
-						<a  id="order_buy">구매하기</a>
+						<a id="order_buy">구매하기</a>
 					</div>
 					</c:if>	
 					
@@ -83,21 +84,25 @@
 					 
 				</div>
 			</div>
-			<input type="hidden" name = "" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
-			<input type="hidden" name = "" id="p_price" value="${p.p_price }" ><!-- 총가격 -->
-			<input type="hidden" name = "" value="${p.p_Id}" ><!-- 상품번호 -->
+		
+		<!-- 구매 -->
+			<input type="hidden" name = "p_img" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
+			<input type="hidden" name = "payprice" class="p_price" value="${p.p_price }" ><!-- 총가격 -->
+			<input type="hidden" name = "p_num" value="${p.p_Id}" ><!-- 상품번호 -->
 			<input type="hidden" name = "" value="${p.p_price }" ><!-- 개별 -->
-			<input type="hidden" name = "" id = "p_count" value="" ><!-- 갯수 -->
-			<input type="hidden" name = "" id = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->
+			<input type="hidden" name = "" class = "p_count" value="1"  >
+			<input type="hidden" name = "" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
+			
+			
 			
 			
 		<!-- 카트 -->
-			<input type="hidden" name = "" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
-			<input type="hidden" name = "" id="p_price" value="${p.p_price }" ><!-- 총가격 -->
-			<input type="hidden" name = "" value="${p.p_Id}" ><!-- 상품번호 -->
-			<input type="hidden" name = "" value="${p.p_price }" ><!-- 개별 -->
-			<input type="hidden" name = "" id = "p_count" value="" ><!-- 갯수 -->
-			<input type="hidden" name = "" id = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
+			<input type="hidden" name = "c_img" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
+			<input type="hidden" name = "" class="p_price" value="${p.p_price }" ><!-- 총가격 -->
+			<input type="hidden" name = "p_id" value="${p.p_Id}" ><!-- 상품번호 -->
+			<input type="hidden" name = "cPrice" value="${p.p_price }" ><!-- 개별 -->
+			<input type="hidden" name = "cAmount" class = "p_count" value="1" >
+			<input type="hidden" name = "cName" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
 			
 			
 			</form>
@@ -400,13 +405,13 @@
     	comm = parseInt(comm) + parseInt(standard);
     	console.log($(".commPrice"));
     	console.log($(".commPrice").text());
-    	$('#p_price').val(comm);
-    	console.log("가격 : " + $('#p_price').val());
+    	$('.p_price').val(comm);
+    	console.log("가격 : " + $('.p_price').val());
     	
      	$(".commPrice").text("");
     	$(".commPrice").text(comm);
         orderCnt = eval(orderCnt) + 1;
-        $('#p_count').val(orderCnt);
+        $('.p_count').val(orderCnt);
         if(comm >= 20000){
         	$("#del").text("0 원");
         }
@@ -419,13 +424,14 @@
      	$(".commPrice").text("");
     	$(".commPrice").text(comm);
         orderCnt = eval(orderCnt) - 1;
-        $('#p_count').val(orderCnt);
+        $('.p_count').val(orderCnt);
         if(comm < 20000){
         	$("#del").text("2500 원");
         }
     }
     
-    console.log("갯수 : " + $('#p_count').val());
+    console.log("갯수 : " + $('.p_count').val());
+
     orderCnt = Number(orderCnt.toString().replace(/\D/g, '')) || 1;
 
     if (eval(orderCnt) < 1) {
@@ -789,6 +795,7 @@
 							+ data[i].qna_createDate
 							+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
 
+
 							);
 				}
 			}else if(data[i].qna_secret == 'N'){
@@ -874,6 +881,62 @@
 			}
 		}				
 					
+
+	    target.hide();
+	    $('#inquiryAnswer' + index).hide();
+	}
+	
+	// 취소
+	var cancelModifyInquiry = function (index) {
+	    var e = getEvent();
+	    e.stopPropagation();
+
+	    $('#modforminquiry' + index).remove();
+	    var target = $('#inquiry' + index);
+	    target.show();
+	    if ($('#inquiryAnswer' + index + ' .message').html().trim() != '') {
+	        $('#inquiryAnswer' + index).show();
+	    }
+	    currentEditId = '';
+	}
+	
+	var form = document.forms["CartandPaymentForm"];
+	// 카트 넘기기
+	$('#order_buy').click(function(){
+		
+		$('#CartandPaymentForm').submit();
+		
+	});
+	
+	$('#cart').click(function(){
+		
+		   var formData = new FormData(form);
+			 $.ajax({
+		            cache : false,
+		            url : "cartInsert.cart", // 요기에
+		            processData: false,
+		            contentType: false,
+		            type : 'POST', 
+		            data : formData, 
+		            success : function(data) {
+		        		var bool = confirm("장바구니에 추가되었습니다.바로 장바구니 페이지로 이동하겠습니까?");
+		    			
+		    			if(bool){
+		    				
+		    				
+		    				location.href='CartView.do'; 
+		    				
+		    			}
+		            	
+		            }, 
+		    
+		            error : function(xhr, status) {
+		                alert(xhr + " : " + status);
+		            }
+		        }); // $.ajax 
+		
+		
+
 		
 
 									$div.append($div1);

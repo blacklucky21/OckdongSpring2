@@ -86,7 +86,6 @@
 									<tr>
 										<th>재료번호</th>
 										<th>재료명</th>
-										<th>가격</th>
 										<th>용량(g)</th>
 										<th>타입</th>
 										<th>등록일</th>
@@ -99,7 +98,6 @@
 							 			<tr class="list${num.count}">
 											<td class="py" id="py">${ i.inNo }</td>
 											<td class="pp detailBtn" onclick="detailBtn(${ i.inNo });">${i.inName }</td>
-											<td class="pp">${ i.inPrice }</td>
 											<td class="pp">${ i.inGram }</td>
 											<td class="pp">${ i.inType }</td>
 											<td class="pp">${ i.inCreateDate }</td>
@@ -166,7 +164,6 @@
 										console.log(data[i]);
 										
 										$tdName = $("<td class='pp detailBtn' onclick='detailBtn(" + data[i].inNo + ");'>").text(decodeURIComponent(data[i].inName.replace(/\+/g, " ")));
-										$tdPrice = $("<td class='pp'>").text(data[i].inPrice);
 										$tdGram = $("<td class='pp'>").text(data[i].inGram);
 										$tdType = $("<td class='pp'>").text(decodeURIComponent(data[i].inType.replace(/\+/g, " ")));
 										$tdCreateDate = $("<td class='pp'>").text(data[i].inCreateDate);
@@ -176,7 +173,6 @@
 										
 										$tr.append($tdNo);
 										$tr.append($tdName);
-										$tr.append($tdPrice);
 										$tr.append($tdGram);
 										$tr.append($tdType);
 										$tr.append($tdCreateDate);

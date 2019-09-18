@@ -10,10 +10,13 @@
 <style>
 .bodyArea {
 	text-align: center;
-	width: 1000px;
+	padding-left: 150px;
+	padding-right: 150px;
+	width: auto;
 	background: white;
-	height: 1000px;
+	height: 600px;
 	margin: 0 auto;
+	margin-bottom: 300px;
 }
 #gwangseong{
 		visibility: hidden;
