@@ -8,8 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
@@ -193,7 +191,17 @@ public class ProductDAO {
 
 	// qna 등록
 	public int insertQna(ProductQna pq) {
-		return sqlSession.insert("productMapper.insertQna",pq);
+		return sqlSession.insert("productMapper.insertQna", pq);
+	}
+
+	// qna 리스트 읽어 가기
+	public ArrayList<ProductQna> selectQnaList(int p_Id) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectQnaList" , p_Id);
+	}
+
+	// qna 삭제
+	public int deleteQna(ProductQna pq) {
+		return sqlSession.update("productMapper.deletedQna", pq);
 	}
 
 

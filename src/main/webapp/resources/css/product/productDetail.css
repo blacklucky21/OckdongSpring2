@@ -194,7 +194,7 @@
 
 .ico-lock {
    width: 21px;
-    height: 13px;
+    height: 17px;
     display: inline-block;
     text-indent: -9999px;
    background: url(../../img/lock.png);
@@ -233,20 +233,19 @@ fieldset, li {
 }
 
 .history .history_wrap .con-qa {
-    border-bottom: 1px solid #ababab;
     padding-bottom: 20px;
 }
 .history .history_wrap .info_top {
     padding-top: 20px;
 }
 /* 작성자 */
-.history .history_wrap .info_top .name {
+ .history .history_wrap .info_top .name {
     font-size: 13px;
     color: #464646;
     font-weight: bold;
-}
+} 
 /* 작성자 다음에 | 추가 해주는 after */
-.history .history_wrap .info_top .name:after {
+ .history_wrap .info_top .date:before {
     display: inline-block;
     content: '';
     width: 1px;
@@ -307,6 +306,15 @@ fieldset, li {
     outline:none;
 }
 
+.qnanone{
+	    text-align: center;
+    border-top: 1px solid black;
+    padding-top: 38px;
+}
+
+#qSubmit:hover {
+    color: #fff;
+}
 	/*jquery용 테이블 셋팅*/
 	.shCMSshop .shopView .viewBody table{display: none;}
 	.shCMSshop .shopView .viewBody table.active{display: table;}

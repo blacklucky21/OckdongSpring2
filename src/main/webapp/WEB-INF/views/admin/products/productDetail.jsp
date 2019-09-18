@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- css 시작 -->
-<link rel="stylesheet" href="resources/css/bootstrap.css">
  <link rel="stylesheet" href="resources/css/product/productDetail.css"> 
+<link rel="stylesheet" href="resources/css/bootstrap.css">
 
 <!-- css 끝 -->
 
@@ -213,7 +213,6 @@
 										<p class="textarea-limit length_inquiriy">
 											<span>0</span>자 / 1000자
 										</p>
-										<!-- 20190225 -->
 									</div>
 								</div>
 								<div class="secret cf">
@@ -238,7 +237,9 @@
 								</div>
 							</form>
 						</div>
+						
 						<!-- 여기서 상품 문의가 있다면 -->
+					
 						<div class="history">
 							<div class="history_wrap">
 								<div id="proInquiry" style="border-top: 1px solid #ababab;">
@@ -249,7 +250,7 @@
 
 												<div class="con-qa">
 													<div class="info_top">
-														<span class="name">st******@naver.com</span> <span
+														<span class="name"></span> <span
 															class="date">2019-09-15 13:19:31</span>
 													</div>
 													<p class="txt">ddzzz</p>
@@ -261,10 +262,13 @@
 														<button type="button" class="btn ctrl"
 															onclick="deleteInquiry(this)">삭제</button>
 													</div>
-													</c:if>
-												</div> <!-- //상품문의 -->
+													</c:if> 
+												</div> 
+												<!-- //상품문의 -->
+												
 											</li>
 										</ul>
+										
 										<ul id="inquiryAnswer" class="open"></ul>
 										<!-- 답변시 생겨야 할 부분 -->
 										<li colspan="5">
@@ -285,6 +289,8 @@
 								</div>
 							</div>
 						</div>
+						
+						
 					</div>
 				</div>
 				<table class="tquestion">
@@ -444,10 +450,7 @@
 	    if (isNaN(cnt) || cnt <= 0) {
 	        alert('최소수량은 1이상입니다.');
 	        obj.value = 1;
-	        
-	        
-	        
-	        
+    
 	    }
 	    if(optionNo) {
 	        setTotalOptionPrice(optionNo,cnt);
@@ -500,38 +503,6 @@
 	});
 	
 //===============================================================================	 
-	//상품 목록에서 삭제 기능 - 완
-	$(document).on('click','.item-close',{},function(e){
-	   e.preventDefault();
-	   var $el = $(e.currentTarget);
-	   $el.closest('.item').remove();
-	   //삭제 시 총 가격에서 빼기 - 50% 완(전역으로 지정한 price_sum은 0으로 초기화가 안되고있음)
-	   var src_price = $el.siblings('.item-price').text();
-	   var price = src_price.split('원');
-	   var price_sum = $('.all-price span').html();
-	   
-	   var result_price = price_sum - price[0];
-	   $('.all-price span').html(result_price);
-	   // var price_sum = 0;
-
-	   //  if($('.item').length = '0'){
-	   //  var price_sum = 0;
-	   //     $('.all-price span').html(price_sum);
-	   // }
-		 if($('.item').length='0'){
-				var price_sum = 0;
-		 }
-	  options = $.grep(options, function(value) {
-	    return value != $.trim($el.closest('.item').find('.item-name').text());
-	  });
-	  // console.log(options);
-	var price_sum = 0;
-	});
-	var price_sum = 0;
-	
-	
-
-//===============================================================================	 	
 	// 상품 후기 댓글 부분
 	function chname(ii){
 	console.log(ii);
@@ -595,6 +566,7 @@
 				
 				
 				$('#pvcount').text(data.length);
+				
 				
 				if(data.length > 0){
 					for(var i in data){
@@ -729,7 +701,7 @@
 	    $('.length_' + key).text(len + '자 / 1000자');
 	}
 	
-	// 상품 문의 게시글 불러 오기
+	// 상품 문의 디테일 들어오면 실행 한다.
 	$(function(){
 		getQnaList();
 	});
@@ -738,19 +710,27 @@
 	$('#qSubmit').on("click", function(){
 		var qna_content = $('#qna_content').val();
 		console.log(qna_content);
+		
+		// 비밀글인지 아닌지 판단한다.
+		if($('#secretedCheckBox').prop("checked") ){
+			var qna_secret = 'Y';
+		}else{
+			var qna_secret = 'N';
+		}
+		
 		var p_Id = ${p.p_Id};
 		
-		if(qna_content.val().trim() == ""){
+		if(qna_content.trim() == ""){
 			alert("내용을 입력하세요.");
 			$('#qna_content').focus();
 			return false;
 		}
 		
 		
-		
+		// 문의글 등록
 		$.ajax({
 			url: "addQna.do",
-			data:{qna_content:qna_content, p_Id:p_Id},
+			data:{qna_content:qna_content, p_Id:p_Id, qna_secret:qna_secret},
 			type:"post",
 			success:function(data){
 				if(data =="success"){
@@ -764,67 +744,234 @@
 	
 	// 상품 문의 ajax 가지고 오기
 	function getQnaList(){
+		var p_Id = ${p.p_Id}; // 상품 번호 가지고 온다.
 		
-	}
-	
-	
-	
-	
-	
-	/* 수정 버튼 눌리며 */
-	var modifyInquiry = function (ctrl,index) {
-		
-		alert("수정 버튼 눌려 이쪽으로 옴");
-	    var e = getEvent(); 
-	    e.stopPropagation();
-	    if (currentEditId !== '') {
-	        $('#modform' + currentEditId).remove();
-	        var target = $('#' + currentEditId);
-	        target.show();
-	    }
-	    currentEditId = 'inquiry' + index;
+		$.ajax({
+			url:"qnaList.do",
+			data:{p_Id:p_Id},
+			dataType:"json",
+			success:function(data){
+				
+				$div = $('.history');
+				$div.html("");
+				var nick = $('#nick').val();
+				var $div1;
+				
+				$('#qacount').text(data.length);
+				if(data.length > 0){
+					for(var i in data){
+						
+		// 로그인 아이디와 작성자 아이디가 같을 경우
+		if(decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) == nick ){
+			
+			// 비밀 글 인지 판단 한다.
+			if(data[i].qna_secret == 'Y'){
+				if(data[i].qna_status == 'Y'){
+					
+				$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
+				
+				.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+						+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+						+ "</span>"
+						+ "<span class='date'>"
+						+ data[i].qna_createDate
+						+ "<span class='ico-lock'></div><p class='txt' id ='qnacontext'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 
-	    var inquiry = shop.product.getInquiry(index);
-	    var target = $('#inquiry' + index);
-	    target.after('<tr id="modforminquiry' + index + '" style="display:block"></tr>');
-	    $('#inquiriy-modify-template').renderTemplate({ "inquiriy": inquiry, "index": index }, '#modforminquiry' + index);
+						);
+				}else{
+					// 글 삭제함
+					$div1 = $("<div class='history_wrap'>")
+					
+					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+							+ "</span>"
+							+ "<span class='date'>"
+							+ data[i].qna_createDate
+							+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
 
-	    target.hide();
-	    $('#inquiryAnswer' + index).hide();
-	}
-	
-	// 취소
-	var cancelModifyInquiry = function (index) {
-	    var e = getEvent();
-	    e.stopPropagation();
+							);
+				}
+			}else if(data[i].qna_secret == 'N'){
+				if(data[i].qna_status == 'Y'){
+					
+				$div1 = $("<div class='history_wrap'>")
+				
+				.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+						+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+						+ "</span>"
+						+ " <span class='date'>"
+						+ data[i].qna_createDate 
+						+ "<span></div><p class='txt' id ='qnacontext'>"
+						+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i+"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl'  id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
+													);
+				}else{
+					$div1 = $("<div class='history_wrap'>")
+					
+					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+							+ "</span>"
+							+ "<span class='date'>"
+							+ data[i].qna_createDate
+							+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
 
-	    $('#modforminquiry' + index).remove();
-	    var target = $('#inquiry' + index);
-	    target.show();
-	    if ($('#inquiryAnswer' + index + ' .message').html().trim() != '') {
-	        $('#inquiryAnswer' + index).show();
-	    }
-	    currentEditId = '';
-	}
-	
-	
-	// 카트 넘기기
-	$('#order_buy').click(function(){
+							);
+				}
+					
+			}
+			
+			
+		// 로그인 안한 상태 보이는 부분
+		}else{
+			if(data[i].qna_secret == 'Y'){
+				if(data[i].qna_status == 'Y'){
+			$div1 = $("<div class='history_wrap'>")
+			
+			.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+					+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+					+ "</span>"
+					+ "<span class='date'>"
+					+ data[i].qna_createDate
+					+ "<span class='ico-lock'></div><p class='txt'>비공개 문의 글 입니다.</p></div></li></ul></div></div></div>"																												
+
+												);
+					
+				}else{
+					$div1 = $("<div class='history_wrap'>")
+					
+					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+							+ "</span>"
+							+ "<span class='date'>"
+							+ data[i].qna_createDate
+							+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"
+							);
+				}
+			}else if(data[i].qna_secret == 'N'){
+				if(data[i].qna_status == 'Y'){
+					
+			$div1 = $("<div class='history_wrap'>")
+			
+			.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+					+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+					+ "</span>"
+					+ "<span class='date'>"
+					+ data[i].qna_createDate
+					+ "<span></div><p class='txt'>"
+					+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p></div></li></ul></div></div></div>"																												
+
+												);
+				}else{
+					$div1 = $("<div class='history_wrap'>")
+					
+					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+							+ "</span>"
+							+ "<span class='date'>"
+							+ data[i].qna_createDate
+							+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다. </p>"
+							);
+				}
+			}
+		}				
+					
 		
-		$('#hoho').submit();
-	});
-	
-	$('#cart').click(function(){
-		
-		var form = document.forms["hoho"];
-		
-		form.action ="CartInsert.do";
-		
-		form.submit();
-		
-	});
-	
-	
+
+									$div.append($div1);
+
+								}
+							}else{
+								$div1 = $("<div class='qnanone'>").text("등록된 상품문의가 없습니다.");
+								$div.append($div1);
+							}
+						}
+					});
+		}
+
+		/* 수정 버튼 눌리며 */
+		function modifyInquiry(i, qna_Id){
+			console.log("수정할 게시판 번호 :  " + qna_Id);			
+			
+			var div = $('#history_wrap' + i);
+			var text = $('#qnacontext').text();
+			
+			
+			console.log(text);
+			
+			var append = "";
+			append += "<form id=inquiryModifyForm" +  + " action=''>";
+	        append += "<div class='text-wrap'>";
+	        append += "<div class='textarea'>";
+	        append += "<textarea class='textarea-normal textarea_inquiriy' name='content' cols='30' rows='10' maxlength='1000' onkeydown='updateLength('')' onkeypress='updateLength('')' onkeyup='updateLength('')' onchange='updateLength('')'>"+text + "</textarea>";
+	        append += "<p class='textarea-limit length_inquiriy'>0자 / 1000자</p>";
+	        append += "</div>";
+	        append+=  "</div>";
+	        append +=  "<div class='secret cf'>";
+	        append +=  "<dl class='txt'>";
+	        append += "<dt>";
+	        append += "<div class='qa-checkbox'>";
+	        append += "<span class='ico-lock'>lock</span>";
+	        append += "<p class='checkbox-normal'>";
+	        append +="<input id='modifySecretedCheckBox' type='checkbox'>";
+	        append += "<label></label>";
+	        append += "</p>";
+	        append += "비밀글 문의";
+	        append += "</div>";
+	        append += "</dt>";
+	        append += "</dl>";
+	        append += "<p class='btn-row' style='text-align:left;'>";
+	        
+	        append += "<input value='' name='' type='hidden'>";	        
+	        append += "<button type='button' class='btn white-2 style-3-1' onclick='cancelModifyInquiry('')'>취소하기</button>";
+	        append += "<button type='submit' class='btn black style-3-1' onclick='submitModifyInquiry('')'>등록하기</button>";
+	        append += "</p>";
+	        append += "</div>";
+	        append += "</form>";
+	        
+	        
+			div.innerHTML = append;
+	        
+	        
+	        
+		}
+
+		// 삭제
+		function deleteInquiry(qna_Id){
+			console.log("삭제할 게시판 번호 :  " + qna_Id);		
+			
+			var key = confirm("상품 문의를 삭제하시 겠습니까? 삭제한 글은 복구 되지 않습니다.");
+			
+			if(!key){
+				alert("삭제를 취소 하셨습니다.");
+			}else{
+				$.ajax({
+					url:"deletedQna.do",
+					data:{qna_Id : qna_Id},
+					type:"post",
+					success:function(data){
+						if(data == "success"){
+							getQnaList();
+						}	
+					}
+				});
+			}
+			
+		}
+
+		// 카트 넘기기
+		$('#order_buy').click(function() {
+
+			$('#hoho').submit();
+		});
+
+		$('#cart').click(function() {
+
+			var form = document.forms["hoho"];
+
+			form.action = "CartInsert.do";
+
+			form.submit();
+
+		});
 	</script>
 	
 	
