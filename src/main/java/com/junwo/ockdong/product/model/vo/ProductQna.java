@@ -10,8 +10,8 @@ public class ProductQna {
 	private String qna_content; // 문의 내용
 	private String qna_createDate; // 작성날
 	private int p_Id; // 게시판 번호
-	private String p_title;
-	private String p_lunchType;
+	private String p_title; // 제목
+	private String p_lunchType; // 도시락 타입
 	private String qna_status; // 글 삭제 여부
 	private String qna_answer; // 답변 상태
 	private String qna_secret; // 비밀 여부
