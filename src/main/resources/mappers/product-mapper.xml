@@ -254,4 +254,18 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
 </update>
 
 
+<!-- qna 등록 하기 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

@@ -10,6 +10,7 @@ import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.dao.ProductDAO;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Service("pService")
@@ -178,6 +179,12 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int updateReply(Productreview pv) {
 		return pDAO.updateReply(pv);
+	}
+
+	// qna 문의길 생성
+	@Override
+	public int insertQna(ProductQna pq) {
+		return pDAO.insertQna(pq);
 	}
 
 
