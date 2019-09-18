@@ -143,7 +143,7 @@
 				<div class="modal-header">
 					<h1 class="modal-title" id="myModalLabel"><a href="blist.do">나만의 도시락</a></h1>
 				</div>
-			
+				<img style="height: 2300px;" src="resources/img/myOwn/나만의_도시락_만들기.png"/>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
