@@ -436,7 +436,7 @@ border-bottom:1px solid gray;
 						</span></td>
 						<td class="gi this-product"><span style="float: left;"><a
 								href="../goods/goods_view.php?goodsNo=1000000068"><img
-									src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png"
+									src="${c.c_img }"
 									width="40" alt="KNITTED SUMMER KIMONO NIGHT"
 									title="KNITTED SUMMER KIMONO NIGHT" class="middle"
 									class="imgsize-s" /></a></span>

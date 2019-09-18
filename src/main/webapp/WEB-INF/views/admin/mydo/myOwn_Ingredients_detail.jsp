@@ -165,10 +165,6 @@
 					<div class="sub_middle">
 						<table>
 							<tr>
-								<th class="head">판매가</th>
-								<td class="sub mi"><input type="text" name="inPrice" id="inPrice" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="${ingredient.inPrice}">&nbsp;원 <span><label id="hide">가격은 10원 단위로 입력이 가능합니다.</label></span></td>
-							</tr>
-							<tr>
 								<th class="head">1인분 기준 양</th>
 								<td class="sub mi"><input type="text" name="inGram" id="inGram" placeholder="숫자만 입력" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="${ingredient.inGram}">&nbsp;g</td>
 							</tr>
@@ -250,12 +246,11 @@
 			function validate(){
 				var inName = $("#inName").val();
 				var inCategory = $("#inCategory").val();
-				var inPrice = $("#inPrice").val();
 				var inGram = $("#inGram").val();
 				var imgArea = $("#imgArea");
 				
-				if(inName != "" && inCategory != "" && inPrice != "" && inGram != "" && imgArea.attr("src") != "" && imgArea.attr("src") != "resources/img/myOwn/Plus-Add.png"){
-					console.log("inName : " + inName + ", inCategory : " + inCategory + ", inPrice : " + inPrice + ", inGram : " + inGram);
+				if(inName != "" && inCategory != ""&& inGram != "" && imgArea.attr("src") != "" && imgArea.attr("src") != "resources/img/myOwn/Plus-Add.png"){
+					console.log("inName : " + inName + ", inCategory : " + inCategory + ", inGram : " + inGram);
 					console.log("이미지 있음");
 					return true;
 				}
