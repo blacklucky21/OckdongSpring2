@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.common.Pagination;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
@@ -374,16 +376,36 @@ public class MyOwnController {
 	}
 	
 	@RequestMapping("myOwnList.me")
-	public ModelAndView myOwnListMyPage(ModelAndView mv, HttpSession session) {
+	public ModelAndView myOwnListMyPage(@RequestParam(value="page", required=false) Integer page, ModelAndView mv, HttpSession session) {
 		
 		Member member = (Member)session.getAttribute("loginUser");
 		
-		ArrayList<MBLRecipe> rList = service.getUserRecipe(member.getUserId());
-		if(rList != null) {
-			mv.addObject("rList",rList);
+		int currentPage = 1;
+		if (page != null) {
+			currentPage = page;
+			System.out.println("page번호 : " + page);
 		}
+
+		int listCount = service.getListCount(member.getUserId());
+		System.out.println("자신이 등록한 나만의 레시피 개수 : " + listCount);
+		
+		PageInfo pi = Pagination.getPageInfoNine(currentPage, listCount);
+		
+		ArrayList<MBLRecipe> rList = service.getUserRecipe(pi, member.getUserId());
+		System.out.println("가져온 리스트");
+		System.out.println(rList);
+		
+		mv.addObject("rList", rList);
+		mv.addObject("pi",pi);
 		mv.setViewName("myOwn/myPage_RecipeList");
 		return mv;
+		
+//		ArrayList<MBLRecipe> rList = service.getUserRecipe(member.getUserId());
+//		if(rList != null) {
+//			mv.addObject("rList",rList);
+//		}
+//		mv.setViewName("myOwn/myPage_RecipeList");
+//		return mv;
 	}
 	
 	@RequestMapping("recipeDetailOne.me")
