@@ -4,7 +4,7 @@
 	
 	<insert id="insertIngredient" parameterType="Ingredient">
 		insert into ingredients
-		values(INGREDIENTS_SEQ.NEXTVAL,#{inName},#{inType},#{inGram},#{inPrice},default,default,#{inOriginalFile},#{inRenameFile})
+		values(INGREDIENTS_SEQ.NEXTVAL,#{inName},#{inType},#{inGram},default,default,#{inOriginalFile},#{inRenameFile})
 	</insert>
 	
 	
