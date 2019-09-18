@@ -13,6 +13,7 @@ import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
 @Repository("pDAO")
@@ -187,6 +188,12 @@ public class ProductDAO {
 	// 댓글 수정한다.
 	public int updateReply(Productreview pv) {
 		return sqlSession.update("productMapper.updateReply",pv);
+	}
+
+
+	// qna 등록
+	public int insertQna(ProductQna pq) {
+		return sqlSession.insert("productMapper.insertQna",pq);
 	}
 
 

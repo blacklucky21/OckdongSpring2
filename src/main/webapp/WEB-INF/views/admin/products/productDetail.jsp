@@ -64,7 +64,7 @@
 					
 					<div class="manufact">배송비       <span id="del">2500 원 </span>           <span style="font-size: x-small;">20000원 이상 무료 배송</span></div>
 					
-					<div class="origin">수량           <div class="amount"><button class="decrease" onclick="cntSet('minus')">-</button><input id="orderCnt" class="input-normal" type="text" maxlength="8" autocomplete="off"  value="1" onblur="buyCountInputCheck(this)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><button class="increase"  onclick="cntSet('plus')">+</button></div></div>
+					<div class="origin">수량           <div class="amount"><button type="button"class="decrease" onclick="cntSet('minus')">-</button><input id="orderCnt" class="input-normal" type="text" maxlength="8" autocomplete="off"  value="1" onblur="buyCountInputCheck(this)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><button class="increase" type="button"  onclick="cntSet('plus')">+</button></div></div>
 					<div class="items">
 						
 					</div>
@@ -344,6 +344,8 @@
 			if(parseInt(count) < 1){
 				alert("수량이 1보다 작을 수 없습니다.");
 				$("#orderCnt").val("1");
+				$("#del").text("2500 원");
+				$(".commPrice").text("${p.p_price}");
 				return false;
 			}
 			
@@ -356,6 +358,12 @@
 	     	$(".commPrice").text("");
 	    	$(".commPrice").text(comm);
 			console.log(count);
+			
+			if(comm >= 20000){
+				$("#del").text("0 원");
+			}else{
+				$("#del").text("2500 원");
+			}
 		});
 	});
 
@@ -436,6 +444,10 @@
 	    if (isNaN(cnt) || cnt <= 0) {
 	        alert('최소수량은 1이상입니다.');
 	        obj.value = 1;
+	        
+	        
+	        
+	        
 	    }
 	    if(optionNo) {
 	        setTotalOptionPrice(optionNo,cnt);
@@ -796,7 +808,7 @@
 	}
 	
 	
-	
+	// 카트 넘기기
 	$('#order_buy').click(function(){
 		
 		$('#hoho').submit();

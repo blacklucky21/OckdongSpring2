@@ -229,6 +229,8 @@ public class AdminController {
 			@RequestParam("selected4") String selected4, @RequestParam("selected5") String selected5,
 			@RequestParam(value = "ingredientImg", required = false) MultipartFile uploadFile,
 			HttpServletRequest request) {
+		System.out.println("Ingredients_Insert.do안에 들어옴");
+		System.out.println("sysout In" + in);
 
 		if (inCategory.equals("4찬")) {
 			in.setInType(selected4);
@@ -252,7 +254,8 @@ public class AdminController {
 		System.out.println(in);
 
 		int result = moService.insert(in);
-
+		
+		System.out.println("result 끝남");
 		if (result > 0) {
 			return "redirect:myIn.do";
 		} else {
@@ -526,13 +529,16 @@ public class AdminController {
 	
 	@RequestMapping("myRecipeDetail.do")
 	public ModelAndView myRecipeDetail(ModelAndView mv, @RequestParam("mblId") int mblId) {
-		
+		System.out.println("mblId : " + mblId);
 		MBLRecipe mblR = moService.myRecipeDetail(mblId);
 		
 		String[] list = mblR.getNumbers().split("/");
-
+		for(int i=0; i<list.length; i++) {
+			System.out.println("list[" + i + "] : " + list[i]);
+		}
+		System.out.println(list.length);
 		Ingredient in = null;
-
+		
 		Ingredient rice = null;
 		Ingredient sub1 = null;
 		Ingredient sub2 = null;
@@ -541,7 +547,7 @@ public class AdminController {
 
 		for (int i = 0; i < list.length; i++) {
 			in = moService.selectOne(Integer.parseInt(list[i]));
-
+			System.out.println(in);
 			switch (in.getInType()) {
 			case "1_밥":
 			case "5_밥":
@@ -755,7 +761,6 @@ public class AdminController {
 	
 	@RequestMapping("inputPid.do")
 	public void inputPid(String id,String check) {
-		
 		
 		HashMap<String, String> ppcheck = new HashMap<String, String>();
 		

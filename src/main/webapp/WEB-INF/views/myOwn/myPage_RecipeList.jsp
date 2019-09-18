@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.leftWrapArea{
+	height: 100% !important;
+}
 .bodyArea {
 	width: 1300px;
 	background: white;
@@ -14,47 +17,83 @@
 	margin: 0 auto;
 	margin-top: 5%;
 }
-.imgOne{
-	width:280px;
-	height:200px;
+
+.imgOne {
+	width: 280px;
+	height: 200px;
 }
-.recipeOne{
-	width:auto;
-	height:600px;
-	padding-left: 150px;
-	padding-right: 150px;
-	display:inline-block;
-	float:left;
+
 	border-radius: 15px;
 	margin: 10px;
-	text-align:center;
-/* 	border-top: 5px solid #13ae67;
+	text-align: center;
+	/* 	border-top: 5px solid #13ae67;
 	border-left: 5px solid #13ae67; */
 }
-.recipeAll{
+
+.recipeAll {
 	margin-left: 5%;
-	width:1000px;
+	width: 1000px;
 }
-.recipeDetail{
+
+.recipeDetail {
 	margin-left: 15px;
-	text-align:left;
+	text-align: left;
 }
-.recipeTitle{
+
+.recipeTitle {
 	font-size: 20px;
 	font-weight: bold;
 }
-.recipeType{
+
+.recipeType {
 	color: #303030;
 }
-.recipePrice{
+
+.recipePrice {
 	color: #ff8d00 !important;
 }
-.recipeOne:hover{
-/* 	border-bottom: 5px solid #13ae67;
+
+.recipeOne:hover {
+	/* 	border-bottom: 5px solid #13ae67;
 	border-right: 5px solid #13ae67;
 	transition:border-bottom 0.2s, border-right 0.2s; */
 	cursor: pointer;
 	border: 5px solid #13ae67;
+}
+
+.pagi {
+	list-style:none;
+	float:left;
+	display:inline-block;
+}
+.pagi li {
+	float:left;
+}
+.pagi li a {
+	float:left;
+	padding:4px;
+	margin-right:3px;
+	width:25px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+.pagi li a:hover, .pagi li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+.unClick:hover, .unClick:focus{
+	cursor: default !important;
+	color: black !important;
+	border:1px solid #eee !important;
+	background-color: white !important;
+}
+.paging{
+	width: 100%;
+    text-align: center;
 }
 </style>
 </head>
@@ -65,7 +104,7 @@
 		<div class="recipeAll" style="display:inline-block; float:left;">
 			<c:if test="${!empty rList}">
 				<div style="text-align:left;">
-					<a>전체 (${rList.size()}개)</a>
+					<a>전체 (${listCount}개)</a>
 				</div>
 			</c:if>
 			<c:if test="${empty rList}">
@@ -90,6 +129,42 @@
 				</c:forEach>
 			</c:if>
 		</div>
+		<div class="paging">
+			<div style="display: inline-block;">
+				<ul class="pagi">
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="myOwnList.me">
+							<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						</c:url>
+						<li><a href="${ before }"><</a></li>
+					</c:if>
+					<c:if test="${ pi.currentPage <= 1 }">
+						<li><a class="unClick" href="#"><</a></li>
+					</c:if>
+				   	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq currentPage }">
+							<li><a href="#">${ p }</a></li>
+						</c:if>
+						
+						<c:if test="${ p ne currentPage }">
+							<c:url var="pagination" value="myOwnList.me">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<li><a href="${ pagination }">${ p }</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						<li><a class="unClick" href="#">></a></li>
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="myOwnList.me">
+							<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						</c:url> 
+						<li><a href="${ after }">></a></li>
+					</c:if>
+				</ul>
+			</div>
+		</div>
 	</div>
 	<c:import url="../footer/footer.jsp" />
 	<script>
@@ -100,6 +175,9 @@
 				
 				location.href="recipeDetailOne.me?mblId="+mblId;
 			});
+		});
+		$('.unClick').click(function (e) {
+			e.preventDefault();
 		});
 	</script>
 </body>

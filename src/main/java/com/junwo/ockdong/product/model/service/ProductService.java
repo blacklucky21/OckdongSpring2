@@ -6,6 +6,7 @@ import java.util.Map;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
 public interface ProductService {
@@ -71,6 +72,8 @@ public interface ProductService {
 	ArrayList<Product> selectList(PageInfo pi);
 	ArrayList<Product> selectList2(PageInfo pi);
 	ArrayList<Product> selectList3(PageInfo pi);
+	
+	int insertQna(ProductQna pq); // 문의글 생성
 	
 	
 	

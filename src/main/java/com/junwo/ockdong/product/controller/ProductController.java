@@ -668,10 +668,25 @@ public class ProductController {
 	// qna 댓글 등록
 	@RequestMapping("addQna.do")
 	@ResponseBody
-	public String insertQna(ProductQna pq,HttpSession session) {
+	public String insertQna(ProductQna pq,HttpSession session) throws Exception {
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		return null;
+		String qna_user = loginUser.getNickName(); // 작성자 이름 넣어주기
+		
+		pq.setQna_user(qna_user); // 작성자를 넣어준다.
+		
+		System.out.println("상품문의  객체 : "+pq);
+		
+		int result = pService.insertQna(pq);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			throw new Exception("댓글 등록 실패");
+		}
+		
 	}
+	
 }
 
 
