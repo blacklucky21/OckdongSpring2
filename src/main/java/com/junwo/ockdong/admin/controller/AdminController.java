@@ -2,13 +2,11 @@ package com.junwo.ockdong.admin.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Spliterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +33,7 @@ import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 
 @Controller
 public class AdminController {
@@ -591,9 +590,45 @@ public class AdminController {
 
 	// 상품 문의
 	@RequestMapping("productInquiry.do")
-	public String productInquiry() {
-		return "admin/products/productInquiry";
+	public ModelAndView productInquiry(ModelAndView mv) {
+		
+		ArrayList<ProductQna> qnaList = pService.QnaAll();
+		
+		System.out.println(qnaList);
+		System.out.println(qnaList.size());
+		
+		mv.addObject("qnaList",qnaList);
+		mv.setViewName("admin/products/productInquiry");
+		return mv;
 	}
+	@RequestMapping("adminSearchQnA.do")
+	@ResponseBody
+	public void adminSearchQnA(HttpServletResponse response, String type)
+			throws JsonIOException, IOException {
+		
+		System.out.println("찾는부분 들어옴");
+		System.out.println("type : " + type);
+		
+		ArrayList<ProductQna> pList = pService.adminSearchQnA(type);
+		
+		System.out.println(pList.size());
+		
+		if (pList != null) {
+			for (ProductQna i : pList) {
+				i.setP_title(URLEncoder.encode(i.getP_title(), "utf-8")); // 상품명
+				i.setP_lunchType(URLEncoder.encode(i.getP_lunchType(), "utf-8")); // 상품설명
+				i.setQna_user(URLEncoder.encode(i.getQna_user(), "utf-8")); // 타입
+
+			}
+		}
+		System.out.println("찾아온 QNA 개수 : " + pList.size());
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(pList, response.getWriter());
+	}
+	
+	
+	
 
 	// 회원리스트~~
 	@RequestMapping("adminMemberList.do")

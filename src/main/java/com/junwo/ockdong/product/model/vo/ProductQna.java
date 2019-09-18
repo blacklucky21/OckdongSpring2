@@ -10,9 +10,32 @@ public class ProductQna {
 	private String qna_content; // 문의 내용
 	private String qna_createDate; // 작성날
 	private int p_Id; // 게시판 번호
+	private String p_title;
+	private String p_lunchType;
 	private String qna_status; // 글 삭제 여부
 	private String qna_answer; // 답변 상태
 	private String qna_secret; // 비밀 여부
+	private String qna_answerDate; // 답변날
+	
+	
+	public String getP_lunchType() {
+		return p_lunchType;
+	}
+	public void setP_lunchType(String p_lunchType) {
+		this.p_lunchType = p_lunchType;
+	}
+	public String getQna_answerDate() {
+		return qna_answerDate;
+	}
+	public void setQna_answerDate(String qna_answerDate) {
+		this.qna_answerDate = qna_answerDate;
+	}
+	public String getP_title() {
+		return p_title;
+	}
+	public void setP_title(String p_title) {
+		this.p_title = p_title;
+	}
 	public int getQna_Id() {
 		return qna_Id;
 	}

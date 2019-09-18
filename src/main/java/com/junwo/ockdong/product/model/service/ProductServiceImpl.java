@@ -198,6 +198,16 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.deleteQna(pq);
 	}
 
+	@Override
+	public ArrayList<ProductQna> QnaAll() {
+		return pDAO.QnaAll();
+	}
+
+	@Override
+	public ArrayList<ProductQna> adminSearchQnA(String qnaStatus) {
+		return pDAO.adminSearchQnA(qnaStatus);
+	}
+
 
 	
 
