@@ -23,11 +23,6 @@
 	height: 200px;
 }
 
-.recipeOne {
-	width: 300px;
-	height: 272px;
-	display: inline-block;
-	float: left;
 	border-radius: 15px;
 	margin: 10px;
 	text-align: center;
