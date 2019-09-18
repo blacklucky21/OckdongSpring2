@@ -36,7 +36,7 @@
 					<div>
 						<span class='sub_span'>평일</span> : AM 09:30 - PM 06:00
 					</div>
-					<div class='text-red'>일요일, 공휴일 휴무</div>
+					<div class='text-red'>토요일, 일요일, 공휴일 휴무</div>
 				</div>
 			</div>
 		</div>

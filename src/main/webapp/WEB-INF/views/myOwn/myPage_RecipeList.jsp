@@ -19,8 +19,10 @@
 	height:200px;
 }
 .recipeOne{
-	width:300px;
-	height:272px;
+	width:auto;
+	height:600px;
+	padding-left: 150px;
+	padding-right: 150px;
 	display:inline-block;
 	float:left;
 	border-radius: 15px;
