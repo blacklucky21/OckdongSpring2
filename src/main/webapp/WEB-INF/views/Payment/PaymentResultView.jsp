@@ -51,19 +51,19 @@
                     <tr>
                         <td class="gi this-product">
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
+                            <span><a href=""><img src="${c.c_img }" width="100" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
 
-                                <a href="../goods/goods_view.php?goodsNo=1000000107">${c.cName }</a>
+                                <a href="">${c.cName }</a>
 
                                 <dl>
-                                    <dt>재료 :</dt>
-                                    <dd>넣을까
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>말까 :</dt>
-                                    <dd>공간
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
 

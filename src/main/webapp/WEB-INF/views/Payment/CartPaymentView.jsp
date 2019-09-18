@@ -121,19 +121,19 @@
                         <td class="gi this-product">
                         	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="40" alt="사진" title="사진" class="middle"></a></span>
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="100" alt="사진" title="사진" class="middle"></a></span>
                             <div>
 
                                 <a href="../goods/goods_view.php?goodsNo=1000000107">${c.cName }</a>
 
                                 <dl>
-                                    <dt>재료 :</dt>
-                                    <dd>넣을까
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>말까 :</dt>
-                                    <dd>공간
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
 
@@ -185,13 +185,13 @@
                                 <a href="../goods/goods_view.php?goodsNo=1000000107">${pc.cName }</a>
 
                                 <dl>
-                                    <dt>재료 :</dt>
-                                    <dd>넣을까
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>말까 :</dt>
-                                    <dd>공간
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
 
@@ -262,7 +262,7 @@
                             <tr>
                                 <th class="ta-l required" aria-required="true">주문하시는 분</th>
                                 <td>
-                                    <div class="txt-field hs" style="width:160px;">
+                                    <div class="txt-field hs text" style="width:160px;">
                                         <input type="text" name="payname" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
                                     </div>
                                 </td>
