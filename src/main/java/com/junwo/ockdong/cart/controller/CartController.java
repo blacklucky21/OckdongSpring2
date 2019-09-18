@@ -209,11 +209,11 @@ public class CartController {
 	
 		ArrayList<Cart> list = CartService.CartPayment(totalMap);
 		hitPno[0] = String.valueOf(list.get(0).getcNo());
-		hitPno2[0] = "Ock"+pdate+hitPno[0];
+		hitPno2[0] = "oc_"+pdate+"C";
 		checkno = Integer.parseInt(hitPno[0]);
 		totalMap.put("hitPno",hitPno2);
 		System.out.println("리스트크기"+list.size());
-		p.setP_id("Ock"+pdate+hitPno[0]);
+		p.setP_id("oc_"+pdate+"C");
 		p.setPayprice( Integer.parseInt(total[0]));
 		//Payment PayMem = CartService.SelectPayMem(checkno);
 		//System.out.println("넘어오는 멤버체크:"+PayMem);
@@ -228,8 +228,8 @@ public class CartController {
 		} else {}
 		System.out.println("힝힝"+p);
 	
-		int plist = CartService.insertPayment(totalMap);
 		int insertPay = CartService.PaymentInsertDB(p);
+		int plist = CartService.insertPayment(totalMap);
 		int delCartNum = CartService.delCartNum(totalMap);
 		return mv;
 	}
@@ -313,7 +313,7 @@ public class CartController {
 			//checkno = Integer.parseInt(hitPno[0]);
 			totalMap.put("hitPno",hitPno2);
 			//System.out.println("리스트크기"+list.size());
-			p.setP_id("Ock"+pdate+p.getP_num());
+			p.setP_id("oc_"+pdate+"M");
 			p.setPayprice( Integer.parseInt(total[0]));
 			p.setPaytext(pp.getPname());
 			//Payment PayMem = CartService.SelectPayMem(checkno);
@@ -329,12 +329,81 @@ public class CartController {
 	
 			System.out.println("힝힝"+p);
 			pp.setId(m.getUserId());
-			pp.setPpno("Ock"+pdate+p.getP_num());
+			pp.setPpno("oc_"+pdate+"M");
 			System.out.println("pp"+pp);
-			int payProduct = CartService.insertPayProduct(pp);
 			int insertPay = CartService.PaymentInsertDB(p);
+			int payProduct = CartService.insertPayProduct(pp);
 			//int delCartNum = CartService.delCartNum(totalMap);
 			return mv;
 		}
+		
+		@RequestMapping("cartInsert.cart")
+		public String CartInsert(ModelAndView mv,@ModelAttribute Cart c,HttpSession session) {
+			
+			Member m = (Member) session.getAttribute("loginUser");
+			
+			c.setId(m.getUserId());
+			
+			System.out.println(c);
+			int cartInsert = CartService.CartInsert(c);
+			System.out.println("삽입체크:"+cartInsert);
+			if(cartInsert >0) {
+				
+			}
+			
+			return "redirect:productDetail.do?p_Id="+c.getP_id();
+			
+		}
+		
+		@RequestMapping("payinsert.pay")
+		public ModelAndView payinsert(ModelAndView mv,@ModelAttribute Cart c,HttpSession session){
+			
+			Member m = (Member) session.getAttribute("loginUser");
+			
+			c.setId(m.getUserId());
+			
+			mv.addObject("PayProduct",c);
+			mv.addObject("member", m);
+			mv.setViewName("Payment/CartPaymentView");
+			
+			
+			
+			
+			
+			return mv;
+			
+		}
+		
+		@RequestMapping("PaymentResultProduct.do")
+		public ModelAndView PayMentResultProduct(ModelAndView mv, @RequestParam("total") String total, HttpSession session,
+			@ModelAttribute Payment p, @ModelAttribute Cart c ,@ModelAttribute PayProduct pp) {
+			
+			Member m = (Member) session.getAttribute("loginUser");
+			Date now = new Date();
+			SimpleDateFormat sfmt = new SimpleDateFormat("YYMMdd");
+			String pdate = sfmt.format(now);
+			
+			
+			p.setP_id("oc_"+pdate+'P');
+			pp.setPpno("oc_"+pdate+'P');
+			p.setPayprice( Integer.parseInt(total));
+			System.out.println("삽입체크"+c);
+			System.out.println(p);
+			System.out.println(total);
+		
+			
+			mv.addObject("pPayProduct",pp);
+			mv.addObject("member", m);
+			mv.addObject("paymem",p);
+			mv.setViewName("Payment/PaymentResultView");
+			
+			int updateAmount = CartService.UpdateProductCount(c);
+			int insertPay = CartService.PaymentInsertDB(p);
+			int payProduct = CartService.insertPayProduct(pp);
+			return mv;
+			
+		}
+			
+		
 		
 }

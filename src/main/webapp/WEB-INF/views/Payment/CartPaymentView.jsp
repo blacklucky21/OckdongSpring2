@@ -114,12 +114,14 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${list ne null }">
 					<c:forEach var="c" items="${list }" varStatus="cart">
+					
                     <tr>
                         <td class="gi this-product">
                         	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="https://taegon.kim/wp-content/uploads/2018/05/image-5.png" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="40" alt="사진" title="사진" class="middle"></a></span>
                             <div>
 
                                 <a href="../goods/goods_view.php?goodsNo=1000000107">${c.cName }</a>
@@ -150,8 +152,8 @@
                         <strong class="price totalAmount" >${c.cPrice *c.cAmount }</strong><strong class="price">원</strong>
                         </td>
                         
-                        <c:if test="${cart.count== 1}">
-                        <td rowspan="${list.size() }" class="ta-c">
+                        
+                        <td rowspan="1" class="ta-c">
                         <span class="c-gray delivaryAmount">
                             기본 - 금액별배송비<br>
                            2500원
@@ -159,11 +161,70 @@
 																	 배송비 무료!</span> 
                                      </td>
                                      
-                                     </c:if>
+                                   
                     </tr>
 
                  </c:forEach>
+                 </c:if>
+                 <c:set var="pc" value="${PayProduct }"/>
+				<c:if test="${PayProduct ne null }">
+				  <tr>
+                        <td class="gi this-product">
+                        <input type="hidden" name="p_num" value="${pc.p_id }">
+                        <input type="hidden" name="p_id" value="${pc.p_id }">
+                        	<input type="hidden" name="p_img" value="${pc.c_img }">
+                        	<input type="hidden" name="id" value="${pc.id }">
+                        	<input type="hidden" name="pname" value="${pc.cName }">
+                        	<input type="hidden" name="pamount" value="${pc.cAmount }">
+                        	<input type="hidden" name="cAmount" value="${pc.cAmount }">
+                        	<input type="hidden" name="price" value="${pc.cPrice }">
+                            <input type="hidden" name="cartSno[]" value="16">
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${pc.c_img }" width="40" alt="사진" title="사진" class="middle"></a></span>
+                            <div>
 
+                                <a href="../goods/goods_view.php?goodsNo=1000000107">${pc.cName }</a>
+
+                                <dl>
+                                    <dt>재료 :</dt>
+                                    <dd>넣을까
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>말까 :</dt>
+                                    <dd>공간
+                                    </dd>
+                                </dl>
+
+                            </div>
+                        </td>
+                        <td class="ta-c count this-product">
+                          ${c.cAmount}
+                        </td>
+                        <td class="ta-c this-product">
+                            <strong class="price">${pc.cPrice}원</strong>
+                        </td>
+                        <td class="benefits">
+
+                        </td>
+                        <td class="ta-c">
+                        <strong class="price totalAmount" >${pc.cPrice *pc.cAmount }</strong><strong class="price">원</strong>
+                        </td>
+                        
+                        
+                        <td rowspan="1" class="ta-c">
+                        <span class="c-gray delivaryAmount">
+                            기본 - 금액별배송비<br>
+                           2500원
+                        </span> <br>  <span style="font-size:11px;">2만원 이상 주문시<br> 
+																	 배송비 무료!</span> 
+                                     </td>
+                                     
+                                   
+                    </tr>
+				
+				
+				
+				</c:if>
 
 
                     </tbody>
@@ -392,78 +453,7 @@
                                     <input type="hidden" name="deliveryAreaCharge" value="0">
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="ta-l">할인 및 적립</th>
-                                <td>
-                                    <div class="pay-benefits">
-                                        <p class="sale">할인 : <strong>(-) 0원</strong> <span>(
-                                            상품 0원
-                                            , 회원 0원
-                                            , 쿠폰 0원
-                                            )</span></p>
-                                        <p class="mileage">
-                                            적립 마일리지 : <strong>(+) 0원</strong>
-                                            <span>
-                                                (
-                                                상품 0원,
-                                                회원 0원,
-                                                쿠폰 0원
-                                                )
-                                            </span>
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="ta-l">쿠폰 사용</th>
-                                <td>
-                                    <input type="hidden" name="couponApplyOrderNo" value="">
-                                    <input type="hidden" name="totalCouponOrderDcPrice" value="">
-                                    <input type="hidden" name="totalCouponOrderPrice" value="">
-                                    <input type="hidden" name="totalCouponOrderMileage" value="">
-                                    <input type="hidden" name="totalCouponDeliveryDcPrice" value="">
-                                    <input type="hidden" name="totalCouponDeliveryPrice" value="">
-                                    <div class="pay-benefits order-coupon-benefits dn">
-                                        <p class="sale">주문할인 : <strong>(-) <b id="useDisplayCouponDcPrice">0</b>원</strong></p>
-                                        <p class="sale">배송비할인 : <strong>(-) <b id="useDisplayCouponDelivery">0</b>원</strong></p>
-                                        <p class="mileage">
-                                            적립 마일리지 : <strong>(+) <b id="useDisplayCouponMileage">0</b>원</strong>
-                                        </p>
-                                    </div>
-                                    <a href="#couponOrderApplyLayer" class="normal-btn small2 btn-open-layer"><em>쿠폰 조회 및 적용</em></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="ta-l">마일리지 사용</th>
-                                <td>
-                                    <span class="txt-field hs disabled" style="width:88px;">
-                                        <input type="text" name="useMileage" value="" onblur="mileage_use_check();" disabled="disabled" class="text money">
-                                    </span>
-                                    원
-                                    <span class="form-element space-l20">
-                                        <span class="c-blue">&nbsp; (보유 마일리지 : 0 원)</span>
-                                    </span>
-                                    <div class="c-blue">
-                                        ※
-                                        0원이상 보유해야 사용이 가능합니다.
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="ta-l">예치금 사용</th>
-                                <td>
-                                    <span class="txt-field hs" style="width:88px;">
-                                        <input type="text" name="useDeposit" value="" onblur="deposit_use_check();" class="text money">
-                                    </span>
-                                    원
-                                    <span class="form-element space-l20">
-                                        <input type="checkbox" id="useDepositAll" onclick="deposit_use_all();" class="checkbox">
-                                        <label for="useDepositAll" class="check-s">전액 사용하기</label>
-                                        <span class="c-blue">&nbsp; (보유 예치금 : 0 원)</span>
-                                    </span>
-
-                                </td>
-                            </tr>
+                          
                             <tr>
                                 <th class="ta-l c-red">최종 결제 금액</th>
                                 <td class="final">
@@ -731,12 +721,23 @@ function CallPayRequest(){
 	$('.payemail').val(email);
 	$('.delivaryCheck').val(delivaryDate+'/'+delivaryTime);
 	$('.payaddress').val(address);
-	
-	var form = document.forms["insertPaymentAbout"];
+	 var form = document.forms["insertPaymentAbout"];
+	 
+	 
+	if('${list}' !=""){
+
 	
 	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice
 	
 	form.submit();
+	}else{
+		
+		
+			
+			form.action ="PaymentResultProduct.do?total="+totalPrice;
+			
+			form.submit();
+	}
 }
 
 </script>	
