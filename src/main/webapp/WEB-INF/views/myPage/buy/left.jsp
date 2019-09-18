@@ -20,6 +20,8 @@
 			<br>
 			<div class="text" onclick="location.href='reviewServletView.bo'">내가 쓴 게시물</div>
 			<br>
+			<div class="text" onclick="location.href='reviewListView.bo'">상품 문의</div>
+			<br>
 			<div class="text" onclick="location.href='myOwnList.me'">나만의 도시락</div>
 			<br>
 			<div class="text" onclick="location.href='updatePwd_myPage.me'">비밀번호 변경</div>
@@ -33,9 +35,6 @@
 					<div class='first-child text-bold'>고객센터</div>
 					<div>
 						<span class='sub_span'>평일</span> : AM 09:30 - PM 06:00
-					</div>
-					<div>
-						토요일 : <span class='text-red'>휴무</span>
 					</div>
 					<div class='text-red'>일요일, 공휴일 휴무</div>
 				</div>
