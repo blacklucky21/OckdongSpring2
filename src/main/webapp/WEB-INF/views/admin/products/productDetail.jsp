@@ -775,12 +775,12 @@
 						+ "</span>"
 						+ "<span class='date'>"
 						+ data[i].qna_createDate
-						+ "<span class='ico-lock'></div><p class='txt' id ='qnacontext'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
+						+ "<span class='ico-lock'></div><p class='txt' id ='qnacontext"+ i +"'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 
 						);
 				}else{
 					// 글 삭제함
-					$div1 = $("<div class='history_wrap'>")
+					$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
 					
 					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
 							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
@@ -794,18 +794,18 @@
 			}else if(data[i].qna_secret == 'N'){
 				if(data[i].qna_status == 'Y'){
 					
-				$div1 = $("<div class='history_wrap'>")
+				$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
 				
 				.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
 						+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
 						+ "</span>"
 						+ " <span class='date'>"
 						+ data[i].qna_createDate 
-						+ "<span></div><p class='txt' id ='qnacontext'>"
+						+ "<span></div><p class='txt' id ='qnacontext"+ i +"'>"
 						+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i+"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl'  id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 													);
 				}else{
-					$div1 = $("<div class='history_wrap'>")
+					$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
 					
 					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
 							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
@@ -892,46 +892,55 @@
 			console.log("수정할 게시판 번호 :  " + qna_Id);			
 			
 			var div = $('#history_wrap' + i);
-			var text = $('#qnacontext').text();
 			
 			
+			var text = $('#qnacontext' + i).text();
+			
+			console.log(div);
 			console.log(text);
 			
 			var append = "";
-			append += "<form id=inquiryModifyForm" +  + " action=''>";
+			
 	        append += "<div class='text-wrap'>";
 	        append += "<div class='textarea'>";
-	        append += "<textarea class='textarea-normal textarea_inquiriy' name='content' cols='30' rows='10' maxlength='1000' onkeydown='updateLength('')' onkeypress='updateLength('')' onkeyup='updateLength('')' onchange='updateLength('')'>"+text + "</textarea>";
-	        append += "<p class='textarea-limit length_inquiriy'>0자 / 1000자</p>";
+	        append += "<textarea class='textarea-normal textarea_inquiriy' name='content' cols='30' rows='10' maxlength='1000' >" +text + "</textarea>";                       
+	        append += "<p class='textarea-limit length_inquiriy'> 자 / 1000자</p>";
 	        append += "</div>";
-	        append+=  "</div>";
-	        append +=  "<div class='secret cf'>";
-	        append +=  "<dl class='txt'>";
+	        append += "</div>";
+	        append += "<div class='secret cf' style='display: flex;'>";
+	        append += "<dl class='txt'>";
 	        append += "<dt>";
 	        append += "<div class='qa-checkbox'>";
 	        append += "<span class='ico-lock'>lock</span>";
-	        append += "<p class='checkbox-normal'>";
-	        append +="<input id='modifySecretedCheckBox' type='checkbox'>";
+	        append += "<p class='checkbox-normal' style='display: inline-block; vertical-align: middle;'>";
+	        append +="<input id='secretedCheckBox' type='checkbox'>";
 	        append += "<label></label>";
 	        append += "</p>";
 	        append += "비밀글 문의";
 	        append += "</div>";
 	        append += "</dt>";
 	        append += "</dl>";
-	        append += "<p class='btn-row' style='text-align:left;'>";
-	        
+	        append += "<p class='btn-row' style='margin-left: auto;'>";
 	        append += "<input value='' name='' type='hidden'>";	        
-	        append += "<button type='button' class='btn white-2 style-3-1' onclick='cancelModifyInquiry('')'>취소하기</button>";
-	        append += "<button type='submit' class='btn black style-3-1' onclick='submitModifyInquiry('')'>등록하기</button>";
+	        append += "<button type='button' class='btn white-2 style-3-1' onclick='cancelModifyInquiry()' style='border: 1px solid black;'>취소하기</button>";
+	        append += "<button type='button' class='btn black style-3-1' onclick='submitModifyInquiry(" + qna_Id + ");'>등록하기</button>";
 	        append += "</p>";
 	        append += "</div>";
-	        append += "</form>";
+	      
 	        
 	        
-			div.innerHTML = append;
+			//div.innerHTML = append;
+			div.html(append);
 	        
-	        
-	        
+		}
+		
+		// 수정 하기에서 취소 버튼 눌렸을 때
+		function cancelModifyInquiry(){
+			getQnaList();
+		}
+		
+		function submitModifyInquiry(qna_Id){
+			console.log(qna_Id);
 		}
 
 		// 삭제
