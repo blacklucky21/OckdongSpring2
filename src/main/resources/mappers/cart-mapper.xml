@@ -60,7 +60,7 @@ where userid = #{loginUserId} -->
 	
 	
 INSERT INTO PAYMENT_PRODUCT( PNO,PPNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID,TOTALPRICE)
-SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}</foreach> AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
+SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}||seq_payProduct.currval</foreach> AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
 
 <foreach collection="total" item ="tt" index="index">#{tt}</foreach>
  AS TOTALPRICE
@@ -76,7 +76,7 @@ WHERE CNO in
 	
 	<select id="PaymentInsertDB" parameterType="Payment">
 	
-INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{payphone},#{paycellphone},#{payemail},#{receiverName},#{receiverPhone},#{receiverCellPhone}
+INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_payProduct.nextval),#{payname},#{payphone},#{paycellphone},#{payemail},#{receiverName},#{receiverPhone},#{receiverCellPhone}
 ,#{payprice},#{orderMemo},to_char(sysdate,'yyyy/mm/dd - hh24:mi:ss'),#{delivaryDate},#{payrecipe},#{payaddress},default,#{paytext},sysdate,#{p_num},#{p_img})
 	
 	</select>
@@ -172,8 +172,23 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id},#{payname},#{pa
 	
 	<insert id="insertPayProduct" parameterType="PayProduct">
 	
-	INSERT INTO PAYMENT_PRODUCT VALUES(SEQ_PRODUCT.NEXTVAL,#{ppno},#{pname},#{pamount},#{price},sysdate,#{id},#{totalprice})
+	INSERT INTO PAYMENT_PRODUCT VALUES(SEQ_PRODUCT.NEXTVAL,#{ppno}||TO_CHAR(seq_payProduct.currval) ,#{pname},#{pamount},#{price},sysdate,#{id},#{totalprice})
 	
 	</insert>
+	
+	
+	<insert id="CartInsert" parameterType="Cart">
+	
+	INSERT INTO CART VALUES(seq_cart.nextval,#{cName},#{cAmount},#{cPrice},sysdate,#{p_id},#{id},#{c_img})
+	
+	</insert>
+	
+	<update id="UpdateProductCount">
+	
+	update product
+	set p_count = p_count+#{cAmount} , P_QUANTITY =P_QUANTITY- #{cAmount}
+	where p_id = #{p_id}
+	
+	</update>
 
 </mapper>

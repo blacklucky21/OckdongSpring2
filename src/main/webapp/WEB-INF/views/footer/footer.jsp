@@ -11,6 +11,7 @@
 	width: 100%;
 	margin: 0px auto 30px;
 	text-align: center;
+	margin-top:150px;
 }
 
 #footer .top1 {

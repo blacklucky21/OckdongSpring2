@@ -98,6 +98,18 @@ public class CartServiceImpl implements CartService{
 		return cDAO.insertPayProduct(pp);
 	}
 
+	@Override
+	public int CartInsert(Cart c) {
+		// TODO Auto-generated method stub
+		return cDAO.CartInsert(c);
+	}
+
+	@Override
+	public int UpdateProductCount(Cart c) {
+		// TODO Auto-generated method stub
+		return cDAO.UpdateProductCount(c);
+	}
+
 
 
 

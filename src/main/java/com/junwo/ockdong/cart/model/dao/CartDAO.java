@@ -96,6 +96,19 @@ public class CartDAO {
 	}
 
 
+	public int CartInsert(Cart c) {
+		// TODO Auto-generated method stub
+		return  sqlSession.insert("cartMapper.CartInsert",c);
+	}
+
+
+	public int UpdateProductCount(Cart c) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cartMapper.UpdateProductCount",c);
+	}
+	
+
+
 
 
 
