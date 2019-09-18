@@ -14,45 +14,63 @@
 	margin: 0 auto;
 	margin-top: 5%;
 }
-.imgOne{
-	width:280px;
-	height:200px;
+
+.imgOne {
+	width: 280px;
+	height: 200px;
 }
-.recipeOne{
-	width:300px;
-	height:272px;
-	display:inline-block;
-	float:left;
+
+.recipeOne {
+	width: 300px;
+	height: 272px;
+	display: inline-block;
+	float: left;
 	border-radius: 15px;
 	margin: 10px;
-	text-align:center;
-/* 	border-top: 5px solid #13ae67;
+	text-align: center;
+	/* 	border-top: 5px solid #13ae67;
 	border-left: 5px solid #13ae67; */
 }
-.recipeAll{
+
+.recipeAll {
 	margin-left: 5%;
-	width:1000px;
+	width: 1000px;
 }
-.recipeDetail{
+
+.recipeDetail {
 	margin-left: 15px;
-	text-align:left;
+	text-align: left;
 }
-.recipeTitle{
+
+.recipeTitle {
 	font-size: 20px;
 	font-weight: bold;
 }
-.recipeType{
+
+.recipeType {
 	color: #303030;
 }
-.recipePrice{
+
+.recipePrice {
 	color: #ff8d00 !important;
 }
-.recipeOne:hover{
-/* 	border-bottom: 5px solid #13ae67;
+
+.recipeOne:hover {
+	/* 	border-bottom: 5px solid #13ae67;
 	border-right: 5px solid #13ae67;
 	transition:border-bottom 0.2s, border-right 0.2s; */
 	cursor: pointer;
 	border: 5px solid #13ae67;
+}
+
+#tb {
+	margin: auto;
+	width: 700px;
+	border-collapse: collapse;
+}
+
+#tb tr td {
+	padding: 5px;
 }
 </style>
 </head>
@@ -87,6 +105,50 @@
 					</div>
 				</c:forEach>
 			</c:if>
+			
+			<table id="tb">
+				<!-- 페이징 처리 -->
+				<tr align="center" height="20" id="buttonTab">
+					<td colspan="6">
+					
+						<!-- [이전] -->
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="before" value="myOwnList.me">
+								<c:param name="page" value="${ pi.currentPage - 1 }"/>
+							</c:url>
+							<a href="${ before }">[이전]</a> &nbsp;
+						</c:if>
+						
+						<!-- 페이지 -->
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							
+							<c:if test="${ p ne currentPage }">
+								<c:url var="pagination" value="myOwnList.me">
+									<c:param name="page" value="${ p }"/>
+								</c:url>
+								<a href="${ pagination }">${ p }</a> &nbsp;
+							</c:if>
+						</c:forEach>
+						
+						<!-- [다음] -->
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							[다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="after" value="myOwnList.me">
+								<c:param name="page" value="${ pi.currentPage + 1 }"/>
+							</c:url> 
+							<a href="${ after }">[다음]</a>
+						</c:if>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<c:import url="../footer/footer.jsp" />

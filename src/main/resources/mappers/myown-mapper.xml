@@ -88,9 +88,9 @@
 		update mblrecipe set status='N' where mbl_id=#{mblId} and status = 'Y'
 	</update>
 	
-	<select id="getUserRecipe" parameterType="String" resultMap="MBLRecipeAllList">
+<!-- 	<select id="getUserRecipe" parameterType="String" resultMap="MBLRecipeAllList">
 		select * from mblrecipe where status='Y' and userid=#{userId}
-	</select>
+	</select> -->
 	
 	<select id="searchRecipeList" parameterType="map" resultMap="MBLRecipeAllList">
 		select *
@@ -135,5 +135,15 @@
 		where mbl_id = #{mblId}
 	</update>
 
+	<select id="getListCount" parameterType="string" resultType="_int">
+		select count(*)
+		from mblrecipe
+		where status = 'Y' and userid = #{userId}
+	</select>
 	
+	<select id="getUserRecipe" parameterType="string" resultMap="MBLRecipeAllList">
+		select *
+		from mblrecipe
+		where status = 'Y' and userid = #{userId}
+	</select>
 </mapper>
