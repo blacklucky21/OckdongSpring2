@@ -106,6 +106,72 @@ public class CartDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("cartMapper.UpdateProductCount",c);
 	}
+
+
+	public int CountPay() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.countPay");
+	}
+
+
+	public int PayMoney() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.PayMoney");
+	}
+
+
+	public int PayToday() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.PayToday");
+	}
+
+
+	public int PayMonth() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.PayMonth");
+	}
+
+
+	public int MemberSecession() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.MemberSecession");
+	}
+
+
+	public int MemberBlack() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.MemberBlack");
+	}
+
+
+	public int MemberAll() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.MemberAll");
+	}
+
+
+	public int ProductCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.ProductCount");
+	}
+
+
+	public int ProductStop() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.ProductStop");
+	}
+
+
+	public int ProductSoldOut() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.ProductSoldOut");
+	}
+
+
+	public ArrayList<PayProduct> selectBuyList(String modal) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("cartMapper.selectBuyList",modal);
+	}
 	
 
 

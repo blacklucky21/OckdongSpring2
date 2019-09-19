@@ -91,7 +91,7 @@
 			<input type="hidden" name = "p_num" value="${p.p_Id}" ><!-- 상품번호 -->
 			<input type="hidden" name = "" value="${p.p_price }" ><!-- 개별 -->
 			<input type="hidden" name = "" class = "p_count" value="1"  >
-			<input type="hidden" name = "" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
+			<input type="hidden" name = "paytext" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
 			
 			
 			

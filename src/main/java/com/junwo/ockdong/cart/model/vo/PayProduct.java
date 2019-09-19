@@ -9,26 +9,28 @@ public class PayProduct {
 	private String pname;
 	private String ppno;
 	private int pamount;
-	private int price;
+	private int pprice;
 	private Date pcreatedate;
 	private String id;
 	private int totalprice;
+	private String p_img;
 	
 	
 	public PayProduct() {}
 
 
-	public PayProduct(int pno, String pname, String ppno, int pamount, int price, Date pcreatedate, String id,
-			int totalprice) {
+	public PayProduct(int pno, String pname, String ppno, int pamount, int pprice, Date pcreatedate, String id,
+			int totalprice, String p_img) {
 		super();
 		this.pno = pno;
 		this.pname = pname;
 		this.ppno = ppno;
 		this.pamount = pamount;
-		this.price = price;
+		this.pprice = pprice;
 		this.pcreatedate = pcreatedate;
 		this.id = id;
 		this.totalprice = totalprice;
+		this.p_img = p_img;
 	}
 
 
@@ -72,13 +74,13 @@ public class PayProduct {
 	}
 
 
-	public int getPrice() {
-		return price;
+	public int getPprice() {
+		return pprice;
 	}
 
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPprice(int pprice) {
+		this.pprice = pprice;
 	}
 
 
@@ -112,13 +114,23 @@ public class PayProduct {
 	}
 
 
+	public String getP_img() {
+		return p_img;
+	}
+
+
+	public void setP_img(String p_img) {
+		this.p_img = p_img;
+	}
+
+
 	@Override
 	public String toString() {
-		return "PayProduct [pno=" + pno + ", pname=" + pname + ", ppno=" + ppno + ", pamount=" + pamount + ", price="
-				+ price + ", pcreatedate=" + pcreatedate + ", id=" + id + ", totalprice=" + totalprice + "]";
-	};
-	
-	
-	
+		return "PayProduct [pno=" + pno + ", pname=" + pname + ", ppno=" + ppno + ", pamount=" + pamount + ", pprice="
+				+ pprice + ", pcreatedate=" + pcreatedate + ", id=" + id + ", totalprice=" + totalprice + ", p_img="
+				+ p_img + "]";
+	}
 
-}
+
+
+	}
