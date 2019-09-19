@@ -121,7 +121,7 @@
                         <td class="gi this-product">
                         	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="100" alt="사진" title="사진" class="middle"></a></span>
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="90" alt="사진" title="사진" class="middle"></a></span>
                             <div>
 
                                 <a href="../goods/goods_view.php?goodsNo=1000000107">${c.cName }</a>
@@ -175,9 +175,11 @@
                         	<input type="hidden" name="p_img" value="${pc.c_img }">
                         	<input type="hidden" name="id" value="${pc.id }">
                         	<input type="hidden" name="pname" value="${pc.cName }">
+                        	<input type="hidden" name="paytext" value="${pc.cName }">
                         	<input type="hidden" name="pamount" value="${pc.cAmount }">
                         	<input type="hidden" name="cAmount" value="${pc.cAmount }">
-                        	<input type="hidden" name="price" value="${pc.cPrice }">
+                        	<input type="hidden" name="pprice" value="${pc.cPrice }">
+                      
                             <input type="hidden" name="cartSno[]" value="16">
                             <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${pc.c_img }" width="40" alt="사진" title="사진" class="middle"></a></span>
                             <div>
@@ -415,7 +417,7 @@
                     <input type="hidden" name="userid" value="${loginUser.userId }">
                     	<input type="hidden" name="payaddress" class="payaddress">
                     	<input type="hidden" name="delivaryDate" class="delivaryCheck">
-                    	<input type="hidden" name="paytext" class="paytext">
+                   
 				</form>
 
                     <h3>결제정보</h3>

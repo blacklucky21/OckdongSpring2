@@ -172,7 +172,7 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	
 	<insert id="insertPayProduct" parameterType="PayProduct">
 	
-	INSERT INTO PAYMENT_PRODUCT VALUES(SEQ_PRODUCT.NEXTVAL,#{ppno}||TO_CHAR(seq_payProduct.currval) ,#{pname},#{pamount},#{price},sysdate,#{id},#{totalprice})
+	INSERT INTO PAYMENT_PRODUCT VALUES(SEQ_PRODUCT.NEXTVAL,#{ppno}||TO_CHAR(seq_payProduct.currval) ,#{pname},#{pamount},#{pprice},sysdate,#{id},#{totalprice},#{p_img})
 	
 	</insert>
 	
@@ -190,5 +190,90 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	where p_id = #{p_id}
 	
 	</update>
+	
+	<select id="countPay" resultType="_int">
+	
+	select count(*) from payment
+	
+	</select>
+	
+	
+	<select id="PayMoney" resultType="_int">
+	
+	select sum(payprice) from payment 
+
+	</select>
+	
+	<select id="PayToday" resultType="_int">
+	
+		select sum(payprice) from payment 
+        where  TO_CHAR(CHECKDATE,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+
+
+
+	</select>
+	
+	<select id="PayMonth" resultType="_int">
+	select sum(payprice)from payment 
+        where checkdate between TRUNC(sysdate,'MM')  and sysdate
+	</select>
+	
+	
+	<select id="MemberSecession" resultType="_int">
+	select count(*) 
+	from member
+	where status='N'
+	
+	</select>
+	
+		<select id="MemberBlack" resultType="_int">
+	
+	select count(*) 
+	from member
+	where status='B'
+	</select>
+	
+		<select id="MemberAll" resultType="_int">
+	select count(*) 
+	from member
+	where status='Y'
+	
+	</select>
+	
+	<select id="ProductCount" resultType="_int">
+	select count(*)
+	from product
+	where p_sell ='Y'
+	
+	
+	</select>
+	
+	<select id="ProductStop" resultType="_int">
+	select count(*)
+	from product
+	where p_sell ='N'
+	
+	
+	</select>
+	
+	
+	<select id="ProductSoldOut" resultType="_int">
+	 <![CDATA[
+	select count(*)
+	from product
+	where p_sell ='N' and P_QUANTITY <1 
+	]]>
+	
+	</select>
+	
+	<select id="selectBuyList" resultType="PayProduct">
+	
+	select *
+	from PAYMENT_PRODUCT
+	where PPNO = #{modal}
+	
+	
+	</select>
+	
 
 </mapper>

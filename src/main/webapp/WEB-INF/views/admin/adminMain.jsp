@@ -44,7 +44,7 @@
                             <div id="sale_summary_new_order">
                                 <div class="items_tit">결제완료</div>
                                 <div class="items_count">
-                                    <span>0</span>
+                                    <span>${payCount}</span>
                                     <span>건</span>
                                 </div>
                             </div>
@@ -68,6 +68,7 @@
 			<!--판매 현황 끝 -->
 			
 			<!-- 상품 현황 -->
+			
 			<div class="product_summary_wrap">
                     <div class="present_summary_bx">
                         <div class="title">
@@ -79,21 +80,21 @@
                             <div id="product_summary_onsale">
                                 <div class="items_tit">판매중 상품</div>
                                 <div class="items_count">
-                                    <span>1</span>
+                                    <span>${ProductCount }</span>
                                     <span> 건</span>
                                 </div>
                             </div>
                             <div id="product_summary_out_of_stock">
-                                <div class="items_tit">품절상품</div>
+                                <div class="items_tit">판매중지 상품</div>
                                 <div class="items_count">
-                                    <span>1</span>
+                                    <span>${ProductStop }</span>
                                     <span> 건</span>
                                 </div>
                             </div>
                             <div id="product_summary_stock_under_ten">
-                                <div class="items_tit">할인 상품</div>
+                                <div class="items_tit">품절 상품</div>
                                 <div class="items_count">
-                                    <span>0</span>
+                                    <span>${ProductSoldOut}</span>
                                     <span> 건</span>
                                 </div>
                             </div>
@@ -105,24 +106,31 @@
 	 <div class="claim_summary_wrap">
                     <div class="present_summary_bx">
                         <div class="title">
-                            <span>취소/반품 현황</span>
+                            <span>멤버 현황</span>
                         	<span><img src="resources/img/admin/Refresh.png"></span>
                             <span class="summary_mini_title">최근 3개월</span>
                            
                         </div>
                         <div class="items">
                             <div id="claim_summary_cancel_request_count">
-                                <div class="items_tit">취소주문</div>
+                                <div class="items_tit">전체 회원</div>
                                 <div class="items_count">
-                                    <span>0</span>
-                                    <span>건</span>
+                                    <span>${memAll }</span>
+                                    <span>명</span>
                                 </div>
                             </div>
                             <div id="claim_summary_return_request_count">
-                                <div class="items_tit">반품주문</div>
+                                <div class="items_tit">블랙리스트</div>
                                 <div class="items_count">
-                                    <span>0</span>
-                                    <span>건</span>
+                                    <span>${BlackList }</span>
+                                    <span>명</span>
+                                </div>
+                            </div>
+                             <div id="claim_summary_return_request_count">
+                                <div class="items_tit">탈퇴회원</div>
+                                <div class="items_count">
+                                    <span>${SecessionMember }</span>
+                                    <span>명</span>
                                 </div>
                             </div>
                         </div>
@@ -167,15 +175,15 @@
 	 		<ul class="botul">
 	 			<li>
 	 				<span>금일 수입</span>
-	 				<span class="sprofit">1000</span>
+	 				<span class="sprofit">${MoneyToday }</span>
 	 			</li>
 	 			<li>
 	 				<span>월 수입</span>
-	 				<span class="sprofit">1000000</span>
+	 				<span class="sprofit">${MoneyMonth }</span>
 	 			</li>
 	 			<li>
 	 				<span>금년 수입</span>
-	 				<span class="sprofit">10000000</span>
+	 				<span class="sprofit">${MoneyAll }</span>
 	 			</li>
 	 			
 	 		</ul>

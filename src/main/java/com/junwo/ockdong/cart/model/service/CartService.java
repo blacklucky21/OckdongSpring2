@@ -40,6 +40,28 @@ public interface CartService {
 
 	int UpdateProductCount(Cart c);
 
+	int CountPay();
+
+	int PayMoney();
+
+	int PayToday();
+
+	int PayMonth();
+
+	int MemberAll();
+
+	int MemberBlack();
+
+	int MemberSecession();
+
+	int ProductCount();
+
+	int ProductStop();
+
+	int ProductSoldOut();
+
+	ArrayList<PayProduct> selectBuyList(String modal);
+
 
 
 

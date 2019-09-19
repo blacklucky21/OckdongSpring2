@@ -102,19 +102,19 @@
  					 <tr>
                         <td class="gi this-product">
                             <input type="hidden" name="cartSno[]" value="16">
-                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${pm.p_img}" width="40" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
+                            <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${pm.p_img}" width="90" alt="AVA SUMMER DENIM" title="AVA SUMMER DENIM" class="middle"></a></span>
                             <div>
 
                                 <a href="../goods/goods_view.php?goodsNo=1000000107">${pp.pname }</a>
 
                                 <dl>
-                                    <dt>재료 :</dt>
-                                    <dd>넣을까
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt>말까 :</dt>
-                                    <dd>공간
+                                    <dt></dt>
+                                    <dd>
                                     </dd>
                                 </dl>
 
@@ -124,13 +124,13 @@
                           ${pp.pamount}
                         </td>
                         <td class="ta-c this-product">
-                            <strong class="price">${pp.price}원</strong>
+                            <strong class="price">${pp.pprice}원</strong>
                         </td>
                         <td class="benefits">
 
                         </td>
                         <td class="ta-c">
-                        <strong class="price totalAmount" >${pp.price *pp.pamount}</strong><strong class="price">원</strong>
+                        <strong class="price totalAmount" >${pp.pprice *pp.pamount}</strong><strong class="price">원</strong>
                         </td>
                         
                         
