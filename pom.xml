@@ -214,11 +214,12 @@
       </dependency>
 
 	  <!-- 이미지 크기 변환 라이브러리  -->
-	  <dependency>
-	  	<groupId>org.imgcalr</groupId>
-	  	<artifactId>imgscalr-lib</artifactId>
-	  	<version>4.2</version>
-	  </dependency>
+<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
+<dependency>
+    <groupId>org.imgscalr</groupId>
+    <artifactId>imgscalr-lib</artifactId>
+    <version>4.2</version>
+</dependency>
 
       <!-- json 관련 라이브러리 -->
       <dependency>

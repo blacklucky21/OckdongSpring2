@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="resources/css/cart/CartView.css">
 <style>
 .modal-body { width: 500px; height: 400px; margin: 0; padding: 0; }
-
+.modal-content{margin-top:300px}
 
 </style>
 </head>
@@ -260,7 +260,7 @@ $('.modalm').click(function(){
         data :{"modal":myBookId},
         success : function(modal){
         	var data = modal;
-        	alert(Object.keys(data).length);
+        
         	var append ="";
         	for(var i in modal){
         		var div = $('.shit');

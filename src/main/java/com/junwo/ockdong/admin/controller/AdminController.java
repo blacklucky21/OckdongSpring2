@@ -830,11 +830,11 @@ public class AdminController {
 		System.out.println(count);
 		
 		mv.addObject("payCount",count);
-		if(PayMonth>0 &&PayMoney>0 && PayToday>0) {
+		
 		mv.addObject("MoneyAll",PayMoney);
 		mv.addObject("MoneyToday",PayToday);
 		mv.addObject("MoneyMonth",PayMonth);
-		}
+		
 		mv.addObject("memAll",member);
 		mv.addObject("BlackList",BlackList);
 		mv.addObject("SecessionMember",SecessionMember);
