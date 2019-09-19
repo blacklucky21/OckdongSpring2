@@ -25,7 +25,7 @@ public class PaginationComment {
 			endPage = maxPage;
 		}
 		
-		pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit);
+		pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, boardLimit, "");
 		
 		return pi;
 	}

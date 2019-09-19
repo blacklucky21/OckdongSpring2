@@ -6,8 +6,11 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.junwo.ockdong.cart.model.vo.Payment;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.member.model.dao.MemberDAO;
 import com.junwo.ockdong.member.model.vo.Member;
+import com.junwo.ockdong.notice.model.vo.Notice;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
@@ -124,6 +127,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int memberUpdate(Member m) {
 		return mDAO.memberUpdate(m);
+	}
+
+
+	@Override
+	public int getListCount() {
+		return mDAO.getListCount();
+	}
+
+
+	@Override
+	public ArrayList<Notice> selectList(PageInfo pi) {
+		return mDAO.selectList(pi);
+	}
+
+
+	@Override
+	public ArrayList<Payment> myPaymentList(PageInfo pi) {
+		return mDAO.myPaymentList(pi);
 	}
 
 

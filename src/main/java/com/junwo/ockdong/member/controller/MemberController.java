@@ -1,5 +1,6 @@
 package com.junwo.ockdong.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,9 +21,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junwo.ockdong.cart.model.vo.Payment;
+import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.common.Pagination;
 import com.junwo.ockdong.member.model.exception.MemberException;
 import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
+import com.junwo.ockdong.notice.model.exception.NoticeException;
+import com.junwo.ockdong.notice.model.vo.Notice;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -159,14 +165,58 @@ public class MemberController {
 	
 	// 구매 내역 화면 이동
 	@RequestMapping("view_history.me")
-	public String viewHistoryView() {
-		return "myPage/buy/buyHistory";
+	public ModelAndView viewHistoryView(@RequestParam(value="page", required=false) Integer page, ModelAndView mv,HttpSession session) {
+		int currentPage = 1;
+		Member m = (Member)session.getAttribute("loginUser");
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = mService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		pi.setUserId(m.getUserId());
+		
+		ArrayList<Payment> pList = mService.myPaymentList(pi);
+		
+		if(pList != null) {
+			mv.addObject("list", pList);
+			mv.addObject("pi", pi);
+			mv.setViewName("myPage/buy/buyHistory");
+		} else {
+			throw new NoticeException("구매내역 조회에 실패 하였습니다.");
+		}
+		
+		return mv;
 	}
 	
 	// 내가 쓴 게시물 화면 이동
 	@RequestMapping("reviewServletView.bo")
-	public String myBoardView() {
-		return "myPage/myBoard/myBoardView";
+	public ModelAndView myBoardView(@RequestParam(value="page", required=false) Integer page, ModelAndView mv, HttpSession session) {
+		
+		int currentPage = 1;
+		Member m = (Member)session.getAttribute("loginUser");
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = mService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		pi.setUserId(m.getUserId());
+		
+		ArrayList<Notice> nList = mService.selectList(pi);
+		System.out.println(nList);
+		
+		if(nList != null) {
+			mv.addObject("list", nList);
+			mv.addObject("pi", pi);
+			mv.setViewName("myPage/myBoard/myBoardView");
+		}else {
+			throw new NoticeException("게시판 조회에 실패하였습니다.");
+		}
+		
+		return mv;
 	}
 	
 	// 비밀번호 변경 화면 이동

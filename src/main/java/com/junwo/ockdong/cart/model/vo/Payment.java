@@ -4,26 +4,26 @@ import java.sql.Date;
 
 public class Payment {
 	
-	private int payno;
+	private int payno; // 시퀀스
 	private String userid;
-	private String p_id;
-	private String payname;
-	private String payphone;
-	private String paycellphone;
+	private String p_id; // 주문번호
+	private String payname; // 주문자명
+	private String payphone; // 집전화
+	private String paycellphone; // 폰
 	private String payemail;
-	private String receiverName;
-	private String receiverPhone;
-	private String receiverCellPhone;
-	private int payprice;
-	private String orderMemo;
-	private String paydate;
-	private String delivaryDate;
-	private String payrecipe;
-	private String payaddress;
-	private String pstatus;
-	private String paytext;
-	private Date checkDate;
-	private int p_num;
+	private String receiverName; // 수령인
+	private String receiverPhone; // 수령인 번호
+	private String receiverCellPhone; 
+	private int payprice; // 결제금액
+	private String orderMemo; // 기사남김
+	private String paydate; // 결제일
+	private String delivaryDate; // 배송일
+	private String payrecipe; // 재료
+	private String payaddress; // 주소
+	private String pstatus; // 상태
+	private String paytext; // 상품명
+	private Date checkDate;  // 
+	private int p_num; // 상품 번호
 	private String p_img;
 	public Payment() {}
 	public Payment(int payno, String userid, String p_id, String payname, String payphone, String paycellphone,

@@ -9,6 +9,14 @@ public class PageInfo {
 	private int startPage; //현제 페이지에서 보여질 페이징의 시작점
 	private int endPage; // 현재 페이지에서 보여질 게시글 최대 개수
 	private int boardLimit; // 딱히 없어도 문제 없을듯 함
+	private String userId;
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -58,7 +66,7 @@ public class PageInfo {
 		super();
 	}
 	public PageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage,
-	        int boardLimit) {
+	        int boardLimit, String userId) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -67,6 +75,7 @@ public class PageInfo {
 		this.startPage = startPage;
 		this.endPage = endPage;
 		this.boardLimit = boardLimit;
+		this.userId = userId;
 	}
 	@Override
 	public String toString() {
