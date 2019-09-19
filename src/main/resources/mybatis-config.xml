@@ -15,6 +15,7 @@
 		<typeAlias type="com.junwo.ockdong.product.model.vo.Productreview" alias="Productreview"/>
 		<typeAlias type="com.junwo.ockdong.myOwn.model.vo.MBLRecipe" alias="MBLRecipe"/>
 		<typeAlias type="com.junwo.ockdong.product.model.vo.ProductQna" alias="ProductQna"/>
+		<typeAlias type="com.junwo.ockdong.product.model.vo.ProductAnswer" alias="ProductAnswer"/>
 		
 
 		<typeAlias type="com.junwo.ockdong.notice.model.vo.NoticeComments" alias="NoticeComments"/>

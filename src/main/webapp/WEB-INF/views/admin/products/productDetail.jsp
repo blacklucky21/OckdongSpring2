@@ -121,7 +121,7 @@
 				<div class="tproduct-info active" id="contentin">
 					<h2>상세 내용</h2>
 					<p id="productinfo" class="productinfo">${ p.p_content }</p>
-					<img src="resources/img/detail01.jpg" id = "intro"class="productinfo">
+					<img src="resources/img/detail01.jpg" id = "intro"class="productinfo" style="margin-bottom: 40px;">
 				</div>
 				
 					<table class="tproduct-info active">
@@ -864,7 +864,7 @@
 						+ "</span>"
 						+ " <span class='date'>"
 						+ data[i].qna_createDate 
-						+ "<span></div><p class='txt'>"
+						+ "<span></div><p class='txt' id ='qnacontext"+ i +"'>"
 						+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl'  id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 													);
 				}else{
@@ -967,7 +967,7 @@
 			
 	        append += "<div class='text-wrap'>";
 	        append += "<div class='textarea'>";
-	        append += "<textarea class='textarea-normal textarea_inquiriy' name='content' cols='30' rows='10' maxlength='1000' >" +text + "</textarea>";                       
+	        append += "<textarea class='textarea-normal textarea_inquiriy' id='textarea" + i +"' name='content' cols='30' rows='10' maxlength='1000' >" + text + "</textarea>";                       
 	        append += "<p class='textarea-limit length_inquiriy'> 자 / 1000자</p>";
 	        append += "</div>";
 	        append += "</div>";
@@ -977,7 +977,7 @@
 	        append += "<div class='qa-checkbox'>";
 	        append += "<span class='ico-lock'>lock</span>";
 	        append += "<p class='checkbox-normal' style='display: inline-block; vertical-align: middle;'>";
-	        append +="<input id='secretedCheckBox' type='checkbox'>";
+	        append +="<input id='secretedCheckBox"+ i +"' type='checkbox'  >";
 	        append += "<label></label>";
 	        append += "</p>";
 	        append += "비밀글 문의";
@@ -987,7 +987,7 @@
 	        append += "<p class='btn-row' style='margin-left: auto;'>";
 	        append += "<input value='' name='' type='hidden'>";	        
 	        append += "<button type='button' class='btn white-2 style-3-1' onclick='cancelModifyInquiry()' style='border: 1px solid black;'>취소하기</button>";
-	        append += "<button type='button' class='btn black style-3-1' onclick='submitModifyInquiry(" + qna_Id + ");'>등록하기</button>";
+	        append += "<button type='button' class='btn black style-3-1' onclick='submitModifyInquiry(" + qna_Id + "," + i + " );'>등록하기</button>";
 	        append += "</p>";
 	        append += "</div>";
 	      
@@ -1003,8 +1003,36 @@
 			getQnaList();
 		}
 		
-		function submitModifyInquiry(qna_Id){
-			console.log(qna_Id);
+		// 수정 버튼 눌렸을때
+		function submitModifyInquiry(qna_Id, i){
+			console.log("수정 받은 댓글 번호  : "+qna_Id);
+			
+			console.log(i);
+			
+			if($('#secretedCheckBox' + i ).prop("checked") ){
+				var qna_secret = 'Y';
+			}else{
+				var qna_secret = 'N';
+			}
+		
+			var qna_content = $('#textarea' + i).val();
+			
+			console.log("수정 내용 가지고 온다." + qna_content);
+			console.log(qna_secret); 
+			
+			
+			$.ajax({
+				url : "updateQna.do",
+				data:{qna_content:qna_content, qna_Id:qna_Id,qna_secret:qna_secret},
+				type:"post",
+				success:function(data){
+					getQnaList();
+				}
+				
+			});
+			
+			
+			
 		}
 
 		// 삭제

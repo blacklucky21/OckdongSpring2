@@ -236,7 +236,7 @@ select count(*)
 <insert id="insertReply" parameterType="Productreview">
 
 insert into PRODUCTREVIEW
-values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sysdate, default, 0 )
+values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'), sysdate, default, 0 )
 
 </insert>
 
@@ -323,6 +323,47 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, sysdate,sys
 		</when>
 	</choose>
 </select>
+
+
+
+<update id="updateQna">
+	update PRODUCTQNA
+		set QNA_CONTENT = #{qna_content}, QNA_SECRET = #{qna_secret}
+		where QNA_ID = ${qna_Id}
+
+</update>
+
+
+<!-- 답글 달아 주기 -->
+<insert id="insertAnswer" parameterType="ProductAnswer">
+	insert into PRODUCTANSWER
+		values(ANSWER_ID.nextval , '운영자', #{answer_content},to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'), #{p_Id},#{qna_Id}  )
+
+
+</insert>
+
+
+<!-- 가져오기 -->
+<select id="selectAnswer" resultType="ProductAnswer">
+	select *
+	from (select *
+			from PRODUCTANSWER left join PRODUCT using(P_ID)
+			where qna_Id = #{qna_Id})
+			
+</select>
+
+
+<select id="selectAnswer2" resultType="ProductAnswer">
+	select qna_id, qna_user, pq.qna_createdate, pq.qna_content, answer_content, answer_createdate,answer_id
+	from PRODUCTANSWER
+	    left join PRODUCT p using(P_ID)
+	    join productqna pq using(qna_id)
+	where qna_Id = #{ qna_Id }
+			
+</select>
+
+
+
 
 
 </mapper>

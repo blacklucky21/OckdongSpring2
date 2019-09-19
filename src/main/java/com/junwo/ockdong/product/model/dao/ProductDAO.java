@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductAnswer;
 import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
@@ -211,6 +212,26 @@ public class ProductDAO {
 
 	public ArrayList<ProductQna> adminSearchQnA(String qnaStatus) {
 		return (ArrayList)sqlSession.selectList("productMapper.adminSearchQnA", qnaStatus);
+	}
+
+
+	public int updateQna(ProductQna pq) {
+		return sqlSession.update("productMapper.updateQna",pq);
+	}
+
+
+	public int insertAnswer(ProductAnswer pa) {
+		return sqlSession.insert("productMapper.insertAnswer",pa);
+	}
+
+
+	public ProductAnswer selectAnswer(ProductAnswer pa) {
+		return sqlSession.selectOne("productMapper.selectAnswer",pa);
+	}
+
+
+	public ProductAnswer selectAnswer2(ProductAnswer pa) {
+		return sqlSession.selectOne("productMapper.selectAnswer2",pa);
 	}
 
 

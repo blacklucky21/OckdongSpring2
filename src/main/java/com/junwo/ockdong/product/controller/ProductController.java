@@ -31,6 +31,7 @@ import com.junwo.ockdong.product.Exception.ProductException;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductAnswer;
 import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
@@ -598,7 +599,7 @@ public class ProductController {
 			pv.setPv_user(URLEncoder.encode(pv.getPv_user(),"utf-8"));
 			System.out.println(pvList);
 		}
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		gson.toJson(pvList, response.getWriter());
 	}
 	
@@ -689,6 +690,7 @@ public class ProductController {
 		for(ProductQna pq : pqList) {
 			pq.setQna_user(URLEncoder.encode(pq.getQna_user(),"utf-8"));
 			pq.setQna_content(URLEncoder.encode(pq.getQna_content(),"utf-8"));
+			
 		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		gson.toJson(pqList, response.getWriter());
@@ -713,6 +715,49 @@ public class ProductController {
 		
 		
 	}
+	
+	
+	// qna 문의 수정
+	@RequestMapping("updateQna.do")
+	@ResponseBody
+	public String updateQna(@ModelAttribute ProductQna pq, HttpSession session) throws Exception {
+		
+		System.out.println("상품 문의 객체 확인 : " + pq);
+		
+		int result = pService.updateQna(pq);
+		
+		if(result > 0) {
+			
+			return "success";
+		}else {
+			throw new Exception("댓글 등록 실패");
+		}
+		
+		
+	}
+	
+	// 상품 답변
+	@RequestMapping("addAnswer.do")
+	@ResponseBody
+	public void addAnswer(ProductAnswer pa, HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
+		
+		System.out.println("pa 컨트롤러 출력 한다. : " + pa);
+		
+		int result = pService.insertAnswer(pa);
+		
+		if(result > 0) {
+			ProductAnswer pan = pService.selectAnswer2(pa);
+			
+			pan.setQna_user(URLEncoder.encode(pan.getQna_user(), "utf-8"));
+			pan.setQna_content(URLEncoder.encode(pan.getQna_content(),"utf-8"));
+			pan.setAnswer_content(URLEncoder.encode(pan.getAnswer_content(),"utf-8"));
+
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			gson.toJson(pan, response.getWriter());
+		}
+		
+	}
+	
 	
 	
 }
