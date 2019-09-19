@@ -533,88 +533,13 @@ th{
                         </table>
                     </div>
 
-                    <div class="how-to-pay orderplz">
-                        <h3>결제하기</h3>
-               <!--          <div class="method">
-                            <div class="js-pay-content">
-
-                                일반결제 컨텐츠
-                                <div class="process" id="settlekind_general">
-                                    <div class="title-element">
-                                        일반결제
-                                    </div>
-                                    <div class="selection">
-                                        <span class="form-element">
-                                            <input type="radio" name="settleKind" id="settleKind_gb" value="gb" class="radio">
-                                            <label class="choice-s on" for="settleKind_gb">무통장 입금</label>
-                                        </span>
-
-                                        무통장입금 컨텐츠
-                                        <ul class="bank" id="settlekind_general_gb" style="display: block;">
-                                            <li>
-                                                <p>( 무통장 입금 의 경우 입금확인 후부터 배송단계가 진행됩니다. )</p>
-                                            </li>
-                                            <li>
-                                                <strong>입금자명</strong>
-                                                <div>
-                                                    <span class="txt-field hs">
-                                                        <input type="text" name="bankSender" class="text">
-                                                    </span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <strong>입금은행</strong>
-                                                <div>
-                                                    <span class="st-hs">
-                                                        <select name="bankAccount" class="tune" style="width: 354px; display: none;">
-                                                            <option value="">선택하세요</option>
-                                                        </select><div class="chosen-container chosen-container-single chosen-container-single-nosearch" style="width: 354px;" title=""><a class="chosen-single chosen-sch" tabindex="-1"><span>선택하세요</span><div><b></b></div></a><div class="chosen-drop"><div class="chosen-search"><input type="text" autocomplete="off" readonly=""></div><ul class="chosen-results"></ul></div></div>
-                                                    </span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        //무통장입금 컨텐츠
-
-
-
-
-
-
-
-                                    </div>
-                                </div>
-                                //일반결제 컨텐츠
-
-
-                            </div>
-
-                        
-                        </div> -->
-                        <div class="buy">
-                            <div class="final-settlement">
-                                <em>최종 결제 금액</em>
-                                <span class="c-red"><strong id="totalSettlePriceView"></strong>원</span>
-                            </div>
-                            <div class="required-check termAgree-check">
-                                <h4 class="dn">청약의사 재확인</h4>
-                                <span class="form-element">
-                                    <input type="checkbox" id="termAgree_orderCheck orderCheck" class="checkbox require">
-                                    <label for="termAgree_orderCheck " class="check-s"><strong>(필수)</strong> <em>구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</em></label>
-                                </span>
-                            </div>
-                            <div class="btn" style="float:right">
-                            <div>
-                                <button type="button" class="skinbtn point2 order-buy" ><em>결제하기</em></button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 					</div>
 					<input type ="hidden" name="pname" value="${mbl.mblTitle }">
 					<input type ="hidden" name="pamount" class="tCount" >
-					<input type ="hidden" name="price" class="pPrice" >
+					<input type ="hidden" name="pprice" class="pPrice" >
 					<input type ="hidden" name="totalprice" class="totalSettlePricevalue">
-					
+					<input type="hidden" id="totalSettlePriceView">
 					</form>
 					
 	</div>
@@ -709,17 +634,14 @@ $('.order-buy').click(function(){
 	//location.href="PaymentResultList2.do"
 
 	
-	var count = parseInt('${pa.size()}')-1;
+
 	var payText ='${pa.get(0).cName}';
 	
-	if(count>=1){
-		
-		payText =  '${pa.get(0).cName}'+ ' 외 '+count +'개 ';
-	}
+	
 	var totalAmount = parseInt($('#finalTotalPrice').text());
 	$('.paytext').val(payText);
 	
-	 CallPayRequest();
+	CallPayRequest();
 	if($('.require').prop("checked")){
 		
 
@@ -730,8 +652,8 @@ $('.order-buy').click(function(){
 		    pg : 'inicis', // version 1.1.0부터 지원.
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : payText,
-		    amount : totalAmount,
+		    name : '${mbl.mblTitle }',
+		    amount : 100,//totalAmount
 		    buyer_email : 'iamport@siot.do',
 		    buyer_name : '${m.userName}',
 		    buyer_tel : '${m.phone}',
@@ -747,7 +669,7 @@ $('.order-buy').click(function(){
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		    
 		    	
-		    	CallPayRequest();
+		    
 		        
 		    } else {
 		        var msg = '결제에 실패하였습니다.';

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -312,9 +313,10 @@ public class CartController {
 			hitPno2[0] = "Ock"+pdate+hitPno[0];
 			//checkno = Integer.parseInt(hitPno[0]);
 			totalMap.put("hitPno",hitPno2);
+			System.out.println("ddddd"+Integer.parseInt(total[0]));
 			//System.out.println("리스트크기"+list.size());
 			p.setP_id("oc_"+pdate+"M");
-			p.setPayprice( Integer.parseInt(total[0]));
+			p.setPayprice(Integer.parseInt(total[0]));
 			p.setPaytext(pp.getPname());
 			//Payment PayMem = CartService.SelectPayMem(checkno);
 			//System.out.println("넘어오는 멤버체크:"+PayMem);
@@ -387,9 +389,12 @@ public class CartController {
 			p.setP_id("oc_"+pdate+'P');
 			pp.setPpno("oc_"+pdate+'P');
 			p.setPayprice( Integer.parseInt(total));
+			pp.setTotalprice(Integer.parseInt(total));
+			
 			System.out.println("삽입체크"+c);
 			System.out.println(p);
 			System.out.println(total);
+			System.out.println(pp);
 		
 			
 			mv.addObject("pPayProduct",pp);
@@ -402,6 +407,18 @@ public class CartController {
 			int payProduct = CartService.insertPayProduct(pp);
 			return mv;
 			
+		}
+		
+		@RequestMapping("ModalSend.do")
+		@ResponseBody
+		public ArrayList<PayProduct> ModalPlz(String modal) {
+			
+			System.out.println(modal);
+			ArrayList<PayProduct> list = CartService.selectBuyList(modal);
+			
+			System.out.println(list);
+			
+			return list;
 		}
 			
 		

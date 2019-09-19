@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/admin/PayList.css">
+<link rel="stylesheet" href="resources/css/cart/CartView.css">
 <style>
+.modal-body { width: 500px; height: 400px; margin: 0; padding: 0; }
+
 
 </style>
 </head>
@@ -83,13 +86,13 @@
 
 			<div style="height: 600px; overflow: auto">
 
-			<div style="height: auto; width:auto; overflow: auto">
+			<div style="height: auto; width:auto;">
 
 				<table class="tableResult " style="border-collapse: collapse;">
 					<thead>
 						<tr >
 
-							<th nowrap style="min-height: 200px;" >주문번호</th>
+							<th nowrap style="min-height: 200px;">주문번호</th>
 							<th nowrap>주문자 아이디</th>
 							<th nowrap>주문자명</th>
 							<th nowrap>주문자 전화번호</th>
@@ -100,7 +103,7 @@
 							<th nowrap>기사에게 남길말</th>
 							<th nowrap>결제시간</th>
 							<th nowrap>배송날짜</th>
-							<th nowrap>판매수량</th>
+						
 
 						</tr>
 					</thead>
@@ -108,7 +111,13 @@
 						<c:forEach var="p" items='${list }' varStatus="pay">
 
 							<tr >
-								<td nowrap style=" cursor:pointer" class="search" id="searchId" >${p.p_id}</td>
+								<td nowrap style=" cursor:pointer" class="search " id="searchId"  >
+								<a href="#"  class="modalm" data-id="${p.p_id }"data-toggle="modal" data-target="#myModal">${p.p_id}</a>
+								
+						
+								
+								
+								</td>
 								<td nowrap>${p.userid }</td>
 								<td nowrap> ${p.payname }</td>
 								<td nowrap>${p.payphone }</td>
@@ -140,7 +149,7 @@
 								<td nowrap>${p.orderMemo }</td>
 								<td nowrap>${p.paydate }</td>
 								<td nowrap>${p.delivaryDate }</td>
-								<td nowrap>${p.payrecipe }</td>
+								
 							</tr>
 
 						</c:forEach>
@@ -154,11 +163,135 @@
 	</div>
 
 
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <div style="float:left"><span>주문번호:</span><span class="siba"></span></div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="float:right">&times;</span></button>
+        <h1 class="modal-title" id="myModalLabel"></h1>
+              
+              
+      </div>
+      <div class="modal-body" style="overflow: auto">
+      		<div class="order-page" style="display:inline-block">
+      			<div class="table1" style="width:460px">
+
+        <table>
+             <thead>
+                    <tr>
+                    	<th style="text-align:center">이미지</th>
+                        <th style="text-align:center">상품</th>
+                        <th style="text-align:center">수량</th>
+                        <th nowrap style="text-align:center">상품금액</th>
+                        <th style="text-align:center">결제총액</th>
+                     
+                    </tr>
+                    </thead>
+                      <tbody class="shit">
+         <%--            
+        <c:forEach var="i" begin="0" end="10">
+
+                    <tr>
+                      
+                        	<td>
+                            <span><a href=""><img src="resources/img/products/20190919091604675.jpg" width="90" alt="사진" title="사진" class="middle"></a></span>
+                            <div class="mName">
+
+                                <a href="../goods/goods_view.php?goodsNo=1000000107">보이유dasdasdasdasdas</a>
+
+                               
+                            </div>
+                        </td>
+                        <td class="ta-c count this-product">
+                          1
+                        </td>
+                        <td class="ta-c this-product">
+                            <strong class="price">4500원</strong>
+                        </td>
+                     
+                        <td class="ta-c">
+                        <strong class="price totalAmount">4500</strong><strong class="price">원</strong>
+                        </td>
+                        
+                        
+                                     
+                                   
+                    </tr>
+
+                 
+                 
+                 
+				
+
+
+                   
+        </c:forEach>
+ --%>         </tbody>
+            
+        </table>
+        </div>
+        </div>
+      </div>
+     
+    </div>
+  </div></div>
+
+
+
 
 
 </form>
-	<script>
 
+	<script>
+$('.modalm').click(function(){
+	var myBookId = String($(this).data('id'));
+
+	$('.siba').text(myBookId);
+	
+
+			
+	jQuery.ajaxSettings.traditional = true;
+
+    $.ajax({
+         
+        type : "GET",
+        url : "ModalSend.do",
+        data :{"modal":myBookId},
+        success : function(modal){
+        	var data = modal;
+        	alert(Object.keys(data).length);
+        	var append ="";
+        	for(var i in modal){
+        		var div = $('.shit');
+        	
+        		
+        		append +='<tr>';
+        		append +='<span>';
+        		append +='<td>';
+        		append +='<img src='+modal[i].p_img+' width="90" alt="사진" title="사진" class="middle">';
+        		append +='</span>';
+        		append +='<div class="mName">';
+        		append +='<td class="gi this-product">';
+        		append +='<a href="../goods/goods_view.php?goodsNo=1000000107">'+modal[i].pname +'</a>';
+        		append +='</div>';
+        		append += '</td>';
+        		append += '<td class="ta-c count this-product">'+modal[i].pamount+' </td>';
+        		append += '<td class="ta-c this-product"><strong class="price">'+modal[i].pprice+'</strong>  </td>';
+        		append += '<td class="ta-c"><strong class="price totalAmount">'+modal[i].totalprice+'</strong><strong class="price"></strong></td>';
+        		append += '</tr>';
+        		
+        	}
+        	div.html(append);
+        },    error : function(){
+            alert('통신실패!!');
+        }
+         
+    });
+     
+
+
+})
 	
 		$(document).ready(function() {
 			  document.getElementById('endDatePicker').value= new Date().toISOString().substring(0, 10);

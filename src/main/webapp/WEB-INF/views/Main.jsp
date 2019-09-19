@@ -25,7 +25,7 @@
 <body>
 <!-- jsp:include를 사용하면 Context root가 자동으로 포함된다. -->
 	<c:import url="header/header.jsp"/>
-	<button onclick="location.href='adminView.do'">관리자 ㅇㅇ</button>
+	<button onclick="location.href='goAdmin.Page'">관리자 ㅇㅇ</button>
 	
 	<!-- 슬라이드 쇼 -->
 	<div class="content" style="width:100%; height:100%; overflow:hidden; margin:55px auto;">

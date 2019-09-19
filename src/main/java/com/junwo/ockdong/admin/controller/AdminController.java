@@ -808,5 +808,46 @@ public class AdminController {
 		//return "redirect:adminPaymentList.do";
 		
 	}
+	
+	@RequestMapping("goAdmin.Page")
+	public ModelAndView goAdmin(ModelAndView mv) {
+		
+		
+		
+		int count = cService.CountPay();
+		int PayMoney = cService.PayMoney();
+		int PayToday = cService.PayToday();
+		int PayMonth = cService.PayMonth();
+		
+		int member = cService.MemberAll();
+		int BlackList = cService.MemberBlack();
+		int SecessionMember = cService.MemberSecession();
+		
+		int ProductCount = cService.ProductCount();
+		int ProductStop = cService.ProductStop();
+		int ProductSoldOut =cService.ProductSoldOut();
+		
+		System.out.println(count);
+		
+		mv.addObject("payCount",count);
+		if(PayMonth>0 &&PayMoney>0 && PayToday>0) {
+		mv.addObject("MoneyAll",PayMoney);
+		mv.addObject("MoneyToday",PayToday);
+		mv.addObject("MoneyMonth",PayMonth);
+		}
+		mv.addObject("memAll",member);
+		mv.addObject("BlackList",BlackList);
+		mv.addObject("SecessionMember",SecessionMember);
+		
+		mv.addObject("ProductCount",ProductCount);
+		mv.addObject("ProductStop",ProductStop);
+		mv.addObject("ProductSoldOut",ProductSoldOut);
+	
+		mv.setViewName("admin/adminMain");
+		
+		
+		
+		return mv;
+	}
 
 }

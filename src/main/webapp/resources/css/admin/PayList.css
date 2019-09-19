@@ -183,10 +183,12 @@ table.tableResult tr:nth-child(1n):hover td{
 
 .pay2 {
 	margin-top:30px;
+	margin-bottom:100px;
 	background-color:white;
 border-radius:20px;
 width:1600px;
 height: auto;
+padding-bottom:50px;
 
 }
 
@@ -197,3 +199,5 @@ width:1600px;
 height: auto;
 padding:1px;
 }
+
+

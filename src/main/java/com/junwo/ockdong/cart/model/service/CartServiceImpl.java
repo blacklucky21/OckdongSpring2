@@ -110,6 +110,72 @@ public class CartServiceImpl implements CartService{
 		return cDAO.UpdateProductCount(c);
 	}
 
+	@Override
+	public int CountPay() {
+		// TODO Auto-generated method stub
+		return cDAO.CountPay();
+	}
+
+	@Override
+	public int PayMoney() {
+		// TODO Auto-generated method stub
+		return cDAO.PayMoney();
+	}
+
+	@Override
+	public int PayToday() {
+		// TODO Auto-generated method stub
+		return cDAO.PayToday();
+	}
+
+	@Override
+	public int PayMonth() {
+		// TODO Auto-generated method stub
+		return cDAO.PayMonth();
+	}
+
+	@Override
+	public int MemberAll() {
+		// TODO Auto-generated method stub
+		return cDAO.MemberAll();
+	}
+
+	@Override
+	public int MemberBlack() {
+		// TODO Auto-generated method stub
+		return cDAO.MemberBlack();
+	}
+
+	@Override
+	public int MemberSecession() {
+		// TODO Auto-generated method stub
+		return cDAO.MemberSecession();
+	}
+
+	@Override
+	public int ProductCount() {
+		// TODO Auto-generated method stub
+		return cDAO.ProductCount();
+	}
+
+	@Override
+	public int ProductStop() {
+		// TODO Auto-generated method stub
+		return cDAO.ProductStop();
+	}
+
+	@Override
+	public int ProductSoldOut() {
+		// TODO Auto-generated method stub
+		return cDAO.ProductSoldOut();
+	}
+
+	@Override
+	public ArrayList<PayProduct> selectBuyList(String modal) {
+		// TODO Auto-generated method stub
+		return cDAO.selectBuyList(modal);
+	}
+
 
 
 
