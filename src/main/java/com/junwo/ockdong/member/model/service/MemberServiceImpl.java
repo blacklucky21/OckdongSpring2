@@ -148,6 +148,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public String findId(Member m) {
+		return mDAO.findId(m);
+	}
+
+
 
 
 

@@ -88,6 +88,10 @@ public interface MemberService {
 
 
 
+	String findId(Member m);
+
+
+
 
 	
 

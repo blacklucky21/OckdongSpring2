@@ -308,6 +308,12 @@
 		where USERID=#{userId}
 		order by payno
 	</select>
+	
+	<select id="findId" parameterType="Member" resultType="String">
+		select userId
+    	from member
+    	where userName=#{userName} and email=#{email}
+	</select>
 		
 	</mapper>
 	

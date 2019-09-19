@@ -112,6 +112,10 @@ public class MemberDAO {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.myPaymentList", pi, rowBounds);
 	}
+
+	public String findId(Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
 		
 }
 

@@ -125,10 +125,25 @@ public class MemberController {
 	}
 	// id 찾기 결과
 	@RequestMapping("idFindResult.me")
-	public String findIdResult(@RequestParam("userName") String userName, 
+	public ModelAndView findIdResult(@RequestParam("userName") String userName, 
 							   @RequestParam("email") String email, 
-							   ModelAndView mv){
-		return "";
+							   Member m, ModelAndView mv){
+		m.setUserName(userName);
+		m.setEmail(email);
+		System.out.println(userName);
+		System.out.println(email);
+		
+		String result = mService.findId(m);
+		
+		
+		if(result != null) {
+			mv.addObject("userId",result);
+			mv.setViewName("member/findIdResult");
+		}else {
+			throw new MemberException("아이디 찾기 실패");
+		}
+		
+		return mv;
 	}
 	
 	/*** PW찾기 ***/
