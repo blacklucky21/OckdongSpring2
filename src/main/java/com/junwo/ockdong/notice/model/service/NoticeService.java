@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.SearchCondition;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
@@ -38,7 +36,11 @@ public interface NoticeService {
 	public List<HashMap<String, Object>> searchList(PageInfo info, SearchCondition sc);
 
 	ArrayList<NoticeComments> selectCommentList(int nNo);
-
+	
+	// 댓글 insert
 	int insertComment(NoticeComments nc);
+
+	// 댓글 delete
+	int deleteComment(int comments_no);
 
 }

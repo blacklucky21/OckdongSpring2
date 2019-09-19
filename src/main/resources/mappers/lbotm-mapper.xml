@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="lbotmMapper">
+	
+	<resultMap type="lbotm" id="lbotmResultSet">
+		<id property="bNo" column="BNO"/>
+		<result property="pt_Id" column="PT_ID"/>
+		<result property="userId" column="USERID" />
+		<result property="b_Title" column="B_TITLE" />
+		<result property="b_Content" column="B_CONTENT" />
+		<result property="b_Nickname" column="B_NICKNAME" />
+		<result property="b_Createdate" column="B_CREATEDATE" />
+		<result property="bModifydate" column="BMODIFYDATE" />
+		<result property="b_Count" column="B_COUNT" />
+		<result property="ct_Id" column="CT_ID" />
+		<result property="b_Src" column="B_SRC" />
+		<result property="b_Status" column="B_STATUS" />
+		
+		<result property="files_no" column="FILES_NO" />
+		<result property="f_reference_no" column="F_REFERENCE_NO" />
+		<result property="files_title" column="FILES_TITLE" />
+		<result property="files_change_title" column="FILES_CHANGE_TITLE" />
+		<result property="files_type" column="FILES_TYPE" />
+		<result property="files_root" column="FILES_ROOT" />
+		<result property="files_secession" column="FILES_SECESSION" />
+	</resultMap>
+	
+	<!-- 게시글 페이징 처리 -->
+	<select id="selectBoardListCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM lbotm 
+		WHERE b_Status = 'Y'and ct_Id = #{ct_Id}
+	</select>
+	
+	<!-- 게시ㅏㄴ 목록 조회 -->
+	<select id="selectHomeList" resultMap="homeResultSet">
+         select l.b_Title, l.b_Createdate, l.b_Count, f.files_root, l.bNo, me.userId, f.files_change_title
+            from lbotm l
+            join member me on (l.userId = me.userId)
+            join files f on (l.bNo = f.f_reference_no)
+            where b_Status = 'Y' and FILES_SECESSION = 0
+            group by l.b_Title, l.b_Createdate, l.b_Count, f.files_root, l.bNo, me.userId, f.files_change_title
+            order by l.bNo desc
+	</select>
+	
+</mapper>

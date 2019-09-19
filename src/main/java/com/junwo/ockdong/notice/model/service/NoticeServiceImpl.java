@@ -75,5 +75,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return nDAO.insertComment(nc);
 	}
 
+	@Override
+	public int deleteComment(int comments_no) {
+		return nDAO.deleteComment(comments_no);
+	}
+
 
 }

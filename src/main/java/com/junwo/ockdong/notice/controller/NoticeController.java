@@ -225,5 +225,13 @@ public class NoticeController {
 		}
 	}
 	
+	// 댓글 delete
+	@RequestMapping("deleteComment.do")
+	public String deleteComment(int nNo, int comments_no) {
+
+		nService.deleteComment(comments_no);
+
+		return "redirect:ndetail.do?nNo=" + nNo;
+	}
 
 }
