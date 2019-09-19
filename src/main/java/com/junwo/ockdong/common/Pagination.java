@@ -25,7 +25,7 @@ public class Pagination {
          endPage = maxPage;
       }
       
-      pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, buttonCount);
+      pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, buttonCount, "");
       
       return pi;
    }
@@ -53,7 +53,7 @@ public class Pagination {
 	         endPage = maxPage;
 	      }
 	      
-	      pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, pageLimit);
+	      pi = new PageInfo(currentPage, listCount, pageLimit, maxPage, startPage, endPage, pageLimit, "");
 	      
 	      return pi;
 	   }

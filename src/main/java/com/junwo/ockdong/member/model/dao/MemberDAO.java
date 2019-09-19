@@ -3,11 +3,15 @@ package com.junwo.ockdong.member.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.junwo.ockdong.cart.model.vo.Payment;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.member.model.vo.Member;
+import com.junwo.ockdong.notice.model.vo.Notice;
 
 
 @Repository("mDAO")
@@ -89,6 +93,26 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.memberUpdate", m);
 	}
 
+	public int getListCount() {
+		return sqlSession.selectOne("memberMapper.getListCount");
+	}
+	
+	public ArrayList<Notice> selectList(PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectList", pi.getUserId(), rowBounds);
+		
+	}
+
+	public ArrayList<Payment> myPaymentList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.myPaymentList", pi, rowBounds);
+	}
+		
+}
 
 	
-}

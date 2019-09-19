@@ -10,8 +10,8 @@
 <style>
 .bodyArea {
 	text-align: center;
-	padding-left: 150px;
-	padding-right: 150px;
+	padding-left: 50px;
+	padding-right: 50px;
 	width: auto;
 	background: white;
 	height: 600px;

@@ -4,7 +4,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.junwo.ockdong.cart.model.vo.Payment;
+import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.member.model.vo.Member;
+import com.junwo.ockdong.notice.model.vo.Notice;
 
 public interface MemberService {
 
@@ -70,6 +73,18 @@ public interface MemberService {
 
 
 	int checkNick(String nickName);
+
+
+
+	int getListCount();
+
+
+
+	ArrayList<Notice> selectList(PageInfo pi);
+
+
+
+	ArrayList<Payment> myPaymentList(PageInfo pi);
 
 
 
