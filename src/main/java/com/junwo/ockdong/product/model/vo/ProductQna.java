@@ -102,9 +102,11 @@ public class ProductQna {
 	@Override
 	public String toString() {
 		return "ProductQna [qna_Id=" + qna_Id + ", qna_user=" + qna_user + ", qna_content=" + qna_content
-		        + ", qna_createDate=" + qna_createDate + ", p_Id=" + p_Id + ", qna_status=" + qna_status
-		        + ", qna_secret=" + qna_secret + ", qna_answer=" + qna_answer + "]";
+		        + ", qna_createDate=" + qna_createDate + ", p_Id=" + p_Id + ", p_title=" + p_title + ", p_lunchType="
+		        + p_lunchType + ", qna_status=" + qna_status + ", qna_answer=" + qna_answer + ", qna_secret="
+		        + qna_secret + ", qna_answerDate=" + qna_answerDate + "]";
 	}
+
 	
 	
 	

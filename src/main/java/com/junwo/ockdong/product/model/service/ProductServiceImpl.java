@@ -10,6 +10,7 @@ import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.dao.ProductDAO;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductAnswer;
 import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
@@ -206,6 +207,26 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<ProductQna> adminSearchQnA(String qnaStatus) {
 		return pDAO.adminSearchQnA(qnaStatus);
+	}
+
+	@Override
+	public int updateQna(ProductQna pq) {
+		return pDAO.updateQna(pq);
+	}
+
+	@Override
+	public int insertAnswer(ProductAnswer pa) {
+		return pDAO.insertAnswer(pa);
+	}
+
+	@Override
+	public ProductAnswer selectAnswer(ProductAnswer pa) {
+		return pDAO.selectAnswer(pa);
+	}
+
+	@Override
+	public ProductAnswer selectAnswer2(ProductAnswer pa) {
+		return pDAO.selectAnswer2(pa);
 	}
 
 

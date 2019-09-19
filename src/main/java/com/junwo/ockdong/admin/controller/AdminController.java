@@ -618,11 +618,12 @@ public class AdminController {
 				i.setP_title(URLEncoder.encode(i.getP_title(), "utf-8")); // 상품명
 				i.setP_lunchType(URLEncoder.encode(i.getP_lunchType(), "utf-8")); // 상품설명
 				i.setQna_user(URLEncoder.encode(i.getQna_user(), "utf-8")); // 타입
+				i.setQna_content(URLEncoder.encode(i.getQna_content(), "utf-8"));
 
+				System.out.println(i);
 			}
 		}
 		System.out.println("찾아온 QNA 개수 : " + pList.size());
-		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(pList, response.getWriter());
 	}

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.product.model.vo.PictureList;
 import com.junwo.ockdong.product.model.vo.Product;
+import com.junwo.ockdong.product.model.vo.ProductAnswer;
 import com.junwo.ockdong.product.model.vo.ProductQna;
 import com.junwo.ockdong.product.model.vo.Productreview;
 
@@ -78,6 +79,11 @@ public interface ProductService {
 	int deleteQna(ProductQna pq); // 삭제
 	ArrayList<ProductQna> QnaAll();
 	ArrayList<ProductQna> adminSearchQnA(String qnaStatus);
+	int updateQna(ProductQna pq); // 문의 변경
+	
+	int insertAnswer(ProductAnswer pa); // 문의 답변
+	ProductAnswer selectAnswer(ProductAnswer pa);
+	ProductAnswer selectAnswer2(ProductAnswer pa);
 	
 	
 	
