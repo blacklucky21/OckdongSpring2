@@ -618,11 +618,12 @@ public class AdminController {
 				i.setP_title(URLEncoder.encode(i.getP_title(), "utf-8")); // 상품명
 				i.setP_lunchType(URLEncoder.encode(i.getP_lunchType(), "utf-8")); // 상품설명
 				i.setQna_user(URLEncoder.encode(i.getQna_user(), "utf-8")); // 타입
+				i.setQna_content(URLEncoder.encode(i.getQna_content(), "utf-8"));
 
+				System.out.println(i);
 			}
 		}
 		System.out.println("찾아온 QNA 개수 : " + pList.size());
-		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(pList, response.getWriter());
 	}
@@ -830,11 +831,11 @@ public class AdminController {
 		System.out.println(count);
 		
 		mv.addObject("payCount",count);
-		if(PayMonth>0 &&PayMoney>0 && PayToday>0) {
+		
 		mv.addObject("MoneyAll",PayMoney);
 		mv.addObject("MoneyToday",PayToday);
 		mv.addObject("MoneyMonth",PayMonth);
-		}
+		
 		mv.addObject("memAll",member);
 		mv.addObject("BlackList",BlackList);
 		mv.addObject("SecessionMember",SecessionMember);

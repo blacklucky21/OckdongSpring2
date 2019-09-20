@@ -85,5 +85,9 @@ public class NoticeDAO {
 		return sqlSession.insert("noticeMapper.insertComment", nc);
 	}
 
+	public int deleteComment(int comments_no) {
+		return sqlSession.selectOne("noticeMapper.delectComment", comments_no);
+	}
+
 
 }

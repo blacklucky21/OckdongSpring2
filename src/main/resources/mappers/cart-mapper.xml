@@ -59,11 +59,11 @@ where userid = #{loginUserId} -->
 	<select id="insertPayment" parameterType="map">
 	
 	
-INSERT INTO PAYMENT_PRODUCT( PNO,PPNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID,TOTALPRICE)
+INSERT INTO PAYMENT_PRODUCT( PNO,PPNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID,TOTALPRICE,P_IMG)
 SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}||seq_payProduct.currval</foreach> AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
 
 <foreach collection="total" item ="tt" index="index">#{tt}</foreach>
- AS TOTALPRICE
+ AS TOTALPRICE,C_IMG
 FROM CART
 WHERE CNO in
 	<foreach collection="totalArr" item="tArr" index="index"  open="(" close=")" separator=",">
@@ -200,21 +200,19 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	
 	<select id="PayMoney" resultType="_int">
 	
-	select sum(payprice) from payment 
+	select COALESCE(sum(payprice),0) from payment 
 
 	</select>
 	
 	<select id="PayToday" resultType="_int">
 	
-		select sum(payprice) from payment 
+		select COALESCE(sum(payprice),0) from payment 
         where  TO_CHAR(CHECKDATE,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
-
-
 
 	</select>
 	
 	<select id="PayMonth" resultType="_int">
-	select sum(payprice)from payment 
+	select COALESCE(sum(payprice),0) from payment 
         where checkdate between TRUNC(sysdate,'MM')  and sysdate
 	</select>
 	

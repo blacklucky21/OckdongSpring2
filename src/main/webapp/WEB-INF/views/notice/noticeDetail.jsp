@@ -8,15 +8,6 @@
 <meta charset="UTF-8">
 <title>공지사항 상세보기</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
 <style>
 .boardName {
 	display: block;
@@ -389,7 +380,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<a href="#">
 							<%-- <img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic"> --%>
 							<%-- <img src="${pageContext.request.contextPath}${detail.FILES_ROOT}${detail.FILES_CHANGE_TITLE}" class="proic"> --%>
-							<img src="${pageContext.request.contextPath}/resources/img/boardImg/lee.jpg" class="proic">
+							<img src="${pageContext.request.contextPath}/resources/img/boardImg/member.png" class="proic">
 						</a>
 						
 						</span>
@@ -479,37 +470,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 								</ul>
 							</div>
 						</div>
-						
-						<!-- 
-						---------------------------------- 댓글 작성 폼 ----------------------------------
-						<div id="comment-write" class="comment-write">
-							<form action="insertComment.do" name="form1" method="post">
-								<textarea name="Comments_Content" id="Comments_Content" class="txtarea r5 placeholder" placeholder="댓글 등록 시 상대에 대한 비방이나 욕설 등은 피해주시고, 따뜻한 격려와 응원을 보내주세요~ 댓글에 대한 신고가 접수될 경우, 내용에 따라 즉시 삭제될 수 있습니다."
-									onfocus="setFlag();"></textarea>
-									
-									<button type="submit" id="btncmm1" class="btn btn-primary">입력</button>
-							</form>
-						</div>	
-					</div>
-
-					---------------------------------- 게시글에 작성된 댓글 수 ----------------------------------
-					<div class="comment-count">
-						<p class="comment-count-1">댓글</p>
-						<p class="comment-count-2" id="nCount"></p>
-					</div>
- 	
- 				댓글 목록 보기 
-				<table class="replyTable" id="rtb">
-					<thead>
-						<tr>
-							<td colspan="2"><b id="rCount"></b></td>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-				 -->
-
-				<!-- 댓글 등록 부분 -->
+				<!-- 댓글 등록 부분  -->
 				<div id="comment-write" class="comment-write">
 				<table class="replyTable">
 					<tr>
@@ -519,7 +480,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 				</table>
 				</div>
 
-				<!-- 댓글 목록 보기  -->
+				<!-- 댓글 목록 보기 -->
 				<table class="comment-list" id="rtb">
 					<thead class="comment-list-li">
 						<tr class="comment-count">			
@@ -579,10 +540,9 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 								if(data.length > 0){
 									for(var i in data){
 										$tr = $("<tr>");
-										$UserId = $("<td class='comment-txt' style='font-weight: bold;'>").text(data[i].UserId);
-										$Comments_Content = $("<td class='ptxt'>").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
+										$UserId = $("<td class='comment-txt' style='font-weight: bold; margin-right: 50px;'>").text(data[i].UserId);
+										$Comments_Content = $("<td width='200' class='ptxt' style='margin-right:60%;'>").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
 										$Comments_Date = $("<td width='100' >").text(data[i].Comments_Date);
-									
 										
 										$tr.append($UserId);
 										$tr.append($Comments_Content);
@@ -609,9 +569,9 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							[이전] &nbsp;
 						</c:if>
 						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="blistBack" value="view.do">
+							<c:url var="blistBack" value="nlist.do">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
-								<c:param name="board_no" value="${detail.BOARD_NO}"/>
+								<c:param name="nNo" value="${notice.nNo}"/>
 							</c:url>
 							<a href="${ blistBack }">[이전]</a>
 						</c:if>
@@ -621,9 +581,9 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 								<font color="red" size="4"><b>[${ p }]</b></font>
 							</c:if>
 							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="blistCheck" value="view.do">
+								<c:url var="blistCheck" value="nlist.do">
 									<c:param name="currentPage" value="${ p }"/>
-									<c:param name="board_no" value="${detail.BOARD_NO}"/>
+									<c:param name="nNo" value="${nNo}"/>
 								</c:url>
 								<a href="${ blistCheck }">${ p }</a>
 							</c:if>
@@ -632,9 +592,9 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							&nbsp; [다음]
 						</c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="view.do">
+							<c:url var="blistEnd" value="nlist.do">
 								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-								<c:param name="board_no" value="${detail.BOARD_NO}"/>
+								<c:param name="nNo" value="${notice.nNo}"/>
 							</c:url>
 							&nbsp; 
 							<a href="${ blistEnd }">[다음]</a>

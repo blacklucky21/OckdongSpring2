@@ -121,10 +121,17 @@
 	order by Comments_No desc
 	</select>
 	
+	<!-- 댓글 insert  -->
 	<insert id="insertComment" parameterType="NoticeComments">
       insert into noticecomments
       values(seq_Comments_No.nextval, #{Comments_Content}, #{nNo}, #{UserId} , sysdate, default, #{nickName})
   	</insert>
+  	
+  	<!-- 댓글 delete  -->
+  	<delete id="deleteComment">
+		delete from NoticeComments 
+		WHERE COMMENTS_NO = #{comments_no}
+	</delete>
 	
   
 </mapper>
