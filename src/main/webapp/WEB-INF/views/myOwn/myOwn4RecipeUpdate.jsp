@@ -184,6 +184,7 @@ table, tr, td {
 			</div>
 			<div style="width: 70%; height: auto; margin-left: 15%; border: 2px solid black; border-radius: 15px;">
 				<div style="width: 100%; height: 400px; text-align: center;">
+					<input type="hidden" name="pastFileName" value="${fileName }"/>
 					<div class="myOwnTable">
 						<div class="rice">
 							<span id="rice" class="myOwnSpan" ondrop="drop(event)" ondragover="allowDrop(event)">

@@ -24,10 +24,10 @@
 }
 
 .recipeOne{
-    float: left;
-	width: 300px;
+    display: inline-block;
 	border-radius: 15px;
-	margin: 10px;
+	margin: 5px;
+	width: 300px;
 	text-align: center;
 	/* 	border-top: 5px solid #13ae67;
 	border-left: 5px solid #13ae67; */
@@ -57,9 +57,6 @@
 }
 
 .recipeOne:hover {
-	/* 	border-bottom: 5px solid #13ae67;
-	border-right: 5px solid #13ae67;
-	transition:border-bottom 0.2s, border-right 0.2s; */
 	cursor: pointer;
 	border: 5px solid #13ae67;
 }
@@ -104,12 +101,12 @@
 	<c:import url="../header/header.jsp" />
 	<div class="bodyArea">
 		<c:import url="../myPage/member/myPageLeft.jsp" />
-		<c:if test="${!empty rList}">
+		<div class="recipeAll" style="display:inline-block; float:left;">
+			<c:if test="${!empty rList}">
 				<div style="text-align:left;">
 					<a>전체 (${listCount}개)</a>
 				</div>
 			</c:if>
-		<div class="recipeAll" style="display:inline-block; float:left;">
 			<c:if test="${empty rList}">
 				회원님이 등록한 나만의 레시피가 없습니다.
 			</c:if>

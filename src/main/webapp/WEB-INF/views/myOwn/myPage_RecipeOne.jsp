@@ -213,7 +213,8 @@
 			});
 			$(".recipeUpdateBtn").click(function(){
 				var mblId = $("#mblId").val();
-				location.href="recipeUpdate.do?mblId="+mblId;
+				var fileName = $("#fileName").val();
+				location.href="recipeUpdate.do?mblId="+mblId + "&fileName=" + fileName;
 			});
 		});
 	</script>
