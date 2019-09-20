@@ -1,6 +1,9 @@
 package com.junwo.ockdong.lbotm.controller;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +23,6 @@ import com.junwo.ockdong.lbotm.model.service.lbotmService;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
-import com.junwo.ockdong.notice.model.vo.Notice;
 
 @Controller
 public class lbotmController {
@@ -54,13 +56,17 @@ public class lbotmController {
 		
 
 		ArrayList<lbotm> list = lbotmService.selectList(pi);
+		System.out.println(list.get(0).getB_Content());
+		
+	
+
 
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
 			mv.setViewName("lbotm/lbotmList");
 		} else {
-			throw new NoticeException("게시글 조회에 실패하였습니다.");
+		throw new NoticeException("게시글 조회에 실패하였습니다.");
 		}
 
 		return mv;
@@ -92,8 +98,19 @@ public class lbotmController {
 	public String lbotminsert(@SessionAttribute("loginUser") Member loginUser, @ModelAttribute lbotm l,
 			HttpServletRequest request) {
 		l.setB_Nickname(loginUser.getNickName());
-		int result = lbotmService.lbotminsert(l);
 		
+		
+		
+		String text = l.getB_Content();
+        Pattern pattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>"); //img 태그 src 추출 정규표현식
+        Matcher matcher = pattern.matcher(text);
+  
+        while(matcher.find()){
+            System.out.println(matcher.group(1));
+            l.setB_Src(matcher.group(1));
+        }
+
+        int result = lbotmService.lbotminsert(l);
 		if (result > 0) {
 			return "redirect:lbotmlist.do";
 		} else {

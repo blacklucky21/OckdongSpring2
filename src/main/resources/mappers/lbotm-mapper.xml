@@ -53,7 +53,7 @@
 	<!-- 게시글 작성  -->
 	<insert id="lbotminsert"  parameterType="lbotm">
 		insert into lbotm values(seq_bNo.nextval, #{pt_Id}, #{userId}, #{b_Title}, #{b_Content}, #{b_Nickname},
-      sysdate, sysdate, default, default, default, default)
+      sysdate, sysdate, default, default, #{b_Src}, default)
 	</insert>
 	
 </mapper>
