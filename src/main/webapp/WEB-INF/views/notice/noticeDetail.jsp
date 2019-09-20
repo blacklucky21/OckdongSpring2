@@ -459,6 +459,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							<a href="javascript:" onClick="reportPopup('close')">
 				            	<span id="closePopup">닫기</span>
         					</a>
+        					
 								<ul class="reportWrap">
 									<li onclick="choiceReport('${detail.BOARD_NO}', '광고/상업성 게시글 ', '${detail.MEMBER_NO }');" id="rli">광고/상업성 게시글 <input id="report" type="radio" value="1" class="pop_check"></li>
 									<li onclick="choiceReport('${detail.BOARD_NO}', '비방/욕설 게시글', '${detail.MEMBER_NO }');" id="rli">비방/욕설 게시글 <input id="report" type="radio" value="2" class="pop_check"></li>
@@ -496,7 +497,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						
 						setInterval(function(){
 							getCommentList();
-						}, 10000);
+						}, 1000000);
 					});
 					
 					// 댓글 등록 ajax
@@ -520,6 +521,11 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					// 댓글 리스트 ajax
 					function getCommentList(){
 						var nNo = ${ notice.nNo };
+						var user ="";
+					
+						if( '${loginUser.userId}' != ""){
+							user = '${loginUser.userId}';
+						}
 						
 						$.ajax({
 							url: "commentList.do",
@@ -533,21 +539,34 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 								var $UserId;
 								var $Comments_Content;
 								var $Comments_Date;
-								
+								var ss ="";
 								$("#rCount").text("댓글 (" + data.length + ")");
 								$("#rCount1").text(data.length);
-								
+								var ddl ="";
 								if(data.length > 0){
 									for(var i in data){
-										$tr = $("<tr>");
-										$UserId = $("<td class='comment-txt' style='font-weight: bold; margin-right: 50px;'>").text(data[i].UserId);
-										$Comments_Content = $("<td width='200' class='ptxt' style='margin-right:60%;'>").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
-										$Comments_Date = $("<td width='100' >").text(data[i].Comments_Date);
+									
+										$tr = $("<tr style='border-bottom:0.5px solid #cecece'>");
+										$UserId = $("<td class='comment-txt'  style='font-weight: bold; margin-right:80px; '>").text(data[i].UserId);
+										$Comments_Content = $("<td class='ptxt cModify"+data[i].Comments_No+"' width='500px' margin-left='100px' >").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
+										$Comments_Date = $("<td nowrap width='100' class='bb"+data[i].Comments_No+"'>").text(data[i].Comments_Date);
+										if(user == data[i].UserId){
+										ddl = "<td nowrap><button class='modifyB2 bb"+data[i].Comments_No+"' onclick='modifyComment("+data[i].Comments_No+")' style='background:none;border:0'>수정</button></td>";
+										ddl += "<td nowrap><button class='deleteB2 bb"+data[i].Comments_No+"' onclick='deleteComment("+data[i].Comments_No+")'style='background:none ;border:0'>삭제</button></td>";
+										ddl += "<td ><input type='hidden' class='cNo' value="+data[i].Comments_No+"></td></tr>"
+										}else{
+											ddl = "<td>&nbsp&nbsp</td>";
+											ddl += "<td>&nbsp&nbsp&nbsp </td>";
+											ddl += "<td>&nbsp&nbsp </td>";
 										
+										}
+									
 										$tr.append($UserId);
 										$tr.append($Comments_Content);
 										$tr.append($Comments_Date);
+										$tr.append(ddl);
 										$tableBody.append($tr);
+									
 									}
 									
 									} else {
@@ -563,7 +582,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					
 				</script>
 
-				<!---------------------------------- 댓글 페이징 처리 ---------------------------------->
+		<%-- 		<!---------------------------------- 댓글 페이징 처리 ---------------------------------->
 					<div class="paginate">
 						<c:if test="${ pi.currentPage <= 1 }">
 							[이전] &nbsp;
@@ -600,9 +619,8 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							<a href="${ blistEnd }">[다음]</a>
 						</c:if>
 					</div>
-
-					<hr class="hrline">
-					<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
+ --%>
+										<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
 					<%-- <div class="balist1">
 						<a href="#" class="aflist1">다음글 ▲
 							<p class="aflist2">저녁추천좀요</p>
@@ -628,7 +646,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 				<!-------------------------------------------------------------------------->
 			</div>
 		</div>
-	
+
 <script>
 	$(document).ready(function(){
 		$().UItoTop({ easingType: 'easeOutQuart' });
@@ -655,7 +673,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 		});
 	});
 	
-	//댓글 삭제 버튼
+	/* //댓글 삭제 버튼
 	$(document).ready(function(){
 		$(".deleteB2").click(function(){
 			if(confirm("삭제하시겠습니까?") == true){
@@ -664,7 +682,68 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
 			}
 		});
-	});
+	}); */
+	
+
+	//댓글 삭제
+	function deleteComment(cNo){
+		alert(cNo);
+		
+	    $.ajax({
+            url: "deleteComment.do",
+            data: {"cNo": cNo},
+            type: "POST",
+            
+            success: function(data){
+            
+            	getCommentList();
+          
+               
+            }
+         });
+	}
+	//댓글 수정
+	
+	function modifyComment(cNo){
+		//alert($('.cModify'+cNo).val());
+		
+		$(".bb"+cNo).css("display","none");
+		//$('.modifyB2').css("display", "none"); 
+		var append ="";
+		var div = $('.cModify'+cNo);
+		append +='<div id="comment-write" class="comment-write" style="display:inline-block;width:500px">';
+		append +='<table class="replyTable">';
+		append +='<tbody><tr>';
+		append +='<td><textarea cols="98" rows="5"  id="Comments_Content " name="COMMENTS_CONTENT" class="txtarea r5 placeholder modify_Content'+cNo+'" placeholder="댓글 수정" onfocus="setFlag();" style="border: none; width:400px"></textarea></td>';
+		append +='<td><button id="rSubmit " class="btn btn-primary btncmm1 modifyComment'+cNo+'">입력</button></td>';
+		append +='</tr>';
+		append +='</tbody></table>';
+		append +='</div>';
+	
+		div.html(append);
+		
+		
+		
+		$('.modifyComment'+cNo).click(function(){
+			
+			var Content = $('.modify_Content'+cNo).val();
+			
+		    $.ajax({
+	            url: "ModifyCommnet.do",
+	            data: {"cNo": cNo,"Content":Content},
+	            type: "POST",
+	            success: function(data){
+	            
+	            	getCommentList();
+	          
+	               
+	            }
+	         });
+			
+		});
+	}
+	
+	
 	
 	//댓글 내용 입력 체크
 	$(document).ready(function(){

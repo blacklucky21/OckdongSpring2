@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,13 +87,11 @@ body {
 					
 					<tbody>
 						<c:choose>
-							<c:when test="${empty list }">
-								<tr>
-									<td colspan="5" align="center">데이터가 없습니다.</td>
-								</tr>
-							</c:when>
+							
 							<c:when test="${!empty list }">
+				
 								<c:forEach var="n" items="${ list }">
+											
 									<tr>
 										<td>${ n.nNo }</td>
 										<td>
@@ -111,6 +110,38 @@ body {
 									</tr>
 								</c:forEach>
 							</c:when> 
+							
+							<c:when test="${!empty searchList }">
+				
+								<c:forEach var="n" items="${ searchList }">
+											
+									<tr>
+										<td>${ n.NNO }</td>
+										<td>
+										<c:url var="ndetail" value="ndetail.do">
+											<c:param name="nNo" value="${ n.NNO }" />
+											<c:param name="page" value="${ pi.currentPage }" />
+										</c:url> 
+										<a href="${ ndetail }" style=" text-decoration:none">${ n.NTITLE }</a>
+										<%-- <c:if test="${ empty loginUser }">
+											${ n.nTitle }		
+											</c:if> --%>
+										</td>
+										<td>${ n.ID }</td>
+										<td>${ n.NCOUNT }</td>
+										<td><fmt:formatDate value="${ n.NDATE }" type="date" pattern="yyyy-MM-dd" /><br/> 
+
+										</td>
+										
+									</tr>
+								</c:forEach>
+							</c:when> 
+							
+							<c:when test="${empty list}">
+								<tr>
+									<td colspan="5" align="center">데이터가 없습니다.</td>
+								</tr>
+							</c:when>
 						</c:choose>
 					</tbody>
 				</table>
@@ -205,7 +236,7 @@ body {
 			<!-- 끝  -->
 				
 			<!-- 로그인 일때만 버튼 활성화  -->
-			<c:if test="${! empty sessionScope.loginUser }">	
+			<c:if test="${sessionScope.loginUser.userId =='admin' }">	
 			<div>
 				<button type="button" class="btn btn-sm btn-primary" id="boardWrite" onclick="location.href='boardWrite.do'">글쓰기</button>
 			</div> 

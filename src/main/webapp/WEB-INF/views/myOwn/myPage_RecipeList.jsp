@@ -23,8 +23,11 @@
 	height: 200px;
 }
 
+.recipeOne{
+    display: inline-block;
 	border-radius: 15px;
-	margin: 10px;
+	margin: 5px;
+	width: 300px;
 	text-align: center;
 	/* 	border-top: 5px solid #13ae67;
 	border-left: 5px solid #13ae67; */
@@ -54,9 +57,6 @@
 }
 
 .recipeOne:hover {
-	/* 	border-bottom: 5px solid #13ae67;
-	border-right: 5px solid #13ae67;
-	transition:border-bottom 0.2s, border-right 0.2s; */
 	cursor: pointer;
 	border: 5px solid #13ae67;
 }

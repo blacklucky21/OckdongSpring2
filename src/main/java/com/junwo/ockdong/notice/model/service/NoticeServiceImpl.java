@@ -80,5 +80,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return nDAO.deleteComment(comments_no);
 	}
 
+	@Override
+	public int updateComent(NoticeComments nc) {
+		// TODO Auto-generated method stub
+		return nDAO.updateComent(nc);
+	}
+
 
 }

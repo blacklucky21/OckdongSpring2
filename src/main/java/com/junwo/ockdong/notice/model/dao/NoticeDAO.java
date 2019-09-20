@@ -86,7 +86,12 @@ public class NoticeDAO {
 	}
 
 	public int deleteComment(int comments_no) {
-		return sqlSession.selectOne("noticeMapper.delectComment", comments_no);
+		return sqlSession.update("noticeMapper.deleteComment", comments_no);
+	}
+
+	public int updateComent(NoticeComments nc) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("noticeMapper.updateComent", nc);
 	}
 
 

@@ -84,6 +84,7 @@ public interface ProductService {
 	int insertAnswer(ProductAnswer pa); // 문의 답변
 	ProductAnswer selectAnswer(ProductAnswer pa);
 	ProductAnswer selectAnswer2(ProductAnswer pa);
+	int updateQnaType(ProductQna pq); // qna 상태 변경
 	
 	
 	

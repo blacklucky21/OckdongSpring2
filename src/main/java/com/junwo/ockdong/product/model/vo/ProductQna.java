@@ -16,8 +16,15 @@ public class ProductQna {
 	private String qna_answer; // 답변 상태
 	private String qna_secret; // 비밀 여부
 	private String qna_answerDate; // 답변날
+	private String answer_content; // 답변 내용
 	
 	
+	public String getAnswer_content() {
+		return answer_content;
+	}
+	public void setAnswer_content(String answer_content) {
+		this.answer_content = answer_content;
+	}
 	public String getP_lunchType() {
 		return p_lunchType;
 	}
@@ -84,17 +91,23 @@ public class ProductQna {
 	public void setQna_answer(String qna_answer) {
 		this.qna_answer = qna_answer;
 	}
-	public ProductQna(int qna_Id, String qna_user, String qna_content, String qna_createDate, int p_Id,
-	        String qna_status, String qna_secret, String qna_answer) {
+	
+	public ProductQna(int qna_Id, String qna_user, String qna_content, String qna_createDate, int p_Id, String p_title,
+	        String p_lunchType, String qna_status, String qna_answer, String qna_secret, String qna_answerDate,
+	        String answer_content) {
 		super();
 		this.qna_Id = qna_Id;
 		this.qna_user = qna_user;
 		this.qna_content = qna_content;
 		this.qna_createDate = qna_createDate;
 		this.p_Id = p_Id;
+		this.p_title = p_title;
+		this.p_lunchType = p_lunchType;
 		this.qna_status = qna_status;
-		this.qna_secret = qna_secret;
 		this.qna_answer = qna_answer;
+		this.qna_secret = qna_secret;
+		this.qna_answerDate = qna_answerDate;
+		this.answer_content = answer_content;
 	}
 	public ProductQna() {
 		super();
@@ -104,8 +117,9 @@ public class ProductQna {
 		return "ProductQna [qna_Id=" + qna_Id + ", qna_user=" + qna_user + ", qna_content=" + qna_content
 		        + ", qna_createDate=" + qna_createDate + ", p_Id=" + p_Id + ", p_title=" + p_title + ", p_lunchType="
 		        + p_lunchType + ", qna_status=" + qna_status + ", qna_answer=" + qna_answer + ", qna_secret="
-		        + qna_secret + ", qna_answerDate=" + qna_answerDate + "]";
+		        + qna_secret + ", qna_answerDate=" + qna_answerDate + ", answer_content=" + answer_content + "]";
 	}
+	
 
 	
 	

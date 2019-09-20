@@ -297,13 +297,14 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		<result property="qna_answer" column="QNA_ANSWER"/>
 		<result property="qna_secret" column="QNA_SECRET"/>
 		<result property="qna_answerDate" column="QNA_ANSWERDATE"/>	
+		<result property="answer_content" column="ANSWER_CONTENT"/>	
 </resultMap>
 
 <!-- 관리자 QnA 리스트 쿼리 -->
 <select id="QnaAdminList" resultMap="productQnaAdmin">
 	select *
 	from (select *
-		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
+		  from 	PRODUCTQNA left join PRODUCT using(P_ID) left join PRODUCTANSWER using(QNA_ID)
 		  order by QNA_ID desc )
 	where QNA_STATUS = 'Y'
 </select>
@@ -311,11 +312,11 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 <select id="adminSearchQnA" parameterType="string" resultMap="productQnaAdmin">
 	select *
 	from (select *
-		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
+		  from 	PRODUCTQNA left join PRODUCT using(P_ID) left join PRODUCTANSWER using(QNA_ID)
 		  order by QNA_ID desc )
 	where QNA_STATUS = 'Y'
 	<choose>
-		<when test="type.equals('답변중')">
+		<when test="type.equals('답변대기')">
 			and QNA_ANSWER = 'N'
 		</when>
 		<when test="type.equals('답변완료')">
@@ -362,7 +363,12 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 			
 </select>
 
-
+<update id="updateQnaType">
+	update PRODUCTQNA
+		set QNA_ANSWER ='Y',QNA_ANSWERDATE = #{qna_answerDate}
+		where QNA_ID = #{qna_Id} 
+	
+</update>
 
 
 

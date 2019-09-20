@@ -495,7 +495,7 @@ public class MyOwnController {
 	}
 	
 	@RequestMapping("recipeUpdate.do")
-	public ModelAndView recipeUpdate(ModelAndView mv, @RequestParam("mblId") int mblId) {
+	public ModelAndView recipeUpdate(ModelAndView mv, @RequestParam("mblId") int mblId, @RequestParam("fileName") String fileName) {
 		
 		MBLRecipe mblR = service.myRecipeDetail(mblId);
 		
@@ -573,6 +573,7 @@ public class MyOwnController {
 			mv.addObject("sub1List", sub1List);
 			mv.addObject("sub2List", sub2List);
 			mv.addObject("soupList", soupList);
+			mv.addObject("fileName",fileName);
 			mv.setViewName("myOwn/myOwn5RecipeUpdate");
 		}else {
 			//4찬일 경우
@@ -604,6 +605,7 @@ public class MyOwnController {
 			mv.addObject("mainList", mainList);
 			mv.addObject("sub1List", sub1List);
 			mv.addObject("sub2List", sub2List);
+			mv.addObject("fileName",fileName);
 			mv.setViewName("myOwn/myOwn4RecipeUpdate");
 		}
 		
@@ -619,14 +621,30 @@ public class MyOwnController {
 									@RequestParam("selectedSub2") int sub2,
 									@RequestParam("mblId") String mblId,
 									@RequestParam("racipeName") String racipeName,
+									@RequestParam("pastFileName") String pastFileName,
 									HttpServletRequest request,
 									HttpSession session) throws Exception {
-		
-		MBLRecipe mblR = service.searchRecipeOne(mblId);
 		
 		Member member = (Member)session.getAttribute("loginUser");
 		
 		String fileName = CreateRecipe(imgSrc, request);
+		
+		System.out.println("imgSrc : " + imgSrc);
+		System.out.println("pastFileName : " + pastFileName);
+		
+		MBLRecipe mblR = service.searchRecipeOne(mblId);
+		
+		int removeResult = removeRecipe(pastFileName, request);
+		
+		System.out.println("pastFileName : " + pastFileName);
+		
+		if(removeResult > 0) {
+			System.out.println("기존 레시피 삭제 성공");
+		}else {
+			System.out.println("기존 레시피 삭제 실패");
+			throw new Exception("나만의 도시락 수정 중 기존 파일 삭제 실패!!!");
+		}
+		
 		
 		System.out.println("fileName : " + fileName);
 		
@@ -655,6 +673,28 @@ public class MyOwnController {
 			return "redirect:myOwnList.me";
 		}else {
 			throw new Exception("나만의 도시락 수정 중 에러 발생!!!");
+		}
+	}
+	
+	
+	public int removeRecipe(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String removePath = root + "\\img\\Recipe\\" + fileName;
+		File removeFile = new File(removePath);
+		if (!removeFile.exists()) {// 해당 폴더가 없으면
+			return 0;
+		}
+		if (removeFile.exists()) {
+			if (removeFile.delete()) {
+				System.out.println("기존 파일 삭제 성공");
+				return 1;
+			} else {
+				System.out.println("기존 파일 삭제 실패");
+				return -1;
+			}
+		} else {
+			System.out.println("없는 파일");
+			return -1;
 		}
 	}
 }
