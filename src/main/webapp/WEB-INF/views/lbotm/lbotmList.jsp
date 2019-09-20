@@ -183,14 +183,15 @@
                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
                 src="https://cphoto.asiae.co.kr/listimglink/1/2019062419003297150_1561370432.jpg" data-holder-rendered="true"> 
                 <div class="card-body">
-                  <p class="card-text" href="">${ l.b_Title }</p><br>
+                  <p class="card-text">${ l.b_Title }</p><br>
+                  
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='lbotmdetail.do'">View</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                     </div>
                     <small class="text-muted">닉네임 ${ l.b_Nickname }</small>
-                    <small class="text-muted">조회수 ${ l.b_Count }</small>
+                    <small class="text-muted">조회수${ l.b_Count }</small>
                   </div>
                 </div>
               </div>

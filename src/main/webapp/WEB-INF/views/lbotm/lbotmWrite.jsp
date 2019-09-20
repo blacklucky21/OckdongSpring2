@@ -92,11 +92,12 @@ div#editor {
 									<tr>
 										<th id="title">제목</th>
 										<td>
-											<input id="b_Title" name="nTitle" type="text" class="form-control">
+											<input id="b_Title" name="b_Title" type="text" class="form-control">
 										</td>
 										<th>작성자</th>
 										<td>
 											<input type="text" name="id" readonly value="${ loginUser.userId }">
+											<input type="hidden" id="userId" name="userId">
 										</td>
 									</tr>
 

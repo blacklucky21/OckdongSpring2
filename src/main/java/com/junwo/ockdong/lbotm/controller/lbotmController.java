@@ -3,6 +3,7 @@ package com.junwo.ockdong.lbotm.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ import com.junwo.ockdong.lbotm.model.service.lbotmService;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
-import com.junwo.ockdong.notice.model.vo.Notice;
 
 @Controller
 public class lbotmController {
@@ -90,8 +90,9 @@ public class lbotmController {
 	// 게시글 작성처리
 	@RequestMapping(value = "lbotminsert.do")
 	public String lbotminsert(@SessionAttribute("loginUser") Member loginUser, @ModelAttribute lbotm l,
-			HttpServletRequest request) {
+			HttpServletRequest request, HttpSession session) {
 		l.setB_Nickname(loginUser.getNickName());
+		
 		int result = lbotmService.lbotminsert(l);
 		
 		if (result > 0) {
