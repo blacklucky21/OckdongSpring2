@@ -243,13 +243,11 @@
 
 
 		var userid =td.eq(1).text();
-			
-		alert(userid);
-			
+
 			
 			var bool = confirm("회원 "+userid+"를 정말로 블랙 시키겠습니까?");
 			
-			if(bool){
+			if(bool && !(userid == 'admin') ){
 				var delMem = document.deleteAdminMember;	
 				
 				delMem.MemId.value = userid;
@@ -258,6 +256,8 @@
 /* 				location.href='deleteAdminMember.aa'; */
 <%-- 				location.href='<%= request.getContextPath( )%>/deletereply.bo?bid=<%=board.getBid() %>&no='+num; --%>
 				<%-- location.href='<%= request.getContextPath( )%>/deletereply.bo?no='+number+&bid=<%=board.getBid() %>; --%>	
+			}else{
+				alert("관리자는 블랙이 불가능합니다.");
 			}
 		});
 	</script>
