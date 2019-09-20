@@ -339,6 +339,9 @@ public class ProductController {
 			@RequestParam(value = "sub3_name", required = false) String sub3_name,
 			@RequestParam(value = "sub3_realname", required = false) String sub3_realname,
 			@RequestParam(value = "sub3_type", required = false) Integer sub3_type, HttpServletRequest request) {
+		
+		
+		
 		// 메인은 무조건 있기 때문에 문제 없음
 		// 가지고 온거 출려 해본다.
 		System.out.println("=================== 수정 컨트롤러 사진 출력 결과 ======================");
