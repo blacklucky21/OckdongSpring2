@@ -277,6 +277,18 @@
 		where userId=#{userId}
 	</update>
 	
+	<select id="findId" parameterType="Member" resultType="String">
+		select userId
+    	from member
+    	where userName=#{userName} and email=#{email}
+	</select>
+	
+	<update id="findPass" >
+		update member
+    	set password = #{password}
+    	where userId=#{userId} and email=#{email}
+	</update>
+	
 	<select id="getListCount" resultType="_int">
 		select count(*)
 		from notice
@@ -320,23 +332,22 @@
 		order by payno
 	</select>
 	
-	<select id="findId" parameterType="Member" resultType="String">
-		select userId
-    	from member
-    	where userName=#{userName} and email=#{email}
-	</select>
-	
-	<update id="findPass" >
-		update member
-    	set password = #{password}
-    	where userId=#{userId} and email=#{email}
-	</update>
-	
-	
 	<select id="getPaymentList" parameterType="string" resultType="_int">
 		select count(*)
 		from payment
 		where userid=#{userId}
+	</select>
+	
+	<select id="myPaymentDetailList" parameterType="string" resultType="Payment">
+		select *
+		from payment
+		where p_id=#{p_id}
+	</select>
+	
+	<select id="myBoardDetailView" parameterType="_int" resultType="lbotm">
+		select *
+		from lbotm
+		where bNo=#{bNo}
 	</select>
 	
 	<select id="getMyBoardList" parameterType="string" resultType="_int">

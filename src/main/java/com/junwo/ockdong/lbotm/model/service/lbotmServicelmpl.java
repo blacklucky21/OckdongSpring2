@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.lbotm.model.dao.lbotmDAO;
-import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 
 @Service("lbotmServie")

@@ -193,7 +193,16 @@ public class MemberServiceImpl implements MemberService {
 	public int getPaymentList(String userId) {
 		return mDAO.getPaymentList(userId);
 	}
+	
+	@Override
+	public Payment myPaymentDetailList(String p_id) {
+		return mDAO.myPaymentDetailList(p_id);
+	}
 
+	@Override
+	public lbotm myBoardDetailView(int bNo) {
+		return mDAO.myBoardDetailView(bNo);
+	}
 
 	@Override
 	public int getMyBoardList(String userId) {
@@ -211,6 +220,11 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<ProductQna> selectQnAList(PageInfo pi) {
 		return mDAO.selectQnAList(pi);
 	}
+
+
+
+
+	
 
 
 

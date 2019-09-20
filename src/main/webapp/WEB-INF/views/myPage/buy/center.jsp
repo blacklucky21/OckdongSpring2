@@ -28,9 +28,9 @@
 		<thead>
 		<tr style="background-color: black; color: white;">
 			<th>주문번호</th>
-			<th style="width: 70px;">주문상태</th>
+			<th style="width: 70px;">주문상태</th> 
 			<th>상품명</th>
-			<th>배달주소</th>
+			<th>배달주소</th>			
 			<th>결제금액</th>
 			<th>배송날짜</th>
 		</tr>
@@ -39,18 +39,24 @@
 		<c:forEach var="buy" items="${ list }">
 		<tbody>
 		<tr>
-			<td align="center">${ buy.p_id }</td>
+			<td align="center">
+				<a href="#" style="text-decoration: none;" class="buyDetailView" id="${ buy.p_id }">${ buy.p_id }</a>
+			</td>
+			<%-- <td align="center">${ buy.p_id }</td> --%>
+			<%-- <td style="cursor: pointer" class="search" id="searchId">
+				<a href="#" class="modalm" data-id="${ buy.p_id }" data-toggle="modal" data-target="#myModal">${ buy.p_id }</a>
+			</td> --%>
 			<c:if test="${buy.pstatus eq 'Y' }">
-				<td>상품준비중</td>
+				<td>상품준비중</td> 
 			</c:if>
 			<c:if test="${buy.pstatus eq 'R' }">
-				<td>배송중</td>
+				<td>배송중</td> 
 			</c:if>
 			<c:if test="${buy.pstatus eq 'E' }">
-				<td>배송완료</td>
+				<td>배송완료</td> 
 			</c:if>
 			<td align="center">${ buy.paytext }</td>
-			<td align="center">${ buy.payaddress }</td>
+			<td align="center">${ buy.payaddress }</td>			
 			<td align="center">${ buy.payprice }</td>
 			<td align="center">${ buy.delivaryDate }</td>
 		</tr>
@@ -108,5 +114,11 @@
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		$(".buyDetailView").click(function() {
+			var p_id = $(this).attr("id");			
+			window.open("buyDetail.me?p_id="+p_id,"Gooooood","width=1900, height=300");			
+		})
+	</script>
 </body>
 </html>
