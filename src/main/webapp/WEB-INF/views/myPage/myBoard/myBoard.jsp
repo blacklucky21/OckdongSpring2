@@ -37,7 +37,9 @@
 		<c:if test="${ !empty list }">
 		<c:forEach var="b" items="${ list }">
 		<tr>
-			<td align="center">${ b.bNo }</td>
+			<td align="center">
+				<a href="#" style="text-decoration: none;" class="myBoardDetailView" id="${ b.bNo }">${ b.bNo }</a>
+			</td>
 			<td align="center">${ b.b_Title }</td>
 			<td align="center">${ b.userId }</td>
 			<td align="center">${ b.b_Createdate }</td>
@@ -93,9 +95,14 @@
 					</c:url>
 					<a href="${after }">[다음]</a>
 				</c:if>
-			
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		$(".myBoardDetailView").click(function() {
+			var bNo = $(this).attr("id");			
+			window.open("myBoardDetailView.me?bNo="+bNo,"Gooooood","width=1900, height=300");			
+		})
+	</script>
 </body>
 </html>

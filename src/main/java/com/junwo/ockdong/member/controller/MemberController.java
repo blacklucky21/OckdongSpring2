@@ -98,7 +98,6 @@ public class MemberController {
 		
 	
 		Member loginUser = mService.memberLogin(m);
-		System.out.println("login member : " + loginUser);
 		
 		if(bCryptPasswordEncoder.matches(m.getPassword(), loginUser.getPassword())) {
 			model.addAttribute("loginUser", loginUser);
@@ -160,7 +159,7 @@ public class MemberController {
 	@RequestMapping("passFindResult.me")
 	@ResponseBody
 	public String findPassResult(@RequestParam("userId") String userId, 
-							   @RequestParam("email") String email, 
+							   @RequestParam("email") String email,							 
 							   Member m) {
 		m.setUserId(userId);
 		m.setEmail(email);
@@ -169,10 +168,8 @@ public class MemberController {
 		
 		m.setPassword(bCryptPasswordEncoder.encode(newPass));
 		
-		System.out.println(newPass);
-		
 		int result = mService.findPass(m);
-		System.out.println(result);
+
 		if(result > 0) {
 			return newPass;
 		}else {
@@ -248,6 +245,26 @@ public class MemberController {
 		return mv;
 	}
 	
+	// 구매 내역 디테일 뷰
+	@RequestMapping("buyDetail.me")
+	public ModelAndView buyDetailView(@ModelAttribute("initPayment") Payment payment,
+										ModelAndView mv,HttpSession session){	
+		
+		
+		System.out.println(payment.getP_id());
+		
+		Payment paymentDetail = mService.myPaymentDetailList(payment.getP_id());	
+	
+		if(paymentDetail != null) {
+			mv.addObject("list", paymentDetail);
+			mv.setViewName("myPage/buy/buyHistoryDetailView");
+		} else {
+			throw new NoticeException("구매내역 조회에 실패 하였습니다.");
+		}	
+		
+		return mv;
+	}
+	
 	// 내가 쓴 게시물 화면 이동
 	@RequestMapping("reviewServletView.bo")
 	public ModelAndView myBoardView(@RequestParam(value="page", required=false) Integer page, ModelAndView mv, HttpSession session) {
@@ -274,6 +291,24 @@ public class MemberController {
 			throw new NoticeException("게시판 조회에 실패하였습니다.");
 		}
 		
+		return mv;
+	}
+	// 내가 쓴 게시물 디테일 뷰
+	@RequestMapping("myBoardDetailView.me")
+	public ModelAndView myBoardDetailView(@ModelAttribute("initPayment") lbotm lBotm, 
+										  ModelAndView mv,
+										  HttpSession session) {
+
+
+		lbotm BoardDetail = mService.myBoardDetailView(lBotm.getbNo());
+
+		if (BoardDetail != null) {
+			mv.addObject("list", BoardDetail);
+			mv.setViewName("myPage/myBoard/myBoardDetailView");
+		} else {
+			throw new NoticeException("게시글 조회에 실패 하였습니다.");
+		}
+
 		return mv;
 	}
 	
