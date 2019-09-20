@@ -111,12 +111,8 @@
 						<c:forEach var="p" items='${list }' varStatus="pay">
 
 							<tr >
-								<td nowrap style=" cursor:pointer" class="search " id="searchId"  >
-								<a href="#"  class="modalm" data-id="${p.p_id }"data-toggle="modal" data-target="#myModal">${p.p_id}</a>
-								
-						
-								
-								
+								<td nowrap style=" cursor:pointer" class="search "   >
+								<a href="#"  class="modalm" data-id="${p.p_id }"data-toggle="modal"  id="searchId"data-target="#myModal">${p.p_id}</a>
 								</td>
 								<td nowrap>${p.userid }</td>
 								<td nowrap> ${p.payname }</td>
@@ -388,8 +384,8 @@ $('.modalm').click(function(){
 	 	$('.delivaryForm').change(function () {
 			
 			var check = $(this).val();
-			var id=$(this).parent().parent().children('#searchId').text();
-			
+			var id=$(this).parent().parent().children().children('#searchId').text();
+				 
 			
 			if(check == 'Ready'){
 				check = 'Y';
