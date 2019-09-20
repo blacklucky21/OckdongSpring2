@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.common.PageInfo;
-import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
+import com.junwo.ockdong.notice.model.vo.Notice;
 
 @Repository("lbotmDAO")
 public class lbotmDAO {
@@ -17,24 +17,26 @@ public class lbotmDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public int selectBoardListCount(int ct_Id) {
-		return sqlSession.selectOne("lbotmMapper.selectBoardListCount", ct_Id);
+	public int getListCount() {
+		return sqlSession.selectOne("lbotmMapper.getListCount");
 	}
 
-	public ArrayList<lbotm> selectHomeList(PageInfo info, int ct_Id) throws lbotmException {
-		ArrayList<lbotm> list = null;
+	public ArrayList<lbotm> selectList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		int offset = (info.getCurrentPage() - 1) * info.getLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, info.getLimit());
-		
-		list = (ArrayList) sqlSession.selectList("lbotmMapper.selectHomeList", ct_Id, rowBounds);
-		
-		if(list == null) {
-			sqlSession.close();
-			throw new lbotmException("조회 실패");
-		}
-		return list;
+		return (ArrayList)sqlSession.selectList("lbotmMapper.selectList", null, rowBounds);
+	}
+
+	public void addReadCount(int bNo) {
+		sqlSession.selectOne("lbotmMapper.updateCount", bNo);
+	}
+
+	public lbotm selectlbotm(int bNo) {
+		return sqlSession.selectOne("lbotmMapper.selectOne", bNo);
 	}
 	
+	public int lbotminsert(lbotm l) {
+		return sqlSession.insert("lbotmMapper.lbotminsert", l);
+	}
 }
