@@ -536,17 +536,20 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 								
 								$("#rCount").text("댓글 (" + data.length + ")");
 								$("#rCount1").text(data.length);
-								
+								var ddl ="";
 								if(data.length > 0){
 									for(var i in data){
 										$tr = $("<tr>");
-										$UserId = $("<td class='comment-txt' style='font-weight: bold; margin-right: 50px;'>").text(data[i].UserId);
-										$Comments_Content = $("<td width='200' class='ptxt' style='margin-right:60%;'>").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
+										$UserId = $("<td class='comment-txt' style='font-weight: bold;'>").text(data[i].UserId);
+										$Comments_Content = $("<td class='ptxt'>").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
 										$Comments_Date = $("<td width='100' >").text(data[i].Comments_Date);
+										ddl += "<td><button>수정</button></td>";
+											ddl += "<td><button>삭제</button></td>";
 										
 										$tr.append($UserId);
 										$tr.append($Comments_Content);
 										$tr.append($Comments_Date);
+										$tr.append(ddl);
 										$tableBody.append($tr);
 									}
 									
