@@ -23,6 +23,9 @@
 	height: 200px;
 }
 
+.recipeOne{
+    float: left;
+	width: 300px;
 	border-radius: 15px;
 	margin: 10px;
 	text-align: center;
@@ -101,12 +104,12 @@
 	<c:import url="../header/header.jsp" />
 	<div class="bodyArea">
 		<c:import url="../myPage/member/myPageLeft.jsp" />
-		<div class="recipeAll" style="display:inline-block; float:left;">
-			<c:if test="${!empty rList}">
+		<c:if test="${!empty rList}">
 				<div style="text-align:left;">
 					<a>전체 (${listCount}개)</a>
 				</div>
 			</c:if>
+		<div class="recipeAll" style="display:inline-block; float:left;">
 			<c:if test="${empty rList}">
 				회원님이 등록한 나만의 레시피가 없습니다.
 			</c:if>
