@@ -40,28 +40,6 @@
 		<tbody>
 		<tr>
 			<td align="center">${ buy.p_id }</td>
-			<%-- <td align="center">${ buy.pstatus }</td> --%>
-			<%-- <td>
-				<select id="delivaryForm" class="delivaryForm" >
-					<c:if test="${buy.pstatus eq 'Y' }">
-						<option class="Ready" value="Ready" selected>상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng">배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
-					</c:if>
-							
-					<c:if test="${buy.pstatus eq 'R' }">
-						<option class="Ready" value="Ready" >상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng" selected>배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
-					</c:if>
-							
-					<c:if test="${buy.pstatus eq 'E' }">
-						<option class="Ready" value="Ready" >상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng" >배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd" selected>배송완료</option>
-					</c:if>
-				</select>
-			</td> --%>
 			<c:if test="${buy.pstatus eq 'Y' }">
 				<td>상품준비중</td>
 			</c:if>
@@ -98,7 +76,7 @@
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="nlist.do">
+					<c:url var="before" value="view_history.me">
 						<c:param name="page" value="${pi.currentPage - 1 }"/>
 					</c:url>
 					<a href="${before }">[이전]</a> &nbsp;
@@ -110,7 +88,7 @@
 						<font color="red" size="4"><b>[${p }]</b></font>
 					</c:if>
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="nlist.do">
+						<c:url var="pagination" value="view_history.me">
 							<c:param name="page" value="${p}"/>
 						</c:url>
 						<a href="${pagination }">${p }</a> &nbsp;
@@ -122,12 +100,11 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="nlist.do">
+					<c:url var="after" value="view_history.me">
 						<c:param name="page" value="${pi.currentPage + 1 }"/>
 					</c:url>
 					<a href="${after }">[다음]</a>
 				</c:if>
-			
 			</td>
 		</tr>
 	</table>

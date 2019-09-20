@@ -94,7 +94,7 @@
 			<br>
 			<div class="sendIdArea">
 				<br>
-				<p><%=request.getAttribute("userId")%></p>
+					<p>${ userId }</p>
 				<br>
 			</div>
 			<br>
