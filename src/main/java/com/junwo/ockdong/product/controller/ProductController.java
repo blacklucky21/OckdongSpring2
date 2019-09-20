@@ -777,6 +777,50 @@ public class ProductController {
 		}
 	}
 	
+	// 문의 답글을 삭제 하겠습니다.
+	@RequestMapping("deleteAnswer.do")
+	@ResponseBody
+	public String deleteAnswer(ProductAnswer pa,  HttpServletResponse response,HttpSession session) throws Exception {
+		
+		int result = pService.deleteAnswer(pa);
+		if(result > 0) {
+			
+			return "success";
+		}else {
+			throw new Exception("삭제에 실패 했습니다.");
+		}
+	}
+	
+	@RequestMapping("updateQnaType2.do")
+	@ResponseBody
+	public void updateType2(ProductQna pq,HttpServletResponse response,HttpSession session ) {
+		 pService.updateQnaType2(pq);
+	}
+	
+	@RequestMapping("AnswerUpdate.do")
+	@ResponseBody
+	public void AnswerUpdate(ProductAnswer pa,  HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
+	
+		System.out.println("수정 버튼 눌림 : "+pa);
+		int result = pService.AnswerUpdate(pa);
+		
+		if(result > 0) {
+			System.out.println("컨트롤 일로 오냐?");
+			ProductAnswer pan = pService.selectAnswer2(pa);
+			
+			pan.setQna_user(URLEncoder.encode(pan.getQna_user(), "utf-8"));
+			pan.setQna_content(URLEncoder.encode(pan.getQna_content(),"utf-8"));
+			pan.setAnswer_content(URLEncoder.encode(pan.getAnswer_content(),"utf-8"));
+
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			gson.toJson(pan, response.getWriter());
+		}else {
+			System.out.println("안됨?");
+		}
+	}
+	
+	
+	
 	
 }
 

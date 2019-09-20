@@ -240,6 +240,22 @@ public class ProductDAO {
 	}
 
 
+	public int deleteAnswer(ProductAnswer pa) {
+		return sqlSession.delete("productMapper.deleteAnswer",pa);
+	}
+
+
+	public void updateQnaType2(ProductQna pq) {
+		sqlSession.update("productMapper.updateQnaType2",pq);
+	}
+
+
+	public int AnswerUpdate(ProductAnswer pa) {
+		System.out.println("안뇽 ㅋㅋ : " + pa);
+		return sqlSession.update("productMapper.AnswerUpdate",pa);
+	}
+
+
 
 	
 
