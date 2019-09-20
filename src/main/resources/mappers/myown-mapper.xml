@@ -24,6 +24,7 @@
 		select *
 		from ingredients
 		where STATUS = 'Y'
+		order by in_no desc
 	</select>
 	
 	<update id="deleteIn" parameterType="_int">
@@ -44,6 +45,7 @@
 				and in_name like '%' || #{sContent} || '%'
 			</when>
 		</choose>
+		order by in_no desc
 	</select>
 	
 	<select id="searchOne" parameterType="_int" resultMap="IngredientAllList">
@@ -77,6 +79,7 @@
 		select *
 		from mblrecipe
 		where status='Y'
+		order by mbl_id desc
 	</select>
 	
 	
@@ -107,6 +110,7 @@
 				and mbl_type like '%' || #{sContent} || '%'
 			</when>
 		</choose>
+		order by mbl_id desc
 	</select>
 	
 	<update id="deleteMblRecipe" parameterType="_int">
@@ -120,6 +124,7 @@
 		select *
 		from mblrecipe
 		where mbl_id = ${mblId}
+		order by mbl_id desc
 	</select>
 	
 
@@ -127,6 +132,7 @@
 		select *
 		from mblrecipe
 		where MBL_FILENAME = #{fileName}
+		order by mbl_id desc
 	</select>
 
 	<update id="updateRecipe" parameterType="MBLRecipe">
@@ -145,5 +151,6 @@
 		select *
 		from mblrecipe
 		where status = 'Y' and userid = #{userId}
+		order by mbl_id desc
 	</select>
 </mapper>
