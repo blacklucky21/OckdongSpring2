@@ -80,7 +80,7 @@
 									<c:forEach var="i" items="${qnaList }" varStatus="num">
 										<tr class="list" id="list${num.count }">
 											<td><input type="radio" id="sel" name="sel"></td>
-											<td class="pp" id="py">${num.count}</td>
+											<td class="pp" id="py">${i.qna_Id }</td>
 											<c:if test="${i.qna_answer eq 'N'}">
 												<td class="pp">답변대기</td>
 											</c:if>
@@ -93,6 +93,7 @@
 											<td class="pp" id="user${num.count }"><input type="hidden" class="i_Qna_User" value="${ i.qna_user }"/>${ i.qna_user }</td>
 											<input type="hidden" class="i_Qna_Content" value="${ i. qna_content }"/>
 											<input type="hidden" class="i_Qna_Id" value="${ i.qna_Id }"/>
+											<input type="hidden" class="i_answer_content" value="${ i.answer_content }"/>
 											
 											<td class="pp"><input type="hidden" class="i_Qna_date" value="${ i.qna_createDate }"/>${i.qna_createDate }</td>
 											<td class="pp"><input type="hidden" class="i_Qna_answer" value="${ i.qna_answerDate }"/>${i.qna_answerDate }</td>
@@ -189,15 +190,20 @@
 							$tin1.val(decodeURIComponent(data[i].qna_content.replace(/\+/g, "")));
 							$tin2 = $("<input type='hidden' class='i_Qna_Id' value='"+ data[i].qna_Id+"'>");
 							$tin3 = $("<input type='hidden' class='i_p_Id' value='"+ data[i].p_Id+"'>");
+							$tin4 = $("<input type='hidden' class='i_answer_content' value='" + data[i].answer_content + "'>");
+							
 							
 							$tdCD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_date' value='"+ data[i].qna_createDate +"'/>" + data[i].qna_createDate + "</td>");
 						
-							if(data[i].qna_answerDate == "undefined"){
+							if(data[i].qna_answerDate == undefined){
 								
-								$tdAD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_answer' value='"+ data[i].qna_answerDate +"'/>" + data[i].qna_answerDate + "</td>");
-							}else{
 								$tdAD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_answer' value='"+ data[i].qna_answerDate +"'/></td>");
+								console.log("검색 여기 옴?");
+							}else{
+								$tdAD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_answer' value='"+ data[i].qna_answerDate +"'/>"+ data[i].qna_answerDate + "</td>");
+							console.log("검색 결과 답변 완료: " +  data[i].qna_answerDate);
 							}
+							
 							
 							count = count + 1;
 							
@@ -211,6 +217,7 @@
 							$tr.append($tin1);
 							$tr.append($tin2);
 							$tr.append($tin3);
+							$tr.append($tin4);
 							$tr.append($tdCD);
 							$tr.append($tdAD);
 							$(".list_content").append($tr);
@@ -228,9 +235,6 @@
 				}
 			});
 			
-			
-
-			
 			var div1 = $('.answer');
 			var append1 = "";
 			
@@ -242,18 +246,23 @@
 			div1.html(append1);
 		}
 		
-		
+		// 검색후 누를때
 		function afterSearch(me){
 			var user= $('#' + me).find(".i_Qna_User").val();
 			var content = $('#' + me).find(".i_Qna_Content").val();
 			var date = $('#' + me).find(".i_Qna_date").val();
-			var answer = $('#' + me).find(".i_Qna_answer").val();
+			var answer_createdate = $('#' + me).find(".i_Qna_answer").val(); // 날자
+			var answer_content = $('#' + me).find(".i_answer_content").val();
 			
 			var qna_Id = $('#' + me).find(".i_Qna_Id").val();
 			var p_Id = $('#' + me).find(".i_p_Id").val();
 			
 			console.log(qna_Id);
 			console.log(p_Id);
+			console.log("검색후 출력 : " + answer_createdate);
+			console.log("검색후 출력 : " + answer_content);
+			
+			
 			
 			$('#' + me).find('#sel').prop('checked', true);
 			
@@ -277,8 +286,7 @@
 			append += "<div class='inquiry_wrap reply' id='write_area' style='display: block;'>";
 			append += "<div class='reply_ico'></div>";
 			// 답변을 안했을 경우 
-			if(answer == "undefined"){
-				console.log("으이구");
+			if(answer_createdate == ""){
 				append += "<div class='reply_content'><textarea placeholder='답변을 입력해주세요.' id='answer_content'></textarea>";
 				append += "</div>";
 				append += "<button class='reply_save_btn' id='SaveBtn' onclick='submitinsert("+ qna_Id +","+ p_Id +")'>저장</button>";
@@ -286,7 +294,17 @@
 				append += "</div>";
 			
 			}else{
-				
+				append += "<div class='answercontent'>";
+				append += "<div class='inquiry_head'>";
+				append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ answer_createdate +"</span>";;
+				append += "</div>"
+				append += "<div class='inquiry_content'>"+ answer_content +"</div>";
+				append += "</div>";
+				append += "</div>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>수정</button>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>삭제</button>";
+				append += "</div>";
+				append += "</div>";
 			}
 			
 			div.html(append);
@@ -305,15 +323,13 @@
 			var user= $(this).find(".i_Qna_User").val();
 			var content = $(this).find(".i_Qna_Content").val();
 			var date = $(this).find(".i_Qna_date").val();
-			var answer = $(this).find(".i_Qna_answer").val();
-			
+			var answer_createdate = $(this).find(".i_Qna_answer").val(); // 날자
+			var answer_content = $(this).find(".i_answer_content").val();
 			var qna_Id = $(this).find(".i_Qna_Id").val();
 			var p_Id = $(this).find(".i_p_Id").val();
 			
-			console.log(user);
-			console.log(content);
-			console.log(date);
-			console.log(answer);
+		
+			console.log("리스트 댓글 번호 : " + answer_content);
 			console.log("리스트 댓글 번호 : " + qna_Id);
 			
 			
@@ -344,7 +360,7 @@
 			append += "<div class='inquiry_wrap reply' id='write_area' style='display: block;'>";
 			append += "<div class='reply_ico'></div>";
 			// 답변을 안했을 경우 
-			if(answer == ""){
+			if(answer_content == ""){
 				
 			append += "<div class='reply_content'><textarea placeholder='답변을 입력해주세요.' id='answer_content'></textarea>";
 			append += "</div>";
@@ -353,7 +369,17 @@
 			append += "</div>";
 			
 			}else{
-				
+				append += "<div class='answercontent'>";
+				append += "<div class='inquiry_head'>";
+				append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ answer_createdate +"</span>";;
+				append += "</div>"
+				append += "<div class='inquiry_content'>"+ answer_content +"</div>";
+				append += "</div>";
+				append += "</div>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>수정</button>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>삭제</button>";
+				append += "</div>";
+				append += "</div>";
 			}
 			
 			div.html(append);
@@ -404,9 +430,14 @@
 						append += "</div>";
 						append += "<div class='inquiry_wrap reply' id='write_area' style='display: block;'>";
 						append += "<div class='reply_ico'></div>";
-						append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ data.answer_createdate  +"</span>";
+						
+						append += "<div class='answercontent'>";
+						append += "<div class='inquiry_head'>";
+						append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ data.answer_createdate +"</span>";;
+						append += "</div>"
 						
 						append += "<div class='inquiry_content'>"+ decodeURIComponent(data.answer_content.replace(/\+/g, " ")) +"</div>";
+						append += "</div>";
 						append += "</div>";
 						append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>수정</button>";
 						append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>삭제</button>";
@@ -415,14 +446,33 @@
 						
 						
 						div.html(append);
+						
+						getupdateList(qna_Id, data.answer_createdate);
+						
+						
+						
 				}
 			});
 			
 		}
 		
 		
+		// 답변 달리면 list 에서 타입을 변경 해준다.
+		function getupdateList(qna_Id ,qna_answerDate){
+			console.log("list 타입 update 할 댓글 번호 : " + qna_Id);
+			console.log("list 타입 update 할 댓글 번호 : " + qna_answerDate);
 		
-		
+			$.ajax({
+				url:"updateQnaType.do",
+				data:{qna_Id:qna_Id,qna_answerDate:qna_answerDate},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					
+				}
+			});
+			
+		}
 		
 		
 		

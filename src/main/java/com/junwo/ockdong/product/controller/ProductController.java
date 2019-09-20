@@ -758,6 +758,21 @@ public class ProductController {
 		
 	}
 	
+	// 답글 달린후 답변 상태 변경 해준다.
+	@RequestMapping("updateQnaType.do")
+	@ResponseBody
+	public String updateQnaType(ProductQna pq, HttpServletResponse response,HttpSession session) throws Exception {
+		System.out.println(pq);
+		
+		System.out.println("qna 상태 수정 결과 : "+ pq);
+		int result = pService.updateQnaType(pq);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			throw new Exception("수정 실패");
+		}
+	}
 	
 	
 }

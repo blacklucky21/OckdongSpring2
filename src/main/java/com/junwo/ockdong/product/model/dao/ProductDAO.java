@@ -235,6 +235,11 @@ public class ProductDAO {
 	}
 
 
+	public int updateQnaType(ProductQna pq) {
+		return sqlSession.update("productMapper.updateQnaType",pq);
+	}
+
+
 
 	
 

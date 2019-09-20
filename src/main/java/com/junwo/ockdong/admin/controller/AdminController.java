@@ -105,9 +105,9 @@ public class AdminController {
 		}
 		}
 		ArrayList<Payment> list = cService.selectPayList(search);
-		// int listCount = mService.MemberListCount();
+		 int listCount = mService.MemberListCount();
 
-//		System.out.println(list);
+		System.out.println(list);
 		if (list != null) {
 			mv.addObject("list", list);
 
