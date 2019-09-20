@@ -229,6 +229,11 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.selectAnswer2(pa);
 	}
 
+	@Override
+	public int updateQnaType(ProductQna pq) {
+		return pDAO.updateQnaType(pq);
+	}
+
 
 	
 

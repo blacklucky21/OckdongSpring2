@@ -769,41 +769,7 @@
 		getQnaList();
 	});
 	
-	// 상품문의 등록
-	$('#qSubmit').on("click", function(){
-		var qna_content = $('#qna_content').val();
-		console.log(qna_content);
-		
-		// 비밀글인지 아닌지 판단한다.
-		if($('#secretedCheckBox').prop("checked") ){
-			var qna_secret = 'Y';
-		}else{
-			var qna_secret = 'N';
-		}
-		
-		var p_Id = ${p.p_Id};
-		
-		if(qna_content.trim() == ""){
-			alert("내용을 입력하세요.");
-			$('#qna_content').focus();
-			return false;
-		}
-		
-		
-		// 문의글 등록
-		$.ajax({
-			url: "addQna.do",
-			data:{qna_content:qna_content, p_Id:p_Id, qna_secret:qna_secret},
-			type:"post",
-			success:function(data){
-				if(data =="success"){
-					getQnaList();
-					$('#qna_content').val("");
-				}
-			}
-		});
-	});
-	
+
 	
 	// 상품 문의 ajax 가지고 오기
 	function getQnaList(){
