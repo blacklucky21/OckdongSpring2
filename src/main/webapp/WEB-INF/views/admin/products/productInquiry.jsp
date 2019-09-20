@@ -94,6 +94,9 @@
 											<input type="hidden" class="i_Qna_Content" value="${ i. qna_content }"/>
 											<input type="hidden" class="i_Qna_Id" value="${ i.qna_Id }"/>
 											<input type="hidden" class="i_answer_content" value="${ i.answer_content }"/>
+											<input type="hidden" class="i_answer_Id" value="${ i.answer_Id }"/>
+											
+											
 											
 											<td class="pp"><input type="hidden" class="i_Qna_date" value="${ i.qna_createDate }"/>${i.qna_createDate }</td>
 											<td class="pp"><input type="hidden" class="i_Qna_answer" value="${ i.qna_answerDate }"/>${i.qna_answerDate }</td>
@@ -151,7 +154,8 @@
 		<script type="text/javascript"
 			src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script>
-	
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲	
+		// 검색어 검색 한다.
 		function searchIn(){
 			var select_code = $("#select_code").val();
 
@@ -169,7 +173,7 @@
 							$tr = $("<tr class='list' id='list" +count + "' onclick='afterSearch(\"list" + count + "\");'>");
 							
 							$tdRadio = $("<td><input type='radio' id='sel' name='sel'>");
-							$tdNo = $("<td class='pp' id='py'>").text(count);
+							$tdNo = $("<td class='pp' id='py'>").text(data[i].qna_Id);
 							$tdAnOk = "";
 							
 							if(data[i].qna_answer == 'Y'){
@@ -191,6 +195,7 @@
 							$tin2 = $("<input type='hidden' class='i_Qna_Id' value='"+ data[i].qna_Id+"'>");
 							$tin3 = $("<input type='hidden' class='i_p_Id' value='"+ data[i].p_Id+"'>");
 							$tin4 = $("<input type='hidden' class='i_answer_content' value='" + data[i].answer_content + "'>");
+							$tin5 = $("<input type='hidden' class='i_answer_Id' value='" + data[i].answer_Id + "'>");
 							
 							
 							$tdCD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_date' value='"+ data[i].qna_createDate +"'/>" + data[i].qna_createDate + "</td>");
@@ -198,12 +203,9 @@
 							if(data[i].qna_answerDate == undefined){
 								
 								$tdAD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_answer' value='"+ data[i].qna_answerDate +"'/></td>");
-								console.log("검색 여기 옴?");
 							}else{
 								$tdAD = $("<td class='pp'>").html("<input type='hidden' class='i_Qna_answer' value='"+ data[i].qna_answerDate +"'/>"+ data[i].qna_answerDate + "</td>");
-							console.log("검색 결과 답변 완료: " +  data[i].qna_answerDate);
 							}
-							
 							
 							count = count + 1;
 							
@@ -218,6 +220,7 @@
 							$tr.append($tin2);
 							$tr.append($tin3);
 							$tr.append($tin4);
+							$tr.append($tin5);
 							$tr.append($tdCD);
 							$tr.append($tdAD);
 							$(".list_content").append($tr);
@@ -246,24 +249,33 @@
 			div1.html(append1);
 		}
 		
-		// 검색후 누를때
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲	
+
+		// 검색후 답변 해줄거 찾는다.
 		function afterSearch(me){
 			var user= $('#' + me).find(".i_Qna_User").val();
 			var content = $('#' + me).find(".i_Qna_Content").val();
 			var date = $('#' + me).find(".i_Qna_date").val();
+			
 			var answer_createdate = $('#' + me).find(".i_Qna_answer").val(); // 날자
 			var answer_content = $('#' + me).find(".i_answer_content").val();
+			var answer_Id = $('#' + me).find(".i_answer_Id").val();
 			
 			var qna_Id = $('#' + me).find(".i_Qna_Id").val();
 			var p_Id = $('#' + me).find(".i_p_Id").val();
 			
+			
+			
+		/* 	
 			console.log(qna_Id);
 			console.log(p_Id);
+			console.log(answer_Id);
+			
 			console.log("검색후 출력 : " + answer_createdate);
 			console.log("검색후 출력 : " + answer_content);
 			
-			
-			
+		 */	
+		 console.log("검색후 출력 : " + answer_content);
 			$('#' + me).find('#sel').prop('checked', true);
 			
 			var div = $('#inquiryInfoWrap');
@@ -286,13 +298,12 @@
 			append += "<div class='inquiry_wrap reply' id='write_area' style='display: block;'>";
 			append += "<div class='reply_ico'></div>";
 			// 답변을 안했을 경우 
-			if(answer_createdate == ""){
+			if(answer_createdate == "undefined"){
 				append += "<div class='reply_content'><textarea placeholder='답변을 입력해주세요.' id='answer_content'></textarea>";
 				append += "</div>";
 				append += "<button class='reply_save_btn' id='SaveBtn' onclick='submitinsert("+ qna_Id +","+ p_Id +")'>저장</button>";
 				append += "</div>";
 				append += "</div>";
-			
 			}else{
 				append += "<div class='answercontent'>";
 				append += "<div class='inquiry_head'>";
@@ -301,24 +312,35 @@
 				append += "<div class='inquiry_content'>"+ answer_content +"</div>";
 				append += "</div>";
 				append += "</div>";
-				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>수정</button>";
-				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>삭제</button>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='updateAnswer("+ qna_Id +","+ p_Id +","+answer_Id+")'>수정</button>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='deleteAnswer("+ answer_Id+ ","+ qna_Id+","+p_Id+")'>삭제</button>";
 				append += "</div>";
 				append += "</div>";
 			}
 			
 			div.html(append);
 		}
-		
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲	
+// 초기화 버튼
 		function replyIn(){
 			location.href="productInquiry.do";
 		}
 		
-			
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲	
+	// 처음 화면에서 선택 한다.
 		$('.list').click(function(event){
 			console.log("list");
 			var tr = $(this);
 			var td = tr.children();
+			
+			
+			var trNum = $(this).closest('tr').prevAll().length; 
+			console.log('trNum : ' + trNum); // 행 번호 넘기기
+
 			
 			var user= $(this).find(".i_Qna_User").val();
 			var content = $(this).find(".i_Qna_Content").val();
@@ -327,14 +349,14 @@
 			var answer_content = $(this).find(".i_answer_content").val();
 			var qna_Id = $(this).find(".i_Qna_Id").val();
 			var p_Id = $(this).find(".i_p_Id").val();
+			var answer_Id = $(this).find(".i_answer_Id").val();
 			
 		
 			console.log("리스트 댓글 번호 : " + answer_content);
 			console.log("리스트 댓글 번호 : " + qna_Id);
+			console.log("답변 번호  : " + answer_Id);
 			
 			
-			var py = td.eq(1).text();
-			console.log(py);
 			
 			if(event.target.type !== 'radio'){
 				$(':radio',this).trigger('click');
@@ -373,32 +395,42 @@
 				append += "<div class='inquiry_head'>";
 				append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ answer_createdate +"</span>";;
 				append += "</div>"
-				append += "<div class='inquiry_content'>"+ answer_content +"</div>";
+				append += "<div class='inquiry_content' id='an"+ trNum +"'>"+ answer_content +"</div>";
 				append += "</div>";
 				append += "</div>";
-				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>수정</button>";
-				append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>삭제</button>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='updateAnswer("+ qna_Id +","+ p_Id +","+ answer_Id+ ", \""+answer_content+"\")'>수정</button>";
+				append += "<button class='reply_save_btn' id='SaveBtn' onclick='deleteAnswer("+ answer_Id + ","+qna_Id+","+ p_Id +")'>삭제</button>";
 				append += "</div>";
 				append += "</div>";
+				
+				console.log("처음 화면에서 수정 댓글 : " + qna_Id);
+				console.log("처음 화면에서 수정 게시판 : " + p_Id);
+				console.log("처음 화면에서 답변 한 말 : " + answer_content);
+				
 			}
-			
 			div.html(append);
-			
-			
 		}); 
 		
 		
-		// 답글 달아주기
-		function submitinsert(qna_Id, p_Id){
-			var answer_content = $('#answer_content').val();
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼			
+		
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+	// 답글 달아주기
+		function submitinsert(qna_Id, p_Id, answer_Id){
 			
+			var answer_content = $('#answer_content').val();
 			console.log(answer_content);
 			
 			var qna_Id = qna_Id;
 			var p_Id = p_Id;
+			var answer_Id =$('.i_answer_Id').val();
+			
+			
 			
 			console.log("댓글 번호  : " + qna_Id);
 			console.log("상품 번호  : " + p_Id);
+			
 			
 			$.ajax({
 				url:"addAnswer.do",
@@ -436,11 +468,11 @@
 						append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ data.answer_createdate +"</span>";;
 						append += "</div>"
 						
-						append += "<div class='inquiry_content'>"+ decodeURIComponent(data.answer_content.replace(/\+/g, " ")) +"</div>";
+						append += "<div class='inquiry_content' >"+ decodeURIComponent(data.answer_content.replace(/\+/g, " ")) +"</div>";
 						append += "</div>";
 						append += "</div>";
-						append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>수정</button>";
-						append += "<button class='reply_save_btn' id='SaveBtn' onclick='("+ qna_Id +","+ p_Id +")'>삭제</button>";
+						append += "<button class='reply_save_btn' id='SaveBtn' onclick='updateAnswer("+ qna_Id +","+ p_Id +","+ answer_Id +")'>수정</button>";
+						append += "<button class='reply_save_btn' id='SaveBtn' onclick='deleteAnswer("+answer_Id+","+ p_Id +","+qna_Id+")'>삭제</button>";
 						append += "</div>";
 						append += "</div>";
 						
@@ -448,15 +480,14 @@
 						div.html(append);
 						
 						getupdateList(qna_Id, data.answer_createdate);
-						
-						
-						
 				}
 			});
 			
 		}
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼			
 		
 		
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲		
 		// 답변 달리면 list 에서 타입을 변경 해준다.
 		function getupdateList(qna_Id ,qna_answerDate){
 			console.log("list 타입 update 할 댓글 번호 : " + qna_Id);
@@ -473,8 +504,154 @@
 			});
 			
 		}
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼	
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲	
+		// 답변 수정 버튼 
+		function updateAnswer(qna_Id, p_Id, answer_Id, answer_content){
+			//var answer_content = $("").val();
 		
+			console.log("수정 버튼 누리면 나올거 : "+qna_Id);
+			console.log("수정 버튼 누리면 나올거 : "+p_Id);
+			console.log("수정 버튼 누리면 나올거 답변 번호 : "+answer_Id);
+			
+			var div = $('.answercontent');
+			
+			var append = "";
+			
+			
+			append += "<div class='reply_content'><textarea  id='answer_content'>"+ answer_content +"</textarea>";
+			append += "</div>";
+			append += "<button class='reply_save_btn' id='SaveBtn' onclick='AnswerUpdate("+ qna_Id +","+ p_Id +","+answer_Id+")'>저장</button>";
+			
+				
+			div.html(append);
+			
+			
+		}
 		
+// ==========================================================		
+		
+		function AnswerUpdate(qna_Id, p_Id, answer_Id){
+		
+			var answer_content = $('#answer_content').val();
+	
+			console.log("AnswerUpdate 눌림 : " +  qna_Id);
+			console.log("AnswerUpdate 눌림 : " +  p_Id);
+			console.log("AnswerUpdate 눌림 : " +  answer_content);
+		
+			$.ajax({
+				url:"AnswerUpdate.do",
+				data:{answer_Id:answer_Id,answer_content:answer_content, qna_Id:qna_Id, p_Id:p_Id},
+				type:"post",
+				dataType:"json",
+				
+				success:function(data){
+					
+					var div = $('#inquiryInfoWrap');
+					
+					var append = "";
+					
+					append += "<div class='table_tit_area'>";
+					append += "<div class='table_tit'>문의/답변 내역</div>";
+					append += "</div>";
+					append += "<div class='content_item_bx'>";
+					append += "<div id ='inquiryDetail'>";
+					append += "<div class='inquiry_wrap'>";
+					append += "<div class='inquiry_head'>";
+					append += "<span class='register_name'>" + decodeURIComponent(data.qna_user.replace(/\+/g, " ")) + "</span><span class='register_ymdt'>"+ data.qna_createdate +"</span>";
+					append += "<div class='right_btn_wrap'></div>";
+					append += "</div>";
+					append += "<div class='inquiry_content'>"+ decodeURIComponent(data.qna_content.replace(/\+/g, " ")) +"</div>";
+					append += "</div>";
+					append += "</div>";
+					append += "<div class='inquiry_wrap reply' id='write_area' style='display: block;'>";
+					append += "<div class='reply_ico'></div>";
+					
+					append += "<div class='answercontent'>";
+					append += "<div class='inquiry_head'>";
+					append += "<span class='register_name'>운영자 </span><span class='register_ymdt'>"+ data.answer_createdate +"</span>";;
+					append += "</div>"
+					
+					append += "<div class='inquiry_content' >"+ decodeURIComponent(data.answer_content.replace(/\+/g, " ")) +"</div>";
+					append += "</div>";
+					append += "</div>";
+					append += "<button class='reply_save_btn' id='SaveBtn' onclick='updateAnswer("+ qna_Id +","+ p_Id +","+answer_Id+")'>수정</button>";
+					append += "<button class='reply_save_btn' id='SaveBtn' onclick='deleteAnswer("+answer_Id+","+ p_Id +","+qna_Id+")'>삭제</button>";
+					append += "</div>";
+					append += "</div>";
+					
+					
+					div.html(append);
+					
+					getupdateList(qna_Id, data.answer_createdate);
+				}
+			});
+			 
+		}
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼			
+		
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲		
+		// 삭제 버튼 눌리면
+		function deleteAnswer(answer_Id, qna_Id, p_Id){
+			console.log("삭제 버튼 : "  + answer_Id);
+			var key = confirm("상품 문의글을 임의로 삭제 하시면 컴플레인을 당할 수 있습니다. 계속 진행하시겠습니까?");
+			
+			
+			console.log("삭제 버튼 눌림222: "  + p_Id);
+			console.log("삭제 버튼 눌림111: "  + qna_Id);
+			
+			
+			if(!key){
+				alert("삭제를 취소 하였습니다.");
+			}else{
+				$.ajax({
+					url:"deleteAnswer.do",
+					data:{answer_Id:answer_Id},
+					type:"post",
+					success:function(data){
+						if(data == "success"){
+							
+							var answer_content = $('.inquiry_content').val();
+							
+						
+							var div = $('.answercontent');
+							
+							var append = "";
+							
+							
+							append += "<div class='reply_content'><textarea  id='answer_content'>"+ answer_content +"</textarea>";
+							append += "</div>";
+							
+							append += "<button class='reply_save_btn' id='SaveBtn' onclick='submitinsert("+ qna_Id +","+ p_Id +")'>저장</button>";	
+							div.html(append);
+							
+							
+							getupdateQna(qna_Id);
+						}
+					}
+				});
+			}
+			
+		}
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		
+
+// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲	
+		// 답글 삭제시 답변 여부와 시간 지운다.
+		function getupdateQna(qna_Id){
+			
+			console.log("삭제 로 넘어온 값 : " + qna_Id);
+			
+			$.ajax({
+				url:"updateQnaType2.do",
+				data:{qna_Id:qna_Id},
+				dataType:"json",
+				success:function(data){
+					
+				}
+			});
+		}
+// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼		
 		
 		
 	</script>
