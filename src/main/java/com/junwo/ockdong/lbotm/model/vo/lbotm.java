@@ -14,7 +14,7 @@ public class lbotm {
 	private int b_Count;
 	private int ct_Id;
 	private String b_Src;
-	private int b_Status;
+	private String b_Status;
 	
 	//파일 관련 추가해야함
 	private int files_no; //파일번호
@@ -28,7 +28,7 @@ public class lbotm {
 	public lbotm() {}
 
 	public lbotm(int bNo, int pt_Id, String userId, String b_Title, String b_Content, String b_Nickname,
-			Date b_Createdate, Date bModifydate, int b_Count, int ct_Id, String b_Src, int b_Status, int files_no,
+			Date b_Createdate, Date bModifydate, int b_Count, int ct_Id, String b_Src, String b_Status, int files_no,
 			int f_reference_no, String files_title, String files_change_title, int files_type, String files_root,
 			int files_secession) {
 		super();
@@ -141,11 +141,11 @@ public class lbotm {
 		this.b_Src = b_Src;
 	}
 
-	public int getB_Status() {
+	public String getB_Status() {
 		return b_Status;
 	}
 
-	public void setB_Status(int b_Status) {
+	public void setB_Status(String b_Status) {
 		this.b_Status = b_Status;
 	}
 
