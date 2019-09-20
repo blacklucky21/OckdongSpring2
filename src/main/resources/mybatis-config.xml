@@ -16,11 +16,11 @@
 		<typeAlias type="com.junwo.ockdong.myOwn.model.vo.MBLRecipe" alias="MBLRecipe"/>
 		<typeAlias type="com.junwo.ockdong.product.model.vo.ProductQna" alias="ProductQna"/>
 		<typeAlias type="com.junwo.ockdong.product.model.vo.ProductAnswer" alias="ProductAnswer"/>
+		<typeAlias type="com.junwo.ockdong.lbotm.model.vo.lbotm" alias="lbotm"/>
 		<typeAlias type="com.junwo.ockdong.notice.model.vo.NoticeComments" alias="NoticeComments"/>
 
 		<typeAlias type="com.junwo.ockdong.cart.model.vo.PayProduct" alias="PayProduct"/>
 
-		<typeAlias type="com.junwo.ockdong.lbotm.model.vo.lbotm" alias="lbotm"/>
 
 	</typeAliases>
 	<mappers>

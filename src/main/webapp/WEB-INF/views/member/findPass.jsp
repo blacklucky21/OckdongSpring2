@@ -17,7 +17,7 @@
 	
 	<div class="loginForm">
 	<a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
-	<form id="passFindForm" action="passFind.me" method="post">
+	<form id="passFindForm" action="passFindResult.me" method="post">
 	<table align="center" class="findd">
 		<tr>
 			<td colspan="3">
@@ -25,7 +25,6 @@
 			</td>
 			<td rowspan="2">
 			<input type="button" id="bu" class="bu" name="bu" style="padding:0px" value="확인">
-			<!-- <input type="hidden" name="code_check" id="code_check" value="<%=getRandom() %>" readonly> -->
 			</td>
 		</tr>
 		<tr>
@@ -50,22 +49,30 @@
 	</div>
 	<br><br><br><br>
 	<script>
-		$(function(){
-			  $("#bu").click(function(){	
+		$(function() {
+			$('#bu').click(function() {
+				var userId = $("#userId").val();
+				var email = $("#email").val();
 				
-				  $("#passFindForm").submit();
-			  });
-			  
-		});
+				$.ajax({
+					url: "passFindResult.me",
+		              data: {userId : userId, email : email},
+		              type: "POST",
+		              success: function(data){
+		                 if(data != null){
+		                	 location.href = 'findPassBefore.me';
+		                 } else{
+		                    alert("실패!");
+		                 }
+		              }, error : function(jqxhr, textStatus, errorThrown){
+		                 console.log("메일 전송 실패");
+		                 console.log(jqxhr);
+		                 console.log(textStatus);
+		                 console.log(errorThrown);
+		              }
+				});
+			})
+		})
 	</script>
-	
-	<%! public int getRandom(){
-		int random = 0;
-		
-		random = (int)Math.floor((Math.random()*(99999-10000+1)))+100;
-		
-		return random;
-	}
-	%>
 </body>
 </html>
