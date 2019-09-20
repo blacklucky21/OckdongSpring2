@@ -641,7 +641,7 @@ $('.order-buy').click(function(){
 	var totalAmount = parseInt($('#finalTotalPrice').text());
 	$('.paytext').val(payText);
 	
-	CallPayRequest();
+	//
 	if($('.require').prop("checked")){
 		
 
@@ -667,7 +667,7 @@ $('.order-buy').click(function(){
 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    
+		        CallPayRequest();
 		    	
 		    
 		        

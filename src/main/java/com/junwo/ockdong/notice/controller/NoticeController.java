@@ -68,12 +68,13 @@ public class NoticeController {
 
 	// 게시판 상세보기
 	@RequestMapping("ndetail.do")
-	public ModelAndView boardDetail(@RequestParam("nNo") int nNo, @RequestParam("page") int page, ModelAndView mv)
+	public ModelAndView boardDetail(@RequestParam("nNo") int nNo, @RequestParam("page") int page, ModelAndView mv,HttpSession session)
 			throws NoticeException {
 		nService.addReadCount(nNo);
 		Notice notice = nService.selectNotice(nNo);
-
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		if (notice != null) {
+			mv.addObject("loginUser",loginUser);
 			mv.addObject("notice", notice).addObject("page", page).setViewName("notice/noticeDetail");
 		} else {
 			throw new NoticeException("게시글 상세보기에 실패하였습니다.");
@@ -178,12 +179,12 @@ public class NoticeController {
 		PageInfo info = Pagination.getPageInfo(currentPage, listCount);
 
 		list = nService.searchList(info, sc);
-
-		mv.setViewName("notice/noticeList");
-		mv.addObject("list", list);
+		System.out.println("리스트체크"+list);
+		
+		mv.addObject("searchList", list);
 		mv.addObject("pi", info);
 		mv.addObject("search", search);
-
+		mv.setViewName("notice/noticeList");
 		return mv;
 
 	}
@@ -222,11 +223,38 @@ public class NoticeController {
 	
 	// 댓글 delete
 	@RequestMapping("deleteComment.do")
-	public String deleteComment(int nNo, int comments_no) {
-
-		nService.deleteComment(comments_no);
-
-		return "redirect:ndetail.do?nNo=" + nNo;
+	@ResponseBody
+	public String deleteComment(int cNo) {
+		
+		System.out.println("삭제:"+cNo);
+		int result = nService.deleteComment(cNo);
+		System.out.println(result);
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new NoticeException("댓글 등록에 실패하였습니다.");
+		}
+	}
+	
+	//댓글 수정
+	
+	@RequestMapping("ModifyCommnet.do")
+	@ResponseBody
+	public String ModifyCommnet(String Content,int cNo) {
+		
+		NoticeComments nc = new NoticeComments();
+		nc.setComments_No(cNo);
+		nc.setComments_Content(Content);
+		
+		int updateComent = nService.updateComent(nc);
+		System.out.println(nc);
+		
+		if(updateComent>0) {
+		return "sucess";
+		}else {
+			throw new NoticeException("댓글 등록에 실패하였습니다.");
+		}
+		
 	}
 
 }

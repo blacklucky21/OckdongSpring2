@@ -118,7 +118,7 @@
 		<li><a href="CartView.do">CART</a></li>
 		<li><a href="">ORDER</a></li>
 		<li><a href="logout.me">log out</a><li>
-		<li><a href="adminhome.do">ad page</a></li>				
+		<li><a href="goAdmin.Page">ad page</a></li>				
 		</c:when>
 		<c:otherwise>
 		
