@@ -1,13 +1,13 @@
 package com.junwo.ockdong.member.model.service;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.vo.Member;
-import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 
 public interface MemberService {
 
@@ -80,7 +80,7 @@ public interface MemberService {
 
 
 
-	ArrayList<Notice> selectList(PageInfo pi);
+	ArrayList<lbotm> selectList(PageInfo pi);
 
 
 
@@ -88,7 +88,36 @@ public interface MemberService {
 
 
 
+	String findId(Member m);
 
-	
+
+
+	int findPass(Member m);
+
+
+
+	boolean send(String subject, String string, String string2, String email);
+
+
+
+	int getPaymentList(String userId);
+
+
+
+	int getMyBoardList(String userId);
+
+
+
+	int getMyQnAList(String userId);
+
+
+
+	ArrayList<ProductQna> selectQnAList(PageInfo pi);
+
+	Payment myPaymentDetailList(String p_id);
+
+
+
+	lbotm myBoardDetailView(int bNo);
 
 }

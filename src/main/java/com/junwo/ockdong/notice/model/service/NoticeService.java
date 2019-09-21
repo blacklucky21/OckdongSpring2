@@ -43,4 +43,8 @@ public interface NoticeService {
 	// 댓글 delete
 	int deleteComment(int comments_no);
 
+	int updateComent(NoticeComments nc);
+
+
+
 }

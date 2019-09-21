@@ -3,20 +3,28 @@ package com.junwo.ockdong.member.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.dao.MemberDAO;
 import com.junwo.ockdong.member.model.vo.Member;
-import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO;
-
+	
+	@Autowired
+	JavaMailSender mailSender;
 	
 	@Override
 	public int memberJoin(Member m) {
@@ -137,7 +145,7 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public ArrayList<Notice> selectList(PageInfo pi) {
+	public ArrayList<lbotm> selectList(PageInfo pi) {
 		return mDAO.selectList(pi);
 	}
 
@@ -148,6 +156,75 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public String findId(Member m) {
+		return mDAO.findId(m);
+	}
+
+
+	@Override
+	public int findPass(Member m) {
+		return mDAO.findPass(m);
+	}
+
+
+	@Override
+	public boolean send(String subject, String text, String from, String to) {
+	      MimeMessage message = mailSender.createMimeMessage();
+
+	      try {
+	         MimeMessageHelper helper = new MimeMessageHelper(message, true);
+	         helper.setSubject(subject);
+	         helper.setText(text);
+	         helper.setFrom(from);
+	         helper.setTo(to);
+
+	         mailSender.send(message);
+	         return true;
+	      } catch (MessagingException e) {
+	         e.printStackTrace();
+	      }
+
+	      return false;
+	}
+
+
+	@Override
+	public int getPaymentList(String userId) {
+		return mDAO.getPaymentList(userId);
+	}
+	
+	@Override
+	public Payment myPaymentDetailList(String p_id) {
+		return mDAO.myPaymentDetailList(p_id);
+	}
+
+	@Override
+	public lbotm myBoardDetailView(int bNo) {
+		return mDAO.myBoardDetailView(bNo);
+	}
+
+	@Override
+	public int getMyBoardList(String userId) {
+		return mDAO.getMyBoardList(userId);
+	}
+
+
+	@Override
+	public int getMyQnAList(String userId) {
+		return mDAO.getMyQnAList(userId);
+	}
+
+
+	@Override
+	public ArrayList<ProductQna> selectQnAList(PageInfo pi) {
+		return mDAO.selectQnAList(pi);
+	}
+
+
+
+
+	
 
 
 

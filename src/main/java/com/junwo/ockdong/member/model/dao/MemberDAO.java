@@ -10,8 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.product.model.vo.ProductQna;
+import com.sun.org.apache.regexp.internal.recompile;
 
 
 @Repository("mDAO")
@@ -97,11 +100,11 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.getListCount");
 	}
 	
-	public ArrayList<Notice> selectList(PageInfo pi) {
+	public ArrayList<lbotm> selectList(PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
+		System.out.println(pi);
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", pi.getUserId(), rowBounds);
 		
 	}
@@ -112,6 +115,42 @@ public class MemberDAO {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.myPaymentList", pi, rowBounds);
 	}
+
+	public String findId(Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
+
+	public int findPass(Member m) {
+		return sqlSession.update("memberMapper.findPass", m);
+	}
+
+	public int getPaymentList(String userId) {
+		return sqlSession.selectOne("memberMapper.getPaymentList", userId);
+	}
+	
+	public Payment myPaymentDetailList(String p_id) {
+		return sqlSession.selectOne("memberMapper.myPaymentDetailList", p_id);
+	}
+
+	public int getMyBoardList(String userId) {
+		return sqlSession.selectOne("memberMapper.getMyBoardList", userId);
+	}
+
+	public int getMyQnAList(String userId) {
+		return sqlSession.selectOne("memberMapper.getMyQnAList", userId);
+	}
+
+	public ArrayList<ProductQna> selectQnAList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectQnAList", pi.getUserId(), rowBounds);
+	}
+
+	public lbotm myBoardDetailView(int bNo) {
+		return sqlSession.selectOne("memberMapper.myBoardDetailView", bNo);
+	}
+
+	
 		
 }
 

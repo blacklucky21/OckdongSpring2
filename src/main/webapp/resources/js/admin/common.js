@@ -24,7 +24,8 @@ $(function(){
 // 관리자 메인 페이지
 $(function(){
 	$('.div1').on("click", function(){
-		location.href="adminView.do";
+		location.href='goAdmin.Page';
+		
 	});
 });
 

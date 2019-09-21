@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.lbotm.model.dao.lbotmDAO;
-import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 
 @Service("lbotmServie")
@@ -17,12 +16,28 @@ public class lbotmServicelmpl implements lbotmService {
 	lbotmDAO lbotmDAO;
 
 	@Override
-	public int selectBoardListCount(int ct_Id) {
-		return lbotmDAO.selectBoardListCount(ct_Id);
+	public int getListCount() {
+		return lbotmDAO.getListCount();
 	}
 
 	@Override
-	public ArrayList<lbotm> selectHomeList(PageInfo info, int ct_Id) throws lbotmException {
-		return lbotmDAO.selectHomeList(info, ct_Id);
+	public ArrayList<lbotm> selectList(PageInfo pi) {
+		return lbotmDAO.selectList(pi);
 	}
+
+	@Override
+	public void addReadCount(int bNo) {
+		lbotmDAO.addReadCount(bNo);
+	}
+
+	@Override
+	public lbotm selectlbotm(int bNo) {
+		return lbotmDAO.selectlbotm(bNo);
+	}
+
+	@Override
+	public int lbotminsert(lbotm l) {
+		return lbotmDAO.lbotminsert(l);
+	}
+
 }

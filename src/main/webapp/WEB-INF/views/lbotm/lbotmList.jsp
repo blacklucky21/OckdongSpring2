@@ -156,37 +156,14 @@
     </table>
   </form> -->
   
-  <%-- <div class="album py-5 bg-light">
+   <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
           
-          	<c:forEach var="row" items="${map.list}">
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
-                src="${ B_src }" data-holder-rendered="true">
-                
-                <div class="card-body">
-                  <p class="card-text"><input name="B_Content" value="${ B_Content }"></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <c:if test="${sessionScope.loginUser.userId == pt.id }">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                      </c:if>
-                    </div>
-                    <small class="text-muted">${ userId }</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-			</c:forEach>
-			
-			            
              <div class="col-md-4">
               <div class="card mb-4 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
-                src="http://i.froala.com/download/fbde574c5a1b63fd29d568bfc29cd8b134e57254.jpg?1568858509" data-holder-rendered="true">
+               <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
+                src="http://www.siminsori.com/news/photo/201908/215448_64500_521.jpg" data-holder-rendered="true"> 
                 <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -200,16 +177,35 @@
               </div>
             </div>
             
+            <c:forEach var="l" items="${ list }">
+             <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+               <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
+                src="${l.b_Src }" data-holder-rendered="true"> 
+                <div class="card-body">
+                  <p class="card-text" href="">${ l.b_Title }</p><br>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='lbotmdetail.do'">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">닉네임 ${ l.b_Nickname }</small>
+                    <small class="text-muted">조회수 ${ l.b_Count }</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+			</c:forEach>
+            
             
           </div>
         </div>
-      </div> --%>
+      </div> 
       
-      <div class="clear" style="height: 40px; background: white;"></div>
+      <%-- <div class="clear" style="height: 40px; background: white;"></div>
 	<div class="container">
 		<div class="row">
 			<div class="left">
-				<jsp:include page="../common/banner.jsp" />
 				<h2 class="title">도시락 자랑하기</h2>
 				<hr class="boardHr">
 				<div class="clear" style="height: 20px; background: white;"></div>
@@ -219,7 +215,9 @@
 					<div class="grid_4" id="tips" onclick="location.href='home.do?nNo=' + ${list.bNo}">
 						<div class="gall_block">
 							<div class="maxheight">
-								<a href="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" class="gall_item" ><img src="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" alt="" style="width:300px; height:170px;"></a>
+								<a href="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" class="gall_item" >
+								<img src="${pageContext.request.contextPath}${list.files_root}${list.files_change_title}" alt="" style="width:300px; height:170px;">
+								</a>
 								<div class="gall_bot">
 									<div class="boxbox">
 										<div class="text1">
@@ -227,8 +225,8 @@
 										</div>
 										<div id="fonts">
 											<label>${list.board_date}</label>&nbsp;|&nbsp;
-											조회수&nbsp;<label style="color: red">${list.board_count }</label><%-- &nbsp;|&nbsp;
-											좋아요&nbsp;<label style="color: red">${list.board_good }</label> --%>
+											조회수&nbsp;<label style="color: red">${list.board_count }</label>&nbsp;|&nbsp;
+											좋아요&nbsp;<label style="color: red">${list.board_good }</label>
 										</div>
 										<img src="<%=request.getContextPath()%>/resources/images/boardImg/woman.png" style="width: 25px; height: 25px; border-radius: 20px">
 										<a id="ba_font">홈트레이닝</a> <br> <a onclick="location.href='view.do?board_no=' + ${list.board_no}" class="btn">more</a>
@@ -240,7 +238,6 @@
 				</div>
 				</c:forEach>
 			</div>
-			<jsp:include page="../common/rightBoard.jsp" />
 		</div>
 		<div class="pagi">
 						<c:if test="${ pi.currentPage <= 1 }">
@@ -278,7 +275,7 @@
 							<a href="${ blistEnd }">[다음]</a>
 						</c:if>
 					</div>
-	</div>
+	</div> --%>
   
   <!-- ############### 순서 버튼  ############### -->
    <div class="pagination p7">
@@ -291,22 +288,13 @@
   	
   <!-- ############### 글쓰기 버튼 ###############  --> 
   <div class="container" id="btnwrite">
- <button class="btn btn-danger" id="btnwrite1">글쓰기</button> 
+ <button class="btn btn-danger" id="btnwrite1" onclick="location.href='lbotmWrite.do'">글쓰기</button> 
   </div>
   </div>
 </div>
 
 <!-- ##################### 풋터 부분 ##################### -->
 <c:import url="../footer/footer.jsp"/>
-
-<script>
-	// 글쓰기 버튼 클릭시 
-	$(document).ready(function(){
-		$("#btnwrite1").click(function(){
-			location.href = "${path}/board/binsert.do";
-		});
-	});
-</script>
 
 </body>
 </html>

@@ -118,7 +118,7 @@
 		<li><a href="CartView.do">CART</a></li>
 		<li><a href="">ORDER</a></li>
 		<li><a href="logout.me">log out</a><li>
-		<li><a href="adminhome.do">ad page</a></li>				
+		<li><a href="goAdmin.Page">ad page</a></li>				
 		</c:when>
 		<c:otherwise>
 		
@@ -209,7 +209,7 @@
         <a onclick="myOwnClick();">나만의 도시락</a>
     </li>
     <li>
-    	<a href="blist.do">도시락 자랑하기</a>
+    	<a href="lbotmlist.do">도시락 자랑하기</a>
     </li>
    
    

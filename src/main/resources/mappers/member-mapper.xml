@@ -277,37 +277,97 @@
 		where userId=#{userId}
 	</update>
 	
+	<select id="findId" parameterType="Member" resultType="String">
+		select userId
+    	from member
+    	where userName=#{userName} and email=#{email}
+	</select>
+	
+	<update id="findPass" >
+		update member
+    	set password = #{password}
+    	where userId=#{userId} and email=#{email}
+	</update>
+	
 	<select id="getListCount" resultType="_int">
 		select count(*)
 		from notice
 		where status = 'Y'
 	</select>
 	
-	<resultMap type="Notice" id="noticeResultSet">
-		<id property="nNo" column="NNO"/>
-		<result property="id" column="ID"/>
-		<result property="nTitle" column="NTITLE"/>
-		<result property="nContent" column="NCONTENT"/>
-		<result property="nCount" column="NCOUNT"/>
-		<result property="status" column="STATUS"/>
-		<result property="nDate" column="NDATE"/>
-		<result property="modifyDate" column="MODIFY_DATE"/>
-		<result property="nickName" column="NICKNAME"/>
+	<resultMap type="lbotm" id="lbotmResultSet">
+		<id property="bNo" column="BNO"/>
+		<result property="pt_Id" column="PT_ID"/>
+		<result property="userId" column="USERID" />
+		<result property="b_Title" column="B_TITLE" />
+		<result property="b_Content" column="B_CONTENT" />
+		<result property="b_Nickname" column="B_NICKNAME" />
+		<result property="b_Createdate" column="B_CREATEDATE" />
+		<result property="bModifydate" column="BMODIFYDATE" />
+		<result property="b_Count" column="B_COUNT" />
+		<result property="ct_Id" column="CT_ID" />
+		<result property="b_Src" column="B_SRC" />
+		<result property="b_Status" column="B_STATUS" />
+		
+		<result property="files_no" column="FILES_NO" />
+		<result property="f_reference_no" column="F_REFERENCE_NO" />
+		<result property="files_title" column="FILES_TITLE" />
+		<result property="files_change_title" column="FILES_CHANGE_TITLE" />
+		<result property="files_type" column="FILES_TYPE" />
+		<result property="files_root" column="FILES_ROOT" />
+		<result property="files_secession" column="FILES_SECESSION" />
 	</resultMap>
 	
-	<select id="selectList" resultMap="noticeResultSet" parameterType="string">
+	<select id="selectList" resultMap="lbotmResultSet">
 		select *
-		from notice
-		where status = 'Y' and USERID=#{userId}
-		order by nno desc
+		from LBOTM
+		where B_STATUS = 'Y' and USERID = #{userId}
+		order by bno desc
 	</select>
 	
-	<select id="myPaymentList" resultType="Payment">
+	<select id="myPaymentList" parameterType="string" resultType="Payment">
 		select *
 		from payment
 		where USERID=#{userId}
 		order by payno
 	</select>
+	
+	<select id="getPaymentList" parameterType="string" resultType="_int">
+		select count(*)
+		from payment
+		where userid=#{userId}
+	</select>
+	
+	<select id="myPaymentDetailList" parameterType="string" resultType="Payment">
+		select *
+		from payment
+		where p_id=#{p_id}
+	</select>
+	
+	<select id="myBoardDetailView" parameterType="_int" resultType="lbotm">
+		select *
+		from lbotm
+		where bNo=#{bNo}
+	</select>
+	
+	<select id="getMyBoardList" parameterType="string" resultType="_int">
+		select count(*)
+		from LBOTM
+		where userid = #{userID}
+	</select>
+	
+	<select id="getMyQnAList" parameterType="string" resultType="_int">
+		select count(*)
+		from PRODUCTQNA
+		where userid = #{userID}
+	</select>
+	
+	<select id="selectQnAList" parameterType="string" resultType="Payment">
+		select *
+		from PRODUCTQNA
+		where USERID=#{userId}
+		order by QNA_NO
+	</select>	
 		
 	</mapper>
 	

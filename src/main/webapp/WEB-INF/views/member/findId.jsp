@@ -23,7 +23,7 @@
 			<input type="text" id="userName" name="userName" class="form-control" placeholder="회원정보에 등록된 이름을 입력해주세요" style="font-size:13px;">
 			</td>
 			<td rowspan="2">
-			<input type="button" id="bu" class="bu" style="padding:0px" value="확인">
+				<input type="button" id="bu" class="bu" style="padding:0px" value="확인">
 			</td>
 		</tr>
 		<tr>

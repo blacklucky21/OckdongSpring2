@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lbotmMapper">
+
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from lbotm
+		where b_Status = 'Y'
+	</select>
 	
 	<resultMap type="lbotm" id="lbotmResultSet">
 		<id property="bNo" column="BNO"/>
@@ -24,22 +31,29 @@
 		<result property="files_secession" column="FILES_SECESSION" />
 	</resultMap>
 	
-	<!-- 게시글 페이징 처리 -->
-	<select id="selectBoardListCount" resultType="_int">
-		SELECT COUNT(*) 
-		FROM lbotm 
-		WHERE b_Status = 'Y'and ct_Id = #{ct_Id}
+	<select id="selectList" resultMap="lbotmResultSet">
+		select *
+		from lbotm
+		where b_Status = 'Y'
+		order by bNo desc
 	</select>
 	
-	<!-- 게시ㅏㄴ 목록 조회 -->
-	<select id="selectHomeList" resultMap="homeResultSet">
-         select l.b_Title, l.b_Createdate, l.b_Count, f.files_root, l.bNo, me.userId, f.files_change_title
-            from lbotm l
-            join member me on (l.userId = me.userId)
-            join files f on (l.bNo = f.f_reference_no)
-            where b_Status = 'Y' and FILES_SECESSION = 0
-            group by l.b_Title, l.b_Createdate, l.b_Count, f.files_root, l.bNo, me.userId, f.files_change_title
-            order by l.bNo desc
-	</select>
+	<update id="updateCount" parameterType="_int">
+		update lbotm
+		set b_Count = b_Count + 1
+		where bNo = #{bNo}
+	</update>
+	
+	<select id="selectOne" parameterType="_int" resultMap="lbotmResultSet">
+		select *
+		from lbotm
+		where bNo= #{bNo} and b_Status='Y'
+	</select>	
+	
+	<!-- 게시글 작성  -->
+	<insert id="lbotminsert"  parameterType="lbotm">
+		insert into lbotm values(seq_bNo.nextval, #{pt_Id}, #{userId}, #{b_Title}, #{b_Content}, #{b_Nickname},
+      sysdate, sysdate, default, default, #{b_Src}, default)
+	</insert>
 	
 </mapper>

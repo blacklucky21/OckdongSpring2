@@ -68,31 +68,50 @@
 						<%-- <input type="hidden" id = "add" value="${ loginUser.address}" style="width:100%"> --%>
 						
 							<th height="40px">우편번호</th>
-							<td><input type="text" name="post" id="post" class="text" value=""></td>
+							<td>
+								<div class="txt-field-id hs" style="width: 350px;">
+									<span class="txt-field hs" style="width: 350px;">
+										<input type="text" name="post" id="post" class="text" value="">
+									</span>
+								</div>
+							</td>
 							<td style="padding-left: 10px">
-								<div id="ckZip"
-									style="display: table-cell; vertical-align: middle;"
-									onclick="searchAdd()">
+								<div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()">
 									<input type="button" class="bu" value="검색" />
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th height="40px">주소</th>
-							<td><input type="text" name="address2" id="address2"
-								class="text"></td>
+							<td>
+								<div class="txt-field-id hs" style="width: 350px;">
+									<span class="txt-field hs" style="width: 350px;">
+										<input type="text" name="address2" id="address2" class="text">
+									</span>
+								</div>
+							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<th height="40px">주소</th>
-							<td><input type="text" name="address3" id="address3"
-								class="text"></td>
+							<td>
+								<div class="txt-field-id hs" style="width: 350px;">
+									<span class="txt-field hs" style="width: 350px;">
+										<input type="text" name="address3" id="address3"class="text">
+									</span>
+								</div>
+							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<th height="40px">상세주소</th>
-							<td><input type="text" name="address4" id="address4"
-								class="text"></td>
+							<td>
+								<div class="txt-field-id hs" style="width: 350px;">
+									<span class="txt-field hs" style="width: 350px;">
+										<input type="text" name="address4" id="address4" class="text">
+									</span>
+								</div>
+							</td>
 							<td></td>
 						</tr>
 

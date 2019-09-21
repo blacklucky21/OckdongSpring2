@@ -117,7 +117,7 @@
 	select *
 	from noticecomments nc
 	join notice n on(nc.nno = n.nno)
-	where nc.nno = #{Comments_No}
+	where COMMENTS_STATUS ='Y' and nc.nno = #{Comments_No}
 	order by Comments_No desc
 	</select>
 	
@@ -128,10 +128,20 @@
   	</insert>
   	
   	<!-- 댓글 delete  -->
-  	<delete id="deleteComment">
-		delete from NoticeComments 
+  	<update id="deleteComment">
+		update NOTICECOMMENTS 
+		set COMMENTS_STATUS = 'N'
 		WHERE COMMENTS_NO = #{comments_no}
-	</delete>
+	</update>
+	
+	
+	<update id="updateComent">
+			update NOTICECOMMENTS
+			set COMMENTS_CONTENT = #{Comments_Content}
+			where COMMENTS_NO = #{Comments_No}
+	
+	
+	</update>
 	
   
 </mapper>

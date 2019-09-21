@@ -29,6 +29,7 @@
 		<c:import url="../buy/left.jsp" />
 		<c:import url="../buy/center.jsp" />
 	</div>
+	<br>
 	<c:import url="../../footer/footer.jsp" />
 </body>
 </html>

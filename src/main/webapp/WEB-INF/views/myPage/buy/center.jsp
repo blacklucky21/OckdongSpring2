@@ -28,9 +28,9 @@
 		<thead>
 		<tr style="background-color: black; color: white;">
 			<th>주문번호</th>
-			<th style="width: 70px;">주문상태</th>
+			<th style="width: 70px;">주문상태</th> 
 			<th>상품명</th>
-			<th>배달주소</th>
+			<th>배달주소</th>			
 			<th>결제금액</th>
 			<th>배송날짜</th>
 		</tr>
@@ -39,40 +39,24 @@
 		<c:forEach var="buy" items="${ list }">
 		<tbody>
 		<tr>
-			<td align="center">${ buy.p_id }</td>
-			<%-- <td align="center">${ buy.pstatus }</td> --%>
-			<%-- <td>
-				<select id="delivaryForm" class="delivaryForm" >
-					<c:if test="${buy.pstatus eq 'Y' }">
-						<option class="Ready" value="Ready" selected>상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng">배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
-					</c:if>
-							
-					<c:if test="${buy.pstatus eq 'R' }">
-						<option class="Ready" value="Ready" >상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng" selected>배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
-					</c:if>
-							
-					<c:if test="${buy.pstatus eq 'E' }">
-						<option class="Ready" value="Ready" >상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng" >배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd" selected>배송완료</option>
-					</c:if>
-				</select>
+			<td align="center">
+				<a href="#" style="text-decoration: none;" class="buyDetailView" id="${ buy.p_id }">${ buy.p_id }</a>
+			</td>
+			<%-- <td align="center">${ buy.p_id }</td> --%>
+			<%-- <td style="cursor: pointer" class="search" id="searchId">
+				<a href="#" class="modalm" data-id="${ buy.p_id }" data-toggle="modal" data-target="#myModal">${ buy.p_id }</a>
 			</td> --%>
 			<c:if test="${buy.pstatus eq 'Y' }">
-				<td>상품준비중</td>
+				<td>상품준비중</td> 
 			</c:if>
 			<c:if test="${buy.pstatus eq 'R' }">
-				<td>배송중</td>
+				<td>배송중</td> 
 			</c:if>
 			<c:if test="${buy.pstatus eq 'E' }">
-				<td>배송완료</td>
+				<td>배송완료</td> 
 			</c:if>
 			<td align="center">${ buy.paytext }</td>
-			<td align="center">${ buy.payaddress }</td>
+			<td align="center">${ buy.payaddress }</td>			
 			<td align="center">${ buy.payprice }</td>
 			<td align="center">${ buy.delivaryDate }</td>
 		</tr>
@@ -98,7 +82,7 @@
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="nlist.do">
+					<c:url var="before" value="view_history.me">
 						<c:param name="page" value="${pi.currentPage - 1 }"/>
 					</c:url>
 					<a href="${before }">[이전]</a> &nbsp;
@@ -110,7 +94,7 @@
 						<font color="red" size="4"><b>[${p }]</b></font>
 					</c:if>
 					<c:if test="${ p ne currentPage }">
-						<c:url var="pagination" value="nlist.do">
+						<c:url var="pagination" value="view_history.me">
 							<c:param name="page" value="${p}"/>
 						</c:url>
 						<a href="${pagination }">${p }</a> &nbsp;
@@ -122,14 +106,19 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="nlist.do">
+					<c:url var="after" value="view_history.me">
 						<c:param name="page" value="${pi.currentPage + 1 }"/>
 					</c:url>
 					<a href="${after }">[다음]</a>
 				</c:if>
-			
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		$(".buyDetailView").click(function() {
+			var p_id = $(this).attr("id");			
+			window.open("buyDetail.me?p_id="+p_id,"Gooooood","width=1900, height=300");			
+		})
+	</script>
 </body>
 </html>

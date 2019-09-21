@@ -22,6 +22,7 @@
 	<c:import url="../header/header.jsp"/>
 	
 	<c:set var="pa" value="${list }"/>
+	<c:set var="pc" value="${PayProduct }"/>
 	<form action="PaymentResultList.do" method="post" id="insertPaymentAbout">
 	<div class="content" style="width:100%; text-align:center">
 
@@ -85,6 +86,7 @@
 							<label for="agree-private"><input type="checkbox" class="require" id="agree-private" name="agree_private" value="Y">상기
 								결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
 						</p>
+						<input type="hidden" name="paytext" class="paytext">
 						<input type="button" value="결제하기" class="btn_pay order-buy">
 					</div>
 				</div>
@@ -114,11 +116,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    
                     <c:if test="${list ne null }">
 					<c:forEach var="c" items="${list }" varStatus="cart">
 					
                     <tr>
                         <td class="gi this-product">
+                             <input type="hidden" name="p_id" value="${c.p_id }">
                         	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
                             <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="90" alt="사진" title="사진" class="middle"></a></span>
@@ -166,7 +170,7 @@
 
                  </c:forEach>
                  </c:if>
-                 <c:set var="pc" value="${PayProduct }"/>
+                 
 				<c:if test="${PayProduct ne null }">
 				  <tr>
                         <td class="gi this-product">
@@ -234,8 +238,9 @@
                 <!-- 장바구니 상품리스트 끝 -->
 
             </div>
+            <c:if test="${empty pc}">
             <a class="btn-move-home" href="CartView.do">장바구니 가기</a>
-	
+			</c:if>
             <div class="price-box">
                 <div>
                     <p>
@@ -631,10 +636,17 @@ $('.post-search').click(function(){
 $('.order-buy').click(function(){
 	
 	//location.href="PaymentResultList2.do"
-
+	
 	
 	var count = parseInt('${pa.size()}')-1;
-	var payText ='${pa.get(0).cName}';
+	var payText ="";
+	
+	if('${pc}' !=""){
+		payText = '${pc.cName}';
+		
+	}else{
+		payText = '${pa.get(0).cName}'		
+	}
 	
 	if(count>=1){
 		
@@ -655,7 +667,7 @@ $('.order-buy').click(function(){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : payText,
-		    amount : totalAmount,
+		    amount : 100,//totalAmount,
 		    buyer_email : 'iamport@siot.do',
 		    buyer_name : '${m.userName}',
 		    buyer_tel : '${m.phone}',
@@ -729,7 +741,7 @@ function CallPayRequest(){
 	if('${list}' !=""){
 
 	
-	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice
+	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice;
 	
 	form.submit();
 	}else{
