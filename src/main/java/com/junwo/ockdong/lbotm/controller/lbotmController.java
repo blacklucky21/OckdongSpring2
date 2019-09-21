@@ -23,7 +23,6 @@ import com.junwo.ockdong.lbotm.model.service.lbotmService;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
-import com.junwo.ockdong.notice.model.vo.Notice;
 
 @Controller
 public class lbotmController {

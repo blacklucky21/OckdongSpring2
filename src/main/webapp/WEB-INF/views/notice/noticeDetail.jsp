@@ -360,7 +360,6 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					</c:url>
 					
 					<span class="modifyB" onClick="location.href='${ updateNoticePage }'">수정</span>
-					<%-- <span class="modifyB" onClick="location.href='${path}/ockdong/updateNoticePage.do?nNo=${notice.nNo}'">수정</span> --%>
 					<img src="${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif" class="listpic1"> 
 					<span class="deleteB" id="deleteB" onClick="location.href='${path}/ockdong/deleteNotice.do?nNo=${notice.nNo}'">삭제</span>
 					</c:if>
