@@ -248,6 +248,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int deletePicture(String sub_name) {
 		return pDAO.deletePicture(sub_name);
+	}
 //=======
 	public int deleteAnswer(ProductAnswer pa) {
 		return pDAO.deleteAnswer(pa);

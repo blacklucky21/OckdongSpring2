@@ -253,6 +253,7 @@ public class ProductDAO {
 
 	public int deletePicture(String sub_name) {
 		return sqlSession.delete("productMapper.deletePicture",sub_name);
+	}
 //=======
 	public int deleteAnswer(ProductAnswer pa) {
 		return sqlSession.delete("productMapper.deleteAnswer",pa);
