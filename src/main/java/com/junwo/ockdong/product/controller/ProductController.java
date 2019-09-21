@@ -465,7 +465,6 @@ public class ProductController {
 		
 		
 		// 기존거 삭제만 한경우
-		
 		// 서브1
 		if(sub1_realname != null) {
 			if (sub1_realname.equals("c")) {
@@ -495,6 +494,8 @@ public class ProductController {
 			}
 		}
 		
+		System.out.println("수정 후 상품 내용 : " + p);
+		int result = pService.updateProducts(p);
 		
 		return "redirect:productList.do";
 		

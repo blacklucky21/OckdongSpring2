@@ -273,6 +273,11 @@ public class ProductDAO {
 	}
 
 
+	public int updateProducts(Product p) {
+		return sqlSession.update("productMapper.updateProducts",p);
+	}
+
+
 
 	
 
