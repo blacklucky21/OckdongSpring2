@@ -27,6 +27,7 @@
 	<table border="1" id="tb" style="width: auto;" class="table table-hover">
 		<thead>
 		<tr style="background-color: black; color: white;">
+			<th>댓글번호</th>
 			<th style="width: 70px;">작성자</th>
 			<th>제목</th>
 			<th>문의 내용</th>
@@ -37,6 +38,9 @@
 		<c:forEach var="qna" items="${ list }">
 		<tbody>
 		<tr>
+			<td align="center">
+				<a href="#" style="text-decoration: none;" class="myQnaDetailView" id="${qna_Id }">${qna_Id }</a>
+			</td>
 			<td align="center">${ qna.qna_user }</td>
 			<td align="center">${ qna.p_title }</td>
 			<td align="center">${ qna.qna_content }</td>
@@ -96,5 +100,11 @@
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		$(".myQnaDetailView").click(function() {
+			var qna_Id = $(this).attr("id");			
+			window.open("myQnaDetailView.me?qna_Id="+qna_Id,"Gooooood","width=1900, height=300");			
+		})
+	</script>
 </body>
 </html>

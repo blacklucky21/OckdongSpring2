@@ -146,8 +146,13 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectQnAList", pi.getUserId(), rowBounds);
 	}
 
-	public lbotm myBoardDetailView(int bNo) {
-		return sqlSession.selectOne("memberMapper.myBoardDetailView", bNo);
+	/*
+	 * public lbotm myBoardDetailView(int bNo) { return
+	 * sqlSession.selectOne("memberMapper.myBoardDetailView", bNo); }
+	 */
+
+	public ProductQna myQnaDetailView(int qna_Id) {
+		return sqlSession.selectOne("memberMapper.myQnaDetailView", qna_Id);
 	}
 
 	

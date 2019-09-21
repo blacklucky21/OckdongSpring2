@@ -101,7 +101,8 @@
 	<script type="text/javascript">
 		$(".myBoardDetailView").click(function() {
 			var bNo = $(this).attr("id");			
-			window.open("myBoardDetailView.me?bNo="+bNo,"Gooooood","width=1900, height=300");			
+			/* window.open("myBoardDetailView.me?bNo="+bNo,"Gooooood","width=1900, height=300"); */			
+			location.href="lbotmdetail.do?bNo="+bNo;
 		})
 	</script>
 </body>

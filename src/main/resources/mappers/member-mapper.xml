@@ -344,11 +344,11 @@
 		where p_id=#{p_id}
 	</select>
 	
-	<select id="myBoardDetailView" parameterType="_int" resultType="lbotm">
+	<!-- <select id="myBoardDetailView" parameterType="_int" resultType="lbotm">
 		select *
 		from lbotm
 		where bNo=#{bNo}
-	</select>
+	</select> -->
 	
 	<select id="getMyBoardList" parameterType="string" resultType="_int">
 		select count(*)
@@ -359,7 +359,7 @@
 	<select id="getMyQnAList" parameterType="string" resultType="_int">
 		select count(*)
 		from PRODUCTQNA
-		where userid = #{userID}
+		where QNA_USER = #{QNA_USER}
 	</select>
 	
 	<select id="selectQnAList" parameterType="string" resultType="Payment">

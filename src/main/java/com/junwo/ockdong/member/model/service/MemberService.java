@@ -118,6 +118,10 @@ public interface MemberService {
 
 
 
-	lbotm myBoardDetailView(int bNo);
+	//lbotm myBoardDetailView(int bNo);
+
+
+
+	ProductQna myQnaDetailView(int qna_Id);
 
 }
