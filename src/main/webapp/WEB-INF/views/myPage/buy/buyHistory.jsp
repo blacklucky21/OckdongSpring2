@@ -17,6 +17,7 @@
 	height: 600px;
 	margin: 0 auto;
 	margin-bottom: 300px;
+	
 }
 #gwangseong{
 		visibility: hidden;

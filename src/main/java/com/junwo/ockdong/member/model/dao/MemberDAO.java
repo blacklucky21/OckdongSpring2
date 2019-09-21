@@ -20,6 +20,7 @@ import com.sun.org.apache.regexp.internal.recompile;
 @Repository("mDAO")
 public class MemberDAO {
 	
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 

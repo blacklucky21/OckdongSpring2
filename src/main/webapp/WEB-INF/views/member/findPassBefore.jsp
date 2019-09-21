@@ -18,6 +18,7 @@
 		width: 600px;
 		height: auto;
 	}
+	
 
 .loginForm {
 	text-align: center;

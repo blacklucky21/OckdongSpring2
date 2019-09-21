@@ -15,6 +15,7 @@
 	
 	<form id="ModifyInfoForm" action="memberUpdate.me" method="post">
 	<c:set var="m" value="${member}" />
+	
 	<span class="join-form">
 	<fieldset id="fds-order-info">
 	<legend>주문폼</legend>

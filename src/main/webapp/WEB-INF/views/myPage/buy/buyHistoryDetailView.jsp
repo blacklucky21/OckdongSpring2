@@ -18,6 +18,7 @@
 			<th style="width: 100px;" nowrap>주문상태</th>
 			<th nowrap>상품명</th>
 			<th nowrap>상품번호</th>
+			
 			<th nowrap>배달주소</th>
 			<th nowrap>결제금액</th>
 			<th nowrap>기사에게 남길말</th>

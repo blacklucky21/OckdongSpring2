@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO;
 	
+	
 	@Autowired
 	JavaMailSender mailSender;
 	
