@@ -373,6 +373,21 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 </update>
 
 
+<!-- <<<<<<<<<  -->
+<update id="updateMainPicture" parameterType="map">
+	update picturelist
+	set PT_NAME = #{titleName}, PT_REALNAME = #{realName}
+	where PT_NAME = #{oldName}
+</update>
+
+<insert id="insertMainPicture" parameterType="PictureList">
+	insert into picturelist values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,#{p_Id}, DEFAULT, 1)
+</insert>
+
+<delete id="deletePicture" parameterType="string">
+	delete from picturelist where PT_NAME = #{sub_name}
+</delete>
+<!-- ============= -->
 <delete id="deleteAnswer">
 	DELETE from PRODUCTANSWER
 	WHERE  ANSWER_ID = #{answer_Id}
@@ -390,7 +405,6 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		where ANSWER_ID = #{answer_Id}
 
 </update>
-
 
 
 </mapper>

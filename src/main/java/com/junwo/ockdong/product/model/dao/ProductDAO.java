@@ -240,6 +240,20 @@ public class ProductDAO {
 	}
 
 
+//<<<<<<< 최경천
+	public int updateMainPicture(Map<String, String> picture) {
+		return sqlSession.update("productMapper.updateMainPicture",picture);
+	}
+
+
+	public int insertMainPicture(PictureList pl) {
+		return sqlSession.insert("productMapper.insertMainPicture",pl);
+	}
+
+
+	public int deletePicture(String sub_name) {
+		return sqlSession.delete("productMapper.deletePicture",sub_name);
+//=======
 	public int deleteAnswer(ProductAnswer pa) {
 		return sqlSession.delete("productMapper.deleteAnswer",pa);
 	}
@@ -253,6 +267,7 @@ public class ProductDAO {
 	public int AnswerUpdate(ProductAnswer pa) {
 		System.out.println("안뇽 ㅋㅋ : " + pa);
 		return sqlSession.update("productMapper.AnswerUpdate",pa);
+
 	}
 
 

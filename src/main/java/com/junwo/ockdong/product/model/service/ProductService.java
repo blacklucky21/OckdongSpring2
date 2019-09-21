@@ -85,9 +85,15 @@ public interface ProductService {
 	ProductAnswer selectAnswer(ProductAnswer pa);
 	ProductAnswer selectAnswer2(ProductAnswer pa);
 	int updateQnaType(ProductQna pq); // qna 상태 변경
+//<<<<<<< 최경천
+	int updateMainPicture(Map<String, String> picture);
+	int insertMainPicture(PictureList pl);
+	int deletePicture(String sub3_name);
+//=======
 	int deleteAnswer(ProductAnswer pa); // 답글 삭제
 	void updateQnaType2(ProductQna pq); // 답글 삭제시 답변 여부 다시 변경
 	int AnswerUpdate(ProductAnswer pa); // 답변 수정
+
 	
 	
 	

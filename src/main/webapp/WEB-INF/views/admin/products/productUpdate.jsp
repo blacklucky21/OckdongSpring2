@@ -319,7 +319,8 @@ $(function(){
 
 function delImg(value){
 	value.src="resources/img/admin/plus2.png";
-	consleo.log(value);
+	console.log(value);
+	console.log(this);
 	$(this).val("");
 	
 	$('#contentImgArea1').files = null;
