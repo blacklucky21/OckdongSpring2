@@ -240,6 +240,21 @@ public class ProductDAO {
 	}
 
 
+	public int updateMainPicture(Map<String, String> picture) {
+		return sqlSession.update("productMapper.updateMainPicture",picture);
+	}
+
+
+	public int insertMainPicture(PictureList pl) {
+		return sqlSession.insert("productMapper.insertMainPicture",pl);
+	}
+
+
+	public int deletePicture(String sub_name) {
+		return sqlSession.delete("productMapper.deletePicture",sub_name);
+	}
+
+
 
 	
 

@@ -85,6 +85,9 @@ public interface ProductService {
 	ProductAnswer selectAnswer(ProductAnswer pa);
 	ProductAnswer selectAnswer2(ProductAnswer pa);
 	int updateQnaType(ProductQna pq); // qna 상태 변경
+	int updateMainPicture(Map<String, String> picture);
+	int insertMainPicture(PictureList pl);
+	int deletePicture(String sub3_name);
 	
 	
 	

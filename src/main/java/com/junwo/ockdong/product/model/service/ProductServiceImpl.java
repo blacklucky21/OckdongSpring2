@@ -234,6 +234,21 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.updateQnaType(pq);
 	}
 
+	@Override
+	public int updateMainPicture(Map<String, String> picture) {
+		return pDAO.updateMainPicture(picture);
+	}
+
+	@Override
+	public int insertMainPicture(PictureList pl) {
+		return pDAO.insertMainPicture(pl);
+	}
+
+	@Override
+	public int deletePicture(String sub_name) {
+		return pDAO.deletePicture(sub_name);
+	}
+
 
 	
 
