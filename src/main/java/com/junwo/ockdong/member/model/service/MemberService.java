@@ -99,6 +99,7 @@ public interface MemberService {
 	boolean send(String subject, String string, String string2, String email);
 
 
+	
 
 	int getPaymentList(String userId);
 

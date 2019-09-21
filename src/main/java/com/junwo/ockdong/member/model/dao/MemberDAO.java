@@ -135,6 +135,7 @@ public class MemberDAO {
 	public int getMyBoardList(String userId) {
 		return sqlSession.selectOne("memberMapper.getMyBoardList", userId);
 	}
+	
 
 	public int getMyQnAList(String userId) {
 		return sqlSession.selectOne("memberMapper.getMyQnAList", userId);

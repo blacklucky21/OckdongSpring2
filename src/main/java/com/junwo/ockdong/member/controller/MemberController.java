@@ -293,6 +293,7 @@ public class MemberController {
 		
 		return mv;
 	}
+	
 	/*
 	 * // 내가 쓴 게시물 디테일 뷰
 	 * 

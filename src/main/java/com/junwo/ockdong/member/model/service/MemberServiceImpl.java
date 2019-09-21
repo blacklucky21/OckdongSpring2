@@ -199,6 +199,7 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.myPaymentDetailList(p_id);
 	}
 
+	
 	/*
 	 * @Override public lbotm myBoardDetailView(int bNo) { return
 	 * mDAO.myBoardDetailView(bNo); }

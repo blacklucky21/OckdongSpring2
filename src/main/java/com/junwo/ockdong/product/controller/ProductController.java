@@ -685,6 +685,7 @@ public class ProductController {
 		
 	}
 	
+	
 	//qna 리스트 호출
 	@RequestMapping("qnaList.do")
 	public void getQnaList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {

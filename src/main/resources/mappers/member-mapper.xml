@@ -344,6 +344,7 @@
 		where p_id=#{p_id}
 	</select>
 	
+	
 	<!-- <select id="myBoardDetailView" parameterType="_int" resultType="lbotm">
 		select *
 		from lbotm
