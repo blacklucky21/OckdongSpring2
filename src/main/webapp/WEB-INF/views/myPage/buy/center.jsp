@@ -40,28 +40,6 @@
 		<tbody>
 		<tr>
 			<td align="center">${ buy.p_id }</td>
-			<%-- <td align="center">${ buy.pstatus }</td> --%>
-			<%-- <td>
-				<select id="delivaryForm" class="delivaryForm" >
-					<c:if test="${buy.pstatus eq 'Y' }">
-						<option class="Ready" value="Ready" selected>상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng">배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
-					</c:if>
-							
-					<c:if test="${buy.pstatus eq 'R' }">
-						<option class="Ready" value="Ready" >상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng" selected>배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd">배송완료</option>
-					</c:if>
-							
-					<c:if test="${buy.pstatus eq 'E' }">
-						<option class="Ready" value="Ready" >상품준비중</option>
-						<option class="DelivaryIng"value="DelivaryIng" >배송중</option>
-						<option class="DelivaryEnd"value="DelivaryEnd" selected>배송완료</option>
-					</c:if>
-				</select>
-			</td> --%>
 			<c:if test="${buy.pstatus eq 'Y' }">
 				<td>상품준비중</td>
 			</c:if>
@@ -127,7 +105,6 @@
 					</c:url>
 					<a href="${after }">[다음]</a>
 				</c:if>
-			
 			</td>
 		</tr>
 	</table>

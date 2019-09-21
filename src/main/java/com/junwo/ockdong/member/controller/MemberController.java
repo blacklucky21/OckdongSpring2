@@ -1,8 +1,7 @@
 package com.junwo.ockdong.member.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,11 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
+import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.exception.MemberException;
 import com.junwo.ockdong.member.model.service.MemberService;
 import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.notice.model.exception.NoticeException;
-import com.junwo.ockdong.notice.model.vo.Notice;
+import com.junwo.ockdong.product.model.vo.ProductQna;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -125,10 +125,25 @@ public class MemberController {
 	}
 	// id 찾기 결과
 	@RequestMapping("idFindResult.me")
-	public String findIdResult(@RequestParam("userName") String userName, 
+	public ModelAndView findIdResult(@RequestParam("userName") String userName, 
 							   @RequestParam("email") String email, 
-							   ModelAndView mv){
-		return "";
+							   Member m, ModelAndView mv){
+		m.setUserName(userName);
+		m.setEmail(email);
+		System.out.println(userName);
+		System.out.println(email);
+		
+		String result = mService.findId(m);
+		
+		
+		if(result != null) {
+			mv.addObject("userId",result);
+			mv.setViewName("member/findIdResult");
+		}else {
+			throw new MemberException("아이디 찾기 실패");
+		}
+		
+		return mv;
 	}
 	
 	/*** PW찾기 ***/
@@ -137,6 +152,49 @@ public class MemberController {
 	public String findPwdView() {
 		return "member/findPass";
 	}
+	@RequestMapping("findPassBefore.me")
+	public String findPassBefore() {
+		return "member/findPassBefore";
+	}
+	// 비밀번호 찾기 결과
+	@RequestMapping("passFindResult.me")
+	@ResponseBody
+	public String findPassResult(@RequestParam("userId") String userId, 
+							   @RequestParam("email") String email, 
+							   Member m) {
+		m.setUserId(userId);
+		m.setEmail(email);
+		
+		String newPass = sendMail(m, email);
+		
+		m.setPassword(bCryptPasswordEncoder.encode(newPass));
+		
+		System.out.println(newPass);
+		
+		int result = mService.findPass(m);
+		System.out.println(result);
+		if(result > 0) {
+			return newPass;
+		}else {
+			throw new MemberException("비밀번호 찾기 실패");
+		}
+	}
+	
+    public String sendMail(Member m, @RequestParam String email) {
+       String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+       randomCode = randomCode.substring(0, 12);
+       String newPass = String.valueOf(randomCode);
+       
+       String subject = "회원 가입 승인번호 입니다.";
+       StringBuilder sb = new StringBuilder();
+       sb.append("회원가입 승인 번호는 ").append(newPass).append(" 입니다.");
+       
+       if(mService.send(subject, sb.toString(), "seok1721@gamil.com", email)) {
+    	   return newPass;
+       } else {
+    	   return "fail";
+       }
+    }
 	
 	/*** MyPage ***/
 	// 마이페이지 화면 이동
@@ -172,7 +230,7 @@ public class MemberController {
 			currentPage = page;
 		}
 		
-		int listCount = mService.getListCount();
+		int listCount = mService.getPaymentList(m.getUserId());
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		pi.setUserId(m.getUserId());
@@ -200,12 +258,12 @@ public class MemberController {
 			currentPage = page;
 		}
 		
-		int listCount = mService.getListCount();
+		int listCount = mService.getMyBoardList(m.getUserId());
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		pi.setUserId(m.getUserId());
 		
-		ArrayList<Notice> nList = mService.selectList(pi);
+		ArrayList<lbotm> nList = mService.selectList(pi);
 		System.out.println(nList);
 		
 		if(nList != null) {
@@ -215,6 +273,36 @@ public class MemberController {
 		}else {
 			throw new NoticeException("게시판 조회에 실패하였습니다.");
 		}
+		
+		return mv;
+	}
+	
+	// 상품문의 화면 이동
+	@RequestMapping("reviewListView.bo")
+	public ModelAndView myQnAView(@RequestParam(value="page", required=false) Integer page, ModelAndView mv, HttpSession session) {
+		
+		int currentPage = 1;
+		Member m = (Member)session.getAttribute("loginUser");
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int listCount = mService.getMyQnAList(m.getUserId());
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		pi.setUserId(m.getUserId());
+		
+		ArrayList<ProductQna> nList = mService.selectQnAList(pi);
+		System.out.println(nList);
+		
+		if(nList != null) {
+			mv.addObject("list", nList);
+			mv.addObject("pi", pi);
+			mv.setViewName("myPage/productQnA/productQnAView");
+		}else {
+			throw new NoticeException("상품문의 조회에 실패하였습니다.");
+		}
+		
 		
 		return mv;
 	}
