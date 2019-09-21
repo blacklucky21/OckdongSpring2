@@ -3,18 +3,18 @@ package com.junwo.ockdong.lbotm.model.vo;
 import java.sql.Date;
 
 public class lbotm {
-	private int bNo;
-	private int pt_Id;
-	private String userId;
-	private String b_Title;
-	private String b_Content;
-	private String b_Nickname;
-	private Date b_Createdate;
-	private Date bModifydate;
-	private int b_Count;
-	private int ct_Id;
-	private String b_Src;
-	private String b_Status;
+	private int bNo; // 게시글번호
+	private int pt_Id; // 사진번호
+	private String userId; // 아아디
+	private String b_Title; // 제목
+	private String b_Content; // 내용
+	private String b_Nickname; // 등록자
+	private Date b_Createdate; //등록일
+	private Date bModifydate; // 수정일
+	private int b_Count; // 조회수 
+	private int ct_Id; // 카테고리 아아디
+	private String b_Src; // 사진경로
+	private String b_Status; // 삭제여부
 	
 	//파일 관련 추가해야함
 	private int files_no; //파일번호

@@ -70,97 +70,12 @@
 <c:import url="../header/header.jsp"/>
  
 <!-- ############### 게시판 내용 ############### -->
-<!-- <div class="contest">
- <div class="contest1">
-  <div class="gallery">
-  <p class="text-green" style="font-size:40px;"><strong>나만의 도시락</strong></p> 
-  
-  <form action="">
-  <table>
-  <tr>
-  <td>
-    <div class="gallery-item" onclick="location.href='bdetail.do'">
-      <div class="gallery-item-image">
-        <img src="http://tong.joins.com/wp-content/uploads/sites/3/2017/05/2017-05-25-11.01.25-1_resized_.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">재혁이네 도시락</h3><span>치킨메뉴가 위주인 도시락</span></div>아이디 / 제목 받아오기 
-    </div>
-    </td>
-    
-    <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="http://webzine.nfm.go.kr/wp-content/uploads/2019/04/1170x765_%EB%8F%84%EC%8B%9C%EB%9D%BD-%ED%99%95%EC%A0%95.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">성훈이네 도시락</h3><span>옛날 학교에서 먹는 도시락이 생각나는 그 맛..!!</span></div>
-    </div>
-    </td>
-    
-    <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="http://www.mrbossam.co.kr/images/sub/menu8_1.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">섭씨네 도시락</h3><span>한끼 식사 든든히 섭씨네 보쌈 도시락</span></div>
-    </div>
-    </td>
-    
-    <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="https://dispatch.cdnser.be/wp-content/uploads/2018/12/20181218160830_main2.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">경천이네 도시락</h3><span>하나뿐인 소고기 도시락!!<br>부위별로 맛볼수 있는 도시락</span></div>
-    </div>
-    </td>
-   </tr> 
-   
-    <tr>
-  <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="http://tong.joins.com/wp-content/uploads/sites/3/2017/05/2017-05-25-11.01.25-1_resized_.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">재혁이네 도시락</h3><span>치킨메뉴가 위주인 도시락</span></div>
-    </div>
-    </td>
-    
-    <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="http://webzine.nfm.go.kr/wp-content/uploads/2019/04/1170x765_%EB%8F%84%EC%8B%9C%EB%9D%BD-%ED%99%95%EC%A0%95.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">성훈이네 도시락</h3><span>옛날 학교에서 먹는 도시락이 생각나는 그 맛..!!</span></div>
-    </div>
-    </td>
-    
-    <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="http://www.mrbossam.co.kr/images/sub/menu8_1.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">섭씨네 도시락</h3><span>한끼 식사 든든히 섭씨네 보쌈 도시락</span></div>
-    </div>
-    </td>
-    
-    <td>
-    <div class="gallery-item">
-      <div class="gallery-item-image">
-        <img src="https://dispatch.cdnser.be/wp-content/uploads/2018/12/20181218160830_main2.jpg" style="width:300px; height:300px;"></div>
-      <div class="gallery-item-description">
-        <h3 class="contest_title">경천이네 도시락</h3><span>하나뿐인 소고기 도시락!!<br>부위별로 맛볼수 있는 도시락</span></div>
-    </div>
-    </td>
-   </tr> 
-   
-    </table>
-  </form> -->
   
    <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
           
-             <div class="col-md-4">
+            <!--  <div class="col-md-4">
               <div class="card mb-4 box-shadow">
                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
                 src="http://www.siminsori.com/news/photo/201908/215448_64500_521.jpg" data-holder-rendered="true"> 
@@ -175,22 +90,41 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             
             <c:forEach var="l" items="${ list }">
              <div class="col-md-4">
               <div class="card mb-4 box-shadow">
+              
+              <c:if test="${ l.b_Src != null}">
                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
                 src="${l.b_Src }" data-holder-rendered="true"> 
+               </c:if>
+               
+                <c:if test="${ l.b_Src == null}">
+               <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" 
+                src="http://camstech.co.kr/core/image/board/noimage.gif" data-holder-rendered="true"> 
+               </c:if>
+               
                 <div class="card-body">
-                  <p class="card-text" href="">${ l.b_Title }</p><br>
+                  <p class="card-text">${ l.b_Title }</p><br>
+                  
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='lbotmdetail.do'">View</button>
+                    
+                    <c:url var="lbotmdetail" value="lbotmdetail.do">
+                      <c:param name="bNo" value="${ l.bNo }"/>	
+                      <c:param name="page" value="${ pi.currentPage }"/>
+                      <c:param name="userId" value="${ userId }"/>
+                    </c:url>  
+                      <!-- <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='lbotmdetail.do'">View</button> -->
+                      <a href="${ lbotmdetail }">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      </a>
                       <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                     </div>
-                    <small class="text-muted">닉네임 ${ l.b_Nickname }</small>
-                    <small class="text-muted">조회수 ${ l.b_Count }</small>
+                    <small class="text-muted"><a style="font-weight:bold;">닉네임</a>${ l.b_Nickname }</small>
+                    <small class="text-muted"><a style="font-weight:bold;">조회수</a>${ l.b_Count }</small>
                   </div>
                 </div>
               </div>
@@ -200,7 +134,22 @@
             
           </div>
         </div>
+        <!-- ############### 순서 버튼  ############### -->
+   <div class="pagination p7">
+      <ul style="margin-left:700px;">
+        <a class="is-active" href="#" style="text-decoration:none"><li>Previous</li></a>
+        <a href="#" style="text-decoration:none; color: #2ecc71;"><li>Next</li></a>
+      </ul>
+   </div>
+  	
+  <!-- ############### 글쓰기 버튼 ###############  --> 
+  <div class="container" id="btnwrite">
+ <button class="btn btn-danger" id="btnwrite1" onclick="location.href='lbotmWrite.do'">글쓰기</button> 
+  </div>
       </div> 
+      
+      <script>
+      </script>
       
       <%-- <div class="clear" style="height: 40px; background: white;"></div>
 	<div class="container">
@@ -276,22 +225,6 @@
 						</c:if>
 					</div>
 	</div> --%>
-  
-  <!-- ############### 순서 버튼  ############### -->
-   <div class="pagination p7">
-      <ul>
-        <a class="is-active" href="#" style="text-decoration:none"><li>Previous</li></a>
-        <a href="#" style="text-decoration:none; color: #2ecc71;"><li>Next</li></a>
-      </ul>
-    </div>
-  </div>
-  	
-  <!-- ############### 글쓰기 버튼 ###############  --> 
-  <div class="container" id="btnwrite">
- <button class="btn btn-danger" id="btnwrite1" onclick="location.href='lbotmWrite.do'">글쓰기</button> 
-  </div>
-  </div>
-</div>
 
 <!-- ##################### 풋터 부분 ##################### -->
 <c:import url="../footer/footer.jsp"/>
