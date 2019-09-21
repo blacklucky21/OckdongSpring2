@@ -12,6 +12,27 @@ public class PictureList {
 	private int p_Id; // 왜래키 상품 번호
 	private String pt_status;
 	private int pt_type; // 메인인지 구분
+	
+	public PictureList() {
+		super();
+	}
+	public PictureList(int pt_Id, String pt_realPath, String pt_name, String pt_realName, Date pt_createDate,
+			Date pt_updateDate, int p_Id, String pt_status, int pt_type) {
+		super();
+		this.pt_Id = pt_Id;
+		this.pt_realPath = pt_realPath;
+		this.pt_name = pt_name;
+		this.pt_realName = pt_realName;
+		this.pt_createDate = pt_createDate;
+		this.pt_updateDate = pt_updateDate;
+		this.p_Id = p_Id;
+		this.pt_status = pt_status;
+		this.pt_type = pt_type;
+	}
+	
+	
+	
+	
 	public int getPt_Id() {
 		return pt_Id;
 	}
@@ -68,22 +89,6 @@ public class PictureList {
 	}
 	
 	
-	public PictureList() {
-		super();
-	}
-	public PictureList(int pt_Id, String pt_realPath, String pt_name, String pt_realName, Date pt_createDate,
-			Date pt_updateDate, int p_Id, String pt_status, int pt_type) {
-		super();
-		this.pt_Id = pt_Id;
-		this.pt_realPath = pt_realPath;
-		this.pt_name = pt_name;
-		this.pt_realName = pt_realName;
-		this.pt_createDate = pt_createDate;
-		this.pt_updateDate = pt_updateDate;
-		this.p_Id = p_Id;
-		this.pt_status = pt_status;
-		this.pt_type = pt_type;
-	}
 	@Override
 	public String toString() {
 		return "PictureList [pt_Id=" + pt_Id + ", pt_realPath=" + pt_realPath + ", pt_name=" + pt_name

@@ -19,4 +19,8 @@ public interface lbotmService {
 
 	int lbotminsert(lbotm l);
 
+	int deletelbotm(int bNo);
+
+	int updatelbtom(lbotm l);
+
 }

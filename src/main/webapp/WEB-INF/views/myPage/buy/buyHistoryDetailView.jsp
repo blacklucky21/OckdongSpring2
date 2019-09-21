@@ -17,8 +17,7 @@
 			<th nowrap>주문자 전화번호</th>
 			<th style="width: 100px;" nowrap>주문상태</th>
 			<th nowrap>상품명</th>
-			<th nowrap>상품번호</th>
-			
+			<th nowrap>수량</th>
 			<th nowrap>배달주소</th>
 			<th nowrap>결제금액</th>
 			<th nowrap>기사에게 남길말</th>
@@ -27,12 +26,16 @@
 		</tr>
 		</thead>
 		<c:if test="${ !empty list }">	
+		<c:forEach var="buy" items="${ list2 }">
+		
+		
+	
 		<tbody>
 		<tr>
 			<td nowrap align="center">${ list.p_id }</td>
 			<td nowrap align="center">${ list.userid }</td>
 			<td nowrap align="center">${ list.payname }</td>
-			<td nowrap align="center">${ list.payphone }</td>
+			<td nowrap align="center">${ list.paycellphone }</td>
 			
 			<c:if test="${list.pstatus eq 'Y' }">
 				<td align="center">상품준비중</td> 
@@ -44,17 +47,19 @@
 				<td align="center">배송완료</td> 
 			</c:if>			
 			
-			<td nowrap align="center">${list.paytext }</td>
-			<td nowrap align="center">${list.p_num }</td>
+			<td nowrap align="center">${buy.pname }</td>
+			<td nowrap align="center">${buy.pamount }</td>
 			<td nowrap align="center">${list.payaddress }</td>
-			<td nowrap align="center">${list.payprice }</td>
+			<td nowrap align="center">${buy.pprice }</td>
 			<td nowrap align="center">${list.orderMemo }</td>
 			<td nowrap align="center">${list.paydate }</td>
 			<td nowrap align="center">${list.delivaryDate }</td>
 		</tr>
-		</tbody>		
+		</tbody>
+			</c:forEach>		
 		</c:if>
 		<tr>
+		
 		<c:if test="${ empty list }">
 		<tbody>
 			<tr>

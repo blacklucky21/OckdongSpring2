@@ -40,4 +40,14 @@ public class lbotmServicelmpl implements lbotmService {
 		return lbotmDAO.lbotminsert(l);
 	}
 
+	@Override
+	public int deletelbotm(int bNo) {
+		return lbotmDAO.deletelbotm(bNo);
+	}
+
+	@Override
+	public int updatelbtom(lbotm l) {
+		return lbotmDAO.updatelbotm(l);
+	}
+
 }

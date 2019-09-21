@@ -14,7 +14,6 @@
 		where p_STATUS = 'Y' and p_sell = 'Y'
 	</select>
 
-
 	<resultMap type="Product" id="ProductList">
 		<id property="p_Id" column ="P_ID"/>
 		<result property="p_name" column="P_NAME"/>
@@ -297,7 +296,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		<result property="qna_answer" column="QNA_ANSWER"/>
 		<result property="qna_secret" column="QNA_SECRET"/>
 		<result property="qna_answerDate" column="QNA_ANSWERDATE"/>	
-		<result property="answer_content" column="ANSWER_CONTENT"/>	
+		<result property="answer_content" column="ANSWER_CONTENT"/>
 		<result property="answer_Id" column="ANSWER_ID"/>	
 </resultMap>
 
@@ -312,20 +311,20 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 </select>
 
 <select id="adminSearchQnA" parameterType="string" resultMap="productQnaAdmin">
-	select *
-		  from 	PRODUCTQNA left join PRODUCT using(P_ID) left join PRODUCTANSWER using(QNA_ID)
-		 
-			where QNA_STATUS = 'Y'
-    	 
-	<choose>
-		<when test="type.equals('답변대기')">
-			and QNA_ANSWER = 'N'
-		</when>
-		<when test="type.equals('답변완료')">
-			and QNA_ANSWER = 'Y'
-		</when>
-	</choose>
-	order by QNA_ID desc 
+   select *
+        from    PRODUCTQNA left join PRODUCT using(P_ID) left join PRODUCTANSWER using(QNA_ID)
+       
+         where QNA_STATUS = 'Y'
+        
+   <choose>
+      <when test="type.equals('답변대기')">
+         and QNA_ANSWER = 'N'
+      </when>
+      <when test="type.equals('답변완료')">
+         and QNA_ANSWER = 'Y'
+      </when>
+   </choose>
+   order by QNA_ID desc 
 </select>
 
 
@@ -333,7 +332,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 <update id="updateQna">
 	update PRODUCTQNA
 		set QNA_CONTENT = #{qna_content}, QNA_SECRET = #{qna_secret}
-		where QNA_ID = #{qna_Id}
+		where QNA_ID = ${qna_Id}
 
 </update>
 
@@ -358,7 +357,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 
 
 <select id="selectAnswer2" resultType="ProductAnswer">
-	select qna_id, qna_user, pq.qna_createdate, pq.qna_content, answer_content, answer_createdate, answer_id
+	select qna_id, qna_user, pq.qna_createdate, pq.qna_content, answer_content, answer_createdate,answer_id
 	from PRODUCTANSWER
 	    left join PRODUCT p using(P_ID)
 	    join productqna pq using(qna_id)
@@ -373,7 +372,21 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 	
 </update>
 
+<!-- <<<<<<<<<  -->
+<update id="updateMainPicture" parameterType="map">
+	update picturelist
+	set PT_NAME = #{titleName}, PT_REALNAME = #{realName}
+	where PT_NAME = #{oldName}
+</update>
 
+<insert id="insertMainPicture" parameterType="PictureList">
+	insert into picturelist values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,#{p_Id}, DEFAULT, 1)
+</insert>
+
+<delete id="deletePicture" parameterType="string">
+	delete from picturelist where PT_NAME = #{sub_name}
+</delete>
+<!-- ============= -->
 <delete id="deleteAnswer">
 	DELETE from PRODUCTANSWER
 	WHERE  ANSWER_ID = #{answer_Id}
@@ -391,7 +404,6 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		where ANSWER_ID = #{answer_Id}
 
 </update>
-
 
 
 </mapper>

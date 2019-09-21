@@ -3,11 +3,13 @@ package com.junwo.ockdong.lbotm.model.dao;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.junwo.ockdong.common.PageInfo;
+import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.notice.model.vo.Notice;
 
@@ -38,5 +40,17 @@ public class lbotmDAO {
 	
 	public int lbotminsert(lbotm l) {
 		return sqlSession.insert("lbotmMapper.lbotminsert", l);
+	}
+
+	public int deletelbotm(int bNo) {
+		return sqlSession.update("lbotmMapper.deletelbotm", bNo);
+	}
+	
+	public lbotm updatelbotmPage(int bNo) {
+		return sqlSession.selectOne("lbotmMapper.updatelbtomPage", bNo);
+	}
+
+	public int updatelbotm(lbotm l) {
+		return sqlSession.update("lbotmMapper.updatelbotm", l) ;
 	}
 }

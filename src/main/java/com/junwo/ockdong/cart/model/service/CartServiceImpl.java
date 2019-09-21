@@ -176,6 +176,12 @@ public class CartServiceImpl implements CartService{
 		return cDAO.selectBuyList(modal);
 	}
 
+	@Override
+	public int UpdateCartCount(Cart list) {
+		// TODO Auto-generated method stub
+		return cDAO.UpdateCartCount(list);
+	}
+
 
 
 
