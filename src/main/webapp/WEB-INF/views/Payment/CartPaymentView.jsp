@@ -122,6 +122,7 @@
 					
                     <tr>
                         <td class="gi this-product">
+                             <input type="hidden" name="p_id" value="${c.p_id }">
                         	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
                             <span><a href="../goods/goods_view.php?goodsNo=1000000107"><img src="${c.c_img }" width="90" alt="사진" title="사진" class="middle"></a></span>
@@ -654,7 +655,7 @@ $('.order-buy').click(function(){
 	var totalAmount = parseInt($('#finalTotalPrice').text());
 	$('.paytext').val(payText);
 	
-	 //CallPayRequest();
+	 CallPayRequest();
 	if($('.require').prop("checked")){
 		
 
@@ -740,7 +741,7 @@ function CallPayRequest(){
 	if('${list}' !=""){
 
 	
-	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice
+	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice;
 	
 	form.submit();
 	}else{

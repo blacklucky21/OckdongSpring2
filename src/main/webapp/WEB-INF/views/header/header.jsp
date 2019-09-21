@@ -106,8 +106,8 @@
 	<!-- 회원가입 포인트 -->	
 	</li>
 
-	<li><a href="CartView.do">CART</a></li>
-	<li><a href="../mypage/order_list.php">ORDER</a></li>
+	<li><a href="loginView.me">CART</a></li>
+
 </c:if>
 
 <!-- 로그인 상태 -->
@@ -118,7 +118,7 @@
 		<li><a href="CartView.do">CART</a></li>
 		<li><a href="">ORDER</a></li>
 		<li><a href="logout.me">log out</a><li>
-		<li><a href="adminhome.do">ad page</a></li>				
+		<li><a href="goAdmin.Page">ad page</a></li>				
 		</c:when>
 		<c:otherwise>
 		

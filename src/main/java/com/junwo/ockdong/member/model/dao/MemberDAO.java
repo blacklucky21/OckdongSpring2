@@ -127,6 +127,10 @@ public class MemberDAO {
 	public int getPaymentList(String userId) {
 		return sqlSession.selectOne("memberMapper.getPaymentList", userId);
 	}
+	
+	public Payment myPaymentDetailList(String p_id) {
+		return sqlSession.selectOne("memberMapper.myPaymentDetailList", p_id);
+	}
 
 	public int getMyBoardList(String userId) {
 		return sqlSession.selectOne("memberMapper.getMyBoardList", userId);
@@ -141,6 +145,12 @@ public class MemberDAO {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("memberMapper.selectQnAList", pi.getUserId(), rowBounds);
 	}
+
+	public lbotm myBoardDetailView(int bNo) {
+		return sqlSession.selectOne("memberMapper.myBoardDetailView", bNo);
+	}
+
+	
 		
 }
 

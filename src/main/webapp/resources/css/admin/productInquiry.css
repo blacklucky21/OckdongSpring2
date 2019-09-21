@@ -404,4 +404,16 @@ table.ncp_tbl {
 
 
 
+.reply_save_btn, .reply_save_btn{
+	
+border: 1px solid #dadada;
+    background: #fff;
+    color: #595959;
+    text-align: center;
+    padding: 5px 8px;
+    border-radius: 0;
+    font-size: 12px;
+    font-weight: normal;
+    outline: none;
+}
 
