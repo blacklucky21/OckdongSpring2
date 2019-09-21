@@ -403,6 +403,12 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		where ANSWER_ID = #{answer_Id}
 
 </update>
+<update id="updateProducts">
+	update PRODUCT
+		set P_NAME = #{p_name}, P_CONTENT = #{p_content} , P_UPDATEDATE = sysdate, P_QUANTITY = #{p_quantity} , P_LUNCHTYPE = #{p_lunchtype}, P_PRICE = #{p_price}
+		where  P_ID = #{p_Id}            
+</update>
+
 
 
 </mapper>

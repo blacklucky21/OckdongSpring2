@@ -265,6 +265,11 @@ public class ProductServiceImpl implements ProductService{
 
 	}
 
+	@Override
+	public int updateProducts(Product p) {
+		return pDAO.updateProducts(p);
+	}
+
 
 	
 

@@ -93,6 +93,7 @@ public interface ProductService {
 	int deleteAnswer(ProductAnswer pa); // 답글 삭제
 	void updateQnaType2(ProductQna pq); // 답글 삭제시 답변 여부 다시 변경
 	int AnswerUpdate(ProductAnswer pa); // 답변 수정
+	int updateProducts(Product p); // 상품 변경
 
 	
 	
