@@ -199,6 +199,7 @@ public class ProductDAO {
 	public ArrayList<ProductQna> selectQnaList(int p_Id) {
 		return (ArrayList)sqlSession.selectList("productMapper.selectQnaList" , p_Id);
 	}
+	
 
 	// qna 삭제
 	public int deleteQna(ProductQna pq) {

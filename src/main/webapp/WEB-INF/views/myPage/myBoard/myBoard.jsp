@@ -15,6 +15,7 @@
 	#tb th, #tb td{ vertical-align: middle;} 
 	/* #tb tr td{width: auto; overflow: hidden;} */
 	#tb thead tr th{width: 100px;}
+	
 	/* #tb tbody tr td{width: 100px;} */
 	#buttonTab{border-left: hidden; border-right: hidden;}
 </style>
@@ -85,6 +86,8 @@
 					</c:if>
 				</c:forEach>
 				
+				
+				
 				<!-- 다음 -->
 				<c:if test="${ pi.currentPage >=  pi.maxPage }">
 					[다음]
@@ -101,7 +104,8 @@
 	<script type="text/javascript">
 		$(".myBoardDetailView").click(function() {
 			var bNo = $(this).attr("id");			
-			window.open("myBoardDetailView.me?bNo="+bNo,"Gooooood","width=1900, height=300");			
+			/* window.open("myBoardDetailView.me?bNo="+bNo,"Gooooood","width=1900, height=300"); */			
+			location.href="lbotmdetail.do?bNo="+bNo;
 		})
 	</script>
 </body>

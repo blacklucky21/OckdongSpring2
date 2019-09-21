@@ -1,5 +1,6 @@
 package com.junwo.ockdong.member.controller;
 
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -297,24 +298,23 @@ public class MemberController {
 		
 		return mv;
 	}
-	// 내가 쓴 게시물 디테일 뷰
-	@RequestMapping("myBoardDetailView.me")
-	public ModelAndView myBoardDetailView(@ModelAttribute("initPayment") lbotm lBotm, 
-										  ModelAndView mv,
-										  HttpSession session) {
-
-
-		lbotm BoardDetail = mService.myBoardDetailView(lBotm.getbNo());
-
-		if (BoardDetail != null) {
-			mv.addObject("list", BoardDetail);
-			mv.setViewName("myPage/myBoard/myBoardDetailView");
-		} else {
-			throw new NoticeException("게시글 조회에 실패 하였습니다.");
-		}
-
-		return mv;
-	}
+	
+	/*
+	 * // 내가 쓴 게시물 디테일 뷰
+	 * 
+	 * @RequestMapping("myBoardDetailView.me") public ModelAndView
+	 * myBoardDetailView(@ModelAttribute("initPayment") lbotm lBotm, ModelAndView
+	 * mv, HttpSession session) {
+	 * 
+	 * 
+	 * lbotm BoardDetail = mService.myBoardDetailView(lBotm.getbNo());
+	 * 
+	 * if (BoardDetail != null) { mv.addObject("list", BoardDetail);
+	 * mv.setViewName("myPage/myBoard/myBoardDetailView"); } else { throw new
+	 * NoticeException("게시글 조회에 실패 하였습니다."); }
+	 * 
+	 * return mv; }
+	 */
 	
 	// 상품문의 화면 이동
 	@RequestMapping("reviewListView.bo")
@@ -343,6 +343,24 @@ public class MemberController {
 		}
 		
 		
+		return mv;
+	}
+	// 문의내역 디테일 뷰
+	@RequestMapping("myQnaDetailView.me")
+	public ModelAndView myQnaDetailView(@ModelAttribute("initPayment") ProductQna qna, 
+										  ModelAndView mv,
+										  HttpSession session) {
+
+
+		ProductQna QnaDetail = mService.myQnaDetailView(qna.getQna_Id());
+
+		if (QnaDetail != null) {
+			mv.addObject("list", QnaDetail);
+			mv.setViewName("myPage/productQnA/myQnaDetailView");
+		} else {
+			throw new NoticeException("게시글 조회에 실패 하였습니다.");
+		}
+
 		return mv;
 	}
 	

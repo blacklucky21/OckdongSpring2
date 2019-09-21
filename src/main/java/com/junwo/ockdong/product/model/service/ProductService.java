@@ -74,6 +74,7 @@ public interface ProductService {
 	ArrayList<Product> selectList2(PageInfo pi);
 	ArrayList<Product> selectList3(PageInfo pi);
 	
+	
 	int insertQna(ProductQna pq); // 문의글 생성
 	ArrayList<ProductQna> selectQnaList(int p_Id); // 리스트 호출
 	int deleteQna(ProductQna pq); // 삭제

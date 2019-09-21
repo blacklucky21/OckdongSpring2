@@ -35,9 +35,9 @@
 		<!-- <a href="main.do"><img class="image"
 			src="resources/img/mainlogo.png" id="logo" align="center"></a> -->
 		<form id="joinForm" name="joinForm" action="memberJoin.me" method="post" onsubmit="return validate();">
-			<!-- <span class="join-form">
+			<span class="join-form">
 				<fieldset id="fds-order-info">
-					<legend></legend> -->
+					<legend></legend>
 					<h3 align="center" style="font-size: 35px;">회원 가입</h3>
 					<div class="table1 orderplz">
 						<table>
@@ -46,35 +46,57 @@
 								<col>
 							</colgroup>
 							<tbody>
+							
 								<tr>
 									<th class="ta-l required" aria-required="true">ID</th>
 									<td>
-										<input type="text" maxlength="13" name="userId" id="userId" class="text" placeholder="띄어쓰기 없이  6-12자">
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" name="userId" id="userId" class="text" placeholder="띄어쓰기 없이  6-12자">
+										</div>
 									</td>
 									<!-- ajax -->
-									<td width="150px" style="padding-left: 10px">
-										<span class="guide ok">이 아이디는 사용 가능합니다.</span>
-										<span class="guide error">이 아이디는 사용 불가능합니다.</span>
-										<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
+									<td width="270px" style="padding-left: 10px">
+										<div class="txt-field-id hs" style="width: 200px;">
+											<span class="guide ok">이 아이디는 사용 가능합니다.</span>
+											<span class="guide error">이 아이디는 사용 불가능합니다.</span>
+												<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
+										</div>
 									</td>
 								</tr>
 								<tr>
 									<th height="40px">비밀번호</th>
-									<td><input type="password" maxlength="13" id="password" name="password" class="text" placeholder="영문+숫자  조합으로 6-12자 "></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="password" maxlength="13" id="password" name="password" class="text" placeholder="영문+숫자  조합으로 6-12자 ">
+										</div>
+									</td>
 									<td></td>
 								</tr>
 								<tr>
 									<th height="40px">비밀번호 확인</th>
-									<td><input type="password" maxlength="13" id="password2" name="password2" class="text"></td>
-									<td><label id="pwdResult"></label></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="password" maxlength="13" id="password2" name="password2" class="text">
+										</div>
+									</td>
+									<td></td>
 								</tr>
 								<tr>
 									<th width="120px" height="40px" float="left">이름</th>
-									<td><input type="text" maxlength="13" name="userName" id="userName" class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" maxlength="13" name="userName" id="userName" class="text">
+										</div>
+									</td>
+									<td></td>
 								</tr>
 								<tr>
 									<th width="120px" height="40px" float="left">닉네임</th>
-									<td><input type="text" maxlength="13" name="nickName" id="nickName" class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" maxlength="13" name="nickName" id="nickName" class="text">
+										</div>
+									</td>
 									<!-- ajax -->
 									<td width="150px" style="padding-left: 10px">
 										<span class="guideNick nickOk">이 닉네임은 사용 가능합니다.</span>
@@ -84,16 +106,29 @@
 								</tr>
 								<tr>
 									<th height="40px">휴대폰 번호</th>
-									<td><input type="text" maxlength="11" id="phone" name="phone" style="width: 200px" class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" id="phone" name="phone" style="width: 200px" class="text">
+										</div>
+									</td>
+									<td></td>
 								</tr>
 								<tr>
 									<th height="40px">이메일</th>
-									<td><input type="email" id="email" name="email" class="text" placeholder="example@naver.com"></td>
-									<td width="150px" style="padding-left: 10px"><span id="validEmail"></span></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="email" id="email" name="email" class="text" placeholder="example@naver.com">
+										</div>
+									</td>
+									<td width="270px" style="padding-left: 10px"><span id="validEmail"></span></td>
 								</tr>
 								<tr>
 									<th height="40px">우편번호</th>
-									<td><input type="text" name="post" id="post" class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" name="post" id="post" class="text">
+										</div>
+									</td>
 									<td style="padding-left: 10px">
 										<div id="ckZip" style="display: table-cell; vertical-align: middle;" onclick="searchAdd()">
 											<input type="button" class="bu" value="검색" />
@@ -102,20 +137,29 @@
 								</tr>
 								<tr>
 									<th height="40px">주소</th>
-									<td><input type="text" name="address2" id="address2"
-										class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" name="address2" id="address2" class="text">
+										</div>
+									</td>
 									<td></td>
 								</tr>
 								<tr>
 									<th height="40px">주소</th>
-									<td><input type="text" name="address3" id="address3"
-										class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" name="address3" id="address3" class="text">
+										</div>
+									</td>
 									<td></td>
 								</tr>
 								<tr>
 									<th height="40px">상세주소</th>
-									<td><input type="text" name="address4" id="address4"
-										class="text"></td>
+									<td>
+										<div class="txt-field-id hs" style="width: 200px;">
+											<input type="text" name="address4" id="address4" class="text">
+										</div>
+									</td>
 									<td></td>
 								</tr>
 							</tbody>
@@ -132,7 +176,7 @@
 							$(function() {
 								$('#userId').on("keyup", function() {
 									var userId = $(this).val().trim();
-									if(userId.length < 6){
+									if(userId.length < 2){
 										$(".guide").hide();
 										$("#idDuplicateCheck").val(0);
 										
@@ -168,7 +212,7 @@
 							$(function() {
 								$('#nickName').on("keyup", function() {
 									var nickName = $(this).val().trim();
-									if(nickName.length < 6){
+									if(nickName.length < 2){
 										$(".guideNick").hide();
 										$("#nickDuplicateCheck").val(0);
 										

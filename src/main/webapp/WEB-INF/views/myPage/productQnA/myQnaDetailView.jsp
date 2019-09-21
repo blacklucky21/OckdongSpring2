@@ -7,10 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		alert("입력하신 정보가 틀립니다. 다시 입력해주세요.");
-		location.href = "<%=request.getContextPath() %>/views/common/loginJoinForm/findPass.jsp";
-	</script>
-	
+
+
 </body>
 </html>

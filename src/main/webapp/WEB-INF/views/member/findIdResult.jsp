@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <style>
 	.image {
+	
 		width: 600px;
 		height: auto;
 	}

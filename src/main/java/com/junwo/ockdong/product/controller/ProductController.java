@@ -313,7 +313,7 @@ public class ProductController {
 			System.out.println("컨트롤러 사진 정보 : " + pt.get(i).toString());
 		}
 
-		System.out.println("수정 디테일 갈대 기존 값 : " + p);
+		System.out.println("수정 디테일 갈대 기존 값  이건가?: " + p);
 		mv.addObject("p", p);
 		mv.addObject("pt", pt);
 		mv.setViewName("admin/products/productDetail");
@@ -729,6 +729,7 @@ public class ProductController {
 		
 	}
 	
+	
 	//qna 리스트 호출
 	@RequestMapping("qnaList.do")
 	public void getQnaList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
@@ -737,7 +738,8 @@ public class ProductController {
 		for(ProductQna pq : pqList) {
 			pq.setQna_user(URLEncoder.encode(pq.getQna_user(),"utf-8"));
 			pq.setQna_content(URLEncoder.encode(pq.getQna_content(),"utf-8"));
-			
+			/* pq.setAnswer_content(URLEncoder.encode(pq.getAnswer_content(),"utf-8")); */
+			System.out.println("상품 문의 리스트 호출 해 온다 : "+ pq);
 		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		gson.toJson(pqList, response.getWriter());

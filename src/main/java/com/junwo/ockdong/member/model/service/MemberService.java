@@ -13,7 +13,6 @@ public interface MemberService {
 
 	int memberJoin(Member m);
 
-
 	
 	Member memberLogin(Member m);
 
@@ -99,6 +98,7 @@ public interface MemberService {
 	boolean send(String subject, String string, String string2, String email);
 
 
+	
 
 	int getPaymentList(String userId);
 
@@ -118,6 +118,10 @@ public interface MemberService {
 
 
 
-	lbotm myBoardDetailView(int bNo);
+	//lbotm myBoardDetailView(int bNo);
+
+
+
+	ProductQna myQnaDetailView(int qna_Id);
 
 }

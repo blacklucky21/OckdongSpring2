@@ -189,6 +189,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	// qna 댓글 리스트 호출
+	
 	@Override
 	public ArrayList<ProductQna> selectQnaList(int p_Id) {
 		return pDAO.selectQnaList(p_Id);

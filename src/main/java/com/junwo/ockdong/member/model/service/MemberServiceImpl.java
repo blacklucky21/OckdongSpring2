@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO;
 	
+	
 	@Autowired
 	JavaMailSender mailSender;
 	
@@ -199,10 +200,11 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.myPaymentDetailList(p_id);
 	}
 
-	@Override
-	public lbotm myBoardDetailView(int bNo) {
-		return mDAO.myBoardDetailView(bNo);
-	}
+	
+	/*
+	 * @Override public lbotm myBoardDetailView(int bNo) { return
+	 * mDAO.myBoardDetailView(bNo); }
+	 */
 
 	@Override
 	public int getMyBoardList(String userId) {
@@ -219,6 +221,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<ProductQna> selectQnAList(PageInfo pi) {
 		return mDAO.selectQnAList(pi);
+	}
+
+
+	@Override
+	public ProductQna myQnaDetailView(int qna_Id) {
+		return mDAO.myQnaDetailView(qna_Id);
 	}
 
 

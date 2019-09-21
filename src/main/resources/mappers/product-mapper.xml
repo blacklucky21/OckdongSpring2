@@ -118,7 +118,7 @@
 <!-- 업데이트 사진 정보 가지고 가기 -->
 <select id="updateProduct" parameterType="_int" resultMap="ProductList">
 	select *
-	from PRODUCT
+	from PRODUCT 
 	where P_ID = #{p_Id}
 </select>
 
@@ -265,7 +265,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 
 
 <!-- qna 리스트 호출 -->
-<select id="selectQnaList" parameterType="_int" resultType="ProductQna">
+<select id="selectQnaList" parameterType="_int" resultMap="productQnaAdmin">
 	select *
 	from (select *
 		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
@@ -299,6 +299,7 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		<result property="answer_content" column="ANSWER_CONTENT"/>
 		<result property="answer_Id" column="ANSWER_ID"/>	
 </resultMap>
+
 
 <!-- 관리자 QnA 리스트 쿼리 -->
 <select id="QnaAdminList" resultMap="productQnaAdmin">
