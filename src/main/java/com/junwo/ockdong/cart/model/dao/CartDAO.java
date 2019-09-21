@@ -172,6 +172,12 @@ public class CartDAO {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("cartMapper.selectBuyList",modal);
 	}
+
+
+	public int UpdateCartCount(Cart c) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("cartMapper.UpdateProductCount",c);
+	}
 	
 
 
