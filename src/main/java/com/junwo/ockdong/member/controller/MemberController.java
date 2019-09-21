@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junwo.ockdong.cart.model.service.CartService;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
@@ -36,7 +38,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
-	
+	@Autowired
+	private CartService CartService;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -252,11 +255,12 @@ public class MemberController {
 		
 		
 		System.out.println(payment.getP_id());
-		
+		String val = payment.getP_id();
 		Payment paymentDetail = mService.myPaymentDetailList(payment.getP_id());	
-	
+		ArrayList<PayProduct> list = CartService.selectBuyList(val);
 		if(paymentDetail != null) {
 			mv.addObject("list", paymentDetail);
+			mv.addObject("list2", list);
 			mv.setViewName("myPage/buy/buyHistoryDetailView");
 		} else {
 			throw new NoticeException("구매내역 조회에 실패 하였습니다.");
