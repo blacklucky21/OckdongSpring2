@@ -23,7 +23,7 @@
 	
 	<c:set var="pa" value="${list }"/>
 	<c:set var="pc" value="${PayProduct }"/>
-	<form action="PaymentResultList.do" method="post" id="insertPaymentAbout">
+	<form action="PaymentResultList.do" method="post" id="insertPaymentAbout"  >
 	<div class="content" style="width:100%; text-align:center">
 
 	<div class="area_right">
@@ -86,7 +86,7 @@
 							<label for="agree-private"><input type="checkbox" class="require" id="agree-private" name="agree_private" value="Y">상기
 								결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
 						</p>
-						<input type="hidden" name="paytext" class="paytext">
+						
 						<input type="button" value="결제하기" class="btn_pay order-buy">
 					</div>
 				</div>
@@ -118,10 +118,12 @@
                     <tbody>
                     
                     <c:if test="${list ne null }">
+                     <input type="hidden" name="paytext" class="paytext">
 					<c:forEach var="c" items="${list }" varStatus="cart">
 					
                     <tr>
                         <td class="gi this-product">
+                       
                              <input type="hidden" name="p_id" value="${c.p_id }">
                         	<input type="hidden" name="cNo" value='${c.cNo }'>
                             <input type="hidden" name="cartSno[]" value="16">
@@ -156,15 +158,15 @@
                         <strong class="price totalAmount" >${c.cPrice *c.cAmount }</strong><strong class="price">원</strong>
                         </td>
                         
-                        
-                        <td rowspan="1" class="ta-c">
+                          <c:if test="${cart.count== 1}">
+                        <td rowspan="${list.size() }" class="ta-c">
                         <span class="c-gray delivaryAmount">
                             기본 - 금액별배송비<br>
                            2500원
                         </span> <br>  <span style="font-size:11px;">2만원 이상 주문시<br> 
 																	 배송비 무료!</span> 
                                      </td>
-                                     
+                                     </c:if>
                                    
                     </tr>
 
@@ -267,10 +269,10 @@
                             </colgroup>
                             <tbody>
                             <tr>
-                                <th class="ta-l required" aria-required="true">주문하시는 분</th>
+                                <th class="ta-l required"  >주문하시는 분</th>
                                 <td>
                                     <div class="txt-field hs text" style="width:160px;">
-                                        <input type="text" name="payname" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text">
+                                        <input type="text" name="payname" value="${m.userName }" data-pattern="gdEngKor" maxlength="20" class="text" required>
                                     </div>
                                 </td>
                             </tr>
@@ -283,15 +285,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="ta-l required" aria-required="true">휴대폰 번호</th>
+                                <th class="ta-l required"  >휴대폰 번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="mobileNum" name="paycellphone" value="${m.phone}" maxlength="20" class="text">
+                                        <input type="text" id="mobileNum" name="paycellphone" value="${m.phone}" maxlength="20" class="text" required>
                                     </span>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="ta-l required" aria-required="true">이메일</th>
+                                <th class="ta-l required"  >이메일</th>
                                 <td>
                                     <div class="email" style="display:inline">
                                         <span class="txt-field hs" style="width:160px;">
@@ -353,19 +355,19 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="ta-l required" aria-required="true">받으실분</th>
+                                <th class="ta-l required"   >받으실분</th>
                                 <td>
                                     <div class="txt-field hs" style="width:160px;">
-                                        <input type="text" name="receiverName" value="${m.userName}" data-pattern="gdEngKor" maxlength="20" class="text">
+                                        <input type="text" name="receiverName" value="${m.userName}" data-pattern="gdEngKor" maxlength="20" class="text " required>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="ta-l required" aria-required="true">받으실 곳</th>
+                                <th class="ta-l required"  >받으실 곳</th>
                                 <td>
                                     <div class="post" style="width:auto; display:flex">
                                         <div class="txt-field hs" style="width:100px;">
-                                            <input type="text" name="receiverZonecode" id="receiverZonecode" placeholder="우편번호"value="${m.address}" readonly="readonly" style="width:80px; " class="text" >
+                                            <input type="text" name="receiverZonecode" id="receiverZonecode" placeholder="우편번호"value="${m.address}" readonly="readonly" style="width:80px; " class="text" required>
                                             <input type="hidden" name="receiverZipcode" value="">
                                             <span id="receiverZipcodeText" class="text" ></span>
                                                
@@ -374,10 +376,10 @@
                                     </div>
                                     <div class="sa">
                                         <span class="txt-field hs" style="width:400px;">
-                                            <input type="text" name="receiverAddress" id="receiverAddress" value="" readonly="readonly" placeholder="기본주소"class="text">
+                                            <input type="text" name="receiverAddress" id="receiverAddress" value="" readonly="readonly" placeholder="기본주소"class="text" required>
                                         </span>
                                         <span class="txt-field hs" style="width:300px;">
-                                            <input type="text" name="receiverAddressSub" value="" class="text receiverAddressSub" placeholder="상세주소">
+                                            <input type="text" name="receiverAddressSub" value="" class="text receiverAddressSub" placeholder="상세주소" required>
                                         </span>
                                     </div>
                                 </td>
@@ -391,10 +393,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="ta-l required" aria-required="true">휴대폰 번호</th>
+                                <th class="ta-l required"  >휴대폰 번호</th>
                                 <td>
                                     <span class="txt-field hs" style="width:160px;">
-                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" value="${m.phone }" class="text">
+                                        <input type="text" id="receiverCellPhone" name="receiverCellPhone" value="${m.phone }" class="text" required>
                                     </span>
                                 </td>
                             </tr>
@@ -410,8 +412,8 @@
                                 <th class="ta-l">배송 날짜 선택</th>
                                 <td>
                                     <span class="form-element">
-                                  		<input type="date" class="delivaryDate" id="delivaryDate" name="">
-                                  		<input type="time" class="delivaryTime" id="delivaryTime" name="delivaryTime" value="13:00">
+                                  		<input type="date" class="delivaryDate" id="delivaryDate" name="" required>
+                                  		<input type="time" class="delivaryTime" id="delivaryTime" name="delivaryTime" value="13:00" required>
                                     </span>
                                 </td>
                             </tr>
@@ -644,6 +646,7 @@ $('.order-buy').click(function(){
 	if('${pc}' !=""){
 		payText = '${pc.cName}';
 		
+		
 	}else{
 		payText = '${pa.get(0).cName}'		
 	}
@@ -651,9 +654,10 @@ $('.order-buy').click(function(){
 	if(count>=1){
 		
 		payText =  '${pa.get(0).cName}'+ ' 외 '+count +'개 ';
+		$('.paytext').val(payText);
 	}
 	var totalAmount = parseInt($('#finalTotalPrice').text());
-	$('.paytext').val(payText);
+
 	
 	 CallPayRequest();
 	if($('.require').prop("checked")){
@@ -683,7 +687,7 @@ $('.order-buy').click(function(){
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		    
 		    	
-		    	CallPayRequest();
+		    	//CallPayRequest();
 		        
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
@@ -742,15 +746,19 @@ function CallPayRequest(){
 
 	
 	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice;
-	
-	form.submit();
+	 
+		 form.submit();
+		 
+
 	}else{
 		
 		
 			
 			form.action ="PaymentResultProduct.do?total="+totalPrice;
 			
-			form.submit();
+		
+				 form.submit();
+				
 	}
 }
 

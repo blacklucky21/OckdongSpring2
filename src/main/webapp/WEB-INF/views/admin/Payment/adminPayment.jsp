@@ -180,7 +180,7 @@
                         <th style="text-align:center">상품</th>
                         <th style="text-align:center">수량</th>
                         <th nowrap style="text-align:center">상품금액</th>
-                        <th style="text-align:center">결제총액</th>
+                        <th style="text-align:center">상품합계</th>
                      
                     </tr>
                     </thead>
@@ -260,8 +260,6 @@ $('.modalm').click(function(){
         	var append ="";
         	for(var i in modal){
         		var div = $('.shit');
-        	
-        		
         		append +='<tr>';
         		append +='<span>';
         		append +='<td>';
@@ -274,7 +272,7 @@ $('.modalm').click(function(){
         		append += '</td>';
         		append += '<td class="ta-c count this-product">'+modal[i].pamount+' </td>';
         		append += '<td class="ta-c this-product"><strong class="price">'+modal[i].pprice+'</strong>  </td>';
-        		append += '<td class="ta-c"><strong class="price totalAmount">'+modal[i].totalprice+'</strong><strong class="price"></strong></td>';
+        		append += '<td class="ta-c"><strong class="price totalAmount">'+modal[i].pamount*modal[i].pprice+'</strong><strong class="price"></strong></td>';
         		append += '</tr>';
         		
         	}

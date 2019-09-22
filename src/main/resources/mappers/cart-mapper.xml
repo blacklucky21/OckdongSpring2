@@ -58,10 +58,9 @@ where userid = #{loginUserId} -->
 	
 	<select id="insertPayment" parameterType="map">
 	
-	
 INSERT INTO PAYMENT_PRODUCT( PNO,PPNO,PNAME,PAMOUNT,PPRICE,PCREATEDATE,ID,TOTALPRICE,P_IMG)
-SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}||seq_payProduct.currval</foreach> AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
-
+SELECT SEQ_PRODUCT.NEXTVAL AS PNO,<foreach collection="hitPno" item ="hit" index="index">#{hit}||seq_payProduct.currval</foreach> 
+AS PPNO,CNAME,CAMOUNT,CPRICE,SYSDATE AS PCREATEDATE ,ID,
 <foreach collection="total" item ="tt" index="index">#{tt}</foreach>
  AS TOTALPRICE,C_IMG
 FROM CART

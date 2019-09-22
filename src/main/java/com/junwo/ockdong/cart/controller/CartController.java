@@ -161,36 +161,7 @@ public class CartController {
 		String pdate = sfmt.format(now);
 		String PayNum ;
 		
-		//int reg = CartService.checkNum();
-		  //		System.out.println(reg);
-//		String[] arrList = list.split("cart ");
-//		String[] realList = new String[arrList.length-1];
-//		
-//		System.out.println("===============================================");
-//		for(int i = 1; i< arrList.length; i++) {
-//			System.out.println(arrList[i].split(","));
-//			
-//		}
-//		System.out.println("===============================================");
-//		
-//		for(int i = 0; i < realList.length; i++) {
-//			realList[i] = arrList[i + 1];
-//		}
-	
-		
-	
-//		System.out.println("dd" + m.getUserId());
 
-//		System.out.println("커트" + list);
-
-		/*
-		 * if (list != null) { mv.addObject("list", list); mv.addObject("member", m);
-		 * mv.setViewName("Payment/PaymentResultView");
-		 * 
-		 * } else {
-		 * 
-		 * }
-		 */
 		for(int i=0;i<total.length;i++) {
 			System.out.println(total[i]);
 			System.out.println("dddd");
