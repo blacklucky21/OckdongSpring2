@@ -193,6 +193,7 @@
 				<div class="buttons">
 					<input class="myOwnInsertBtn" type="submit" onclick="return validate();" value="결제하기" style="width: 100px; height: 50px;" />
 					<input class="recipeUpdateBtn" type="button" value="수정하기" style="width: 100px; height: 50px;" />
+					<input class="recipeDeleteBtn" type="button" value="삭제하기" style="width: 100px; height: 50px;" />
 					<input class="myOwnBackBtn" type="button" value="뒤로가기" style="width: 100px; height: 50px;" />
 				</div>
 				<br clear="all">
@@ -217,6 +218,11 @@
 				location.href="recipeUpdate.do?mblId="+mblId + "&fileName=" + fileName;
 			});
 		});
+		$(function(){
+			$(".recipeDeleteBtn").click(function(){
+				location.href="recipeDelete.do?mblId="+mblId;
+			});
+		})
 	</script>
 </body>
 </html>

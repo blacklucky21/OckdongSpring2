@@ -545,24 +545,6 @@ table, tr, td {
 		            	
 		            	$("#formChange").attr("action", "imageCreate.do");
 		            	$(".myOwnInsertBtn").click();
-		            	
-		            	/* $.ajax({
-		            		type : "post",
-		            		data : {imgSrc: imgSrc},
-		            		url : "imageCreate.do",
-		            		success: function(data){
-		            			console.log("성공");
-		            		}, error: function(error){
-		            			console.log("실패");
-		            		}
-		            	}); */
-		            	
- 		            	// getCanvas = canvas; // 주석
-		            	// upload(); // 주석
-		                /* canvas.toBlob(function(blob) {
-		                	console.log(blob);
-		                    saveAs(blob, 'image.png');
-		                }); */
 		            }
 		        });
 		   	});
