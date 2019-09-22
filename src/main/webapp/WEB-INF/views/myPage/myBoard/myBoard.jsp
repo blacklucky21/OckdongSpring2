@@ -43,6 +43,7 @@
 			</td>
 			<td align="center">${ b.b_Title }</td>
 			<td align="center">${ b.userId }</td>
+			
 			<td align="center">${ b.b_Createdate }</td>
 			<td align="center">${ b.b_Count }</td>
 		</tr>
@@ -95,6 +96,7 @@
 				<c:if test="${ pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="reviewServletView.bo">
 						<c:param name="page" value="${pi.currentPage + 1 }"/>
+						
 					</c:url>
 					<a href="${after }">[다음]</a>
 				</c:if>
@@ -105,7 +107,7 @@
 		$(".myBoardDetailView").click(function() {
 			var bNo = $(this).attr("id");			
 			/* window.open("myBoardDetailView.me?bNo="+bNo,"Gooooood","width=1900, height=300"); */			
-			location.href="lbotmdetail.do?bNo="+bNo;
+			location.href="lbotmdetail.do?bNo="+bNo+"&page=1";
 		})
 	</script>
 </body>
