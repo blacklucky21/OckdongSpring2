@@ -95,6 +95,9 @@ public interface ProductService {
 	void updateQnaType2(ProductQna pq); // 답글 삭제시 답변 여부 다시 변경
 	int AnswerUpdate(ProductAnswer pa); // 답변 수정
 	int updateProducts(Product p); // 상품 변경
+	int ProductCount(); // 답변 문의 안된거
+	int ProductCountAll(); //모든 문의 사항
+	ArrayList<ProductAnswer> selectQnaAnswer(int qna_Id); // 답장 가지고 오기
 
 	
 	

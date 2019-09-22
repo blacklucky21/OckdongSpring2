@@ -174,7 +174,7 @@
 					</div>
 				</div>		
 				<div>
-							<input type="button" value="취소" class="bu" ><input type="submit" value="수정" class="bu" onclick="return validate();" >
+							<input type="button" value="취소" class="bu" onclick="back();"><input type="submit" value="수정" class="bu" onclick="return validate();" >
 				</div>		
 			
 				<!-- 상품등록 중 끝 -->
@@ -324,6 +324,21 @@ function delImg(value){
 	$(this).val("");
 	
 	$('#contentImgArea1').files = null;
+}
+
+$(function(){
+	$('#Inventory').keyup(function(){
+		var count = $('#Inventory').val();
+		
+		if(parseInt(count) < 1){
+			alert("수량이 1보다 작을 수 없습니다.");
+			$('#Inventory').val("1");
+			return false;
+		}
+	});
+});
+function back(){
+	history.back(-1);
 }
 	
 </script>

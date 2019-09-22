@@ -14,7 +14,7 @@
 <!-- js 시작 -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/admin/frist.js"></script>
+<script type="text/javascript" src="resources/js/admin/main.js?ver=1"></script>
 
 <!-- js 끝 -->
 </head>
@@ -150,11 +150,11 @@
                             	<ul class="summaryul">
                                 	<li class="summaryli">
                                 		<span class="ps_li le">미답변 문의</span>
-                                		<span class="ps_li ri">0</span>
+                                		<span class="ps_li ri">${ProductQnaYet }</span>
                                 	<li>
 									<li>                                	
                                 		<span class="ps_li le">전체문의 내역</span>
-										<span class="ps_li ri">0</span>
+										<span class="ps_li ri">${ProductQnaAll }</span>
 									<li>
 								</ul>	
                             </div>
@@ -214,6 +214,9 @@
 	</div> 
 </div>
 </section>
+<script >
+
+</script>
 
 
 </body>

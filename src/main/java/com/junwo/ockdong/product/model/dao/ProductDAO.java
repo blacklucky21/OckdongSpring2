@@ -278,6 +278,21 @@ public class ProductDAO {
 	}
 
 
+	public int selectQnaYet() {
+		return sqlSession.selectOne("productMapper.productQnaYet");
+	}
+
+
+	public int selectQnaAll() {
+		return sqlSession.selectOne("productMapper.productQnaAll");
+	}
+
+
+	public ArrayList<ProductAnswer> selectQnaAnswer(int qna_Id) {
+		return (ArrayList)sqlSession.selectList("productMapper.selectQnaAnswer", qna_Id);
+	}
+
+
 
 	
 

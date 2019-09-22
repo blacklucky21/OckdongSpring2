@@ -262,28 +262,6 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 	values(QNA_NO.nextval , #{qna_user}, #{qna_content}, to_char(sysdate,'yyyy/mm/dd hh24:mi:ss'), #{p_Id}, default, default, #{qna_secret}, default)
 
 </insert>
-
-
-<!-- qna 리스트 호출 -->
-<select id="selectQnaList" parameterType="_int" resultMap="productQnaAdmin">
-	select *
-	from (select *
-		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
-		  where p_ID = #{p_Id}
-		  order by QNA_ID desc )
-	order by QNA_ID desc
-
-</select>
-
-<!-- 상품 문의 삭제 -->
-<update id="deletedQna" >
-	update PRODUCTQNA
-	set QNA_STATUS = 'N'
-	where qna_id = #{qna_Id}
-</update>
-
-
-
 <resultMap type="ProductQna" id="productQnaAdmin">
 		<id property="qna_Id" column="QNA_ID"/>
 		<result property="qna_user" column="QNA_USER"/>
@@ -299,6 +277,24 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		<result property="answer_content" column="ANSWER_CONTENT"/>
 		<result property="answer_Id" column="ANSWER_ID"/>	
 </resultMap>
+
+<!-- qna 리스트 호출 -->
+<select id="selectQnaList"  resultMap="productQnaAdmin">
+	select *
+		  from 	PRODUCTQNA left join PRODUCT using(P_ID)
+		  where p_ID = #{p_Id}
+	
+	order by QNA_ID desc
+
+</select>
+
+<!-- 상품 문의 삭제 -->
+<update id="deletedQna" >
+	update PRODUCTQNA
+	set QNA_STATUS = 'N'
+	where qna_id = #{qna_Id}
+</update>
+
 
 
 <!-- 관리자 QnA 리스트 쿼리 -->
@@ -409,6 +405,24 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		set P_NAME = #{p_name}, P_CONTENT = #{p_content} , P_UPDATEDATE = sysdate, P_QUANTITY = #{p_quantity} , P_LUNCHTYPE = #{p_lunchtype}, P_PRICE = #{p_price}
 		where  P_ID = #{p_Id}            
 </update>
+
+<select id="productQnaYet" resultType="_int">
+	select count(*)
+	from PRODUCTQNA
+	where QNA_STATUS ='Y' AND QNA_ANSWER ='N'
+</select>
+<select id="productQnaAll" resultType="_int">
+select count(*)
+	from PRODUCTQNA
+	where QNA_STATUS ='Y'
+</select>
+<select id="selectQnaAnswer" resultType="ProductAnswer">
+select *
+		  from 	PRODUCTQNA left join PRODUCTANSWER using(QNA_ID)
+		  where QNA_ID = #{qna_Id}
+	order by QNA_ID desc
+
+</select>
 
 
 

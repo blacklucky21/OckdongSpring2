@@ -47,12 +47,10 @@
 <li class="topbar_cate"><a href="#" ><img src="resources/img/list_icon.png"> CATEGORIES</a>
 <div class="cate_sub">
 <div><a href="">NEW product</a></div>
-<div><a href="">BEST ITEM</a></div>
-<div><a href="">My own lunch box</a></div>
+<div><a href="listproduct.do">LUNCH BOX</a></div>
+<div><a onclick="myOwnClick();">My own lunch box</a></div>
 <div><a></a></div>
-<div><a href="">Lunch box of the month</a></div>
-<div><a></a></div>
-<div><a href="test.do">Regular delivery</a></div>
+<div><a href="lbotmlist.do">Lunch box of the month</a></div>
 <div><a></a></div>
 </div>
 </li>
@@ -181,7 +179,7 @@
     <ul class="category type-layer">
     
     <li>
-        <a href="">이달의 도시락</a>
+        <a href="nlist.do">공지사항</a>
     </li>
     <li>
         <a href="listproduct.do">전체 상품</a>
@@ -194,17 +192,6 @@
             </li>
         </ul>
    </li>
-    <li  >
-        <a href="">정기배송</a>
-        <ul class="sub_menu">
-            <li  >
-                <a href="">정기</a>
-            </li>
-            <li  >
-                <a href="">배송</a>
-            </li>
-        </ul>
-    </li>
     <li  >
         <a onclick="myOwnClick();">나만의 도시락</a>
     </li>
@@ -233,6 +220,8 @@
     			location.href="myOwn4.do";
     		}
     	}
+    	
+    	
     </script>
 </body>
 </html>

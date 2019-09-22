@@ -271,6 +271,21 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.updateProducts(p);
 	}
 
+	@Override
+	public int ProductCount() {
+		return pDAO.selectQnaYet();
+	}
+
+	@Override
+	public int ProductCountAll() {
+		return pDAO.selectQnaAll();
+	}
+
+	@Override
+	public ArrayList<ProductAnswer> selectQnaAnswer(int qna_Id) {
+		return pDAO.selectQnaAnswer(qna_Id);
+	}
+
 
 	
 

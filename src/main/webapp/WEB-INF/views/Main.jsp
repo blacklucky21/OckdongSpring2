@@ -31,8 +31,8 @@
 	<div class="content" style="width:100%; height:100%; overflow:hidden; margin:55px auto;">
 		<div id="slider">
 			<img src="resources/img/mainViews/mainsli.PNG" />
-			<img src="resources/img/mainViews/mainsli2.png "/>
-			<img src="resources/img/mainViews/3.jpg"  style="width:100%;height:100%;"/>
+			<img src="resources/img/mainViews/mainsli2.png"/>
+			<img src="resources/img/mainViews/mainsli3.jpg" />
 			<img src="resources/img/mainViews/4.jpg"  style="width:1920px;height:100%;"/> 
 		
 		</div>
@@ -158,7 +158,7 @@
 		<div class="modal-dialog modal-xl ">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title" id="myModalLabel">이달의 도시락</h1>
+					<h1 class="modal-title" id="myModalLabel">도시락 자랑게시판</h1>
 				</div>
 
 				<div class="modal-footer">
@@ -290,9 +290,7 @@
 						<span class="consumer">${p.P_PRICE } </span>
 						</p>
 						<p class="preview">
-						 	<span>좋아요 ${p.P_LIKE}</span>
 							
-							<span>상품문의 </span> 
 						</p>
 					</div>
 				</div>
@@ -348,9 +346,9 @@
 						<span class="consumer">${p.P_PRICE } </span>
 						</p>
 						<p class="preview">
-						 	<span>좋아요 ${p.P_LIKE}</span>
+						 <%-- 	<span>좋아요 ${p.P_LIKE}</span>
 							
-							<span>상품문의 </span> 
+							<span>상품문의 </span>  --%>
 						</p>
 					</div>
 				</div>
@@ -372,7 +370,7 @@
 	</div>
 	<div class="cate_box cate_box1">
 		<div class="top_title">
-			<p class="title">이달의 도시락</p>
+			<p class="title">도시락 자랑게시판</p>
 			<p class="update">전 달 한달 간의 데이터를 기준으로 매주 1일에 업데이트 됩니다.</p>
 		</div>
 
@@ -400,9 +398,9 @@
 						<p class="name">
 							<span>제품이름 가지고 오기</span>
 						</p>
-						<p class="preview">
+					<!-- 	<p class="preview">
 							<span>좋아요 100</span>
-						</p>
+						</p> -->
 					</div>
 				</div>
 			</li>
