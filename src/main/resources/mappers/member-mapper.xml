@@ -17,6 +17,7 @@
 			#{userName}
 		)
 		
+		
 	</insert>
 	
 	<!-- Login -->
@@ -345,17 +346,10 @@
 		where p_id=#{p_id}
 	</select>
 	
-	
-	<!-- <select id="myBoardDetailView" parameterType="_int" resultType="lbotm">
-		select *
-		from lbotm
-		where bNo=#{bNo}
-	</select> -->
-	
 	<select id="getMyBoardList" parameterType="string" resultType="_int">
 		select count(*)
 		from LBOTM
-		where userid = #{userID}
+		where userid = #{userID} and B_STATUS = 'Y'
 	</select>
 	
 	<select id="getMyQnAList" parameterType="string" resultType="_int">
@@ -372,4 +366,3 @@
 	</select>	
 		
 	</mapper>
-	

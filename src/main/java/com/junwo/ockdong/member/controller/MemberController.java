@@ -183,7 +183,7 @@ public class MemberController {
 	
     public String sendMail(Member m, @RequestParam String email) {
        String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
-       randomCode = randomCode.substring(0, 12);
+       randomCode = randomCode.substring(0, 6);
        String newPass = String.valueOf(randomCode);
        
        String subject = "회원 가입 승인번호 입니다.";
@@ -257,6 +257,7 @@ public class MemberController {
 		
 		System.out.println(payment.getP_id());
 		String val = payment.getP_id();
+		
 		Payment paymentDetail = mService.myPaymentDetailList(payment.getP_id());	
 		ArrayList<PayProduct> list = CartService.selectBuyList(val);
 		if(paymentDetail != null) {
@@ -287,6 +288,7 @@ public class MemberController {
 		
 		ArrayList<lbotm> nList = mService.selectList(pi);
 		System.out.println(nList);
+		
 		
 		if(nList != null) {
 			mv.addObject("list", nList);
