@@ -731,20 +731,28 @@ public class ProductController {
 	}
 	
 	
-	//qna 리스트 호출
+	//qna 리스트 호출 디테일 들어오자마자 시작됨
 	@RequestMapping("qnaList.do")
 	public void getQnaList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
 		ArrayList<ProductQna> pqList = pService.selectQnaList(p_Id);
-		
+		ArrayList<ProductQna> encoding = new ArrayList<ProductQna>();
 		for(ProductQna pq : pqList) {
 			pq.setQna_user(URLEncoder.encode(pq.getQna_user(),"utf-8"));
 			pq.setQna_content(URLEncoder.encode(pq.getQna_content(),"utf-8"));
-			/* pq.setAnswer_content(URLEncoder.encode(pq.getAnswer_content(),"utf-8")); */
-			System.out.println("상품 문의 리스트 호출 해 온다 : "+ pq);
+			/*pq.setAnswer_content(URLEncoder.encode(pq.getAnswer_content(),"utf-8"));*/
+		
+			if(pq.getQna_answer().equals("Y")) {
+				int qna_Id = pq.getQna_Id();
+				ArrayList<ProductAnswer> paList = pService.selectQnaAnswer(qna_Id);
+				for(ProductAnswer pa : paList) {
+					pa.setAnswer_content(URLEncoder.encode(pa.getAnswer_content(),"utf-8"));
+					pq.setAnswer_content(pa.getAnswer_content());
+				}
+			}
+			encoding.add(pq);
 		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		gson.toJson(pqList, response.getWriter());
-		
+		gson.toJson(encoding, response.getWriter());
 	}
 	
 	// qna 삭제
@@ -827,11 +835,11 @@ public class ProductController {
 	// 문의 답글을 삭제 하겠습니다.
 	@RequestMapping("deleteAnswer.do")
 	@ResponseBody
-	public String deleteAnswer(ProductAnswer pa,  HttpServletResponse response,HttpSession session) throws Exception {
+	public String deleteAnswer(ProductAnswer pa,  HttpServletResponse response,HttpSession session,ProductQna pq) throws Exception {
 		
 		int result = pService.deleteAnswer(pa);
 		if(result > 0) {
-			
+			pService.updateQnaType2(pq);
 			return "success";
 		}else {
 			throw new Exception("삭제에 실패 했습니다.");

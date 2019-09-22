@@ -79,7 +79,7 @@
 					</div>
 				</div>		
 				<div>
-							<input type="submit" value="등록" class="bu" onclick="check">
+							<input type="submit" value="등록" class="bu" onclick="check();">
 				</div>		
 				<!-- 상품등록 중 끝 -->
 				<div id="fileArea">
@@ -166,7 +166,26 @@ function delImg(value){
 				$("#imgArea").css("border","1px solid black");
 			}
 
-
+$(function(){
+	$('#sell').blur(function(){
+		var count = $('#sell').val();
+		
+		if(parseInt(count) < 11){
+			alert("판매가는 10 원 보다 작을 수 없습니다.");
+			$('#sell').val("10");
+			return false;
+		}
+	});
+	$('#Inventory').blur(function(){
+		var count = $('#Inventory').val();
+		
+		if(parseInt(count) < 1){
+			alert("수량이 1보다 작을 수 없습니다.");
+			$('#Inventory').val("1");
+			return false;
+		}
+	});
+});
 
 </script>
 

@@ -105,6 +105,7 @@ public class MemberController {
 		
 		if(bCryptPasswordEncoder.matches(m.getPassword(), loginUser.getPassword())) {
 			model.addAttribute("loginUser", loginUser);
+			
 		}else {
 			throw new MemberException("로그인에 실패하였습니다.");
 		}

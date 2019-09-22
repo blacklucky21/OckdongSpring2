@@ -618,13 +618,18 @@ public class AdminController {
 				i.setP_title(URLEncoder.encode(i.getP_title(), "utf-8")); // 상품명
 				i.setP_lunchType(URLEncoder.encode(i.getP_lunchType(), "utf-8")); // 상품설명
 				i.setQna_user(URLEncoder.encode(i.getQna_user(), "utf-8")); // 타입
-				i.setQna_content(URLEncoder.encode(i.getQna_content(), "utf-8"));
-
+				i.setQna_content(URLEncoder.encode(i.getQna_content(),"utf-8"));
+				if(i.getAnswer_content() != null) {
+					i.setAnswer_content(URLEncoder.encode(i.getAnswer_content(),"utf-8"));
+					
+				}
+				
+				
 				System.out.println(i);
 			}
 		}
 		System.out.println("찾아온 QNA 개수 : " + pList.size());
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		gson.toJson(pList, response.getWriter());
 	}
 	
@@ -828,6 +833,9 @@ public class AdminController {
 		int ProductStop = cService.ProductStop();
 		int ProductSoldOut =cService.ProductSoldOut();
 		
+		int ProductQnaYet = pService.ProductCount(); 
+		int ProductQnaAll = pService.ProductCountAll(); 
+		
 		System.out.println(count);
 		
 		mv.addObject("payCount",count);
@@ -844,6 +852,9 @@ public class AdminController {
 		mv.addObject("ProductStop",ProductStop);
 		mv.addObject("ProductSoldOut",ProductSoldOut);
 	
+		mv.addObject("ProductQnaYet",ProductQnaYet);
+		mv.addObject("ProductQnaAll",ProductQnaAll);
+		
 		mv.setViewName("admin/adminMain");
 		
 		

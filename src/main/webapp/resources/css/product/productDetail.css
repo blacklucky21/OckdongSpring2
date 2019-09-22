@@ -56,7 +56,7 @@
 	.shCMSshop .shopView .viewBody .contentNav li.active{background: #282e32;}
 	.shCMSshop .shopView .viewBody .contentNav li.active a{color: white;}
 	
-
+	#order_buy, #cart{cursor: pointer;}
 	/*테이블 기본 셋팅*/
 	.shCMSshop .shopView .viewBody table tbody {border-top: 1px solid #afafaf; border-bottom: 1px solid #d4d4d4; width: 100%; margin: 60px 0 40px 0; border-collapse: collapse; border-spacing: 0;font-size: 14px;}
 	.shCMSshop .shopView .viewBody thead>tr{height:40px;background: #f2f2f2;text-align: center;}

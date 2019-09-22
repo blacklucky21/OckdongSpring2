@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- css 시작 -->
- <link rel="stylesheet" href="resources/css/product/productDetail.css"> 
+<link rel="stylesheet" href="resources/css/product/productDetail.css">
 <link rel="stylesheet" href="resources/css/bootstrap.css">
 
 <!-- css 끝 -->
 
 <!-- js 시작 -->
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- js 끝 -->
 
 <style>
-
 </style>
 
 </head>
@@ -27,10 +27,9 @@
 	<!-- ############### 헤더 부분 ############### -->
 	<c:import url="../../header/header.jsp" />
 	<!-- 윗부분 -->
-	 <!-- 전체 감싸기 -->
-	  <!-- ▼▼▼▼ main ▼▼▼▼ -->
-	 
-	 <div class="shCMSshop">
+	<!-- 전체 감싸기 -->
+	<!-- ▼▼▼▼ main ▼▼▼▼ -->
+<div class="shCMSshop">
 		<div class="shopView">
 	   <form action="payinsert.pay"  method="post" id="CartandPaymentForm">
 			<div class="viewHeader">
@@ -58,16 +57,12 @@
 					<div class="price">
 						<span class="sale-price comm"  > ${p.p_price} 원</span>
 					</div>
-					
 					<c:if test="${ p.p_sell ne 'N' }">
-					<input type="hidden" id="standard" value="${p.p_price }"/>
-					<div class="categori">분류           <span>${ p.p_lunchtype }</span></div>
-					
-					<div class="manufact">배송비       <span id="del">2500 원 </span>           <span style="font-size: x-small;">20000원 이상 무료 배송</span></div>
-					
-					<div class="origin">수량           <div class="amount"><button type="button"class="decrease" onclick="cntSet('minus')">-</button><input id="orderCnt" class="input-normal" type="text" maxlength="8" autocomplete="off"  value="1" onblur="buyCountInputCheck(this)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><button class="increase" type="button"  onclick="cntSet('plus')">+</button></div></div>
-					<div class="items">
-						
+						<input type="hidden" id="standard" value="${p.p_price }"/>
+						<div class="categori">분류           <span>${ p.p_lunchtype }</span></div>
+						<div class="manufact">배송비       <span id="del">2500 원 </span>           <span style="font-size: x-small;">20000원 이상 무료 배송</span></div>
+						<div class="origin">수량           <div class="amount"><button type="button"class="decrease" onclick="cntSet('minus')">-</button><input id="orderCnt" class="input-normal" type="text" maxlength="8" autocomplete="off"  value="1" onblur="buyCountInputCheck(this)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><button class="increase" type="button"  onclick="cntSet('plus')">+</button></div></div>
+						<div class="items">
 					</div>
 					<div class="all-price">총 상품금액        <span class="commPrice">${p.p_price}</span>원</div>
 					<div class="btn">
@@ -92,10 +87,6 @@
 			<input type="hidden" name = "" value="${p.p_price }" ><!-- 개별 -->
 			<input type="hidden" name = "" class = "p_count" value="1"  >
 			<input type="hidden" name = "paytext" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
-			
-			
-			
-			
 		<!-- 카트 -->
 			<input type="hidden" name = "c_img" value="resources/img/products/${ pt[0].pt_name }" ><!-- 메인사진 -->
 			<input type="hidden" name = "" class="p_price" value="${p.p_price }" ><!-- 총가격 -->
@@ -103,8 +94,6 @@
 			<input type="hidden" name = "cPrice" value="${p.p_price }" ><!-- 개별 -->
 			<input type="hidden" name = "cAmount" class = "p_count" value="1" >
 			<input type="hidden" name = "cName" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
-			
-			
 			</form>
 			
 <!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼  -->				
@@ -123,7 +112,6 @@
 					<p id="productinfo" class="productinfo">${ p.p_content }</p>
 					<img src="resources/img/detail01.jpg" id = "intro"class="productinfo" style="margin-bottom: 40px;">
 				</div>
-				
 					<table class="tproduct-info active">
 					<tr>
 					</tr>
@@ -242,9 +230,7 @@
 								</div>
 							</form>
 						</div>
-						
 						<!-- 여기서 상품 문의가 있다면 -->
-					
 						<div class="history">
 							<div class="history_wrap">
 								<div id="proInquiry" style="border-top: 1px solid #ababab;">
@@ -252,7 +238,6 @@
 										<ul id="inquiry" class="inquiry">
 											<li id="content" class="txt_wrap">
 												<!-- 상품문의 -->
-
 												<div class="con-qa">
 													<div class="info_top">
 														<span class="name"></span> <span
@@ -270,10 +255,8 @@
 													</c:if> 
 												</div> 
 												<!-- //상품문의 -->
-												
 											</li>
 										</ul>
-										
 										<ul id="inquiryAnswer" class="open"></ul>
 										<!-- 답변시 생겨야 할 부분 -->
 										<li colspan="5">
@@ -289,13 +272,10 @@
 												</dl>
 											</div>
 										</li>
-										
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						
 					</div>
 				</div>
 				<table class="tquestion">
@@ -342,11 +322,11 @@
 			<!-- 하단 탭 끝 -->
 		</div>
 	</div>
-	 <!-- ▲▲▲▲ main ▲▲▲▲ -->
+	<!-- ▲▲▲▲ main ▲▲▲▲ -->
 	<!-- 윗부분 끝 -->
 	<!-- ##################### 풋터 부분 ##################### -->
 	<c:import url="../../footer/footer.jsp" />
-	
+
 	<script>
 	$(function(){
 		$("#orderCnt").keyup(function(){
@@ -499,7 +479,6 @@
 		   $(".tcontent").click(function(){
 		   //전체 글자의 변수를 2번 잡아서 . 한번은 위쪽 내용. 한번은 아래쪽 내용 출력
 		   //위쪽 내용
-		   alert("나와라");
 		    var text = $(this).children('span').html(); //전체 html또는 text를 가져와서
 		    console.log(text);
 		    var full = $(this).closest('tr').next('tr').children('td').eq(1).text(text).css('text-align','left'); // tr 출력후 나머지 글자 출력 및 정렬
@@ -773,7 +752,7 @@
 	
 	// 상품 문의 ajax 가지고 오기
 	function getQnaList(){
-		var p_Id = ${p.p_Id}; // 상품 번호 가지고 온다.
+		var p_Id = ${p.p_Id}; 
 		
 		$.ajax({
 			url:"qnaList.do",
@@ -785,137 +764,147 @@
 				$div.html("");
 				var nick = $('#nick').val();
 				var $div1;
-				
+				var div2 = "";
 				$('#qacount').text(data.length);
+				
 				if(data.length > 0){
 					for(var i in data){
-						
-		// 로그인 아이디와 작성자 아이디가 같을 경우
-		if(decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) == nick ){
-			
-			// 비밀 글 인지 판단 한다.
-			if(data[i].qna_secret == 'Y'){
-				if(data[i].qna_status == 'Y'){
-					
-				$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
-				
-				.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-						+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-						+ "</span>"
-						+ "<span class='date'>"
-						+ data[i].qna_createDate
-						+ "<span class='ico-lock'></div><p class='txt'  id ='qnacontext"+ i +"'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
-
-						);
-				}else{
-					// 글 삭제함
-					$div1 = $("<div class='history_wrap'>")
-					
-					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-							+ "</span>"
-							+ "<span class='date'>"
-							+ data[i].qna_createDate
-							+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
-
-							);
-				}
-			}else if(data[i].qna_secret == 'N'){
-				if(data[i].qna_status == 'Y'){
-					
-				$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"' >")
-				
-				.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-						+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-						+ "</span>"
-						+ " <span class='date'>"
-						+ data[i].qna_createDate 
-						+ "<span></div><p class='txt' id ='qnacontext"+ i +"'>"
-						+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl'  id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
-													);
-				}else{
-					$div1 = $("<div class='history_wrap'>")
-					
-					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-							+ "</span>"
-							+ "<span class='date'>"
-							+ data[i].qna_createDate
-							+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
-
-							);
-					
-					
-				}
-					
-			}
-			
-			
-		// 로그인 안한 상태 보이는 부분
-		}else{
-			if(data[i].qna_secret == 'Y'){
-				if(data[i].qna_status == 'Y'){
-			$div1 = $("<div class='history_wrap'>")
-			
-			.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-					+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-					+ "</span>"
-					+ "<span class='date'>"
-					+ data[i].qna_createDate
-					+ "<span class='ico-lock'></div><p class='txt'>비공개 문의 글 입니다.</p></div></li></ul></div></div></div>"																												
-
-												);
-					
-				}else{
-					$div1 = $("<div class='history_wrap'>")
-					
-					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-							+ "</span>"
-							+ "<span class='date'>"
-							+ data[i].qna_createDate
-							+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"
-							);
-				}
-			}else if(data[i].qna_secret == 'N'){
-				if(data[i].qna_status == 'Y'){
-					
-			$div1 = $("<div class='history_wrap'>")
-			
-			.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-					+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-					+ "</span>"
-					+ "<span class='date'>"
-					+ data[i].qna_createDate
-					+ "<span></div><p class='txt'>"
-					+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p></div></li></ul></div></div></div>"																												
-
-												);
-				}else{
-					$div1 = $("<div class='history_wrap'>")
-					
-					.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-							+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-							+ "</span>"
-							+ "<span class='date'>"
-							+ data[i].qna_createDate
-							+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다. </p>"
-							);
-				}
-			}
-		}				
-					
-		
-
-									$div.append($div1);
-
+						console.log("================");
+						console.log(data[i]);
+						// 로그인 아이디와 작성자 아이디가 같을 경우
+						if(decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) == nick ){
+							
+							// 비밀 글 인지 판단 한다.
+							if(data[i].qna_secret == 'Y'){
+								if(data[i].qna_status == 'Y'){
+									
+									$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
+										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+											+ "</span>"
+											+ "<span class='date'>"
+											+ data[i].qna_createDate
+											+ "<span class='ico-lock'></div><p class='txt'  id ='qnacontext"+ i +"'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
+										);
+									
+										console.log(pq.pna_Id);
+										/* if(data[i].qna_answer == 'Y' && data[i].qna_Id == pq.pna_Id){
+											
+									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
+										div2 += "<li cospan='5'>";
+										div2 += "<div class='message'>";
+										div2 += "<dl class='reply'>";
+										div2 += "<img src='resources/img/line.png' class='answerline'>";
+										div2 += "<dt>운영자<time>"+ data[i].qna_answerDate +" </time></dt>";
+										div2 += "<dd>"+ decodeURIComponent(data[i].answer_content.replace(/\+/g,""))+"</dd>";
+										div2 += "</dl></div></li>"; 
+										}  */
+										
+										
+									
+								}else{
+									// 글 삭제함
+									$div1 = $("<div class='history_wrap'>")
+										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+												+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+												+ "</span>"
+												+ "<span class='date'>"
+												+ data[i].qna_createDate
+												+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
+										);
 								}
-							}else{
-								$div1 = $("<div class='qnanone'>").text("등록된 상품문의가 없습니다.");
-								$div.append($div1);
+							}else if(data[i].qna_secret == 'N'){
+								if(data[i].qna_status == 'Y'){
+									
+									$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"' >")
+										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+												+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+												+ "</span>"
+												+ " <span class='date'>"
+												+ data[i].qna_createDate 
+												+ "<span></div><p class='txt' id ='qnacontext"+ i +"'>"
+												+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl'  id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
+										);
+										if(data[i].qna_answer == 'Y'){
+										
+									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
+										div2 += "<li cospan='5'>";
+										div2 += "<div class='message'>";
+										div2 += "<dl class='reply'>";
+										div2 += "<img src='resources/img/line.png' class='answerline'>";
+										div2 += "<dt>운영자<time>"+ data[i].qna_answerDate +" </time></dt>";
+										div2 += "<dd>"+ decodeURIComponent(data[i].answer_content.replace(/\+/g,""))+"</dd>";
+										div2 += "</dl></div></li>"; 
+										} 
+									
+								}else{
+									$div1 = $("<div class='history_wrap'>")
+										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+												+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+												+ "</span>"
+												+ "<span class='date'>"
+												+ data[i].qna_createDate
+												+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
+										);
+								}
 							}
-						}
-					});
+							
+						// 로그인 안한 상태 보이는 부분
+						}else{
+							if(data[i].qna_secret == 'Y'){
+								if(data[i].qna_status == 'Y'){
+									$div1 = $("<div class='history_wrap'>")
+									
+									.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+											+ "</span>"
+											+ "<span class='date'>"
+											+ data[i].qna_createDate
+											+ "<span class='ico-lock'></div><p class='txt'>비공개 문의 글 입니다.</p></div></li></ul></div></div></div>"																												
+									);
+									
+								}else{
+									$div1 = $("<div class='history_wrap'>")
+										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+												+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+												+ "</span>"
+												+ "<span class='date'>"
+												+ data[i].qna_createDate
+												+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"
+										);
+								}
+							}else if(data[i].qna_secret == 'N'){
+								if(data[i].qna_status == 'Y'){
+									$div1 = $("<div class='history_wrap'>")
+									.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+											+ "</span>"
+											+ "<span class='date'>"
+											+ data[i].qna_createDate
+											+ "<span></div><p class='txt'>"
+											+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p></div></li></ul></div></div></div>"																												
+									);
+								}else{
+									$div1 = $("<div class='history_wrap'>")
+										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+												+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+												+ "</span>"
+												+ "<span class='date'>"
+												+ data[i].qna_createDate
+												+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다. </p>"
+										);
+								}
+							}
+						}				
+						$div.append($div1);
+						$div.append(div2);
+					}
+				}else{
+					$div1 = $("<div class='qnanone'>").text("등록된 상품문의가 없습니다.");
+					$div.append($div1);
+				}
+			}
+		});
 		}
 
 	
@@ -1031,13 +1020,21 @@
 		var form = document.forms["CartandPaymentForm"];
 		// 카트 넘기기
 		$('#order_buy').click(function(){
-			
+			if(${sessionScope.loginUser eq null}){
+				alert("로그인 후 이용가능한 서비스 입니다.");
+			}else{
 			$('#CartandPaymentForm').submit();
+				
+			}
+			
 			
 		});
 		
 		$('#cart').click(function(){
-			
+			if(${sessionScope.loginUser eq null}){
+				alert("로그인 후 이용가능한 서비스 입니다.");
+			}else{
+				
 			   var formData = new FormData(form);
 				 $.ajax({
 			            cache : false,
@@ -1062,11 +1059,12 @@
 			                alert(xhr + " : " + status);
 			            }
 			        }); // $.ajax 
+			}
 		});
 	</script>
-	
-	
-	
+
+
+
 	<input type="hidden" id="nick" value="${loginUser.nickName}">
 </body>
 </html>
