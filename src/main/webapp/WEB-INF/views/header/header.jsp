@@ -106,8 +106,8 @@
 	<!-- 회원가입 포인트 -->	
 	</li>
 
-	<li><a href="CartView.do">CART</a></li>
-	<li><a href="../mypage/order_list.php">ORDER</a></li>
+	<li><a href="loginView.me">CART</a></li>
+
 </c:if>
 
 <!-- 로그인 상태 -->

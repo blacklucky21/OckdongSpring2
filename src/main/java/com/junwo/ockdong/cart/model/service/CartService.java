@@ -62,7 +62,9 @@ public interface CartService {
 
 	ArrayList<PayProduct> selectBuyList(String modal);
 
+	int UpdateCartCount(Cart cart);
 
+	
 
 
 

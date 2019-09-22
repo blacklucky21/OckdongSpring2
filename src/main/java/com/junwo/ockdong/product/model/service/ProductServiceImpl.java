@@ -189,6 +189,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	// qna 댓글 리스트 호출
+	
 	@Override
 	public ArrayList<ProductQna> selectQnaList(int p_Id) {
 		return pDAO.selectQnaList(p_Id);
@@ -235,6 +236,21 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+//<<<<<<< 최경천
+	public int updateMainPicture(Map<String, String> picture) {
+		return pDAO.updateMainPicture(picture);
+	}
+
+	@Override
+	public int insertMainPicture(PictureList pl) {
+		return pDAO.insertMainPicture(pl);
+	}
+
+	@Override
+	public int deletePicture(String sub_name) {
+		return pDAO.deletePicture(sub_name);
+	}
+//=======
 	public int deleteAnswer(ProductAnswer pa) {
 		return pDAO.deleteAnswer(pa);
 	}
@@ -247,6 +263,12 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int AnswerUpdate(ProductAnswer pa) {
 		return pDAO.AnswerUpdate(pa);
+
+	}
+
+	@Override
+	public int updateProducts(Product p) {
+		return pDAO.updateProducts(p);
 	}
 
 

@@ -20,6 +20,7 @@ import com.sun.org.apache.regexp.internal.recompile;
 @Repository("mDAO")
 public class MemberDAO {
 	
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -135,6 +136,7 @@ public class MemberDAO {
 	public int getMyBoardList(String userId) {
 		return sqlSession.selectOne("memberMapper.getMyBoardList", userId);
 	}
+	
 
 	public int getMyQnAList(String userId) {
 		return sqlSession.selectOne("memberMapper.getMyQnAList", userId);
@@ -146,8 +148,13 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectQnAList", pi.getUserId(), rowBounds);
 	}
 
-	public lbotm myBoardDetailView(int bNo) {
-		return sqlSession.selectOne("memberMapper.myBoardDetailView", bNo);
+	/*
+	 * public lbotm myBoardDetailView(int bNo) { return
+	 * sqlSession.selectOne("memberMapper.myBoardDetailView", bNo); }
+	 */
+
+	public ProductQna myQnaDetailView(int qna_Id) {
+		return sqlSession.selectOne("memberMapper.myQnaDetailView", qna_Id);
 	}
 
 	

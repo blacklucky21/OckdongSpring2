@@ -14,6 +14,7 @@
 	#tb{margin: auto; width: auto; border-collapse: collapse;}
 	#tb th, #tb td{ vertical-align: middle;} 
 	/* #tb tr td{width: auto; overflow: hidden;} */
+	
 	#tb thead tr th{width: 100px;}
 	/* #tb tbody tr td{width: 100px;} */
 	#buttonTab{border-left: hidden; border-right: hidden;}

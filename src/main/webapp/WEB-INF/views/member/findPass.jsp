@@ -15,6 +15,7 @@
 	<br><br><br>
 	
 	
+	
 	<div class="loginForm">
 	<a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
 	<form id="passFindForm" action="passFindResult.me" method="post">

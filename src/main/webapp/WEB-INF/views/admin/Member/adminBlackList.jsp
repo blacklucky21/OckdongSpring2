@@ -235,8 +235,7 @@ $('.mCheck').click(function(){
 
 		var userid =td.eq(1).text();
 			
-		alert(userid);
-			
+	
 			
 			var bool = confirm("회원 "+userid+"의 블랙을 해제 하시겠습니까?");
 			

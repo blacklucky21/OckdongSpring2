@@ -1,5 +1,6 @@
 package com.junwo.ockdong.member.controller;
 
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junwo.ockdong.cart.model.service.CartService;
+import com.junwo.ockdong.cart.model.vo.PayProduct;
 import com.junwo.ockdong.cart.model.vo.Payment;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
@@ -36,7 +39,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
-	
+	@Autowired
+	private CartService CartService;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -252,11 +256,12 @@ public class MemberController {
 		
 		
 		System.out.println(payment.getP_id());
-		
+		String val = payment.getP_id();
 		Payment paymentDetail = mService.myPaymentDetailList(payment.getP_id());	
-	
+		ArrayList<PayProduct> list = CartService.selectBuyList(val);
 		if(paymentDetail != null) {
 			mv.addObject("list", paymentDetail);
+			mv.addObject("list2", list);
 			mv.setViewName("myPage/buy/buyHistoryDetailView");
 		} else {
 			throw new NoticeException("구매내역 조회에 실패 하였습니다.");
@@ -293,24 +298,23 @@ public class MemberController {
 		
 		return mv;
 	}
-	// 내가 쓴 게시물 디테일 뷰
-	@RequestMapping("myBoardDetailView.me")
-	public ModelAndView myBoardDetailView(@ModelAttribute("initPayment") lbotm lBotm, 
-										  ModelAndView mv,
-										  HttpSession session) {
-
-
-		lbotm BoardDetail = mService.myBoardDetailView(lBotm.getbNo());
-
-		if (BoardDetail != null) {
-			mv.addObject("list", BoardDetail);
-			mv.setViewName("myPage/myBoard/myBoardDetailView");
-		} else {
-			throw new NoticeException("게시글 조회에 실패 하였습니다.");
-		}
-
-		return mv;
-	}
+	
+	/*
+	 * // 내가 쓴 게시물 디테일 뷰
+	 * 
+	 * @RequestMapping("myBoardDetailView.me") public ModelAndView
+	 * myBoardDetailView(@ModelAttribute("initPayment") lbotm lBotm, ModelAndView
+	 * mv, HttpSession session) {
+	 * 
+	 * 
+	 * lbotm BoardDetail = mService.myBoardDetailView(lBotm.getbNo());
+	 * 
+	 * if (BoardDetail != null) { mv.addObject("list", BoardDetail);
+	 * mv.setViewName("myPage/myBoard/myBoardDetailView"); } else { throw new
+	 * NoticeException("게시글 조회에 실패 하였습니다."); }
+	 * 
+	 * return mv; }
+	 */
 	
 	// 상품문의 화면 이동
 	@RequestMapping("reviewListView.bo")
@@ -339,6 +343,24 @@ public class MemberController {
 		}
 		
 		
+		return mv;
+	}
+	// 문의내역 디테일 뷰
+	@RequestMapping("myQnaDetailView.me")
+	public ModelAndView myQnaDetailView(@ModelAttribute("initPayment") ProductQna qna, 
+										  ModelAndView mv,
+										  HttpSession session) {
+
+
+		ProductQna QnaDetail = mService.myQnaDetailView(qna.getQna_Id());
+
+		if (QnaDetail != null) {
+			mv.addObject("list", QnaDetail);
+			mv.setViewName("myPage/productQnA/myQnaDetailView");
+		} else {
+			throw new NoticeException("게시글 조회에 실패 하였습니다.");
+		}
+
 		return mv;
 	}
 	

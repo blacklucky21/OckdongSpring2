@@ -92,11 +92,11 @@ div#editor {
 									<tr>
 										<th id="title">제목</th>
 										<td>
-											<input id="b_Title" name="nTitle" type="text" class="form-control">
+											<input id="b_Title" name="b_Title" type="text" class="form-control">
 										</td>
 										<th>작성자</th>
 										<td>
-											<input type="text" name="id" readonly value="${ loginUser.userId }">
+											<input type="text" name="userId" readonly value="${ loginUser.userId }">
 										</td>
 									</tr>
 
@@ -107,7 +107,7 @@ div#editor {
 							</div>
 						<div class="boardWriteBtn">
 							<input id="btnSave" type="button" value="작성하기" class="btn btn-success">
-							<input type="button" value="취소" class="btn btn-warning" onclick="location.href='lbotmlist.do'">
+							<input type="button" value="취소" class="btn btn-warning" onclick="history.back();">
 						</div>
 						</form>
 						<!------------------------------ 작성완료, 취소 버튼 ------------------------------>

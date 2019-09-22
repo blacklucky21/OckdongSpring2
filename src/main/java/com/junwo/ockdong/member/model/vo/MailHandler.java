@@ -20,6 +20,7 @@ public class MailHandler {
       messageHelper = new MimeMessageHelper(message, true, "UTF-8");
    }
 
+   
    public void setSubject(String subject) throws MessagingException {
       messageHelper.setSubject(subject);
       // 이메일 타이틀

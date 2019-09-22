@@ -56,4 +56,23 @@
       sysdate, sysdate, default, default, #{b_Src}, default)
 	</insert>
 	
+	<update id="deletelbotm">
+		update lbotm set b_status = 'N'
+		where bNo = #{bNo}
+	</update>
+	
+	<!-- 수정  페이지 -->
+	<select id="updatelbotmPage" parameterType="_int" resultMap="lbotmResultSet">
+		select *
+		from lbotm
+		where bNo = #{bNo} and b_status='Y'
+	</select>
+	
+	<!-- 수정 update -->
+	<update id="updatelbotm" parameterType="lbotm">
+		update lbotm
+		set b_Title=#{b_Title}, b_Content=#{b_Content}, bModifydate=sysdate
+		where bNo = #{bNo}
+	</update>
+	
 </mapper>

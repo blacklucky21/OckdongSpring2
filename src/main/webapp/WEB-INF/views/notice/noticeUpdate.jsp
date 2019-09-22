@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-<title>옥동도시락 - 수정하기</title>
+<title>공지사항 - 수정하기</title>
 <style>
 body {
 	text-align: left;
@@ -82,17 +82,6 @@ div#editor {
 						<input type="hidden" name="nNo" value="${ notice.nNo }">
 							<div class="table table-responsive">
 								<table class="table table-striped">
-									<tr>
-										<td class="cateTd">카테고리</td>
-										<td>
-											<select name="writing_type" id="form_control" class="form-control input-xshort">
-												<option value="11">공지사항</option>
-												<option value="12">자유게시판</option>
-											</select>
-										</td>
-										<td>
-										</td>
-									</tr>
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
 										<td>제목</td>
