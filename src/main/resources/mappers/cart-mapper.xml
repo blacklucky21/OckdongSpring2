@@ -285,5 +285,23 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	
 	</select>
 	
+	
+	<select id="ProductCountdo" resultType="_int">
+	select  COALESCE(sum(P_COUNT),0)
+	from product
+	where p_sell ='Y' and P_LUNCHTYPE='도시락'
+	
+	
+	</select>
+	
+		<select id="ProductCountsel" resultType="_int">
+	select COALESCE(sum(P_COUNT),0)
+	from product
+	where p_sell ='Y' and P_LUNCHTYPE='샐러드'
+	
+	
+	</select>
+	
+	
 
 </mapper>

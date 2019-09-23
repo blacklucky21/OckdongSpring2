@@ -51,14 +51,14 @@
                             <div id="sale_summary_product_prepare">
                                 <div class="items_tit">도시락</div>
                                 <div class="items_count">
-                                    <span>0</span>
+                                    <span>${ ProductCountdo}</span>
                                     <span> 건</span>
                                 </div>
                             </div>
                             <div id="sale_summary_delivery_prepare">
                                 <div class="items_tit">샐러드</div>
                                 <div class="items_count">
-                                    <span>0</span>
+                                    <span>${ProductCountsel }</span>
                                     <span>건</span>
                                 </div>
                             </div>
@@ -206,8 +206,8 @@
 	 					
 	 					<c:forEach var="ad" items="${ list2 }">
 	 						<tr>
-	 							<td class="notice_left">${ ad.nNo }</td>
-	 							<td class="notice_left">${ ad.nTitle }</td>
+	 							<td class="notice_left"><span class="notice_title"></span></td>
+	 							<td class="notice_left"><span class="notice_title" onclick="location.href='ndetail.do?nNo='+${ ad.nNo }+'&page=1'">${ ad.nTitle }sex</span></td>
 	 						</tr>
 	 					</c:forEach>
 	 					

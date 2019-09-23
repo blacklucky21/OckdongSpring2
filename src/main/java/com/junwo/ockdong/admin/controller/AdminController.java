@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-//github.com/blacklucky21/OckdongSpring2.git
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -835,6 +835,8 @@ public class AdminController {
 		int SecessionMember = cService.MemberSecession();
 		
 		int ProductCount = cService.ProductCount();
+		int ProductCountdo = cService.ProductCountdo();
+		int ProductCountsel = cService.ProductCountsel();
 		int ProductStop = cService.ProductStop();
 		int ProductSoldOut =cService.ProductSoldOut();
 		
@@ -860,6 +862,9 @@ public class AdminController {
 		mv.addObject("memAll",member);
 		mv.addObject("BlackList",BlackList);
 		mv.addObject("SecessionMember",SecessionMember);
+		
+		mv.addObject("ProductCountdo",ProductCountdo);
+		mv.addObject("ProductCountsel",ProductCountsel);
 		
 		mv.addObject("ProductCount",ProductCount);
 		mv.addObject("ProductStop",ProductStop);

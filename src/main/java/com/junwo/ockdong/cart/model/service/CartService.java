@@ -64,6 +64,10 @@ public interface CartService {
 
 	int UpdateCartCount(Cart cart);
 
+	int ProductCountdo();
+
+	int ProductCountsel();
+
 	
 
 
