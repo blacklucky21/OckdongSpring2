@@ -769,10 +769,12 @@
 				
 				if(data.length > 0){
 					for(var i in data){
-						console.log("================");
 						console.log(data[i]);
+						console.log("닉네임"+decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) );
+					
+						console.log("${sessionScope.loginUser.nickName}");
 						// 로그인 아이디와 작성자 아이디가 같을 경우
-						if(decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) == nick ){
+						if(decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) ==  "${sessionScope.loginUser.nickName}" ){
 							
 							// 비밀 글 인지 판단 한다.
 							if(data[i].qna_secret == 'Y'){
@@ -780,15 +782,17 @@
 									
 									$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
 										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+											+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) 
 											+ "</span>"
 											+ "<span class='date'>"
 											+ data[i].qna_createDate
 											+ "<span class='ico-lock'></div><p class='txt'  id ='qnacontext"+ i +"'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 										);
 									
-										 if(data[i].qna_answer == 'Y'){
-											
+
+										
+										if(data[i].qna_answer == 'Y'){
+
 									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
 										div2 += "<li cospan='5'>";
 										div2 += "<div class='message'>";

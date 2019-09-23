@@ -342,26 +342,6 @@ public class ProductController {
 			@RequestParam(value = "sub3_type", required = false) Integer sub3_type, HttpServletRequest request) {
 		
 		// 메인은 무조건 있기 때문에 문제 없음
-		// 가지고 온거 출려 해본다.
-		System.out.println("=================== 수정 컨트롤러 사진 출력 결과 ======================");
-		System.out.println("상품 변경된거 출력 : " + p);
-		System.out.println(thumbnailImg1); // 사진이 변경 되지 않으면 값이 넘어 오지 않는다 이것으로 판단해야 할거 같음
-		System.out.println(thumbnailImg2);
-		System.out.println(thumbnailImg3);
-		System.out.println(thumbnailImg4);
-		System.out.println("======================디테일 에서 기존꺼 없을경우 null 출력====================");
-		System.out.println("타이틀 이름 : " + title_name);
-		System.out.println("타이틀 원래이름 : " + title_realname);
-		System.out.println("타이틀 타입 메인 구분 : " + title_type);
-		System.out.println("서브1 변경 네임: " + sub1_name);
-		System.out.println("서브1 원래 네임: " + sub1_realname);
-		System.out.println("서브1 타입 : " + sub1_type);
-		System.out.println("서브2 변경 네임: " + sub2_name);
-		System.out.println("서브2 원래 네임: " + sub2_realname);
-		System.out.println("서브2 타입 : " + sub2_type);
-		System.out.println("서브3 변경 네임: " + sub3_name);
-		System.out.println("서브3 원레 네임: " + sub3_realname);
-		System.out.println("서브3 타입 : " + sub3_type);
 		
 		// 메인 수정
 		if(!thumbnailImg1.isEmpty()){//사진 바뀜
@@ -516,7 +496,7 @@ public class ProductController {
 
 		System.out.println("deleteFile 컨트롤러에서 불러 온 사진 이름 : " + realname);
 	}
-	
+	// 사진을 추가 했을 경우
 	public String mkProductImgFile(MultipartFile file, HttpServletRequest request) {
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -736,17 +716,19 @@ public class ProductController {
 	public void getQnaList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
 		ArrayList<ProductQna> pqList = pService.selectQnaList(p_Id);
 		ArrayList<ProductQna> encoding = new ArrayList<ProductQna>();
+		
 		for(ProductQna pq : pqList) {
 			pq.setQna_user(URLEncoder.encode(pq.getQna_user(),"utf-8"));
 			pq.setQna_content(URLEncoder.encode(pq.getQna_content(),"utf-8"));
 			/*pq.setAnswer_content(URLEncoder.encode(pq.getAnswer_content(),"utf-8"));*/
-		
+			System.out.println(pq);
 			if(pq.getQna_answer().equals("Y")) {
 				int qna_Id = pq.getQna_Id();
 				ArrayList<ProductAnswer> paList = pService.selectQnaAnswer(qna_Id);
 				for(ProductAnswer pa : paList) {
 					pa.setAnswer_content(URLEncoder.encode(pa.getAnswer_content(),"utf-8"));
 					pq.setAnswer_content(pa.getAnswer_content());
+					System.out.println(pa);
 				}
 			}
 			encoding.add(pq);
