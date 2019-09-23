@@ -28,10 +28,10 @@
 		<thead>
 		<tr style="background-color: black; color: white;">
 			<th>댓글번호</th>
-			<th style="width: 100px;">작성자</th>
+			<th style="width: 100%;">작성자</th>
 			<th>제목</th>
 			<th>문의 내용</th>
-			<th style="width: 200px;">문의 등록일</th>
+			<th style="width: 100%;">문의 등록일</th>
 		</tr>
 		</thead>
 		<c:if test="${ !empty list }">
@@ -43,7 +43,7 @@
 			</td>
 			<td align="center">${ qna.qna_user }</td>
 			<td align="center">${ qna.p_title }</td>
-			<td align="center">${ qna.qna_content }</td>
+			<td align="center" style="width: 800px;">${ qna.qna_content }</td>
 			<td align="center">${ qna.qna_createDate }</td>
 		</tr>
 		</tbody>

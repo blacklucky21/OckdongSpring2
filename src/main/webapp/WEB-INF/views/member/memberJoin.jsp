@@ -169,7 +169,7 @@
 						<div class="btns" align="center">
 							<div id="goMain">
 								<button onclick="goMain()" class="bu">메인으로</button>
-								<button type="submit" onclick="insertMember();" class="bu">가입하기</button>
+								<button type="submit" onclick="return insertMember();" class="bu">가입하기</button>
 							</div>
 						</div>
 						<script type="text/javascript">
@@ -294,7 +294,7 @@
 			                }
 			            
 			            var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-			    		var regPhone = /^[0-9]+$/;
+			    		var regPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 			    		var regPwd = /^(?=.*[a-zA-Z]+)(?=.*[0-9]+).{6,12}$/;
 			            
 			            function insertMember() {
@@ -308,31 +308,32 @@
 								$("#nickName").focus();
 								return false;
 							}
-			            	else{
+			            	/* else{
 								$("#joinForm").submit();
-							}
+							} */
 			            	
 			            	if(!regPhone.test($('#phone').val())){
-			                	alert("숫자만 가능합니다.");
+			                	alert("비밀번호 형식에 맞지 않습니다.(ex)XXX(-)XXXX(-)XXXX)숫자만 가능");
 			                	$('#phone').focus();
-			                	return;
+			                	return false;
 			                }
 			            	
 			            	if(!regPwd.test($('#password').val())){
 			     			   alert('영문+숫자  조합으로 6-12자를 입력해 주세요.');
 			     			   $('#password').focus();
-			     			   return;
+			     			   return false;
 			     			}
 			     			
 			     			if(!regEmail.test($('#email').val())) {
 			                     alert("이메일 주소가 유효하지 않습니다");
-			                     $('#email').focus();            
-			                 }else{
+			                     $('#email').focus();
+			                     return false;
+			                }else{
 			     				if($('#password').val()!="" && $('#password2').val() == $('#password').val() && $('#phone').val()!="" && $('#address3').val()!="" && $('#email').val()!=""){			
 			     					alert("회원이 되신걸 환영합니다.");
 			     					$("#joinForm").submit();
 			     				}
-			                 }
+			                }
 						}
 			            
 			            $(function(){
