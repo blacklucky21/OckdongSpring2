@@ -109,7 +109,7 @@ public class MemberController {
 		}else {
 			throw new MemberException("로그인에 실패하였습니다.");
 		}
-		return "Main";
+		return "redirect:main.do";
 	}
 	
 	
@@ -118,7 +118,7 @@ public class MemberController {
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		
-		return "Main";
+		return "redirect:main.do";
 	}
 	
 	/*** ID찾기 ***/

@@ -231,11 +231,11 @@
 						<p class="price">
 						<span class="consumer">${p.P_PRICE } </span>
 						</p>
-						<p class="preview">
+						<%-- <p class="preview">
 						 	<span>좋아요 ${p.P_LIKE}</span>
 							
 							<span>상품문의 </span> 
-						</p>
+						</p> --%>
 					</div>
 				</div>
 			</li>

@@ -58,7 +58,6 @@
             <ul class="acc_subject">
                 <li><a href="productList.do" class="menu_depth2">상품 리스트</a></li>
                 <li><a href="productsInsert.do" class="menu_depth2">상품등록</a></li>
-                <li><a href="#" class="menu_depth2">상품후기</a></li>
                 <li><a href="productInquiry.do" class="menu_depth2">상품문의</a></li>
             </ul>
         </li>
@@ -82,18 +81,13 @@
                 
             </ul>
         </li>
-        <li class="accor_has_sub">
- 		 <strong class="menu_depth1">상품 분류 관리</strong>            
-            <ul class="acc_subject">
-                <li><a href="#" class="menu_depth2">상품 그룹 관리</a></li>
-                <li><a href="#" class="menu_depth2">카테고리 관리</a></li>
-            </ul>
-        </li>
+     
          <li class="accor_has_sub">
  		 <strong class="menu_depth1">게시판 관리</strong>            
             <ul class="acc_subject">
                 <li><a href="#" class="menu_depth2">게시판 리스트</a></li>
                 <li><a href="#" class="menu_depth2">게시글 관리</a></li>
+                <li><a href="boardWrite.do" class="menu_depth2">공지사항 관리</a></li>
             </ul>
         </li>
          <li class="accor_has_sub">
