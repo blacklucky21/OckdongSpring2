@@ -79,7 +79,7 @@ div#editor {
 						<form action="insert.do" method="post" name="form1" enctype="multipart/form-data">
 							<div class="table table-responsive">
 								<table class="table table-striped">
-									<tr>
+									<!-- <tr>
 										<td class="cateTd">카테고리</td>
 										<td>
 											<select name="writing_type" id="form_control" class="form-control input-xshort">
@@ -87,7 +87,7 @@ div#editor {
 												<option value="12">자유게시판</option>
 											</select>
 										</td>
-									</tr>
+									</tr> -->
 									<!------------------------------ 글 제목 ------------------------------>
 									<tr>
 										<th id="title">제목</th>

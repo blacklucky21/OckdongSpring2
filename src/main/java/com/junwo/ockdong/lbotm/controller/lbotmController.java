@@ -1,10 +1,13 @@
 package com.junwo.ockdong.lbotm.controller;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.common.Pagination;
 import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.service.lbotmService;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
 import com.junwo.ockdong.member.model.vo.Member;
-import com.junwo.ockdong.notice.model.exception.NoticeException;
 
 @Controller
 public class lbotmController {
@@ -50,7 +54,7 @@ public class lbotmController {
 			mv.addObject("pi", pi);
 			mv.setViewName("lbotm/lbotmList");
 		} else {
-			throw new NoticeException("게시글 조회에 실패하였습니다.");
+			throw new lbotmException("게시글 조회에 실패하였습니다.");
 		}
 
 		return mv;
@@ -68,7 +72,7 @@ public class lbotmController {
 			mv.addObject("loginUser", loginUser);
 			mv.addObject("lbotm", lbotm).addObject("page", page).setViewName("lbotm/lbotmDetail");
 		} else {
-			throw new NoticeException("게시글 상세보기에 실패하였습니다.");
+			throw new lbotmException("게시글 상세보기에 실패하였습니다.");
 		}
 		return mv;
 	}
@@ -133,5 +137,43 @@ public class lbotmController {
 
 		return mv;
 	}
+	
+	@RequestMapping("lbotmTop.do")
+	public void boardTopList(HttpServletResponse response) throws IOException {
+
+		ArrayList<lbotm> list = lbotmService.lbotmTop();
+		
+		for(lbotm l : list) {
+			l.setB_Title(URLEncoder.encode(l.getB_Title(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list, response.getWriter());
+		
+	}
+	
+	// 좋아요 등록/삭제
+//	@RequestMapping("like.do")
+//	public String like(@SessionAttribute("loginUser") Member m, int bNo, HttpSession session) {
+//		boardMarking bm = new boardMarking();
+//		int likeCount = lbotmService.selectLike(bNo);
+//		m = (Member)session.getAttribute("loginUser");
+//		
+//		bm.setBoard_no(bNo);
+//		bm.setUserId(m.getUserId());
+//		
+//		
+//		int check = -99;
+//		
+//		check = lbotmService.checkLike(bm);
+//		
+//		if(check == 0) {
+//			int insert = lbotmService.insertLike(bm);
+//		}else {
+//			int delete = lbotmService.deleteLike(bm);
+//		}
+//	
+//		return "redirect:view.do?board_no=" + board_no;
+//	}
 	
 }

@@ -226,7 +226,7 @@ public class NoticeController {
 	@ResponseBody
 	public String deleteComment(int cNo) {
 		
-		System.out.println("삭제:"+cNo);
+		/* System.out.println("삭제:"+cNo); */
 		int result = nService.deleteComment(cNo);
 		System.out.println(result);
 		if(result > 0) {
@@ -237,7 +237,6 @@ public class NoticeController {
 	}
 	
 	//댓글 수정
-	
 	@RequestMapping("ModifyCommnet.do")
 	@ResponseBody
 	public String ModifyCommnet(String Content,int cNo) {
@@ -247,7 +246,7 @@ public class NoticeController {
 		nc.setComments_Content(Content);
 		
 		int updateComent = nService.updateComent(nc);
-		System.out.println(nc);
+		/* System.out.println(nc); */
 		
 		if(updateComent>0) {
 		return "sucess";
