@@ -356,10 +356,10 @@ public class MyOwnController {
 		
 		if(result > 0) {
 			System.out.println("성공");
-			return "Main";
+			return "redirect:main.do";
 		}else {
 			System.out.println("실패");
-			return "Main";
+			return "redirect:main.do";
 		}
 	}
 	
