@@ -94,7 +94,7 @@ a:hover {
 	<div class="loginForm">
 		<a href="main.do"><img class="image" src="resources/img/mainlogo.png" id="logo" align="center"></a>
 
-		<form id="successForm" action="main.do" method="post">
+		<form id="successForm" action="loginView.me" method="post">
 			<div class="Form">
 				<div class="inner">
 					<div class="Form2">인증번호 확인</div>

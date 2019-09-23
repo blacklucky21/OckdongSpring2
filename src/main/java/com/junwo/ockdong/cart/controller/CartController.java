@@ -151,34 +151,21 @@ public class CartController {
 	@RequestMapping("PaymentResultList.do")
 	public ModelAndView PaymentResultList(ModelAndView mv,  @RequestParam("Arr") String[] Arr,@RequestParam("total") String[] total, HttpSession session,
 			@ModelAttribute Payment p, @ModelAttribute Cart c) {
-
-		
-		System.out.println("dddd"+Arr);
-	
-		System.out.println("주문카트체크용"+c);
 		Date now = new Date();
 		SimpleDateFormat sfmt = new SimpleDateFormat("YYMMdd");
 		String pdate = sfmt.format(now);
 		String PayNum ;
-		
-
 		for(int i=0;i<total.length;i++) {
 			System.out.println(total[i]);
-			System.out.println("dddd");
 		}
-
 		Member m = (Member) session.getAttribute("loginUser");
 		String loginUserId = m.getUserId();
-		System.out.println("dd" + m.getUserId());
 		String[]  hitPno=  new String[1];
 		String[]  hitPno2=  new String[1];
 		int checkno ;
-	
 		HashMap<String, String[]> totalMap = new HashMap<String, String[]>();
-
 		totalMap.put("totalArr", Arr);
 		totalMap.put("total",total);
-	
 		ArrayList<Cart> list = CartService.CartPayment(totalMap);
 		hitPno[0] = String.valueOf(list.get(0).getcNo());
 		hitPno2[0] = "oc_"+pdate+"C";
@@ -186,26 +173,19 @@ public class CartController {
 		totalMap.put("hitPno",hitPno2);
 		System.out.println("리스트크기"+list.size());
 		p.setP_id("oc_"+pdate+"C");
-		p.setPayprice( Integer.parseInt(total[0]));
-		//Payment PayMem = CartService.SelectPayMem(checkno);
-		//System.out.println("넘어오는 멤버체크:"+PayMem);
-		
-		
+		p.setPayprice( Integer.parseInt(total[0]));	
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("member", m);
 			mv.addObject("paymem",p);
 			mv.setViewName("Payment/PaymentResultView");
 
-		} else {}
+		}
 		System.out.println("힝힝"+p);
-		
-		
 		int updateAmount = 0;
 		for(int i=0;i<list.size();i++) {
 			updateAmount = CartService.UpdateCartCount(list.get(i));
 		}
-		
 		int insertPay = CartService.PaymentInsertDB(p);
 		int plist = CartService.insertPayment(totalMap);
 		int delCartNum = CartService.delCartNum(totalMap);
@@ -393,7 +373,6 @@ public class CartController {
 			System.out.println(modal);
 			ArrayList<PayProduct> list = CartService.selectBuyList(modal);
 			
-			System.out.println(list);
 			
 			return list;
 		}

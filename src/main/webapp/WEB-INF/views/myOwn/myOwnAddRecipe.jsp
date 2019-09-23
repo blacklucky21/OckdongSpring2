@@ -204,12 +204,14 @@
 			var racipeName = $("#racipeName").val();
 			
 			if(racipeName.length > 0){
+				console.log("레시피 명 : " + racipeName);
 				return true;
 			}else{
 				alert("제목을 입력해주세요.");
 				$("#racipeName").focus();
 				return false;
 			}
+			return true;
 		}
 		$(function(){
 			$(".myOwnBackBtn").click(function(){

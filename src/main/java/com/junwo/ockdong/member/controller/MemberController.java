@@ -103,13 +103,23 @@ public class MemberController {
 	
 		Member loginUser = mService.memberLogin(m);
 		
-		if(bCryptPasswordEncoder.matches(m.getPassword(), loginUser.getPassword())) {
-			model.addAttribute("loginUser", loginUser);
-			
+		if(loginUser != null) {
+			if(bCryptPasswordEncoder.matches(m.getPassword(), loginUser.getPassword())) {
+				model.addAttribute("loginUser", loginUser);
+				return "Main";
+			}else {
+				model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+				return "member/login";
+			}
 		}else {
-			throw new MemberException("로그인에 실패하였습니다.");
+			model.addAttribute("msg","존재하지 않는 회원입니다.");
+			return "member/login";
 		}
-		return "Main";
+		
+		
+		
+	
+		
 	}
 	
 	
@@ -182,14 +192,15 @@ public class MemberController {
 		}
 	}
 	
+	
     public String sendMail(Member m, @RequestParam String email) {
        String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
-       randomCode = randomCode.substring(0, 6);
+       randomCode = randomCode.substring(0, 4);
        String newPass = String.valueOf(randomCode);
        
-       String subject = "회원 가입 승인번호 입니다.";
+       String subject = "옥동도시락 임시비밀번호 입니다.";
        StringBuilder sb = new StringBuilder();
-       sb.append("회원가입 승인 번호는 ").append(newPass).append(" 입니다.");
+       sb.append("임시비밀번호는 ").append(newPass).append(" 입니다.");
        
        if(mService.send(subject, sb.toString(), "seok1721@gamil.com", email)) {
     	   return newPass;
@@ -325,14 +336,15 @@ public class MemberController {
 		
 		int currentPage = 1;
 		Member m = (Member)session.getAttribute("loginUser");
+		
 		if(page != null) {
 			currentPage = page;
 		}
 		
-		int listCount = mService.getMyQnAList(m.getUserId());
+		int listCount = mService.getMyQnAList(m.getNickName());
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		pi.setUserId(m.getUserId());
+		pi.setUserId(m.getNickName());
 		
 		ArrayList<ProductQna> nList = mService.selectQnAList(pi);
 		System.out.println(nList);
@@ -348,24 +360,22 @@ public class MemberController {
 		
 		return mv;
 	}
-	// 문의내역 디테일 뷰
-	@RequestMapping("myQnaDetailView.me")
-	public ModelAndView myQnaDetailView(@ModelAttribute("initPayment") ProductQna qna, 
-										  ModelAndView mv,
-										  HttpSession session) {
-
-
-		ProductQna QnaDetail = mService.myQnaDetailView(qna.getQna_Id());
-
-		if (QnaDetail != null) {
-			mv.addObject("list", QnaDetail);
-			mv.setViewName("myPage/productQnA/myQnaDetailView");
-		} else {
-			throw new NoticeException("게시글 조회에 실패 하였습니다.");
-		}
-
-		return mv;
-	}
+	/*
+	 * // 문의내역 디테일 뷰
+	 * 
+	 * @RequestMapping("myQnaDetailView.me") public ModelAndView
+	 * myQnaDetailView(@ModelAttribute("initPayment") ProductQna qna, ModelAndView
+	 * mv, HttpSession session) {
+	 * 
+	 * 
+	 * ProductQna QnaDetail = mService.myQnaDetailView(qna.getQna_Id());
+	 * 
+	 * if (QnaDetail != null) { mv.addObject("list", QnaDetail);
+	 * mv.setViewName("myPage/productQnA/myQnaDetailView"); } else { throw new
+	 * NoticeException("게시글 조회에 실패 하였습니다."); }
+	 * 
+	 * return mv; }
+	 */
 	
 	// 비밀번호 변경 화면 이동
 	@RequestMapping("updatePwd_myPage.me")

@@ -503,7 +503,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					</div>
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
-					<div class="allmark">
+					<%-- <div class="allmark">
 					<c:if test="${! empty sessionScope.loginUser}">
 						<c:if test="${check1 == 0}">
 						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
@@ -522,7 +522,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
 						<a href="#" class="heart login" data-toggle="modal" data-target="#login-modal"> <span>${likeCount}</span></a>
 					</c:if>
-					</div>
+					</div> --%>
 					
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<c:if test="${! empty sessionScope.loginUser}">

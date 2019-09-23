@@ -658,8 +658,8 @@ $('.order-buy').click(function(){
 	}
 	var totalAmount = parseInt($('#finalTotalPrice').text());
 
-	
-	 CallPayRequest();
+  	CallPayRequest();
+	 //CallPayRequest();
 	if($('.require').prop("checked")){
 		
 
@@ -687,7 +687,7 @@ $('.order-buy').click(function(){
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		    
 		    	
-		    	//CallPayRequest();
+		    	CallPayRequest();
 		        
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
@@ -718,16 +718,12 @@ function CallPayRequest(){
 	var total = new Array();
 	console.log("합"+totalPrice);
 	var check = 0;
-
-
 	$('.this-product').find('input[name=cNo]').each(function(i,e){
-		
 		console.log($(this).val());
 		total[check] = totalPrice;
 		totalArr[check++] = $(this).val();
 		
 	});
-	
 	var username = $('[name="receiverName"]').val();
 	var email = $('.orderEmail').val()+$('.orderEmail2').val();
 	var address = $('#receiverZonecode').val()+'/'+$('#receiverAddress').val()+'/'+$('.receiverAddressSub').val();	
@@ -739,25 +735,14 @@ function CallPayRequest(){
 	$('.payemail').val(email);
 	$('.delivaryCheck').val(delivaryDate+'/'+delivaryTime);
 	$('.payaddress').val(address);
-	 var form = document.forms["insertPaymentAbout"];
-	 
+	var form = document.forms["insertPaymentAbout"];
 	 
 	if('${list}' !=""){
-
-	
 	form.action ="PaymentResultList.do?Arr="+totalArr+"&total="+totalPrice;
-	 
-		 form.submit();
-		 
-
+	form.submit();
 	}else{
-		
-		
-			
 			form.action ="PaymentResultProduct.do?total="+totalPrice;
-			
-		
-				 form.submit();
+			form.submit();
 				
 	}
 }
@@ -860,14 +845,12 @@ function selectEmail(ele){
 		 $('#receiverZonecode').val(addSplit[0]);
 		 $('#receiverAddress').val(addSplit[1]+' '+addSplit[2]);
 		 $('.receiverAddressSub').val(addSplit[3]);
-		 
 		 $('.orderEmail').val(emailSplit[0]);
 		 $('.orderEmail2').val('@'+emailSplit[1]);
 		
 	});
 	
 	$('#shippingBasic').click(function(){
-
 		$('[name="receiverName"]').val('${m.userName}');
 		$('[name="receiverPhone"]').val('${m.phone}');
 		$('[name="receiverCellPhone"]').val('${m.phone}');
