@@ -106,7 +106,7 @@ public class MemberController {
 		if(loginUser != null) {
 			if(bCryptPasswordEncoder.matches(m.getPassword(), loginUser.getPassword())) {
 				model.addAttribute("loginUser", loginUser);
-				return "Main";
+				return "redirect:main.do";
 			}else {
 				model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
 				return "member/login";
@@ -128,7 +128,7 @@ public class MemberController {
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		
-		return "Main";
+		return "redirect:main.do";
 	}
 	
 	/*** ID찾기 ***/
