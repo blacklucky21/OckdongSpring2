@@ -75,4 +75,16 @@
 		where bNo = #{bNo}
 	</update>
 	
+	<!-- 게시글 순위  -->
+	<select id="lbotmTop" resultMap="lbotmResultSet"> <!-- CDATA 부등호 쓸때 감싸기 -->
+		<![CDATA[
+		select *
+		from (select *
+			  from lbotm
+			  where b_status = 'Y'
+			  order by b_Count desc)
+		where rownum <= 6
+		]]>
+	</select>
+	
 </mapper>

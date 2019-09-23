@@ -213,8 +213,8 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public int getMyQnAList(String userId) {
-		return mDAO.getMyQnAList(userId);
+	public int getMyQnAList(String qna_user) {
+		return mDAO.getMyQnAList(qna_user);
 	}
 
 
@@ -224,10 +224,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	@Override
-	public ProductQna myQnaDetailView(int qna_Id) {
-		return mDAO.myQnaDetailView(qna_Id);
-	}
+	/*
+	 * @Override public ProductQna myQnaDetailView(int qna_Id) { // TODO
+	 * Auto-generated method stub return null; }
+	 */
+
+
+	/*
+	 * @Override public ProductQna myQnaDetailView(int qna_Id) { return
+	 * mDAO.myQnaDetailView(qna_Id); }
+	 */
 
 
 

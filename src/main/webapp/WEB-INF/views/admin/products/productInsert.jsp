@@ -69,7 +69,6 @@
 								<td><div class="prim"><img id="contentImgArea1" name="contentImg2" onerror="delImg(this);" style="width: 100%; height: 80%;"><span id="s1">추가이미지</span></div></td>
 								<td><div class="prim"><img id="contentImgArea2" name="contentImg3" onerror="delImg(this);" style="width: 100%; height: 80%;"><span id="s2">추가이미지</span></div></td>
 								<td><div class="prim"><img id="contentImgArea3" name="contentImg4" onerror="delImg(this);" style="width: 100%; height: 80%;"><span id="s3">추가이미지</span></div></td>
-								<td> <div><input multiple="multiple" type="file" name="file" /></div><td>
 							</tr>
 							<tr style="height: 364px;">
 								<th class="head" >상품 상세</th>

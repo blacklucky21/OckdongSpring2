@@ -408,7 +408,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					</div>
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
-					<div class="allmark">
+			<%-- 		<div class="allmark">
 					<c:if test="${! empty sessionScope.loginUser}">
 						<c:if test="${check1 == 0}">
 						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
@@ -427,7 +427,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
 						<a href="#" class="heart login" data-toggle="modal" data-target="#login-modal"> <span>${likeCount}</span></a>
 					</c:if>
-					</div>
+					</div> --%>
 					
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<c:if test="${! empty sessionScope.loginUser}">
@@ -457,7 +457,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 							<div id="rPopup">
 							<a href="javascript:" onClick="reportPopup('close')">
 				            	<span id="closePopup">닫기</span>
-        					</a>
+        					</a> 
         					
 								<ul class="reportWrap">
 									<li onclick="choiceReport('${detail.BOARD_NO}', '광고/상업성 게시글 ', '${detail.MEMBER_NO }');" id="rli">광고/상업성 게시글 <input id="report" type="radio" value="1" class="pop_check"></li>
@@ -686,7 +686,6 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 
 	//댓글 삭제
 	function deleteComment(cNo){
-		alert(cNo);
 		
 	    $.ajax({
             url: "deleteComment.do",
@@ -713,7 +712,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 		append +='<div id="comment-write" class="comment-write" style="display:inline-block;width:500px">';
 		append +='<table class="replyTable">';
 		append +='<tbody><tr>';
-		append +='<td><textarea cols="98" rows="5"  id="Comments_Content " name="COMMENTS_CONTENT" class="txtarea r5 placeholder modify_Content'+cNo+'" placeholder="댓글 수정" onfocus="setFlag();" style="border: none; width:400px"></textarea></td>';
+		append +='<td><textarea cols="98" rows="5"  id="Comments_Content" name="COMMENTS_CONTENT" class="txtarea r5 placeholder modify_Content'+cNo+'" placeholder="댓글 수정" onfocus="setFlag();" style="border: none; width:400px"></textarea></td>';
 		append +='<td><button id="rSubmit " class="btn btn-primary btncmm1 modifyComment'+cNo+'">입력</button></td>';
 		append +='</tr>';
 		append +='</tbody></table>';

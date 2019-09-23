@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상세보기</title>
 <style>
 .frm {
 	margin-left: 250px;
@@ -447,10 +447,6 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 			<div class="row">
 				<!---------------------------------------------------------------------------------------------------------------------------------------------->
 				<div class="container1">
-					<!-- 게시판 명 -->
-					<%-- <c:if test="${detail.WRITING_TYPE == 1}">
-						<h2 class="boardName">자유게시판				
-					</c:if> --%>
 					<h2 class="boardName">도시락 자랑하기</h2>
 
 					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
@@ -478,8 +474,6 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<span class="inner">
 						<span class="ico_wrap">
 						<a>
-							<%-- <img src="<%=request.getContextPath()%>/resources/images/boardImg/img_male.gif" class="proic"> --%>
-							<%-- <img src="${pageContext.request.contextPath}${detail.FILES_ROOT}${detail.FILES_CHANGE_TITLE}" class="proic"> --%>
 							<img src="${pageContext.request.contextPath}/resources/img/boardImg/member.png" class="proic">
 						</a>
 						
@@ -496,7 +490,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 									<li class="da02"><span>${ lbotm.b_Count }</span></li>
 									<!-- 댓글 카운트  -->
  									<%--<li class="da03"><span>${detail.COMMENTS_COUNT}</span></li> --%>
-									<li class="da03"><span id="rCount1"></span></li>
+									<li class="da03"><span id="rCount1">${ lbotm.b_Count }</span></li>
 								</ul>
 							</div>
 						</span>
@@ -509,7 +503,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 					</div>
 
 					<!------------------------------------ 북마크, 좋아요------------------------------------>
-					<div class="allmark">
+					<%-- <div class="allmark">
 					<c:if test="${! empty sessionScope.loginUser}">
 						<c:if test="${check1 == 0}">
 						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
@@ -528,7 +522,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 						<a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
 						<a href="#" class="heart login" data-toggle="modal" data-target="#login-modal"> <span>${likeCount}</span></a>
 					</c:if>
-					</div>
+					</div> --%>
 					
 					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
 					<c:if test="${! empty sessionScope.loginUser}">
@@ -592,93 +586,93 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 				</table>
 				
 				<script>
-					$(function(){
+				$(function(){
+					getCommentList();
+					
+					setInterval(function(){
 						getCommentList();
-						
-						setInterval(function(){
-							getCommentList();
-						}, 1000000);
-					});
-					
-					// 댓글 등록 ajax
-					$("#rSubmit").on("click", function(){
-			         var Comments_Content = $("#Comments_Content").val();
-			         var nNo = ${ notice.nNo };
-			         
-			         $.ajax({
-			            url: "insertComment.do",
-			            data: {Comments_Content: Comments_Content, nNo:nNo},
-			            type: "post",
-			            success: function(data){
-			               if(data == "success"){
-			            	   getCommentList();
-			            	   $("#Comments_Content").val("");
-			               }
-			            }
-			         });
-			      });
-					
-					// 댓글 리스트 ajax
-					function getCommentList(){
-						var nNo = ${ notice.nNo };
-						var user ="";
-					
-						if( '${loginUser.userId}' != ""){
-							user = '${loginUser.userId}';
-						}
-						
-						$.ajax({
-							url: "commentList.do",
-							data: {nNo:nNo},
-							dataType: "json",
-							success: function(data){ 	
-								$tableBody = $("#rtb tbody");
-								$tableBody.html("");
-								
-								var $tr;
-								var $UserId;
-								var $Comments_Content;
-								var $Comments_Date;
-								var ss ="";
-								$("#rCount").text("댓글 (" + data.length + ")");
-								$("#rCount1").text(data.length);
-								var ddl ="";
-								if(data.length > 0){
-									for(var i in data){
-									
-										$tr = $("<tr style='border-bottom:0.5px solid #cecece'>");
-										$UserId = $("<td class='comment-txt'  style='font-weight: bold; margin-right:80px; '>").text(data[i].UserId);
-										$Comments_Content = $("<td class='ptxt cModify"+data[i].Comments_No+"' width='500px' margin-left='100px' >").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
-										$Comments_Date = $("<td nowrap width='100' class='bb"+data[i].Comments_No+"'>").text(data[i].Comments_Date);
-										if(user == data[i].UserId){
-										ddl = "<td nowrap><button class='modifyB2 bb"+data[i].Comments_No+"' onclick='modifyComment("+data[i].Comments_No+")' style='background:none;border:0'>수정</button></td>";
-										ddl += "<td nowrap><button class='deleteB2 bb"+data[i].Comments_No+"' onclick='deleteComment("+data[i].Comments_No+")'style='background:none ;border:0'>삭제</button></td>";
-										ddl += "<td ><input type='hidden' class='cNo' value="+data[i].Comments_No+"></td></tr>"
-										}else{
-											ddl = "<td>&nbsp&nbsp</td>";
-											ddl += "<td>&nbsp&nbsp&nbsp </td>";
-											ddl += "<td>&nbsp&nbsp </td>";
-										
-										}
-									
-										$tr.append($UserId);
-										$tr.append($Comments_Content);
-										$tr.append($Comments_Date);
-										$tr.append(ddl);
-										$tableBody.append($tr);
-									
-									}
-									
-									} else {
-										$tr = $("<tr>");
-										$Comments_Content = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-										
-										$tr.append($Comments_Content);
-										$tableBody.append($tr);
-									}
-								}	
-						});
+					}, 1000000);
+				});
+				
+				// 댓글 등록 ajax
+				$("#rSubmit").on("click", function(){
+		         var Comments_Content = $("#Comments_Content").val();
+		         var nNo = ${ notice.nNo };
+		         
+		         $.ajax({
+		            url: "insertComment.do",
+		            data: {Comments_Content: Comments_Content, nNo:nNo},
+		            type: "post",
+		            success: function(data){
+		               if(data == "success"){
+		            	   getCommentList();
+		            	   $("#Comments_Content").val("");
+		               }
+		            }
+		         });
+		      });
+				
+				// 댓글 리스트 ajax
+				function getCommentList(){
+					var nNo = ${ notice.nNo };
+					var user ="";
+				
+					if( '${loginUser.userId}' != ""){
+						user = '${loginUser.userId}';
 					}
+					
+					$.ajax({
+						url: "commentList.do",
+						data: {nNo:nNo},
+						dataType: "json",
+						success: function(data){ 	
+							$tableBody = $("#rtb tbody");
+							$tableBody.html("");
+							
+							var $tr;
+							var $UserId;
+							var $Comments_Content;
+							var $Comments_Date;
+							var ss ="";
+							$("#rCount").text("댓글 (" + data.length + ")");
+							$("#rCount1").text(data.length);
+							var ddl ="";
+							if(data.length > 0){
+								for(var i in data){
+								
+									$tr = $("<tr style='border-bottom:0.5px solid #cecece'>");
+									$UserId = $("<td class='comment-txt'  style='font-weight: bold; margin-right:80px; '>").text(data[i].UserId);
+									$Comments_Content = $("<td class='ptxt cModify"+data[i].Comments_No+"' width='500px' margin-left='100px' >").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
+									$Comments_Date = $("<td nowrap width='100' class='bb"+data[i].Comments_No+"'>").text(data[i].Comments_Date);
+									if(user == data[i].UserId){
+									ddl = "<td nowrap><button class='modifyB2 bb"+data[i].Comments_No+"' onclick='modifyComment("+data[i].Comments_No+")' style='background:none;border:0'>수정</button></td>";
+									ddl += "<td nowrap><button class='deleteB2 bb"+data[i].Comments_No+"' onclick='deleteComment("+data[i].Comments_No+")'style='background:none ;border:0'>삭제</button></td>";
+									ddl += "<td ><input type='hidden' class='cNo' value="+data[i].Comments_No+"></td></tr>"
+									}else{
+										ddl = "<td>&nbsp&nbsp</td>";
+										ddl += "<td>&nbsp&nbsp&nbsp </td>";
+										ddl += "<td>&nbsp&nbsp </td>";
+									
+									}
+								
+									$tr.append($UserId);
+									$tr.append($Comments_Content);
+									$tr.append($Comments_Date);
+									$tr.append(ddl);
+									$tableBody.append($tr);
+								
+								}
+								
+								} else {
+									$tr = $("<tr>");
+									$Comments_Content = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+									
+									$tr.append($Comments_Content);
+									$tableBody.append($tr);
+								}
+							}	
+					});
+				}
 					
 				</script>
 

@@ -31,6 +31,8 @@ import com.junwo.ockdong.member.model.vo.Member;
 import com.junwo.ockdong.myOwn.model.service.MyOwnService;
 import com.junwo.ockdong.myOwn.model.vo.Ingredient;
 import com.junwo.ockdong.myOwn.model.vo.MBLRecipe;
+import com.junwo.ockdong.notice.model.service.NoticeService;
+import com.junwo.ockdong.notice.model.vo.Notice;
 import com.junwo.ockdong.product.model.service.ProductService;
 import com.junwo.ockdong.product.model.vo.Product;
 import com.junwo.ockdong.product.model.vo.ProductQna;
@@ -48,6 +50,9 @@ public class AdminController {
 	
 	@Autowired
 	private CartService cService;
+	
+	@Autowired
+	NoticeService nService;
 
 	@RequestMapping("adminView.do")
 	public String adminView() {
@@ -838,6 +843,14 @@ public class AdminController {
 		
 		System.out.println(count);
 		
+		ArrayList<Notice> list2 = nService.selectList2();
+		if (list2 != null) {
+			
+			mv.addObject("list2", list2);
+		}
+		
+		System.out.println("ddddddddd"+list2);
+			
 		mv.addObject("payCount",count);
 		
 		mv.addObject("MoneyAll",PayMoney);

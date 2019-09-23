@@ -45,6 +45,8 @@ public interface NoticeService {
 
 	int updateComent(NoticeComments nc);
 
+	ArrayList<Notice> selectList2();
+
 
 
 }
