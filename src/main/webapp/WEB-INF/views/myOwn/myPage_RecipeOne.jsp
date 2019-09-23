@@ -219,8 +219,11 @@
 			});
 		});
 		$(function(){
+			var mblId = $("#mblId").val();
 			$(".recipeDeleteBtn").click(function(){
-				location.href="recipeDelete.do?mblId="+mblId;
+				if(confirm("나만의 도시락을 삭제하시겠습니까?")){
+	               location.href="myRecipeDelete.do?mblId="+mblId;
+	            }
 			});
 		})
 	</script>

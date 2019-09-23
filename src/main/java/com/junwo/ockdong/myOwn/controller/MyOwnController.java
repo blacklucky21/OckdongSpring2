@@ -356,10 +356,10 @@ public class MyOwnController {
 		
 		if(result > 0) {
 			System.out.println("성공");
-			return "Main";
+			return "redirect:main.do";
 		}else {
 			System.out.println("실패");
-			return "Main";
+			return "redirect:main.do";
 		}
 	}
 	
@@ -464,7 +464,12 @@ public class MyOwnController {
 			@RequestParam("mainNo") int main,
 			@RequestParam("sub1No") int sub1,
 			@RequestParam("sub2No") int sub2,
-			HttpServletRequest request) throws IOException {
+			HttpServletRequest request,
+			HttpSession session,
+			@RequestParam("mblId") int mblId) throws IOException {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		
 		System.out.println("fileName : " + fileName);
 		
@@ -482,6 +487,8 @@ public class MyOwnController {
 		} else {
 			System.out.println("4찬");
 		}
+		
+		MBLRecipe recipe = service.myRecipeDetail(mblId);
 
 		mv.addObject("rice",riceIn);
 		mv.addObject("main",mainIn);
@@ -489,6 +496,8 @@ public class MyOwnController {
 		mv.addObject("sub2",sub2In);
 		mv.addObject("soup",soupIn);
 		mv.addObject("fileName",fileName);
+		mv.addObject("member",loginUser);
+		mv.addObject("mbl",recipe);
 		mv.setViewName("myOwn/myOwnPayment");
 		
 		return mv;
@@ -697,4 +706,18 @@ public class MyOwnController {
 			return -1;
 		}
 	}
+	
+	@RequestMapping("myRecipeDelete.do")
+   public String myRecipeDelete(int mblId) throws Exception {
+      System.out.println("mblId : " + mblId);
+      int result = service.deleteMblRecipe(mblId);
+
+      if (result > 0) {
+         System.out.println("성공");
+         return "redirect:myOwnList.me";
+      } else {
+         System.out.println("실패");
+         throw new Exception("내가 만든 나만의 도시락 삭제 도중 애러발생!!!!");
+      }
+   }
 }
