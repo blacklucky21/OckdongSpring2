@@ -53,7 +53,6 @@ public class NoticeController {
 		
 
 		ArrayList<Notice> list = nService.selectList(pi);
-
 		if (list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
@@ -61,10 +60,29 @@ public class NoticeController {
 		} else {
 			throw new NoticeException("게시글 조회에 실패하였습니다.");
 		}
+		
 
 		return mv;
 
 	}
+	
+	@RequestMapping("nlist2.do")
+	public ModelAndView noticelist2(@RequestParam(value = "page", required = false) Integer page, ModelAndView mv, @RequestParam int nNo) {
+
+		ArrayList<Notice> list2 = nService.selectList2(nNo);
+		
+		if (list2 != null) {
+			mv.addObject("list2", list2);
+			mv.setViewName("admin/adminMain");
+			
+		} else {
+			throw new NoticeException("게시글 조회에 실패하였습니다.");
+		}
+
+		return mv;
+
+	}
+	
 
 	// 게시판 상세보기
 	@RequestMapping("ndetail.do")

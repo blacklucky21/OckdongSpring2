@@ -686,7 +686,7 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 
 	//댓글 삭제
 	function deleteComment(cNo){
-		alert(cNo);
+		alert("댓글 삭제가 완료되었습니다.");
 		
 	    $.ajax({
             url: "deleteComment.do",

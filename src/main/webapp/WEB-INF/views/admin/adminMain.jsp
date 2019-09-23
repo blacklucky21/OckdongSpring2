@@ -196,12 +196,21 @@
 	 		<div class="notice_content_wrap">
 	 			<table class="notice_table">
 	 				<tbody class="notice_nobody_table">
-	 				<c:forEach var ="i" begin="0" end="5">
+	 				
+	 				 <%-- <c:forEach var ="i" begin="0" end="5">
 	 					<tr>
 	 						<td class="notice_left"><span class="notice_title">[SNS마켓 성장지원 프로젝트] 제 2의 스타일난다를 찾습니다!</span></td>
-	 						<td class="notice_right"><span class="notice_date">2019-09-21</span></td>
+	 						<td class="notice_left"><span class="notice_title">2019-09-21</span></td>
 	 					</tr>	
-	 					</c:forEach>		
+	 					</c:forEach> --%>	 
+	 					
+	 					<c:forEach var="ad" items="${ list2 }">
+	 						<tr>
+	 							<td class="notice_left">${ ad.nNo }</td>
+	 							<td class="notice_left">${ ad.nTitle }</td>
+	 						</tr>
+	 					</c:forEach>
+	 					
 	 				</tbody>
 	 			</table>
 	 		</div>
