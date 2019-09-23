@@ -192,6 +192,7 @@ public class MemberController {
 		}
 	}
 	
+	
     public String sendMail(Member m, @RequestParam String email) {
        String randomCode = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
        randomCode = randomCode.substring(0, 4);
