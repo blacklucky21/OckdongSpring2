@@ -33,7 +33,7 @@
 			<img src="resources/img/mainViews/mainsli.PNG" />
 			<img src="resources/img/mainViews/mainsli2.png"/>
 			<img src="resources/img/mainViews/mainsli3.jpg" />
-			<img src="resources/img/mainViews/4.jpg"  style="width:1920px;height:100%;"/> 
+			<!-- <img src="resources/img/mainViews/4.jpg"  style="width:1920px;height:100%;"/>  -->
 		
 		</div>
 	</div>
@@ -173,17 +173,17 @@
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$ 링크 이동 사진 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 <!-- 하단 사진  왼쪽 오른쪽 -->
 	<!-- 이동 -->
-	<div id="wizmainbox">
-		<!-- 왼쪽 부분 -->
+<!-- 	<div id="wizmainbox">
+		왼쪽 부분
 		<div id="box_left" class="first_li">
 			<img src="resources/img/mainViews/111.jpg" style="width:100%;height:100%;"/>
 		</div>
-		<!-- 우측 부분 -->
+		우측 부분
 		<div id="box_right" class="first_li">
 			<img src="resources/img/mainViews/3.jpg" style="width:100%;height:100%; "/>
 		</div>
 	
-	</div>
+	</div> -->
 <!-- 하단 사진 끝 -->
 
 <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$ 링크 이동 사진 끝 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
@@ -362,7 +362,7 @@
 	</div>
 <!-- 33333333333333333333333333 샐러드 3333333333333333333333333333333 -->
 <!-- 44444444444444444444444444 샐러드 4444444444444444444444444444444 -->
-<div class="item-display-wrap">
+<%-- <div class="item-display-wrap">
 	<div class="mtitbox">
 		<div class="mtitle">
 			<span class="mname">lunch box of<br>the months</span>
@@ -411,7 +411,7 @@
 	</div>
 	
 	</div>
-
+ --%>
 <!-- 44444444444444444444444444 샐러드 4444444444444444444444444444444 -->
 	
 	
