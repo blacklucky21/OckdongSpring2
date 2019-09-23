@@ -155,7 +155,7 @@ public class CartController {
 		
 		System.out.println("dddd"+Arr);
 	
-		System.out.println("힝힝"+c);
+		System.out.println("주문카트체크용"+c);
 		Date now = new Date();
 		SimpleDateFormat sfmt = new SimpleDateFormat("YYMMdd");
 		String pdate = sfmt.format(now);
@@ -228,7 +228,13 @@ public class CartController {
 
 		} else {}
 		System.out.println("힝힝"+p);
-	
+		
+		
+		int updateAmount = 0;
+		for(int i=0;i<list.size();i++) {
+			updateAmount = CartService.UpdateCartCount(list.get(i));
+		}
+		
 		int insertPay = CartService.PaymentInsertDB(p);
 		int plist = CartService.insertPayment(totalMap);
 		int delCartNum = CartService.delCartNum(totalMap);

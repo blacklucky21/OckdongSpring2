@@ -14,7 +14,6 @@
 		where p_STATUS = 'Y' and p_sell = 'Y'
 	</select>
 
-
 	<resultMap type="Product" id="ProductList">
 		<id property="p_Id" column ="P_ID"/>
 		<result property="p_name" column="P_NAME"/>
@@ -297,7 +296,8 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		<result property="qna_answer" column="QNA_ANSWER"/>
 		<result property="qna_secret" column="QNA_SECRET"/>
 		<result property="qna_answerDate" column="QNA_ANSWERDATE"/>	
-		<result property="answer_content" column="ANSWER_CONTENT"/>	
+		<result property="answer_content" column="ANSWER_CONTENT"/>
+		<result property="answer_Id" column="ANSWER_ID"/>	
 </resultMap>
 
 <!-- 관리자 QnA 리스트 쿼리 -->
@@ -310,19 +310,20 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 </select>
 
 <select id="adminSearchQnA" parameterType="string" resultMap="productQnaAdmin">
-	select *
-	from (select *
-		  from 	PRODUCTQNA left join PRODUCT using(P_ID) left join PRODUCTANSWER using(QNA_ID)
-		  order by QNA_ID desc )
-	where QNA_STATUS = 'Y'
-	<choose>
-		<when test="type.equals('답변대기')">
-			and QNA_ANSWER = 'N'
-		</when>
-		<when test="type.equals('답변완료')">
-			and QNA_ANSWER = 'Y'
-		</when>
-	</choose>
+   select *
+        from    PRODUCTQNA left join PRODUCT using(P_ID) left join PRODUCTANSWER using(QNA_ID)
+       
+         where QNA_STATUS = 'Y'
+        
+   <choose>
+      <when test="type.equals('답변대기')">
+         and QNA_ANSWER = 'N'
+      </when>
+      <when test="type.equals('답변완료')">
+         and QNA_ANSWER = 'Y'
+      </when>
+   </choose>
+   order by QNA_ID desc 
 </select>
 
 
@@ -370,6 +371,38 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 	
 </update>
 
+<!-- <<<<<<<<<  -->
+<update id="updateMainPicture" parameterType="map">
+	update picturelist
+	set PT_NAME = #{titleName}, PT_REALNAME = #{realName}
+	where PT_NAME = #{oldName}
+</update>
+
+<insert id="insertMainPicture" parameterType="PictureList">
+	insert into picturelist values(SEQ_PT_ID.NEXTVAL,#{pt_name},#{pt_realName},SYSDATE,SYSDATE,#{p_Id}, DEFAULT, 1)
+</insert>
+
+<delete id="deletePicture" parameterType="string">
+	delete from picturelist where PT_NAME = #{sub_name}
+</delete>
+<!-- ============= -->
+<delete id="deleteAnswer">
+	DELETE from PRODUCTANSWER
+	WHERE  ANSWER_ID = #{answer_Id}
+</delete>
+
+<update id="updateQnaType2">
+	update PRODUCTQNA
+	set QNA_ANSWER = 'N' , QNA_ANSWERDATE = ''
+	where QNA_ID = #{qna_Id}
+</update>
+
+<update id="AnswerUpdate">
+	update PRODUCTANSWER
+		set ANSWER_CONTENT = #{answer_content}
+		where ANSWER_ID = #{answer_Id}
+
+</update>
 
 
 </mapper>

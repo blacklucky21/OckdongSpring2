@@ -328,7 +328,8 @@ public class ProductController {
 			@RequestParam(value = "thumbnailImg2", required = false) MultipartFile thumbnailImg2,
 			@RequestParam(value = "thumbnailImg3", required = false) MultipartFile thumbnailImg3,
 			@RequestParam(value = "thumbnailImg4", required = false) MultipartFile thumbnailImg4,
-			@RequestParam("title_name") String title_name, @RequestParam("title_realname") String title_realname,
+			@RequestParam("title_name") String title_name,
+			@RequestParam("title_realname") String title_realname,
 			@RequestParam("title_type") int title_type,
 			@RequestParam(value = "sub1_name", required = false) String sub1_name,
 			@RequestParam(value = "sub1_realname", required = false) String sub1_realname,
@@ -339,8 +340,6 @@ public class ProductController {
 			@RequestParam(value = "sub3_name", required = false) String sub3_name,
 			@RequestParam(value = "sub3_realname", required = false) String sub3_realname,
 			@RequestParam(value = "sub3_type", required = false) Integer sub3_type, HttpServletRequest request) {
-		
-		
 		
 		// 메인은 무조건 있기 때문에 문제 없음
 		// 가지고 온거 출려 해본다.
@@ -363,125 +362,142 @@ public class ProductController {
 		System.out.println("서브3 변경 네임: " + sub3_name);
 		System.out.println("서브3 원레 네임: " + sub3_realname);
 		System.out.println("서브3 타입 : " + sub3_type);
-
 		
-		
-		ArrayList npt = new ArrayList(); // 기존 사진을 없앨 을 경우
-		npt.add(title_realname);
-		npt.add(sub1_realname);
-		npt.add(sub2_realname);
-		npt.add(sub3_realname);
-
-		// 가지고 온거 확인 해본다.
-		ArrayList orign = new ArrayList(); // 사진을 추가 했을 경우
-
-		orign.add(thumbnailImg1.getOriginalFilename());
-		orign.add(thumbnailImg2.getOriginalFilename());
-		orign.add(thumbnailImg3.getOriginalFilename());
-		orign.add(thumbnailImg4.getOriginalFilename());
-
-		System.out.println("==================  기존꺼에서 추가 됐는지 확인 한다.   =============================");
-		System.out.println(thumbnailImg1.getOriginalFilename()); // 원래 이름 저장한다.
-		System.out.println(thumbnailImg2.getOriginalFilename());
-		System.out.println(thumbnailImg3.getOriginalFilename());
-		System.out.println(thumbnailImg4.getOriginalFilename());
-		System.out.println("==========================================");
-		
-		
-
-		for (int i = 0; i < orign.size(); i++) {
-			System.out.println("수정 컨트롤러 사진 변경된 이름 출력 해본다. : " + orign.get(i).toString());
+		// 메인 수정
+		if(!thumbnailImg1.isEmpty()){//사진 바뀜
+			System.out.println("thumbnailImg1 수정됨");
+			deleteFile(title_name, request);//기존 파일 삭제
+			String productImgFileName1 = mkProductImgFile(thumbnailImg1, request);//수정될 이미지 파일 만들기 + 파일명 받아오기
+			Map<String, String> picture = new HashMap<String, String>();// DB에 전달할 수정된 파일정보와 이전 파일명
+			picture.put("oldName", title_name);
+			picture.put("realName", thumbnailImg1.getOriginalFilename());
+			picture.put("titleName", productImgFileName1);
+			System.out.println("title_name : " + title_name);
+			System.out.println("thumbnailImg1.getOriginalFilename() : " + thumbnailImg1.getOriginalFilename());
+			System.out.println("productImgFileName : " + productImgFileName1);
+			int result = pService.updateMainPicture(picture);// DB값에 저장된 이미지 파일명 변경 수정
+			if(result > 0) {System.out.println("수정성공");}else {System.out.println("수정실패");}
 		}
-
-		int size = 0;
-		for (int i = 0; i < orign.size(); i++) {
-			if (!orign.get(i).equals("")) {
-				size += 1;
-			}
+		
+		//서브 1
+		if(!thumbnailImg2.isEmpty() && sub1_name != null){//추가된 파일이 있으면서 기존에 이미지가 있는경우
+			System.out.println("thumbnailImg2 수정됨");
+			deleteFile(sub1_name, request);//기존 파일 삭제
+			String productImgFileName2 = mkProductImgFile(thumbnailImg2, request);//수정될 이미지 파일 만들기 + 파일명 받아오기
+			Map<String, String> picture = new HashMap<String, String>();// DB에 전달할 수정된 파일정보와 이전 파일명
+			picture.put("oldName", sub1_name);
+			picture.put("realName", thumbnailImg2.getOriginalFilename());
+			picture.put("titleName", productImgFileName2);
+			System.out.println("sub1_name : " + sub1_name);
+			System.out.println("thumbnailImg2.getOriginalFilename() : " + thumbnailImg2.getOriginalFilename());
+			System.out.println("productImgFileName2 : " + productImgFileName2);
+			int result = pService.updateMainPicture(picture);// DB값에 저장된 이미지 파일명 변경 수정
+			if(result > 0) {System.out.println("수정성공");}else {System.out.println("수정실패");}
+			
+		}else if(!thumbnailImg2.isEmpty() && sub1_name == null) {//추가된 파일이 있으면서 기존에 이미지가 없는경우
+			System.out.println("thumbnailImg2 추가됨");
+			System.out.println(p);
+			String productImgFileName2 = mkProductImgFile(thumbnailImg2, request);//추가될 이미지 파일 만들기 + 파일명 받아오기
+			PictureList pl = new PictureList();
+			pl.setP_Id(p.getP_Id());
+			pl.setPt_name(productImgFileName2);//방금 저장된 이미지파일명
+			pl.setPt_realName(thumbnailImg2.getOriginalFilename());//실제 파일명
+			
+			int result = pService.insertMainPicture(pl);
+			if(result > 0) {System.out.println("추가성공");}else {System.out.println("추가실패");}
 		}
-
-		ArrayList<MultipartFile> list = new ArrayList<MultipartFile>();
-
-		//
-		// 등록할 파일이 있는지 구분
-		// 값이 있다. 새로운 사진 이 들어왔으면
-		if (thumbnailImg1 != null && !thumbnailImg1.isEmpty()) { // 메인
-			// 변경된 이름 여부 확인후 있으면 그걸 지우겟다.
-			if (title_name != null) {
-				deleteFile(title_name, request);
-			}
-			list.add(thumbnailImg1);
-
+		
+		//서브 2
+		if(!thumbnailImg3.isEmpty() && sub2_name != null){//추가된 파일이 있으면서 기존에 이미지가 있는경우
+			System.out.println("thumbnailImg3수정됨");
+			deleteFile(sub2_name, request);//기존 파일 삭제
+			String productImgFileName3 = mkProductImgFile(thumbnailImg3, request);//수정될 이미지 파일 만들기 + 파일명 받아오기
+			Map<String, String> picture = new HashMap<String, String>();// DB에 전달할 수정된 파일정보와 이전 파일명
+			picture.put("oldName", sub2_name);
+			picture.put("realName", thumbnailImg3.getOriginalFilename());
+			picture.put("titleName", productImgFileName3);
+			System.out.println("sub2_name : " + sub2_name);
+			System.out.println("thumbnailImg3.getOriginalFilename() : " + thumbnailImg3.getOriginalFilename());
+			System.out.println("productImgFileName3 : " + productImgFileName3);
+			int result = pService.updateMainPicture(picture);// DB값에 저장된 이미지 파일명 변경 수정
+			if(result > 0) {System.out.println("수정성공");}else {System.out.println("수정실패");}
+			
+		}else if(!thumbnailImg3.isEmpty() && sub2_name == null) {//추가된 파일이 있으면서 기존에 이미지가 없는경우
+			System.out.println("thumbnailImg3 추가됨");
+			System.out.println(p);
+			String productImgFileName3 = mkProductImgFile(thumbnailImg3, request);//추가될 이미지 파일 만들기 + 파일명 받아오기
+			PictureList pl = new PictureList();
+			pl.setP_Id(p.getP_Id());
+			pl.setPt_name(productImgFileName3);//방금 저장된 이미지파일명
+			pl.setPt_realName(thumbnailImg3.getOriginalFilename());//실제 파일명
+			
+			int result = pService.insertMainPicture(pl);
+			if(result > 0) {System.out.println("추가성공");}else {System.out.println("추가실패");}
 		}
-		if (thumbnailImg2 != null && !thumbnailImg2.isEmpty()) { // 서브
-			// 이러면 파일이 존재 한다.
-
-			if (sub1_name != null) {
-				// 기존 올린 파일 있는지 조회 한다. 있으면 제거 하기 위해서
+		
+		//서브 3
+		if(!thumbnailImg4.isEmpty() && sub3_name != null){//추가된 파일이 있으면서 기존에 이미지가 있는경우
+			System.out.println("thumbnailImg4 수정됨");
+			deleteFile(sub3_name, request);//기존 파일 삭제
+			String productImgFileName4 = mkProductImgFile(thumbnailImg4, request);//수정될 이미지 파일 만들기 + 파일명 받아오기
+			Map<String, String> picture = new HashMap<String, String>();// DB에 전달할 수정된 파일정보와 이전 파일명
+			picture.put("oldName", sub3_name);
+			picture.put("realName", thumbnailImg4.getOriginalFilename());
+			picture.put("titleName", productImgFileName4);
+			int result = pService.updateMainPicture(picture);// DB값에 저장된 이미지 파일명 변경 수정
+			System.out.println("sub3_name : " + sub3_name);
+			System.out.println("thumbnailImg4.getOriginalFilename() : " + thumbnailImg4.getOriginalFilename());
+			System.out.println("productImgFileName4 : " + productImgFileName4);
+			if(result > 0) {System.out.println("수정성공");}else {System.out.println("수정실패");}
+			
+		}else if(!thumbnailImg4.isEmpty() && sub3_name == null) {//추가된 파일이 있으면서 기존에 이미지가 없는경우
+			System.out.println("thumbnailImg4 추가됨");
+			System.out.println(p);
+			String productImgFileName4 = mkProductImgFile(thumbnailImg4, request);//추가될 이미지 파일 만들기 + 파일명 받아오기
+			PictureList pl = new PictureList();
+			pl.setP_Id(p.getP_Id());
+			pl.setPt_name(productImgFileName4);//방금 저장된 이미지파일명
+			pl.setPt_realName(thumbnailImg4.getOriginalFilename());//실제 파일명
+			
+			int result = pService.insertMainPicture(pl);
+			if(result > 0) {System.out.println("추가성공");}else {System.out.println("추가실패");}
+		}
+		
+		
+		// 기존거 삭제만 한경우
+		
+		// 서브1
+		if(sub1_realname != null) {
+			if (sub1_realname.equals("c")) {
 				deleteFile(sub1_name, request); // 변경된 이름
+				int result = pService.deletePicture(sub1_name);
+				if(result > 0) {System.out.println("삭제성공");}else {System.out.println("삭제실패");}
 			}
-			list.add(thumbnailImg2);
 		}
-		if (thumbnailImg3 != null && !thumbnailImg3.isEmpty()) {
-			// 이러면 파일이 존재 한다.
-			if (sub2_name != null) {
-				// 기존 올린 파일 있는지 조회 한다. 있으면 제거 하기 위해서
+		
+		
+		// 서브2
+		if(sub2_realname != null) {
+			if (sub2_realname.equals("c")) {
 				deleteFile(sub2_name, request); // 변경된 이름
+				int result = pService.deletePicture(sub2_name);
+				if(result > 0) {System.out.println("삭제성공");}else {System.out.println("삭제실패");}
 			}
-			list.add(thumbnailImg3);
 		}
-		if (thumbnailImg4 != null && !thumbnailImg4.isEmpty()) {
-			// 이러면 파일이 존재 한다.
-			if (sub3_name != null) {
-				// 기존 올린 파일 있는지 조회 한다. 있으면 제거 하기 위해서
+		
+		
+		// 서브3
+		if(sub3_realname != null) {
+			if (sub3_realname.equals("c")) {
 				deleteFile(sub3_name, request); // 변경된 이름
-			}
-			list.add(thumbnailImg4);
-		}
-		PictureList pt;
-		ArrayList<String> renameList = saveproduct(list, request);
-		ArrayList<PictureList> pList = new ArrayList<PictureList>();
-
-		if (renameList != null) {
-			for (int i = 0; i < size; i++) {
-				pt = new PictureList();
-				pt.setPt_realName(list.get(i).getOriginalFilename());
-				pt.setPt_name(renameList.get(i));
-
-				System.out.println("origin 이름 : " + pt.getPt_realName());
-				if (i == 0) {
-					pt.setPt_type(0);
-				} else {
-					pt.setPt_type(1);
-				}
-				pList.add(pt);
+				int result = pService.deletePicture(sub3_name);
+				if(result > 0) {System.out.println("삭제성공");}else {System.out.println("삭제실패");}
 			}
 		}
-
-		// 기존거 그냥 삭제만 한경우
-		if (sub1_realname.equals("c")) {
-			deleteFile(sub1_name, request); // 변경된 이름
-
-		}
-
-		if (sub2_realname.equals("c")) {
-			deleteFile(sub2_name, request); // 변경된 이름
-
-		}
-		if (sub3_realname.equals("c")) {
-			deleteFile(sub3_name, request); // 변경된 이름
-
-		}
-
-		// 새로운 값을 넣어 버린다.
-		int result1 = pService.updateProduct(p);
-		int result2 = pService.updatePicture(pList);
-		int result3 = result1 + result2;
-		if (result3 >= 1) {
-			return "redirect:productList.do";
-		} else {
-			return "view/common/errorPage";
-		}
+		
+		
+		return "redirect:productList.do";
+		
 	}
 	
 //    연장선        =================================================================
@@ -498,6 +514,34 @@ public class ProductController {
 		}
 
 		System.out.println("deleteFile 컨트롤러에서 불러 온 사진 이름 : " + realname);
+	}
+	
+	public String mkProductImgFile(MultipartFile file, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\img\\products";
+		File folder = new File(savePath);
+
+		if (!folder.exists()) {// 해당 폴더가 없으면
+			folder.mkdirs();// 만들어라
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+
+		String originalFile = file.getOriginalFilename();
+
+		String renameFile = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+				+ originalFile.substring(originalFile.lastIndexOf(".") + 1);// 마지막은 확장자명 추가
+
+		String renamePath = folder + "\\" + renameFile;
+
+		try {
+			file.transferTo(new File(renamePath));// 전달 받은 file이 rename명으로 저장
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return renameFile;
 	}
 
 // ===============   리스트  ==============================================================================================================================		
@@ -776,6 +820,50 @@ public class ProductController {
 			throw new Exception("수정 실패");
 		}
 	}
+	
+	// 문의 답글을 삭제 하겠습니다.
+	@RequestMapping("deleteAnswer.do")
+	@ResponseBody
+	public String deleteAnswer(ProductAnswer pa,  HttpServletResponse response,HttpSession session) throws Exception {
+		
+		int result = pService.deleteAnswer(pa);
+		if(result > 0) {
+			
+			return "success";
+		}else {
+			throw new Exception("삭제에 실패 했습니다.");
+		}
+	}
+	
+	@RequestMapping("updateQnaType2.do")
+	@ResponseBody
+	public void updateType2(ProductQna pq,HttpServletResponse response,HttpSession session ) {
+		 pService.updateQnaType2(pq);
+	}
+	
+	@RequestMapping("AnswerUpdate.do")
+	@ResponseBody
+	public void AnswerUpdate(ProductAnswer pa,  HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
+	
+		System.out.println("수정 버튼 눌림 : "+pa);
+		int result = pService.AnswerUpdate(pa);
+		
+		if(result > 0) {
+			System.out.println("컨트롤 일로 오냐?");
+			ProductAnswer pan = pService.selectAnswer2(pa);
+			
+			pan.setQna_user(URLEncoder.encode(pan.getQna_user(), "utf-8"));
+			pan.setQna_content(URLEncoder.encode(pan.getQna_content(),"utf-8"));
+			pan.setAnswer_content(URLEncoder.encode(pan.getAnswer_content(),"utf-8"));
+
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			gson.toJson(pan, response.getWriter());
+		}else {
+			System.out.println("안됨?");
+		}
+	}
+	
+	
 	
 	
 }
