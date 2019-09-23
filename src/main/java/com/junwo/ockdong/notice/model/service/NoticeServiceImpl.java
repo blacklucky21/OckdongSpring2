@@ -86,5 +86,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return nDAO.updateComent(nc);
 	}
 
+	@Override
+	public ArrayList<Notice> selectList2() {
+		return nDAO.selectList2();
+	}
+
 
 }

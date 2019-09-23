@@ -94,5 +94,9 @@ public class NoticeDAO {
 		return sqlSession.update("noticeMapper.updateComent", nc);
 	}
 
+	public ArrayList<Notice> selectList2() {
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectList2");
+	}
+
 
 }
