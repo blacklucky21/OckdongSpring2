@@ -20,7 +20,7 @@
 </style>
 </head>
 <body>
-	<h1 align="center">구매 내역</h1>
+	<h1 align="center">문의 내역</h1>
 	
 	<br>
 	
@@ -28,10 +28,10 @@
 		<thead>
 		<tr style="background-color: black; color: white;">
 			<th>댓글번호</th>
-			<th style="width: 70px;">작성자</th>
+			<th style="width: 100px;">작성자</th>
 			<th>제목</th>
 			<th>문의 내용</th>
-			<th>문의 등록일</th>
+			<th style="width: 200px;">문의 등록일</th>
 		</tr>
 		</thead>
 		<c:if test="${ !empty list }">
@@ -39,7 +39,7 @@
 		<tbody>
 		<tr>
 			<td align="center">
-				<a href="#" style="text-decoration: none;" class="myQnaDetailView" id="${qna_Id }">${qna_Id }</a>
+				<a href="#" style="text-decoration: none;" class="myQnaDetailView" id="${qna.p_Id }">${qna.qna_Id }</a>
 			</td>
 			<td align="center">${ qna.qna_user }</td>
 			<td align="center">${ qna.p_title }</td>
@@ -53,7 +53,7 @@
 		<c:if test="${ empty list }">
 		<tbody>
 			<tr>
-			<td colspan="4">문의내역이 없습니다.</td>
+			<td colspan="5">문의내역이 없습니다.</td>
 			</tr>
 		</tbody>
 		</c:if>
@@ -61,7 +61,7 @@
 		
 		<!-- 페이징 처리 -->
 		<tr align="center" height="20" id="buttonTab">
-			<td colspan="4">
+			<td colspan="5">
 			
 				<!-- 이전 -->
 				<c:if test="${ pi.currentPage <= 1 }">
@@ -102,8 +102,9 @@
 	</table>
 	<script type="text/javascript">
 		$(".myQnaDetailView").click(function() {
-			var qna_Id = $(this).attr("id");			
-			window.open("myQnaDetailView.me?qna_Id="+qna_Id,"Gooooood","width=1900, height=300");			
+			var p_Id = $(this).attr("id");			
+			/* window.open("myQnaDetailView.me?qna_Id="+qna_Id,"Gooooood","width=1900, height=300"); */	
+			location.href="productDetail.do?p_Id="+p_Id;
 		})
 	</script>
 </body>

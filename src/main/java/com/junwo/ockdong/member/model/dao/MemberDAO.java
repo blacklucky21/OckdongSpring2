@@ -138,8 +138,8 @@ public class MemberDAO {
 	}
 	
 
-	public int getMyQnAList(String userId) {
-		return sqlSession.selectOne("memberMapper.getMyQnAList", userId);
+	public int getMyQnAList(String qna_user) {
+		return sqlSession.selectOne("memberMapper.getMyQnAList", qna_user);
 	}
 
 	public ArrayList<ProductQna> selectQnAList(PageInfo pi) {
@@ -153,9 +153,10 @@ public class MemberDAO {
 	 * sqlSession.selectOne("memberMapper.myBoardDetailView", bNo); }
 	 */
 
-	public ProductQna myQnaDetailView(int qna_Id) {
-		return sqlSession.selectOne("memberMapper.myQnaDetailView", qna_Id);
-	}
+	/*
+	 * public ProductQna myQnaDetailView(int qna_Id) { return
+	 * sqlSession.selectOne("memberMapper.myQnaDetailView", qna_Id); }
+	 */
 
 	
 		
