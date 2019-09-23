@@ -108,7 +108,7 @@ public interface MemberService {
 
 
 
-	int getMyQnAList(String userId);
+	int getMyQnAList(String qna_user);
 
 
 
@@ -122,6 +122,6 @@ public interface MemberService {
 
 
 
-	ProductQna myQnaDetailView(int qna_Id);
+	/* ProductQna myQnaDetailView(int qna_Id); */
 
 }

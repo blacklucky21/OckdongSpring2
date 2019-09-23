@@ -325,14 +325,15 @@ public class MemberController {
 		
 		int currentPage = 1;
 		Member m = (Member)session.getAttribute("loginUser");
+		
 		if(page != null) {
 			currentPage = page;
 		}
 		
-		int listCount = mService.getMyQnAList(m.getUserId());
+		int listCount = mService.getMyQnAList(m.getNickName());
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		pi.setUserId(m.getUserId());
+		pi.setUserId(m.getNickName());
 		
 		ArrayList<ProductQna> nList = mService.selectQnAList(pi);
 		System.out.println(nList);
@@ -348,24 +349,22 @@ public class MemberController {
 		
 		return mv;
 	}
-	// 문의내역 디테일 뷰
-	@RequestMapping("myQnaDetailView.me")
-	public ModelAndView myQnaDetailView(@ModelAttribute("initPayment") ProductQna qna, 
-										  ModelAndView mv,
-										  HttpSession session) {
-
-
-		ProductQna QnaDetail = mService.myQnaDetailView(qna.getQna_Id());
-
-		if (QnaDetail != null) {
-			mv.addObject("list", QnaDetail);
-			mv.setViewName("myPage/productQnA/myQnaDetailView");
-		} else {
-			throw new NoticeException("게시글 조회에 실패 하였습니다.");
-		}
-
-		return mv;
-	}
+	/*
+	 * // 문의내역 디테일 뷰
+	 * 
+	 * @RequestMapping("myQnaDetailView.me") public ModelAndView
+	 * myQnaDetailView(@ModelAttribute("initPayment") ProductQna qna, ModelAndView
+	 * mv, HttpSession session) {
+	 * 
+	 * 
+	 * ProductQna QnaDetail = mService.myQnaDetailView(qna.getQna_Id());
+	 * 
+	 * if (QnaDetail != null) { mv.addObject("list", QnaDetail);
+	 * mv.setViewName("myPage/productQnA/myQnaDetailView"); } else { throw new
+	 * NoticeException("게시글 조회에 실패 하였습니다."); }
+	 * 
+	 * return mv; }
+	 */
 	
 	// 비밀번호 변경 화면 이동
 	@RequestMapping("updatePwd_myPage.me")

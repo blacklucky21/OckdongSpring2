@@ -355,14 +355,14 @@
 	<select id="getMyQnAList" parameterType="string" resultType="_int">
 		select count(*)
 		from PRODUCTQNA
-		where QNA_USER = #{QNA_USER}
+		where QNA_USER = #{qna_user}
 	</select>
 	
-	<select id="selectQnAList" parameterType="string" resultType="Payment">
+	<select id="selectQnAList" parameterType="string" resultType="ProductQna">
 		select *
 		from PRODUCTQNA
-		where USERID=#{userId}
-		order by QNA_NO
+		where QNA_USER=#{qna_user}
+		order by QNA_ID
 	</select>	
 		
 	</mapper>
