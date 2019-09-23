@@ -744,9 +744,9 @@
 	}
 	
 	// 상품 문의 디테일 들어오면 실행 한다.
-	$(function(){
+	/* $(function(){
 		getQnaList();
-	});
+	}); */
 	
 
 	
@@ -769,16 +769,16 @@
 				
 				if(data.length > 0){
 					for(var i in data){
+						console.log("data[" + i + "]");
 						console.log(data[i]);
-						console.log("닉네임"+decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) );
 					
-						console.log("${sessionScope.loginUser.nickName}");
 						// 로그인 아이디와 작성자 아이디가 같을 경우
 						if(decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) ==  "${sessionScope.loginUser.nickName}" ){
-							
 							// 비밀 글 인지 판단 한다.
 							if(data[i].qna_secret == 'Y'){
 								if(data[i].qna_status == 'Y'){
+									
+									
 									
 									$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
 										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
@@ -788,11 +788,11 @@
 											+ data[i].qna_createDate
 											+ "<span class='ico-lock'></div><p class='txt'  id ='qnacontext"+ i +"'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 										);
-									
-
+										console.log(data);
 										
-										if(data[i].qna_answer == 'Y'){
-
+										$div.append($div1);
+									 if(data[i].qna_answer == 'Y' && (data[i].qna_answerDate ==  data[i].answer_createDate)){ 
+										 console.log("여기 들어올까?? 진짜 궁금행 ㅎㅎ");
 									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
 										div2 += "<li cospan='5'>";
 										div2 += "<div class='message'>";
@@ -802,9 +802,8 @@
 										div2 += "<dd>"+ decodeURIComponent(data[i].answer_content.replace(/\+/g,""))+"</dd>";
 										div2 += "</dl></div></li>"; 
 										}  
-										
-										
-									
+									 
+										$div.append(div2);
 								}else{
 									// 글 삭제함
 									$div1 = $("<div class='history_wrap'>")
@@ -815,6 +814,8 @@
 												+ data[i].qna_createDate
 												+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
 										);
+									
+									$div.append($div1);
 								}
 							}else if(data[i].qna_secret == 'N'){
 								if(data[i].qna_status == 'Y'){
@@ -828,7 +829,8 @@
 												+ "<span></div><p class='txt' id ='qnacontext"+ i +"'>"
 												+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl'  id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 										);
-										if(data[i].qna_answer == 'Y'){
+									$div.append($div1);
+									if(data[i].qna_answer == 'Y' && (data[i].qna_answerDate ==  data[i].answer_createDate)){
 										
 									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
 										div2 += "<li cospan='5'>";
@@ -838,21 +840,23 @@
 										div2 += "<dt>운영자<time>"+ data[i].qna_answerDate +" </time></dt>";
 										div2 += "<dd>"+ decodeURIComponent(data[i].answer_content.replace(/\+/g,""))+"</dd>";
 										div2 += "</dl></div></li>"; 
-										} 
-									
-								}else{
-									$div1 = $("<div class='history_wrap'>")
-										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-												+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
-												+ "</span>"
-												+ "<span class='date'>"
-												+ data[i].qna_createDate
-												+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
-										);
+										$div.append(div2);
+									}
 								}
+									
+							}else{
+								$div1 = $("<div class='history_wrap'>")
+									.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
+											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
+											+ "</span>"
+											+ "<span class='date'>"
+											+ data[i].qna_createDate
+											+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다.</p>"																										
+									);
+								
+								$div.append($div1);
 							}
-							
-						// 로그인 안한 상태 보이는 부분
+						
 						}else{
 							if(data[i].qna_secret == 'Y'){
 								if(data[i].qna_status == 'Y'){
@@ -865,7 +869,7 @@
 											+ data[i].qna_createDate
 											+ "<span class='ico-lock'></div><p class='txt'>비공개 문의 글 입니다.</p></div></li></ul></div></div></div>"																												
 									);
-									
+									$div.append($div1);
 								}else{
 									$div1 = $("<div class='history_wrap'>")
 										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
@@ -875,6 +879,7 @@
 												+ data[i].qna_createDate
 												+ "<span class='ico-lock'></div><p class='txt'>삭제된 상품 문의 입니다.</p>"
 										);
+									$div.append($div1);
 								}
 							}else if(data[i].qna_secret == 'N'){
 								if(data[i].qna_status == 'Y'){
@@ -887,6 +892,7 @@
 											+ "<span></div><p class='txt'>"
 											+ decodeURIComponent(data[i].qna_content.replace(/\+/g,""))+ "</p></div></li></ul></div></div></div>"																												
 									);
+									$div.append($div1);
 								}else{
 									$div1 = $("<div class='history_wrap'>")
 										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
@@ -896,11 +902,12 @@
 												+ data[i].qna_createDate
 												+ "<span ></div><p class='txt'>삭제된 상품 문의 입니다. </p>"
 										);
+									$div.append($div1);
 								}
 							}
 						}				
-						$div.append($div1);
-						$div.append(div2);
+						/* $div.append($div1);
+						$div.append(div2); */
 					}
 				}else{
 					$div1 = $("<div class='qnanone'>").text("등록된 상품문의가 없습니다.");
@@ -1034,7 +1041,7 @@
 		});
 		
 		$('#cart').click(function(){
-			if(${sessionScope.loginUser eq null}){
+			if("${sessionScope.loginUser eq null}"){
 				alert("로그인 후 이용가능한 서비스 입니다.");
 			}else{
 				

@@ -17,6 +17,13 @@ public class ProductQna {
 	private String qna_secret; // 비밀 여부
 	private String qna_answerDate; // 답변날
 	private String answer_content; // 답변 내용
+	private String answer_createDate;
+	public String getAnswer_createDate() {
+		return answer_createDate;
+	}
+	public void setAnswer_createDate(String answer_createDate) {
+		this.answer_createDate = answer_createDate;
+	}
 	private int answer_Id;
 	
 	
@@ -98,10 +105,9 @@ public class ProductQna {
 	public void setQna_answer(String qna_answer) {
 		this.qna_answer = qna_answer;
 	}
-	
 	public ProductQna(int qna_Id, String qna_user, String qna_content, String qna_createDate, int p_Id, String p_title,
 	        String p_lunchType, String qna_status, String qna_answer, String qna_secret, String qna_answerDate,
-	        String answer_content, int answer_Id) {
+	        String answer_content, String answer_createDate, int answer_Id) {
 		super();
 		this.qna_Id = qna_Id;
 		this.qna_user = qna_user;
@@ -115,6 +121,7 @@ public class ProductQna {
 		this.qna_secret = qna_secret;
 		this.qna_answerDate = qna_answerDate;
 		this.answer_content = answer_content;
+		this.answer_createDate = answer_createDate;
 		this.answer_Id = answer_Id;
 	}
 	public ProductQna() {
@@ -126,10 +133,10 @@ public class ProductQna {
 		        + ", qna_createDate=" + qna_createDate + ", p_Id=" + p_Id + ", p_title=" + p_title + ", p_lunchType="
 		        + p_lunchType + ", qna_status=" + qna_status + ", qna_answer=" + qna_answer + ", qna_secret="
 		        + qna_secret + ", qna_answerDate=" + qna_answerDate + ", answer_content=" + answer_content
-		        + ", answer_Id=" + answer_Id + "]";
+		        + ", answer_createDate=" + answer_createDate + ", answer_Id=" + answer_Id + "]";
 	}
-
-
+	
+	
 	
 	
 	
