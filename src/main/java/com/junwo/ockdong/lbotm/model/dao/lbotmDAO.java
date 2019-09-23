@@ -53,4 +53,8 @@ public class lbotmDAO {
 	public int updatelbotm(lbotm l) {
 		return sqlSession.update("lbotmMapper.updatelbotm", l) ;
 	}
+
+	public ArrayList<lbotm> lbotmTop() {
+		return (ArrayList)sqlSession.selectList("lbotmMapper.lbotmTop");
+	}
 }

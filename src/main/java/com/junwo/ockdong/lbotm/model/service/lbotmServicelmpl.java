@@ -51,4 +51,9 @@ public class lbotmServicelmpl implements lbotmService {
 		return lbotmDAO.updatelbotm(l);
 	}
 
+	@Override
+	public ArrayList<lbotm> lbotmTop() {
+		return lbotmDAO.lbotmTop();
+	}
+
 }

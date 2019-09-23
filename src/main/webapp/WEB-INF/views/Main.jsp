@@ -390,29 +390,52 @@
 		</p>
 		<ul class="prd_basic">
 		<!-- 일단 임시로 6개 DB 넣으면 채울거 -->
-			<% for(int i = 0; i < 3; i++){ %>
+			<%-- <% for(int i = 0; i < 3; i++){ %> --%>
 			<li>
 				<div class="box">
 					<div class="img">
 						<img src="resources/img/mainViews/111.jpg">
 					</div>
+					
 					<div class="info">
 						<p class="name">
-							<span>제품이름 가지고 오기</span>
+							<!-- <span>제품이름 가지고 오기</span> -->
+							<span></span>
 						</p>
 						<p class="preview">
-							<span>좋아요 100</span>
+							<!-- <span>좋아요 100</span> -->
+							<span></span>
 						</p>
 					</div>
+					
 				</div>
 			</li>
-			<% } %>
+			<%-- <% } %> --%>
 		</ul>
 	</div>
 	
 	</div>
 	
 	</div>
+	
+	<script>
+	/* 	function lbotmTop(){
+			$.ajax({
+				url: "lbotmTop.do",
+				dataType: "json",
+				success: function(data){
+					$tableBody = ${"#box div"};
+					$tableBody.html("");
+					
+					for(var i in data){
+						var $div = $("<div>"); 
+						var $
+					}
+				}
+			});
+		} */
+	
+	</script>
 
 <!-- 44444444444444444444444444 샐러드 4444444444444444444444444444444 -->
 	
