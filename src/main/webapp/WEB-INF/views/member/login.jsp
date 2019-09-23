@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,7 @@
 <link rel="stylesheet" href="resources/css/member/login.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Login</title>
 </head>
 <body>
@@ -55,7 +58,7 @@
 	</div>
 	<script>
 		function login() {
-
+			
 			$("#loginForm").submit();
 		}
 
@@ -63,6 +66,18 @@
 
 			location.href = "Main.jsp";
 		}
+		
+		$(function(){
+			var msg = "<%=msg%>";
+			console.log(msg);
+			if(msg != null){
+				if(msg != "" && msg != "null"){
+					alert(msg);
+				}
+			}
+			
+		});
+			
 	
 	</script>
 </body>
