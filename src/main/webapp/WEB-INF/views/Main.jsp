@@ -374,6 +374,7 @@
 		<div class="top_title">
 			<p class="title">이달의 도시락</p>
 			<p class="update">전 달 한달 간의 데이터를 기준으로 매주 1일에 업데이트 됩니다.</p>
+			<!-- <a></a> -->
 		</div>
 
 	<div class="products_list">
