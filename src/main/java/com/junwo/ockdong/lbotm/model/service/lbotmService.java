@@ -23,4 +23,6 @@ public interface lbotmService {
 
 	int updatelbtom(lbotm l);
 
+	ArrayList<lbotm> lbotmTop();
+
 }
