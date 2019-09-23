@@ -135,7 +135,7 @@
 		  from PRODUCT
 		  left join PICTURELIST using(P_ID)
 		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '도시락'
-		  order by P_LIKE desc)
+		  order by P_COUNT desc)
 		   where rownum < 9
  
 	 ]]>
@@ -148,7 +148,7 @@
 		  from PRODUCT
 		  left join PICTURELIST using(P_ID)
 		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' AND P_LUNCHTYPE = '샐러드'
-		  order by P_LIKE desc)
+		  order by P_COUNT desc)
 		   where rownum < 9
  
 	 ]]>

@@ -109,7 +109,7 @@ public class MemberController {
 		}else {
 			throw new MemberException("로그인에 실패하였습니다.");
 		}
-		return "Main";
+		return "redirect:main.do";
 	}
 	
 	
