@@ -115,11 +115,9 @@ public class MemberController {
 			model.addAttribute("msg","존재하지 않는 회원입니다.");
 			return "member/login";
 		}
-		
-		
-		
-	
-		
+
+		return "redirect:main.do";
+
 	}
 	
 	
@@ -128,7 +126,7 @@ public class MemberController {
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		
-		return "Main";
+		return "redirect:main.do";
 	}
 	
 	/*** ID찾기 ***/

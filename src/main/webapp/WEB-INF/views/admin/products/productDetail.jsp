@@ -787,8 +787,7 @@
 											+ "<span class='ico-lock'></div><p class='txt'  id ='qnacontext"+ i +"'>"+ decodeURIComponent(data[i].qna_content.replace(/\+/g,"")) +"</p><div class='btn-row left'><button type='button' class='btn ctrl' id = 'updateQna" + i +"' onclick='modifyInquiry("+ i +", "+ data[i].qna_Id + ")'>수정</button><button type='button' class='btn ctrl' id='delQna"+ i +"' onclick='deleteInquiry(" + data[i].qna_Id +")'>삭제</button></div></div></li></ul></div></div></div>"																												
 										);
 									
-										console.log(pq.pna_Id);
-										/* if(data[i].qna_answer == 'Y' && data[i].qna_Id == pq.pna_Id){
+										 if(data[i].qna_answer == 'Y'){
 											
 									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
 										div2 += "<li cospan='5'>";
@@ -798,7 +797,7 @@
 										div2 += "<dt>운영자<time>"+ data[i].qna_answerDate +" </time></dt>";
 										div2 += "<dd>"+ decodeURIComponent(data[i].answer_content.replace(/\+/g,""))+"</dd>";
 										div2 += "</dl></div></li>"; 
-										}  */
+										}  
 										
 										
 									

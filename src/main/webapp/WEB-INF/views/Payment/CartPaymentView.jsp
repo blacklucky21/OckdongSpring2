@@ -659,7 +659,7 @@ $('.order-buy').click(function(){
 	var totalAmount = parseInt($('#finalTotalPrice').text());
 
 	
-	 CallPayRequest();
+	 //CallPayRequest();
 	if($('.require').prop("checked")){
 		
 
@@ -687,7 +687,7 @@ $('.order-buy').click(function(){
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		    
 		    	
-		    	//CallPayRequest();
+		    	CallPayRequest();
 		        
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
