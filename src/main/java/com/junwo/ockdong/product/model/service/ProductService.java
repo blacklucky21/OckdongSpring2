@@ -98,6 +98,7 @@ public interface ProductService {
 	int ProductCount(); // 답변 문의 안된거
 	int ProductCountAll(); //모든 문의 사항
 	ArrayList<ProductAnswer> selectQnaAnswer(int qna_Id); // 답장 가지고 오기
+	ArrayList<ProductAnswer> answerAll();
 
 	
 	

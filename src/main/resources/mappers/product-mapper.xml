@@ -275,6 +275,8 @@ values(SEQ_PV_ID.nextval , #{p_Id}, #{pv_user}, #{pv_reviewContent}, to_char(sys
 		<result property="qna_secret" column="QNA_SECRET"/>
 		<result property="qna_answerDate" column="QNA_ANSWERDATE"/>	
 		<result property="answer_content" column="ANSWER_CONTENT"/>
+		<result property="answer_createDate" column="ANSWER_CREATEDATE"/>
+		
 		<result property="answer_Id" column="ANSWER_ID"/>	
 </resultMap>
 
@@ -421,6 +423,13 @@ select *
 		  from 	PRODUCTQNA left join PRODUCTANSWER using(QNA_ID)
 		  where QNA_ID = #{qna_Id}
 	order by QNA_ID desc
+
+</select>
+
+
+<select id="answerAll" resultType="ProductAnswer">
+select *
+from PRODUCTANSWER
 
 </select>
 

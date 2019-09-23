@@ -293,6 +293,11 @@ public class ProductDAO {
 	}
 
 
+	public ArrayList<ProductAnswer> answerAll() {
+		return (ArrayList)sqlSession.selectList("productMapper.answerAll");
+	}
+
+
 
 	
 

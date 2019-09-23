@@ -286,6 +286,11 @@ public class ProductServiceImpl implements ProductService{
 		return pDAO.selectQnaAnswer(qna_Id);
 	}
 
+	@Override
+	public ArrayList<ProductAnswer> answerAll() {
+		return pDAO.answerAll();
+	}
+
 
 	
 

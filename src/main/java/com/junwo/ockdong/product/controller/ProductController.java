@@ -714,24 +714,43 @@ public class ProductController {
 	//qna 리스트 호출 디테일 들어오자마자 시작됨
 	@RequestMapping("qnaList.do")
 	public void getQnaList(HttpServletResponse response, @RequestParam("p_Id") int p_Id) throws JsonIOException, IOException {
+		System.out.println("=================================== qnaList.do =====================================");
 		ArrayList<ProductQna> pqList = pService.selectQnaList(p_Id);
 		ArrayList<ProductQna> encoding = new ArrayList<ProductQna>();
+		
+		ArrayList<ProductAnswer> paList = pService.answerAll();
+		
+		System.out.println(pqList.size());
+		System.out.println(paList.size());
 		
 		for(ProductQna pq : pqList) {
 			pq.setQna_user(URLEncoder.encode(pq.getQna_user(),"utf-8"));
 			pq.setQna_content(URLEncoder.encode(pq.getQna_content(),"utf-8"));
 			/*pq.setAnswer_content(URLEncoder.encode(pq.getAnswer_content(),"utf-8"));*/
-			System.out.println(pq);
+
 			if(pq.getQna_answer().equals("Y")) {
-				int qna_Id = pq.getQna_Id();
-				ArrayList<ProductAnswer> paList = pService.selectQnaAnswer(qna_Id);
+//				int qna_Id = pq.getQna_Id();
+				
 				for(ProductAnswer pa : paList) {
-					pa.setAnswer_content(URLEncoder.encode(pa.getAnswer_content(),"utf-8"));
-					pq.setAnswer_content(pa.getAnswer_content());
-					System.out.println(pa);
+					if(pa.getQna_Id() == pq.getQna_Id()) {
+						System.out.println(pa);
+						System.out.println(pq);
+						pq.setAnswer_content(URLEncoder.encode(pa.getAnswer_content(),"utf-8"));
+						pq.setAnswer_createDate(pa.getAnswer_createdate());
+						break;
+					}
 				}
+			}else {
+				System.out.println("답글없음");
+				System.out.println(pq);
 			}
+			
 			encoding.add(pq);
+			
+		}
+		
+		for(ProductQna qna : encoding) {
+			System.out.println(qna);
 		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		gson.toJson(encoding, response.getWriter());
