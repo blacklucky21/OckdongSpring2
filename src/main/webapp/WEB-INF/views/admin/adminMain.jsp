@@ -204,10 +204,10 @@
 	 					</tr>	
 	 					</c:forEach> --%>	 
 	 					
-	 					<c:forEach var="ad" items="${ list2 }">
+	 					<c:forEach var="ad" items="${ list2 }" end="6">
 	 						<tr>
 	 							<td class="notice_left"><span class="notice_title"></span></td>
-	 							<td class="notice_left"><span class="notice_title" onclick="location.href='ndetail.do?nNo='+${ ad.nNo }+'&page=1'">${ ad.nTitle }sex</span></td>
+	 							<td class="notice_left"><span class="notice_title" onclick="location.href='ndetail.do?nNo='+${ ad.nNo }+'&page=1'">${ ad.nTitle }</span></td>
 	 						</tr>
 	 					</c:forEach>
 	 					
