@@ -94,6 +94,9 @@
 			<input type="hidden" name = "cPrice" value="${p.p_price }" ><!-- 개별 -->
 			<input type="hidden" name = "cAmount" class = "p_count" value="1" >
 			<input type="hidden" name = "cName" class = "p_name" value="${p.p_name }" ><!-- 상품 이름 -->	
+			<input type="hidden" name = "p_quantity" class = "p_quantity" value="${p.p_quantity }" ><!-- 상품 이름 -->	
+			
+			
 			</form>
 			
 <!-- ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼  -->				
@@ -397,16 +400,19 @@
         }
         
     } else if (type == 'minus') {
-    	var comm = $(".commPrice").text();
-    	comm = parseInt(comm) - parseInt(standard);
-    	console.log($(".commPrice"));
-    	console.log($(".commPrice").text());
-     	$(".commPrice").text("");
-    	$(".commPrice").text(comm);
-        orderCnt = eval(orderCnt) - 1;
-        $('.p_count').val(orderCnt);
-        if(comm < 20000){
-        	$("#del").text("2500 원");
+	    	if($('#orderCnt').val() > 1){
+	    		
+		    	var comm = $(".commPrice").text();
+		    	comm = parseInt(comm) - parseInt(standard);
+		    	console.log($(".commPrice"));
+		    	console.log($(".commPrice").text());
+		     	$(".commPrice").text("");
+		    	$(".commPrice").text(comm);
+		        orderCnt = eval(orderCnt) - 1;
+		        $('.p_count').val(orderCnt);
+		        if(comm < 20000){
+	        		$("#del").text("2500 원");
+    		}
         }
     }
     
@@ -416,6 +422,7 @@
 
     if (eval(orderCnt) < 1) {
         orderCnt = 1;
+        
     }
     if (eval(orderCnt) > 9999) {
         orderCnt = 9999;
@@ -1030,15 +1037,19 @@
 		var form = document.forms["CartandPaymentForm"];
 		// 카트 넘기기
 		$('#order_buy').click(function(){
+			var p_quantity = $('.p_quantity').val();
+			
+			var p_count = $('#orderCnt').val()
+			
 			if(${sessionScope.loginUser eq null}){
 				alert("로그인 후 이용가능한 서비스 입니다.");
-			}else{
-			$('#CartandPaymentForm').submit();
-				
-			}
 			
-			
-		});
+				}else if(p_quantity < p_count){
+					alert("재고 수량을 초과하여 주문이 불가능 합니다.");
+				}else{
+					 $('#CartandPaymentForm').submit(); 
+				}
+			});
 		
 		$('#cart').click(function(){
 			if("${sessionScope.loginUser eq null}"){
