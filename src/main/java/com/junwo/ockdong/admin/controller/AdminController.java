@@ -256,7 +256,7 @@ public class AdminController {
 		}
 
 		System.out.println(in);
-
+		
 		int result = moService.insert(in);
 		
 		System.out.println("result 끝남");
@@ -301,37 +301,64 @@ public class AdminController {
 	public String ingredientUpdate(@ModelAttribute Ingredient in, @RequestParam("inCategory") String inCategory,
 			@RequestParam("selected4") String selected4, @RequestParam("selected5") String selected5,
 			@RequestParam(value = "ingredientImg", required = false) MultipartFile uploadFile,
-			@RequestParam("nOldCateAndType") String nOldCateAndType, HttpServletRequest request) {
+			@RequestParam("nOldCateAndType") String nOldCateAndType, HttpServletRequest request) throws Exception {
 
 		System.out.println(in);
 		System.out.println(uploadFile);
-
+		System.out.println("inCategory : " + inCategory);
+		System.out.println("nOldCateAndType : " + nOldCateAndType);
+		
+		//타입에 따른 분류
 		if (inCategory.equals("4찬")) {
+			System.out.println("4찬 : " + selected4);
 			in.setInType(selected4);
 			inCategory = inCategory + "\\" + selected4;
+			
 		} else {
+			System.out.println("5찬 : " + selected5);
 			in.setInType(selected5);
 			inCategory = inCategory + "\\" + selected5;
 		}
-
+		
+		//새로 등록한 파일이 있을경우
 		if (uploadFile != null && !uploadFile.isEmpty()) {
 			// 저장할 경로를 지정하는 saveFile()메소드 생성
 			System.out.println(uploadFile);
 
-			String renameFileName = inUpdateFile(uploadFile, request, inCategory, nOldCateAndType, in);
-
-			if (renameFileName != null) {
-				in.setInOriginalFile(uploadFile.getOriginalFilename());
-				in.setInRenameFile(renameFileName);
+			int result = inUpdateFile(request,nOldCateAndType, in);
+			
+			if(result > 0) {
+				String renameFileName = inSaveFile(uploadFile, request, inCategory);
+				if (renameFileName != null) {
+					in.setInOriginalFile(uploadFile.getOriginalFilename());
+					in.setInRenameFile(renameFileName);
+				}
+			}else {
+				throw new Exception("재료 수정중 애러 발생!!!!");
 			}
 		} else {
 			System.out.println("uploadFile 비어있음");
+		}
+		
+		// 파일이 저장될 경로가 달라 질 경우
+		if(!inCategory.equals(nOldCateAndType)) {
+			System.out.println("타입 바뀜");
+			int result = moveFile(request, in.getInRenameFile(), nOldCateAndType, inCategory);
+			if(result > 0) {
+				System.out.println("파일 위치 수정 완료!!!");
+			}else {
+				throw new Exception("파일 위치 수정 실패!!!");
+			}
+		}else {
+			System.out.println("타입 안바뀜");
 		}
 
 		System.out.println("moService들어가기 전" + in);
 
 		int result = moService.update(in);
 
+		System.out.println("결과값 result : " + result);
+		
 		if (result > 0) {
 			return "redirect:myIn.do";
 		} else {
@@ -339,33 +366,17 @@ public class AdminController {
 		}
 	}
 
-	// 이미지 파일 삭제하고 업데이트 하기
-	public String inUpdateFile(MultipartFile file, HttpServletRequest request, String inCategory,
-			String nOldCateAndType, Ingredient in) {
+	// 이미지 파일 삭제
+	public int inUpdateFile(HttpServletRequest request, String nOldCateAndType, Ingredient in) {
 		System.out.println("이미지 업데이트로 들어옴");
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\img\\myOwn\\" + inCategory;
-		File folder = new File(savePath);
-
-		if (!folder.exists()) {// 해당 폴더가 없으면
-			folder.mkdirs();// 만들어라
-		}
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
-		String originalFile = file.getOriginalFilename();
-
-		String renameFile = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
-				+ originalFile.substring(originalFile.lastIndexOf(".") + 1);// 마지막은 확장자명 추가
-
-		String renamePath = folder + "\\" + renameFile;
-
+		int result = 1;
 		// 삭제를 위한 방법
-		System.out.println(nOldCateAndType);
 		String removePath = root + "\\img\\myOwn\\" + nOldCateAndType;
-		System.out.println(removePath);
+		System.out.println("removePath : " + removePath);
 		File removeFolder = new File(removePath);
 		String removeFilePath = removeFolder + "\\" + in.getInRenameFile();
+		System.out.println("removeFilePath : " + removeFilePath);
 
 		System.out.println("try문 들어가기 전");
 
@@ -374,19 +385,79 @@ public class AdminController {
 			if (removeFile.exists()) {
 				if (removeFile.delete()) {
 					System.out.println("기존 파일 삭제 성공");
+					result = 1;
 				} else {
 					System.out.println("기존 파일 삭제 실패");
+					result = -1;
 				}
 			} else {
 				System.out.println("없는 파일");
 			}
-			file.transferTo(new File(renamePath));// 전달 받은 file이 rename명으로 저장
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return renameFile;
+		return result;
 	}
+	
+	
+	//이미지 파일 위치 이동
+	public int moveFile(HttpServletRequest request, String fileName, String nOldCateAndType, String inCategory) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String beforeFilePath = root + "\\img\\myOwn\\" + nOldCateAndType + "\\" + fileName;
+		String afterFilePath = root + "\\img\\myOwn\\" + inCategory + "\\" + fileName;
+		
+		File file = new File(beforeFilePath);
+		
+		if(file.renameTo(new File(afterFilePath))) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+//	public String inUpdateFile(MultipartFile file, HttpServletRequest request, String inCategory,
+//			String nOldCateAndType, Ingredient in) {
+//		System.out.println("이미지 업데이트로 들어옴");
+//		String root = request.getSession().getServletContext().getRealPath("resources");
+//		String savePath = root + "\\img\\myOwn\\" + inCategory;
+//		File folder = new File(savePath);
+//
+//		if (!folder.exists()) {// 해당 폴더가 없으면
+//			folder.mkdirs();// 만들어라
+//		}
+//
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//
+//		String originalFile = file.getOriginalFilename();
+//
+//		String renameFile = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+//				+ originalFile.substring(originalFile.lastIndexOf(".") + 1);// 마지막은 확장자명 추가
+//
+//		String renamePath = folder + "\\" + renameFile;
+//
+//		// 삭제를 위한 방법
+//		String removePath = root + "\\img\\myOwn\\" + nOldCateAndType;
+//		File removeFolder = new File(removePath);
+//		String removeFilePath = removeFolder + "\\" + in.getInRenameFile();
+//
+//		System.out.println("try문 들어가기 전");
+//
+//		try {
+//			File removeFile = new File(removeFilePath);
+//			if (removeFile.exists()) {
+//				if (removeFile.delete()) {
+//					System.out.println("기존 파일 삭제 성공");
+//				} else {
+//					System.out.println("기존 파일 삭제 실패");
+//				}
+//			} else {
+//				System.out.println("없는 파일");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return renameFile;
+//	}
 
 	// 재료 리스트에서 선택한 재료 삭제하기
 	@RequestMapping("ingredientDelete.do")

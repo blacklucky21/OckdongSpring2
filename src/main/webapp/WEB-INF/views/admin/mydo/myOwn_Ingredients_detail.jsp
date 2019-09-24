@@ -35,16 +35,17 @@
 			str[8] = "selected";
 			break;
 	}
+	
 	String[] cateType = new String[2];
 	String oldCate = "";
 	switch(in.getInType()){
 		case "1_밥": case "2_서브1": case "3_서브2": case "4_메인":
 			cateType[0] = "checked";
-			oldCate = "4찬\\" + in.getInType();
+			oldCate = "4찬\\\\" + in.getInType();
 			break;
 		case "5_밥": case "6_메인": case "7_서브1": case "8_서브2": case "9_수프":
 			cateType[1] = "checked";
-			oldCate = "5찬\\" + in.getInType();
+			oldCate = "5찬\\\\" + in.getInType();
 			break;
 	}
 %>
@@ -189,7 +190,7 @@
 				</div>
 				<div class="insert_middle">
 					<input type="submit" value="수정하기" onclick="return validate();"/>
-					<input type="submit" value="뒤로가기" onclick="return validate();"/>
+					<input class="backBtn" type="button" value="뒤로가기"/>
 				</div>
 				<div style="display:none;">
 					<input type="file" id="ingredientImg" multiple="multiple" name="ingredientImg" onchange="LoadImg(this);">
@@ -241,9 +242,18 @@
 			        	$("#select5").css("display","block");
 			        }
 				});
+				
+				
+				$(".backBtn").click(function(){
+					history.back();
+				});
 			});
 			
 			function validate(){
+				
+				if(!confirm("수정하시겠습니까?")){
+					return false;
+				}
 				var inName = $("#inName").val();
 				var inCategory = $("#inCategory").val();
 				var inGram = $("#inGram").val();
