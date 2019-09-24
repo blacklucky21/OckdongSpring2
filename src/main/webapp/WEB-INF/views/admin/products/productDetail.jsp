@@ -785,11 +785,9 @@
 							if(data[i].qna_secret == 'Y'){
 								if(data[i].qna_status == 'Y'){
 									
-									
-									
 									$div1 = $("<div class='history_wrap' id='history_wrap"+ i +"'>")
 										.html("<div id='proInquiry' style='border-top: 1px solid #ababab;'><div><ul id='inquiry' class='inquiry'><li id = 'content' class='txt_wrap'><div class='con-qa'><div class='info_top'><span class='name'>"
-											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,"")) 
+											+ decodeURIComponent(data[i].qna_user.replace(/\+/g,""))
 											+ "</span>"
 											+ "<span class='date'>"
 											+ data[i].qna_createDate
@@ -799,7 +797,6 @@
 										
 										$div.append($div1);
 									 if(data[i].qna_answer == 'Y' && (data[i].qna_answerDate ==  data[i].answer_createDate)){ 
-										 console.log("여기 들어올까?? 진짜 궁금행 ㅎㅎ");
 									 	div2 += "<ul id='inquiryAnswer' class='open'></ul>";
 										div2 += "<li cospan='5'>";
 										div2 += "<div class='message'>";
@@ -1039,7 +1036,7 @@
 		$('#order_buy').click(function(){
 			var p_quantity = $('.p_quantity').val();
 			
-			var p_count = $('#orderCnt').val()
+			var p_count = $('#orderCnt').val();
 			
 			if(${sessionScope.loginUser eq null}){
 				alert("로그인 후 이용가능한 서비스 입니다.");
@@ -1052,8 +1049,14 @@
 			});
 		
 		$('#cart').click(function(){
+			var p_quantity = $('.p_quantity').val();
+			
+			var p_count = $('#orderCnt').val();
+			
 			if(${sessionScope.loginUser eq null}){
 				alert("로그인 후 이용가능한 서비스 입니다.");
+			}else if(p_quantity < p_count){
+				alert("재고 수량을 초과하여 불가능 합니다.");
 			}else{
 				
 			   var formData = new FormData(form);
