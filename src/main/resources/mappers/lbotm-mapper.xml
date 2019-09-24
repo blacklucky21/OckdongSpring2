@@ -2,89 +2,127 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lbotmMapper">
 
-	<select id="getListCount" resultType="_int">
-		select count(*)
-		from lbotm
-		where b_Status = 'Y'
-	</select>
-	
-	<resultMap type="lbotm" id="lbotmResultSet">
-		<id property="bNo" column="BNO"/>
-		<result property="pt_Id" column="PT_ID"/>
-		<result property="userId" column="USERID" />
-		<result property="b_Title" column="B_TITLE" />
-		<result property="b_Content" column="B_CONTENT" />
-		<result property="b_Nickname" column="B_NICKNAME" />
-		<result property="b_Createdate" column="B_CREATEDATE" />
-		<result property="bModifydate" column="BMODIFYDATE" />
-		<result property="b_Count" column="B_COUNT" />
-		<result property="ct_Id" column="CT_ID" />
-		<result property="b_Src" column="B_SRC" />
-		<result property="b_Status" column="B_STATUS" />
-		
-		<result property="files_no" column="FILES_NO" />
-		<result property="f_reference_no" column="F_REFERENCE_NO" />
-		<result property="files_title" column="FILES_TITLE" />
-		<result property="files_change_title" column="FILES_CHANGE_TITLE" />
-		<result property="files_type" column="FILES_TYPE" />
-		<result property="files_root" column="FILES_ROOT" />
-		<result property="files_secession" column="FILES_SECESSION" />
-	</resultMap>
-	
-	<select id="selectList" resultMap="lbotmResultSet">
-		select *
-		from lbotm
-		where b_Status = 'Y'
-		order by bNo desc
-	</select>
-	
-	<update id="updateCount" parameterType="_int">
-		update lbotm
-		set b_Count = b_Count + 1
-		where bNo = #{bNo}
-	</update>
-	
-	<select id="selectOne" parameterType="_int" resultMap="lbotmResultSet">
-		select *
-		from lbotm
-		where bNo= #{bNo} and b_Status='Y'
-	</select>	
-	
-	<!-- 게시글 작성  -->
-	<insert id="lbotminsert"  parameterType="lbotm">
-		insert into lbotm values(seq_bNo.nextval, #{pt_Id}, #{userId}, #{b_Title}, #{b_Content}, #{b_Nickname},
+   <select id="getListCount" resultType="_int">
+      select count(*)
+      from lbotm
+      where b_Status = 'Y'
+   </select>
+   
+   <resultMap type="lbotm" id="lbotmResultSet">
+      <id property="bNo" column="BNO"/>
+      <result property="pt_Id" column="PT_ID"/>
+      <result property="userId" column="USERID" />
+      <result property="b_Title" column="B_TITLE" />
+      <result property="b_Content" column="B_CONTENT" />
+      <result property="b_Nickname" column="B_NICKNAME" />
+      <result property="b_Createdate" column="B_CREATEDATE" />
+      <result property="bModifydate" column="BMODIFYDATE" />
+      <result property="b_Count" column="B_COUNT" />
+      <result property="ct_Id" column="CT_ID" />
+      <result property="b_Src" column="B_SRC" />
+      <result property="b_Status" column="B_STATUS" />
+      
+      <result property="files_no" column="FILES_NO" />
+      <result property="f_reference_no" column="F_REFERENCE_NO" />
+      <result property="files_title" column="FILES_TITLE" />
+      <result property="files_change_title" column="FILES_CHANGE_TITLE" />
+      <result property="files_type" column="FILES_TYPE" />
+      <result property="files_root" column="FILES_ROOT" />
+      <result property="files_secession" column="FILES_SECESSION" />
+   </resultMap>
+   
+   <resultMap type="lbotmComments" id="lbotmcommentsReulstSet">
+      <id property="lbotm_No" column="LBOTM_NO" />
+      <result property="lbotm_Content" column="LBOTM_CONTENT" />
+      <result property="bNo" column="BNo" />
+      <result property="userId" column="USERID" />
+      <result property="lbotm_Date" column="LBOTM_DATE" />
+      <result property="lbotm_Status" column="LBOTM_STATUS" />
+      <result property="nickName" column="NICKNAME" />
+   </resultMap>
+   
+   <select id="selectList" resultMap="lbotmResultSet">
+      select *
+      from lbotm
+      where b_Status = 'Y'
+      order by bNo desc
+   </select>
+   
+   <update id="updateCount" parameterType="_int">
+      update lbotm
+      set b_Count = b_Count + 1
+      where bNo = #{bNo}
+   </update>
+   
+   <select id="selectOne" parameterType="_int" resultMap="lbotmResultSet">
+      select *
+      from lbotm
+      where bNo= #{bNo} and b_Status='Y'
+   </select>   
+   
+   <!-- 게시글 작성  -->
+   <insert id="lbotminsert"  parameterType="lbotm">
+      insert into lbotm values(seq_bNo.nextval, #{pt_Id}, #{userId}, #{b_Title}, #{b_Content}, #{b_Nickname},
       sysdate, sysdate, default, default, #{b_Src}, default)
-	</insert>
-	
-	<update id="deletelbotm">
-		update lbotm set b_status = 'N'
-		where bNo = #{bNo}
-	</update>
-	
-	<!-- 수정  페이지 -->
-	<select id="updatelbotmPage" parameterType="_int" resultMap="lbotmResultSet">
-		select *
-		from lbotm
-		where bNo = #{bNo} and b_status='Y'
-	</select>
-	
-	<!-- 수정 update -->
-	<update id="updatelbotm" parameterType="lbotm">
-		update lbotm
-		set b_Title=#{b_Title}, b_Content=#{b_Content}, bModifydate=sysdate
-		where bNo = #{bNo}
-	</update>
-	
-	<!-- 게시글 순위  -->
-	<select id="lbotmTop" resultMap="lbotmResultSet"> <!-- CDATA 부등호 쓸때 감싸기 -->
-		<![CDATA[
-		select *
-		from (select *
-			  from lbotm
-			  where b_status = 'Y'
-			  order by b_Count desc)
-		where rownum <= 6
-		]]>
-	</select>
-	
+   </insert>
+   
+   <update id="deletelbotm">
+      update lbotm set b_status = 'N'
+      where bNo = #{bNo}
+   </update>
+   
+   <!-- 수정  페이지 -->
+   <select id="updatelbotmPage" parameterType="_int" resultMap="lbotmResultSet">
+      select *
+      from lbotm
+      where bNo = #{bNo} and b_status='Y'
+   </select>
+   
+   <!-- 수정 update -->
+   <update id="updatelbotm" parameterType="lbotm">
+      update lbotm
+      set b_Title=#{b_Title}, b_Content=#{b_Content}, bModifydate=sysdate
+      where bNo = #{bNo}
+   </update>
+   
+   <!-- 게시글 순위  -->
+   <select id="lbotmTop" resultMap="lbotmResultSet"> <!-- CDATA 부등호 쓸때 감싸기 -->
+      <![CDATA[
+      select *
+      from (select *
+           from lbotm
+           where b_status = 'Y'
+           order by b_Count desc)
+      where rownum <= 6
+      ]]>
+   </select>
+   
+      <!-- 댓글 -->
+   <select id="lbotmselectCommentList" parameterType="_int" resultMap="lbotmcommentsReulstSet">
+   select *
+   from lbotmcomments lc
+   join lbotm l on(lc.bno = l.bno)
+   where lbotm_STATUS ='Y' and lc.bno = #{lbotm_no}
+   order by lbotm_no desc
+   </select>
+   
+   <!-- 댓글 insert  -->
+   <insert id="lbotminsertComment" parameterType="lbotmComments">
+      insert into lbotmcomments
+      values(seq_LBOTM_NO.nextval, #{lbotm_Content}, #{bNo}, #{userId} , sysdate, default, #{nickName})
+     </insert>
+     
+     <!-- 댓글 delete  -->
+     <update id="lbotmdeleteComment">
+      update LBOTMCOMMENTS 
+      set LBOTM_STATUS = 'N'
+      WHERE LBOTM_NO = #{lbotm_no}
+   </update>
+   
+   <update id="lbotmupdateComment">
+         update LBTOMCOMMENTS
+         set LBOTM_CONTENT = #{Lbtom_Content}
+         where LBOTM_NO = #{Lbotm_No}
+   </update>
+   
 </mapper>

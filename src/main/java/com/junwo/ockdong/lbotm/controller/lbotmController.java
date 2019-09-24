@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +27,7 @@ import com.junwo.ockdong.common.Pagination;
 import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.service.lbotmService;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
+import com.junwo.ockdong.lbotm.model.vo.lbotmComments;
 import com.junwo.ockdong.member.model.vo.Member;
 
 @Controller
@@ -176,4 +178,71 @@ public class lbotmController {
 //		return "redirect:view.do?board_no=" + board_no;
 //	}
 	
+	/* ####### 댓글 가져오기 ####### */
+	@RequestMapping("lbotmcommentList.do")
+	public void lbotmgetCommentList(HttpServletResponse response, int bNo) throws Exception {
+		ArrayList<lbotmComments> lList = lbotmService.lbotmselectCommentList(bNo);
+		for(lbotmComments r : lList) {
+			r.setLbotm_Content(URLEncoder.encode(r.getLbotm_Content(), "utf-8"));
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(lList, response.getWriter());
+	}
+	
+	/* 댓글 등록 */
+	@RequestMapping("lbotminsertComment.do")
+	@ResponseBody
+	public String lbotminsertComment(HttpSession session, lbotmComments lc) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+	
+		String userId = loginUser.getUserId();
+		
+		lc.setUserId(userId);
+		System.out.println("sexss" + lc);
+		int result = lbotmService.lbotminsertComment(lc);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new lbotmException("댓글 등록에 실패하였습니다.");
+		}
+	}
+	
+	// 댓글 delete
+	@RequestMapping("lbotmdeleteComment.do")
+	@ResponseBody
+	public String lbotmdeleteComment(int cNo) {
+		
+		/* System.out.println("삭제:"+cNo); */
+		int result = lbotmService.lbotmdeleteComment(cNo);
+		System.out.println(result);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new lbotmException("댓글 등록에 실패하였습니다.");
+		}
+	}
+	
+	//댓글 수정
+	@RequestMapping("lbotmModifyCommnet.do")
+	@ResponseBody
+	public String lbotmModifyCommnet(String Content,int cNo) {
+		
+		lbotmComments lc = new lbotmComments();
+		lc.setLbotm_No(cNo);
+		lc.setLbotm_Content(Content);
+		
+		int updateComent = lbotmService.lbotmupdateComment(lc);
+		/* System.out.println(nc); */
+		
+		if(updateComent>0) {
+		return "sucess";
+		}else {
+			throw new lbotmException("댓글 등록에 실패하였습니다.");
+		}
+		
+	}
 }

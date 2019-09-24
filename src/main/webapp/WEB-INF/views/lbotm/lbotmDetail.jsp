@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE>
@@ -9,113 +9,113 @@
 <title>상세보기</title>
 <style>
 .frm {
-	margin-left: 250px;
+   margin-left: 250px;
 }
 
 a:link, a:visited {
-	text-decoration: none;
-	color: #656565;
+   text-decoration: none;
+   color: #656565;
 }
 ㄴ
 
 
 .board_list {
-	width: 100%;
-	border-top: 2px solid #252525;
-	border-bottom: 1px solid #ccc
+   width: 100%;
+   border-top: 2px solid #252525;
+   border-bottom: 1px solid #ccc
 }
 
 .board_list thead th:first-child {
-	background-image: none
+   background-image: none
 }
 
 .board_list thead th {
-	border-bottom: 1px solid #ccc;
-	padding: 12px 0 13px 0;
-	color: #3b3a3a;
-	vertical-align: middle
+   border-bottom: 1px solid #ccc;
+   padding: 12px 0 13px 0;
+   color: #3b3a3a;
+   vertical-align: middle
 }
 
 .board_list tbody td {
-	border-top: 1px solid #ccc;
-	padding: 10px 0;
-	text-align: center;
-	vertical-align: middle
+   border-top: 1px solid #ccc;
+   padding: 10px 0;
+   text-align: center;
+   vertical-align: middle
 }
 
 .board_list tbody tr:first-child td {
-	border: none
+   border: none
 }
 
 .board_list tbody td.title {
-	text-align: left;
-	padding-left: 20px
+   text-align: left;
+   padding-left: 20px
 }
 
 .board_list tbody td a {
-	display: inline-block
+   display: inline-block
 }
 
 .board_view {
-	width: 85%;
-	border-top: 2px solid #252525;
-	border-bottom: 1px solid #ccc
+   width: 85%;
+   border-top: 2px solid #252525;
+   border-bottom: 1px solid #ccc
 }
 
 .board_view tbody th {
-	text-align: left;
-	background: #f7f7f7;
-	color: #3b3a3a
+   text-align: left;
+   background: #f7f7f7;
+   color: #3b3a3a
 }
 
 .board_view tbody th.list_tit {
-	font-size: 13px;
-	color: #000;
-	letter-spacing: 0.1px
+   font-size: 13px;
+   color: #000;
+   letter-spacing: 0.1px
 }
 
 .board_view tbody .no_line_b th, .board_view tbody .no_line_b td {
-	border-bottom: none
+   border-bottom: none
 }
 
 .board_view tbody th, .board_view tbody td {
-	padding: 15px 0 16px 16px;
-	border-bottom: 1px solid #ccc
+   padding: 15px 0 16px 16px;
+   border-bottom: 1px solid #ccc
 }
 
 .board_view tbody td.view_text {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	padding: 45px 18px 45px 18px
+   border-top: 1px solid #ccc;
+   border-bottom: 1px solid #ccc;
+   padding: 45px 18px 45px 18px
 }
 
 .board_view tbody th.th_file {
-	padding: 0 0 0 15px;
-	vertical-align: middle
+   padding: 0 0 0 15px;
+   vertical-align: middle
 }
 
 .wdp_90 {
-	width: 90%
+   width: 90%
 }
 
 .btn {
-	border-radius: 3px;
-	padding: 5px 11px;
-	color: black !important;
-	display: inline-block;
-	background-color: #6b9ab8;
-	border: 1px solid #56819d;
-	vertical-align: middle;
-	border-color: black;
+   border-radius: 3px;
+   padding: 5px 11px;
+   color: black !important;
+   display: inline-block;
+   background-color: #6b9ab8;
+   border: 1px solid #56819d;
+   vertical-align: middle;
+   border-color: black;
 }.boardName {
-	display: block;
-	font-size: 24px;
-	padding-bottom: 8px;
-	margin-bottom: 20px;
-	border-bottom: 2px solid #5d5d5d;
-	line-height: 1.3em;
-	color: #2e2e2e;
-	font-weight: 600;
+   display: block;
+   font-size: 24px;
+   padding-bottom: 8px;
+   margin-bottom: 20px;
+   border-bottom: 2px solid #5d5d5d;
+   line-height: 1.3em;
+   color: #2e2e2e;
+   font-weight: 600;
 }
 
 .page1 h2 {
@@ -124,280 +124,280 @@ a:link, a:visited {
 }
 
 .boardSubject {
-	font-size: 17px;
-	font-weight: bold;
+   font-size: 17px;
+   font-weight: bold;
 }
 .view_text {
-	width: 80%;
+   width: 80%;
 }
 .proic {
-	width: 35px;
-	height: 35px;
+   width: 35px;
+   height: 35px;
 }
 .nick_em {
-	display: inline-block;
+   display: inline-block;
 }
 .inner_nick_box {
-	margin-top: 8px;
+   margin-top: 8px;
 }
 
 .date_menu li.da01 span {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_time.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_time.gif")
-		no-repeat left 1px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_time.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/ico_time.gif")
+      no-repeat left 1px;
 }
 
 .date_menu li.da02 span {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_eye.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_eye.gif")
-		no-repeat left 1px;
-	color: #ff2626;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_eye.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/ico_eye.gif")
+      no-repeat left 1px;
+   color: #ff2626;
 }
 
 .date_menu li.da03 span {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_balloon.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_balloon.gif")
-		no-repeat left 1px;
-	color: #ff2626;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_balloon.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/ico_balloon.gif")
+      no-repeat left 1px;
+   color: #ff2626;
 }
 
 .date_menu li {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bar_9.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif")
-		no-repeat left center;
-	padding-left: 9px;
-	margin-left: 0px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bar_9.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif")
+      no-repeat left center;
+   padding-left: 9px;
+   margin-left: 0px;
 }
 
 .date_menu li span {
-	display: inline-block;
-	padding-left: 18px;
-	margin-right: 12px;
+   display: inline-block;
+   padding-left: 18px;
+   margin-right: 12px;
 }
 
 .date_menu li:first-child {
-	margin-left: 0;
-	padding-left: 0;
-	background: none;
+   margin-left: 0;
+   padding-left: 0;
+   background: none;
 }
 
 .date_menu li {
-	display: inline-block;
-	color: #a1a0a0;
-	font-size: 12px;
-	line-height: 14px;
-	font-weight: normal;
+   display: inline-block;
+   color: #a1a0a0;
+   font-size: 12px;
+   line-height: 14px;
+   font-weight: normal;
 }
 
 .group_inner {
-	display: inline-block;
-	margin-top: 10px;
-	float: right;
+   display: inline-block;
+   margin-top: 10px;
+   float: right;
 }
 
 .allmark {
-	text-align: center;
-	margin-top: 50px;
+   text-align: center;
+   margin-top: 50px;
 }
 
 .allmark .bmark {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif") no-repeat;
-	width: 150px;
-	height: 50px;
-	display: inline-block;
-	line-height: 50px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif") no-repeat;
+   width: 150px;
+   height: 50px;
+   display: inline-block;
+   line-height: 50px;
 }
 
 .allmark .bmark span {
-	display: inline-block;
-	padding-left: 32px;
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_off.png") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_bmark_off.png")
-		no-repeat left center;
-	font-weight: bold;
-	font-size: 15px;
-	color: #323232;
-	font-weight: bold;
-	vertical-align: top;
+   display: inline-block;
+   padding-left: 32px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_off.png") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/ico_bmark_off.png")
+      no-repeat left center;
+   font-weight: bold;
+   font-size: 15px;
+   color: #323232;
+   font-weight: bold;
+   vertical-align: top;
 }
 .allmark .bmark1 {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
-		no-repeat;
-	width: 150px;
-	height: 50px;
-	display: inline-block;
-	line-height: 50px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
+      no-repeat;
+   width: 150px;
+   height: 50px;
+   display: inline-block;
+   line-height: 50px;
 }
 .allmark .bmark1 span {
-	display: inline-block;
-	padding-left: 32px;
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_on.png") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_bmark_on.png")
-		no-repeat left center;
-	font-weight: bold;
-	font-size: 15px;
-	color: #323232;
-	font-weight: bold;
-	vertical-align: top;
+   display: inline-block;
+   padding-left: 32px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_bmark_on.png") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/ico_bmark_on.png")
+      no-repeat left center;
+   font-weight: bold;
+   font-size: 15px;
+   color: #323232;
+   font-weight: bold;
+   vertical-align: top;
 }
 .allmark .heart {
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
-		no-repeat;
-	width: 150px;
-	height: 50px;
-	display: inline-block;
-	line-height: 50px;
-	margin-left: 20px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/bg_heart.gif")
+      no-repeat;
+   width: 150px;
+   height: 50px;
+   display: inline-block;
+   line-height: 50px;
+   margin-left: 20px;
 }
 
 .allmark .heart span {
-	display: inline-block;
-	padding-left: 35px;
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heart.png") --%>
-		url(/webapp/resources/img/boardImg/ico_heart.png) no-repeat left center;
-	font-weight: bold;
-	font-size: 15px;
-	color: #323232;
-	font-weight: bold;
-	vertical-align: top;
+   display: inline-block;
+   padding-left: 35px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heart.png") --%>
+      url(/webapp/resources/img/boardImg/ico_heart.png) no-repeat left center;
+   font-weight: bold;
+   font-size: 15px;
+   color: #323232;
+   font-weight: bold;
+   vertical-align: top;
 }
 
 .allmark .heart1 {
-	background:
-		url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif")
-		no-repeat;
-	width: 150px;
-	height: 50px;
-	display: inline-block;
-	line-height: 50px;
-	margin-left: 20px;
+   background:
+      url("<%=request.getContextPath()%>/resources/img/boardImg/bg_heart.gif")
+      no-repeat;
+   width: 150px;
+   height: 50px;
+   display: inline-block;
+   line-height: 50px;
+   margin-left: 20px;
 }
 .allmark .heart1 span {
-	display: inline-block;
-	padding-left: 35px;
-	background:
-		<%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heartch.png") --%>
-		url("${pageContext.request.contextPath}/resources/img/boardImg/ico_heartch.png")
-		no-repeat left center;
-	font-weight: bold;
-	font-size: 15px;
-	color: #323232;
-	font-weight: bold;
-	vertical-align: top;
+   display: inline-block;
+   padding-left: 35px;
+   background:
+      <%-- url("<%=request.getContextPath()%>/resources/img/boardImg/ico_heartch.png") --%>
+      url("${pageContext.request.contextPath}/resources/img/boardImg/ico_heartch.png")
+      no-repeat left center;
+   font-weight: bold;
+   font-size: 15px;
+   color: #323232;
+   font-weight: bold;
+   vertical-align: top;
 }
 .btn_ar {
-	float: right;
-	margin-top: 50px;
+   float: right;
+   margin-top: 50px;
 }
 .tit_comment {
-	margin-top: 130px;
+   margin-top: 130px;
 }
 .comment-write {
-	background: #f9f9f9;
-	border: 1px solid #ececec;
-	padding: 15px;
-	position: relative;
-	margin-top: 12px;
+   background: #f9f9f9;
+   border: 1px solid #ececec;
+   padding: 15px;
+   position: relative;
+   margin-top: 12px;
 }
 -write textarea {
-	width: 88%;
-	height: 120px;
+   width: 88%;
+   height: 120px;
 }
 
 .btncmm1 {
-	position: absolute;
-	right: 10px;
-	top: -9px; 
-	width: 90px;
-	height: 120px;
-	margin-top: 25px;
+   position: absolute;
+   right: 10px;
+   top: -9px; 
+   width: 90px;
+   height: 120px;
+   margin-top: 25px;
 }
 #btncmm2 {
-	position: absolute;
-	right: 21px;
-	top: -9px;
-	width: 90px;
-	height: 120px;
+   position: absolute;
+   right: 21px;
+   top: -9px;
+   width: 90px;
+   height: 120px;
 }
 .hrline {
-	border-top: 1px solid #cecece;
+   border-top: 1px solid #cecece;
 }
 .comment-count {
-	border-bottom: 1px solid #cecece;
-	margin-top: 35px;
+   border-bottom: 1px solid #cecece;
+   margin-top: 35px;
 }
 .comment-count-1 {
-	display: inline-block;
-	color: #383838;
-	font-size: 13px;
+   display: inline-block;
+   color: #383838;
+   font-size: 13px;
 }
 .comment-count-2 {
-	display: inline-block;
-	font-size: 13px;
-	color: #fa111a;
+   display: inline-block;
+   font-size: 13px;
+   color: #fa111a;
 }
 .comment-txt {
-	display: inline-block;
-	padding-left: 15px;
-	width: 93%;
+   display: inline-block;
+   padding-left: 15px;
+   width: 93%;
 }
 .comment-pic {
-	display: inline-block;
+   display: inline-block;
 }
 .comment-list-li {
-	padding-top: 15px;
+   padding-top: 15px;
 }
 #ptxt {
-	padding-top: 7px;
+   padding-top: 7px;
 }
 .comment-txt tbody {
-	padding-left: 10px;
+   padding-left: 10px;
 }
 .btn-re {
-	padding-left: 70px;
-	color: #545050;
+   padding-left: 70px;
+   color: #545050;
 }
 .balist1 {
-	margin-top: 30px;
+   margin-top: 30px;
 }
 .belist1, .aflist1 {
-	color: #423f3f;
+   color: #423f3f;
 }
 .belist2, .aflist2 {
-	display: inline-block;
-	padding-left: 18px;
+   display: inline-block;
+   padding-left: 18px;
 }
 .belist3, .aflist3 {
-	display: inline-block;
-	float: right;
-	font-size: 14px;
-	color: #9e9e9e;
-	font-size: 15px;
+   display: inline-block;
+   float: right;
+   font-size: 14px;
+   color: #9e9e9e;
+   font-size: 15px;
 }
 .belist3{margin-right: -2px;}
 .listpic {
-	padding-left: 10px;
-	padding-right: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
 }
 .listpic1{
-	float: right;
+   float: right;
     margin-top: 24px;
     padding-left: 10px;
-	padding-right: 10px;
-	
+   padding-right: 10px;
+   
 }
 .bSubject{font-size: 17px; font-weight: bold;}
 .pageWriteBtn{margin-right: 12px;}
@@ -405,7 +405,7 @@ a:link, a:visited {
 .commentPro{width: 50px; height: 50px;}
 .aflistp{display: inline-block;}
 .re{padding-top: 10px;}
-.modifyB, .deleteB{font-weight: 400; font-size:13px; float:right;	color:#9c9c9cbf; padding-top:13px;}
+.modifyB, .deleteB{font-weight: 400; font-size:13px; float:right;   color:#9c9c9cbf; padding-top:13px;}
 .modifyB:hover, .deleteB:hover{cursor: pointer;}
 .remd{display: inline-block; float: right;}
 .listpic2{padding-left: 10px; padding-bottom: 8px;}
@@ -435,452 +435,434 @@ cursor: pointer; background: #f72e36; color: white; padding-top: 4px; border-rad
 
 </head>
 <body>
-	<!-- ############### 헤더 부분 ############### -->
-	<c:import url="../header/header.jsp"/>
+   <!-- ############### 헤더 부분 ############### -->
+   <c:import url="../header/header.jsp"/>
 
-	<br>
-	<!---------------------------------- 게시글 상세페이지 ---------------------------------->
-	
-	<!--===================== Content======================-->
-	
-		<div class="container">
-			<div class="row">
-				<!---------------------------------------------------------------------------------------------------------------------------------------------->
-				<div class="container1">
-					<h2 class="boardName">도시락 자랑하기</h2>
+   <br>
+   <!---------------------------------- 게시글 상세페이지 ---------------------------------->
+   
+   <!--===================== Content======================-->
+   
+      <div class="container">
+         <div class="row">
+            <!---------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="container1">
+               <h2 class="boardName">도시락 자랑하기</h2>
 
-					<!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
-					<c:if test="${sessionScope.loginUser.userId == lbotm.userId}">
-					<c:url var="updatelbotmPage" value="updatelbotmPage.do">
-						<c:param name="bNo" value="${ lbotm.bNo }"/>
-						<c:param name="page" value="${ page }"/>
-					</c:url>
-					
-					<span class="modifyB" onClick="location.href='${ updatelbotmPage }'">수정</span>
-					<img src="${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif" class="listpic1"> 
-					<span class="deleteB" id="deleteB" onClick="location.href='${path}/ockdong/deletelbotm.do?bNo=${lbotm.bNo}'">삭제</span>
-					</c:if>
-					
-					<td>
-					<input type="hidden" name="id" value="${ lbotm.bNo }">
-					</td>
-					
-					<!-- 게시글 제목 -->
-					<div>
-						<span class="bSubject">${ lbotm.b_Title }</span>
-					</div>
-					<hr class="hrline">
-					<div class="boardInfo">
-						<span class="inner">
-						<span class="ico_wrap">
-						<a>
-							<img src="${pageContext.request.contextPath}/resources/img/boardImg/member.png" class="proic">
-						</a>
-						
-						</span>
-							<!------------------------------------ 게시글 작성자명 ------------------------------------>
-								<em class="nick_em">
-								<div class="inner_nick_box">
-									<p class="inner_nick">${ lbotm.b_Nickname }</p>
-								</div>
-						</em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
-							<div class="group_inner">
-								<ul class="date_menu">
-									<li class="da01"><span>${ fn:substring(lbotm.b_Createdate, 0, 16) }</span></li>
-									<li class="da02"><span>${ lbotm.b_Count }</span></li>
-									<!-- 댓글 카운트  -->
- 									<%--<li class="da03"><span>${detail.COMMENTS_COUNT}</span></li> --%>
-									<li class="da03"><span id="rCount1">${ lbotm.b_Count }</span></li>
-								</ul>
-							</div>
-						</span>
-					</div>
-					<hr class="hrline">
+               <!------------------------ 게시물 수정, 삭제 (로그인시 적용(해당 게시물 작성자만 가능하도록 설정)) ------------------------>
+               <c:if test="${sessionScope.loginUser.userId == lbotm.userId}">
+               <c:url var="updatelbotmPage" value="updatelbotmPage.do">
+                  <c:param name="bNo" value="${ lbotm.bNo }"/>
+                  <c:param name="page" value="${ page }"/>
+               </c:url>
+               
+               <span class="modifyB" onClick="location.href='${ updatelbotmPage }'">수정</span>
+               <img src="${pageContext.request.contextPath}/resources/img/boardImg/bar_9.gif" class="listpic1"> 
+               <span class="deleteB" id="deleteB" onClick="location.href='${path}/ockdong/deletelbotm.do?bNo=${lbotm.bNo}'">삭제</span>
+               </c:if>
+               
+               <td>
+               <input type="hidden" name="id" value="${ lbotm.bNo }">
+               </td>
+               
+               <!-- 게시글 제목 -->
+               <div>
+                  <span class="bSubject">${ lbotm.b_Title }</span>
+               </div>
+               <hr class="hrline">
+               <div class="boardInfo">
+                  <span class="inner">
+                  <span class="ico_wrap">
+                  <a>
+                     <img src="${pageContext.request.contextPath}/resources/img/boardImg/member.png" class="proic">
+                  </a>
+                  
+                  </span>
+                     <!------------------------------------ 게시글 작성자명 ------------------------------------>
+                        <em class="nick_em">
+                        <div class="inner_nick_box">
+                           <p class="inner_nick">${ lbotm.b_Nickname }</p>
+                        </div>
+                  </em> <!------------------------------------ 게시글 날짜, 조회수, 댓글수 ------------------------------------>
+                     <div class="group_inner">
+                        <ul class="date_menu">
+                           <li class="da01"><span>${ fn:substring(lbotm.b_Createdate, 0, 16) }</span></li>
+                           <li class="da02"><span>${ lbotm.b_Count }</span></li>
+                           <!-- 댓글 카운트  -->
+                            <%--<li class="da03"><span>${detail.COMMENTS_COUNT}</span></li> --%>
+                           <li class="da03"><span id="rCount1"></span></li>
+                        </ul>
+                     </div>
+                  </span>
+               </div>
+               <hr class="hrline">
 
-					<!------------------------------------ 게시글 내용 ------------------------------------>
-					<div class="viewContent">
-						<p class="view_text">${lbotm.b_Content}</p>
-					</div>
+               <!------------------------------------ 게시글 내용 ------------------------------------>
+               <div class="viewContent">
+                  <p class="view_text">${lbotm.b_Content}</p>
+               </div>
 
-					<!------------------------------------ 북마크, 좋아요------------------------------------>
-					<%-- <div class="allmark">
-					<c:if test="${! empty sessionScope.loginUser}">
-						<c:if test="${check1 == 0}">
-						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
-						</c:if>
-						<c:if test="${check1 != 0}">
-						<a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark1"> <span>북마크</span></a>
-						</c:if>
-						<c:if test="${check2 == 0}">
-						<a href="like.do?board_no=${detail.BOARD_NO}" class="heart"><span>${likeCount} 3</span></a>
-						</c:if>
-						<c:if test="${check2 != 0}">
-						<a href="like.do?board_no=${detail.BOARD_NO}" class="heart1"><span>${likeCount} 3</span></a>
-						</c:if>
-					</c:if>
-					<c:if test="${empty sessionScope.loginUser}">
-						<a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
-						<a href="#" class="heart login" data-toggle="modal" data-target="#login-modal"> <span>${likeCount}</span></a>
-					</c:if>
-					</div> --%>
-					
-					<!------------------------------------ 글쓰기, 목록 ------------------------------------>
-					<c:if test="${! empty sessionScope.loginUser}">
-					<div class="btn_ar">
-						<img id="writeBtn" class="pageWriteBtn" onclick="location.href='boardWrite.do'" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_write2.gif">
-						<img id="boardList" class="boardList" onclick="location.href='lbotmlist.do'" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_list.gif">	
-					</div>
-					</c:if>
-					<c:if test="${empty sessionScope.loginUser}">
-					<div class="btn_ar">
-						<img id="writeBtn login" class="pageWriteBtn login" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_write2.gif"
-						 data-toggle="modal" data-target="#login-modal">
-						<img id="boardList" class="boardList" onclick="history.back();" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_list.gif">
-					</div>
-					</c:if>
-					<div id="commList">
-						<p class="tit_comment">
-							<img src="<%=request.getContextPath()%>/resources/img/boardImg//tit_cmt_write.png">
-						</p>
-						<c:if test="${!empty sessionScope.loginUser}">
-							<a href="javascript:" onClick="reportPopup('open')"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
-						</c:if>
-						<c:if test="${empty sessionScope.loginUser}">
-							<a data-toggle="modal" data-target="#login-modal"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
-						</c:if>
-						<div id="reportContent">
-							<div id="rPopup">
-							<a href="javascript:" onClick="reportPopup('close')">
-				            	<span id="closePopup">닫기</span>
-        					</a>
-        					
-								<ul class="reportWrap">
-									<li onclick="choiceReport('${detail.BOARD_NO}', '광고/상업성 게시글 ', '${detail.MEMBER_NO }');" id="rli">광고/상업성 게시글 <input id="report" type="radio" value="1" class="pop_check"></li>
-									<li onclick="choiceReport('${detail.BOARD_NO}', '비방/욕설 게시글', '${detail.MEMBER_NO }');" id="rli">비방/욕설 게시글 <input id="report" type="radio" value="2" class="pop_check"></li>
-									<li onclick="choiceReport('${detail.BOARD_NO}', '개인정보 유출 게시글 ', '${detail.MEMBER_NO }');" id="rli">개인정보 유출 게시글 <input id="report" type="radio" value="3" class="pop_check"></li>
-									<li onclick="choiceReport('${detail.BOARD_NO}', '청소년 유해(음란) 게시글 ', '${detail.MEMBER_NO }');" id="rli">청소년 유해(음란) 게시글 <input id="report" type="radio" value="4" class="pop_check"></li>
-									<li onclick="choiceReport('${detail.BOARD_NO}', '명예훼손/저작권 침해 게시글 ', '${detail.MEMBER_NO }');" id="rli">명예훼손/저작권 침해 게시글 <input id="report" type="radio" value="5" class="pop_check"></li>	
-									<li onclick="choiceReport('${detail.BOARD_NO}', '도배성 게시글 ', '${detail.MEMBER_NO }');" id="rli">도배성 게시글 <input type="radio"id="report" value="6" class="pop_check"></li>		
-									<li onclick="choiceReport('${detail.BOARD_NO}', '불명확/추측성 게시글 ', '${detail.MEMBER_NO }');" id="rli">불명확/추측성 게시글 <input id="report" type="radio" value="7" class="pop_check"></li>		
-								</ul>
-							</div>
-						</div>
-				<!-- 댓글 등록 부분  -->
-				<div id="comment-write" class="comment-write">
-				<table class="replyTable">
-					<tr>
-						<td><textarea cols="98" rows="5" id="Comments_Content" name="COMMENTS_CONTENT" class="txtarea r5 placeholder" placeholder="댓글 등록" onfocus="setFlag();" style="border: none;"></textarea></td>
-						<td><button id="rSubmit" class="btn btn-primary btncmm1">입력</button></td>
-					</tr>
-				</table>
-				</div>
+               <!------------------------------------ 북마크, 좋아요------------------------------------>
+            <%--    <div class="allmark">
+               <%-- <div class="allmark">
+               <c:if test="${! empty sessionScope.loginUser}">
+                  <c:if test="${check1 == 0}">
+                  <a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark"> <span>북마크</span></a>
+                  </c:if>
+                  <c:if test="${check1 != 0}">
+                  <a href="bookMark.do?board_no=${detail.BOARD_NO}" class="bmark1"> <span>북마크</span></a>
+                  </c:if>
+                  <c:if test="${check2 == 0}">
+                  <a href="like.do?board_no=${detail.BOARD_NO}" class="heart"><span>${likeCount} 3</span></a>
+                  </c:if>
+                  <c:if test="${check2 != 0}">
+                  <a href="like.do?board_no=${detail.BOARD_NO}" class="heart1"><span>${likeCount} 3</span></a>
+                  </c:if>
+               </c:if>
+               <c:if test="${empty sessionScope.loginUser}">
+                  <a href="#" class="bmark login" data-toggle="modal" data-target="#login-modal"> <span>북마크</span></a>
+                  <a href="#" class="heart login" data-toggle="modal" data-target="#login-modal"> <span>${likeCount}</span></a>
+               </c:if>
+               </div> --%>
+               
+               <!------------------------------------ 글쓰기, 목록 ------------------------------------>
+               <c:if test="${! empty sessionScope.loginUser}">
+               <div class="btn_ar">
+                  <img id="writeBtn" class="pageWriteBtn" onclick="location.href='boardWrite.do'" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_write2.gif">
+                  <img id="boardList" class="boardList" onclick="location.href='lbotmlist.do'" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_list.gif">   
+               </div>
+               </c:if>
+               <c:if test="${empty sessionScope.loginUser}">
+               <div class="btn_ar">
+               <c:if test="${sessionScope.loginUser.userId == lbotm.userId}">
+                  <img id="writeBtn login" class="pageWriteBtn login" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_write2.gif"
+                   data-toggle="modal" data-target="#login-modal">
+               </c:if>
+                  <img id="boardList" class="boardList" onclick="history.back();" src="${pageContext.request.contextPath}/resources/img/boardImg/btn_list.gif">
+               </div>
+               </c:if>
+               <div id="commList">
+                  <p class="tit_comment">
+                     <img src="<%=request.getContextPath()%>/resources/img/boardImg//tit_cmt_write.png">
+                  </p>
+                  <c:if test="${!empty sessionScope.loginUser}">
+                     <a href="javascript:" onClick="reportPopup('open')"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
+                  </c:if>
+                  <c:if test="${empty sessionScope.loginUser}">
+                     <a data-toggle="modal" data-target="#login-modal"> <span class="reportBoard" id="reportBoard">신고하기</span></a>
+                  </c:if>
+                  <div id="reportContent">
+                     <div id="rPopup">
+                     <a href="javascript:" onClick="reportPopup('close')">
+                           <span id="closePopup">닫기</span>
+                       </a>
+                       
+                        <ul class="reportWrap">
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '광고/상업성 게시글 ', '${detail.MEMBER_NO }');" id="rli">광고/상업성 게시글 <input id="report" type="radio" value="1" class="pop_check"></li>
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '비방/욕설 게시글', '${detail.MEMBER_NO }');" id="rli">비방/욕설 게시글 <input id="report" type="radio" value="2" class="pop_check"></li>
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '개인정보 유출 게시글 ', '${detail.MEMBER_NO }');" id="rli">개인정보 유출 게시글 <input id="report" type="radio" value="3" class="pop_check"></li>
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '청소년 유해(음란) 게시글 ', '${detail.MEMBER_NO }');" id="rli">청소년 유해(음란) 게시글 <input id="report" type="radio" value="4" class="pop_check"></li>
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '명예훼손/저작권 침해 게시글 ', '${detail.MEMBER_NO }');" id="rli">명예훼손/저작권 침해 게시글 <input id="report" type="radio" value="5" class="pop_check"></li>   
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '도배성 게시글 ', '${detail.MEMBER_NO }');" id="rli">도배성 게시글 <input type="radio"id="report" value="6" class="pop_check"></li>      
+                           <li onclick="choiceReport('${detail.BOARD_NO}', '불명확/추측성 게시글 ', '${detail.MEMBER_NO }');" id="rli">불명확/추측성 게시글 <input id="report" type="radio" value="7" class="pop_check"></li>      
+                        </ul>
+                     </div>
+                  </div>
+            <!-- 댓글 등록 부분  -->
+            <div id="comment-write" class="comment-write">
+            <table class="replyTable">
+               <tr>
+                  <td><textarea cols="98" rows="5" id="Lbotm_Content" name="LBOTM_CONTENT" class="txtarea r5 placeholder" placeholder="댓글 등록" onfocus="setFlag();" style="border: none;"></textarea></td>
+                  <td><button id="rSubmit" class="btn btn-primary btncmm1">입력</button></td>
+               </tr>
+            </table>
+            </div>
 
-				<!-- 댓글 목록 보기 -->
-				<table class="comment-list" id="rtb">
-					<thead class="comment-list-li">
-						<tr class="comment-count">			
-							<td colspan="2" class="comment-count-1"><b id="rCount" class="comment-count-2"></b></td>
-						</tr>
-					</thead>
-					<tbody class="comment-txts"></tbody>
-				</table>
-				
-				<script>
-				$(function(){
-					getCommentList();
-					
-					setInterval(function(){
-						getCommentList();
-					}, 1000000);
-				});
-				
-				// 댓글 등록 ajax
-				$("#rSubmit").on("click", function(){
-		         var Comments_Content = $("#Comments_Content").val();
-		         var nNo = ${ notice.nNo };
-		         
-		         $.ajax({
-		            url: "insertComment.do",
-		            data: {Comments_Content: Comments_Content, nNo:nNo},
-		            type: "post",
-		            success: function(data){
-		               if(data == "success"){
-		            	   getCommentList();
-		            	   $("#Comments_Content").val("");
-		               }
-		            }
-		         });
-		      });
-				
-				// 댓글 리스트 ajax
-				function getCommentList(){
-					var nNo = ${ notice.nNo };
-					var user ="";
-				
-					if( '${loginUser.userId}' != ""){
-						user = '${loginUser.userId}';
-					}
-					
-					$.ajax({
-						url: "commentList.do",
-						data: {nNo:nNo},
-						dataType: "json",
-						success: function(data){ 	
-							$tableBody = $("#rtb tbody");
-							$tableBody.html("");
-							
-							var $tr;
-							var $UserId;
-							var $Comments_Content;
-							var $Comments_Date;
-							var ss ="";
-							$("#rCount").text("댓글 (" + data.length + ")");
-							$("#rCount1").text(data.length);
-							var ddl ="";
-							if(data.length > 0){
-								for(var i in data){
-								
-									$tr = $("<tr style='border-bottom:0.5px solid #cecece'>");
-									$UserId = $("<td class='comment-txt'  style='font-weight: bold; margin-right:80px; '>").text(data[i].UserId);
-									$Comments_Content = $("<td class='ptxt cModify"+data[i].Comments_No+"' width='500px' margin-left='100px' >").text(decodeURIComponent(data[i].Comments_Content.replace(/\+/g, " ")));
-									$Comments_Date = $("<td nowrap width='100' class='bb"+data[i].Comments_No+"'>").text(data[i].Comments_Date);
-									if(user == data[i].UserId){
-									ddl = "<td nowrap><button class='modifyB2 bb"+data[i].Comments_No+"' onclick='modifyComment("+data[i].Comments_No+")' style='background:none;border:0'>수정</button></td>";
-									ddl += "<td nowrap><button class='deleteB2 bb"+data[i].Comments_No+"' onclick='deleteComment("+data[i].Comments_No+")'style='background:none ;border:0'>삭제</button></td>";
-									ddl += "<td ><input type='hidden' class='cNo' value="+data[i].Comments_No+"></td></tr>"
-									}else{
-										ddl = "<td>&nbsp&nbsp</td>";
-										ddl += "<td>&nbsp&nbsp&nbsp </td>";
-										ddl += "<td>&nbsp&nbsp </td>";
-									
-									}
-								
-									$tr.append($UserId);
-									$tr.append($Comments_Content);
-									$tr.append($Comments_Date);
-									$tr.append(ddl);
-									$tableBody.append($tr);
-								
-								}
-								
-								} else {
-									$tr = $("<tr>");
-									$Comments_Content = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
-									
-									$tr.append($Comments_Content);
-									$tableBody.append($tr);
-								}
-							}	
-					});
-				}
-					
-				</script>
+            <!-- 댓글 목록 보기 -->
+            <table class="comment-list" id="rtb">
+               <thead class="comment-list-li">
+                  <tr class="comment-count">         
+                     <td colspan="2" class="comment-count-1"><b id="rCount" class="comment-count-2"></b></td>
+                  </tr>
+               </thead>
+               <tbody class="comment-txts"></tbody>
+            </table>
+            
+            <script>
+            $(function(){
+               lbotmgetCommentList();
+               
+               setInterval(function(){
+                  getCommentList();
+               }, 1000000);
+            });
+            
+            // 댓글 등록 ajax
+            $("#rSubmit").on("click", function(){
+               var Lbotm_Content = $("#Lbotm_Content").val();
+               var bNo = ${ lbotm.bNo };
+               
+               $.ajax({
+                  url: "lbotminsertComment.do",
+                  data: {lbotm_Content:Lbotm_Content, bNo:bNo},
+                  type: "post",
+                  success: function(data){
+                      /* alert('${lbotm.bNo}'); */
+                     if(data == "success"){
+                        lbotmgetCommentList();
+                        $("#Lbotm_Content").val("");
+                     }
+                  }
+               });
+            });
+            
+            // 댓글 리스트 ajax
+            function lbotmgetCommentList(){
+               var bNo = ${ lbotm.bNo };
+               var user ="";
+            
+               if( '${loginUser.userId}' != ""){
+                  user = '${loginUser.userId}';
+               }
+               
+               $.ajax({
+                  url: "lbotmcommentList.do",
+                  data: {bNo:bNo},
+                  dataType: "json",
+                  success: function(data){    
+                     $tableBody = $("#rtb tbody");
+                     $tableBody.html("");
+                     
+                     var $tr;
+                     var $UserId;
+                     var $Lbotm_Content;
+                     var $Lbotm_Date;
+                     var ss ="";
+                     $("#rCount").text("댓글 (" + data.length + ")");
+                     $("#rCount1").text(data.length);
+                     var ddl ="";
+                     if(data.length > 0){
+                        for(var i in data){
+                        
+                           $tr = $("<tr style='border-bottom:0.5px solid #cecece'>");
+                           $UserId = $("<td class='comment-txt'  style='font-weight: bold; margin-right:80px; '>").text(data[i].userId);
+                           $Lbotm_Content = $("<td class='ptxt cModify"+data[i].lbotm_No+"' width='500px' margin-left='100px' >").text(decodeURIComponent(data[i].lbotm_Content.replace(/\+/g, " ")));
+                           $Lbotm_Date = $("<td nowrap width='100' class='bb"+data[i].lbotm_No+"'>").text(data[i].lbotm_Date);
+                           if(user == data[i].UserId){
+                           ddl = "<td nowrap><button class='modifyB2 bb"+data[i].lbotm_No+"' onclick='modifyComment("+data[i].lbotm_No+")' style='background:none;border:0'>수정</button></td>";
+                           ddl += "<td nowrap><button class='deleteB2 bb"+data[i].lbotm_No+"' onclick='deleteComment("+data[i].lbotm_No+")'style='background:none ;border:0'>삭제</button></td>";
+                           ddl += "<td ><input type='hidden' class='cNo' value="+data[i].lbotm_No+"></td></tr>"
+                           }else{
+                              ddl = "<td>&nbsp&nbsp</td>";
+                              ddl += "<td>&nbsp&nbsp&nbsp </td>";
+                              ddl += "<td>&nbsp&nbsp </td>";
+                           
+                           }
+                        
+                           $tr.append($UserId);
+                           $tr.append($Lbotm_Content);
+                           $tr.append($Lbotm_Date);
+                           $tr.append(ddl);
+                           $tableBody.append($tr);
+                        
+                        }
+                        
+                        } else {
+                           $tr = $("<tr>");
+                           $Lbotm_Content = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+                           
+                           $tr.append($Lbotm_Content);
+                           $tableBody.append($tr);
+                        }
+                     }   
+               });
+            }
+               
+            </script>
 
-		<%-- 		<!---------------------------------- 댓글 페이징 처리 ---------------------------------->
-					<div class="paginate">
-						<c:if test="${ pi.currentPage <= 1 }">
-							[이전] &nbsp;
-						</c:if>
-						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="blistBack" value="nlist.do">
-								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
-								<c:param name="nNo" value="${notice.nNo}"/>
-							</c:url>
-							<a href="${ blistBack }">[이전]</a>
-						</c:if>
-						
-						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<c:if test="${ p eq pi.currentPage }">
-								<font color="red" size="4"><b>[${ p }]</b></font>
-							</c:if>
-							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="blistCheck" value="nlist.do">
-									<c:param name="currentPage" value="${ p }"/>
-									<c:param name="nNo" value="${nNo}"/>
-								</c:url>
-								<a href="${ blistCheck }">${ p }</a>
-							</c:if>
-						</c:forEach>
-						<c:if test="${ pi.currentPage >= pi.maxPage }">
-							&nbsp; [다음]
-						</c:if>
-						<c:if test="${ pi.currentPage < pi.maxPage}">
-							<c:url var="blistEnd" value="nlist.do">
-								<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-								<c:param name="nNo" value="${notice.nNo}"/>
-							</c:url>
-							&nbsp; 
-							<a href="${ blistEnd }">[다음]</a>
-						</c:if>
-					</div>
+      <%--       <!---------------------------------- 댓글 페이징 처리 ---------------------------------->
+               <div class="paginate">
+                  <c:if test="${ pi.currentPage <= 1 }">
+                     [이전] &nbsp;
+                  </c:if>
+                  <c:if test="${ pi.currentPage > 1 }">
+                     <c:url var="blistBack" value="nlist.do">
+                        <c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+                        <c:param name="nNo" value="${notice.nNo}"/>
+                     </c:url>
+                     <a href="${ blistBack }">[이전]</a>
+                  </c:if>
+                  
+                  <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                     <c:if test="${ p eq pi.currentPage }">
+                        <font color="red" size="4"><b>[${ p }]</b></font>
+                     </c:if>
+                     <c:if test="${ p ne pi.currentPage }">
+                        <c:url var="blistCheck" value="nlist.do">
+                           <c:param name="currentPage" value="${ p }"/>
+                           <c:param name="nNo" value="${nNo}"/>
+                        </c:url>
+                        <a href="${ blistCheck }">${ p }</a>
+                     </c:if>
+                  </c:forEach>
+                  <c:if test="${ pi.currentPage >= pi.maxPage }">
+                     &nbsp; [다음]
+                  </c:if>
+                  <c:if test="${ pi.currentPage < pi.maxPage}">
+                     <c:url var="blistEnd" value="nlist.do">
+                        <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+                        <c:param name="nNo" value="${notice.nNo}"/>
+                     </c:url>
+                     &nbsp; 
+                     <a href="${ blistEnd }">[다음]</a>
+                  </c:if>
+               </div>
  --%>
-										<!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
-					<%-- <div class="balist1">
-						<a href="#" class="aflist1">다음글 ▲
-							<p class="aflist2">저녁추천좀요</p>
-						</a>
-						<div class="aflist3">
-							<p class="aflistp">17:30</p>
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
-							<p class="aflistp">조회수 10</p>
-						</div>
-					</div>
-					<!------------------------------------ 이전글 제목, 날짜, 조회수 ------------------------------------>
-					<div>
-						<a href="#" class="belist1">이전글 ▼
-							<p class="belist2">오늘 먹은 점심임니다</p>
-						</a>
-						<div class="belist3">
-							<p class="aflistp">13:30</p>
-							<img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
-							<p class="aflistp">조회수 32</p>
-						</div>
-					</div> --%>
-				</div>
-				<!-------------------------------------------------------------------------->
-			</div>
-		</div>
+                              <!------------------------------------ 다음글 제목, 날짜, 조회수 ------------------------------------>
+               <%-- <div class="balist1">
+                  <a href="#" class="aflist1">다음글 ▲
+                     <p class="aflist2">저녁추천좀요</p>
+                  </a>
+                  <div class="aflist3">
+                     <p class="aflistp">17:30</p>
+                     <img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
+                     <p class="aflistp">조회수 10</p>
+                  </div>
+               </div>
+               <!------------------------------------ 이전글 제목, 날짜, 조회수 ------------------------------------>
+               <div>
+                  <a href="#" class="belist1">이전글 ▼
+                     <p class="belist2">오늘 먹은 점심임니다</p>
+                  </a>
+                  <div class="belist3">
+                     <p class="aflistp">13:30</p>
+                     <img src="<%=request.getContextPath()%>/resources/images/boardImg/bar_9.gif" class="listpic">
+                     <p class="aflistp">조회수 32</p>
+                  </div>
+               </div> --%>
+            </div>
+            <!-------------------------------------------------------------------------->
+         </div>
+      </div>
 
 <script>
-	$(document).ready(function(){
-		$().UItoTop({ easingType: 'easeOutQuart' });
-		$('#stuck_container').tmStickUp({});
-		$('.gallery .gall_item').touchTouch();
-	}); 
+   $(document).ready(function(){
+      $().UItoTop({ easingType: 'easeOutQuart' });
+      $('#stuck_container').tmStickUp({});
+      $('.gallery .gall_item').touchTouch();
+   }); 
 
-	//목록 버튼
-	/* $(document).ready(function(){
-		$("#boardList").click(function(){
-			location.href="${path}/baraonda/list.do?writing_type=${detail.WRITING_TYPE}";
-		});
-	});	 */
-	
-	//게시물 삭제 버튼 (취소눌르면 삭제되고 400에러뜬다)
-	$(document).ready(function(){
-		$("#deleteB").click(function(){
-			if(confirm("삭제하시겠습니까?") == true){
-				document.form.submit();
-			}else{ //취소
-				/* location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}"; */
-				location.href="${path}/ockdong/ndetail.do?nNo=${notice.nNo}";
-			}
-		});
-	});
-	
-	/* //댓글 삭제 버튼
-	$(document).ready(function(){
-		$(".deleteB2").click(function(){
-			if(confirm("삭제하시겠습니까?") == true){
-				document.form.submit();
-			}else{ //취소
-				location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}";
-			}
-		});
-	}); */
-	
+   //게시물 삭제 버튼 (취소눌르면 삭제되고 400에러뜬다)
+   $(document).ready(function(){
+      $("#deleteB").click(function(){
+         if(confirm("삭제하시겠습니까?") == true){
+            document.form.submit();
+         }else{ //취소
+            /* location.href="${path}/baraonda/view.do?board_no=${detail.BOARD_NO}"; */
+            location.href="${path}/ockdong/ndetail.do?nNo=${notice.nNo}";
+         }
+      });
+   });
 
-	//댓글 삭제
-	function deleteComment(cNo){
-		alert(cNo);
-		
-	    $.ajax({
-            url: "deleteComment.do",
+   //댓글 삭제
+   function lbotmdeleteComment(cNo){
+      alert("댓글 삭제 완료되었습니다.");
+      
+       $.ajax({
+            url: "lbotmdeleteComment.do",
             data: {"cNo": cNo},
             type: "POST",
             
             success: function(data){
-            
-            	getCommentList();
-          
-               
+               lbotmgetCommentList();
             }
          });
-	}
-	//댓글 수정
-	
-	function modifyComment(cNo){
-		//alert($('.cModify'+cNo).val());
-		
-		$(".bb"+cNo).css("display","none");
-		//$('.modifyB2').css("display", "none"); 
-		var append ="";
-		var div = $('.cModify'+cNo);
-		append +='<div id="comment-write" class="comment-write" style="display:inline-block;width:500px">';
-		append +='<table class="replyTable">';
-		append +='<tbody><tr>';
-		append +='<td><textarea cols="98" rows="5"  id="Comments_Content " name="COMMENTS_CONTENT" class="txtarea r5 placeholder modify_Content'+cNo+'" placeholder="댓글 수정" onfocus="setFlag();" style="border: none; width:400px"></textarea></td>';
-		append +='<td><button id="rSubmit " class="btn btn-primary btncmm1 modifyComment'+cNo+'">입력</button></td>';
-		append +='</tr>';
-		append +='</tbody></table>';
-		append +='</div>';
-	
-		div.html(append);
-		
-		
-		
-		$('.modifyComment'+cNo).click(function(){
-			
-			var Content = $('.modify_Content'+cNo).val();
-			
-		    $.ajax({
-	            url: "ModifyCommnet.do",
-	            data: {"cNo": cNo,"Content":Content},
-	            type: "POST",
-	            success: function(data){
-	            
-	            	getCommentList();
-	          
-	               
-	            }
-	         });
-			
-		});
-	}
-	
-	
-	
-	//댓글 내용 입력 체크
-	$(document).ready(function(){
-		$("#btncmm1").click(function(){
-			var comment = $("#comment").val();
-			if(comment == ""){
-				alert("내용을 입력하세요.");
-				document.getElementById('comment').focus();
-				return false;
-			}
-			document.form1.submit();
-		});
-	});
-	
-	//신고하기 팝업
-	function reportPopup(type){
-		if(type == 'open'){
-			$("#reportContent").attr('style', 'display:inline');
-		}else if(type == 'close'){
-			$("#reportContent").attr('style', 'display:none');
-		}
-	}
-	
-	//신고하기 버튼 이벤트
-	function choiceReport(board_no, report_comment, report_get_no){
-		if(confirm("해당 게시글을 신고하시겠습니까?") == true){
-			$.ajax({
-				url:"report.do",
-				rype:"post",
-				data:{board_no:board_no, report_comment:report_comment, report_get_no:report_get_no}
-			});
-			alert("신고가 완료되었습니다.");
-			$("#reportContent").attr('style', 'display:none');
-		}else{
-			$("#reportContent").attr('style', 'display:none');
-		}
-	}
-	
+   }
+   //댓글 수정
+   
+   function lbotmmodifyComment(cNo){
+      //alert($('.cModify'+cNo).val());
+      
+      $(".bb"+cNo).css("display","none");
+      //$('.modifyB2').css("display", "none"); 
+      var append ="";
+      var div = $('.cModify'+cNo);
+      append +='<div id="comment-write" class="comment-write" style="display:inline-block;width:500px">';
+      append +='<table class="replyTable">';
+      append +='<tbody><tr>';
+      append +='<td><textarea cols="98" rows="5"  id="Comments_Content " name="COMMENTS_CONTENT" class="txtarea r5 placeholder modify_Content'+cNo+'" placeholder="댓글 수정" onfocus="setFlag();" style="border: none; width:400px"></textarea></td>';
+      append +='<td><button id="rSubmit " class="btn btn-primary btncmm1 modifyComment'+cNo+'">입력</button></td>';
+      append +='</tr>';
+      append +='</tbody></table>';
+      append +='</div>';
+   
+      div.html(append);
+      
+      
+      
+      $('.lbotmmodifyComment'+cNo).click(function(){
+         
+         var Content = $('.modify_Content'+cNo).val();
+         
+          $.ajax({
+               url: "ModifyCommnet.do",
+               data: {"cNo": cNo,"Content":Content},
+               type: "POST",
+               success: function(data){
+               
+                  getCommentList();
+             
+                  
+               }
+            });
+         
+      });
+   }
+   
+   
+   
+   //댓글 내용 입력 체크
+   /* $(document).ready(function(){
+      $("#btncmm1").click(function(){
+         var comment = $("#comment").val();
+         if(comment == ""){
+            alert("내용을 입력하세요.");
+            document.getElementById('comment').focus();
+            return false;
+         }
+         document.form1.submit();
+      });
+   }); */
+   
+   //신고하기 팝업
+   function reportPopup(type){
+      if(type == 'open'){
+         $("#reportContent").attr('style', 'display:inline');
+      }else if(type == 'close'){
+         $("#reportContent").attr('style', 'display:none');
+      }
+   }
+   
+   //신고하기 버튼 이벤트
+   function choiceReport(board_no, report_comment, report_get_no){
+      if(confirm("해당 게시글을 신고하시겠습니까?") == true){
+         $.ajax({
+            url:"report.do",
+            rype:"post",
+            data:{board_no:board_no, report_comment:report_comment, report_get_no:report_get_no}
+         });
+         alert("신고가 완료되었습니다.");
+         $("#reportContent").attr('style', 'display:none');
+      }else{
+         $("#reportContent").attr('style', 'display:none');
+      }
+   }
+   
 </script>
 
 
-	<!-- ##################### 풋터 부분 ##################### -->
-	<c:import url="../footer/footer.jsp"/>
+   <!-- ##################### 풋터 부분 ##################### -->
+   <c:import url="../footer/footer.jsp"/>
 
 
 

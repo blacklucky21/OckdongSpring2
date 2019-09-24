@@ -658,7 +658,7 @@ $('.order-buy').click(function(){
 	}
 	var totalAmount = parseInt($('#finalTotalPrice').text());
 
-  	CallPayRequest();
+  	//CallPayRequest();
 	 //CallPayRequest();
 	if($('.require').prop("checked")){
 		

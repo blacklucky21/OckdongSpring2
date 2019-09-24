@@ -9,6 +9,7 @@ import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.lbotm.model.dao.lbotmDAO;
 import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
+import com.junwo.ockdong.lbotm.model.vo.lbotmComments;
 
 @Service("lbotmServie")
 public class lbotmServicelmpl implements lbotmService {
@@ -55,5 +56,28 @@ public class lbotmServicelmpl implements lbotmService {
 	public ArrayList<lbotm> lbotmTop() {
 		return lbotmDAO.lbotmTop();
 	}
+
+	@Override
+	public ArrayList<lbotmComments> lbotmselectCommentList(int bNo) {
+		return lbotmDAO.lbotmselectCommentList(bNo);
+	}
+
+	@Override
+	public int lbotminsertComment(lbotmComments lc) {
+		return lbotmDAO.lbotminsertComment(lc);
+	}
+	
+	@Override
+	public int lbotmdeleteComment(int cNo) {
+		return lbotmDAO.lbotmdeleteComment(cNo);
+	}
+
+	@Override
+	public int lbotmupdateComment(lbotmComments lc) {
+		return lbotmDAO.lbotmupdateComnent(lc);
+	}
+
+
+	
 
 }

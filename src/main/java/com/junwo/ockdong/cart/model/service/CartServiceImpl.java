@@ -182,6 +182,18 @@ public class CartServiceImpl implements CartService{
 		return cDAO.UpdateCartCount(list);
 	}
 
+	@Override
+	public int ProductCountdo() {
+		// TODO Auto-generated method stub
+		return cDAO.ProductCountdo();
+	}
+
+	@Override
+	public int ProductCountsel() {
+		// TODO Auto-generated method stub
+		return cDAO.ProductCountsel();
+	}
+
 
 
 

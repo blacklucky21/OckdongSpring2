@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.junwo.ockdong.common.PageInfo;
 import com.junwo.ockdong.lbotm.model.exception.lbotmException;
 import com.junwo.ockdong.lbotm.model.vo.lbotm;
+import com.junwo.ockdong.lbotm.model.vo.lbotmComments;
 import com.junwo.ockdong.notice.model.vo.Notice;
 
 @Repository("lbotmDAO")
@@ -57,4 +58,22 @@ public class lbotmDAO {
 	public ArrayList<lbotm> lbotmTop() {
 		return (ArrayList)sqlSession.selectList("lbotmMapper.lbotmTop");
 	}
+
+	public ArrayList<lbotmComments> lbotmselectCommentList(int bNo) {
+		return (ArrayList)sqlSession.selectList("lbotmMapper.lbotmselectCommentList", bNo);
+	}
+	
+	public int lbotminsertComment(lbotmComments lc) {
+		return sqlSession.insert("lbotmMapper.lbotminsertComment", lc);
+	}
+
+	public int lbotmdeleteComment(int cNo) {
+		return sqlSession.update("lbotmMapper.lbotmdeleteComment", cNo);
+	}
+
+	public int lbotmupdateComnent(lbotmComments lc) {
+		return sqlSession.update("lbotmMapper.lbtomupdateComment", lc);
+	}
+
+	
 }

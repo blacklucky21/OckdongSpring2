@@ -178,6 +178,18 @@ public class CartDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("cartMapper.UpdateProductCount",c);
 	}
+
+
+	public int ProductCountdo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.ProductCountdo");
+	}
+
+
+	public int ProductCountsel() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("cartMapper.ProductCountsel");
+	}
 	
 
 

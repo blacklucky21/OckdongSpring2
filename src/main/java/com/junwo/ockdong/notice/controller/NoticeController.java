@@ -86,14 +86,21 @@ public class NoticeController {
 
 	// 게시판 상세보기
 	@RequestMapping("ndetail.do")
-	public ModelAndView boardDetail(@RequestParam("nNo") int nNo, @RequestParam("page") int page, ModelAndView mv,HttpSession session)
+	public ModelAndView boardDetail(@RequestParam("nNo") int nNo, @RequestParam(value = "page", required = false) int page, ModelAndView mv,HttpSession session)
 			throws NoticeException {
 		nService.addReadCount(nNo);
 		Notice notice = nService.selectNotice(nNo);
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		System.out.println("dddd"+page);
 		if (notice != null) {
 			mv.addObject("loginUser",loginUser);
-			mv.addObject("notice", notice).addObject("page", page).setViewName("notice/noticeDetail");
+			
+			mv.addObject("notice", notice);
+			
+			mv.addObject("page", page);
+			
+			mv.setViewName("notice/noticeDetail");
+			
 		} else {
 			throw new NoticeException("게시글 상세보기에 실패하였습니다.");
 		}
