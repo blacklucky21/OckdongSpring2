@@ -253,7 +253,7 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	<select id="ProductCount" resultType="_int">
 	select count(*)
 	from product
-	where p_sell ='Y'
+	where p_sell ='Y' and  P_STATUS = 'Y'
 	
 	
 	</select>
@@ -261,7 +261,7 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	<select id="ProductStop" resultType="_int">
 	select count(*)
 	from product
-	where p_sell ='N'
+	where p_sell ='N' and  P_STATUS = 'Y'
 	
 	
 	</select>
@@ -272,7 +272,7 @@ INSERT INTO PAYMENT VALUES(SEQ_PAYMENT.NEXTVAL,#{userid},#{p_id} ||TO_CHAR(seq_p
 	select count(*)
 	from product
 	where p_sell ='N' and P_QUANTITY <1 
-	]]>
+	]]> 
 	
 	</select>
 	

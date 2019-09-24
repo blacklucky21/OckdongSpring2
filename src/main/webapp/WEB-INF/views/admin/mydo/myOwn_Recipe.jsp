@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도시락 제료 리스트</title>
+<title>나만의 도시락 리스트</title>
 <!-- css 시작 -->
 <link rel="stylesheet" href="resources/css/bootstrap.css">
 <link rel="stylesheet" href="resources/css/admin/productList.css">
@@ -41,7 +41,7 @@
 			<div class="content">
 				<!-- 상품 제목 -->
 				<div class="page_title_wrap">
-					<div class="page_tit">도시락 재료 리스트</div>
+					<div class="page_tit">나만의 도시락 리스트</div>
 				</div>
 				<!-- 제목 끝 -->
 

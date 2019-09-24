@@ -92,7 +92,7 @@
 	from (select *
 		  from PRODUCT
 		  	left join PICTURELIST using(P_ID)
-		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y'
+		  where P_STATUS = 'Y' AND PT_TYPE = 0 AND PT_STATUS = 'Y' 
 		  order by P_CREATEDATE desc)
 		  where rownum < 9
 		 
