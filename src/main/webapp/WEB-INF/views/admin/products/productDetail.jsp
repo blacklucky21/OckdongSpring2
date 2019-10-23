@@ -734,29 +734,6 @@
 	});
 	
 	
-	// 상품 문의 시작
-	var currentEditId = "";
-	// 상품 문의  1000 자 제한 두기
-	var updateLength = function (key) {
-	    var len = $('.textarea_' + key).val().length;
-	    $('.length_' + key).text(len + '자 / 1000자');
-	}
-	var getEvent = function () {
-	    return window.event || arguments.callee.caller.arguments[0];
-	}
-
-	var updateLength = function (key) {
-	    var len = $('.textarea_' + key).val().length;
-	    $('.length_' + key).text(len + '자 / 1000자');
-	}
-	
-	// 상품 문의 디테일 들어오면 실행 한다.
-	/* $(function(){
-		getQnaList();
-	}); */
-	
-
-	
 	// 상품 문의 ajax 가지고 오기
 	function getQnaList(){
 		var p_Id = ${p.p_Id}; 
@@ -1028,7 +1005,6 @@
 			}
 			
 		}
-//=============================================================================
 
 		
 		var form = document.forms["CartandPaymentForm"];
@@ -1037,8 +1013,9 @@
 			var p_quantity = $('.p_quantity').val();
 			
 			var p_count = $('#orderCnt').val();
-			
-			if(${sessionScope.loginUser eq null}){
+			console.log(p_count);
+			console.log(p_quantity);
+			if(${empty sessionScope.loginUser}){
 				alert("로그인 후 이용가능한 서비스 입니다.");
 			
 				}else if(p_quantity < p_count){
@@ -1050,15 +1027,16 @@
 		
 		$('#cart').click(function(){
 			var p_quantity = $('.p_quantity').val();
-			
 			var p_count = $('#orderCnt').val();
 			
-			if(${sessionScope.loginUser eq null}){
+			console.log(p_quantity);
+			console.log(p_count);
+		
+			if(${empty sessionScope.loginUser}){
 				alert("로그인 후 이용가능한 서비스 입니다.");
 			}else if(p_quantity < p_count){
 				alert("재고 수량을 초과하여 불가능 합니다.");
 			}else{
-				
 			   var formData = new FormData(form);
 				 $.ajax({
 			            cache : false,
@@ -1069,16 +1047,10 @@
 			            data : formData, 
 			            success : function(data) {
 			        		var bool = confirm("장바구니에 추가되었습니다.바로 장바구니 페이지로 이동하겠습니까?");
-			    			
 			    			if(bool){
-			    				
-			    				
 			    				location.href='CartView.do'; 
-			    				
 			    			}
-			            	
 			            }, 
-			    
 			            error : function(xhr, status) {
 			                alert(xhr + " : " + status);
 			            }
