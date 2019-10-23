@@ -99,8 +99,6 @@
 	 ]]>
 		  
 </select>
-
-
 <select id="pictureList" resultType = "hashmap">
 
 	<![CDATA[

@@ -313,7 +313,6 @@ public class ProductController {
 			System.out.println("컨트롤러 사진 정보 : " + pt.get(i).toString());
 		}
 
-		System.out.println("수정 디테일 갈대 기존 값  이건가?: " + p);
 		mv.addObject("p", p);
 		mv.addObject("pt", pt);
 		mv.setViewName("admin/products/productDetail");
@@ -729,7 +728,6 @@ public class ProductController {
 			/*pq.setAnswer_content(URLEncoder.encode(pq.getAnswer_content(),"utf-8"));*/
 
 			if(pq.getQna_answer().equals("Y")) {
-//				int qna_Id = pq.getQna_Id();
 				
 				for(ProductAnswer pa : paList) {
 					if(pa.getQna_Id() == pq.getQna_Id()) {
@@ -744,9 +742,7 @@ public class ProductController {
 				System.out.println("답글없음");
 				System.out.println(pq);
 			}
-			
 			encoding.add(pq);
-			
 		}
 		
 		for(ProductQna qna : encoding) {

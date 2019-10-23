@@ -697,10 +697,7 @@ public class AdminController {
 				i.setQna_content(URLEncoder.encode(i.getQna_content(),"utf-8"));
 				if(i.getAnswer_content() != null) {
 					i.setAnswer_content(URLEncoder.encode(i.getAnswer_content(),"utf-8"));
-					
 				}
-				
-				
 				System.out.println(i);
 			}
 		}
